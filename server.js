@@ -10,7 +10,7 @@ app.use('/dist', express.static(path.join(__dirname, 'dist')));
 // Define a route to serve the HTML files
 app.get('/', (req, res) => {
     //   res.sendFile(path.join(__dirname, 'public', 'index.html'));
-    res.redirect('https://gigharboropenstudiotour.org/')
+    res.redirect('/my-account')
 });
 
 app.get('/my-account', (req, res) => {
