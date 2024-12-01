@@ -13,15 +13,7 @@ app.get('/', (req, res) => {
     res.redirect('/my-account');
 });
 
-app.get('/my-account', (req, res) => {
-    res.sendFile(path.join(__dirname, 'app/pages/my-account/index.html'));
-});
-app.get('/my-account/index.js', (req, res) => { 
-    res.sendFile(path.join(__dirname, 'app/pages/my-account/index.js'));
- })
-app.get('/my-account/style.css', (req, res) => { 
-    res.sendFile(path.join(__dirname, 'app/pages/my-account/style.css'));
- })
+app.use('/my-account', express.static(path.join(__dirname, 'app/pages/my-account')));
 
 // app.get("dist/bundle.js", (req, res) => {
 //     res.sendFile(path.join(__dirname, 'dist', 'bundle.js'));
@@ -29,4 +21,5 @@ app.get('/my-account/style.css', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
-}); 
+});
+
