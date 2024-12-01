@@ -1,0 +1,39 @@
+{
+  "name": "ghost-membership-forms",
+  "version": "1.0.0",
+  "description": "This is a deployment of a website which is clasped to a squarespace website.",
+  "main": "server.js",
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "babel-loader": "^9.2.1",
+    "css-loader": "^7.1.2",
+    "raw-loader": "^4.0.2",
+    "sass": "^1.81.0",
+    "sass-loader": "^16.0.3",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "start:w": "nodemon server.js",
+    "build:w": "webpack --config webpack.config.js --watch",
+    "webpack": "webpack",
+    "build:scss": "sass app/styles.scss dist/styles.css",
+    "watch:scss": "sass --watch app/styles.scss dist/styles.css"
+  },
+  "author": "William Owen <william.owen.dev@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.1",
+    "@fortawesome/free-solid-svg-icons": "^6.7.1",
+    "express": "^4.21.1"
+  },
+  "keywords": [
+    "node",
+    "glitch"
+  ]
+
+}

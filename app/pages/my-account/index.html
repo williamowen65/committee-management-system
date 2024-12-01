@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="dist/bundle.js"></script>
+        <script src="my-account/index.js"></script>
+        <link rel="stylesheet" href="dist/styles.css">
+        <link rel="stylesheet" href="my-account/style.css">
+
+    </head>
+
+    <body>
+        <h1>My Account</h1>
+        <form id="my-account-form">
+            <div class="row">
+                <input-component style="width: 48%" required fieldName="firstName" alias="First Name"></input-component>
+                <input-component style="width: 48%" required fieldName="lastName" alias="Last Name"></input-component>
+            </div>
+            <div class="row">
+
+                <input-component required style="width: 48%" type="phone" fieldName="phone"
+                    alias="Phone"></input-component>
+            </div>
+            <div class="row">
+                <input-component style="width: 48%" required type="email" fieldName="personalEmail"
+                    alias="Personal Email"></input-component>
+                <input-component style="width: 48%" type="email" fieldName="businessEmail"
+                    alias="Business Email"></input-component>
+            </div>
+            <div class="row">
+                <textarea-component class="w-100" required fieldName="mailingAddress"
+                    alias="Mailing Address"></-component>
+            </div>
+            <div class="row">
+                <textarea-component class="w-100" fieldName="studioAddress" alias="Studio Address"></-component>
+            </div>
+            <div class="row">
+                <input-component type="link" fieldName="website" alias="Website"></input-component>
+                <input-component type="link" fieldName="facebook" alias="Facebook"></input-component>
+                <input-component type="link" fieldName="instagram" alias="Instagram"></input-component>
+            </div>
+            <div class="row">
+
+                <input-component class="w-100" required fieldName="artistTagline"
+                    alias="Artist Tagline"></input-component>
+            </div>
+            <div class="row">
+                <textarea-component class="w-100" required fieldName="artistStatement"
+                    alias="Artist Statement"></-component>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+
+
+    </body>
+
+    </html>

@@ -1,0 +1,96 @@
+label {
+    font-size: 1.2rem;
+    position: relative;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    display: inline-block;
+
+    .text {
+        position: absolute;
+        z-index: 1;
+        transition: all 0.5s;
+        transform: translate(8px, 14px);
+        user-select: none;
+        cursor: text;
+    }
+
+    &.moveLabel {
+        .text {
+            transform: translate(0px, -7px);
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+    }
+    .password-container{
+        position: relative;
+        // background-color: #ccc;
+        .password-toggle {
+            width: 24px;
+            position: absolute;
+            top: 27px;
+            translate: -100% -50%;
+            right: 0;
+            scale: .8;
+            cursor: pointer;
+            font-size: 12px;
+        }
+    }
+
+    .static-label-text {
+        font-size: 0.75rem;
+        white-space: nowrap;
+        margin-top: 4px;
+    }
+
+    &[for="remember-me"] {
+        translate: -44px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        input {
+            scale: 1.3;
+            translate: 5px -5px;
+            transform-origin: top left;
+            cursor: pointer;
+        }
+    }
+
+    input, textarea{
+        width: 80%;
+        margin: 10px 0 0 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    .hide-password {
+        display: none;
+    }
+
+    .show-password {
+        display: block;
+    }
+
+    &[password-toggle="show"] {
+        .hide-password {
+            display: block;
+        }
+
+        .show-password {
+            display: none;
+        }
+    }
+
+    .error-message {
+        font-size: 0.8rem;
+        user-select: none;
+        z-index: 1;
+        line-height: 12px;
+    }
+}
