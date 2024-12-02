@@ -255,7 +255,12 @@ textarea-component.w-100,
 input-component.w-100 {
   width: 100% !important;
   width: -webkit-fill-available !important;
-}`, "",{"version":3,"sources":["webpack://./app/styles.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,WAAA;EACA,8BAAA;EACA,eAAA;EACA,mBAAA;AACJ;AAMA;;;EAGI,sBAAA;EACA,sBAAA;AAJJ;;AAUI;;EACI,sBAAA;EACA,wCAAA;AANR","sourceRoot":""}]);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}`, "",{"version":3,"sources":["webpack://./app/styles.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,WAAA;EACA,8BAAA;EACA,eAAA;EACA,mBAAA;AACJ;AAMA;;;EAGI,sBAAA;EACA,sBAAA;AAJJ;;AAUI;;EACI,sBAAA;EACA,wCAAA;AANR;;AAUA;EACG,iBAAA;EACC,cAAA;AAPJ","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

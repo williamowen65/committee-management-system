@@ -14,10 +14,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/my-account', express.static(path.join(__dirname, 'app/pages/my-account')));
+app.use('/my-contract', express.static(path.join(__dirname, 'app/pages/my-contract')));
 
-// app.get("dist/bundle.js", (req, res) => {
-//     res.sendFile(path.join(__dirname, 'dist', 'bundle.js'));
-// });
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
