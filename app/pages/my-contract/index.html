@@ -35,7 +35,8 @@
                     process visible in a way that will enable visitors to learn more about my art form. Hosted artists
                     must comply with all the above except workspace.
 
-                    - To serve as an active participant on one of the designated committees that help to produce the Tour.
+                    - To serve as an active participant on one of the designated committees that help to produce the
+                    Tour.
                     All artists, even those that live outside of the tour boundaries, are expected to sign up for a
                     volunteer position on one of our committees.
 
@@ -87,7 +88,8 @@
                     signs, elect board for 2026, review survey results and discuss ideas for next year
 
 
-                    <u><strong>October 22:</strong></u> General members meeting and potluck (location TBD) to return signs, elect board for
+                    <u><strong>October 22:</strong></u> General members meeting and potluck (location TBD) to return
+                    signs, elect board for
                     2026, review survey results and discuss ideas for next year
 
                     (All the following information goes to a Google Spread sheet or a Google Drive Image folder when
@@ -99,6 +101,65 @@
             <div class="row">
                 <input-component class="w-100" required fieldName="signature" alias="Signature"></input-component>
             </div>
+
+            <hr>
+            <!-- Artist details -->
+
+            <p>WA State UBI (a UBI is required to participate – go here to apply - <a href="https://dor.wa.gov/open-business" target="_blank">https://dor.wa.gov/open-business</a>)</p>
+
+            <div class="row">
+                <input-component style="width: 48%" required fieldName="firstName" alias="First Name"></input-component>
+                <input-component style="width: 48%" required fieldName="lastName" alias="Last Name"></input-component>
+            </div>
+            <div class="row">
+
+                <input-component required style="width: 48%" type="phone" fieldName="phone"
+                    alias="Phone"></input-component>
+            </div>
+            <div class="row">
+                <input-component style="width: 48%" required type="email" fieldName="personalEmail"
+                    alias="Personal Email"></input-component>
+                <input-component style="width: 48%" type="email" fieldName="businessEmail"
+                    alias="Business Email"></input-component>
+            </div>
+            <div class="row">
+                <textarea-component class="w-100" required fieldName="mailingAddress"
+                    alias="Mailing Address"></-component>
+            </div>
+            <div class="row">
+                <textarea-component class="w-100" fieldName="studioAddress" alias="Studio Address"></-component>
+            </div>
+            <div class="row">
+                <input-component type="link" fieldName="website" alias="Website"></input-component>
+                <input-component type="link" fieldName="facebook" alias="Facebook"></input-component>
+                <input-component type="link" fieldName="instagram" alias="Instagram"></input-component>
+            </div>
+            <div class="row">
+
+                <input-component class="w-100" required fieldName="artistTagline"
+                    alias="Artist Tagline"></input-component>
+            </div>
+            <div class="row">
+                <textarea-component class="w-100" required fieldName="artistStatement"
+                    alias="Artist Statement"></-component>
+            </div>
+            <div class="row">
+                <markdown-component>
+                    <span slot="markdown-content">
+                        ### Digital Images
+                        Please upload the following required digital images (jpg files of about 2-3 MB.)  All images must have a professional appearance.  2D artwork must be cropped so that matting/framing does not show in the image.
+                        -  Three (3) images of your artwork – label these like this example:  DonSmithArt1.jpg, DonSmithArt2.jpg, DonSmithArt3.jpg  
+                        -   One (1) image of you working in your studio – label these like this example:  DonSmithStudio.jpg
+                        -   One (1) SQUARE image of your artwork that you want to be the main piece featured in the brochure.      
+                        This image should be one of the three images that you submitted above, but cropped so that it’s square.  
+                        Label like this example:  DonSmithBrochure.jpg  
+                        -   If you are having trouble figuring out how to submit your digital images, contact (put Artist Images chair contact info here.)
+                    </span>
+                </markdown-component>
+                <file-input-component multiple="true" fieldName="digitalImages" alias="Digital Images" accept=".jpg,.jpeg,.png"></file-input-component>
+            </div>
+
+
         </form>
     </div>
 </body>

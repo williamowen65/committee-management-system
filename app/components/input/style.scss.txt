@@ -93,4 +93,24 @@ label {
         z-index: 1;
         line-height: 12px;
     }
+    .images-container{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 10px;
+        img{
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .img-container{
+
+            position: relative;
+            button.delete-button {
+                position: absolute;
+                left: 0;
+            }
+        }
+    }
+
 }

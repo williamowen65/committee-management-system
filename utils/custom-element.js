@@ -23,9 +23,7 @@ export async function createCustomElement(name, onload, html, css) {
             this.updateTemplate();
         }
 
-        static get observedAttributes() {
-            return ['fieldName', 'alias']; // Add all attributes you want to observe
-        }
+      
 
         attributeChangedCallback(name, oldValue, newValue) {
             if (oldValue !== newValue) {
@@ -40,6 +38,8 @@ export async function createCustomElement(name, onload, html, css) {
                 required: this.hasAttribute('required') || false,
                 capitalizeFirstLetter: (str) => str.charAt(0).toUpperCase() + str.slice(1),
                 type: this.getAttribute('type') || 'text',
+                multiple: this.hasAttribute('multiple') || false,
+                accept: this.getAttribute('accept') || '',
             };
 
 

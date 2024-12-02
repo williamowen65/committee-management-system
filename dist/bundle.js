@@ -27,14 +27,16 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types_text_input_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types/text-input.html.txt */ "./app/components/input/types/text-input.html.txt");
-/* harmony import */ var _types_textarea_input_html_txt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types/textarea-input.html.txt */ "./app/components/input/types/textarea-input.html.txt");
-/* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
-/* harmony import */ var _style_scss_txt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss.txt */ "./app/components/input/style.scss.txt");
+/* harmony import */ var _types_file_input_html_txt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types/file-input.html.txt */ "./app/components/input/types/file-input.html.txt");
+/* harmony import */ var _types_textarea_input_html_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./types/textarea-input.html.txt */ "./app/components/input/types/textarea-input.html.txt");
+/* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
+/* harmony import */ var _style_scss_txt__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss.txt */ "./app/components/input/style.scss.txt");
 
 
 
 
-(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_2__.createCustomElement)('input-component', function () {
+
+(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_3__.createCustomElement)('input-component', function () {
   console.log('input-component loaded');
   // set slot
   // Evaluate the template (initially with default context)
@@ -59,10 +61,37 @@ __webpack_require__.r(__webpack_exports__);
 
   // console.log("evaluatedTemplate", evaluatedTemplate);
   // console.log({ styles })
-}, _types_text_input_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_3__["default"]);
-(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_2__.createCustomElement)('textarea-component', function () {
+}, _types_text_input_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_4__["default"]);
+(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_3__.createCustomElement)('textarea-component', function () {
   moveLabel.bind(this)();
-}, _types_textarea_input_html_txt__WEBPACK_IMPORTED_MODULE_1__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_3__["default"]);
+}, _types_textarea_input_html_txt__WEBPACK_IMPORTED_MODULE_2__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_4__["default"]);
+(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_3__.createCustomElement)('file-input-component', function () {
+  var _this = this;
+  // Set listeners to display images added to file input
+  this.querySelector('input').addEventListener('change', function (e) {
+    var imagesContainer = _this.querySelector('.images-container');
+    Array.from(e.target.files).forEach(function (file) {
+      var reader = new FileReader();
+      reader.onloadend = function () {
+        var img = document.createElement('img');
+        var deleteButton = document.createElement('button');
+        deleteButton.textContent = 'X';
+        deleteButton.classList.add('delete-button');
+        deleteButton.addEventListener('click', function () {
+          img.remove();
+          deleteButton.remove();
+        });
+        var imgContainer = document.createElement('div');
+        imgContainer.classList.add('img-container');
+        imgContainer.appendChild(img);
+        imgContainer.appendChild(deleteButton);
+        imagesContainer.appendChild(imgContainer);
+        img.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+}, _types_file_input_html_txt__WEBPACK_IMPORTED_MODULE_1__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_4__["default"]);
 function moveLabel() {
   this.querySelectorAll('input, textarea').forEach(function (el) {
     el.addEventListener('focus', function (e) {
@@ -227,15 +256,12 @@ function _createCustomElement() {
                   capitalizeFirstLetter: function capitalizeFirstLetter(str) {
                     return str.charAt(0).toUpperCase() + str.slice(1);
                   },
-                  type: this.getAttribute('type') || 'text'
+                  type: this.getAttribute('type') || 'text',
+                  multiple: this.hasAttribute('multiple') || false,
+                  accept: this.getAttribute('accept') || ''
                 };
                 var evaluatedTemplate = evaluateTemplate(html, context);
                 this.innerHTML = "\n                <style>\n                ".concat(css, "\n                </style>\n                ").concat(evaluatedTemplate, "\n                ");
-              }
-            }], [{
-              key: "observedAttributes",
-              get: function get() {
-                return ['fieldName', 'alias']; // Add all attributes you want to observe
               }
             }]);
           }(/*#__PURE__*/_wrapNativeSuper(HTMLElement));
@@ -461,7 +487,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("label {\r\n    font-size: 1.2rem;\r\n    position: relative;\r\n    margin-bottom: 5px;\r\n    margin-top: 5px;\r\n    display: inline-block;\r\n\r\n    .text {\r\n        position: absolute;\r\n        z-index: 1;\r\n        transition: all 0.5s;\r\n        transform: translate(8px, 14px);\r\n        user-select: none;\r\n        cursor: text;\r\n    }\r\n\r\n    &.moveLabel {\r\n        .text {\r\n            transform: translate(0px, -7px);\r\n            font-size: 0.75rem;\r\n            font-weight: bold;\r\n        }\r\n    }\r\n    .password-container{\r\n        position: relative;\r\n        // background-color: #ccc;\r\n        .password-toggle {\r\n            width: 24px;\r\n            position: absolute;\r\n            top: 27px;\r\n            translate: -100% -50%;\r\n            right: 0;\r\n            scale: .8;\r\n            cursor: pointer;\r\n            font-size: 12px;\r\n        }\r\n    }\r\n\r\n    .static-label-text {\r\n        font-size: 0.75rem;\r\n        white-space: nowrap;\r\n        margin-top: 4px;\r\n    }\r\n\r\n    &[for=\"remember-me\"] {\r\n        translate: -44px 0;\r\n        display: flex;\r\n        align-items: center;\r\n        justify-content: center;\r\n\r\n        input {\r\n            scale: 1.3;\r\n            translate: 5px -5px;\r\n            transform-origin: top left;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n\r\n    input, textarea{\r\n        width: 80%;\r\n        margin: 10px 0 0 0;\r\n        padding: 10px;\r\n        border: 1px solid #ccc;\r\n        border-radius: 5px;\r\n    }\r\n\r\n    textarea {\r\n        resize: vertical;\r\n        min-height: 100px;\r\n    }\r\n\r\n    .hide-password {\r\n        display: none;\r\n    }\r\n\r\n    .show-password {\r\n        display: block;\r\n    }\r\n\r\n    &[password-toggle=\"show\"] {\r\n        .hide-password {\r\n            display: block;\r\n        }\r\n\r\n        .show-password {\r\n            display: none;\r\n        }\r\n    }\r\n\r\n    .error-message {\r\n        font-size: 0.8rem;\r\n        user-select: none;\r\n        z-index: 1;\r\n        line-height: 12px;\r\n    }\r\n}");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("label {\r\n    font-size: 1.2rem;\r\n    position: relative;\r\n    margin-bottom: 5px;\r\n    margin-top: 5px;\r\n    display: inline-block;\r\n\r\n    .text {\r\n        position: absolute;\r\n        z-index: 1;\r\n        transition: all 0.5s;\r\n        transform: translate(8px, 14px);\r\n        user-select: none;\r\n        cursor: text;\r\n    }\r\n\r\n    &.moveLabel {\r\n        .text {\r\n            transform: translate(0px, -7px);\r\n            font-size: 0.75rem;\r\n            font-weight: bold;\r\n        }\r\n    }\r\n    .password-container{\r\n        position: relative;\r\n        // background-color: #ccc;\r\n        .password-toggle {\r\n            width: 24px;\r\n            position: absolute;\r\n            top: 27px;\r\n            translate: -100% -50%;\r\n            right: 0;\r\n            scale: .8;\r\n            cursor: pointer;\r\n            font-size: 12px;\r\n        }\r\n    }\r\n\r\n    .static-label-text {\r\n        font-size: 0.75rem;\r\n        white-space: nowrap;\r\n        margin-top: 4px;\r\n    }\r\n\r\n    &[for=\"remember-me\"] {\r\n        translate: -44px 0;\r\n        display: flex;\r\n        align-items: center;\r\n        justify-content: center;\r\n\r\n        input {\r\n            scale: 1.3;\r\n            translate: 5px -5px;\r\n            transform-origin: top left;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n\r\n    input, textarea{\r\n        width: 80%;\r\n        margin: 10px 0 0 0;\r\n        padding: 10px;\r\n        border: 1px solid #ccc;\r\n        border-radius: 5px;\r\n    }\r\n\r\n    textarea {\r\n        resize: vertical;\r\n        min-height: 100px;\r\n    }\r\n\r\n    .hide-password {\r\n        display: none;\r\n    }\r\n\r\n    .show-password {\r\n        display: block;\r\n    }\r\n\r\n    &[password-toggle=\"show\"] {\r\n        .hide-password {\r\n            display: block;\r\n        }\r\n\r\n        .show-password {\r\n            display: none;\r\n        }\r\n    }\r\n\r\n    .error-message {\r\n        font-size: 0.8rem;\r\n        user-select: none;\r\n        z-index: 1;\r\n        line-height: 12px;\r\n    }\r\n    .images-container{\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        margin-top: 10px;\r\n        img{\r\n            width: 100px;\r\n            height: 100px;\r\n            margin-right: 10px;\r\n            margin-bottom: 10px;\r\n        }\r\n        .img-container{\r\n\r\n            position: relative;\r\n            button.delete-button {\r\n                position: absolute;\r\n                left: 0;\r\n            }\r\n        }\r\n    }\r\n\r\n}");
+
+/***/ }),
+
+/***/ "./app/components/input/types/file-input.html.txt":
+/*!********************************************************!*\
+  !*** ./app/components/input/types/file-input.html.txt ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<label for=\"${fieldName}\" >\r\n    <input type=\"file\" id=\"${fieldName}\" name=\"${fieldName}\" ${multiple ? \"multiple=true\" : \"\"}  ${accept ? `accept=\"${accept}\"` : \"\"}/>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n    <div class=\"images-container\"></div>\r\n</label>");
 
 /***/ }),
 

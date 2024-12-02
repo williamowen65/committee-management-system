@@ -1,4 +1,5 @@
 import inputTemplate from './types/text-input.html.txt';
+import fileInputTemplate from './types/file-input.html.txt';
 import textareaTemplate from './types/textarea-input.html.txt';
 import { createCustomElement, evaluateTemplate } from '../../../utils/custom-element';
 import styles from './style.scss.txt';
@@ -21,13 +22,13 @@ createCustomElement('input-component', function () {
 
     // this.querySelector('input').setAttribute('type', defaultContext.type);
     // if(defaultContext.required) {
-        // this.querySelector('input').setAttribute('required', true);
+    // this.querySelector('input').setAttribute('required', true);
     // }
 
     moveLabel.bind(this)();
 
     // // Set listeners on all inputs for the label to float
- 
+
 
 
     // console.log("evaluatedTemplate", evaluatedTemplate);
@@ -42,7 +43,43 @@ createCustomElement('textarea-component', function () {
 }, textareaTemplate, styles);
 
 
-function moveLabel(){
+createCustomElement('file-input-component', function () {
+
+    // Set listeners to display images added to file input
+    this.querySelector('input').addEventListener('change', (e) => {
+
+        const imagesContainer = this.querySelector('.images-container');
+    
+        Array.from(e.target.files).forEach((file) => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                
+                const img = document.createElement('img');
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'X';
+                deleteButton.classList.add('delete-button');
+                deleteButton.addEventListener('click', () => {
+                    img.remove();
+                    deleteButton.remove();
+                });
+
+                const imgContainer = document.createElement('div');
+                imgContainer.classList.add('img-container');
+                imgContainer.appendChild(img);
+                imgContainer.appendChild(deleteButton);
+
+                imagesContainer.appendChild(imgContainer);
+                img.src = reader.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    })
+
+
+}, fileInputTemplate, styles);
+
+
+function moveLabel() {
     this.querySelectorAll('input, textarea').forEach((el) => {
         el.addEventListener('focus', (e) => {
             const target = e.target;

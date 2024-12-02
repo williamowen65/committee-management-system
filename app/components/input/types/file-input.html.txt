@@ -1,0 +1,8 @@
+
+
+
+<label for="${fieldName}" >
+    <input type="file" id="${fieldName}" name="${fieldName}" ${multiple ? "multiple=true" : ""}  ${accept ? `accept="${accept}"` : ""}/>
+    <div id="${fieldName}-error" class="error-message"></div>
+    <div class="images-container"></div>
+</label>
