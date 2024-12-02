@@ -1,3 +1,4 @@
 import "./components/input/index.js";
 import "./components/header/index.js";
-import './styles.scss'
+import "./components/markdown/index.js";
+import './styles.scss'  // Import the styles

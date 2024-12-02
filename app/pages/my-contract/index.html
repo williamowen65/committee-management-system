@@ -4,8 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My GHOST Contract</title>
+    <script src="/dist/bundle.js"></script>
 </head>
 <body>
-    <h1>My Contract</h1>
+    <header-component></header-component>
+    <div class="container">
+        <h1>My Contract</h1>
+        <form id="my-contract-form">
+            <markdown-component>
+                # Contract
+                ## Terms
+                - Term 1
+                - Term 2
+                - Term 3
+            </markdown-component>
+            <div class="row">
+                <input-component class="w-100" required fieldName="signature" alias="Signature"></input-component>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
