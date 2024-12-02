@@ -107,13 +107,23 @@ __webpack_require__.r(__webpack_exports__);
 
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_0__.createCustomElement)('markdown-component', function () {
   // convert the inner markdown to html
-  var markdown = this.innerHTML;
-  var html = (0,marked__WEBPACK_IMPORTED_MODULE_1__["default"])(markdown);
-  this.innerHTML = html;
+  var markdown = this.querySelector('span[slot="markdown-content"]').innerHTML;
   console.log({
-    html: html
+    "this": this,
+    markdown: markdown
   });
+  // console.log({marked, markdown, this: this})
+  // const html = marked(markdown);
+  var html = marked__WEBPACK_IMPORTED_MODULE_1__.marked.parse("".concat(trimString(markdown)));
+  this.innerHTML = html;
 }, _index_html_txt__WEBPACK_IMPORTED_MODULE_2__["default"], "");
+function trimString(a) {
+  return a.split('\n').map(function (line) {
+    return line.trim() + "   ";
+  }).filter(function (line) {
+    return Boolean(line);
+  }).join('\n   ');
+}
 
 /***/ }),
 
@@ -493,7 +503,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<slot></slot>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<slot name=\"markdown-content\"></slot>");
 
 /***/ }),
 

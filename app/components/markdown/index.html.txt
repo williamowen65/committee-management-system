@@ -1,1 +1,1 @@
-<slot></slot>
+<slot name="markdown-content"></slot>

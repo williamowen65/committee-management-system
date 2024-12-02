@@ -1,11 +1,21 @@
 import { createCustomElement, evaluateTemplate } from '../../../utils/custom-element';
-import marked from 'marked';
+import {marked} from 'marked';
 import markdownTemplate from './index.html.txt';
 
 createCustomElement('markdown-component', function () {
     // convert the inner markdown to html
-    const markdown = this.innerHTML;
-    const html = marked(markdown);
+    const markdown  = this.querySelector('span[slot="markdown-content"]').innerHTML
+    console.log({ this: this, markdown})
+    // console.log({marked, markdown, this: this})
+    // const html = marked(markdown);
+    const html = marked.parse(`${trimString(markdown)}`);
     this.innerHTML = html
-    console.log({html})
 }, markdownTemplate, "");
+
+
+function trimString(a){
+    return a.split('\n')
+            .map(line => line.trim() + "   ")
+            .filter(line => Boolean(line))
+            .join('\n   ')
+  }
