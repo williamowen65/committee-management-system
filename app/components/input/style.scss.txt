@@ -7,6 +7,10 @@ label {
     margin-bottom: 5px;
     margin-top: 5px;
     display: inline-block;
+    width: 100%;
+    input:not([type=radio],[type=checkbox]),textarea{
+        width: 100%;
+    }
 
     .text {
         position: absolute;

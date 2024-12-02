@@ -40,6 +40,7 @@ export async function createCustomElement(name, onload, html, css) {
                 type: this.getAttribute('type') || 'text',
                 multiple: this.hasAttribute('multiple') || false,
                 accept: this.getAttribute('accept') || '',
+                labelClass: this.getAttribute('labelClass') || '',
             };
 
 

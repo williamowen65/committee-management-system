@@ -20,10 +20,10 @@ textarea {
 
 textarea-component,
 input-component {
-    &.w-100 {
-        width: 100% !important;
-        width: -webkit-fill-available !important;
-    }
+}
+.w-100 {
+    width: 100% !important;
+    width: -webkit-fill-available !important;
 }
 
 .container{

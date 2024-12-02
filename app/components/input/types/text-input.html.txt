@@ -1,8 +1,8 @@
 
 
 
-<label for="${fieldName}" >
+<label for="${fieldName}" class="${labelClass || ""}">
     <small class="text" part="labelText">${alias || capitalizeFirstLetter(fieldName)} ${required ? "*" : ""}</small>
-    <input type="${type}" id="${fieldName}" name="${fieldName}" />
+    <input type="${type}" id="${fieldName}" name="${fieldName}" class="${labelClass || ""}"/>
     <div id="${fieldName}-error" class="error-message"></div>
 </label>
