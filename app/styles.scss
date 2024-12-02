@@ -14,7 +14,7 @@ input,
 label,
 textarea {
     box-sizing: border-box;
-    width: 100% !important;
+    // width: 100% !important;
     // background-color: black !important
 }
 
@@ -29,4 +29,20 @@ input-component {
 .container{
    max-width: 1000px;
     margin: 0 auto;
+}
+
+#questionnaire{
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    flex-direction: column;
+    label {
+        width: fit-content;
+        display: flex;
+        align-items: baseline;
+        input {
+            margin-right: 10px;
+         translate: 0 3px; 
+        }
+    }
 }

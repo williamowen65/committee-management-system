@@ -311,7 +311,6 @@ input,
 label,
 textarea {
   box-sizing: border-box;
-  width: 100% !important;
 }
 
 textarea-component.w-100,
@@ -323,7 +322,23 @@ input-component.w-100 {
 .container {
   max-width: 1000px;
   margin: 0 auto;
-}`, "",{"version":3,"sources":["webpack://./app/styles.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,WAAA;EACA,8BAAA;EACA,eAAA;EACA,mBAAA;AACJ;AAMA;;;EAGI,sBAAA;EACA,sBAAA;AAJJ;;AAUI;;EACI,sBAAA;EACA,wCAAA;AANR;;AAUA;EACG,iBAAA;EACC,cAAA;AAPJ","sourceRoot":""}]);
+}
+
+#questionnaire {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  flex-direction: column;
+}
+#questionnaire label {
+  width: fit-content;
+  display: flex;
+  align-items: baseline;
+}
+#questionnaire label input {
+  margin-right: 10px;
+  translate: 0 3px;
+}`, "",{"version":3,"sources":["webpack://./app/styles.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,WAAA;EACA,8BAAA;EACA,eAAA;EACA,mBAAA;AACJ;AAMA;;;EAGI,sBAAA;AAJJ;;AAWI;;EACI,sBAAA;EACA,wCAAA;AAPR;;AAWA;EACG,iBAAA;EACC,cAAA;AARJ;;AAWA;EACI,aAAA;EACA,UAAA;EACA,cAAA;EACA,sBAAA;AARJ;AASI;EACI,kBAAA;EACA,aAAA;EACA,qBAAA;AAPR;AAQQ;EACI,kBAAA;EACH,gBAAA;AANT","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -487,7 +502,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("label {\r\n    font-size: 1.2rem;\r\n    position: relative;\r\n    margin-bottom: 5px;\r\n    margin-top: 5px;\r\n    display: inline-block;\r\n\r\n    .text {\r\n        position: absolute;\r\n        z-index: 1;\r\n        transition: all 0.5s;\r\n        transform: translate(8px, 14px);\r\n        user-select: none;\r\n        cursor: text;\r\n    }\r\n\r\n    &.moveLabel {\r\n        .text {\r\n            transform: translate(0px, -7px);\r\n            font-size: 0.75rem;\r\n            font-weight: bold;\r\n        }\r\n    }\r\n    .password-container{\r\n        position: relative;\r\n        // background-color: #ccc;\r\n        .password-toggle {\r\n            width: 24px;\r\n            position: absolute;\r\n            top: 27px;\r\n            translate: -100% -50%;\r\n            right: 0;\r\n            scale: .8;\r\n            cursor: pointer;\r\n            font-size: 12px;\r\n        }\r\n    }\r\n\r\n    .static-label-text {\r\n        font-size: 0.75rem;\r\n        white-space: nowrap;\r\n        margin-top: 4px;\r\n    }\r\n\r\n    &[for=\"remember-me\"] {\r\n        translate: -44px 0;\r\n        display: flex;\r\n        align-items: center;\r\n        justify-content: center;\r\n\r\n        input {\r\n            scale: 1.3;\r\n            translate: 5px -5px;\r\n            transform-origin: top left;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n\r\n    input, textarea{\r\n        width: 80%;\r\n        margin: 10px 0 0 0;\r\n        padding: 10px;\r\n        border: 1px solid #ccc;\r\n        border-radius: 5px;\r\n    }\r\n\r\n    textarea {\r\n        resize: vertical;\r\n        min-height: 100px;\r\n    }\r\n\r\n    .hide-password {\r\n        display: none;\r\n    }\r\n\r\n    .show-password {\r\n        display: block;\r\n    }\r\n\r\n    &[password-toggle=\"show\"] {\r\n        .hide-password {\r\n            display: block;\r\n        }\r\n\r\n        .show-password {\r\n            display: none;\r\n        }\r\n    }\r\n\r\n    .error-message {\r\n        font-size: 0.8rem;\r\n        user-select: none;\r\n        z-index: 1;\r\n        line-height: 12px;\r\n    }\r\n    .images-container{\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        margin-top: 10px;\r\n        img{\r\n            width: 100px;\r\n            height: 100px;\r\n            margin-right: 10px;\r\n            margin-bottom: 10px;\r\n        }\r\n        .img-container{\r\n\r\n            position: relative;\r\n            button.delete-button {\r\n                position: absolute;\r\n                left: 0;\r\n            }\r\n        }\r\n    }\r\n\r\n}");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("label {\r\n    &:not(:has(input[type=radio])){\r\n        font-size: 1.2rem;\r\n    } \r\n        \r\n    position: relative;\r\n    margin-bottom: 5px;\r\n    margin-top: 5px;\r\n    display: inline-block;\r\n\r\n    .text {\r\n        position: absolute;\r\n        z-index: 1;\r\n        transition: all 0.5s;\r\n        transform: translate(8px, 14px);\r\n        user-select: none;\r\n        cursor: text;\r\n    }\r\n\r\n    &.moveLabel {\r\n        .text {\r\n            transform: translate(0px, -7px);\r\n            font-size: 0.75rem;\r\n            font-weight: bold;\r\n        }\r\n    }\r\n    .password-container{\r\n        position: relative;\r\n        // background-color: #ccc;\r\n        .password-toggle {\r\n            width: 24px;\r\n            position: absolute;\r\n            top: 27px;\r\n            translate: -100% -50%;\r\n            right: 0;\r\n            scale: .8;\r\n            cursor: pointer;\r\n            font-size: 12px;\r\n        }\r\n    }\r\n\r\n    .static-label-text {\r\n        font-size: 0.75rem;\r\n        white-space: nowrap;\r\n        margin-top: 4px;\r\n    }\r\n\r\n    &[for=\"remember-me\"] {\r\n        translate: -44px 0;\r\n        display: flex;\r\n        align-items: center;\r\n        justify-content: center;\r\n\r\n        input {\r\n            scale: 1.3;\r\n            translate: 5px -5px;\r\n            transform-origin: top left;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n\r\n    input, textarea{\r\n        // width: 80%;\r\n        margin: 10px 0 0 0;\r\n        padding: 10px;\r\n        border: 1px solid #ccc;\r\n        border-radius: 5px;\r\n    }\r\n\r\n    textarea {\r\n        resize: vertical;\r\n        min-height: 100px;\r\n    }\r\n\r\n    .hide-password {\r\n        display: none;\r\n    }\r\n\r\n    .show-password {\r\n        display: block;\r\n    }\r\n\r\n    &[password-toggle=\"show\"] {\r\n        .hide-password {\r\n            display: block;\r\n        }\r\n\r\n        .show-password {\r\n            display: none;\r\n        }\r\n    }\r\n\r\n    .error-message {\r\n        font-size: 0.8rem;\r\n        user-select: none;\r\n        z-index: 1;\r\n        line-height: 12px;\r\n    }\r\n    .images-container{\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        margin-top: 10px;\r\n        img{\r\n            width: 100px;\r\n            height: 100px;\r\n            margin-right: 10px;\r\n            margin-bottom: 10px;\r\n        }\r\n        .img-container{\r\n\r\n            position: relative;\r\n            button.delete-button {\r\n                position: absolute;\r\n                left: 0;\r\n            }\r\n        }\r\n    }\r\n\r\n}");
 
 /***/ }),
 

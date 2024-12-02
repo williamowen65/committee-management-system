@@ -15,8 +15,7 @@
         <form id="my-contract-form">
             <markdown-component>
                 <span slot="markdown-content">
-                    This contract, along with all required images and electronic payment, are due on or before March 2,
-                    2025.
+                    This contract, along with all required images and electronic payment, are due on or before March 2, 2025.
 
                     <u><strong>I hereby agree:</strong></u>
 
@@ -35,8 +34,7 @@
                     process visible in a way that will enable visitors to learn more about my art form. Hosted artists
                     must comply with all the above except workspace.
 
-                    - To serve as an active participant on one of the designated committees that help to produce the
-                    Tour.
+                    - To serve as an active participant on one of the designated committees that help to produce the Tour.
                     All artists, even those that live outside of the tour boundaries, are expected to sign up for a
                     volunteer position on one of our committees.
 
@@ -67,30 +65,18 @@
 
                     <u><strong> I agree to participate in the following GHOST Timeline:</strong></u>
 
-                    <u><strong>March 26:</strong></u> General members kick-off meeting at Gig Harbor library 5:30 – 7:00
-                    pm
+                    <u><strong>March 26:</strong></u> General members kick-off meeting at Gig Harbor library 5:30 – 7:00 pm
+
                     <u><strong>April 10:</strong></u> Last day for members to notify Beth Owen of corrections needed on
                     the brochure or website details (will be available online within the Member login site instead of in
                     person at the library)
 
-
-
-                    <u><strong>August 20:</strong></u> General members meeting at Gig Harbor Library 5:30-7:00 pm to
-                    pick up signs and review plans
-
-
+                    <u><strong>August 20:</strong></u> General members meeting at Gig Harbor Library 5:30-7:00 pm to pick up signs and review plans
 
                     <u><strong>Sept 19, 20 and 21:</strong></u> GHOST tour dates
 
-
-
-                    <u><strong>October 22:</strong></u> General members meeting and potluck (location TBD) to return
-                    signs, elect board for 2026, review survey results and discuss ideas for next year
-
-
-                    <u><strong>October 22:</strong></u> General members meeting and potluck (location TBD) to return
-                    signs, elect board for
-                    2026, review survey results and discuss ideas for next year
+                    <u><strong>October 22:</strong></u> General members meeting and potluck (location TBD) to return signs, 
+                    elect board for 2026, review survey results and discuss ideas for next year
 
                     (All the following information goes to a Google Spread sheet or a Google Drive Image folder when
                     submitted)
@@ -141,7 +127,7 @@
             </div>
             <div class="row">
                 <textarea-component class="w-100" required fieldName="artistStatement"
-                    alias="Artist Statement"></-component>
+                    alias="Artist Statement"></textarea-component>
             </div>
             <div class="row">
                 <markdown-component>
@@ -158,6 +144,37 @@
                 </markdown-component>
                 <file-input-component multiple="true" fieldName="digitalImages" alias="Digital Images" accept=".jpg,.jpeg,.png"></file-input-component>
             </div>
+
+            <hr>
+
+            <markdown-component>
+                <span slot="markdown-content">
+                    <b>Sharing studios:</b>  Please note that we would like to encourage artists to share studio space where possible since these studios will get the most visitors! Our goal is to have at least 2 artists per studio – more, if possible.  Shared studio space could include garages and indoor spaces.
+
+                    Fill out this questionnaire to help us gather information about studio sharing.
+                </span>
+            </markdown-component>
+            <div id="questionnaire">
+                <label for="hasStudio">
+                    <input type="radio" name="studioPreference" id="hasStudio" value="hasStudio">
+                    I have my own studio space within the GHOST tour boundaries....
+                </label>
+                <div visible-if="studioPreference === 'hasStudio'">
+                    <label for="noRoom">
+                        <input type="radio" name="studioAvailability" id="noRoom" value="noRoom">
+                        I do not have room for additional artists.
+                    </label>
+                    <label for="canShare">
+                        <input type="radio" name="studioAvailability" id="canShare" value="canShare">
+                        I can share my studio space with more artists.
+                    </label>
+                </div>
+                <label for="doesNotHaveStudio">
+                    <input type="radio" name="studioPreference" id="doesNotHaveStudio" value="doesNotHaveStudio">
+                    I don't have a studio and I need to show my art at another artist's studio space
+                </label>
+            </div>
+
 
 
         </form>
