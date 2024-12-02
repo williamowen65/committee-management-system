@@ -1,5 +1,5 @@
 label {
-    &:not(:has(input[type=radio])){
+    &:not(:has(input[type=radio], input[type=checkbox])){
         font-size: 1.2rem;
     } 
         

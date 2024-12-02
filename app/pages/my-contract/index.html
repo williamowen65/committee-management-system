@@ -159,26 +159,121 @@
                     <input type="radio" name="studioPreference" id="hasStudio" value="hasStudio">
                     I have my own studio space within the GHOST tour boundaries....
                 </label>
-                <div visible-if="studioPreference === 'hasStudio'">
-                    <label for="noRoom">
+                <div id="studioElement" visible-if="studioPreference === 'hasStudio'">
+                    <label for="noRoom" class="level-1">
                         <input type="radio" name="studioAvailability" id="noRoom" value="noRoom">
                         I do not have room for additional artists.
                     </label>
-                    <label for="canShare">
+                    <label for="canShare" class="level-1">
                         <input type="radio" name="studioAvailability" id="canShare" value="canShare">
                         I can share my studio space with more artists.
                     </label>
+                    <div class="level-2" id="additionalStudioInfo" visible-if="studioAvailability === 'canShare'" style="margin-top: 10px;">
+                        <textarea-component style="width:100%" fieldName="studioSharingInfo"
+                            alias="How many additional artist can you share it with (not including yourself?)"></textarea-component>
+                            <div style="margin-top: 20px;;"></div>
+                        <textarea-component style="width:100%" fieldName="studioSharingPlans"
+                            alias="If you already have plans to share someone’s studio space, list them here:"></textarea-component>
+                    </div>
+                    <label for="willingnessToRelocate" class="level-1">
+                        <input type="checkbox" name="willingnessToRelocate" for="willingnessToRelocate" id="willingnessToRelocate"></input>
+                        I am willing to show my art at another artist's studio space, even though I have my own studio.
+                    </label>
+                    <div class="level-3" id="canopy-studio">
+                        <label for="hasCanopy" visible-if="willingnessToRelocate">
+                            <input type="radio" name="canopy-studio" id="hasCanopy" value="hasCanopy">
+                            I have my own own art canopy to use
+                        </label>
+                        <label for="doesNotHaveCanopy">
+                            <input type="radio" name="canopy-studio" id="doesNotHaveCanopy" value="doesNotHaveCanopy">
+                            I don’t have my own art canopy so would need a covered space (ie, a garage or indoors) to set up
+                        </label>
+                    </div>
                 </div>
                 <label for="doesNotHaveStudio">
                     <input type="radio" name="studioPreference" id="doesNotHaveStudio" value="doesNotHaveStudio">
                     I don't have a studio and I need to show my art at another artist's studio space
                 </label>
+                <div class="level-1" id="canopy-no-studio" visible-if="doesNotHaveStudio">
+                    <label for="hasCanopy-no-studio" visible-if="willingnessToRelocate">
+                        <input type="radio" name="canopy-no-studio" id="hasCanopy-no-studio" value="hasCanopy-no-studio">
+                        I have my own own art canopy to use
+                    </label>
+                    <label for="doesNotHaveCanopy-no-studio">
+                        <input type="radio" name="canopy-no-studio" id="doesNotHaveCanopy-no-studio" value="doesNotHaveCanopy-no-studio">
+                        I don’t have my own art canopy so would need a covered space (ie, a garage or indoors) to set up
+                    </label>
+                </div>
             </div>
 
 
 
         </form>
     </div>
+        <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        handleStudioPreferenceChange();
+        handleDoesNotHaveStudio();
+        document.querySelectorAll('input[name="studioPreference"]').forEach(function(radio) {
+          radio.addEventListener('change', handleStudioPreferenceChange);
+          radio.addEventListener('change', handleDoesNotHaveStudio);
+        });
+
+        handleStudioAvailabilityChange();
+        document.querySelectorAll('input[name="studioAvailability"]').forEach(function(radio) {
+          radio.addEventListener('change', handleStudioAvailabilityChange);
+        });
+        handleWillingnessToRelocate();
+        document.querySelectorAll('input[name="willingnessToRelocate"]').forEach(function(radio) {
+          radio.addEventListener('change', handleWillingnessToRelocate);
+        });
+
+      
+      });
+
+      function handleStudioPreferenceChange(event) {
+        var studioPreference = document.querySelector('input[name="studioPreference"]:checked')?.value || "";
+        var studioElement = document.getElementById('studioElement');
+        if (studioPreference === 'hasStudio') {
+          studioElement.style.display = 'block';
+        } else {
+          studioElement.style.display = 'none';
+        }
+
+      }
+
+      function handleStudioAvailabilityChange(event) {
+        var studioAvailability = document.querySelector('input[name="studioAvailability"]:checked')?.value || "";
+        var additionalStudioInfo = document.getElementById('additionalStudioInfo');
+        if (studioAvailability === 'canShare') {
+          additionalStudioInfo.style.display = 'block';
+        } else {
+          additionalStudioInfo.style.display = 'none';
+        }
+      }
+
+      function handleWillingnessToRelocate(event){
+        var willingnessToRelocate = document.querySelector('input[name="willingnessToRelocate"]:checked')?.checked || "";
+        var canopy = document.getElementById('canopy-studio');
+        if (willingnessToRelocate) {
+          canopy.style.display = 'block';
+        } else {
+          canopy.style.display = 'none';
+        }
+      }
+
+      function handleDoesNotHaveStudio(event) {
+        console.log('handleDoesNotHaveStudio', {target : event?.target});
+
+        var doesNotHaveStudio = document.querySelector('input[id="doesNotHaveStudio"]:checked')?.value || "";
+        var canopy = document.getElementById('canopy-no-studio');
+        if (doesNotHaveStudio) {
+          canopy.style.display = 'block';
+        } else {
+          canopy.style.display = 'none';
+        }
+      }
+    </script>
 </body>
 
 </html>

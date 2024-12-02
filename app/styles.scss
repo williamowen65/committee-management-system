@@ -33,16 +33,38 @@ input-component {
 
 #questionnaire{
     display: flex;
-    width: 80%;
-    margin: 0 auto;
     flex-direction: column;
     label {
         width: fit-content;
         display: flex;
         align-items: baseline;
+        box-sizing: border-box;
         input {
-            margin-right: 10px;
+            box-sizing: border-box;
+        margin-right: 10px;
          translate: 0 3px; 
         }
+        textarea-component {
+            margin-top: 30px;
+        }
+        textarea {
+            width: 100%;
+           
+        }
+        // margin-left: 24px;
     }
+    .level-1{
+        margin-left: 40px;
+    }
+    .level-2 {
+        margin-left: 75px;
+    }
+    .level-3{
+        margin-left: 100px;
+    }
+}
+
+#studioElement{
+    // width:fit-content;
+    width: 100%;;
 }
