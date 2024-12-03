@@ -19,6 +19,7 @@ __webpack_require__.r(__webpack_exports__);
   setUXEventListeners.bind(this)();
 }, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__["default"]);
 function setUXEventListeners() {
+  var _this = this;
   // Change form from signup to login
   var dividerEl = this.querySelector('.os-dual-form');
   this.querySelectorAll('.toggleAuthType').forEach(function (el) {
@@ -26,6 +27,17 @@ function setUXEventListeners() {
       e.stopPropagation();
       dividerEl.getAttribute('auth-mode') === 'login' ? dividerEl.setAttribute('auth-mode', 'signup') : dividerEl.setAttribute('auth-mode', 'login');
       //  writeFriendlyMessage();
+    });
+  });
+
+  // handle submit event for login form
+  this.querySelector('.login-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = _this.querySelector('.login-form input[type="email"]').value;
+    var password = _this.querySelector('.login-form input[type="password"]').value;
+    console.log({
+      email: email,
+      password: password
     });
   });
 }
@@ -193,16 +205,16 @@ function trimString(a) {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_input_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/input/index.js */ "./app/components/input/index.js");
-/* harmony import */ var _components_header_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/header/index.js */ "./app/components/header/index.js");
-/* harmony import */ var _components_markdown_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/markdown/index.js */ "./app/components/markdown/index.js");
-/* harmony import */ var _components_dual_login_form_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/dual-login-form/index.js */ "./app/components/dual-login-form/index.js");
-/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styles.scss */ "./app/styles.scss");
-
-
-
-
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.scss */ "./app/styles.scss");
+/* harmony import */ var _components_input_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/input/index.js */ "./app/components/input/index.js");
+/* harmony import */ var _components_header_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/header/index.js */ "./app/components/header/index.js");
+/* harmony import */ var _components_markdown_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/markdown/index.js */ "./app/components/markdown/index.js");
+/* harmony import */ var _components_dual_login_form_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/dual-login-form/index.js */ "./app/components/dual-login-form/index.js");
  // Import the styles
+
+
+
+
 
 /***/ }),
 
@@ -3641,16 +3653,4 @@ const lexer = _Lexer.lex;
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
-(() => {
-/*!******************!*\
-  !*** ./index.js ***!
-  \******************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app/index.js */ "./app/index.js");
-
-})();
-
-/******/ })()
-;
-//# sourceMappingURL=bundle.js.map
+// This entry needs to b

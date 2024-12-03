@@ -21,4 +21,15 @@ function setUXEventListeners(){
             //  writeFriendlyMessage();
          })
      })
+
+     // handle submit event for login form
+        this.querySelector('.login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = this.querySelector('.login-form input[type="email"]').value;
+            const password = this.querySelector('.login-form input[type="password"]').value;
+            console.log({email, password});
+        })
+
+
+
 }
