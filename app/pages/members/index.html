@@ -1,70 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script type="module" src="/dist/firebase.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 10px;
-            background-color: #f4f4f4;
-        }
 
-        button {
-            background-color: #272727;
-            color: white;
-            border: none;
-            padding: 13px 26px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 12px;
-            margin: 4px 2px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script type="module" src="/dist/firebase.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 10px;
+      background-color: #f4f4f4;
+    }
 
-        button:hover {
-            background-color: #0056b3;
-        }
+    button {
+      background-color: #272727;
+      color: white;
+      border: none;
+      padding: 13px 26px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 12px;
+      margin: 4px 2px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-        .buttons-container button {
-            width: 100%;
-        }
-    </style>
-    <script type="module">
-      firebase.redirectIfNotLoggedIn('/artist-sign-on');
-    </script>
-  </head>
-  <body>
-    
-    <div class="" style="display: flex; flex-direction: column">
-      <div style="text-align: right">
-        <span>Hello, USER NAME</span>
-        <button>Logout</button>
-      </div>
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .buttons-container button {
+      width: 100%;
+    }
+  </style>
+  <script type="module">
+    firebase.redirectIfNotLoggedIn('/artist-sign-on')
+    .then(user => {
+      document.body.style.display = 'block'
+      document.querySelector('span').innerText = `Hello, ${user.displayName}`
+    })
+
+  </script>
+</head>
+
+<body style="display:none">
+
+  <div class="" style="display: flex; flex-direction: column">
+    <div style="text-align: right">
+      <span>Hello, USER NAME</span>
+      <button>Logout</button>
+    </div>
     <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-      <div
-        class="buttons-container"
-        style="display: flex; flex-direction: column; gap: 10px;"
-      >
+      <div class="buttons-container" style="display: flex; flex-direction: column; gap: 10px;">
         <a href="/my-account"><button>My Account</button></a>
         <a href="/my-contract"><button>My Contract</button></a>
         <a href="#"><button>Scholarship Application</button></a>
         <a href="#"><button>Committee Information</button></a>
         <a href="#"><button>Board and Heads <br> of the Committee</button></a>
         <a href="#"><button>Ghost Bylaws</button></a>
-        <a target="_parent" href="https://gigharboropenstudiotour.org/join#boundary-map"><button>Ghost Tour <br>Boundaries Map</button></a>
+        <a target="_parent" href="https://gigharboropenstudiotour.org/join#boundary-map"><button>Ghost Tour
+            <br>Boundaries Map</button></a>
         <a href="#"><button>Resources for New Artists</button></a>
-       
+
       </div>
-        <style>
+      <style>
         #timeline {
           border: 1px solid black;
           padding: 10px 15px;
@@ -72,14 +77,15 @@
           margin: 4px 2px;
           height: fit-content;
         }
-        </style>
-        <div id="timeline">
-            <h3>GHOST Timeline 2025</h3>
-            <p>...</p>
-            <p>...</p>
-            <p>...</p>
-          </div>
+      </style>
+      <div id="timeline">
+        <h3>GHOST Timeline 2025</h3>
+        <p>...</p>
+        <p>...</p>
+        <p>...</p>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

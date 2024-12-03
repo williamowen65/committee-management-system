@@ -53,12 +53,15 @@ window.firebase = {
   doc,
 }
 
-window.firebase.redirectIfNotLoggedIn = function (path) {
-  window.firebase.onAuthStateChanged(window.firebase.auth, (user) => {
-    if (!user) {
-      // redirect to 'artist-sign-on' page
-      window.location.href = path;
-
-    }
+window.firebase.redirectIfNotLoggedIn = async function (path) {
+  return new Promise((resolve, reject) => {
+    window.firebase.onAuthStateChanged(window.firebase.auth, (user) => {
+      if (!user) {
+        // redirect to 'artist-sign-on' page
+        window.location.href = path;
+        
+      }
+      resolve(user)
+    })
   })
 }
