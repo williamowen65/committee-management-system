@@ -19,7 +19,6 @@ __webpack_require__.r(__webpack_exports__);
   setUXEventListeners.bind(this)();
 }, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__["default"]);
 function setUXEventListeners() {
-  var _this = this;
   // Change form from signup to login
   var dividerEl = this.querySelector('.os-dual-form');
   this.querySelectorAll('.toggleAuthType').forEach(function (el) {
@@ -31,13 +30,41 @@ function setUXEventListeners() {
   });
 
   // handle submit event for login form
-  this.querySelector('.login-form').addEventListener('submit', function (e) {
+  this.querySelector('form#login').addEventListener('submit', function (e) {
     e.preventDefault();
-    var email = _this.querySelector('.login-form input[type="email"]').value;
-    var password = _this.querySelector('.login-form input[type="password"]').value;
-    console.log({
+    var email = this.querySelector('input[type="email"]').value;
+    var password = this.querySelector('input[type="password"]').value;
+    return firebase.signInWithEmailAndPassword(firebase.auth, email, password).then(function (user) {
+      // redirect to members
+      console.log('redirecting to members page');
+      window.location.href = '/members';
+    });
+  });
+
+  // handle submit event for signup form
+  this.querySelector('form#signup').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var button = this;
+    var firstName = button.querySelector('input[id="firstName"]').value;
+    var lastName = button.querySelector('input[id="lastName"]').value;
+    var email = button.querySelector('input[id="email"]').value;
+    var username = button.querySelector('input[id="username"]').value;
+    var password = button.querySelector('input[id="password"]').value;
+    var confirmPassword = button.querySelector('input[id="confirm-password"]').value;
+    console.log("about to create user with email and password", {
       email: email,
-      password: password
+      password: password,
+      auth: firebase.auth
+    });
+    return firebase.createUserWithEmailAndPassword(firebase.auth, email, password).then(function (result) {
+      console.log("result", result);
+      return firebase.updateProfile(result.user, {
+        displayName: username
+      });
+    }).then(function (user) {
+      // redirect to members
+      console.log('redirecting to members page');
+      window.location.href = '/members';
     });
   });
 }
@@ -541,7 +568,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n<div class=\"os-dual-form\" data-primary=\"login\" auth-mode=\"login\">\n    <form id=\"signup\" class=\"left\">\n      <h1>Sign up</h1>\n      <os-form-feedback feedbackName=\"success\"></os-form-feedback>\n\n      <div class=\"row\">\n        <input-component\n          fieldName=\"firstName\"\n          alias=\"First Name\"\n        ></input-component>\n        \n        <input-component fieldName=\"lastName\" alias=\"Last Name\"></input-component>\n      </div>\n      <div class=\"row\">\n        <input-component fieldName=\"username\" alias=\"Username\"></input-component>\n        <input-component fieldName=\"email\" alias=\"Email\"></input-component>\n      </div>\n      <div class=\"row\">\n        <input-component fieldName=\"password\" type=\"password\" alias=\"Password\"></input-component>\n        <input-component\n          fieldName=\"confirm-password\"\n          type=\"password\"\n          alias=\"Confirm Password\"\n        ></input-component>\n      </div>\n      <!-- <div id=\"reCAPTCHA\"></div>\n      <os-form-feedback feedbackName=\"reCAPTCHA\"></os-form-feedback> -->\n\n      <div class=\"row\">\n        <button type=\"submit\" buttonName=\"submit\"\n          >Submit</button\n        >\n\n        <button type=\"button\" class=\"mobile-view os-form-toggle\"\n          >Go to Log in</button\n        >\n      </div>\n      <os-form-feedback feedbackName=\"submit\"></os-form-feedback>\n    </form>\n    <form id=\"login\" class=\"right\">\n      <h1>Login</h1>\n      <input-component\n        fieldName=\"username-or-email\"\n        alias=\"Username or Email\"\n      ></input-component>\n      <input-component\n        fieldName=\"password-login\"\n        type=\"password\"\n        alias=\"Password\"\n      ></input-component>\n      <div class=\"row\">\n        <button type=\"submit\" buttonName=\"submit\"\n          >Submit</button\n        >\n        <button type=\"button\" class=\"mobile-view toggleAuthType\"\n          >Register new account</button\n        >\n      </div>\n      <os-form-feedback feedbackName=\"submit\"></os-form-feedback>\n    </form>\n\n    <div class=\"cover left login\" style=\"background-image: url(${loginImage});\">\n      <button type=\"button\" class=\"toggleAuthType secondary\">\n        Register new account\n      </button>\n    </div>\n    <div class=\"cover right signup\"  style=\"background-image: url(${signupImage});\">\n      <button type=\"button\" class=\"toggleAuthType\"\n        >Go to Log in</button\n      >\n    </div>\n  </div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n<div class=\"os-dual-form\" data-primary=\"login\" auth-mode=\"login\">\n    <form id=\"signup\" class=\"left\">\n      <h1>Sign up</h1>\n      <os-form-feedback feedbackName=\"success\"></os-form-feedback>\n\n      <div class=\"row\">\n        <input-component\n          fieldName=\"firstName\"\n          alias=\"First Name\"\n        ></input-component>\n        \n        <input-component fieldName=\"lastName\" alias=\"Last Name\"></input-component>\n      </div>\n      <div class=\"row\">\n        <input-component fieldName=\"username\" alias=\"Username\"></input-component>\n        <input-component fieldName=\"email\" alias=\"Email\"></input-component>\n      </div>\n      <div class=\"row\">\n        <input-component fieldName=\"password\" type=\"password\" alias=\"Password\"></input-component>\n        <input-component\n          fieldName=\"confirm-password\"\n          type=\"password\"\n          alias=\"Confirm Password\"\n        ></input-component>\n      </div>\n      <!-- <div id=\"reCAPTCHA\"></div>\n      <os-form-feedback feedbackName=\"reCAPTCHA\"></os-form-feedback> -->\n\n      <div class=\"row\">\n        <button type=\"submit\" buttonName=\"submit\"\n          >Submit</button\n        >\n\n        <button type=\"button\" class=\"mobile-view os-form-toggle\"\n          >Go to Log in</button\n        >\n      </div>\n      <os-form-feedback feedbackName=\"submit\"></os-form-feedback>\n    </form>\n    <form id=\"login\" class=\"right\">\n      <h1>Login</h1>\n      <input-component\n        fieldName=\"email-login\"\n        alias=\"Email\"\n        type=\"email\"\n      ></input-component>\n      <input-component\n        fieldName=\"password-login\"\n        type=\"password\"\n        alias=\"Password\"\n      ></input-component>\n      <div class=\"row\">\n        <button type=\"submit\" buttonName=\"submit\"\n          >Submit</button\n        >\n        <button type=\"button\" class=\"mobile-view toggleAuthType\"\n          >Register new account</button\n        >\n      </div>\n      <os-form-feedback feedbackName=\"submit\"></os-form-feedback>\n    </form>\n\n    <div class=\"cover left login\" style=\"background-image: url(${loginImage});\">\n      <button type=\"button\" class=\"toggleAuthType secondary\">\n        Register new account\n      </button>\n    </div>\n    <div class=\"cover right signup\"  style=\"background-image: url(${signupImage});\">\n      <button type=\"button\" class=\"toggleAuthType\"\n        >Go to Log in</button\n      >\n    </div>\n  </div>");
 
 /***/ }),
 
@@ -569,7 +596,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<header>\n    <a href=\"/members\">Go back to members page</a>\n</header>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<header>\n    <a href=\"/members\">Go back to members page</a>\n    <a href=\"https://gigharboropenstudiotour.org/\">Go back to GHOST Website</a>\n</header>");
 
 /***/ }),
 

@@ -9,11 +9,14 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  signOut,
+  updateProfile
 } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js'
 import {
   getFirestore,
   getDocs,
   collection,
+
   query,
   where,
   doc,
@@ -51,6 +54,8 @@ window.firebase = {
   query,
   where,
   doc,
+  signOut,
+  updateProfile
 }
 
 window.firebase.redirectIfNotLoggedIn = async function (path) {
@@ -65,3 +70,4 @@ window.firebase.redirectIfNotLoggedIn = async function (path) {
     })
   })
 }
+

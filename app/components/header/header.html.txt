@@ -1,3 +1,4 @@
 <header>
     <a href="/members">Go back to members page</a>
+    <a href="https://gigharboropenstudiotour.org/">Go back to GHOST Website</a>
 </header>

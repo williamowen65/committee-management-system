@@ -41,8 +41,9 @@
     <form id="login" class="right">
       <h1>Login</h1>
       <input-component
-        fieldName="username-or-email"
-        alias="Username or Email"
+        fieldName="email-login"
+        alias="Email"
+        type="email"
       ></input-component>
       <input-component
         fieldName="password-login"

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
   <script type="module" src="/dist/firebase.js"></script>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/dist/styles.css">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -27,6 +27,14 @@
       document.querySelector('span').innerText = `Hello, ${user.displayName}`
     })
 
+    document.addEventListener('DOMContentLoaded',() =>{
+      document.getElementById('logout').addEventListener('click', () => {
+        firebase.signOut(firebase.auth).then(() => {
+          window.location.href = '/artist-sign-on'
+        })
+      })
+    })
+
   </script>
 </head>
 
@@ -35,7 +43,7 @@
   <div class="" style="display: flex; flex-direction: column">
     <div style="text-align: right">
       <span>Hello, USER NAME</span>
-      <button>Logout</button>
+      <button id="logout">Logout</button>
     </div>
     <div style="display: flex; flex-wrap: wrap; gap: 10px;">
       <div class="buttons-container" style="display: flex; flex-direction: column; gap: 10px;">
