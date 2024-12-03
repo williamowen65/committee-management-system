@@ -198,26 +198,6 @@ function trimString(a) {
 
 /***/ }),
 
-/***/ "./app/index.js":
-/*!**********************!*\
-  !*** ./app/index.js ***!
-  \**********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.scss */ "./app/styles.scss");
-/* harmony import */ var _components_input_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/input/index.js */ "./app/components/input/index.js");
-/* harmony import */ var _components_header_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/header/index.js */ "./app/components/header/index.js");
-/* harmony import */ var _components_markdown_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/markdown/index.js */ "./app/components/markdown/index.js");
-/* harmony import */ var _components_dual_login_form_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/dual-login-form/index.js */ "./app/components/dual-login-form/index.js");
- // Import the styles
-
-
-
-
-
-/***/ }),
-
 /***/ "./utils/custom-element.js":
 /*!*********************************!*\
   !*** ./utils/custom-element.js ***!
@@ -3655,14 +3635,22 @@ const lexer = _Lexer.lex;
 var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
-/*!******************!*\
-  !*** ./index.js ***!
-  \******************/
+/*!*******************************************!*\
+  !*** ./app/components/component-build.js ***!
+  \*******************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app/index.js */ "./app/index.js");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../styles.scss */ "./app/styles.scss");
+/* harmony import */ var _input_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./input/index.js */ "./app/components/input/index.js");
+/* harmony import */ var _header_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./header/index.js */ "./app/components/header/index.js");
+/* harmony import */ var _markdown_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./markdown/index.js */ "./app/components/markdown/index.js");
+/* harmony import */ var _dual_login_form_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dual-login-form/index.js */ "./app/components/dual-login-form/index.js");
+ // Import the styles (These are really the global styles for the app -- They could have their own web pack config)
+
+
+
 
 })();
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle.js.map
+//# sourceMappingURL=components.js.map

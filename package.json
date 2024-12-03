@@ -19,7 +19,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "start:w": "nodemon server.js",
-    "build:w": "webpack --config webpack.config.js --watch",
+    "build:w": "webpack --config webpack.components.config.js --watch",
     "webpack": "webpack",
     "build:scss": "sass app/styles.scss dist/styles.css",
     "watch:scss": "sass --watch app/styles.scss dist/styles.css"
