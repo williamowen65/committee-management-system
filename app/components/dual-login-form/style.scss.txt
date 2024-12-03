@@ -1,6 +1,14 @@
 
+
+
+
 input{
-    all:initial
+    // all:initial;
+    // width:fit-content !important;
+
+}
+h1{
+    text-align: center;
 }
 
 form:not(#reCAPTCHAForm) {
@@ -15,11 +23,13 @@ form:not(#reCAPTCHAForm) {
 
 
 label {
-    translate: 30px 30px;
+    // translate: 30px 30px;
 }
 
 .row {
     display: flex;
+    flex-direction: row;
+    gap: 10px;
     justify-content: space-between;
 }
 
@@ -69,7 +79,7 @@ label {
             background-image: url('./assets/authformImgs/image-3.jpg'); 
         }
     }
-   
+
 }
 
 div[auth-mode="login"] {
@@ -98,7 +108,7 @@ div[auth-mode="signup"] {
         flex-direction: column;
         &[auth-mode="signup"]{
 
-            
+
             .right {
                 display: none;
             }
@@ -109,7 +119,7 @@ div[auth-mode="signup"] {
             }
 
         }
-        
+
 
         .cover {
             display: none;
@@ -267,7 +277,7 @@ button {
             color: black;
         }
     }
-    
+
 
     .cover {
 
@@ -297,7 +307,7 @@ button {
             filter: contrast(0.5);
             z-index: -1; // Ensure the pseudo-element is behind the content
         }
-      
+
         h2{
             color: rgb(0, 0, 0);
             background-color: #cccccc64;
@@ -343,7 +353,7 @@ button {
         justify-content: center;
         height: 70vh;
         width: 400px;
-   
+
     }
 
     label {
@@ -451,7 +461,7 @@ button {
 
 // Media query for mobile 
 @media only screen and (max-width: 767px) {
-    #auth-container {
+    .os-dual-form{
         margin-top: 22px;
         width: 100%;
         .cover {
@@ -478,7 +488,7 @@ button {
                 display: none;
             }
         }
-       
+
     }
     .row {
         // flex-direction: column;
@@ -491,5 +501,3 @@ button {
     }
 
 }
-
-
