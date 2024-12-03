@@ -644,7 +644,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("header{\n    display: flex;\n    justify-content: end;\n    align-items: end;\n    flex-direction: column;\n    a{\n        margin: 10px;\n    }\n}");
 
 /***/ }),
 
