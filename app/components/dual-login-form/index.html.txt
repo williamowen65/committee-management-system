@@ -28,7 +28,7 @@
       <os-form-feedback feedbackName="reCAPTCHA"></os-form-feedback> -->
 
       <div class="row">
-        <button type="submit" buttonName="submit"
+        <button type="submit"
           >Submit</button
         >
 
@@ -51,7 +51,7 @@
         alias="Password"
       ></input-component>
       <div class="row">
-        <button type="submit" buttonName="submit"
+        <button type="submit"
           >Submit</button
         >
         <button type="button" class="mobile-view toggleAuthType"

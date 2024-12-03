@@ -23,41 +23,80 @@ function setUXEventListeners() {
     })
 
     // handle submit event for login form
-    this.querySelector('form#login').addEventListener('submit', function(e) {
+    this.querySelector('form#login').addEventListener('submit', function (e) {
         e.preventDefault();
-        const email = this.querySelector('input[type="email"]').value;
-        const password = this.querySelector('input[type="password"]').value;
+
+        const form = this;
+
+        // get the button
+        const btnSubmit = form.querySelector('button[type="submit"]')
+
+        // get the button text
+        const btnText = btnSubmit.innerText
+        // change the button text to loading
+        btnSubmit.innerText = 'Loading...'
+        // disable the button
+        btnSubmit.disabled = true
+
+        const email = form.querySelector('input[type="email"]').value;
+        const password = form.querySelector('input[type="password"]').value;
 
         return firebase.signInWithEmailAndPassword(firebase.auth, email, password).then((user) => {
             // redirect to members
             console.log('redirecting to members page');
             window.location.href = '/members'
+        }).catch(() => {
+            // change the button text back to original
+            btnSubmit.innerText = btnText
+            // enable the button
+            btnSubmit.disabled = false
+            // show error message
+            alert('There was an error creating your account. Please try again')
         })
 
     })
 
     // handle submit event for signup form
-    this.querySelector('form#signup').addEventListener('submit', function(e) {
+    this.querySelector('form#signup').addEventListener('submit', function (e) {
         e.preventDefault();
-        const button = this;
-        const firstName = button.querySelector('input[id="firstName"]').value;
-        const lastName = button.querySelector('input[id="lastName"]').value;
-        const email = button.querySelector('input[id="email"]').value;
-        const username = button.querySelector('input[id="username"]').value;
-        const password = button.querySelector('input[id="password"]').value;
-        const confirmPassword = button.querySelector('input[id="confirm-password"]').value;
+        const form = this;
+        // get the button
+        const btnSubmit = form.querySelector('button[type="submit"]')
 
-    console.log("about to create user with email and password", {email, password, auth: firebase.auth});
+        // get the button text
+        const btnText = btnSubmit.innerText
+        // change the button text to loading
+        btnSubmit.innerText = 'Loading...'
+        // disable the button
+        btnSubmit.disabled = true
 
-        return firebase.createUserWithEmailAndPassword(firebase.auth, email, password).then(function(result) {
+
+
+        const firstName = form.querySelector('input[id="firstName"]').value;
+        const lastName = form.querySelector('input[id="lastName"]').value;
+        const email = form.querySelector('input[id="email"]').value;
+        const username = form.querySelector('input[id="username"]').value;
+        const password = form.querySelector('input[id="password"]').value;
+        const confirmPassword = form.querySelector('input[id="confirm-password"]').value;
+
+        console.log("about to create user with email and password", { email, password, auth: firebase.auth });
+
+        return firebase.createUserWithEmailAndPassword(firebase.auth, email, password).then(function (result) {
             console.log("result", result);
             return firebase.updateProfile(result.user, {
                 displayName: username
             })
-          }).then((user) => {
+        }).then((user) => {
             // redirect to members
             console.log('redirecting to members page');
             window.location.href = '/members'
+        }).catch(() => {
+            // change the button text back to original
+            btnSubmit.innerText = btnText
+            // enable the button
+            btnSubmit.disabled = false
+            // show error message
+            alert('There was an error creating your account. Please try again')
         })
 
     })
