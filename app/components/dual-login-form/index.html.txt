@@ -9,6 +9,7 @@
           fieldName="firstName"
           alias="First Name"
         ></input-component>
+        
         <input-component fieldName="lastName" alias="Last Name"></input-component>
       </div>
       <div class="row">
