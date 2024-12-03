@@ -1,0 +1,73 @@
+
+<div class="os-dual-form" data-primary="login" auth-mode="login">
+    <form id="signup" class="left">
+      <h1>Sign up</h1>
+      <os-form-feedback feedbackName="success"></os-form-feedback>
+
+      <div class="row">
+        <input-component
+          fieldName="firstName"
+          alias="First Name"
+        ></input-component>
+        <input-component fieldName="lastName" alias="Last Name"></input-component>
+      </div>
+      <div class="row">
+        <input-component fieldName="username"></input-component>
+        <input-component fieldName="email"></input-component>
+      </div>
+      <div class="row">
+        <input-component fieldName="password" type="password"></input-component>
+        <input-component
+          fieldName="confirm-password"
+          type="password"
+          alias="Confirm Password"
+        ></input-component>
+      </div>
+      <small>[either add more questions here or after sign up]</small>
+      <div id="reCAPTCHA"></div>
+      <os-form-feedback feedbackName="reCAPTCHA"></os-form-feedback>
+
+      <div class="row">
+        <button type="submit" buttonName="submit"
+          >Submit</button
+        >
+
+        <button type="button" class="mobile-view os-form-toggle"
+          >Go to Log in</button
+        >
+      </div>
+      <os-form-feedback feedbackName="submit"></os-form-feedback>
+    </form>
+    <os-form id="login" class="right">
+      <h1>Login</h1>
+      <input-component
+        fieldName="username-or-email"
+        alias="Username or Email"
+      ></input-component>
+      <input-component
+        fieldName="password-login"
+        type="password"
+        alias="Password"
+      ></input-component>
+      <div class="row">
+        <button type="submit" buttonName="submit"
+          >Submit</button
+        >
+        <button type="button" class="mobile-view os-form-toggle"
+          >Register new account</button
+        >
+      </div>
+      <os-form-feedback feedbackName="submit"></os-form-feedback>
+    </os-form>
+
+    <div class="cover left login">
+      <button type="button" class="os-form-toggle secondary">
+        Register new account
+      </button>
+    </div>
+    <div class="cover right signup">
+      <button type="button" class="os-form-toggle"
+        >Go to Log in</button
+      >
+    </div>
+  </div>

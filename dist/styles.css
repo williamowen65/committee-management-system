@@ -1,0 +1,59 @@
+.row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+input,
+label,
+textarea {
+  box-sizing: border-box;
+}
+
+.w-100 {
+  width: 100% !important;
+  width: -webkit-fill-available !important;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+#questionnaire {
+  display: flex;
+  flex-direction: column;
+}
+#questionnaire label {
+  width: fit-content;
+  display: flex;
+  align-items: baseline;
+  box-sizing: border-box;
+}
+#questionnaire label input {
+  box-sizing: border-box;
+  margin-right: 10px;
+  translate: 0 3px;
+}
+#questionnaire label textarea-component {
+  margin-top: 30px;
+}
+#questionnaire label textarea {
+  width: 100%;
+}
+#questionnaire .level-1 {
+  margin-left: 40px;
+}
+#questionnaire .level-2 {
+  margin-left: 75px;
+}
+#questionnaire .level-3 {
+  margin-left: 100px;
+}
+
+#studioElement {
+  width: 100%;
+}
+
+/*# sourceMappingURL=styles.css.map */
