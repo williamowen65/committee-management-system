@@ -1,15 +1,15 @@
 import { createCustomElement, evaluateTemplate } from '../../../utils/custom-element';
 import {marked} from 'marked';
 import markdownTemplate from './index.html.txt';
+import styles from './style.scss.txt';
 
 createCustomElement('markdown-component', function () {
     // convert the inner markdown to html
     const markdown  = this.querySelector('span[slot="markdown-content"]').innerHTML
-    console.log({ this: this, markdown})
     // console.log({marked, markdown, this: this})
     // const html = marked(markdown);
     const html = marked.parse(`${trimString(markdown)}`);
-    this.innerHTML = html
+    this.innerHTML = `<style>${styles}</style>`  + html
 }, markdownTemplate, "");
 
 

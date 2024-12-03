@@ -234,20 +234,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
 /* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! marked */ "./node_modules/marked/lib/marked.esm.js");
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/markdown/index.html.txt");
+/* harmony import */ var _style_scss_txt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss.txt */ "./app/components/markdown/style.scss.txt");
+
 
 
 
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_0__.createCustomElement)('markdown-component', function () {
   // convert the inner markdown to html
   var markdown = this.querySelector('span[slot="markdown-content"]').innerHTML;
-  console.log({
-    "this": this,
-    markdown: markdown
-  });
   // console.log({marked, markdown, this: this})
   // const html = marked(markdown);
   var html = marked__WEBPACK_IMPORTED_MODULE_1__.marked.parse("".concat(trimString(markdown)));
-  this.innerHTML = html;
+  this.innerHTML = "<style>".concat(_style_scss_txt__WEBPACK_IMPORTED_MODULE_3__["default"], "</style>") + html;
 }, _index_html_txt__WEBPACK_IMPORTED_MODULE_2__["default"], "");
 function trimString(a) {
   return a.split('\n').map(function (line) {
@@ -715,6 +713,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<slot name=\"markdown-content\"></slot>");
+
+/***/ }),
+
+/***/ "./app/components/markdown/style.scss.txt":
+/*!************************************************!*\
+  !*** ./app/components/markdown/style.scss.txt ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("markdown-component{\n    width: fit-content;\n    display: block;\n    justify-self: center;\n    p{\n        width: fit-content;\n        ul{\n            width: fit-content;\n        }\n    }\n}");
 
 /***/ }),
 
