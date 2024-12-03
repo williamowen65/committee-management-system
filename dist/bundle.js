@@ -3653,4 +3653,16 @@ const lexer = _Lexer.lex;
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry needs to b
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+(() => {
+/*!******************!*\
+  !*** ./index.js ***!
+  \******************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app/index.js */ "./app/index.js");
+
+})();
+
+/******/ })()
+;
+//# sourceMappingURL=bundle.js.map
