@@ -44,6 +44,7 @@ export async function createCustomElement(name, onload, html, css) {
                 redirect: this.getAttribute('redirect') || '',
                 "loginImage": this.getAttribute('loginImage') || '',
                 "signupImage": this.getAttribute('signupImage') || '',
+                "description": this.getAttribute('description') || '',
             };
 
 

@@ -1,7 +1,8 @@
 
 
 
-<label for="${fieldName}" style="width: 100%; box-sizing: border-box;">
+<div>${description}</div>
+<label for="${fieldName}" style="width: 100%; box-sizing: border-box; margin-top: 20px;">
     <small class="text" part="labelText">${alias || capitalizeFirstLetter(fieldName)} ${required ? "*" : ""}</small>
     <textarea id="${fieldName}" name="${fieldName}"></textarea>
     <div id="${fieldName}-error" class="error-message"></div>
