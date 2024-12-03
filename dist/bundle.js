@@ -25,7 +25,7 @@ function setUXEventListeners() {
     el.addEventListener('click', function (e) {
       e.stopPropagation();
       dividerEl.getAttribute('auth-mode') === 'login' ? dividerEl.setAttribute('auth-mode', 'signup') : dividerEl.setAttribute('auth-mode', 'login');
-      writeFriendlyMessage();
+      //  writeFriendlyMessage();
     });
   });
 }
@@ -291,7 +291,10 @@ function _createCustomElement() {
                   type: this.getAttribute('type') || 'text',
                   multiple: this.hasAttribute('multiple') || false,
                   accept: this.getAttribute('accept') || '',
-                  labelClass: this.getAttribute('labelClass') || ''
+                  labelClass: this.getAttribute('labelClass') || '',
+                  redirect: this.getAttribute('redirect') || '',
+                  "loginImage": this.getAttribute('loginImage') || '',
+                  "signupImage": this.getAttribute('signupImage') || ''
                 };
                 var evaluatedTemplate = evaluateTemplate(html, context);
                 this.innerHTML = "\n                <style>\n                ".concat(css, "\n                </style>\n                ").concat(evaluatedTemplate, "\n                ");
@@ -389,7 +392,28 @@ textarea {
 
 #studioElement {
   width: 100%;
-}`, "",{"version":3,"sources":["webpack://./app/styles.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,WAAA;EACA,8BAAA;EACA,eAAA;EACA,mBAAA;AACJ;AAMA;;;EAGI,sBAAA;AAJJ;;AAYA;EACI,sBAAA;EACA,wCAAA;AATJ;;AAYA;EACG,iBAAA;EACC,cAAA;AATJ;;AAYA;EACI,aAAA;EACA,sBAAA;AATJ;AAUI;EACI,kBAAA;EACA,aAAA;EACA,qBAAA;EACA,sBAAA;AARR;AASQ;EACI,sBAAA;EACJ,kBAAA;EACC,gBAAA;AAPT;AASQ;EACI,gBAAA;AAPZ;AASQ;EACI,WAAA;AAPZ;AAYI;EACI,iBAAA;AAVR;AAYI;EACI,iBAAA;AAVR;AAYI;EACI,kBAAA;AAVR;;AAcA;EAEI,WAAA;AAZJ","sourceRoot":""}]);
+}
+
+button {
+  background-color: #272727;
+  color: white;
+  border: none;
+  padding: 13px 26px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}`, "",{"version":3,"sources":["webpack://./app/styles.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,WAAA;EACA,8BAAA;EACA,eAAA;EACA,mBAAA;AACJ;AAMA;;;EAGI,sBAAA;AAJJ;;AAYA;EACI,sBAAA;EACA,wCAAA;AATJ;;AAYA;EACG,iBAAA;EACC,cAAA;AATJ;;AAYA;EACI,aAAA;EACA,sBAAA;AATJ;AAUI;EACI,kBAAA;EACA,aAAA;EACA,qBAAA;EACA,sBAAA;AARR;AASQ;EACI,sBAAA;EACJ,kBAAA;EACC,gBAAA;AAPT;AASQ;EACI,gBAAA;AAPZ;AASQ;EACI,WAAA;AAPZ;AAYI;EACI,iBAAA;AAVR;AAYI;EACI,iBAAA;AAVR;AAYI;EACI,kBAAA;AAVR;;AAcA;EAEI,WAAA;AAZJ;;AAgBA;EACI,yBAAA;EACA,YAAA;EACA,YAAA;EACA,kBAAA;EACA,iBAAA;EACA,yBAAA;EACA,mBAAA;EACA,kBAAA;EACA,qBAAA;EACA,qBAAA;EACA,eAAA;EACA,eAAA;EACA,eAAA;EACA,sCAAA;AAbJ;;AAgBE;EACE,yBAAA;AAbJ","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -525,7 +549,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n<div class=\"os-dual-form\" data-primary=\"login\" auth-mode=\"login\">\n    <form id=\"signup\" class=\"left\">\n      <h1>Sign up</h1>\n      <os-form-feedback feedbackName=\"success\"></os-form-feedback>\n\n      <div class=\"row\">\n        <input-component\n          fieldName=\"firstName\"\n          alias=\"First Name\"\n        ></input-component>\n        \n        <input-component fieldName=\"lastName\" alias=\"Last Name\"></input-component>\n      </div>\n      <div class=\"row\">\n        <input-component fieldName=\"username\" alias=\"Username\"></input-component>\n        <input-component fieldName=\"email\" alias=\"Email\"></input-component>\n      </div>\n      <div class=\"row\">\n        <input-component fieldName=\"password\" type=\"password\" alias=\"Password\"></input-component>\n        <input-component\n          fieldName=\"confirm-password\"\n          type=\"password\"\n          alias=\"Confirm Password\"\n        ></input-component>\n      </div>\n      <!-- <div id=\"reCAPTCHA\"></div>\n      <os-form-feedback feedbackName=\"reCAPTCHA\"></os-form-feedback> -->\n\n      <div class=\"row\">\n        <button type=\"submit\" buttonName=\"submit\"\n          >Submit</button\n        >\n\n        <button type=\"button\" class=\"mobile-view os-form-toggle\"\n          >Go to Log in</button\n        >\n      </div>\n      <os-form-feedback feedbackName=\"submit\"></os-form-feedback>\n    </form>\n    <form id=\"login\" class=\"right\">\n      <h1>Login</h1>\n      <input-component\n        fieldName=\"username-or-email\"\n        alias=\"Username or Email\"\n      ></input-component>\n      <input-component\n        fieldName=\"password-login\"\n        type=\"password\"\n        alias=\"Password\"\n      ></input-component>\n      <div class=\"row\">\n        <button type=\"submit\" buttonName=\"submit\"\n          >Submit</button\n        >\n        <button type=\"button\" class=\"mobile-view toggleAuthType\"\n          >Register new account</button\n        >\n      </div>\n      <os-form-feedback feedbackName=\"submit\"></os-form-feedback>\n    </form>\n\n    <div class=\"cover left login\">\n      <button type=\"button\" class=\"toggleAuthType secondary\">\n        Register new account\n      </button>\n    </div>\n    <div class=\"cover right signup\">\n      <button type=\"button\" class=\"toggleAuthType\"\n        >Go to Log in</button\n      >\n    </div>\n  </div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n<div class=\"os-dual-form\" data-primary=\"login\" auth-mode=\"login\">\n    <form id=\"signup\" class=\"left\">\n      <h1>Sign up</h1>\n      <os-form-feedback feedbackName=\"success\"></os-form-feedback>\n\n      <div class=\"row\">\n        <input-component\n          fieldName=\"firstName\"\n          alias=\"First Name\"\n        ></input-component>\n        \n        <input-component fieldName=\"lastName\" alias=\"Last Name\"></input-component>\n      </div>\n      <div class=\"row\">\n        <input-component fieldName=\"username\" alias=\"Username\"></input-component>\n        <input-component fieldName=\"email\" alias=\"Email\"></input-component>\n      </div>\n      <div class=\"row\">\n        <input-component fieldName=\"password\" type=\"password\" alias=\"Password\"></input-component>\n        <input-component\n          fieldName=\"confirm-password\"\n          type=\"password\"\n          alias=\"Confirm Password\"\n        ></input-component>\n      </div>\n      <!-- <div id=\"reCAPTCHA\"></div>\n      <os-form-feedback feedbackName=\"reCAPTCHA\"></os-form-feedback> -->\n\n      <div class=\"row\">\n        <button type=\"submit\" buttonName=\"submit\"\n          >Submit</button\n        >\n\n        <button type=\"button\" class=\"mobile-view os-form-toggle\"\n          >Go to Log in</button\n        >\n      </div>\n      <os-form-feedback feedbackName=\"submit\"></os-form-feedback>\n    </form>\n    <form id=\"login\" class=\"right\">\n      <h1>Login</h1>\n      <input-component\n        fieldName=\"username-or-email\"\n        alias=\"Username or Email\"\n      ></input-component>\n      <input-component\n        fieldName=\"password-login\"\n        type=\"password\"\n        alias=\"Password\"\n      ></input-component>\n      <div class=\"row\">\n        <button type=\"submit\" buttonName=\"submit\"\n          >Submit</button\n        >\n        <button type=\"button\" class=\"mobile-view toggleAuthType\"\n          >Register new account</button\n        >\n      </div>\n      <os-form-feedback feedbackName=\"submit\"></os-form-feedback>\n    </form>\n\n    <div class=\"cover left login\" style=\"background-image: url(${loginImage});\">\n      <button type=\"button\" class=\"toggleAuthType secondary\">\n        Register new account\n      </button>\n    </div>\n    <div class=\"cover right signup\"  style=\"background-image: url(${signupImage});\">\n      <button type=\"button\" class=\"toggleAuthType\"\n        >Go to Log in</button\n      >\n    </div>\n  </div>");
 
 /***/ }),
 

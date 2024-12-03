@@ -60,12 +60,12 @@
       <os-form-feedback feedbackName="submit"></os-form-feedback>
     </form>
 
-    <div class="cover left login">
+    <div class="cover left login" style="background-image: url(${loginImage});">
       <button type="button" class="toggleAuthType secondary">
         Register new account
       </button>
     </div>
-    <div class="cover right signup">
+    <div class="cover right signup"  style="background-image: url(${signupImage});">
       <button type="button" class="toggleAuthType"
         >Go to Log in</button
       >

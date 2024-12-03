@@ -12,7 +12,7 @@ export async function createCustomElement(name, onload, html, css) {
     class customElementType extends HTMLElement {
         constructor() {
             super();
-            if(this.innerHTML){
+            if (this.innerHTML) {
 
                 this.innerHTML = template.content.cloneNode(true).outerHTML;
             }
@@ -23,7 +23,7 @@ export async function createCustomElement(name, onload, html, css) {
             this.updateTemplate();
         }
 
-      
+
 
         attributeChangedCallback(name, oldValue, newValue) {
             if (oldValue !== newValue) {
@@ -41,6 +41,9 @@ export async function createCustomElement(name, onload, html, css) {
                 multiple: this.hasAttribute('multiple') || false,
                 accept: this.getAttribute('accept') || '',
                 labelClass: this.getAttribute('labelClass') || '',
+                redirect: this.getAttribute('redirect') || '',
+                "loginImage": this.getAttribute('loginImage') || '',
+                "signupImage": this.getAttribute('signupImage') || '',
             };
 
 
@@ -60,6 +63,6 @@ export async function createCustomElement(name, onload, html, css) {
 
 export // Function to evaluate template literals
     function evaluateTemplate(template, context) {
-        // console.log({ template, context });
+    // console.log({ template, context });
     return new Function(...Object.keys(context), `return \`${template}\`;`)(...Object.values(context));
 }

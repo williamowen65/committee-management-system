@@ -18,7 +18,7 @@ function setUXEventListeners(){
          el.addEventListener('click', (e) => {
              e.stopPropagation()
              dividerEl.getAttribute('auth-mode') === 'login' ? dividerEl.setAttribute('auth-mode', 'signup') : dividerEl.setAttribute('auth-mode', 'login')
-             writeFriendlyMessage();
+            //  writeFriendlyMessage();
          })
      })
 }
