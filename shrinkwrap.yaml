@@ -2,6 +2,7 @@ dependencies:
   '@fortawesome/fontawesome-svg-core': 6.7.1
   '@fortawesome/free-solid-svg-icons': 6.7.1
   express: 4.21.1
+  marked: 15.0.3
 devDependencies:
   '@babel/core': 7.26.0
   '@babel/preset-env': 7.26.0
@@ -2286,6 +2287,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==
+  /marked/15.0.3:
+    dev: false
+    engines:
+      node: '>= 18'
+    hasBin: true
+    resolution:
+      integrity: sha512-Ai0cepvl2NHnTcO9jYDtcOEtVBNVYR31XnEA3BndO7f5As1wzpcOceSUM8FDkNLJNIODcLpDTWay/qQhqbuMvg==
   /media-typer/0.3.0:
     dev: false
     engines:
@@ -3138,6 +3146,7 @@ specifiers:
   babel-loader: ^9.2.1
   css-loader: ^7.1.2
   express: ^4.21.1
+  marked: ^15.0.3
   raw-loader: ^4.0.2
   sass: ^1.81.0
   sass-loader: ^16.0.3
