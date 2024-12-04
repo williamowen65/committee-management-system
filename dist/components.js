@@ -105,6 +105,23 @@ function setUXEventListeners() {
 
 /***/ }),
 
+/***/ "./app/components/footer/index.js":
+/*!****************************************!*\
+  !*** ./app/components/footer/index.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _footer_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./footer.html.txt */ "./app/components/footer/footer.html.txt");
+/* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
+/* harmony import */ var _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss.txt */ "./app/components/footer/style.scss.txt");
+
+
+
+(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('footer-component', function () {}, _footer_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+/***/ }),
+
 /***/ "./app/components/header/index.js":
 /*!****************************************!*\
   !*** ./app/components/header/index.js ***!
@@ -627,6 +644,34 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./app/components/footer/footer.html.txt":
+/*!***********************************************!*\
+  !*** ./app/components/footer/footer.html.txt ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<footer>\n  <div id=\"footer-logo\">\n    <div>\n      <h1>Gig Harbor <br>Open Studio Tour</h1>\n      <small>Artist Portal</small>\n    </div>\n  </div>\n</footer>\n");
+
+/***/ }),
+
+/***/ "./app/components/footer/style.scss.txt":
+/*!**********************************************!*\
+  !*** ./app/components/footer/style.scss.txt ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("footer{\n    margin: 100px 0 20px;\n    display: flex;\n    justify-content: center;\n    // align-items: end;\n    // flex-direction: column;\n    a{\n        margin: 10px;\n    }\n    img{\n        width: 100px;\n        height: 100px;\n        margin-left: 20px;\n    }\n    #footer-logo{\n        display: flex;\n        align-items: center;\n        text-align: center;\n        h1{\n            margin: 0;\n        }\n        small{\n            margin: 0;\n        }\n    }\n    nav#links{\n        display: flex;\n        a{\n            margin: 10px;\n        }\n    }\n}");
+
+/***/ }),
+
 /***/ "./app/components/header/header.html.txt":
 /*!***********************************************!*\
   !*** ./app/components/header/header.html.txt ***!
@@ -637,7 +682,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<header>\n  <div id=\"header-logo\">\n    <div>\n      <h1>Gig Harbor <br>Open Studio Tour</h1>\n      <small>Artist Portal</small>\n    </div>\n    <img src=\"/dist/assets/ghost-logo-pink (1).jpg\" />\n  </div>\n\n  <nav id=\"links\">\n    <a href=\"/members\">Go back to members page</a>\n    <a href=\"https://gigharboropenstudiotour.org/\">Go back to GHOST Website</a>\n  </nav>\n</header>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<header>\n  <div id=\"header-logo\">\n    <div>\n      <h1>Gig Harbor <br>Open Studio Tour</h1>\n      <small>Artist Portal</small>\n    </div>\n    <img src=\"/dist/assets/ghost-logo-pink (1).jpg\" />\n  </div>\n\n  <nav id=\"links\">\n    ${window.location.href.includes('members') ? '' : '<a href=\"/members\">Go back to members page</a>'}\n    <a href=\"https://gigharboropenstudiotour.org/\">Go back to GHOST Website</a>\n  </nav>\n</header>\n");
 
 /***/ }),
 
@@ -3726,7 +3771,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _header_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./header/index.js */ "./app/components/header/index.js");
 /* harmony import */ var _markdown_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./markdown/index.js */ "./app/components/markdown/index.js");
 /* harmony import */ var _dual_login_form_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dual-login-form/index.js */ "./app/components/dual-login-form/index.js");
+/* harmony import */ var _footer_index_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./footer/index.js */ "./app/components/footer/index.js");
  // Import the styles (These are really the global styles for the app -- They could have their own web pack config)
+
 
 
 

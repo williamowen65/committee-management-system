@@ -1,0 +1,8 @@
+<footer>
+  <div id="footer-logo">
+    <div>
+      <h1>Gig Harbor <br>Open Studio Tour</h1>
+      <small>Artist Portal</small>
+    </div>
+  </div>
+</footer>

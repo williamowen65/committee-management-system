@@ -1,0 +1,32 @@
+footer{
+    margin: 100px 0 20px;
+    display: flex;
+    justify-content: center;
+    // align-items: end;
+    // flex-direction: column;
+    a{
+        margin: 10px;
+    }
+    img{
+        width: 100px;
+        height: 100px;
+        margin-left: 20px;
+    }
+    #footer-logo{
+        display: flex;
+        align-items: center;
+        text-align: center;
+        h1{
+            margin: 0;
+        }
+        small{
+            margin: 0;
+        }
+    }
+    nav#links{
+        display: flex;
+        a{
+            margin: 10px;
+        }
+    }
+}
