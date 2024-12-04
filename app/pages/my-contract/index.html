@@ -249,7 +249,7 @@
     <form id="volunteer-responsibility-form">
       <markdown-component>
         <span slot="markdown-content">
-          <fieldset style="width: 100%;">
+          <fieldset style="">
             <style>
               legend#volunteer-title {
                 background: #f9f9f9;
@@ -400,6 +400,9 @@
 
     <!-- Artistic Demonstration Form -->
     <form id="artistic-demonstration-form">
+
+
+      <h2>Artistic Demonstration</h2>
       <textarea-component required fieldName="artisticDemonstration"
         alias="HOW YOU WILL BE DEMONSTRATING YOUR ARTISTIC PROCESS DURING THE TOUR:"
         description="Educating the public about how art is produced is an important part of this tour.  Include a tentative description of how you plan on demonstrating your artistic process (ie, live artist demonstration, actual artwork in various stages of your process, a display board with photos of your process)"></textarea-component>
@@ -411,8 +414,25 @@
         and answer my questions.)
       </label>
 
-      <button>Submit</button>
+      <button type="submit" id="save-artistic-demonstration" style="margin: auto; margin-top: 20px;; display: block;">Submit</button>
     </form>
+    <hr>
+    
+    <!-- Payment Form -->
+    <form id="payment-form">
+      <markdown-component>
+        <span slot="markdown-content">
+          ### Payment
+          The fee for participating in the Gig Harbor Open Studio Tour is $150.00. Please submit payment by March 2, 2025.
+          Payment can be made by check or online. If you would like to pay by check, please make it out to Gig Harbor Open
+          Studio Tour and mail it to:
+          Gig Harbor Open Studio Tour
+          PO Box 1234
+          Gig Harbor, WA 98335
+          If you would like to pay online, please click the button below.
+        </span>
+      </markdown-component>
+      <button type="submit" id="pay-online">Pay Online</button>
 
   </div>
   <script>
