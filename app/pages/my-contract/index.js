@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 })
 
+// Helper function to get form values
 function getFormValues(formSelector) {
     const form = document.querySelector(formSelector);
     const formData = new FormData(form);
