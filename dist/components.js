@@ -3778,6 +3778,37 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+// Globals file
+// Helper function to get form values
+window.getFormValues = function (formSelector) {
+  console.log("Getting form values and about to set loading");
+  var form = document.querySelector(formSelector);
+  var formData = new FormData(form);
+  setLoading(form, true);
+  return {
+    form: form,
+    values: Object.fromEntries(formData.entries())
+  };
+};
+window.setLoading = function (form, isLoading) {
+  console.log("Setting loading", {
+    form: form,
+    isLoading: isLoading
+  });
+  var submitButton = form.querySelector('button[type="submit"]');
+  if (isLoading) {
+    // get submit button text 
+    var text = submitButton.innerHTML;
+    submitButton.setAttribute('disabled', 'disabled');
+    submitButton.innerHTML = 'Loading...';
+    submitButton.setAttribute('data-text', text);
+  } else {
+    submitButton.removeAttribute('disabled');
+    var _text = submitButton.getAttribute('data-text');
+    submitButton.innerHTML = _text;
+  }
+};
 })();
 
 /******/ })()

@@ -23,30 +23,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 })
 
-// Helper function to get form values
-function getFormValues(formSelector) {
-    const form = document.querySelector(formSelector);
-    const formData = new FormData(form);
-    setLoading(form, true)
-    return {
-        form, values: Object.fromEntries(formData.entries())
-    }
-}
 
-function setLoading(form, isLoading) {
-    const submitButton = form.querySelector('button[type="submit"]')
-    if (isLoading) {
-        // get submit button text 
-        const text = submitButton.innerHTML
-        submitButton.setAttribute('disabled', 'disabled')
-        submitButton.innerHTML = 'Loading...'
-        submitButton.setAttribute('data-text', text);
-    } else {
-        submitButton.removeAttribute('disabled')
-        const text = submitButton.getAttribute('data-text')
-        submitButton.innerHTML = text
-    }
-}
+
+
 
 
 
