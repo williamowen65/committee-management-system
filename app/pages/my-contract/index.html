@@ -6,13 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My GHOST Contract</title>
   <script src="/dist/components.js"></script>
+  <script src="/my-contract/index.js"></script>
 </head>
+
 
 <body>
   <header-component></header-component>
   <div class="container">
     <h1>My Contract</h1>
-    <form id="my-contract-form">
+
+    <!-- Signature Form -->
+    <form id="my-signature-form">
       <markdown-component>
         <span slot="markdown-content">
           This contract, along with all required images and electronic payment, are due on or before March 2, 2025.
@@ -87,11 +91,15 @@
       </markdown-component>
       <div class="" style="width: 400px; display: flex; flex-direction: column; margin: auto; ">
         <input-component required fieldName="signature" alias="Signature"></input-component>
-        <button type="button" id="save-signature">Save Signature</button>
+        <button type="submit" id="save-signature">Save Signature</button>
       </div>
+    </form>
 
-      <hr>
-      <!-- Artist details -->
+
+    <hr>
+    <!-- Artist details form -->
+
+    <form id="artist-details-form">
 
       <p>WA State UBI (a UBI is required to participate – go here to apply - <a href="https://dor.wa.gov/open-business"
           target="_blank">https://dor.wa.gov/open-business</a>)</p>
@@ -132,6 +140,12 @@
         <textarea-component labelClass="w-100" class="w-100" required fieldName="artistStatement"
           alias="Artist Statement"></textarea-component>
       </div>
+    </form>
+
+    <hr>
+
+    <!-- Digital Images Form -->
+    <form id="digital-images-form">
       <div class="row">
         <markdown-component>
           <span slot="markdown-content">
@@ -151,11 +165,14 @@
         <file-input-component multiple="true" fieldName="digitalImages" alias="Digital Images"
           accept=".jpg,.jpeg,.png"></file-input-component>
       </div>
-      <button type="button" id="save-artist-contract-details" style="margin: auto; display: block;">Save Artist Contract
+      <button type="submit" id="save-artist-contract-details" style="margin: auto; display: block;">Save Artist Contract
         Details</button>
 
-      <hr>
+    </form>
 
+    <hr>
+    <!-- Studio Sharing Form -->
+    <form id="studio-sharing-form">
       <markdown-component>
         <span slot="markdown-content">
           ### <b>Sharing studios:</b>
@@ -221,12 +238,14 @@
           </label>
         </div>
       </div>
-      <button type="button" id="save-stuido-sharing-details" style="margin: auto; display: block;">Save Studio Sharing
+      <button type="submit" id="save-stuido-sharing-details" style="margin: auto; display: block;">Save Studio Sharing
         Details</button>
+    </form>
 
+    <hr>
 
-      <hr>
-
+    <!-- Volunteer Responsibility Form -->
+    <form id="volunteer-responsibility-form">
       <markdown-component>
         <span slot="markdown-content">
           <fieldset style="width: 100%;">
@@ -234,11 +253,9 @@
 
               ### <b>Pick your volunteer responsibility:</b>
             </legend>
-            <div
-            style="
+            <div style="
             width: fit-content;
-            margin: auto;"
-            >
+            margin: auto;">
 
 
               Below is a list of each committee with volunteer positions available for that committee.with a basic job
@@ -266,10 +283,11 @@
 
 
             <style>
-            #committee-positions {
+              #committee-positions {
                 margin: 60px 100px;
                 /* max-width: 600px; */
               }
+
               #committee-positions ol {
                 list-style: none;
               }
@@ -363,25 +381,26 @@
 
         </span>
       </markdown-component>
-
-
-        <textarea-component  
-        required 
-        fieldName="artisticDemonstration" 
-        alias="HOW YOU WILL BE DEMONSTRATING YOUR ARTISTIC PROCESS DURING THE TOUR:" 
-        description="Educating the public about how art is produced is an important part of this tour.  Include a tentative description of how you plan on demonstrating your artistic process (ie, live artist demonstration, actual artwork in various stages of your process, a display board with photos of your process)"
-        ></textarea-component>
-
-        <label for="artistMentor" class="level-1">
-          <h3>Artist Mentor</h3>
-          <input type="checkbox" name="artistMentor" for="artistMentor"
-            id="artistMentor"></input>
-            I would like an artist mentor (an experienced artist who can talk to me about preparing for the tour, marketing and answer my questions.) 
-        </label>
-        
-        <button>Submit</button>
-
     </form>
+
+    <hr>
+
+    <!-- Artistic Demonstration Form -->
+    <form id="artistic-demonstration-form">
+      <textarea-component required fieldName="artisticDemonstration"
+        alias="HOW YOU WILL BE DEMONSTRATING YOUR ARTISTIC PROCESS DURING THE TOUR:"
+        description="Educating the public about how art is produced is an important part of this tour.  Include a tentative description of how you plan on demonstrating your artistic process (ie, live artist demonstration, actual artwork in various stages of your process, a display board with photos of your process)"></textarea-component>
+
+      <label for="artistMentor" class="level-1">
+        <h3>Artist Mentor</h3>
+        <input type="checkbox" name="artistMentor" for="artistMentor" id="artistMentor"></input>
+        I would like an artist mentor (an experienced artist who can talk to me about preparing for the tour, marketing
+        and answer my questions.)
+      </label>
+
+      <button>Submit</button>
+    </form>
+
   </div>
   <script>
     document.addEventListener('DOMContentLoaded', function () {

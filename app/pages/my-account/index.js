@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log("my account page loaded");
+
     // capture form submit
     document.getElementById('my-account-form').addEventListener('submit', function(e) {
 
