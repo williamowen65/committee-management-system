@@ -24,8 +24,11 @@
   <script type="module">
     firebase.redirectIfNotLoggedIn('/artist-sign-on')
     .then(user => {
-      document.body.style.display = 'block'
-      document.querySelector('span').innerText = `Hello, ${user.displayName}`
+      if(user){
+
+        document.body.style.display = 'block'
+        document.querySelector('span').innerText = `Hello, ${user.displayName}`
+      }
     })
 
     document.addEventListener('DOMContentLoaded',() =>{
@@ -39,7 +42,7 @@
   </script>
 </head>
 
-<body style="display:none">
+<body style="display:none !important; ">
 
   <header-component></header-component>
   <div class="" style="display: flex; flex-direction: column">
