@@ -637,7 +637,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<header>\n    <a href=\"/members\">Go back to members page</a>\n    <a href=\"https://gigharboropenstudiotour.org/\">Go back to GHOST Website</a>\n</header>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<header>\n  <div id=\"header-logo\">\n    <div>\n      <h1>Gig Harbor <br>Open Studio Tour</h1>\n      <small>Artist Portal</small>\n    </div>\n    <img src=\"/dist/assets/ghost-logo-pink (1).jpg\" />\n  </div>\n\n  <nav id=\"links\">\n    <a href=\"/members\">Go back to members page</a>\n    <a href=\"https://gigharboropenstudiotour.org/\">Go back to GHOST Website</a>\n  </nav>\n</header>\n");
 
 /***/ }),
 
@@ -651,7 +651,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("header{\n    display: flex;\n    justify-content: end;\n    align-items: end;\n    flex-direction: column;\n    a{\n        margin: 10px;\n    }\n}");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("header{\n    padding: 10px;\n    display: flex;\n    justify-content: space-between;\n    // align-items: end;\n    // flex-direction: column;\n    a{\n        margin: 10px;\n    }\n    img{\n        width: 100px;\n        height: 100px;\n        margin-left: 20px;\n    }\n    #header-logo{\n        display: flex;\n        align-items: center;\n        text-align: center;\n        h1{\n            margin: 0;\n        }\n        small{\n            margin: 0;\n        }\n    }\n    nav#links{\n        display: flex;\n        a{\n            margin: 10px;\n        }\n    }\n}");
 
 /***/ }),
 
