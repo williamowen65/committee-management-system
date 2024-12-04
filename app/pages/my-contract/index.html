@@ -250,16 +250,26 @@
       <markdown-component>
         <span slot="markdown-content">
           <fieldset style="width: 100%;">
-            <legend style="text-align: center;">
+            <style>
+              legend#volunteer-title {
+                background: #f9f9f9;
+                padding: 5px 10px;
+                border: 1px solid #eaeaea;
+                border-radius: 5px;
+              }
+              
+            </style>
+            <legend style="text-align: center;" id="volunteer-title">
 
-            <h3 style="margin-bottom: 0;"><b>Pick your volunteer responsibility:</b></h3>
-            <small>(Changes saved in real-time)</small>
+            <h3 style=""><b>Pick your volunteer responsibility:</b></h3>
+            <!-- <small style="position: absolute; translate: -50% 0;">(Changes saved in real-time <wbr>-- First come, first serve --<wbr>Feel free to swap)</small> -->
 
             </legend>
             <div style="
             width: fit-content;
-            margin: auto;">
+            margin: auto; ">
 
+                <div style="background-color: yellow; width: fit-content; margin: auto;">Changes are saved in real-time -- First come, first serve -- Feel free to swap</div>
 
               Below is a list of each committee with volunteer positions available for that committee.with a basic job
               description, an estimate of the time of year that committee is active and whether that job can be done
