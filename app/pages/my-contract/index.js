@@ -27,8 +27,24 @@ document.addEventListener('DOMContentLoaded', function () {
 function getFormValues(formSelector) {
     const form = document.querySelector(formSelector);
     const formData = new FormData(form);
+    setLoading(form, true)
     return {
         form, values: Object.fromEntries(formData.entries())
+    }
+}
+
+function setLoading(form, isLoading) {
+    const submitButton = form.querySelector('button[type="submit"]')
+    if (isLoading) {
+        // get submit button text 
+        const text = submitButton.innerHTML
+        submitButton.setAttribute('disabled', 'disabled')
+        submitButton.innerHTML = 'Loading...'
+        submitButton.setAttribute('data-text', text);
+    } else {
+        submitButton.removeAttribute('disabled')
+        const text = submitButton.getAttribute('data-text')
+        submitButton.innerHTML = text
     }
 }
 
@@ -38,6 +54,7 @@ function handleSignatureForm(e) {
     e.preventDefault();
     const { values, form } = getFormValues('form#my-signature-form')
     console.log({ values, form })
+    setLoading(form, false)
 }
 
 
@@ -46,6 +63,7 @@ function handleArtistDetailsForm(e) {
     const { values, form } = getFormValues('form#artist-details-form')
     console.log({ values, form })
     // Get form
+    setLoading(form, false)
 
 }
 function handleDigitalImagesForm(e) {
@@ -53,6 +71,7 @@ function handleDigitalImagesForm(e) {
 
     const { values, form } = getFormValues('form#digital-images-form')
     console.log({ values, form })
+    setLoading(form, false)
 
 }
 // This form is unique. It should return a single string which compiles a sentence based on the form values 
@@ -115,6 +134,7 @@ function handleStudioSharingForm(e) {
 
     console.log({ StudioSharingAnswer })
 
+    setLoading(form, false)
 
     // const {values, form} = getFormValues('form#studio-sharing-form')
     // console.log({values, form})
@@ -128,6 +148,7 @@ function handleVolunteerResponsibilityForm(e) {
 
     const { values, form } = getFormValues('form#volunteer-responsibility-form')
     console.log({ values, form })
+    setLoading(form, false)
 }
 
 function handleArtisticDemonstrationForm(e) {
@@ -136,6 +157,7 @@ function handleArtisticDemonstrationForm(e) {
     const { values, form } = getFormValues('form#artistic-demonstration-form');
 
     console.log({ values, form })
+    setLoading(form, false)
 
 }
 

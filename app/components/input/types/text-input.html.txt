@@ -3,6 +3,6 @@
 
 <label for="${fieldName}" class="${labelClass || ""}">
     <small class="text" part="labelText">${alias || capitalizeFirstLetter(fieldName)} ${required ? "*" : ""}</small>
-    <input type="${type}" id="${fieldName}" name="${fieldName}" class="${labelClass || ""}"/>
+    <input type="${type}" id="${fieldName}" name="${fieldName}" class="${labelClass || ""}" ${required ? "required" :""} />
     <div id="${fieldName}-error" class="error-message"></div>
 </label>
