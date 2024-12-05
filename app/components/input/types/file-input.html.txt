@@ -1,4 +1,4 @@
-<div class="file-input-component" style="position: relative;">
+<div class="file-input-component" style="position: relative; ">
     <label for="${fieldName}" style="margin: 10px;">
         <input style="display:none" ${required ? "required" : "" } type="file" id="${fieldName}" name="${fieldName}"
             ${multiple ? "multiple=true" : "" } ${accept ? `accept="${accept}" ` : "" } />

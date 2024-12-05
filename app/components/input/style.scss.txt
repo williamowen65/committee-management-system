@@ -168,4 +168,8 @@ label {
         padding: 5px;
         cursor: pointer;
     }
+
+    .file-name{
+        text-align: center;
+    }
 }
