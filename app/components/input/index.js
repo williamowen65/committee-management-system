@@ -70,6 +70,10 @@ createCustomElement('file-input-component', function () {
                 // empty out the images container
                 const inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML;
                 imagesContainer.innerHTML = inputLabelText;
+                const fileNameEl = parentContainer.querySelector('.file-name')
+                if(fileNameEl) {
+                    fileNameEl.remove();
+                }
 
                 
                 const img = document.createElement('img');

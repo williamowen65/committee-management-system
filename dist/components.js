@@ -205,6 +205,10 @@ __webpack_require__.r(__webpack_exports__);
         // empty out the images container
         var inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML;
         imagesContainer.innerHTML = inputLabelText;
+        var fileNameEl = parentContainer.querySelector('.file-name');
+        if (fileNameEl) {
+          fileNameEl.remove();
+        }
         var img = document.createElement('img');
         var deleteButton = document.createElement('button');
         deleteButton.textContent = 'X';
