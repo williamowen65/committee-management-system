@@ -6,6 +6,9 @@ import "./dual-login-form/index.js";
 import "./footer/index.js";
 
 
+// global google services api
+import "../../lib/google.js";
+
 
 // Globals file
 // Helper function to get form values
@@ -19,8 +22,7 @@ window.getFormValues = function(formSelector) {
     }
 }
 
-
-
+// global function to set loading state
 window.setLoading = function(form, isLoading) {
     console.log("Setting loading", { form, isLoading })
     const submitButton = form.querySelector('button[type="submit"]')

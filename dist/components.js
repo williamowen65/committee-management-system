@@ -274,6 +274,55 @@ function trimString(a) {
 
 /***/ }),
 
+/***/ "./lib/google.js":
+/*!***********************!*\
+  !*** ./lib/google.js ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// import functions from '@google-cloud/functions-framework'
+
+// import "dotenv/config"
+// const path = require('path');
+// const dotenv = require('dotenv');
+// dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+
+/**
+ * This file is meant to provide an easy way for the rest of the app to work with google services
+ * 
+ * The main thing I want it to do is deal with authentication for the service. 
+ * Auth uses JWT with a short expiry time. When I call a service I want the auth logic to be implied
+ * 
+ * There are many services that can be used with googleapis. I will start with sheets.
+ * I will potentially use gmail, calendar, and other services. 
+ * 
+ * There are a few set up steps to get this working:
+ * 1. Create a service account in the google cloud console
+ * 2. Create a private key for the service account
+ * 3. Share the service account email address with the google service you want to use
+ * 4. Create a private_key.json file in the root of the project
+ * 5. Add the private key to the private_key.json file
+ * 6. Add the private_key.json file to the .gitignore
+ * 7. Use the getAuthClient function to get an authorized client
+ * 8. Use the client to call the google service
+ * 
+ */
+
+// async function getAuthClient() {
+
+//     const JWT = google.auth.JWT;
+//     const authClient = new JWT({
+//         keyFile: ,
+//         scopes: ['https://mail.google.com/'],
+//         subject: 'admin@bethowenwatercolors.com' // google admin email address to impersonate
+//     });
+//     await authClient.authorize(); // once authorized, can do whatever you want
+//     return authClient
+// }
+
+/***/ }),
+
 /***/ "./utils/custom-element.js":
 /*!*********************************!*\
   !*** ./utils/custom-element.js ***!
@@ -3772,11 +3821,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _markdown_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./markdown/index.js */ "./app/components/markdown/index.js");
 /* harmony import */ var _dual_login_form_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dual-login-form/index.js */ "./app/components/dual-login-form/index.js");
 /* harmony import */ var _footer_index_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./footer/index.js */ "./app/components/footer/index.js");
+/* harmony import */ var _lib_google_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/google.js */ "./lib/google.js");
  // Import the styles (These are really the global styles for the app -- They could have their own web pack config)
 
 
 
 
+
+
+// global google services api
 
 
 // Globals file
@@ -3791,6 +3844,8 @@ window.getFormValues = function (formSelector) {
     values: Object.fromEntries(formData.entries())
   };
 };
+
+// global function to set loading state
 window.setLoading = function (form, isLoading) {
   console.log("Setting loading", {
     form: form,
