@@ -62,6 +62,7 @@ createCustomElement('file-input-component', function () {
 
         const imagesContainer = this.querySelector('.images-container');
         const parentContainer =  imagesContainer.closest('.file-input-component')
+        const labelContainer = parentContainer.querySelector('.label-container');
     
         Array.from(e.target.files).forEach((file) => {
             const reader = new FileReader();
@@ -86,6 +87,7 @@ createCustomElement('file-input-component', function () {
                     deleteButton.remove();
                     imagesContainer.classList.remove('has-images');
                     parentContainer.querySelector('.file-name').remove();
+                    parentContainer.querySelector('.error').remove();
                     // remove button from file input
                     const fileInput = parentContainer.querySelector('input');
                     fileInput.value = '';
@@ -97,7 +99,7 @@ createCustomElement('file-input-component', function () {
                 const imgContainer = document.createElement('div');
                 imgContainer.classList.add('img-container');
                 imgContainer.appendChild(img);
-                parentContainer.appendChild(deleteButton);
+                labelContainer.appendChild(deleteButton);
 
                 imagesContainer.appendChild(imgContainer);
                 imagesContainer.classList.add('has-images');
@@ -115,6 +117,8 @@ createCustomElement('file-input-component', function () {
                 // Requirements: Size must be no larger than 3 mb. 
                 // Must not be a thumbnail image.
                 // One image must be a square
+
+                console.log("file size check ",{ fileSize: file.size, fileName: file.name, fileType: file.type });
 
                 // Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )
                 if(file.size < 20000) {

@@ -106,7 +106,6 @@ label {
     .images-container{
         display: flex;
         flex-wrap: wrap;
-        margin-top: 10px;
         position: relative;
         // justify-content: center;
         // .file-name{
@@ -123,6 +122,7 @@ label {
         }
         .img-container{
 
+                overflow: hidden;
             position: relative;
             button.delete-button {
                 position: absolute;
@@ -133,9 +133,11 @@ label {
         &.file-input-display{
             width: 200px;
             height: 200px;
-            border: 1px solid black;
+            overflow: visible;
             cursor: pointer;
-
+            &:not(.has-images){
+                border: 1px solid black;
+            }
           
             .alias{
                 font-size: 12px;
@@ -154,9 +156,21 @@ label {
             }
         }
     }
-
 }
+
 .file-input-component {
+    .img-container:not(:empty){
+        border: 1px solid black;
+    }
+
+    width: 220px;
+    .label-container{
+        position: relative;
+        width: 200px;
+        height: 200px;
+        overflow: visible;
+        margin: auto;
+    }
 
     .delete-button{
         position: absolute;
@@ -169,7 +183,8 @@ label {
         cursor: pointer;
     }
 
-    .file-name{
+    .file-name, .error{
+        // position: absolute;
         text-align: center;
     }
 }
