@@ -110,6 +110,28 @@ createCustomElement('file-input-component', function () {
                 fileName.classList.add('file-name');
                 parentContainer.appendChild(fileName);
 
+
+                // Display possible errors with this file
+                // Requirements: Size must be no larger than 3 mb. 
+                // Must not be a thumbnail image.
+                // One image must be a square
+
+                // Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )
+                if(file.size < 20000) {
+                    const error = document.createElement('p');
+                    error.textContent = 'File is a thumbnail image. Please upload a larger image.';
+                    error.classList.add('error');
+                    parentContainer.appendChild(error);
+                }
+                // make sure the image isn't too big
+                if(file.size > 3000000) {
+                    const error = document.createElement('p');
+                    error.textContent = 'File is too large. Please upload an image less than 3 mb.';
+                    error.classList.add('error');
+                    parentContainer.appendChild(error);
+                }
+
+
             };
             reader.readAsDataURL(file);
         });
