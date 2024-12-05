@@ -1,4 +1,4 @@
-<div class="file-input-component" style="position: relative; ">
+<div class="file-input-component" style="position: relative;">
     <div class="label-container">
         <label for="${fieldName}" style="">
             <input style="opacity: 0; height: 0; width: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" ${required ? "required" : "" } type="file" id="${fieldName}" name="${fieldName}"

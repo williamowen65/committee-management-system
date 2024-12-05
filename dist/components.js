@@ -219,7 +219,9 @@ __webpack_require__.r(__webpack_exports__);
           deleteButton.remove();
           imagesContainer.classList.remove('has-images');
           parentContainer.querySelector('.file-name').remove();
-          parentContainer.querySelector('.error').remove();
+          parentContainer.querySelectorAll('.error').forEach(function (error) {
+            return error.remove();
+          });
           // remove button from file input
           var fileInput = parentContainer.querySelector('input');
           fileInput.value = '';
@@ -265,6 +267,28 @@ __webpack_require__.r(__webpack_exports__);
           _error.textContent = 'File is too large. Please upload an image less than 3 mb.';
           _error.classList.add('error');
           parentContainer.appendChild(_error);
+        }
+
+        // Get attribute "square" from component
+        var squareRequirement = _this.getAttribute('square-requirement');
+        if (squareRequirement) {
+          // check for square size
+          var image = new Image();
+          image.src = reader.result;
+          image.onload = function () {
+            var width = image.width,
+              height = image.height;
+            console.log({
+              width: width,
+              height: height
+            });
+            if (width !== height) {
+              var _error2 = document.createElement('p');
+              _error2.textContent = 'Image is not square. Please upload a square image.';
+              _error2.classList.add('error');
+              parentContainer.appendChild(_error2);
+            }
+          };
         }
       };
       reader.readAsDataURL(file);
@@ -783,7 +807,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"file-input-component\" style=\"position: relative; \">\r\n    <div class=\"label-container\">\r\n        <label for=\"${fieldName}\" style=\"\">\r\n            <input style=\"opacity: 0; height: 0; width: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);\" ${required ? \"required\" : \"\" } type=\"file\" id=\"${fieldName}\" name=\"${fieldName}\"\r\n            ${multiple ? \"multiple=true\" : \"\" } ${accept ? `accept=\"${accept}\" ` : \"\" } />\r\n            <div class=\"images-container file-input-display\">\r\n                <div class=\"ifEmpty\">\r\n                    <div class=\"alias\">${alias ? alias : \"\"}</div>\r\n                </div>\r\n            </div>\r\n        </label>\r\n    </div>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"file-input-component\" style=\"position: relative;\">\r\n    <div class=\"label-container\">\r\n        <label for=\"${fieldName}\" style=\"\">\r\n            <input style=\"opacity: 0; height: 0; width: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);\" ${required ? \"required\" : \"\" } type=\"file\" id=\"${fieldName}\" name=\"${fieldName}\"\r\n            ${multiple ? \"multiple=true\" : \"\" } ${accept ? `accept=\"${accept}\" ` : \"\" } />\r\n            <div class=\"images-container file-input-display\">\r\n                <div class=\"ifEmpty\">\r\n                    <div class=\"alias\">${alias ? alias : \"\"}</div>\r\n                </div>\r\n            </div>\r\n        </label>\r\n    </div>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</div>");
 
 /***/ }),
 

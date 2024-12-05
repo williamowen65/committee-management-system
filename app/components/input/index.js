@@ -45,10 +45,10 @@ createCustomElement('textarea-component', function () {
 
 createCustomElement('file-input-component', function () {
 
-   
+
 
     this.querySelector('input').addEventListener('click', (e) => {
-        
+
         // prevent bubbling event on delete image button
         if (e.target.classList.contains('delete-button')) {
             e.stopPropagation();
@@ -61,9 +61,9 @@ createCustomElement('file-input-component', function () {
     this.querySelector('input').addEventListener('change', (e) => {
 
         const imagesContainer = this.querySelector('.images-container');
-        const parentContainer =  imagesContainer.closest('.file-input-component')
+        const parentContainer = imagesContainer.closest('.file-input-component')
         const labelContainer = parentContainer.querySelector('.label-container');
-    
+
         Array.from(e.target.files).forEach((file) => {
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -72,14 +72,14 @@ createCustomElement('file-input-component', function () {
                 const inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML;
                 imagesContainer.innerHTML = inputLabelText;
                 const fileNameEl = parentContainer.querySelector('.file-name')
-                if(fileNameEl) {
+                if (fileNameEl) {
                     fileNameEl.remove();
                 }
 
-                
+
                 const img = document.createElement('img');
                 const deleteButton = document.createElement('button');
-                
+
                 deleteButton.textContent = 'X';
                 deleteButton.classList.add('delete-button');
                 deleteButton.addEventListener('click', () => {
@@ -87,7 +87,7 @@ createCustomElement('file-input-component', function () {
                     deleteButton.remove();
                     imagesContainer.classList.remove('has-images');
                     parentContainer.querySelector('.file-name').remove();
-                    parentContainer.querySelector('.error').remove();
+                    parentContainer.querySelectorAll('.error').forEach(error => error.remove());
                     // remove button from file input
                     const fileInput = parentContainer.querySelector('input');
                     fileInput.value = '';
@@ -103,7 +103,7 @@ createCustomElement('file-input-component', function () {
 
                 imagesContainer.appendChild(imgContainer);
                 imagesContainer.classList.add('has-images');
-                
+
                 img.src = reader.result;
 
                 // display the name of the file
@@ -118,17 +118,17 @@ createCustomElement('file-input-component', function () {
                 // Must not be a thumbnail image.
                 // One image must be a square
 
-                console.log("file size check ",{ fileSize: file.size, fileName: file.name, fileType: file.type });
+                console.log("file size check ", { fileSize: file.size, fileName: file.name, fileType: file.type });
 
                 // Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )
-                if(file.size < 20000) {
+                if (file.size < 20000) {
                     const error = document.createElement('p');
                     error.textContent = 'File is a thumbnail image. Please upload a larger image.';
                     error.classList.add('error');
                     parentContainer.appendChild(error);
                 }
                 // make sure the image isn't too big
-                if(file.size > 3000000) {
+                if (file.size > 3000000) {
                     const error = document.createElement('p');
                     error.textContent = 'File is too large. Please upload an image less than 3 mb.';
                     error.classList.add('error');
@@ -136,10 +136,31 @@ createCustomElement('file-input-component', function () {
                 }
 
 
-            };
-            reader.readAsDataURL(file);
-        });
-    })
+                // Get attribute "square" from component
+                const squareRequirement = this.getAttribute('square-requirement');
+                if (squareRequirement) {
+
+
+                    // check for square size
+                    const image = new Image();
+                    image.src = reader.result;
+                    image.onload = () => {
+                        const { width, height } = image;
+                        console.log({ width, height });
+                        if (width !== height) {
+                            const error = document.createElement('p');
+                            error.textContent = 'Image is not square. Please upload a square image.';
+                            error.classList.add('error');
+                            parentContainer.appendChild(error);
+                        }
+                    }
+            }
+
+
+        };
+        reader.readAsDataURL(file);
+    });
+})
 
 
 }, fileInputTemplate, styles);
