@@ -61,10 +61,16 @@ createCustomElement('file-input-component', function () {
     this.querySelector('input').addEventListener('change', (e) => {
 
         const imagesContainer = this.querySelector('.images-container');
+        const parentContainer =  imagesContainer.closest('.file-input-component')
     
         Array.from(e.target.files).forEach((file) => {
             const reader = new FileReader();
             reader.onloadend = () => {
+
+                // empty out the images container
+                const inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML;
+                imagesContainer.innerHTML = inputLabelText;
+
                 
                 const img = document.createElement('img');
                 const deleteButton = document.createElement('button');
@@ -72,10 +78,14 @@ createCustomElement('file-input-component', function () {
                 deleteButton.textContent = 'X';
                 deleteButton.classList.add('delete-button');
                 deleteButton.addEventListener('click', () => {
-                   
                     img.remove();
                     deleteButton.remove();
                     imagesContainer.classList.remove('has-images');
+                    parentContainer.querySelector('.file-name').remove();
+                    // remove button from file input
+                    const fileInput = parentContainer.querySelector('input');
+                    fileInput.value = '';
+                    // prevent bubbling event on delete image button
                     e.stopPropagation();
                     e.stopImmediatePropagation();
                 });
@@ -83,12 +93,19 @@ createCustomElement('file-input-component', function () {
                 const imgContainer = document.createElement('div');
                 imgContainer.classList.add('img-container');
                 imgContainer.appendChild(img);
-                imgContainer.appendChild(deleteButton);
+                parentContainer.appendChild(deleteButton);
 
                 imagesContainer.appendChild(imgContainer);
                 imagesContainer.classList.add('has-images');
-
+                
                 img.src = reader.result;
+
+                // display the name of the file
+                const fileName = document.createElement('p');
+                fileName.textContent = file.name;
+                fileName.classList.add('file-name');
+                parentContainer.appendChild(fileName);
+
             };
             reader.readAsDataURL(file);
         });

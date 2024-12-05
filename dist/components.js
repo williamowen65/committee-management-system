@@ -198,9 +198,13 @@ __webpack_require__.r(__webpack_exports__);
   // Set listeners to display images added to file input
   this.querySelector('input').addEventListener('change', function (e) {
     var imagesContainer = _this.querySelector('.images-container');
+    var parentContainer = imagesContainer.closest('.file-input-component');
     Array.from(e.target.files).forEach(function (file) {
       var reader = new FileReader();
       reader.onloadend = function () {
+        // empty out the images container
+        var inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML;
+        imagesContainer.innerHTML = inputLabelText;
         var img = document.createElement('img');
         var deleteButton = document.createElement('button');
         deleteButton.textContent = 'X';
@@ -209,16 +213,27 @@ __webpack_require__.r(__webpack_exports__);
           img.remove();
           deleteButton.remove();
           imagesContainer.classList.remove('has-images');
+          parentContainer.querySelector('.file-name').remove();
+          // remove button from file input
+          var fileInput = parentContainer.querySelector('input');
+          fileInput.value = '';
+          // prevent bubbling event on delete image button
           e.stopPropagation();
           e.stopImmediatePropagation();
         });
         var imgContainer = document.createElement('div');
         imgContainer.classList.add('img-container');
         imgContainer.appendChild(img);
-        imgContainer.appendChild(deleteButton);
+        parentContainer.appendChild(deleteButton);
         imagesContainer.appendChild(imgContainer);
         imagesContainer.classList.add('has-images');
         img.src = reader.result;
+
+        // display the name of the file
+        var fileName = document.createElement('p');
+        fileName.textContent = file.name;
+        fileName.classList.add('file-name');
+        parentContainer.appendChild(fileName);
       };
       reader.readAsDataURL(file);
     });
@@ -722,7 +737,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("label {\r\n    // margin: 10px;\r\n    // box-sizing: border-box;\r\n    &:not(:has(input[type=radio], input[type=checkbox])){\r\n        font-size: 1.2rem;\r\n    } \r\n\r\n        \r\n    position: relative;\r\n    margin-bottom: 5px;\r\n    margin-top: 5px;\r\n    display: inline-block;\r\n    width: 100%;\r\n    input:not([type=radio],[type=checkbox]),textarea{\r\n        width: 100%;\r\n    }\r\n\r\n    .text {\r\n        position: absolute;\r\n        z-index: 1;\r\n        transition: all 0.5s;\r\n        transform: translate(8px, 14px);\r\n        user-select: none;\r\n        cursor: text;\r\n    }\r\n\r\n    &.moveLabel {\r\n        .text {\r\n            transform: translate(0px, -7px);\r\n            font-size: 0.75rem;\r\n            font-weight: bold;\r\n        }\r\n    }\r\n    .password-container{\r\n        position: relative;\r\n        // background-color: #ccc;\r\n        .password-toggle {\r\n            width: 24px;\r\n            position: absolute;\r\n            top: 27px;\r\n            translate: -100% -50%;\r\n            right: 0;\r\n            scale: .8;\r\n            cursor: pointer;\r\n            font-size: 12px;\r\n        }\r\n    }\r\n\r\n    .static-label-text {\r\n        font-size: 0.75rem;\r\n        white-space: nowrap;\r\n        margin-top: 4px;\r\n    }\r\n\r\n    &[for=\"remember-me\"] {\r\n        translate: -44px 0;\r\n        display: flex;\r\n        align-items: center;\r\n        justify-content: center;\r\n\r\n        input {\r\n            scale: 1.3;\r\n            translate: 5px -5px;\r\n            transform-origin: top left;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n\r\n    input, textarea{\r\n        // width: 80%;\r\n        margin: 10px 0 0 0;\r\n        padding: 10px;\r\n        border: 1px solid #ccc;\r\n        border-radius: 5px;\r\n    }\r\n\r\n    textarea {\r\n        resize: vertical;\r\n        min-height: 100px;\r\n    }\r\n\r\n    .hide-password {\r\n        display: none;\r\n    }\r\n\r\n    .show-password {\r\n        display: block;\r\n    }\r\n\r\n    &[password-toggle=\"show\"] {\r\n        .hide-password {\r\n            display: block;\r\n        }\r\n\r\n        .show-password {\r\n            display: none;\r\n        }\r\n    }\r\n\r\n    .error-message {\r\n        font-size: 0.8rem;\r\n        user-select: none;\r\n        z-index: 1;\r\n        line-height: 12px;\r\n    }\r\n    .images-container{\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        margin-top: 10px;\r\n        position: relative;\r\n        img{\r\n            width: 100%;\r\n            height: 100%;\r\n            object-fit: cover;\r\n            // margin-right: 10px;\r\n            // margin-bottom: 10px;\r\n        }\r\n        .img-container{\r\n\r\n            position: relative;\r\n            button.delete-button {\r\n                position: absolute;\r\n                left: 0;\r\n            }\r\n        }\r\n\r\n        &.file-input-display{\r\n            width: 200px;\r\n            height: 200px;\r\n            border: 1px solid black;\r\n            cursor: pointer;\r\n\r\n          \r\n            .alias{\r\n                font-size: 12px;\r\n                text-align: center;\r\n                margin: 10px;\r\n             \r\n            }\r\n            .ifEmpty{\r\n                margin: auto;\r\n            }\r\n\r\n            &.has-images{\r\n                .ifEmpty{\r\n                    display: none;\r\n                }\r\n            }\r\n        }\r\n    }\r\n}");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("label {\r\n    // margin: 10px;\r\n    // box-sizing: border-box;\r\n    &:not(:has(input[type=radio], input[type=checkbox])){\r\n        font-size: 1.2rem;\r\n    } \r\n\r\n        \r\n    position: relative;\r\n    margin-bottom: 5px;\r\n    margin-top: 5px;\r\n    display: inline-block;\r\n    width: 100%;\r\n    input:not([type=radio],[type=checkbox]),textarea{\r\n        width: 100%;\r\n    }\r\n\r\n    .text {\r\n        position: absolute;\r\n        z-index: 1;\r\n        transition: all 0.5s;\r\n        transform: translate(8px, 14px);\r\n        user-select: none;\r\n        cursor: text;\r\n    }\r\n\r\n    &.moveLabel {\r\n        .text {\r\n            transform: translate(0px, -7px);\r\n            font-size: 0.75rem;\r\n            font-weight: bold;\r\n        }\r\n    }\r\n    .password-container{\r\n        position: relative;\r\n        // background-color: #ccc;\r\n        .password-toggle {\r\n            width: 24px;\r\n            position: absolute;\r\n            top: 27px;\r\n            translate: -100% -50%;\r\n            right: 0;\r\n            scale: .8;\r\n            cursor: pointer;\r\n            font-size: 12px;\r\n        }\r\n    }\r\n\r\n    .static-label-text {\r\n        font-size: 0.75rem;\r\n        white-space: nowrap;\r\n        margin-top: 4px;\r\n    }\r\n\r\n    &[for=\"remember-me\"] {\r\n        translate: -44px 0;\r\n        display: flex;\r\n        align-items: center;\r\n        justify-content: center;\r\n\r\n        input {\r\n            scale: 1.3;\r\n            translate: 5px -5px;\r\n            transform-origin: top left;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n\r\n    input, textarea{\r\n        // width: 80%;\r\n        margin: 10px 0 0 0;\r\n        padding: 10px;\r\n        border: 1px solid #ccc;\r\n        border-radius: 5px;\r\n    }\r\n\r\n    textarea {\r\n        resize: vertical;\r\n        min-height: 100px;\r\n    }\r\n\r\n    .hide-password {\r\n        display: none;\r\n    }\r\n\r\n    .show-password {\r\n        display: block;\r\n    }\r\n\r\n    &[password-toggle=\"show\"] {\r\n        .hide-password {\r\n            display: block;\r\n        }\r\n\r\n        .show-password {\r\n            display: none;\r\n        }\r\n    }\r\n\r\n    .error-message {\r\n        font-size: 0.8rem;\r\n        user-select: none;\r\n        z-index: 1;\r\n        line-height: 12px;\r\n    }\r\n    .images-container{\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        margin-top: 10px;\r\n        position: relative;\r\n        // justify-content: center;\r\n        // .file-name{\r\n        //     font-size: 15px;\r\n        //     margin-top: 10px;\r\n        //     text-align: center;\r\n        // }\r\n        img{\r\n            width: 100%;\r\n            height: 100%;\r\n            object-fit: cover;\r\n            // margin-right: 10px;\r\n            // margin-bottom: 10px;\r\n        }\r\n        .img-container{\r\n\r\n            position: relative;\r\n            button.delete-button {\r\n                position: absolute;\r\n                left: 0;\r\n            }\r\n        }\r\n\r\n        &.file-input-display{\r\n            width: 200px;\r\n            height: 200px;\r\n            border: 1px solid black;\r\n            cursor: pointer;\r\n\r\n          \r\n            .alias{\r\n                font-size: 12px;\r\n                text-align: center;\r\n                margin: 10px;\r\n             \r\n            }\r\n            .ifEmpty{\r\n                margin: auto;\r\n            }\r\n\r\n            &.has-images{\r\n                .ifEmpty{\r\n                    display: none;\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n}\r\n.file-input-component {\r\n\r\n    .delete-button{\r\n        position: absolute;\r\n        top: 0;\r\n        right: 0;\r\n        background-color: red;\r\n        color: white;\r\n        border: none;\r\n        padding: 5px;\r\n        cursor: pointer;\r\n    }\r\n}");
 
 /***/ }),
 
@@ -736,7 +751,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<label for=\"${fieldName}\" style=\"margin: 10px;\">\r\n    <input style=\"display:none\" ${required ? \"required\" : \"\"} type=\"file\" id=\"${fieldName}\" name=\"${fieldName}\" ${multiple ? \"multiple=true\" : \"\"}  ${accept ? `accept=\"${accept}\"` : \"\"}/>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n    <div class=\"images-container file-input-display\">\r\n        <div class=\"ifEmpty\">\r\n            <div class=\"alias\">${alias ? alias : \"\"}</div>\r\n        </div>\r\n    </div>\r\n</label>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"file-input-component\" style=\"position: relative;\">\r\n    <label for=\"${fieldName}\" style=\"margin: 10px;\">\r\n        <input style=\"display:none\" ${required ? \"required\" : \"\" } type=\"file\" id=\"${fieldName}\" name=\"${fieldName}\"\r\n            ${multiple ? \"multiple=true\" : \"\" } ${accept ? `accept=\"${accept}\" ` : \"\" } />\r\n        <div class=\"images-container file-input-display\">\r\n            <div class=\"ifEmpty\">\r\n                <div class=\"alias\">${alias ? alias : \"\"}</div>\r\n            </div>\r\n        </div>\r\n    </label>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</div>");
 
 /***/ }),
 
