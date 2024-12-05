@@ -34,7 +34,7 @@ export async function createCustomElement(name, onload, html, css) {
         updateTemplate() {
             const context = {
                 fieldName: this.getAttribute('fieldName') || 'defaultFieldName',
-                alias: this.getAttribute('alias') || 'defaultAlias',
+                alias: this.getAttribute('alias') || '',
                 required: this.hasAttribute('required') || false,
                 capitalizeFirstLetter: (str) => str.charAt(0).toUpperCase() + str.slice(1),
                 type: this.getAttribute('type') || 'text',

@@ -274,55 +274,6 @@ function trimString(a) {
 
 /***/ }),
 
-/***/ "./lib/google.js":
-/*!***********************!*\
-  !*** ./lib/google.js ***!
-  \***********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// import functions from '@google-cloud/functions-framework'
-
-// import "dotenv/config"
-// const path = require('path');
-// const dotenv = require('dotenv');
-// dotenv.config({ path: path.resolve(__dirname, '../../.env') });
-
-/**
- * This file is meant to provide an easy way for the rest of the app to work with google services
- * 
- * The main thing I want it to do is deal with authentication for the service. 
- * Auth uses JWT with a short expiry time. When I call a service I want the auth logic to be implied
- * 
- * There are many services that can be used with googleapis. I will start with sheets.
- * I will potentially use gmail, calendar, and other services. 
- * 
- * There are a few set up steps to get this working:
- * 1. Create a service account in the google cloud console
- * 2. Create a private key for the service account
- * 3. Share the service account email address with the google service you want to use
- * 4. Create a private_key.json file in the root of the project
- * 5. Add the private key to the private_key.json file
- * 6. Add the private_key.json file to the .gitignore
- * 7. Use the getAuthClient function to get an authorized client
- * 8. Use the client to call the google service
- * 
- */
-
-// async function getAuthClient() {
-
-//     const JWT = google.auth.JWT;
-//     const authClient = new JWT({
-//         keyFile: ,
-//         scopes: ['https://mail.google.com/'],
-//         subject: 'admin@bethowenwatercolors.com' // google admin email address to impersonate
-//     });
-//     await authClient.authorize(); // once authorized, can do whatever you want
-//     return authClient
-// }
-
-/***/ }),
-
 /***/ "./utils/custom-element.js":
 /*!*********************************!*\
   !*** ./utils/custom-element.js ***!
@@ -400,7 +351,7 @@ function _createCustomElement() {
               value: function updateTemplate() {
                 var context = {
                   fieldName: this.getAttribute('fieldName') || 'defaultFieldName',
-                  alias: this.getAttribute('alias') || 'defaultAlias',
+                  alias: this.getAttribute('alias') || '',
                   required: this.hasAttribute('required') || false,
                   capitalizeFirstLetter: function capitalizeFirstLetter(str) {
                     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -759,7 +710,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("label {\r\n    &:not(:has(input[type=radio], input[type=checkbox])){\r\n        font-size: 1.2rem;\r\n    } \r\n        \r\n    position: relative;\r\n    margin-bottom: 5px;\r\n    margin-top: 5px;\r\n    display: inline-block;\r\n    width: 100%;\r\n    input:not([type=radio],[type=checkbox]),textarea{\r\n        width: 100%;\r\n    }\r\n\r\n    .text {\r\n        position: absolute;\r\n        z-index: 1;\r\n        transition: all 0.5s;\r\n        transform: translate(8px, 14px);\r\n        user-select: none;\r\n        cursor: text;\r\n    }\r\n\r\n    &.moveLabel {\r\n        .text {\r\n            transform: translate(0px, -7px);\r\n            font-size: 0.75rem;\r\n            font-weight: bold;\r\n        }\r\n    }\r\n    .password-container{\r\n        position: relative;\r\n        // background-color: #ccc;\r\n        .password-toggle {\r\n            width: 24px;\r\n            position: absolute;\r\n            top: 27px;\r\n            translate: -100% -50%;\r\n            right: 0;\r\n            scale: .8;\r\n            cursor: pointer;\r\n            font-size: 12px;\r\n        }\r\n    }\r\n\r\n    .static-label-text {\r\n        font-size: 0.75rem;\r\n        white-space: nowrap;\r\n        margin-top: 4px;\r\n    }\r\n\r\n    &[for=\"remember-me\"] {\r\n        translate: -44px 0;\r\n        display: flex;\r\n        align-items: center;\r\n        justify-content: center;\r\n\r\n        input {\r\n            scale: 1.3;\r\n            translate: 5px -5px;\r\n            transform-origin: top left;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n\r\n    input, textarea{\r\n        // width: 80%;\r\n        margin: 10px 0 0 0;\r\n        padding: 10px;\r\n        border: 1px solid #ccc;\r\n        border-radius: 5px;\r\n    }\r\n\r\n    textarea {\r\n        resize: vertical;\r\n        min-height: 100px;\r\n    }\r\n\r\n    .hide-password {\r\n        display: none;\r\n    }\r\n\r\n    .show-password {\r\n        display: block;\r\n    }\r\n\r\n    &[password-toggle=\"show\"] {\r\n        .hide-password {\r\n            display: block;\r\n        }\r\n\r\n        .show-password {\r\n            display: none;\r\n        }\r\n    }\r\n\r\n    .error-message {\r\n        font-size: 0.8rem;\r\n        user-select: none;\r\n        z-index: 1;\r\n        line-height: 12px;\r\n    }\r\n    .images-container{\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        margin-top: 10px;\r\n        img{\r\n            width: 100px;\r\n            height: 100px;\r\n            margin-right: 10px;\r\n            margin-bottom: 10px;\r\n        }\r\n        .img-container{\r\n\r\n            position: relative;\r\n            button.delete-button {\r\n                position: absolute;\r\n                left: 0;\r\n            }\r\n        }\r\n    }\r\n\r\n}");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("label {\r\n    &:not(:has(input[type=radio], input[type=checkbox])){\r\n        font-size: 1.2rem;\r\n    } \r\n        \r\n    position: relative;\r\n    margin-bottom: 5px;\r\n    margin-top: 5px;\r\n    display: inline-block;\r\n    width: 100%;\r\n    input:not([type=radio],[type=checkbox]),textarea{\r\n        width: 100%;\r\n    }\r\n\r\n    .text {\r\n        position: absolute;\r\n        z-index: 1;\r\n        transition: all 0.5s;\r\n        transform: translate(8px, 14px);\r\n        user-select: none;\r\n        cursor: text;\r\n    }\r\n\r\n    &.moveLabel {\r\n        .text {\r\n            transform: translate(0px, -7px);\r\n            font-size: 0.75rem;\r\n            font-weight: bold;\r\n        }\r\n    }\r\n    .password-container{\r\n        position: relative;\r\n        // background-color: #ccc;\r\n        .password-toggle {\r\n            width: 24px;\r\n            position: absolute;\r\n            top: 27px;\r\n            translate: -100% -50%;\r\n            right: 0;\r\n            scale: .8;\r\n            cursor: pointer;\r\n            font-size: 12px;\r\n        }\r\n    }\r\n\r\n    .static-label-text {\r\n        font-size: 0.75rem;\r\n        white-space: nowrap;\r\n        margin-top: 4px;\r\n    }\r\n\r\n    &[for=\"remember-me\"] {\r\n        translate: -44px 0;\r\n        display: flex;\r\n        align-items: center;\r\n        justify-content: center;\r\n\r\n        input {\r\n            scale: 1.3;\r\n            translate: 5px -5px;\r\n            transform-origin: top left;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n\r\n    input, textarea{\r\n        // width: 80%;\r\n        margin: 10px 0 0 0;\r\n        padding: 10px;\r\n        border: 1px solid #ccc;\r\n        border-radius: 5px;\r\n    }\r\n\r\n    textarea {\r\n        resize: vertical;\r\n        min-height: 100px;\r\n    }\r\n\r\n    .hide-password {\r\n        display: none;\r\n    }\r\n\r\n    .show-password {\r\n        display: block;\r\n    }\r\n\r\n    &[password-toggle=\"show\"] {\r\n        .hide-password {\r\n            display: block;\r\n        }\r\n\r\n        .show-password {\r\n            display: none;\r\n        }\r\n    }\r\n\r\n    .error-message {\r\n        font-size: 0.8rem;\r\n        user-select: none;\r\n        z-index: 1;\r\n        line-height: 12px;\r\n    }\r\n    .images-container{\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        margin-top: 10px;\r\n        img{\r\n            width: 100px;\r\n            height: 100px;\r\n            margin-right: 10px;\r\n            margin-bottom: 10px;\r\n        }\r\n        .img-container{\r\n\r\n            position: relative;\r\n            button.delete-button {\r\n                position: absolute;\r\n                left: 0;\r\n            }\r\n        }\r\n\r\n        &.file-input-display{\r\n            min-width: 200px;\r\n            min-height: 200px;\r\n            border: 1px solid black;\r\n            cursor: pointer;\r\n\r\n            margin: 10px;;\r\n            .alias{\r\n                font-size: 12px;\r\n                text-align: center;\r\n                margin: 10px;\r\n             \r\n            }\r\n            .ifEmpty{\r\n                margin: auto;\r\n            }\r\n        }\r\n    }\r\n\r\n}");
 
 /***/ }),
 
@@ -773,7 +724,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<label for=\"${fieldName}\" >\r\n    <input type=\"file\" id=\"${fieldName}\" name=\"${fieldName}\" ${multiple ? \"multiple=true\" : \"\"}  ${accept ? `accept=\"${accept}\"` : \"\"}/>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n    <div class=\"images-container\"></div>\r\n</label>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<label for=\"${fieldName}\">\r\n    <!-- <div style=\"white-space: nowrap; margin-right: 20px;\">${alias ? alias : \"\"}</div> -->\r\n    <input style=\"display:none\" ${required ? \"required\" : \"\"} type=\"file\" id=\"${fieldName}\" name=\"${fieldName}\" ${multiple ? \"multiple=true\" : \"\"}  ${accept ? `accept=\"${accept}\"` : \"\"}/>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n    <div class=\"images-container file-input-display\">\r\n        <div class=\"ifEmpty\">\r\n            <div class=\"alias\">${alias ? alias : \"\"}</div>\r\n        </div>\r\n    </div>\r\n</label>");
 
 /***/ }),
 
@@ -3821,7 +3772,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _markdown_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./markdown/index.js */ "./app/components/markdown/index.js");
 /* harmony import */ var _dual_login_form_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dual-login-form/index.js */ "./app/components/dual-login-form/index.js");
 /* harmony import */ var _footer_index_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./footer/index.js */ "./app/components/footer/index.js");
-/* harmony import */ var _lib_google_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/google.js */ "./lib/google.js");
  // Import the styles (These are really the global styles for the app -- They could have their own web pack config)
 
 
@@ -3830,7 +3780,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // global google services api
-
+// import "../../lib/google.js";
 
 // Globals file
 // Helper function to get form values

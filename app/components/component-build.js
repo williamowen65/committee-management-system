@@ -7,7 +7,7 @@ import "./footer/index.js";
 
 
 // global google services api
-import "../../lib/google.js";
+// import "../../lib/google.js";
 
 
 // Globals file

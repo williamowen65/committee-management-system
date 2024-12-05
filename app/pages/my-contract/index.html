@@ -145,27 +145,52 @@
     </form>
 
     <hr>
+    <style>
+      #digital-images-form label{
+        display: flex;
+        align-items: baseline;
+      }
+    </style>
 
     <!-- Digital Images Form -->
     <form id="digital-images-form">
-      <div class="row">
+      <div class="">
         <markdown-component>
           <span slot="markdown-content">
             ### Digital Images:
             Please upload the following required digital images (jpg files of about 2-3 MB.) All images must have a
             professional appearance. 2D artwork must be cropped so that matting/framing does not show in the image.
-            - Three (3) images of your artwork – label these like this example: DonSmithArt1.jpg, DonSmithArt2.jpg,
-            DonSmithArt3.jpg
-            - One (1) image of you working in your studio – label these like this example: DonSmithStudio.jpg
-            - One (1) SQUARE image of your artwork that you want to be the main piece featured in the brochure.
-            This image should be one of the three images that you submitted above, but cropped so that it’s square.
-            Label like this example: DonSmithBrochure.jpg
-            - If you are having trouble figuring out how to submit your digital images, contact (put Artist Images chair
+      
+            If you are having trouble figuring out how to submit your digital images, contact (put Artist Images chair
             contact info here.)
           </span>
         </markdown-component>
-        <file-input-component multiple="true" fieldName="digitalImages" alias="Digital Images"
+        <div style="max-width: 800px; margin:auto">
+
+          <h4 style="text-align: center;">Three (3) images of your artwork – label these like this example: DonSmithArt1.jpg, DonSmithArt2.jpg,
+          DonSmithArt3.jpg</h4>
+          <div style="display: flex; justify-content: center;">
+
+            <file-input-component required="true" fieldName="digitalImage1"  alias="Digital Image 1"
+            accept=".jpg,.jpeg,.png"></file-input-component>
+            <file-input-component required="true" fieldName="digitalImage2"  alias="Digital Image 2"
+            accept=".jpg,.jpeg,.png"></file-input-component>
+            <file-input-component required="true" fieldName="digitalImage3"  alias="Digital Image 3"
+            accept=".jpg,.jpeg,.png"></file-input-component>
+          </div>
+
+          <h4 style="text-align: center;">One (1) image of you working in your studio – label these like this example: DonSmithStudio.jpg</h4>
+          <file-input-component required="true" fieldName="artistInStudioImage" alias="Image of you working in your studio"
           accept=".jpg,.jpeg,.png"></file-input-component>
+
+          <h4 style="text-align: center;">One (1) SQUARE image of your artwork that you want to be the main piece featured in the brochure.
+This image should be one of the three images that you submitted above, but cropped so that it’s square.
+Label like this example: DonSmithBrochure.jpg</h4>
+          <file-input-component required="true" fieldName="brochureImage" alias="Brochure Image"
+          accept=".jpg,.jpeg,.png"></file-input-component>
+
+
+        </div>
       </div>
       <button type="submit" id="save-digital-images" style="margin: auto; display: block; ">Save Digital Images</button>
 

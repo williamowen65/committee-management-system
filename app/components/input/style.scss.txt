@@ -118,6 +118,24 @@ label {
                 left: 0;
             }
         }
+
+        &.file-input-display{
+            min-width: 200px;
+            min-height: 200px;
+            border: 1px solid black;
+            cursor: pointer;
+
+            margin: 10px;;
+            .alias{
+                font-size: 12px;
+                text-align: center;
+                margin: 10px;
+             
+            }
+            .ifEmpty{
+                margin: auto;
+            }
+        }
     }
 
 }
