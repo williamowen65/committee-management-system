@@ -29,4 +29,27 @@ header{
             margin: 10px;
         }
     }
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+        align-items: center;
+       #header-logo {
+        display: flex;
+            flex-direction: column;
+            align-items: center;
+
+        img {
+            width: 80px;
+            height: 80px;
+            margin-left: 0;
+        }
+
+        nav#links {
+            flex-direction: column;
+            align-items: center;
+            a {
+                margin: 5px 0;
+            }
+        }
+    }
 }
