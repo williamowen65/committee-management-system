@@ -61,6 +61,7 @@ createCustomElement('file-input-component', function () {
                 deleteButton.addEventListener('click', () => {
                     img.remove();
                     deleteButton.remove();
+                    imagesContainer.classList.remove('has-images');
                 });
 
                 const imgContainer = document.createElement('div');
@@ -69,6 +70,8 @@ createCustomElement('file-input-component', function () {
                 imgContainer.appendChild(deleteButton);
 
                 imagesContainer.appendChild(imgContainer);
+                imagesContainer.classList.add('has-images');
+
                 img.src = reader.result;
             };
             reader.readAsDataURL(file);
