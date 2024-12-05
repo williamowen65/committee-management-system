@@ -1,7 +1,10 @@
 label {
+    // margin: 10px;
+    // box-sizing: border-box;
     &:not(:has(input[type=radio], input[type=checkbox])){
         font-size: 1.2rem;
     } 
+
         
     position: relative;
     margin-bottom: 5px;
@@ -122,12 +125,12 @@ label {
         }
 
         &.file-input-display{
-            min-width: 200px;
-            min-height: 200px;
+            width: 200px;
+            height: 200px;
             border: 1px solid black;
             cursor: pointer;
 
-            margin: 10px;;
+          
             .alias{
                 font-size: 12px;
                 text-align: center;
@@ -145,5 +148,4 @@ label {
             }
         }
     }
-
 }

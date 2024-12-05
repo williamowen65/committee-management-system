@@ -45,6 +45,18 @@ createCustomElement('textarea-component', function () {
 
 createCustomElement('file-input-component', function () {
 
+   
+
+    this.querySelector('input').addEventListener('click', (e) => {
+        
+        // prevent bubbling event on delete image button
+        if (e.target.classList.contains('delete-button')) {
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+        }
+    })
+
+
     // Set listeners to display images added to file input
     this.querySelector('input').addEventListener('change', (e) => {
 
@@ -56,12 +68,16 @@ createCustomElement('file-input-component', function () {
                 
                 const img = document.createElement('img');
                 const deleteButton = document.createElement('button');
+                
                 deleteButton.textContent = 'X';
                 deleteButton.classList.add('delete-button');
                 deleteButton.addEventListener('click', () => {
+                   
                     img.remove();
                     deleteButton.remove();
                     imagesContainer.classList.remove('has-images');
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
                 });
 
                 const imgContainer = document.createElement('div');
