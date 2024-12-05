@@ -30,7 +30,7 @@ header{
         }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 900px) {
         flex-direction: column;
         align-items: center;
        #header-logo {
