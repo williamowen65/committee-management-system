@@ -1,8 +1,8 @@
 
 
 
-<label for="${fieldName}" class="${labelClass || ""}">
+<label for="${fieldName}" class="${labelClass || ""}" style="${width ? "width:"+ width + ";" : ""}">
     <small class="text" part="labelText">${alias || capitalizeFirstLetter(fieldName)} ${required ? "*" : ""}</small>
-    <input type="${type}" id="${fieldName}" name="${fieldName}" class="${labelClass || ""}" ${required ? "required" :""} />
+    <input type="${type}" id="${fieldName}" name="${fieldName}" class="${labelClass || ""}" ${required ? "required" :""} ${type === 'number' ? 'min="0"' : ''} />
     <div id="${fieldName}-error" class="error-message"></div>
 </label>

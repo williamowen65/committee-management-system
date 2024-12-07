@@ -71,14 +71,16 @@ I don’t have my own art canopy so would need a covered space (ie, a garage or 
 function handleStudioSharingForm(e) {
     e.preventDefault();
     const form = document.querySelector('form#studio-sharing-form')
-
+    setLoading(form, true)
     // Get first string (aka "studioPreference")
     const studioPreference = form.querySelector('input[name="studioPreference"]:checked')
+    if(!studioPreference) return alert("Please select an option. Do you have a studio space or not?");
     let StudioSharingAnswer = studioPreference.parentNode.innerText;
     const option1Selected = StudioSharingAnswer.includes('I have my own studio space')
     // Get second string based on studioPreference 
     if (option1Selected) {
         const studioAvailability = form.querySelector('input[name="studioAvailability"]:checked')
+        if(!studioAvailability) return alert("Please select an option. Can you share your studio space?");
         let studioAvailabilityAnswer = studioAvailability.parentNode.innerText;
         // append answer to string result
         StudioSharingAnswer += ' \n\t' + studioAvailabilityAnswer;
@@ -87,11 +89,13 @@ function handleStudioSharingForm(e) {
         const subOption2Selected = studioAvailabilityAnswer.includes('I can share my studio space')
         if (subOption2Selected) {
             // get how many artists can be accommodated
-            const artistsAccommodated = form.querySelector('textarea[name="studioSharingInfo"]')
+            const artistsAccommodated = form.querySelector('input[name="studioSharingInfo"]')
+            if(!artistsAccommodated.value) return alert("Please provide information on how many artists can be accommodated");
             StudioSharingAnswer += ' \n\t\t' + artistsAccommodated.value.trim();
 
             // get plans to share studio space
             const studioSharingPlans = form.querySelector('textarea[name="studioSharingPlans"]')
+            if(!studioSharingPlans.value) return alert("Please provide information on how you plan to share your studio space");
             StudioSharingAnswer += ' \n\t\t' + studioSharingPlans.value.trim();
         }
 
@@ -115,16 +119,25 @@ function handleStudioSharingForm(e) {
     } else { // option 2 selected "I don't have a studio"
         // Get canopy info
         const canopyPreference = form.querySelector('input[name="canopy-no-studio"]:checked')
+        if(!canopyPreference) return alert("Please select an option. Do you have a canopy?");
         StudioSharingAnswer += ' \n\t' + canopyPreference.parentNode.innerText;
 
     }
 
     console.log({ StudioSharingAnswer })
 
-    setLoading(form, false)
+  
 
-    // const {values, form} = getFormValues('form#studio-sharing-form')
+
+
+    // const {values} = getFormValues('form#studio-sharing-form')
     // console.log({values, form})
+
+    // Save to firestore
+    CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, { studioSharingInfo: StudioSharingAnswer }).then(() => {
+        setLoading(form, false)
+    })
+
 
 
 }

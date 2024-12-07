@@ -34,8 +34,12 @@ window.setLoading = function(form, isLoading) {
         submitButton.innerHTML = 'Loading...'
         submitButton.setAttribute('data-text', text);
     } else {
-        submitButton.removeAttribute('disabled')
-        const text = submitButton.getAttribute('data-text')
-        submitButton.innerHTML = text
+        submitButton.innerHTML = "Your studio preferences have been saved"
+        setTimeout(() => {
+            submitButton.removeAttribute('disabled')
+            const text = submitButton.getAttribute('data-text')
+            submitButton.innerHTML = text
+        }, 3000)
+
     }
 }

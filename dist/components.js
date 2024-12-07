@@ -426,7 +426,8 @@ function _createCustomElement() {
                   redirect: this.getAttribute('redirect') || '',
                   "loginImage": this.getAttribute('loginImage') || '',
                   "signupImage": this.getAttribute('signupImage') || '',
-                  "description": this.getAttribute('description') || ''
+                  "description": this.getAttribute('description') || '',
+                  width: this.getAttribute('width') || ''
                 };
                 var evaluatedTemplate = evaluateTemplate(html, context);
                 this.innerHTML = "\n                <style>\n                ".concat(css, "\n                </style>\n                ").concat(evaluatedTemplate, "\n                ");
@@ -816,7 +817,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<header>\n  <div id=\"header-logo\">\n    <div>\n      <h1>Gig Harbor <br>Open Studio Tour</h1>\n      <small>Artist Portal</small>\n    </div>\n    <img src=\"/dist/assets/ghost-logo-pink (1).jpg\" />\n  </div>\n\n  <nav id=\"links\">\n    ${window.location.href.includes('members') ? '' : '<a href=\"/members\">Go back to members page</a>'}\n    <a href=\"https://gigharboropenstudiotour.org/\">Go back to GHOST Website</a>\n  </nav>\n</header>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<header>\r\n  <div id=\"header-logo\">\r\n    <div>\r\n      <h1>Gig Harbor <br>Open Studio Tour</h1>\r\n      <small>Artist Portal</small>\r\n    </div>\r\n    <img src=\"/dist/assets/ghost-logo-pink (1).jpg\" />\r\n  </div>\r\n\r\n  <nav id=\"links\">\r\n    ${window.location.href.includes('members') ? '' : '<a href=\"/members\">Go back to members page</a>'}\r\n    <a href=\"https://gigharboropenstudiotour.org/\">Go back to GHOST Website</a>\r\n  </nav>\r\n</header>\r\n");
 
 /***/ }),
 
@@ -872,7 +873,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<label for=\"${fieldName}\" class=\"${labelClass || \"\"}\">\r\n    <small class=\"text\" part=\"labelText\">${alias || capitalizeFirstLetter(fieldName)} ${required ? \"*\" : \"\"}</small>\r\n    <input type=\"${type}\" id=\"${fieldName}\" name=\"${fieldName}\" class=\"${labelClass || \"\"}\" ${required ? \"required\" :\"\"} />\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</label>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<label for=\"${fieldName}\" class=\"${labelClass || \"\"}\" style=\"${width ? \"width:\"+ width + \";\" : \"\"}\">\r\n    <small class=\"text\" part=\"labelText\">${alias || capitalizeFirstLetter(fieldName)} ${required ? \"*\" : \"\"}</small>\r\n    <input type=\"${type}\" id=\"${fieldName}\" name=\"${fieldName}\" class=\"${labelClass || \"\"}\" ${required ? \"required\" :\"\"} ${type === 'number' ? 'min=\"0\"' : ''} />\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</label>");
 
 /***/ }),
 
@@ -3997,9 +3998,12 @@ window.setLoading = function (form, isLoading) {
     submitButton.innerHTML = 'Loading...';
     submitButton.setAttribute('data-text', text);
   } else {
-    submitButton.removeAttribute('disabled');
-    var _text = submitButton.getAttribute('data-text');
-    submitButton.innerHTML = _text;
+    submitButton.innerHTML = "Your studio preferences have been saved";
+    setTimeout(function () {
+      submitButton.removeAttribute('disabled');
+      var text = submitButton.getAttribute('data-text');
+      submitButton.innerHTML = text;
+    }, 3000);
   }
 };
 })();
