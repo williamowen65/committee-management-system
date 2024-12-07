@@ -16,7 +16,7 @@ import {
   getFirestore,
   getDocs,
   collection,
-
+  setDoc,
   query,
   where,
   doc,
@@ -55,7 +55,8 @@ window.firebase = {
   where,
   doc,
   signOut,
-  updateProfile
+  updateProfile,
+  setDoc
 }
 
 window.firebase.redirectIfNotLoggedIn = async function (path) {

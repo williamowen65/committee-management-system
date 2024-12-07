@@ -142,9 +142,10 @@ function handleArtisticDemonstrationForm(e) {
 
 
 function handleCheckboxChange(e) {
-    const { checked, name } = e.target
+    const { checked, name, value: roleId } = e.target
+    const userId = firebase.auth.currentUser.uid
     console.log("make updates to firebase ",{ checked, name, CRUD })
-
+    CRUD.update('ghost-contracts', userId, { committeeRoleId: roleId })
 }
 
 /**
@@ -155,6 +156,9 @@ function handleCheckboxChange(e) {
 function setUpVolunteerResponsibilityForm(contracts) {
 
     console.log("setUpVolunteerResponsibilityForm", { contracts })
+
+    const filledRoles = Object.values(contracts).map(contract => contract.committeeRoleId)
+
     // Set timeout is a work around b/c the form is not loaded when the document is ready
     setTimeout(() => {
         const form = document.querySelector('div#committee-positions')
@@ -169,13 +173,16 @@ function setUpVolunteerResponsibilityForm(contracts) {
     }, 0)
 
     function createCheckbox(role) {
+        const isRoleFilled = filledRoles.includes(role.getAttribute('data-role-id'))
+
         const roleId = role.getAttribute('data-role-id')
         const thisRole = roles[roleId]
         const checkbox = document.createElement('input')
         checkbox.type = 'checkbox'
         checkbox.name = thisRole.title
         checkbox.value = roleId
-        checkbox.checked = false
+        checkbox.checked = isRoleFilled ? true:false
+        checkbox.disabled = isRoleFilled ? true:false
         return checkbox
     }
 }

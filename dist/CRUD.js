@@ -6,6 +6,7 @@
  */
 
 
+
 window.CRUD = {
     create: async function (data) {
         console.log("create data", data)
@@ -13,8 +14,8 @@ window.CRUD = {
     read: async function () {
         console.log("read data", {firebase})
     },
-    readAll: async function () {
-        const query =  firebase.query(firebase.collection(firebase.db, 'ghost-contracts'))
+    readAll: async function (collection) {
+        const query =  firebase.query(firebase.collection(firebase.db, collection))
        const docs = await firebase.getDocs(query)
        const data = []
         docs.forEach(doc => {
@@ -23,8 +24,10 @@ window.CRUD = {
         })
         return data;
     },
-    update: async function (id, data) {
-        console.log("update data", id, data)
+    update: async function (collection, id, data) {
+        console.log("update data", { collection, id, data })
+        const docRef = firebase.doc(firebase.collection(firebase.db, collection), id)
+        await firebase.setDoc(docRef, data)
     },
     delete: async function (id) {
         console.log("delete data", id)
