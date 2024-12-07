@@ -182,7 +182,7 @@ __webpack_require__.r(__webpack_exports__);
     var deleteButton = document.createElement('button');
     deleteButton.textContent = 'X';
     deleteButton.classList.add('delete-button');
-    deleteButton.addEventListener('click', function () {
+    deleteButton.addEventListener('click', function (e) {
       img.remove();
       deleteButton.remove();
       imagesContainer.classList.remove('has-images');
@@ -193,6 +193,10 @@ __webpack_require__.r(__webpack_exports__);
       // remove button from file input
       var fileInput = parentContainer.querySelector('input');
       fileInput.value = '';
+
+      //    guarantee that the file input is required
+      fileInput.setAttribute('required', 'required');
+
       // prevent bubbling event on delete image button
       e.stopPropagation();
       e.stopImmediatePropagation();
@@ -210,6 +214,7 @@ __webpack_require__.r(__webpack_exports__);
     fileName.textContent = file.name;
     fileName.classList.add('file-name');
     parentContainer.appendChild(fileName);
+    return this;
   };
   this.querySelector('input').addEventListener('click', function (e) {
     // prevent bubbling event on delete image button

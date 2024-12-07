@@ -26,49 +26,55 @@ createCustomElement('file-input-component', function () {
     const labelContainer = parentContainer.querySelector('.label-container');
 
     this.setImage = function (src, file) {
-           // empty out the images container
-           const inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML;
-           imagesContainer.innerHTML = inputLabelText;
-           const fileNameEl = parentContainer.querySelector('.file-name')
-           if (fileNameEl) {
-               fileNameEl.remove();
-           }
+        // empty out the images container
+        const inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML;
+        imagesContainer.innerHTML = inputLabelText;
+        const fileNameEl = parentContainer.querySelector('.file-name')
+        if (fileNameEl) {
+            fileNameEl.remove();
+        }
 
 
-           const img = document.createElement('img');
-           const deleteButton = document.createElement('button');
+        const img = document.createElement('img');
+        const deleteButton = document.createElement('button');
 
-           deleteButton.textContent = 'X';
-           deleteButton.classList.add('delete-button');
-           deleteButton.addEventListener('click', () => {
-               img.remove();
-               deleteButton.remove();
-               imagesContainer.classList.remove('has-images');
-               parentContainer.querySelector('.file-name').remove();
-               parentContainer.querySelectorAll('.error').forEach(error => error.remove());
-               // remove button from file input
-               const fileInput = parentContainer.querySelector('input');
-               fileInput.value = '';
-               // prevent bubbling event on delete image button
-               e.stopPropagation();
-               e.stopImmediatePropagation();
-           });
+        deleteButton.textContent = 'X';
+        deleteButton.classList.add('delete-button');
+        deleteButton.addEventListener('click', (e) => {
+            img.remove();
+            deleteButton.remove();
+            imagesContainer.classList.remove('has-images');
+            parentContainer.querySelector('.file-name').remove();
+            parentContainer.querySelectorAll('.error').forEach(error => error.remove());
+            // remove button from file input
+            const fileInput = parentContainer.querySelector('input');
+            fileInput.value = '';
 
-           const imgContainer = document.createElement('div');
-           imgContainer.classList.add('img-container');
-           imgContainer.appendChild(img);
-           labelContainer.appendChild(deleteButton);
+            //    guarantee that the file input is required
+            fileInput.setAttribute('required', 'required');
 
-           imagesContainer.appendChild(imgContainer);
-           imagesContainer.classList.add('has-images');
+            // prevent bubbling event on delete image button
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+        });
 
-           img.src = src;
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('img-container');
+        imgContainer.appendChild(img);
+        labelContainer.appendChild(deleteButton);
 
-           // display the name of the file
-           const fileName = document.createElement('p');
-           fileName.textContent = file.name;
-           fileName.classList.add('file-name');
-           parentContainer.appendChild(fileName);
+        imagesContainer.appendChild(imgContainer);
+        imagesContainer.classList.add('has-images');
+
+        img.src = src;
+
+        // display the name of the file
+        const fileName = document.createElement('p');
+        fileName.textContent = file.name;
+        fileName.classList.add('file-name');
+        parentContainer.appendChild(fileName);
+
+        return this;
     }
 
 
@@ -85,7 +91,7 @@ createCustomElement('file-input-component', function () {
     // Set listeners to display images added to file input
     this.querySelector('input').addEventListener('change', (e) => {
 
-     
+
 
         Array.from(e.target.files).forEach((file) => {
             const reader = new FileReader();
@@ -93,7 +99,7 @@ createCustomElement('file-input-component', function () {
 
                 this.setImage(reader.result, file)
 
-            
+
                 // Display possible errors with this file
                 // Requirements: Size must be no larger than 3 mb. 
                 // Must not be a thumbnail image.
@@ -135,13 +141,13 @@ createCustomElement('file-input-component', function () {
                             parentContainer.appendChild(error);
                         }
                     }
-            }
+                }
 
 
-        };
-        reader.readAsDataURL(file);
-    });
-})
+            };
+            reader.readAsDataURL(file);
+        });
+    })
 
 
 }, fileInputTemplate, styles);

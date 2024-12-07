@@ -342,8 +342,12 @@ function setDigitalImagesForm(contracts){
             const ref = firebase.storage.ref(firebase.storage.getStorage(), digitalImage);
             const name = ref.name;
 
+            const thisComponent = component.setImage(digitalImage, { name })
 
-            component.setImage(digitalImage, { name })
+            // Set not required for input (to allow form to be submitted when user has existing image) --- you cannot set the value for file inputs 
+            thisComponent.querySelector('input[type=file]').removeAttribute('required')
+
+            console.log({thisComponent})
         }
     }
 }
