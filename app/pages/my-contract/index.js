@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Set up volunteer responsibility form 
     setUpVolunteerResponsibilityForm();
+    console.log({ roles, firebase })
 })
 
 
@@ -143,6 +144,7 @@ function handleArtisticDemonstrationForm(e) {
 function handleCheckboxChange(e) {
     const { checked, name } = e.target
     console.log("make updates to firebase ",{ checked, name })
+
 }
 
 /**
@@ -166,13 +168,15 @@ function setUpVolunteerResponsibilityForm() {
 
     function createCheckbox(role) {
         const roleId = role.getAttribute('data-role-id')
+        const thisRole = roles[roleId]
+        console.log({thisRole})
         const checkbox = document.createElement('input')
         checkbox.type = 'checkbox'
-        checkbox.name = roleId
+        checkbox.name = thisRole.title
         checkbox.value = roleId
         checkbox.checked = false
         return checkbox
     }
 }
 
-console.log({ roles })
+
