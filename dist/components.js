@@ -474,6 +474,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, `@media only screen and (max-width: 767
     width: 100% !important;
     flex-direction: column;
   }
+  .os-dual-form .row {
+    flex-wrap: nowrap;
+  }
   .os-dual-form[auth-mode=signup] .right {
     display: none;
   }
@@ -502,7 +505,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `@media only screen and (max-width: 767
   .password-strength {
     width: 91% !important;
   }
-}`, "",{"version":3,"sources":["webpack://./app/components/dual-login-form/global.scss"],"names":[],"mappings":"AACA;EAEI;IACI,gBAAA;IACA,sBAAA;IACA,sBAAA;EADN;EAIU;IACI,aAAA;EAFd;EAIU;IACI,aAAA;EAFd;EAOU;IACI,aAAA;EALd;EAOU;IACI,aAAA;EALd;EASM;IACI,aAAA;EAPV;EAUM;IACI,WAAA;IACA,YAAA;EARV;EASU;IACI,gBAAA;EAPd;EAmBE;IACI,yBAAA;EAjBN;EAoBE;IACI,qBAAA;EAlBN;AACF","sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./app/components/dual-login-form/global.scss"],"names":[],"mappings":"AACA;EAEI;IACI,gBAAA;IACA,sBAAA;IACA,sBAAA;EADN;EAEK;IACC,iBAAA;EAAN;EAIU;IACI,aAAA;EAFd;EAIU;IACI,aAAA;EAFd;EAOU;IACI,aAAA;EALd;EAOU;IACI,aAAA;EALd;EASM;IACI,aAAA;EAPV;EAUM;IACI,WAAA;IACA,YAAA;EARV;EASU;IACI,gBAAA;EAPd;EAmBE;IACI,yBAAA;EAjBN;EAoBE;IACI,qBAAA;EAlBN;AACF","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

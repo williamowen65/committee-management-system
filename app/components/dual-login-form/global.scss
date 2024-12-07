@@ -5,6 +5,9 @@
         margin-top: 22px;
         width: 100% !important;
         flex-direction: column;
+       .row{
+        flex-wrap: nowrap;
+       }
 
         &[auth-mode="signup"] {
             .right {
