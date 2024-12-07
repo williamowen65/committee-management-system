@@ -24,8 +24,9 @@ window.getFormValues = function(formSelector) {
 }
 
 // global function to set loading state
-window.setLoading = function(form, isLoading) {
-    console.log("Setting loading", { form, isLoading })
+window.setLoading = function(form, isLoading, config = { success: true}) {
+    if (!config.success) return; // Don't set loading if there was an error
+    console.log("Setting loading", { form, isLoading, config })
     const submitButton = form.querySelector('button[type="submit"]')
     if (isLoading) {
         // get submit button text 
@@ -34,7 +35,8 @@ window.setLoading = function(form, isLoading) {
         submitButton.innerHTML = 'Loading...'
         submitButton.setAttribute('data-text', text);
     } else {
-        submitButton.innerHTML = "Your studio preferences have been saved"
+       
+            submitButton.innerHTML = "Your studio preferences have been saved"
         setTimeout(() => {
             submitButton.removeAttribute('disabled')
             const text = submitButton.getAttribute('data-text')

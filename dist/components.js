@@ -3986,9 +3986,14 @@ window.getFormValues = function (formSelector) {
 
 // global function to set loading state
 window.setLoading = function (form, isLoading) {
+  var config = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {
+    success: true
+  };
+  if (!config.success) return; // Don't set loading if there was an error
   console.log("Setting loading", {
     form: form,
-    isLoading: isLoading
+    isLoading: isLoading,
+    config: config
   });
   var submitButton = form.querySelector('button[type="submit"]');
   if (isLoading) {
