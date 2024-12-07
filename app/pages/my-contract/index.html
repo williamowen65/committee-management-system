@@ -327,7 +327,7 @@
                 list-style: none;
               }
 
-                #committee-positions li.role input[type="checkbox"]:not(:checked) + b {
+                #committee-positions li.role:has(input[type="checkbox"]:not(:checked)) {
                 background: yellow;
                 color: black;
               }
