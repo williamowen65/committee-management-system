@@ -8,6 +8,10 @@
     <script src="/dist/components.js"></script>
     <script src="/my-account/index.js"></script>
     <link rel="stylesheet" href="/my-account/style.css">
+    <script type="module" src="/dist/firebase.js"></script>
+    <script type="module">
+        firebase.redirectIfNotLoggedIn('/artist-sign-on')
+      </script>
 
 </head>
 
