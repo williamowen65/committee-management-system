@@ -25,7 +25,7 @@ createCustomElement('file-input-component', function () {
     const parentContainer = imagesContainer.closest('.file-input-component')
     const labelContainer = parentContainer.querySelector('.label-container');
 
-    this.setImage = function (src) {
+    this.setImage = function (src, file) {
            // empty out the images container
            const inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML;
            imagesContainer.innerHTML = inputLabelText;
@@ -63,6 +63,12 @@ createCustomElement('file-input-component', function () {
            imagesContainer.classList.add('has-images');
 
            img.src = src;
+
+           // display the name of the file
+           const fileName = document.createElement('p');
+           fileName.textContent = file.name;
+           fileName.classList.add('file-name');
+           parentContainer.appendChild(fileName);
     }
 
 
@@ -85,17 +91,9 @@ createCustomElement('file-input-component', function () {
             const reader = new FileReader();
             reader.onloadend = () => {
 
-                this.setImage(reader.result)
+                this.setImage(reader.result, file)
 
-             
-
-                // display the name of the file
-                const fileName = document.createElement('p');
-                fileName.textContent = file.name;
-                fileName.classList.add('file-name');
-                parentContainer.appendChild(fileName);
-
-
+            
                 // Display possible errors with this file
                 // Requirements: Size must be no larger than 3 mb. 
                 // Must not be a thumbnail image.

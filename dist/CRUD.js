@@ -55,10 +55,12 @@ window.CRUD = {
      * @param {string} path - The storage path where the file will be saved.
      * @returns {Promise<string>} - A promise that resolves to the download URL of the uploaded file.
      */
-    saveImage: async function (file, path) {
-        const storageRef = firebase.storage.ref(firebase.storage.getStorage(), path);
+    saveImage: async function (file) {
+        console.log("save image", { file })
+        const storageRef = firebase.storage.ref(firebase.storage.getStorage(), file.name);
         const snapshot = await firebase.storage.uploadBytesResumable(storageRef, file);
         console.log('Uploaded a blob or file!', snapshot);
-        return await firebase.storage.getDownloadURL(snapshot.ref);
+        // return the url to view 
+        return await firebase.storage.getDownloadURL(storageRef)
     }
 }

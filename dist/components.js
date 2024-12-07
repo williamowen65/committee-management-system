@@ -170,7 +170,7 @@ __webpack_require__.r(__webpack_exports__);
   var imagesContainer = this.querySelector('.images-container');
   var parentContainer = imagesContainer.closest('.file-input-component');
   var labelContainer = parentContainer.querySelector('.label-container');
-  this.setImage = function (src) {
+  this.setImage = function (src, file) {
     // empty out the images container
     var inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML;
     imagesContainer.innerHTML = inputLabelText;
@@ -204,6 +204,12 @@ __webpack_require__.r(__webpack_exports__);
     imagesContainer.appendChild(imgContainer);
     imagesContainer.classList.add('has-images');
     img.src = src;
+
+    // display the name of the file
+    var fileName = document.createElement('p');
+    fileName.textContent = file.name;
+    fileName.classList.add('file-name');
+    parentContainer.appendChild(fileName);
   };
   this.querySelector('input').addEventListener('click', function (e) {
     // prevent bubbling event on delete image button
@@ -218,13 +224,7 @@ __webpack_require__.r(__webpack_exports__);
     Array.from(e.target.files).forEach(function (file) {
       var reader = new FileReader();
       reader.onloadend = function () {
-        _this.setImage(reader.result);
-
-        // display the name of the file
-        var fileName = document.createElement('p');
-        fileName.textContent = file.name;
-        fileName.classList.add('file-name');
-        parentContainer.appendChild(fileName);
+        _this.setImage(reader.result, file);
 
         // Display possible errors with this file
         // Requirements: Size must be no larger than 3 mb. 

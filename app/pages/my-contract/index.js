@@ -67,11 +67,11 @@ async function handleDigitalImagesForm(e) {
 
     // save images to storage
     // Get file url and save it to firebase by image element id.
-    const url = await CRUD.saveImage(values['digital-image-1'], 'digital-images')
+    const url = await CRUD.saveImage(values['digitalImage1'])
 
     // Save to firestore
     CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, {
-        'digital-image-1': url
+        'digitalImage1': url
     }).then(() => {  
         setLoading(form, false)
     })
@@ -333,10 +333,17 @@ function setDigitalImagesForm(contracts){
     if (contract) {
         console.log("Setting up digital images form", {contract})
         const form = document.querySelector('form#digital-images-form')
-        const digitalImage = contract['digital-image-1']
+        const digitalImage = contract['digitalImage1']
         if (digitalImage) {
+            console.log("Setting digital image", { digitalImage })
             const component = form.querySelector('file-input-component[fieldname="digitalImage1"]')
-            component.setImage(digitalImage)
+            
+            // get image name
+            const ref = firebase.storage.ref(firebase.storage.getStorage(), digitalImage);
+            const name = ref.name;
+
+
+            component.setImage(digitalImage, { name })
         }
     }
 }

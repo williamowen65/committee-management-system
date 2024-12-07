@@ -25,7 +25,7 @@ import {
 } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
 
 // firebase storageBucket: "gs://ghost-d319b.firebasestorage.app"
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js'
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, getBlob} from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAPrNIc_STwgScLfFOfEN8YyGENoHfT6T4',
@@ -64,7 +64,7 @@ window.firebase = {
   updateProfile,
   setDoc,
   storage: {
-    getStorage,
+    getStorage,getBlob,
     ref,
     uploadBytesResumable,
     getDownloadURL,
