@@ -9,6 +9,14 @@
         // margin-right: 10px;
     }
 }
+
+.column{
+    display: flex;
+    flex-direction: column;
+    button {
+        width: fit-content
+    }
+}
 hr {
     border: 0;
     height: 1px;

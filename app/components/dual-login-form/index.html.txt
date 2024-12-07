@@ -27,12 +27,12 @@
       <!-- <div id="reCAPTCHA"></div>
       <os-form-feedback feedbackName="reCAPTCHA"></os-form-feedback> -->
 
-      <div class="row">
+      <div class="column submitBtnsContainer">
         <button type="submit"
           >Submit</button
         >
 
-        <button type="button" class="mobile-view os-form-toggle"
+        <button type="button" class="mobile-view toggleAuthType"
           >Go to Log in</button
         >
       </div>
@@ -50,7 +50,7 @@
         type="password"
         alias="Password"
       ></input-component>
-      <div class="row">
+      <div class="column submitBtnsContainer">
         <button type="submit"
           >Submit</button
         >
