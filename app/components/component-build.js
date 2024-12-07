@@ -3,6 +3,7 @@ import "./input/index.js";
 import "./header/index.js";
 import "./markdown/index.js";
 import "./dual-login-form/index.js";
+import "./dual-login-form/global.scss"
 import "./footer/index.js";
 
 

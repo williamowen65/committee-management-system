@@ -1,0 +1,54 @@
+// Media query for mobile 
+@media only screen and (max-width: 767px) {
+
+    .os-dual-form {
+        margin-top: 22px;
+        width: 100% !important;
+        flex-direction: column;
+
+        &[auth-mode="signup"] {
+            .right {
+                display: none;
+            }
+            form#login {
+                display: none;
+            }
+        }
+
+        &[auth-mode="login"] {
+            .left {
+                display: none;
+            }
+            form#signup {
+                display: none;
+            }
+        }
+
+        .cover {
+            display: none;
+        }
+
+        form {
+            width: 100%;
+            height: 80vh;
+            label {
+                margin-top: 10px;
+                .text {
+                    transform: translate(8px, 17px);
+                }
+            }
+        }
+    }
+
+    .row {
+        // flex-direction: column;
+    }
+
+    .mobile-view {
+        display: inline-block;
+    }
+
+    .password-strength {
+        width: 91% !important;
+    }
+}
