@@ -21,7 +21,49 @@ createCustomElement('textarea-component', function () {
 
 
 createCustomElement('file-input-component', function () {
+    const imagesContainer = this.querySelector('.images-container');
+    const parentContainer = imagesContainer.closest('.file-input-component')
+    const labelContainer = parentContainer.querySelector('.label-container');
 
+    this.setImage = function (src) {
+           // empty out the images container
+           const inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML;
+           imagesContainer.innerHTML = inputLabelText;
+           const fileNameEl = parentContainer.querySelector('.file-name')
+           if (fileNameEl) {
+               fileNameEl.remove();
+           }
+
+
+           const img = document.createElement('img');
+           const deleteButton = document.createElement('button');
+
+           deleteButton.textContent = 'X';
+           deleteButton.classList.add('delete-button');
+           deleteButton.addEventListener('click', () => {
+               img.remove();
+               deleteButton.remove();
+               imagesContainer.classList.remove('has-images');
+               parentContainer.querySelector('.file-name').remove();
+               parentContainer.querySelectorAll('.error').forEach(error => error.remove());
+               // remove button from file input
+               const fileInput = parentContainer.querySelector('input');
+               fileInput.value = '';
+               // prevent bubbling event on delete image button
+               e.stopPropagation();
+               e.stopImmediatePropagation();
+           });
+
+           const imgContainer = document.createElement('div');
+           imgContainer.classList.add('img-container');
+           imgContainer.appendChild(img);
+           labelContainer.appendChild(deleteButton);
+
+           imagesContainer.appendChild(imgContainer);
+           imagesContainer.classList.add('has-images');
+
+           img.src = src;
+    }
 
 
     this.querySelector('input').addEventListener('click', (e) => {
@@ -37,51 +79,15 @@ createCustomElement('file-input-component', function () {
     // Set listeners to display images added to file input
     this.querySelector('input').addEventListener('change', (e) => {
 
-        const imagesContainer = this.querySelector('.images-container');
-        const parentContainer = imagesContainer.closest('.file-input-component')
-        const labelContainer = parentContainer.querySelector('.label-container');
+     
 
         Array.from(e.target.files).forEach((file) => {
             const reader = new FileReader();
             reader.onloadend = () => {
 
-                // empty out the images container
-                const inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML;
-                imagesContainer.innerHTML = inputLabelText;
-                const fileNameEl = parentContainer.querySelector('.file-name')
-                if (fileNameEl) {
-                    fileNameEl.remove();
-                }
+                this.setImage(reader.result)
 
-
-                const img = document.createElement('img');
-                const deleteButton = document.createElement('button');
-
-                deleteButton.textContent = 'X';
-                deleteButton.classList.add('delete-button');
-                deleteButton.addEventListener('click', () => {
-                    img.remove();
-                    deleteButton.remove();
-                    imagesContainer.classList.remove('has-images');
-                    parentContainer.querySelector('.file-name').remove();
-                    parentContainer.querySelectorAll('.error').forEach(error => error.remove());
-                    // remove button from file input
-                    const fileInput = parentContainer.querySelector('input');
-                    fileInput.value = '';
-                    // prevent bubbling event on delete image button
-                    e.stopPropagation();
-                    e.stopImmediatePropagation();
-                });
-
-                const imgContainer = document.createElement('div');
-                imgContainer.classList.add('img-container');
-                imgContainer.appendChild(img);
-                labelContainer.appendChild(deleteButton);
-
-                imagesContainer.appendChild(imgContainer);
-                imagesContainer.classList.add('has-images');
-
-                img.src = reader.result;
+             
 
                 // display the name of the file
                 const fileName = document.createElement('p');

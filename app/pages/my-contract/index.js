@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // set the Studio Sharing form
         setUpStudioSharingForm(contracts);
+
+        // Set the digital images form
+        setDigitalImagesForm(contracts);
     })
 
     CRUD.listen('ghost-contracts', null, (existingContracts) => {
@@ -322,3 +325,18 @@ function setUpStudioSharingForm(contracts) {
     }
 }
 
+
+
+function setDigitalImagesForm(contracts){
+    console.log("setDigitalImagesForm", { contracts })
+    const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+    if (contract) {
+        console.log("Setting up digital images form", {contract})
+        const form = document.querySelector('form#digital-images-form')
+        const digitalImage = contract['digital-image-1']
+        if (digitalImage) {
+            const component = form.querySelector('file-input-component[fieldname="digitalImage1"]')
+            component.setImage(digitalImage)
+        }
+    }
+}

@@ -167,6 +167,44 @@ __webpack_require__.r(__webpack_exports__);
 }, _types_textarea_input_html_txt__WEBPACK_IMPORTED_MODULE_2__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_4__["default"]);
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_3__.createCustomElement)('file-input-component', function () {
   var _this = this;
+  var imagesContainer = this.querySelector('.images-container');
+  var parentContainer = imagesContainer.closest('.file-input-component');
+  var labelContainer = parentContainer.querySelector('.label-container');
+  this.setImage = function (src) {
+    // empty out the images container
+    var inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML;
+    imagesContainer.innerHTML = inputLabelText;
+    var fileNameEl = parentContainer.querySelector('.file-name');
+    if (fileNameEl) {
+      fileNameEl.remove();
+    }
+    var img = document.createElement('img');
+    var deleteButton = document.createElement('button');
+    deleteButton.textContent = 'X';
+    deleteButton.classList.add('delete-button');
+    deleteButton.addEventListener('click', function () {
+      img.remove();
+      deleteButton.remove();
+      imagesContainer.classList.remove('has-images');
+      parentContainer.querySelector('.file-name').remove();
+      parentContainer.querySelectorAll('.error').forEach(function (error) {
+        return error.remove();
+      });
+      // remove button from file input
+      var fileInput = parentContainer.querySelector('input');
+      fileInput.value = '';
+      // prevent bubbling event on delete image button
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+    });
+    var imgContainer = document.createElement('div');
+    imgContainer.classList.add('img-container');
+    imgContainer.appendChild(img);
+    labelContainer.appendChild(deleteButton);
+    imagesContainer.appendChild(imgContainer);
+    imagesContainer.classList.add('has-images');
+    img.src = src;
+  };
   this.querySelector('input').addEventListener('click', function (e) {
     // prevent bubbling event on delete image button
     if (e.target.classList.contains('delete-button')) {
@@ -177,45 +215,10 @@ __webpack_require__.r(__webpack_exports__);
 
   // Set listeners to display images added to file input
   this.querySelector('input').addEventListener('change', function (e) {
-    var imagesContainer = _this.querySelector('.images-container');
-    var parentContainer = imagesContainer.closest('.file-input-component');
-    var labelContainer = parentContainer.querySelector('.label-container');
     Array.from(e.target.files).forEach(function (file) {
       var reader = new FileReader();
       reader.onloadend = function () {
-        // empty out the images container
-        var inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML;
-        imagesContainer.innerHTML = inputLabelText;
-        var fileNameEl = parentContainer.querySelector('.file-name');
-        if (fileNameEl) {
-          fileNameEl.remove();
-        }
-        var img = document.createElement('img');
-        var deleteButton = document.createElement('button');
-        deleteButton.textContent = 'X';
-        deleteButton.classList.add('delete-button');
-        deleteButton.addEventListener('click', function () {
-          img.remove();
-          deleteButton.remove();
-          imagesContainer.classList.remove('has-images');
-          parentContainer.querySelector('.file-name').remove();
-          parentContainer.querySelectorAll('.error').forEach(function (error) {
-            return error.remove();
-          });
-          // remove button from file input
-          var fileInput = parentContainer.querySelector('input');
-          fileInput.value = '';
-          // prevent bubbling event on delete image button
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });
-        var imgContainer = document.createElement('div');
-        imgContainer.classList.add('img-container');
-        imgContainer.appendChild(img);
-        labelContainer.appendChild(deleteButton);
-        imagesContainer.appendChild(imgContainer);
-        imagesContainer.classList.add('has-images');
-        img.src = reader.result;
+        _this.setImage(reader.result);
 
         // display the name of the file
         var fileName = document.createElement('p');
