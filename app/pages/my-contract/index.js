@@ -20,10 +20,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
-
-    // Set up volunteer responsibility form 
-    setUpVolunteerResponsibilityForm();
-    console.log({ roles, firebase })
+    CRUD.readAll('ghost-contracts').then((contracts) => {  
+        // Set up volunteer responsibility form 
+        setUpVolunteerResponsibilityForm(contracts);
+    })
 })
 
 
@@ -143,7 +143,7 @@ function handleArtisticDemonstrationForm(e) {
 
 function handleCheckboxChange(e) {
     const { checked, name } = e.target
-    console.log("make updates to firebase ",{ checked, name })
+    console.log("make updates to firebase ",{ checked, name, CRUD })
 
 }
 
@@ -152,7 +152,9 @@ function handleCheckboxChange(e) {
  * 
  * This form requires getting all artists info
  */
-function setUpVolunteerResponsibilityForm() {
+function setUpVolunteerResponsibilityForm(contracts) {
+
+    console.log("setUpVolunteerResponsibilityForm", { contracts })
     // Set timeout is a work around b/c the form is not loaded when the document is ready
     setTimeout(() => {
         const form = document.querySelector('div#committee-positions')
@@ -169,7 +171,6 @@ function setUpVolunteerResponsibilityForm() {
     function createCheckbox(role) {
         const roleId = role.getAttribute('data-role-id')
         const thisRole = roles[roleId]
-        console.log({thisRole})
         const checkbox = document.createElement('input')
         checkbox.type = 'checkbox'
         checkbox.name = thisRole.title
