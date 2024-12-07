@@ -1,3 +1,5 @@
+import roles from './committee-roles.js'
+
 document.addEventListener('DOMContentLoaded', function () {
 
     console.log("My Contract Page Loaded")
@@ -140,11 +142,13 @@ function handleArtisticDemonstrationForm(e) {
 
 function handleCheckboxChange(e) {
     const { checked, name } = e.target
-    console.log({ checked, name })
+    console.log("make updates to firebase ",{ checked, name })
 }
 
 /**
  * This form doesn't have a submit button... It is a series of checkboxes that should be saved on change
+ * 
+ * This form requires getting all artists info
  */
 function setUpVolunteerResponsibilityForm() {
     // Set timeout is a work around b/c the form is not loaded when the document is ready
@@ -169,6 +173,6 @@ function setUpVolunteerResponsibilityForm() {
         checkbox.checked = false
         return checkbox
     }
-
 }
 
+console.log({ roles })
