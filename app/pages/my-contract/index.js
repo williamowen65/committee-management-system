@@ -1,5 +1,7 @@
 import roles from './committee-roles.js'
 
+
+let contracts;
 document.addEventListener('DOMContentLoaded', function () {
 
     console.log("My Contract Page Loaded")
@@ -20,9 +22,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
-    CRUD.readAll('ghost-contracts').then((contracts) => {  
+    CRUD.readAll('ghost-contracts').then((existingContracts) => {
+        contracts = existingContracts
         // Set up volunteer responsibility form 
         setUpVolunteerResponsibilityForm(contracts);
+    })
+
+    CRUD.listen('ghost-contracts', null, (existingContracts) => {
+        contracts = existingContracts;
+        updateVolunteerResponsibilityForm(contracts);
     })
 })
 
@@ -144,8 +152,9 @@ function handleArtisticDemonstrationForm(e) {
 function handleCheckboxChange(e) {
     const { checked, name, value: roleId } = e.target
     const userId = firebase.auth.currentUser.uid
-    console.log("make updates to firebase ",{ checked, name, CRUD })
-    CRUD.update('ghost-contracts', userId, { committeeRoleId: roleId })
+    const existingRoles = contracts.find(contract => contract.userId === userId)?.committeeRoleId || []
+    console.log("make updates to firebase ", { checked, name, CRUD })
+    CRUD.update('ghost-contracts', userId, { committeeRoleId: [...existingRoles, roleId] })
 }
 
 /**
@@ -157,7 +166,7 @@ function setUpVolunteerResponsibilityForm(contracts) {
 
     console.log("setUpVolunteerResponsibilityForm", { contracts })
 
-    const filledRoles = Object.values(contracts).map(contract => contract.committeeRoleId)
+    const filledRoles = Object.values(contracts).map(contract => contract.committeeRoleId).flat()
 
     // Set timeout is a work around b/c the form is not loaded when the document is ready
     setTimeout(() => {
@@ -167,7 +176,7 @@ function setUpVolunteerResponsibilityForm(contracts) {
             // find all the roles
             // Add html to each role 
             const input = createCheckbox(role)
-            role.insertAdjacentElement("afterbegin",input)
+            role.insertAdjacentElement("afterbegin", input)
             input.addEventListener('change', handleCheckboxChange)
         })
     }, 0)
@@ -181,10 +190,26 @@ function setUpVolunteerResponsibilityForm(contracts) {
         checkbox.type = 'checkbox'
         checkbox.name = thisRole.title
         checkbox.value = roleId
-        checkbox.checked = isRoleFilled ? true:false
-        checkbox.disabled = isRoleFilled ? true:false
+        checkbox.checked = isRoleFilled ? true : false
+        checkbox.disabled = isRoleFilled ? true : false
         return checkbox
     }
 }
 
+function updateVolunteerResponsibilityForm(contracts) {
+    setTimeout(() => {
+
+        const filledRoles = Object.values(contracts).map(contract => contract.committeeRoleId).flat()
+        const form = document.querySelector('div#committee-positions')
+        const roles = form.querySelectorAll('li.role')
+        roles.forEach(role => {
+            const roleId = role.getAttribute('data-role-id')
+            const thisRole = roles[roleId]
+            const checkbox = role.querySelector('input[type="checkbox"]')
+            const isRoleFilled = filledRoles.includes(roleId)
+            checkbox.checked = isRoleFilled ? true : false
+            checkbox.disabled = isRoleFilled ? true : false
+        })
+    }, 0)
+}
 
