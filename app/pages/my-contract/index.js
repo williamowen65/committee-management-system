@@ -61,7 +61,11 @@ function handleDigitalImagesForm(e) {
 
     const { values, form } = getFormValues('form#digital-images-form')
     console.log({ values, form })
-    setLoading(form, false)
+
+    // Save to firestore
+    CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, values).then(() => {  
+        setLoading(form, false)
+    })
 
 }
 // This form is unique. It should return a single string which compiles a sentence based on the form values 
