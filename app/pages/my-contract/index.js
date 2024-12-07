@@ -2,6 +2,8 @@ import roles from './committee-roles.js'
 
 
 let contracts;
+const imageFields = ['digitalImage1', 'digitalImage2', 'digitalImage3', 'artistInStudioImage', 'brochureImage']
+
 document.addEventListener('DOMContentLoaded', function () {
 
     console.log("My Contract Page Loaded")
@@ -67,13 +69,22 @@ async function handleDigitalImagesForm(e) {
 
     // save images to storage
     // Get file url and save it to firebase by image element id.
-    const url = await CRUD.saveImage(values['digitalImage1'])
-
     // Save to firestore
-    CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, {
-        'digitalImage1': url
-    }).then(() => {  
-        setLoading(form, false)
+    imageFields.forEach(async (field) => {
+        
+        try {
+            const url = await CRUD.saveImage(values[field])
+            CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, {
+               images: {
+                [field]: url
+               }
+            }).then(() => {  
+                setLoading(form, false)
+            })
+        } catch (error) {
+            console.log("Error saving image", {error, field})
+        }
+      
     })
 
 
@@ -331,12 +342,17 @@ function setDigitalImagesForm(contracts){
     console.log("setDigitalImagesForm", { contracts })
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
     if (contract) {
-        console.log("Setting up digital images form", {contract})
+
+
+        imageFields.forEach(field => {
+
+
+        console.log("Setting up digital images form", {contract, field})
         const form = document.querySelector('form#digital-images-form')
-        const digitalImage = contract['digitalImage1']
+        const digitalImage = contract[field]
         if (digitalImage) {
             console.log("Setting digital image", { digitalImage })
-            const component = form.querySelector('file-input-component[fieldname="digitalImage1"]')
+            const component = form.querySelector(`file-input-component[fieldname="${field}"]`)
             
             // get image name
             const ref = firebase.storage.ref(firebase.storage.getStorage(), digitalImage);
@@ -349,5 +365,7 @@ function setDigitalImagesForm(contracts){
 
             console.log({thisComponent})
         }
+    })
+
     }
 }

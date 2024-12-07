@@ -57,7 +57,11 @@ window.CRUD = {
      */
     saveImage: async function (file) {
         console.log("save image", { file })
-        const storageRef = firebase.storage.ref(firebase.storage.getStorage(), file.name);
+        // make sure the file name format has no spaces
+        const fileName = file.name.replace(/\s/g, '-');
+
+
+        const storageRef = firebase.storage.ref(firebase.storage.getStorage(), fileName);
         const snapshot = await firebase.storage.uploadBytesResumable(storageRef, file);
         console.log('Uploaded a blob or file!', snapshot);
         // return the url to view 
