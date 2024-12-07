@@ -1,0 +1,12 @@
+.role-checkbox{
+    width: fit-content;
+    /* margin: 0 !important; */
+    margin: 10px;
+    height: 10px;
+    display: inline-flex;
+    flex-direction: column;
+}
+.role-checkbox input {
+  scale: 1.2;
+    margin: 0;
+}
