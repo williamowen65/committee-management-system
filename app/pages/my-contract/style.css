@@ -4,9 +4,17 @@
     margin: 10px;
     height: 10px;
     display: inline-flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
+    align-items: center;
 }
 .role-checkbox input {
   scale: 1.2;
   margin: 0;
+}
+
+.role-checkbox .user-name:not(:empty) {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
 }

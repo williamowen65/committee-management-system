@@ -195,6 +195,10 @@ function setUpVolunteerResponsibilityForm(contracts) {
         const thisRole = roles[roleId]
         const label = document.createElement('label')
         label.classList.add('role-checkbox')
+        // span for username
+        const userNameSpan = document.createElement('span')
+        userNameSpan.classList.add('user-name')
+        label.appendChild(userNameSpan)
         const checkbox = document.createElement('input')
         label.appendChild(checkbox)
         checkbox.type = 'checkbox'
@@ -221,6 +225,13 @@ function updateVolunteerResponsibilityForm(contracts) {
             checkbox.disabled = isRoleFilled ? true : false
 
             // mark the role icon with the user's name
+            const label = role.querySelector('label')
+            if (isRoleFilled) {
+                const userId = contracts.find(contract => contract.committeeRoleId.includes(roleId))?.userId
+                label.querySelector('.user-name').innerText = userId || "[UNKNOWN]"
+            } else {
+                label.querySelector('.user-name').innerText = ''
+            }
 
         })
     }, 0)
