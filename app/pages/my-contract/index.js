@@ -19,12 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
 
-
-
+    // Set up volunteer responsibility form 
+    setUpVolunteerResponsibilityForm();
 })
-
-
-
 
 
 
@@ -81,7 +78,7 @@ function handleStudioSharingForm(e) {
             // get how many artists can be accommodated
             const artistsAccommodated = form.querySelector('textarea[name="studioSharingInfo"]')
             StudioSharingAnswer += ' \n\t\t' + artistsAccommodated.value.trim();
-            
+
             // get plans to share studio space
             const studioSharingPlans = form.querySelector('textarea[name="studioSharingPlans"]')
             StudioSharingAnswer += ' \n\t\t' + studioSharingPlans.value.trim();
@@ -140,4 +137,38 @@ function handleArtisticDemonstrationForm(e) {
 
 }
 
+
+function handleCheckboxChange(e) {
+    const { checked, name } = e.target
+    console.log({ checked, name })
+}
+
+/**
+ * This form doesn't have a submit button... It is a series of checkboxes that should be saved on change
+ */
+function setUpVolunteerResponsibilityForm() {
+    // Set timeout is a work around b/c the form is not loaded when the document is ready
+    setTimeout(() => {
+        const form = document.querySelector('div#committee-positions')
+        const roles = form.querySelectorAll('li.role')
+        roles.forEach(role => {
+            // find all the roles
+            // Add html to each role 
+            const input = createCheckbox(role)
+            role.insertAdjacentElement("afterbegin",input)
+            input.addEventListener('change', handleCheckboxChange)
+        })
+    }, 0)
+
+    function createCheckbox(role) {
+        const roleId = role.getAttribute('data-role-id')
+        const checkbox = document.createElement('input')
+        checkbox.type = 'checkbox'
+        checkbox.name = roleId
+        checkbox.value = roleId
+        checkbox.checked = false
+        return checkbox
+    }
+
+}
 
