@@ -122,7 +122,7 @@ label {
         }
         .img-container{
 
-                overflow: hidden;
+                overflow: hidden !important;
             position: relative;
             button.delete-button {
                 position: absolute;
@@ -133,7 +133,8 @@ label {
         &.file-input-display{
             width: 200px;
             height: 200px;
-            overflow: visible;
+            // overflow: visible;
+            overflow: hidden;
             cursor: pointer;
             &:not(.has-images){
                 border: 1px solid black;
