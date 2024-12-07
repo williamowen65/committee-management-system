@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', function () {
         contracts = existingContracts
         // Set up volunteer responsibility form 
         setUpVolunteerResponsibilityForm(contracts);
+
+        // set the Studio Sharing form
+        setUpStudioSharingForm(contracts);
     })
 
     CRUD.listen('ghost-contracts', null, (existingContracts) => {
@@ -71,19 +74,36 @@ I don’t have my own art canopy so would need a covered space (ie, a garage or 
 function handleStudioSharingForm(e) {
     e.preventDefault();
     const form = document.querySelector('form#studio-sharing-form')
+
+
+    const StudioSharingPayload = { 
+        StudioSharingAnswer: "",
+        StudioSharingInfo: {
+            studioPreference: "",
+            studioAvailability: "",
+            artistsAccommodated: "",
+            studioSharingPlans: "",
+            willingnessToRelocate: "",
+            canopyPreference: "",
+        }
+     }
    
     // Get first string (aka "studioPreference")
     const studioPreference = form.querySelector('input[name="studioPreference"]:checked')
     if(!studioPreference) return formAlert("Please select an option. Do you have a studio space or not?");
-    let StudioSharingAnswer = studioPreference.parentNode.innerText;
-    const option1Selected = StudioSharingAnswer.includes('I have my own studio space')
+    StudioSharingPayload.StudioSharingAnswer = studioPreference.parentNode.innerText;
+    StudioSharingPayload.StudioSharingInfo.studioPreference = studioPreference.value;
+
+    const option1Selected =  StudioSharingPayload.StudioSharingAnswer.includes('I have my own studio space')
     // Get second string based on studioPreference 
     if (option1Selected) {
         const studioAvailability = form.querySelector('input[name="studioAvailability"]:checked')
         if(!studioAvailability) return formAlert("Please select an option. Can you share your studio space?");
         let studioAvailabilityAnswer = studioAvailability.parentNode.innerText;
+        
         // append answer to string result
-        StudioSharingAnswer += ' \n\t' + studioAvailabilityAnswer;
+        StudioSharingPayload.StudioSharingAnswer += ' \n\t' + studioAvailabilityAnswer;
+        StudioSharingPayload.StudioSharingInfo.studioAvailability = studioAvailability.value;
 
         // Check for type of answer  "I can share my studio space"
         const subOption2Selected = studioAvailabilityAnswer.includes('I can share my studio space')
@@ -91,12 +111,15 @@ function handleStudioSharingForm(e) {
             // get how many artists can be accommodated
             const artistsAccommodated = form.querySelector('input[name="studioSharingInfo"]')
             if(!artistsAccommodated.value) return formAlert("Please provide information on how many artists can be accommodated");
-            StudioSharingAnswer += ' \n\t\t' + artistsAccommodated.value.trim();
+            StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + artistsAccommodated.value.trim();
+            StudioSharingPayload.StudioSharingInfo.artistsAccommodated = artistsAccommodated.value;
 
             // get plans to share studio space
             const studioSharingPlans = form.querySelector('textarea[name="studioSharingPlans"]')
             if(!studioSharingPlans.value) return formAlert("Please provide information on how you plan to share your studio space");
-            StudioSharingAnswer += ' \n\t\t' + studioSharingPlans.value.trim();
+            // StudioSharingAnswer += ' \n\t\t' + studioSharingPlans.value.trim();
+            StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + studioSharingPlans.value.trim();
+            StudioSharingPayload.StudioSharingInfo.studioSharingPlans = studioSharingPlans.value;
         }
 
 
@@ -104,13 +127,17 @@ function handleStudioSharingForm(e) {
         // Check for willingness to relocate
         const willingnessToRelocate = form.querySelector('input[name="willingnessToRelocate"]:checked')
         if (willingnessToRelocate) {
-            StudioSharingAnswer += ' \n\t' + willingnessToRelocate.parentNode.innerText;
+            // StudioSharingAnswer += ' \n\t' + willingnessToRelocate.parentNode.innerText;
+            StudioSharingPayload.StudioSharingAnswer += ' \n\t' + willingnessToRelocate.parentNode.innerText;
+            StudioSharingPayload.StudioSharingInfo.willingnessToRelocate = willingnessToRelocate.value;
 
             // find canopy preference 
             const canopyPreference = form.querySelector('input[name="canopy-studio"]:checked')
             if(!canopyPreference) return formAlert("Please select an option. Do you have a canopy?");
             if (canopyPreference) {
-                StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
+                // StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
+                StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
+                StudioSharingPayload.StudioSharingInfo.canopyPreference = canopyPreference.value;
             }
 
         }
@@ -121,13 +148,15 @@ function handleStudioSharingForm(e) {
         // Get canopy info
         const canopyPreference = form.querySelector('input[name="canopy-no-studio"]:checked')
         if(!canopyPreference) return formAlert("Please select an option. Do you have a canopy?");
-        StudioSharingAnswer += ' \n\t' + canopyPreference.parentNode.innerText;
+        // StudioSharingAnswer += ' \n\t' + canopyPreference.parentNode.innerText;
+        StudioSharingPayload.StudioSharingAnswer += ' \n\t' + canopyPreference.parentNode.innerText;
+        StudioSharingPayload.StudioSharingInfo.canopyPreference = canopyPreference.value
 
     }
 
-    console.log({ StudioSharingAnswer })
+    console.log({ StudioSharingPayload })
 
-  
+   
 
 
 
@@ -135,8 +164,8 @@ function handleStudioSharingForm(e) {
     // console.log({values, form})
 
     // Save to firestore
-     setLoading(form, true)
-    CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, { studioSharingInfo: StudioSharingAnswer }).then(() => {
+    setLoading(form, true)
+    CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, StudioSharingPayload).then(() => {
         setLoading(form, false)
     })
 
@@ -253,5 +282,32 @@ function updateVolunteerResponsibilityForm(contracts) {
 
         })
     }, 0)
+}
+
+function setUpStudioSharingForm(contracts) {
+    console.log("setUpStudioSharingForm", { contracts })
+    const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+    if (contract) {
+        console.log("Setting up studio sharing form", {contract})
+        const form = document.querySelector('form#studio-sharing-form')
+        const studioSharingInfo = contract.StudioSharingInfo
+
+        // set the inputs
+        Object.values(studioSharingInfo).forEach(value => {
+            const input = form.querySelector(`input[id="${value}"]`)
+            if (input) {
+                // if input it radio or checkbox 
+                if (input.type === 'radio' || input.type === 'checkbox') {
+                    input.checked = true;
+                    // trigger change event
+                    const event = new Event('change')
+                    input.dispatchEvent(event)
+                } else {
+                    input.value = value
+                }
+
+            }
+        })
+    }
 }
 
