@@ -62,5 +62,15 @@ window.CRUD = {
         console.log('Uploaded a blob or file!', snapshot);
         // return the url to view 
         return await firebase.storage.getDownloadURL(storageRef)
+    },
+    removeImage: async function (fileName, userId, path, fieldToRemove) {
+        console.log("remove image", { fileName, userId, path })
+        const storageRef = firebase.storage.ref(firebase.storage.getStorage(), fileName);
+        await firebase.storage.deleteObject(storageRef)
+        if(userId){
+            const docRef = firebase.doc(firebase.collection(firebase.db, path), userId)
+            await firebase.setDoc(docRef, { [fieldToRemove]: firebase.deleteField() }, { merge: true })
+        }
+
     }
 }

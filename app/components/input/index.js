@@ -50,8 +50,13 @@ createCustomElement('file-input-component', function () {
             const fileInput = parentContainer.querySelector('input');
             fileInput.value = '';
 
-            //    guarantee that the file input is required
+            // guarantee that the file input is required
             fileInput.setAttribute('required', 'required');
+
+            // Delete image from storage and from the database
+            const userId = firebase.auth.currentUser.uid;
+            const fieldToRemove = this.getAttribute('fieldName');
+            CRUD.removeImage(file.name, userId, "ghost-contracts",fieldToRemove );
 
             // prevent bubbling event on delete image button
             e.stopPropagation();
