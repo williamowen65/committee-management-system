@@ -23,6 +23,10 @@ import {
   doc,
   getDoc,
 } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
+
+// firebase storageBucket: "gs://ghost-d319b.firebasestorage.app"
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js'
+
 const firebaseConfig = {
   apiKey: 'AIzaSyAPrNIc_STwgScLfFOfEN8YyGENoHfT6T4',
   authDomain: 'ghost-d319b.firebaseapp.com',
@@ -58,7 +62,13 @@ window.firebase = {
   doc,
   signOut,
   updateProfile,
-  setDoc
+  setDoc,
+  storage: {
+    getStorage,
+    ref,
+    uploadBytesResumable,
+    getDownloadURL,
+  }
 }
 
 window.firebase.redirectIfNotLoggedIn = async function (path) {

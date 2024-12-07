@@ -56,16 +56,23 @@ function handleArtistDetailsForm(e) {
     setLoading(form, false)
 
 }
-function handleDigitalImagesForm(e) {
+async function handleDigitalImagesForm(e) {
     e.preventDefault();
 
     const { values, form } = getFormValues('form#digital-images-form')
     console.log({ values, form })
 
+    // save images to storage
+    // Get file url and save it to firebase by image element id.
+    const url = await CRUD.saveImage(values['digital-image-1'], 'digital-images')
+
     // Save to firestore
-    CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, values).then(() => {  
+    CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, {
+        'digital-image-1': url
+    }).then(() => {  
         setLoading(form, false)
     })
+
 
 }
 // This form is unique. It should return a single string which compiles a sentence based on the form values 
