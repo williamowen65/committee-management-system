@@ -11,6 +11,8 @@
 window.CRUD = {
     create: async function (data) {
         console.log("create data", data)
+        const docRef = firebase.doc(firebase.collection(firebase.db, 'scholarship-applications'), firebase.firestore().collection('scholarship-applications').doc().id)
+        await firebase.setDoc(docRef, data)
     },
     read: async function (collection, id) {
         console.log("read data", { collection, id })
