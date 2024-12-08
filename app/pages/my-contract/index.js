@@ -523,7 +523,7 @@ function setArtistDetailsForm(contracts) {
         const inputs = form.querySelectorAll('input, textarea')
         inputs.forEach(input => {
             const name = input.name
-            input.value = artistDetails[name]
+            input.value = artistDetails[name] || ""
             // trigger change
             const event = new Event('change')
             input.dispatchEvent(event)
