@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // Set up Signature
         setSignatureForm(contracts);
 
+        // set up artist details form
+        setArtistDetailsForm(contracts);
+
         // Set up volunteer responsibility form 
         setUpVolunteerResponsibilityForm(contracts);
 
@@ -66,9 +69,12 @@ function handleSignatureForm(e) {
 function handleArtistDetailsForm(e) {
     e.preventDefault();
     const { values, form } = getFormValues('form#artist-details-form')
-    console.log({ values, form })
     // Get form
-    setLoading(form, false)
+    CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, { artistDetails: {
+        ...values 
+    }}).then(() => {
+        setLoading(form, false)
+    })
 
 }
 async function handleDigitalImagesForm(e) {
@@ -459,5 +465,23 @@ function setSignatureForm(contracts) {
             const event = new Event('change')
             input.dispatchEvent(event)
         }
+    }
+}
+
+function setArtistDetailsForm(contracts){
+    const form = document.querySelector('form#artist-details-form')
+    const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+    const artistDetails = contract.artistDetails
+    console.log("Setting up artist details form", { artistDetails, contract })
+    if (artistDetails) {
+        console.log("Setting artist details", { artistDetails })
+        const inputs = form.querySelectorAll('input, textarea')
+        inputs.forEach(input => {
+            const name = input.name
+            input.value = artistDetails[name]
+            // trigger change
+            const event = new Event('change')
+            input.dispatchEvent(event)
+        })
     }
 }
