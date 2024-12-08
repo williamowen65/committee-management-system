@@ -51,7 +51,7 @@ function setUXEventListeners() {
             // enable the button
             btnSubmit.disabled = false
             // show error message
-            alert('There was an error creating your account. Please try again')
+            alert('There was an error signing in to your account. Please try again')
         })
 
     })

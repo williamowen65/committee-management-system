@@ -1,5 +1,5 @@
 <!-- I don't remember what data-primary meant -->
-<div class="os-dual-form" data-primary="login" auth-mode="signup">
+<div class="os-dual-form" data-primary="login" auth-mode="login">
   <form id="signup" class="left">
     <h1>Sign up</h1>
     <os-form-feedback feedbackName="success"></os-form-feedback>
