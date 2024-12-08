@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Set the digital images form
         setDigitalImagesForm(contracts);
+
+        // Set Artistic demonstration
+        setArtisticDemonstrationForm(contracts);
     })
 
     CRUD.listen('ghost-contracts', null, (existingContracts) => {
@@ -216,7 +219,10 @@ function handleArtisticDemonstrationForm(e) {
     const { values, form } = getFormValues('form#artistic-demonstration-form');
 
     console.log({ values, form })
-    setLoading(form, false)
+    CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, { ...values }).then(() => {
+        setLoading(form, false)
+    })
+
 
 }
 
@@ -368,5 +374,32 @@ function setDigitalImagesForm(contracts){
         }
     })
 
+    }
+}
+
+
+function setArtisticDemonstrationForm(contracts){
+    const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+    if(contract){
+        console.log("Setting up artistic demonstration form", {contract})
+        const form = document.querySelector('form#artistic-demonstration-form')
+        const artisticDemonstration = contract.artisticDemonstration
+        if (artisticDemonstration) {
+            console.log("Setting artistic demonstration", { artisticDemonstration })
+            const textarea = form.querySelector(`textarea[name="artisticDemonstration"]`)
+            textarea.value = artisticDemonstration
+            // trigger change
+            const event = new Event('change')
+            textarea.dispatchEvent(event)
+        }
+        const artistMentor = contract.artistMentor
+        if(artistMentor){
+            console.log("Setting artistic mentor", { artistMentor })
+            const checkbox = form.querySelector(`input[name="artistMentor"]`)
+            checkbox.checked = true
+            // trigger change
+            const event = new Event('change')
+            checkbox.dispatchEvent(event)
+        }
     }
 }

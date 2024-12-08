@@ -897,7 +897,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<div>${description}</div>\r\n<label for=\"${fieldName}\" style=\"width: 100%; box-sizing: border-box; margin-top: 20px;\">\r\n    <small class=\"text\" part=\"labelText\">${alias || capitalizeFirstLetter(fieldName)} ${required ? \"*\" : \"\"}</small>\r\n    <textarea id=\"${fieldName}\" name=\"${fieldName}\"></textarea>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</label>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<div>${description}</div>\r\n<label for=\"${fieldName}\" style=\"width: 100%; box-sizing: border-box; margin-top: 20px;\" >\r\n    <small class=\"text\" part=\"labelText\">${alias || capitalizeFirstLetter(fieldName)} ${required ? \"*\" : \"\"}</small>\r\n    <textarea id=\"${fieldName}\" name=\"${fieldName}\" ${required ? \"required\" : \"\"}></textarea>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</label>");
 
 /***/ }),
 
