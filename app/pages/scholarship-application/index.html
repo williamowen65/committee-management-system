@@ -52,19 +52,25 @@
 
         <b>Please fill out and submit the following online application:</b>
         <input-component
-          fieldName="name"
-          alias="Name (First and Last)"
+        required="true"
+        fieldName="name"
+        alias="Name (First and Last)"
         ></input-component>
-        <input-component fieldName="email" alias="Email"></input-component>
         <input-component
+        required="true"
+        type="email"
+         fieldName="email" alias="Email"></input-component>
+        <input-component
+        required="true"
           type="checkbox"
           fieldName="hasReceivedScholarship"
-          alias="Have you received a GHOST artist scholarship previously (you
+          alias="Have you not received a GHOST artist scholarship previously (you
           can only receive this one time)"
         ></input-component>
 
         
         <textarea-component
+          required="true"
           fieldName="needForScholarship"
           alias="Please explain your need for this
           scholarship:"
