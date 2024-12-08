@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const name = form.querySelector('input[id="name"]').value;
         const email = form.querySelector('input[id="email"]').value;
-        const hasReceivedScholarshipPreviously = form.querySelector('input[id="hasRecievedScholarship"]').checked;
+        const hasReceivedScholarshipPreviously = form.querySelector('input[id="hasReceivedScholarship"]').checked;
         const needForScholarship = form.querySelector('textarea[id="needForScholarship"]').value;
 
         // save to firebase
@@ -35,12 +35,13 @@ document.addEventListener('DOMContentLoaded', function () {
             btnSubmit.disabled = false
             // show success message
             alert('Your scholarship application has been submitted successfully!')
-        }).catch(() => {
+        }).catch((err) => {
             // change the button text back to original
             btnSubmit.innerText = btnText
             // enable the button
             btnSubmit.disabled = false
             // show error message
+            console.log({ err })
             alert('There was an error submitting your scholarship application. Please try again')
         });
     });
