@@ -460,11 +460,21 @@
           ### Payment
           The fee for participating in the Gig Harbor Open Studio Tour is <b> $150.00 [<--- Placeholder ]</b>. Please
               submit payment by March 2, 2025.
+
               Payments must be made online. Click the button below to checkout. Your receipt will be emailed and
               displayed here on your contract.
         </span>
       </markdown-component>
-      <button type="submit" id="pay-online" style="margin: auto;  display: block;">Pay Online</button>
+
+
+      <!--  Paypal Integration -->
+        <div style="text-align: center;">
+          <paypal-component></paypal-component>
+        </div>
+
+
+      <div id="payment-receipt"></div>
+      <!-- <button type="submit" id="pay-online" style="margin: auto;  display: block;">Pay Online</button> -->
       <footer-component></footer-component>
   </div>
   <script>

@@ -5,6 +5,7 @@ import "./markdown/index.js";
 import "./dual-login-form/index.js";
 import "./dual-login-form/global.scss"
 import "./footer/index.js";
+import "./3rdParty/paypal/index.js";
 
 
 // global google services api
