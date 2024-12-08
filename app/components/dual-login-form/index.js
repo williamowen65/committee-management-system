@@ -79,17 +79,26 @@ function setUXEventListeners() {
         const password = form.querySelector('input[id="password"]').value;
         const confirmPassword = form.querySelector('input[id="confirm-password"]').value;
 
+        if (password !== confirmPassword) {
+            alert('Passwords do not match')
+            btnSubmit.innerText = btnText
+            btnSubmit.disabled = false
+            return
+        }
+
         console.log("about to create user with email and password", { email, password, auth: firebase.auth });
 
         return firebase.createUserWithEmailAndPassword(firebase.auth, email, password).then(function (result) {
             console.log("result", result);
             return firebase.updateProfile(result.user, {
                 displayName: fullName
+            }).then(() => {
+                console.log("user profile updated")
+                return result
             })
-        }).then((user) => {
-
+        }).then((result) => {
                 // Update ghost-contracts/{userId} with user data
-            firebase.setDoc(firebase.doc(firebase.collection(firebase.db, 'ghost-contracts'), user.uid), {
+            firebase.setDoc(firebase.doc(firebase.collection(firebase.db, 'ghost-contracts'), result.user.uid), {
                     userId: result.user.uid,
                     artistDetails: {
                         firstName,
