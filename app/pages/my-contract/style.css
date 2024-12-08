@@ -18,3 +18,14 @@
     font-weight: 500;
     color: #000;
 }
+
+#committee-positions{
+  position: relative;
+}
+
+#committee-positions button {
+  /* float: right; */
+  position: absolute;
+  right:0;
+  padding: 4px;
+}
