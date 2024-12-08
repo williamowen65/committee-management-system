@@ -1,6 +1,7 @@
 import roles from './committee-roles.js'
 
 
+
 let contracts;
 const imageFields = ['digitalImage1', 'digitalImage2', 'digitalImage3', 'artistInStudioImage', 'brochureImage']
 
@@ -70,9 +71,11 @@ function handleArtistDetailsForm(e) {
     e.preventDefault();
     const { values, form } = getFormValues('form#artist-details-form')
     // Get form
-    CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, { artistDetails: {
-        ...values 
-    }}).then(() => {
+    CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, {
+        artistDetails: {
+            ...values
+        }
+    }).then(() => {
         setLoading(form, false)
     })
 
@@ -324,15 +327,32 @@ function setUpVolunteerResponsibilityForm(contracts) {
         return label
     }
 
-    function handleOffload(e) {
-        console.log("Offload", e)
-    }
-    function createOffloadButton(role) {
-        const button = document.createElement('button')
-        button.innerText = "Offload"
-        return button
-    }
 
+
+}
+
+function handleOffload(e) {
+    console.log("Offloading", e.target.parentNode.getAttribute('data-role-id'))
+    const roleId = e.target.parentNode.getAttribute('data-role-id');
+    const userId = firebase.auth.currentUser.uid;
+    let committeeRoleIds = contracts.find(contract => contract.userId === userId)?.committeeRoleId || [];
+    committeeRoleIds = committeeRoleIds.filter(id => id !== roleId);
+    
+    e.target.remove()
+
+    CRUD.update('ghost-contracts', userId, { committeeRoleId: committeeRoleIds }).then(() => {
+        contracts = contracts.map(contract =>
+            contract.userId === userId ? { ...contract, committeeRoleId: committeeRoleIds } : contract
+        );
+        updateVolunteerResponsibilityForm(contracts);
+    });
+}
+function createOffloadButton(role) {
+    const button = document.createElement('button')
+    button.innerText = "Offload"
+    button.setAttribute("type", "button")
+    button.classList.add('offload-button')
+    return button
 }
 
 function updateVolunteerResponsibilityForm(contracts) {
@@ -354,6 +374,31 @@ function updateVolunteerResponsibilityForm(contracts) {
             if (isRoleFilled) {
                 const userId = contracts.find(contract => contract.committeeRoleId.includes(roleId))?.userId
                 label.querySelector('.user-name').innerText = userId || "[UNKNOWN]"
+
+                // get my roles fresh from the DB
+                CRUD.read("ghost-contracts", firebase.auth.currentUser.uid).then((myContract) => {
+                    // get my role set
+                    // myRoles and filledRoles are an array of ids (ints)
+                    const myRoles = myContract.committeeRoleId
+
+
+                    console.log("Updating offload buttons", { myRoles, roleId, "myRoles.includes(roleId)": myRoles.includes(roleId) })
+                    
+
+
+                    if (myRoles.includes(roleId)) {
+                        const button = createOffloadButton(role)
+                        // check role for existing button
+                        const existingButton = role.querySelector('.offload-button')
+                        if(!existingButton){   
+                            role.insertAdjacentElement("beforeend", button)
+                            button.addEventListener('click', handleOffload)
+                        }
+                    } 
+                })
+
+
+
             } else {
                 label.querySelector('.user-name').innerText = ''
             }
@@ -468,7 +513,7 @@ function setSignatureForm(contracts) {
     }
 }
 
-function setArtistDetailsForm(contracts){
+function setArtistDetailsForm(contracts) {
     const form = document.querySelector('form#artist-details-form')
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
     const artistDetails = contract.artistDetails

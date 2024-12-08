@@ -12,8 +12,11 @@ window.CRUD = {
     create: async function (data) {
         console.log("create data", data)
     },
-    read: async function () {
-        console.log("read data", { firebase })
+    read: async function (collection, id) {
+        console.log("read data", { collection, id })
+        const docRef = firebase.doc(firebase.collection(firebase.db, collection), id)
+        const doc = await firebase.getDoc(docRef)
+        return doc.data();
     },
     listen: async function (collection, id, cb) {
         if (id) {
