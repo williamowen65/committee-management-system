@@ -271,8 +271,10 @@ function setUpVolunteerResponsibilityForm(contracts) {
 
     // Set timeout is a work around b/c the form is not loaded when the document is ready
     setTimeout(() => {
+        const myContract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid) || []
         const form = document.querySelector('div#committee-positions')
         const roles = form.querySelectorAll('li.role')
+        const myRoles = myContract.committeeRoleId || []
         roles.forEach(role => {
             // find all the roles
             // Add html to each role 
@@ -282,14 +284,16 @@ function setUpVolunteerResponsibilityForm(contracts) {
             input.addEventListener('change', handleCheckboxChange)
 
             // get my role set
-            const myContract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid) || []
             // myRoles and filledRoles are an array of ids (ints)
-            const myRoles = myContract.committeeRoleId || []
 
             // check if this role belongs to me
             const roleId = role.getAttribute('data-role-id')
+            const hasMyRoles = myRoles.includes(roleId)
 
-            if (myRoles.includes(roleId)) {
+            // console.log("Bugfix, multiple offload button ",{ roleId, myRoles, hasMyRoles, role, button })
+
+            // check if this role is filled
+            if (hasMyRoles) {
                 role.insertAdjacentElement("beforeend", button)
                 button.addEventListener('click', handleOffload)
             }
@@ -372,17 +376,23 @@ function updateVolunteerResponsibilityForm(contracts) {
             // mark the role icon with the user's name
             const label = role.querySelector('label')
             if (isRoleFilled) {
-                const contract = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))
-                const userId = contract?.userId
-                label.querySelector('.user-name').innerText =  contract.artistDetails.firstName || "[UNKNOWN]"
 
+                // Set the user name next to the checkbox
+                const committeeMemberContract = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))
+                label.querySelector('.user-name').innerText =  committeeMemberContract.artistDetails.firstName || "[UNKNOWN]"
+                
+
+                // Get this users contract
+                const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+
+                const userId = contract?.userId
                 // get my roles fresh from the DB
                 // get my role set
                 // myRoles and filledRoles are an array of ids (ints)
-                const myRoles = contract.committeeRoleId
+                const myRoles = contract.committeeRoleId || []
 
 
-                console.log("Updating offload buttons", { myRoles, roleId, "myRoles.includes(roleId)": myRoles.includes(roleId) })
+                console.log("Updating offload buttons", { myRoles, roleId, "myRoles.includes(roleId)": myRoles.includes(roleId), contract })
 
 
 
@@ -390,7 +400,11 @@ function updateVolunteerResponsibilityForm(contracts) {
                     const button = createOffloadButton(role)
                     // check role for existing button
                     const existingButton = role.querySelector('.offload-button')
+                    console.log("existingButton", existingButton)
                     if (!existingButton) {
+                        
+
+
                         role.insertAdjacentElement("beforeend", button)
                         button.addEventListener('click', handleOffload)
                     }
