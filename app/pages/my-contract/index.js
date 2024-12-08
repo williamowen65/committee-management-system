@@ -284,7 +284,7 @@ function setUpVolunteerResponsibilityForm(contracts) {
             // get my role set
             const myContract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid) || []
             // myRoles and filledRoles are an array of ids (ints)
-            const myRoles = myContract.committeeRoleId
+            const myRoles = myContract.committeeRoleId || []
 
             // check if this role belongs to me
             const roleId = role.getAttribute('data-role-id')
@@ -372,7 +372,7 @@ function updateVolunteerResponsibilityForm(contracts) {
             // mark the role icon with the user's name
             const label = role.querySelector('label')
             if (isRoleFilled) {
-                const contract = contracts.find(contract => contract.committeeRoleId.includes(roleId))
+                const contract = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))
                 const userId = contract?.userId
                 label.querySelector('.user-name').innerText =  contract.artistDetails.firstName || "[UNKNOWN]"
 
@@ -413,6 +413,7 @@ function setUpStudioSharingForm(contracts) {
         console.log("Setting up studio sharing form", { contract })
         const form = document.querySelector('form#studio-sharing-form')
         const studioSharingInfo = contract.StudioSharingInfo
+        if(!studioSharingInfo) return;
 
         // set the inputs
         Object.values(studioSharingInfo).forEach(value => {
