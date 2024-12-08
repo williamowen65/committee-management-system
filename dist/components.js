@@ -4019,7 +4019,8 @@ window.getFormValues = function (formSelector) {
 // global function to set loading state
 window.setLoading = function (form, isLoading) {
   var config = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {
-    success: true
+    success: true,
+    cbText: "Your changes have been saved"
   };
   if (!config.success) return; // Don't set loading if there was an error
   console.log("Setting loading", {
@@ -4035,7 +4036,7 @@ window.setLoading = function (form, isLoading) {
     submitButton.innerHTML = 'Loading...';
     submitButton.setAttribute('data-text', text);
   } else {
-    submitButton.innerHTML = "Your studio preferences have been saved";
+    submitButton.innerHTML = config.cbText;
     setTimeout(function () {
       submitButton.removeAttribute('disabled');
       var text = submitButton.getAttribute('data-text');
