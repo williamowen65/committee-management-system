@@ -166,12 +166,11 @@ __webpack_require__.r(__webpack_exports__);
   moveLabel.bind(this)();
 }, _types_textarea_input_html_txt__WEBPACK_IMPORTED_MODULE_2__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_4__["default"]);
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_3__.createCustomElement)('file-input-component', function () {
-  var _this2 = this;
+  var _this = this;
   var imagesContainer = this.querySelector('.images-container');
   var parentContainer = imagesContainer.closest('.file-input-component');
   var labelContainer = parentContainer.querySelector('.label-container');
   this.setImage = function (src, file) {
-    var _this = this;
     // empty out the images container
     var inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML;
     imagesContainer.innerHTML = inputLabelText;
@@ -194,14 +193,11 @@ __webpack_require__.r(__webpack_exports__);
       // remove button from file input
       var fileInput = parentContainer.querySelector('input');
       fileInput.value = '';
+      // empty .img-container
+      imagesContainer.innerHTML = inputLabelText;
 
       // guarantee that the file input is required
       fileInput.setAttribute('required', 'required');
-
-      // Delete image from storage and from the database
-      var userId = firebase.auth.currentUser.uid;
-      var fieldToRemove = _this.getAttribute('fieldName');
-      CRUD.removeImage(file.name, userId, "ghost-contracts", fieldToRemove);
 
       // prevent bubbling event on delete image button
       e.stopPropagation();
@@ -235,7 +231,7 @@ __webpack_require__.r(__webpack_exports__);
     Array.from(e.target.files).forEach(function (file) {
       var reader = new FileReader();
       reader.onloadend = function () {
-        _this2.setImage(reader.result, file);
+        _this.setImage(reader.result, file);
 
         // Display possible errors with this file
         // Requirements: Size must be no larger than 3 mb. 
@@ -264,7 +260,7 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         // Get attribute "square" from component
-        var squareRequirement = _this2.getAttribute('square-requirement');
+        var squareRequirement = _this.getAttribute('square-requirement');
         if (squareRequirement) {
           // check for square size
           var image = new Image();

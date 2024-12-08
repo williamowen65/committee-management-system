@@ -349,7 +349,8 @@ function setDigitalImagesForm(contracts){
 
         console.log("Setting up digital images form", {contract, field})
         const form = document.querySelector('form#digital-images-form')
-        const digitalImage = contract[field]
+        if(!contract.images) return;
+        const digitalImage = contract.images[field]
         if (digitalImage) {
             console.log("Setting digital image", { digitalImage })
             const component = form.querySelector(`file-input-component[fieldname="${field}"]`)
