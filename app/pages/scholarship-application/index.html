@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My GHOST Contract</title>
+    <script src="/dist/components.js"></script>
+    <script src="/scholarship-application/index.js" type="module"></script>
+    <script src="/dist/CRUD.js" type="module"></script>
+    <script type="module" src="/dist/firebase.js"></script>
+    <script type="module">
+      firebase.redirectIfNotLoggedIn('/artist-sign-on')
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header-component></header-component>
+    <div class="container">
+      <form id="scholarship-application-form">
+        <div style="text-align: center">
+          <h1>SCHOLARSHIP APPLICATION FOR GHOST ARTISTS</h1>
+          <b>Due by 2/25/25</b>
+        </div>
+
+        <p>
+          GHOST has up to five (5) $100 scholarships available for artists that
+          require financial assistance with their membership. These can be new,
+          returning or emerging artists. There is a limit of one scholarship per
+          artist and they are only eligible for this one time. If two or more
+          artists are involved with making one product, they are eligible for
+          only one scholarship in total. If two artists live in the same
+          household but make different products and pay separate artist fees,
+          then they are eligible for one scholarship per person.
+        </p>
+        <p>
+          The GHOST board will evaluate the applications and decide which ones
+          to approve, based on the merit of the application answers. The board
+          reserves the right to not fulfill all 5 scholarships if suitable
+          artist candidates are not identified. If more than 5 suitable artists
+          apply for these scholarships, then a random drawing from applicants
+          will be held to award the scholarships.
+        </p>
+        <p>
+          Any artist receiving a scholarship must actively volunteer on their
+          committee. If they receive a scholarship but don’t fulfill their
+          responsibilities to their committee, they will be unable to
+          participate in future tours.
+        </p>
+        <p>
+          Approved scholarships will be applied to your contract payment section
+          via a coupon code that you would receive by 3/1/25. Apply this coupon
+          code to your contract payment section. Be sure to submit your contract
+          along with the rest of your artist fees by the due date of March 2.
+        </p>
+
+        <b>Please fill out and submit the following online application:</b>
+        <input-component
+          fieldName="name"
+          alias="Name (First and Last)"
+        ></input-component>
+        <input-component fieldName="email" alias="Email"></input-component>
+        <input-component
+          type="checkbox"
+          fieldName="hasReceivedScholarship"
+          alias="Have you received a GHOST artist scholarship previously (you
+          can only receive this one time)"
+        ></input-component>
+
+        
+        <textarea-component
+          fieldName="needForScholarship"
+          alias="Please explain your need for this
+          scholarship:"
+        ></textarea-component>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
