@@ -26,6 +26,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     CRUD.readAll('ghost-contracts').then((existingContracts) => {
         contracts = existingContracts
+
+        // Set up Signature
+        setSignatureForm(contracts);
+
         // Set up volunteer responsibility form 
         setUpVolunteerResponsibilityForm(contracts);
 
@@ -51,8 +55,11 @@ document.addEventListener('DOMContentLoaded', function () {
 function handleSignatureForm(e) {
     e.preventDefault();
     const { values, form } = getFormValues('form#my-signature-form')
-    console.log({ values, form })
-    setLoading(form, false)
+    
+    CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, { ...values }).then(() => {
+        setLoading(form, false)
+    })
+
 }
 
 
@@ -400,6 +407,23 @@ function setArtisticDemonstrationForm(contracts){
             // trigger change
             const event = new Event('change')
             checkbox.dispatchEvent(event)
+        }
+    }
+}
+
+function setSignatureForm(contracts){
+    const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+    if(contract){
+        console.log("Setting up signature form", {contract})
+        const form = document.querySelector('form#my-signature-form')
+        const signature = contract.signature
+        if (signature) {
+            console.log("Setting signature", { signature })
+            const input = form.querySelector(`input[name="signature"]`)
+            input.value = signature
+            // trigger change
+            const event = new Event('change')
+            input.dispatchEvent(event)
         }
     }
 }
