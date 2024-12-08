@@ -337,7 +337,7 @@ function handleOffload(e) {
     const userId = firebase.auth.currentUser.uid;
     let committeeRoleIds = contracts.find(contract => contract.userId === userId)?.committeeRoleId || [];
     committeeRoleIds = committeeRoleIds.filter(id => id !== roleId);
-    
+
     e.target.remove()
 
     CRUD.update('ghost-contracts', userId, { committeeRoleId: committeeRoleIds }).then(() => {
@@ -372,30 +372,29 @@ function updateVolunteerResponsibilityForm(contracts) {
             // mark the role icon with the user's name
             const label = role.querySelector('label')
             if (isRoleFilled) {
-                const userId = contracts.find(contract => contract.committeeRoleId.includes(roleId))?.userId
-                label.querySelector('.user-name').innerText = userId || "[UNKNOWN]"
+                const contract = contracts.find(contract => contract.committeeRoleId.includes(roleId))
+                const userId = contract?.userId
+                label.querySelector('.user-name').innerText =  contract.artistDetails.firstName || "[UNKNOWN]"
 
                 // get my roles fresh from the DB
-                CRUD.read("ghost-contracts", firebase.auth.currentUser.uid).then((myContract) => {
-                    // get my role set
-                    // myRoles and filledRoles are an array of ids (ints)
-                    const myRoles = myContract.committeeRoleId
+                // get my role set
+                // myRoles and filledRoles are an array of ids (ints)
+                const myRoles = contract.committeeRoleId
 
 
-                    console.log("Updating offload buttons", { myRoles, roleId, "myRoles.includes(roleId)": myRoles.includes(roleId) })
-                    
+                console.log("Updating offload buttons", { myRoles, roleId, "myRoles.includes(roleId)": myRoles.includes(roleId) })
 
 
-                    if (myRoles.includes(roleId)) {
-                        const button = createOffloadButton(role)
-                        // check role for existing button
-                        const existingButton = role.querySelector('.offload-button')
-                        if(!existingButton){   
-                            role.insertAdjacentElement("beforeend", button)
-                            button.addEventListener('click', handleOffload)
-                        }
-                    } 
-                })
+
+                if (myRoles.includes(roleId)) {
+                    const button = createOffloadButton(role)
+                    // check role for existing button
+                    const existingButton = role.querySelector('.offload-button')
+                    if (!existingButton) {
+                        role.insertAdjacentElement("beforeend", button)
+                        button.addEventListener('click', handleOffload)
+                    }
+                }
 
 
 
