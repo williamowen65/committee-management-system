@@ -246,9 +246,9 @@ function handleCheckboxChange(e) {
     const existingRoles = contracts.find(contract => contract.userId === userId)?.committeeRoleId || []
 
     // Set limit to 2 roles
-    if (checked && existingRoles.length >= 2) {
+    if (checked && existingRoles.length >= 3) {
         e.target.checked = false
-        return alert("You can only select 2 roles")
+        return alert("You can only select 3 roles")
     }
 
     console.log("make updates to firebase ", { checked, name, CRUD })
