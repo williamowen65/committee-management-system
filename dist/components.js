@@ -74,8 +74,8 @@ function setUXEventListeners() {
     btnSubmit.disabled = true;
     var firstName = form.querySelector('input[id="firstName"]').value;
     var lastName = form.querySelector('input[id="lastName"]').value;
+    var fullName = "".concat(firstName, " ").concat(lastName);
     var email = form.querySelector('input[id="email"]').value;
-    var username = form.querySelector('input[id="username"]').value;
     var password = form.querySelector('input[id="password"]').value;
     var confirmPassword = form.querySelector('input[id="confirm-password"]').value;
     console.log("about to create user with email and password", {
@@ -86,18 +86,31 @@ function setUXEventListeners() {
     return firebase.createUserWithEmailAndPassword(firebase.auth, email, password).then(function (result) {
       console.log("result", result);
       return firebase.updateProfile(result.user, {
-        displayName: username
+        displayName: fullName
       });
     }).then(function (user) {
-      // redirect to members
-      console.log('redirecting to members page');
-      window.location.href = '/members';
-    })["catch"](function () {
+      // Update ghost-contracts/{userId} with user data
+      firebase.setDoc(firebase.doc(firebase.collection(firebase.db, 'ghost-contracts'), user.uid), {
+        userId: result.user.uid,
+        artistDetails: {
+          firstName: firstName,
+          lastName: lastName
+        },
+        createdAt: firebase.serverTimestamp()
+      }).then(function () {
+        // redirect to members
+        console.log('redirecting to members page');
+        window.location.href = '/members';
+      });
+    })["catch"](function (err) {
       // change the button text back to original
       btnSubmit.innerText = btnText;
       // enable the button
       btnSubmit.disabled = false;
       // show error message
+      console.log({
+        err: err
+      });
       alert('There was an error creating your account. Please try again');
     });
   });

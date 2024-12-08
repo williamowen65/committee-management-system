@@ -74,8 +74,8 @@ function setUXEventListeners() {
 
         const firstName = form.querySelector('input[id="firstName"]').value;
         const lastName = form.querySelector('input[id="lastName"]').value;
+        const fullName = `${firstName} ${lastName}`
         const email = form.querySelector('input[id="email"]').value;
-        const username = form.querySelector('input[id="username"]').value;
         const password = form.querySelector('input[id="password"]').value;
         const confirmPassword = form.querySelector('input[id="confirm-password"]').value;
 
@@ -84,18 +84,31 @@ function setUXEventListeners() {
         return firebase.createUserWithEmailAndPassword(firebase.auth, email, password).then(function (result) {
             console.log("result", result);
             return firebase.updateProfile(result.user, {
-                displayName: username
+                displayName: fullName
             })
         }).then((user) => {
-            // redirect to members
-            console.log('redirecting to members page');
-            window.location.href = '/members'
-        }).catch(() => {
+
+                // Update ghost-contracts/{userId} with user data
+            firebase.setDoc(firebase.doc(firebase.collection(firebase.db, 'ghost-contracts'), user.uid), {
+                    userId: result.user.uid,
+                    artistDetails: {
+                        firstName,
+                        lastName,
+                    },
+                    createdAt: firebase.serverTimestamp()
+            }).then(() => {
+                // redirect to members
+                console.log('redirecting to members page');
+                window.location.href = '/members'
+            })
+
+        }).catch((err) => {
             // change the button text back to original
             btnSubmit.innerText = btnText
             // enable the button
             btnSubmit.disabled = false
             // show error message
+            console.log({err})
             alert('There was an error creating your account. Please try again')
         })
 
