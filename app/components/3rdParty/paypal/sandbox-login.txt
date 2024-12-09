@@ -1,0 +1,7 @@
+Sandbox URL: https://sandbox.paypal.com
+Sandbox Region: US
+Personal Email: sb-lcqzv34748555@personal.example.com
+Personal password: 1,+S&(rU
+
+business Email: sb-cbvwj34752547@business.example.com
+Business Password: Co9<t>k$
