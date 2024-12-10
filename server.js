@@ -18,6 +18,7 @@ app.use(cors({
 
 
 
+
 app.post('/submit', (req, res) => {
     const data = req.body;
     console.log('Received data:', data);

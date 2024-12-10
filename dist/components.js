@@ -669,7 +669,8 @@ function _createCustomElement() {
                   "signupImage": this.getAttribute('signupImage') || '',
                   "description": this.getAttribute('description') || '',
                   width: this.getAttribute('width') || '',
-                  slotLinks: this.getAttribute('slotLinks') || ''
+                  slotLinks: this.getAttribute('slotLinks') || '',
+                  placeholder: this.getAttribute('placeholder') || ''
                   // PAYPAL_CLIENT_ID: this.getAttribute('PAYPAL_CLIENT_ID') || '',
                 };
                 var evaluatedTemplate = evaluateTemplate(html, context);
@@ -1130,7 +1131,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<label for=\"${fieldName}\" class=\"${labelClass || \"\"}\" style=\"${width ? \"width:\"+ width + \";\" : \"\"}\">\r\n    <small class=\"text\" part=\"labelText\">${alias || capitalizeFirstLetter(fieldName)} ${required ? \"*\" : \"\"}</small>\r\n    <input type=\"${type}\" id=\"${fieldName}\" name=\"${fieldName}\" class=\"${labelClass || \"\"}\" ${required ? \"required\" :\"\"} ${type === 'number' ? 'min=\"0\"' : ''} />\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</label>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<label for=\"${fieldName}\" class=\"${labelClass || \"\"}\" style=\"${width ? \"width:\"+ width + \";\" : \"\"}\">\r\n    <small class=\"text\" part=\"labelText\">${alias && required ? alias + \"*\" : alias ? alias : \"\"} </small>\r\n    <input placeholder=\"${placeholder}\" type=\"${type}\" id=\"${fieldName}\" name=\"${fieldName}\" class=\"${labelClass || \"\"}\" ${required ? \"required\" :\"\"} ${type === 'number' ? 'min=\"0\"' : ''} />\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</label>");
 
 /***/ }),
 
