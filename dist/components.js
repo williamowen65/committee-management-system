@@ -1002,7 +1002,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n\n<!-- <script\nsrc=\"https://www.paypal.com/sdk/js?client-id=Afs2Ei8jIPZLq82X3RlBG8IjcfeWrKTabg0JPbykmgR1yv9VkQIqCt86C65x42Zi0vPnHrjlRuRAuIiD&components=buttons&enable-funding=venmo&disable-funding=credit&currency=USD\"\n></script> -->\n\n\n\n<div class=\"payPalContainer\" style=\"\"></div>tes");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n<div class=\"payPalContainer\" style=\"\"></div>");
 
 /***/ }),
 
