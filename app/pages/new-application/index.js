@@ -8,9 +8,29 @@ document.addEventListener('DOMContentLoaded', function() {
         const { values, form } = getFormValues('form#new-application-form')
         console.log({ values, form })
 
-       
-        CRUD.create('new-applications', values).then(() => {
-            alert('Your application has been submitted successfully!')
+        // Process images
+        // Get urls
+        // Update data to have urls instead of files
+        // Save data to firebase
+
+        const promises = Object.entries(values).map(([key, value]) => {
+            if (value instanceof File) {
+                return new Promise((resolve, reject) => {
+                    CRUD.saveImage(value).then(url => {
+                        values[key] = url
+                    }).then(() => {
+                        resolve()
+                    }).catch((err) => {
+                        reject(err)
+                    })
+                })
+            }
+        })
+        
+        Promise.all(promises).then(() => {  
+            CRUD.create('new-applications', values).then(() => {
+                alert('Your application has been submitted successfully!')
+            })
         })
     })
 })
