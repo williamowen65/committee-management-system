@@ -39,7 +39,7 @@ createCustomElement('file-input-component', function () {
         const deleteButton = document.createElement('button');
         const alertButton = document.createElement('i');
         alertButton.classList.add('fas', 'fa-exclamation-triangle', 'alert-icon');
-        
+
 
         deleteButton.textContent = 'X';
         deleteButton.classList.add('delete-button');
@@ -107,6 +107,7 @@ createCustomElement('file-input-component', function () {
 
                 this.setImage(reader.result, file)
 
+                this.querySelector(".file-input-component").setAttribute('hasError', false);
 
                 // Display possible errors with this file
                 // Requirements: Size must be no larger than 3 mb. 
@@ -121,6 +122,8 @@ createCustomElement('file-input-component', function () {
                     error.textContent = 'This image is too small. Please upload a 2-3MB image.';
                     error.classList.add('error');
                     parentContainer.appendChild(error);
+                    this.querySelector(".file-input-component").setAttribute('hasError', true);
+
                 }
                 // make sure the image isn't too big
                 if (file.size > 3000000) {
@@ -128,6 +131,7 @@ createCustomElement('file-input-component', function () {
                     error.textContent = 'File is too large. Please upload an image less than 3 mb.';
                     error.classList.add('error');
                     parentContainer.appendChild(error);
+                    this.querySelector(".file-input-component").setAttribute('hasError', true);
                 }
 
 
