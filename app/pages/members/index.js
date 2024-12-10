@@ -39,13 +39,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     // listen to new applications changes
                     CRUD.listen('new-applications', null, (newApplications) => {
                         console.log({newApplications})
-                        document.querySelector('.badge').innerText = newApplications.length
+                        const totalToReview = newApplications.filter(app => app.hasBeenReviewed === false).length
+
+                        document.querySelector('.badge').innerText = totalToReview
                     })
                 }, 1)
                 return `
                 <h4>${role}</h4>
                   <a href="/new-applications">
-                    <button style="position: relative;">New Artist Applications <span class="badge"></span></button>
+                    <button style="position: relative;">New Artist Applications Received <span class="badge"></span></button>
                 </a>`
         
             default:

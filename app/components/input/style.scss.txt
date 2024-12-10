@@ -188,4 +188,16 @@ label {
         // position: absolute;
         text-align: center;
     }
+    .error {
+        border: 1px solid black;
+        color: red;
+        font-weight: bold;
+    }
+
+    .alert-icon{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-weight: 20px;
+    }
 }

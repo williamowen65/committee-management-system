@@ -37,6 +37,9 @@ createCustomElement('file-input-component', function () {
 
         const img = document.createElement('img');
         const deleteButton = document.createElement('button');
+        const alertButton = document.createElement('i');
+        alertButton.classList.add('fas', 'fa-exclamation-triangle', 'alert-icon');
+        
 
         deleteButton.textContent = 'X';
         deleteButton.classList.add('delete-button');
@@ -65,6 +68,8 @@ createCustomElement('file-input-component', function () {
         imgContainer.classList.add('img-container');
         imgContainer.appendChild(img);
         labelContainer.appendChild(deleteButton);
+
+        labelContainer.appendChild(alertButton);
 
         imagesContainer.appendChild(imgContainer);
         imagesContainer.classList.add('has-images');
@@ -113,7 +118,7 @@ createCustomElement('file-input-component', function () {
                 // Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )
                 if (file.size < 20000) {
                     const error = document.createElement('p');
-                    error.textContent = 'File is a thumbnail image. Please upload a larger image.';
+                    error.textContent = 'This image is too small. Please upload a 2-3MB image.';
                     error.classList.add('error');
                     parentContainer.appendChild(error);
                 }
