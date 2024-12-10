@@ -1,5 +1,8 @@
  import roles from '../my-contract/committee-roles.js'
 
+
+const userRoles = {}
+
 document.addEventListener('DOMContentLoaded', function() {
     firebase.redirectIfNotLoggedIn('/artist-sign-on')
 .then(user => {
@@ -15,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
       const sidePanel = getGhostSidePanel(contract.committeeRoleId)
 
       document.querySelector('#user-role').innerHTML = `<h3>Committee Role:</h3>${sidePanel.trim() ? sidePanel : 'No role assigned'}`
+    
+    
+
     })
 
     /**
@@ -26,12 +32,20 @@ document.addEventListener('DOMContentLoaded', function() {
       return roleIds.map(roleId => {
         const role = roles[roleId].title
         console.log({role})
+        userRoles[roleId] = role
         switch (role) {
             case 'New Artist Applications Chair':
+                setTimeout(()=>{
+                    // listen to new applications changes
+                    CRUD.listen('new-applications', null, (newApplications) => {
+                        console.log({newApplications})
+                        document.querySelector('.badge').innerText = newApplications.length
+                    })
+                }, 1)
                 return `
                 <h4>${role}</h4>
                   <a href="/new-applications">
-                    <button style="position: relative;">New Artist Applications <span class="badge">4</span></button>
+                    <button style="position: relative;">New Artist Applications <span class="badge"></span></button>
                 </a>`
         
             default:

@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const { values, form } = getFormValues('form#new-application-form')
         console.log({ values, form })
 
+        values.hasBeenReviewed = false
+
         // Process images
         // Get urls
         // Update data to have urls instead of files
@@ -27,10 +29,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         
+        /**
+         * Potential enhancements... Don't redirect.
+         * after save, record the id.. If applicant re-save, just update the record
+         */
+
+
         Promise.all(promises).then(() => {  
             CRUD.create('new-applications', values).then(() => {
                 alert('Your application has been submitted successfully!')
-                location.href = '/'
+                location.href = 'https://gigharboropenstudiotour.org/'
             })
         })
     })
