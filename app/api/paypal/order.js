@@ -24,6 +24,7 @@ async function createOrderMiddleware(req, res, next) {
         });
         const resData = await handleResponse(response);
         req.orderResponse = resData;
+        console.log("order", {resData})
         next();
     } catch (error) {
         res.status(500).json({ message: error.message });
