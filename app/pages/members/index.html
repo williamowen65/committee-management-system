@@ -8,6 +8,8 @@
   <script src="/dist/components.js"></script>
   <script type="module" src="/dist/firebase.js"></script>
   <link rel="stylesheet" href="/dist/styles.css">
+  <script src="/dist/CRUD.js"></script>
+  <script src="/members/index.js" type="module"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -21,24 +23,7 @@
       width: 100%;
     }
   </style>
-  <script type="module">
-    firebase.redirectIfNotLoggedIn('/artist-sign-on')
-    .then(user => {
-      if(user){
 
-        document.body.style.display = 'block'
-        document.querySelector('#username').innerText = `Hello, ${user.displayName}`
-      }
-    })
-
-    document.addEventListener('DOMContentLoaded',() =>{
-      document.getElementById('logout').addEventListener('click', () => {
-        firebase.signOut(firebase.auth).then(() => {
-          window.location.href = '/artist-sign-on'
-        })
-      })
-    })
-  </script>
 </head>
 
 <body style="display:none !important; ">
@@ -101,14 +86,27 @@
           margin: 4px 2px;
           height: fit-content;
         }
+        .badge {
+          background-color: red;
+          color: white;
+          padding: 2px 5px;
+          border-radius: 50%;
+          margin-left: 5px;
+          position: absolute;
+          top: 0px;
+          right: 0px;
+          translate: 50% -50%;
+        }
        
       </style>
       <div id="sidebar" style="width: 200px;">
-        <span>Role: <span>TBD</span></span>
+        <span id="user-role">
+          
+        </span>
 
-        <a href="/new-applications">
-          <button>New Applications</button>
-        </a>
+
+      
+
       </div>
 
     </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>New Artist Application - GHOST</title>
     <script src="/dist/components.js"></script>
     <script type="module" src="/dist/firebase.js"></script>
     <link rel="stylesheet" href="/dist/styles.css" />
@@ -94,11 +94,67 @@
                 min-height: 100px;
             }
         </style>
-        <p style="margin: 0;">If sharing a studio, have you made arrangements to do so? If so, please name the Tour Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host you in their studio.</p>
+        <p style="margin: 0;">If sharing a studio, have you made arrangements to do so? If so, please name the Tour
+            Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host
+            you in their studio.</p>
         <textarea style="width: 100%; box-sizing: border-box; "></textarea>
         <!-- <textarea-component description="If sharing a studio, have you made arrangements to do so? If so, please name the Tour Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host you in their studio."></textarea-component> -->
 
-        <button>Submit Application</button>
+        <h3>I would like an artist mentor (an experienced artist who can talk to me about preparing for the tour,
+            marketing and answer my questions)</h3>
+        <label for="artistMentor">
+            <input required type="radio" name="artistMentor" value="Yes, I would like an artist mentor"
+                id="artistMentor"></input>
+            Yes, I would like an artist mentor
+        </label>
+        <label for="noArtistMentor">
+            <input required type="radio" name="artistMentor" value="No, I do not need an artist mentor"
+                id="noArtistMentor"></input>
+            No, I do not need an artist mentor
+        </label>
+
+        <h3>How did you hear about the GHOST Tour?</h3>
+        <textarea style="width: 100%; box-sizing: border-box; "></textarea>
+
+        <h3>Three (3) digital images of your art</h3>
+        <p>Make sure that your images look professional and are jpgs that are 2-3 MB (no thumbnails!) 2D art should only
+            be of your art image (no background or frame.) 3D art and jewelry should have a plain background (ex, black
+            or white) and have enough lighting to show good detail. Crop the image so that your art fills most of the
+            image and make sure the image is crisp and does justice to your art.</p>
+        <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+            <style>
+                file-input-component {
+                    margin: 10px;
+                }
+            </style>
+            <file-input-component required="true" fieldName="digitalImage1" alias="Digital Image 1"
+                accept=".jpg,.jpeg,.png"></file-input-component>
+            <file-input-component required="true" fieldName="digitalImage2" alias="Digital Image 2"
+                accept=".jpg,.jpeg,.png"></file-input-component>
+            <file-input-component required="true" fieldName="digitalImage3" alias="Digital Image 3"
+                accept=".jpg,.jpeg,.png"></file-input-component>
+        </div>
+
+        <h3>One (1) digital image of your studio (if it is within the studio tour boundaries and you will be showing
+            there) or your booth (if you will be showing at another artist's studio)</h3>
+        <p>This should be a jpg image that is 2-3 MB. Make sure your display space looks professional, has good lighting
+            and is represented well in your photo.</p>
+        <p>Make sure that your images look professional and are jpgs that are 2-3 MB (no thumbnails!) 2D art should only
+            be of your art image (no background or frame.) 3D art and jewelry should have a plain background (ex, black
+            or white) and have enough lighting to show good detail. Crop the image so that your art fills most of the
+            image and make sure the image is crisp and does justice to your art.</p>
+        <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+
+            <file-input-component required="true" fieldName="digitalImage1" alias="Digital Image 1"
+                accept=".jpg,.jpeg,.png"></file-input-component>
+        </div>
+
+        <h3>Artist Statement</h3>
+        <textarea-component fieldName="artistStatement" placeholder="Artist Statement" required description="This  is a short statement that describes what art you make, how you make it and why you make it.  (Limit 200 words)"></textarea-component>
+        <h3>Your art website or social media sites</h3>
+        <textarea-component placeholder="Social media presence " fieldName="website-social-media" required description="If you have an art website and/or social media sites, list them here.  If you don't have any of those, type in NONE"></textarea-component>
+
+        <button type="submit" style="margin: auto; display: block; ">Submit Application</button>
 
     </div>
 

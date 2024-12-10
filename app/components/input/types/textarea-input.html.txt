@@ -3,7 +3,7 @@
 
 <div>${description}</div>
 <label for="${fieldName}" style="width: 100%; box-sizing: border-box; margin-top: 20px;" >
-    <small class="text" part="labelText">${alias || capitalizeFirstLetter(fieldName)} ${required ? "*" : ""}</small>
-    <textarea id="${fieldName}" name="${fieldName}" ${required ? "required" : ""}></textarea>
+    <small class="text" part="labelText">${alias && required ? alias + "*" : alias ? alias : ""} </small>
+    <textarea  placeholder="${placeholder}" id="${fieldName}" name="${fieldName}" ${required ? "required" : ""}></textarea>
     <div id="${fieldName}-error" class="error-message"></div>
 </label>
