@@ -8,10 +8,10 @@
 
 
 
-
+// CRUD pattern
 window.CRUD = {
-    create: async function (data) {
-        await firebase.addDoc(firebase.collection(firebase.db, 'scholarship-applications'), data)
+    create: async function (collection,data) {
+        await firebase.addDoc(firebase.collection(firebase.db, collection), data)
     },
     read: async function (collection, id) {
         console.log("read data", { collection, id })

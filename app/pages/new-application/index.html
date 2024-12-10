@@ -7,7 +7,9 @@
     <title>New Artist Application - GHOST</title>
     <script src="/dist/components.js"></script>
     <script type="module" src="/dist/firebase.js"></script>
+    <script src="/dist/CRUD.js"></script>
     <link rel="stylesheet" href="/dist/styles.css" />
+    <script src="/new-application/index.js" type="module"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,7 +23,7 @@
 <body style="">
     <header-component slotLinks="public"></header-component>
 
-    <div class="container">
+    <form class="container" id="new-application-form">
         <markdown-component>
             <span slot="markdown-content">
                 <h1 style="text-align: center; text-transform: uppercase">
@@ -145,7 +147,7 @@
             image and make sure the image is crisp and does justice to your art.</p>
         <div style="display: flex; justify-content: center; flex-wrap: wrap;">
 
-            <file-input-component required="true" fieldName="digitalImage1" alias="Digital Image 1"
+            <file-input-component required="true" fieldName="digitalImage4" alias="Digital Image 1"
                 accept=".jpg,.jpeg,.png"></file-input-component>
         </div>
 
@@ -156,7 +158,7 @@
 
         <button type="submit" style="margin: auto; display: block; ">Submit Application</button>
 
-    </div>
+    </form>
 
     <footer-component></footer-component>
 </body>

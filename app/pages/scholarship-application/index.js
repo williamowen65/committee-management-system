@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const needForScholarship = form.querySelector('textarea[id="needForScholarship"]').value;
 
         // save to firebase
-        CRUD.create({
+        CRUD.create('scholarship-applications', {
             name,
             email,
             hasReceivedScholarshipPreviously,
