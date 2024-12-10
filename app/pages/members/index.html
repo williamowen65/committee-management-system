@@ -27,7 +27,7 @@
       if(user){
 
         document.body.style.display = 'block'
-        document.querySelector('span').innerText = `Hello, ${user.displayName}`
+        document.querySelector('#username').innerText = `Hello, ${user.displayName}`
       }
     })
 
@@ -46,7 +46,7 @@
   <header-component></header-component>
   <div class="" style="display: flex; flex-direction: column">
     <div style="text-align: right">
-      <span>Hello, USER NAME</span>
+      <span id="username"></span>
       <button id="logout">Logout</button>
     </div>
     <div style="display: flex; flex-wrap: wrap; gap: 10px;">
@@ -76,8 +76,8 @@
         }
         #timeline ul li {
           margin-bottom: 10px;
-
         }
+
       </style>
       <div id="timeline">
         <h3>GHOST Timeline 2025</h3>
@@ -93,6 +93,24 @@
           <li><strong>October 22:</strong> General members meeting and potluck (location TBD) to return signs, elect board for 2026, review survey results and discuss ideas for next year</li>
         </ul>
       </div>
+
+      <style>
+         #sidebar {
+          border: 1px solid black;
+          padding: 10px 15px;
+          margin: 4px 2px;
+          height: fit-content;
+        }
+       
+      </style>
+      <div id="sidebar" style="width: 200px;">
+        <span>Role: <span>TBD</span></span>
+
+        <a href="/new-applications">
+          <button>New Applications</button>
+        </a>
+      </div>
+
     </div>
   </div>
   <footer-component></footer-component>
