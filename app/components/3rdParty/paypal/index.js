@@ -62,7 +62,7 @@ function initializePaypalButtons(){
             actions,
           })
 
-          actions.disable()
+          // actions.disable()
           paypalButtonAction = actions
 
           // // Disable the buttons if based on form data
