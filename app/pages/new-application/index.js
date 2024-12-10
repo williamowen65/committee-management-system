@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         Promise.all(promises).then(() => {  
             CRUD.create('new-applications', values).then(() => {
                 alert('Your application has been submitted successfully!')
+                location.href = '/'
             })
         })
     })
