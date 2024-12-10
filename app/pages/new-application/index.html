@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
@@ -8,93 +9,100 @@
     <script type="module" src="/dist/firebase.js"></script>
     <link rel="stylesheet" href="/dist/styles.css" />
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 10px;
-        /* background-color: #f4f4f4; */
-      }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            /* background-color: #f4f4f4; */
+        }
     </style>
-  </head>
+</head>
 
-  <body style="">
+<body style="">
     <header-component slotLinks="public"></header-component>
 
     <div class="container">
-      <markdown-component>
-        <span slot="markdown-content">
-          <h1 style="text-align: center; text-transform: uppercase">
-            APPLICATION for new artists
-          </h1>
+        <markdown-component>
+            <span slot="markdown-content">
+                <h1 style="text-align: center; text-transform: uppercase">
+                    APPLICATION for new artists
+                </h1>
 
-          <p>
-            This is a one-time application for all artists that are either new
-            to the studio tour, or have been on the studio tour but are applying
-            to show in a new medium. If you are accepted onto the tour, you will
-            then need to set up your member account on this website and submit a
-            yearly member contract (it’s online through the Members page and is
-            called My Contract.) This year’s member contract is due by March 2,
-            2025.
-          </p>
-        </span>
-      </markdown-component>
-      <h3>Artist Name</h3>
-      <div class="row">
-        <input-component
-          style="width: 48%"
-          required="true"
-          fieldName="firstName"
-          alias="First Name"
-        ></input-component>
-        <input-component
-          style="width: 48%"
-          required="true"
-          fieldName="lastName"
-          alias="Last Name"
-        ></input-component>
-      </div>
-      <h3>Contact Info</h3>
-      <div class="row">
-        <input-component
-          style="width: 48%"
-          required="true"
-          type="email"
-          fieldName="email"
-          alias="Email"
-        ></input-component>
-        <input-component
-          style="width: 48%"
-          required="true"
-          fieldName="phone"
-          alias="Phone"
-        ></input-component>
-      </div>
-      <textarea-component
-        required="true"
-        fieldName="studio-address"
-        alias="Studio Address"
-      ></textarea-component>
-      <textarea-component
-        required="true"
-        fieldName="mailing-address"
-        alias="Mailing Address"
-      ></textarea-component>
-      <input-component
-        required="true"
-        fieldName="medium"
-        alias="Medium(s)"
-      ></input-component>
+                <p>
+                    This is a one-time application for all artists that are either new
+                    to the studio tour, or have been on the studio tour but are applying
+                    to show in a new medium. If you are accepted onto the tour, you will
+                    then need to set up your member account on this website and submit a
+                    yearly member contract (it’s online through the Members page and is
+                    called My Contract.) This year’s member contract is due by March 2,
+                    2025.
+                </p>
+            </span>
+        </markdown-component>
+        <h3>Artist Name</h3>
+        <div class="row">
+            <input-component style="width: 48%" required="true" fieldName="firstName"
+                alias="First Name"></input-component>
+            <input-component style="width: 48%" required="true" fieldName="lastName"
+                alias="Last Name"></input-component>
+        </div>
+        <h3>Contact Info</h3>
+        <div class="row">
+            <input-component style="width: 48%" required="true" type="email" fieldName="email"
+                alias="Email"></input-component>
+            <input-component style="width: 48%" required="true" fieldName="phone" alias="Phone"></input-component>
+        </div>
+        <textarea-component required="true" fieldName="studio-address" alias="Studio Address"></textarea-component>
+        <textarea-component required="true" fieldName="mailing-address" alias="Mailing Address"></textarea-component>
 
-      <h3>WA State Business License (UBI) Number *</h3>
-      <p>A Washington State Business License (UBI) Number is required to be in the tour. If you don't have one, apply: https://bls.dor.wa.gov/. </p>
-      <input-component
-        required="true"
-        fieldName="wa-state-business-license-ubi-number"
-        placeholder="UBI Number"
-      ></input-component>
-      <button>Submit Application</button>
+        <h3>Medium(s)</h3>
+        <input-component required="true" fieldName="medium"
+            placeholder="Comma separated list of mediums"></input-component>
+
+        <h3>WA State Business License (UBI) Number *</h3>
+        <p>A Washington State Business License (UBI) Number is required to be in the tour. If you don't have one, apply:
+            https://bls.dor.wa.gov/. </p>
+        <input-component required="true" fieldName="wa-state-business-license-ubi-number"
+            placeholder="UBI Number"></input-component>
+
+        <h3>Is your studio within the GHOST Tour Boundaries? (That map is available on the Join page) *</h3>
+
+        <label for="isWithinBoundaries">
+            <input required type="radio" name="isWithinBoundaries" value="Yes, my studio falls within the boundary"
+                id="isWithinBoundaries"></input>
+            Yes, my studio falls within the boundary
+        </label>
+        <label for="isNotWithinBoundaries">
+            <input required type="radio" name="isWithinBoundaries"
+                value="No, my studio is outside the boundary and I will need to share studio space with another artist"
+                id="isNotWithinBoundaries"></input>
+            No, my studio is outside the boundary and I will need to share studio space with another artist
+        </label>
+
+        <h3>Studio Availability</h3>
+        <style>
+            input,
+            textarea {
+                margin: 10px 0 0 0;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            textarea {
+                resize: vertical;
+                min-height: 100px;
+            }
+        </style>
+        <p style="margin: 0;">If sharing a studio, have you made arrangements to do so? If so, please name the Tour Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host you in their studio.</p>
+        <textarea style="width: 100%; box-sizing: border-box; "></textarea>
+        <!-- <textarea-component description="If sharing a studio, have you made arrangements to do so? If so, please name the Tour Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host you in their studio."></textarea-component> -->
+
+        <button>Submit Application</button>
+
     </div>
 
     <footer-component></footer-component>
-  </body>
+</body>
+
 </html>
