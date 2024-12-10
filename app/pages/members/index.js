@@ -12,8 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log(contract)
       // Get role name
 
+      const sidePanel = getGhostSidePanel(contract.committeeRoleId)
 
-      document.querySelector('#user-role').innerHTML = `<h3>Committee Role:</h3>${getGhostSidePanel(contract.committeeRoleId)}`
+      document.querySelector('#user-role').innerHTML = `<h3>Committee Role:</h3>${sidePanel.trim() ? sidePanel : 'No role assigned'}`
     })
 
     /**
