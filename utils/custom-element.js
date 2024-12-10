@@ -46,6 +46,7 @@ export async function createCustomElement(name, onload, html, css) {
                 "signupImage": this.getAttribute('signupImage') || '',
                 "description": this.getAttribute('description') || '',
                 width: this.getAttribute('width') || '',
+                slotLinks: this.getAttribute('slotLinks') || '',
                 // PAYPAL_CLIENT_ID: this.getAttribute('PAYPAL_CLIENT_ID') || '',
             };
 

@@ -8,7 +8,9 @@
   </div>
 
   <nav id="links">
-    ${window.location.href.includes('members') ? '' : '<a href="/members">Go back to members page</a>'}
+ 
+
+    ${window.location.href.includes('members') ? '' : !slotLinks.includes('members') ? '<a href="/members">Go back to Members page</a>' : ''}
     <a href="https://gigharboropenstudiotour.org/">Go back to GHOST Website</a>
   </nav>
 </header>

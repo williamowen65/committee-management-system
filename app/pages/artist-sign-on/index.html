@@ -8,9 +8,8 @@
     <script type="module" src="/dist/firebase.js"></script>
   </head>
   <body>
-    <header>
-        <a href="https://gigharboropenstudiotour.org/">Go back to GHOST Website</a>
-    </header>
+    <header-component slotLinks="ghost-members">
+    </header-component>
     <!-- Define 
      the images to pass here
      The redirect on success
@@ -20,5 +19,7 @@
     loginImage="/dist/assets/login.jpeg"
     signupImage="/dist/assets/signup.jpg"
     ></dual-login-form-component>
+
+    <footer-component></footer-component>
   </body>
 </html>
