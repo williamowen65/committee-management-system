@@ -21,7 +21,7 @@
 </div> -->
 
 
-<div class="artist-application-review">
+<div class="artist-application-review" expanded="false">
 
     <div class="app-preview">
         ${firstName} ${lastName} ${medium}
