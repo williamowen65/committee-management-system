@@ -30,11 +30,13 @@ document.addEventListener('DOMContentLoaded', function () {
             needForScholarship
         }).then(() => {
             // change the button text back to original
-            btnSubmit.innerText = btnText
+            btnSubmit.innerText = "Your scholarship application has been submitted successfully!"
             // enable the button
             btnSubmit.disabled = false
             // show success message
-            alert('Your scholarship application has been submitted successfully!')
+            setTimeout(() => {
+                location.href = 'https://gigharboropenstudiotour.org/'
+            }, 3000)
         }).catch((err) => {
             // change the button text back to original
             btnSubmit.innerText = btnText
