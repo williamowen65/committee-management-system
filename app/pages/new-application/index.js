@@ -37,8 +37,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         Promise.all(promises).then(() => {  
             CRUD.create('new-applications', values).then(() => {
-                alert('Your application has been submitted successfully!')
-                location.href = 'https://gigharboropenstudiotour.org/'
+                const button = document.querySelector('button[type="submit"]')
+                button.innerText = 'Application Submitted!'
+                setTimeout(() => {
+                    location.href = 'https://gigharboropenstudiotour.org/'
+                }, 3000)
             })
         })
     })

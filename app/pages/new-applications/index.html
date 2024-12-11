@@ -26,7 +26,11 @@
                 console.log(applications);
                 
                 applications.forEach(application => {
-                    const applicationComponent = document.createElement('application-component');
+
+                    // Create component element
+
+                    document.querySelector('#applications').innerHTML = '<application-component></application-component>';
+                   
                   
                     // Bind the data from this application to the component
                     applicationComponent.app = application;
