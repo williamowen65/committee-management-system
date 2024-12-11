@@ -111,18 +111,18 @@ ${studioSharingResponse}
         <h3>I would like an artist mentor (an experienced artist who can talk to me about preparing for the tour,
             marketing and answer my questions)</h3>
         <label for="artistMentor">
-            <input required type="radio" name="artistMentor" value="Yes, I would like an artist mentor"
+            <input disabled ${artistMentor == "Yes, I would like an artist mentor" ? "checked": ""} required type="radio" name="artistMentor" value="Yes, I would like an artist mentor"
                 id="artistMentor"></input>
             Yes, I would like an artist mentor
         </label>
         <label for="noArtistMentor">
-            <input required type="radio" name="artistMentor" value="No, I do not need an artist mentor"
+            <input disabled ${artistMentor == "Yes, I would like an artist mentor" ? "": "checked"}  required type="radio" name="artistMentor" value="No, I do not need an artist mentor"
                 id="noArtistMentor"></input>
             No, I do not need an artist mentor
         </label>
 
         <h3>How did you hear about the GHOST Tour?</h3>
-        <textarea style="width: 100%; box-sizing: border-box; ">
+        <textarea disabled style="width: 100%; box-sizing: border-box; ">
 ${howDidYouHearAboutUs}
         </textarea>
 
@@ -160,11 +160,11 @@ ${howDidYouHearAboutUs}
         </div>
 
         <h3>Artist Statement</h3>
-        <textarea-component fieldName="artistStatement-${randomId}" placeholder="Artist Statement" required
+        <textarea-component  disabled fieldName="artistStatement-${randomId}" placeholder="Artist Statement" required
             description="This  is a short statement that describes what art you make, how you make it and why you make it.  (Limit 200 words)"
             value="${artistStatement}"></textarea-component>
         <h3>Your art website or social media sites</h3>
-        <textarea-component placeholder="Website & Social media presence " fieldName="website-social-media-${randomId}" required
+        <textarea-component disabled  placeholder="Website & Social media presence " fieldName="website-social-media-${randomId}" required
             description="If you have an art website and/or social media sites, list them here.  If you don't have any of those, type in NONE"
             value="${websiteSocialMedia}"></textarea-component>
 
