@@ -26,6 +26,7 @@
     <div class="app-preview">
         ${firstName} ${lastName} ${medium}
         <p>Has Been Reviewed: ${hasBeenReviewed}</p>
+        <p>Created At: ${createdAt}</p>
 
         
     </div>

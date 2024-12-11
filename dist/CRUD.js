@@ -40,7 +40,12 @@ window.CRUD = {
         const docs = await firebase.getDocs(query)
         const data = []
         docs.forEach(doc => {
-            data.push(doc.data())
+            // convert createdAt to a formatted date
+            const docData = doc.data()
+
+            docData.createdAt = docData.createdAt.toDate().toLocaleDateString()
+
+            data.push(docData)
         })
         return data;
     },

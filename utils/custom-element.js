@@ -86,6 +86,7 @@ export async function createCustomElement(name, onload, html, css, options ={}) 
                 studioAddress: this.getAttribute('studio-address') || '',
                 artistStatement: this.getAttribute('artistStatement') || '',
                 isWithinBoundaries: this.getAttribute('isWithinBoundaries') || '',
+                createdAt: this.getAttribute('createdAt') || '',
                 // paypalClientId: this.getAttribute('PAYPAL_CLIENT_ID') || '',
             };
 
