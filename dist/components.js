@@ -1,5 +1,4 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./app/components/3rdParty/paypal/index.js":
@@ -8,6 +7,7 @@
   \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/3rdParty/paypal/index.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../utils/custom-element */ "./utils/custom-element.js");
@@ -217,6 +217,7 @@ function initializePaypalButtons() {
   \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/application/index.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
@@ -234,6 +235,7 @@ __webpack_require__.r(__webpack_exports__);
   \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/dual-login-form/index.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
@@ -359,6 +361,7 @@ function setUXEventListeners() {
   \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _footer_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./footer.html.txt */ "./app/components/footer/footer.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
@@ -376,6 +379,7 @@ __webpack_require__.r(__webpack_exports__);
   \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _header_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./header.html.txt */ "./app/components/header/header.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
@@ -391,180 +395,9 @@ __webpack_require__.r(__webpack_exports__);
 /*!***************************************!*\
   !*** ./app/components/input/index.js ***!
   \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _types_text_input_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types/text-input.html.txt */ "./app/components/input/types/text-input.html.txt");
-/* harmony import */ var _types_file_input_html_txt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types/file-input.html.txt */ "./app/components/input/types/file-input.html.txt");
-/* harmony import */ var _types_textarea_input_html_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./types/textarea-input.html.txt */ "./app/components/input/types/textarea-input.html.txt");
-/* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
-/* harmony import */ var _style_scss_txt__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss.txt */ "./app/components/input/style.scss.txt");
-
-
-
-
-
-(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_3__.createCustomElement)('input-component', function () {
-  console.log('input-component loaded');
-  // set slot
-
-  moveLabel.bind(this)();
-}, _types_text_input_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_4__["default"]);
-(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_3__.createCustomElement)('textarea-component', function () {
-  moveLabel.bind(this)();
-}, _types_textarea_input_html_txt__WEBPACK_IMPORTED_MODULE_2__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_4__["default"]);
-(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_3__.createCustomElement)('file-input-component', function () {
-  var _this = this;
-  var imagesContainer = this.querySelector('.images-container');
-  var parentContainer = imagesContainer.closest('.file-input-component');
-  var labelContainer = parentContainer.querySelector('.label-container');
-  this.setImage = function (src, file) {
-    // empty out the images container
-    var inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML;
-    imagesContainer.innerHTML = inputLabelText;
-    var fileNameEl = parentContainer.querySelector('.file-name');
-    if (fileNameEl) {
-      fileNameEl.remove();
-    }
-    var img = document.createElement('img');
-    var deleteButton = document.createElement('button');
-    var alertButton = document.createElement('i');
-    alertButton.classList.add('fas', 'fa-exclamation-triangle', 'alert-icon');
-    deleteButton.textContent = 'X';
-    deleteButton.classList.add('delete-button');
-    deleteButton.addEventListener('click', function (e) {
-      img.remove();
-      deleteButton.remove();
-      imagesContainer.classList.remove('has-images');
-      parentContainer.querySelector('.file-name').remove();
-      parentContainer.querySelectorAll('.error').forEach(function (error) {
-        return error.remove();
-      });
-      // remove button from file input
-      var fileInput = parentContainer.querySelector('input');
-      fileInput.value = '';
-      // empty .img-container
-      imagesContainer.innerHTML = inputLabelText;
-
-      // guarantee that the file input is required
-      fileInput.setAttribute('required', 'required');
-
-      // prevent bubbling event on delete image button
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-    });
-    var imgContainer = document.createElement('div');
-    imgContainer.classList.add('img-container');
-    imgContainer.appendChild(img);
-    labelContainer.appendChild(deleteButton);
-    labelContainer.appendChild(alertButton);
-    imagesContainer.appendChild(imgContainer);
-    imagesContainer.classList.add('has-images');
-    img.src = src;
-
-    // display the name of the file
-    var fileName = document.createElement('p');
-    fileName.textContent = file.name;
-    fileName.classList.add('file-name');
-    parentContainer.appendChild(fileName);
-    return this;
-  };
-  this.querySelector('input').addEventListener('click', function (e) {
-    // prevent bubbling event on delete image button
-    if (e.target.classList.contains('delete-button')) {
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-    }
-  });
-
-  // Set listeners to display images added to file input
-  this.querySelector('input').addEventListener('change', function (e) {
-    Array.from(e.target.files).forEach(function (file) {
-      var reader = new FileReader();
-      reader.onloadend = function () {
-        _this.setImage(reader.result, file);
-        _this.querySelector(".file-input-component").setAttribute('hasError', false);
-
-        // Display possible errors with this file
-        // Requirements: Size must be no larger than 3 mb. 
-        // Must not be a thumbnail image.
-        // One image must be a square
-
-        console.log("file size check ", {
-          fileSize: file.size,
-          fileName: file.name,
-          fileType: file.type
-        });
-
-        // Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )
-        if (file.size < 20000) {
-          var error = document.createElement('p');
-          error.textContent = 'This image is too small. Please upload a 2-3MB image.';
-          error.classList.add('error');
-          parentContainer.appendChild(error);
-          _this.querySelector(".file-input-component").setAttribute('hasError', true);
-        }
-        // make sure the image isn't too big
-        if (file.size > 3000000) {
-          var _error = document.createElement('p');
-          _error.textContent = 'File is too large. Please upload an image less than 3 mb.';
-          _error.classList.add('error');
-          parentContainer.appendChild(_error);
-          _this.querySelector(".file-input-component").setAttribute('hasError', true);
-        }
-
-        // Get attribute "square" from component
-        var squareRequirement = _this.getAttribute('square-requirement');
-        if (squareRequirement) {
-          // check for square size
-          var image = new Image();
-          image.src = reader.result;
-          image.onload = function () {
-            var width = image.width,
-              height = image.height;
-            console.log({
-              width: width,
-              height: height
-            });
-            if (width !== height) {
-              var _error2 = document.createElement('p');
-              _error2.textContent = 'Image is not square. Please upload a square image.';
-              _error2.classList.add('error');
-              parentContainer.appendChild(_error2);
-            }
-          };
-        }
-      };
-      reader.readAsDataURL(file);
-    });
-  });
-}, _types_file_input_html_txt__WEBPACK_IMPORTED_MODULE_1__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_4__["default"]);
-function moveLabel() {
-  this.querySelectorAll('input, textarea').forEach(function (el) {
-    el.addEventListener('focus', function (e) {
-      var target = e.target;
-      target.closest('label').classList.add('moveLabel');
-      target.closest('label').querySelector('[part]').setAttribute('part', 'labelText moveLabel');
-    });
-    el.addEventListener('blur', function (e) {
-      var target = e.target;
-      if (target.value === '') {
-        target.closest('label').classList.remove('moveLabel');
-        target.closest('label').querySelector('[part]').setAttribute('part', 'labelText');
-      }
-    });
-    el.addEventListener('change', function (e) {
-      var target = e.target;
-      if (target.value === '') {
-        target.closest('label').classList.remove('moveLabel');
-        target.closest('label').querySelector('[part]').setAttribute('part', 'labelText');
-      } else {
-        target.closest('label').classList.add('moveLabel');
-        target.closest('label').querySelector('[part]').setAttribute('part', 'labelText moveLabel');
-      }
-    });
-  });
-}
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\app\\components\\input\\index.js: Unexpected token (120:40)\n\n\u001b[0m \u001b[90m 118 |\u001b[39m\n \u001b[90m 119 |\u001b[39m                 \u001b[90m// Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 120 |\u001b[39m                 \u001b[36mif\u001b[39m (file\u001b[33m.\u001b[39msize \u001b[33m<\u001b[39m \u001b[35m2000000\u001b[39m)) {\n \u001b[90m     |\u001b[39m                                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 121 |\u001b[39m                     \u001b[36mconst\u001b[39m error \u001b[33m=\u001b[39m document\u001b[33m.\u001b[39mcreateElement(\u001b[32m'p'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 122 |\u001b[39m                     error\u001b[33m.\u001b[39mtextContent \u001b[33m=\u001b[39m \u001b[32m'This image is too small. Please upload a 2-3MB image.'\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 123 |\u001b[39m                     error\u001b[33m.\u001b[39mclassList\u001b[33m.\u001b[39madd(\u001b[32m'error'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n    at constructor (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:359:19)\n    at Parser.raise (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:3266:19)\n    at Parser.unexpected (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:3286:16)\n    at Parser.parseExprAtom (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10983:16)\n    at Parser.parseExprSubscripts (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10615:23)\n    at Parser.parseUpdate (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10600:21)\n    at Parser.parseMaybeUnary (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10580:23)\n    at Parser.parseMaybeUnaryOrPrivate (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10434:61)\n    at Parser.parseExprOps (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10439:23)\n    at Parser.parseMaybeConditional (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10416:23)\n    at Parser.parseMaybeAssign (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10379:21)\n    at Parser.parseExpressionBase (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10333:23)\n    at C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10329:39\n    at Parser.allowInAnd (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:11946:16)\n    at Parser.parseExpression (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10329:17)\n    at Parser.parseStatementContent (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12390:23)\n    at Parser.parseStatementLike (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12257:17)\n    at Parser.parseStatementOrSloppyAnnexBFunctionDeclaration (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12247:17)\n    at Parser.parseIfStatement (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12624:28)\n    at Parser.parseStatementContent (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12286:21)\n    at Parser.parseStatementLike (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12257:17)\n    at Parser.parseStatementListItem (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12237:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12810:61)\n    at Parser.parseBlockBody (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12803:10)\n    at Parser.parseBlock (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12791:10)\n    at Parser.parseFunctionBody (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:11634:24)\n    at Parser.parseArrowExpression (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:11609:10)\n    at Parser.parseParenAndDistinguishExpression (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:11222:12)\n    at Parser.parseExprAtom (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10863:23)\n    at Parser.parseExprSubscripts (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10615:23)\n    at Parser.parseUpdate (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10600:21)\n    at Parser.parseMaybeUnary (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10580:23)\n    at Parser.parseMaybeUnaryOrPrivate (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10434:61)\n    at Parser.parseExprOps (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10439:23)\n    at Parser.parseMaybeConditional (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10416:23)\n    at Parser.parseMaybeAssign (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10379:21)\n    at Parser.parseMaybeAssign (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10405:25)\n    at Parser.parseExpressionBase (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10333:23)\n    at C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10329:39\n    at Parser.allowInAnd (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:11946:16)\n    at Parser.parseExpression (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10329:17)\n    at Parser.parseStatementContent (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12390:23)\n    at Parser.parseStatementLike (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12257:17)\n    at Parser.parseStatementListItem (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12237:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12810:61)\n    at Parser.parseBlockBody (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12803:10)\n    at Parser.parseBlock (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12791:10)\n    at Parser.parseFunctionBody (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:11634:24)\n    at Parser.parseArrowExpression (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:11609:10)\n    at Parser.parseParenAndDistinguishExpression (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:11222:12)");
 
 /***/ }),
 
@@ -574,6 +407,7 @@ function moveLabel() {
   \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
 /* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! marked */ "./node_modules/marked/lib/marked.esm.js");
@@ -607,6 +441,7 @@ function trimString(a) {
   \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createCustomElement: () => (/* binding */ createCustomElement),
@@ -724,6 +559,7 @@ function evaluateTemplate(template, context) {
   \*********************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -787,6 +623,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `@media only screen and (max-width: 767
   \******************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -906,6 +743,7 @@ button:hover {
   \*****************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /*
@@ -1000,6 +838,7 @@ module.exports = function (cssWithMappingToString) {
   \************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 module.exports = function (item) {
@@ -1025,6 +864,7 @@ module.exports = function (item) {
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1039,6 +879,7 @@ __webpack_require__.r(__webpack_exports__);
   \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1053,6 +894,7 @@ __webpack_require__.r(__webpack_exports__);
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1067,6 +909,7 @@ __webpack_require__.r(__webpack_exports__);
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1081,6 +924,7 @@ __webpack_require__.r(__webpack_exports__);
   \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1095,6 +939,7 @@ __webpack_require__.r(__webpack_exports__);
   \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1109,6 +954,7 @@ __webpack_require__.r(__webpack_exports__);
   \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1123,67 +969,12 @@ __webpack_require__.r(__webpack_exports__);
   \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("header{\n    padding: 10px;\n    display: flex;\n    justify-content: space-between;\n    // align-items: end;\n    // flex-direction: column;\n    a{\n        margin: 10px;\n    }\n    img{\n        width: 100px;\n        height: 100px;\n        margin-left: 20px;\n    }\n    #header-logo{\n        display: flex;\n        align-items: center;\n        text-align: center;\n        h1{\n            margin: 0;\n        }\n        small{\n            margin: 0;\n        }\n    }\n    nav#links{\n        display: flex;\n        a{\n            margin: 10px;\n        }\n    }\n\n    @media (max-width: 900px) {\n        flex-direction: column;\n        align-items: center;\n       #header-logo {\n        display: flex;\n            flex-direction: column;\n            align-items: center;\n\n        img {\n            width: 80px;\n            height: 80px;\n            margin-left: 0;\n        }\n\n        nav#links {\n            flex-direction: column;\n            align-items: center;\n            a {\n                margin: 5px 0;\n            }\n        }\n    }\n}");
-
-/***/ }),
-
-/***/ "./app/components/input/style.scss.txt":
-/*!*********************************************!*\
-  !*** ./app/components/input/style.scss.txt ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("label {\r\n    // margin: 10px;\r\n    // box-sizing: border-box;\r\n    &:not(:has(input[type=radio], input[type=checkbox])){\r\n        font-size: 1.2rem;\r\n    } \r\n\r\n        \r\n    position: relative;\r\n    margin-bottom: 5px;\r\n    margin-top: 5px;\r\n    display: inline-block;\r\n    width: 100%;\r\n    input:not([type=radio],[type=checkbox]),textarea{\r\n        width: 100%;\r\n    }\r\n\r\n    .text {\r\n        position: absolute;\r\n        z-index: 1;\r\n        transition: all 0.5s;\r\n        transform: translate(8px, 14px);\r\n        user-select: none;\r\n        cursor: text;\r\n    }\r\n\r\n    &.moveLabel {\r\n        .text {\r\n            transform: translate(0px, -7px);\r\n            font-size: 0.75rem;\r\n            font-weight: bold;\r\n        }\r\n    }\r\n    .password-container{\r\n        position: relative;\r\n        // background-color: #ccc;\r\n        .password-toggle {\r\n            width: 24px;\r\n            position: absolute;\r\n            top: 27px;\r\n            translate: -100% -50%;\r\n            right: 0;\r\n            scale: .8;\r\n            cursor: pointer;\r\n            font-size: 12px;\r\n        }\r\n    }\r\n\r\n    .static-label-text {\r\n        font-size: 0.75rem;\r\n        white-space: nowrap;\r\n        margin-top: 4px;\r\n    }\r\n\r\n    &[for=\"remember-me\"] {\r\n        translate: -44px 0;\r\n        display: flex;\r\n        align-items: center;\r\n        justify-content: center;\r\n\r\n        input {\r\n            scale: 1.3;\r\n            translate: 5px -5px;\r\n            transform-origin: top left;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n\r\n    input, textarea{\r\n        // width: 80%;\r\n        margin: 10px 0 0 0;\r\n        padding: 10px;\r\n        border: 1px solid #ccc;\r\n        border-radius: 5px;\r\n    }\r\n\r\n    textarea {\r\n        resize: vertical;\r\n        min-height: 100px;\r\n    }\r\n\r\n    .hide-password {\r\n        display: none;\r\n    }\r\n\r\n    .show-password {\r\n        display: block;\r\n    }\r\n\r\n    &[password-toggle=\"show\"] {\r\n        .hide-password {\r\n            display: block;\r\n        }\r\n\r\n        .show-password {\r\n            display: none;\r\n        }\r\n    }\r\n\r\n    .error-message {\r\n        font-size: 0.8rem;\r\n        user-select: none;\r\n        z-index: 1;\r\n        line-height: 12px;\r\n    }\r\n    .images-container{\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        position: relative;\r\n        // justify-content: center;\r\n        // .file-name{\r\n        //     font-size: 15px;\r\n        //     margin-top: 10px;\r\n        //     text-align: center;\r\n        // }\r\n        img{\r\n            width: 100%;\r\n            height: 100%;\r\n            object-fit: cover;\r\n            // margin-right: 10px;\r\n            // margin-bottom: 10px;\r\n        }\r\n        .img-container{\r\n\r\n                overflow: hidden !important;\r\n            position: relative;\r\n            button.delete-button {\r\n                position: absolute;\r\n                left: 0;\r\n            }\r\n        }\r\n\r\n        &.file-input-display{\r\n            width: 200px;\r\n            height: 200px;\r\n            // overflow: visible;\r\n            overflow: hidden;\r\n            cursor: pointer;\r\n            &:not(.has-images){\r\n                border: 1px solid black;\r\n            }\r\n          \r\n            .alias{\r\n                font-size: 12px;\r\n                text-align: center;\r\n                margin: 10px;\r\n             \r\n            }\r\n            .ifEmpty{\r\n                margin: auto;\r\n            }\r\n\r\n            &.has-images{\r\n                .ifEmpty{\r\n                    display: none;\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\n.file-input-component {\r\n    .img-container:not(:empty){\r\n        border: 1px solid black;\r\n    }\r\n\r\n    width: 220px;\r\n    .label-container{\r\n        position: relative;\r\n        width: 200px;\r\n        height: 200px;\r\n        overflow: visible;\r\n        margin: auto;\r\n    }\r\n\r\n    .delete-button{\r\n        position: absolute;\r\n        top: 0;\r\n        right: 0;\r\n        background-color: red;\r\n        color: white;\r\n        border: none;\r\n        padding: 5px;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .file-name, .error{\r\n        // position: absolute;\r\n        text-align: center;\r\n    }\r\n    .error {\r\n        border: 1px solid black;\r\n        color: red;\r\n        font-weight: bold;\r\n    }\r\n\r\n\r\n\r\n}\r\n.file-input-component[haserror=true]{\r\n\r\n    .alert-icon{\r\n        position: absolute;\r\n        top: 10px;\r\n        left: 10px;\r\n        font-size: 20px;\r\n        color: #ff0000; // warning color\r\n    }\r\n}\r\n.file-input-component[haserror=false]{\r\n\r\n    .alert-icon{\r\n        display: none;\r\n    }\r\n}\r\n\r\n");
-
-/***/ }),
-
-/***/ "./app/components/input/types/file-input.html.txt":
-/*!********************************************************!*\
-  !*** ./app/components/input/types/file-input.html.txt ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"file-input-component\" style=\"position: relative;\">\r\n    <div class=\"label-container\">\r\n        <label for=\"${fieldName}\" style=\"\">\r\n            <input style=\"opacity: 0; height: 0; width: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);\" ${required ? \"required\" : \"\" } type=\"file\" id=\"${fieldName}\" name=\"${fieldName}\"\r\n            ${multiple ? \"multiple=true\" : \"\" } ${accept ? `accept=\"${accept}\" ` : \"\" } />\r\n            <div class=\"images-container file-input-display\">\r\n                <div class=\"ifEmpty\">\r\n                    <div class=\"alias\">${alias ? alias : \"\"}</div>\r\n                </div>\r\n            </div>\r\n        </label>\r\n    </div>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</div>");
-
-/***/ }),
-
-/***/ "./app/components/input/types/text-input.html.txt":
-/*!********************************************************!*\
-  !*** ./app/components/input/types/text-input.html.txt ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<label for=\"${fieldName}\" class=\"${labelClass || \"\"}\" style=\"${width ? \"width:\"+ width + \";\" : \"\"}\">\r\n    <small class=\"text\" part=\"labelText\">${alias && required ? alias + \"*\" : alias ? alias : \"\"} </small>\r\n    <input placeholder=\"${placeholder}\" type=\"${type}\" id=\"${fieldName}\" name=\"${fieldName}\" class=\"${labelClass || \"\"}\" ${required ? \"required\" :\"\"} ${type === 'number' ? 'min=\"0\"' : ''} />\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</label>");
-
-/***/ }),
-
-/***/ "./app/components/input/types/textarea-input.html.txt":
-/*!************************************************************!*\
-  !*** ./app/components/input/types/textarea-input.html.txt ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<div>${description}</div>\r\n<label for=\"${fieldName}\" style=\"width: 100%; box-sizing: border-box; margin-top: 20px;\" >\r\n    <small class=\"text\" part=\"labelText\">${alias && required ? alias + \"*\" : alias ? alias : \"\"} </small>\r\n    <textarea  placeholder=\"${placeholder}\" id=\"${fieldName}\" name=\"${fieldName}\" ${required ? \"required\" : \"\"}></textarea>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</label>");
 
 /***/ }),
 
@@ -1193,6 +984,7 @@ __webpack_require__.r(__webpack_exports__);
   \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1207,6 +999,7 @@ __webpack_require__.r(__webpack_exports__);
   \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1221,6 +1014,7 @@ __webpack_require__.r(__webpack_exports__);
   \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1273,6 +1067,7 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
   \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1325,6 +1120,7 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
   \****************************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 var stylesInDOM = [];
@@ -1418,6 +1214,7 @@ module.exports = function (list, options) {
   \********************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 var memo = {};
@@ -1461,6 +1258,7 @@ module.exports = insertBySelector;
   \**********************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -1480,6 +1278,7 @@ module.exports = insertStyleElement;
   \**********************************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -1499,6 +1298,7 @@ module.exports = setAttributesWithoutAttributes;
   \***************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -1569,6 +1369,7 @@ module.exports = domAPI;
   \*********************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -1592,6 +1393,7 @@ module.exports = styleTagTransform;
   \***********************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Hooks: () => (/* binding */ _Hooks),
@@ -4243,8 +4045,9 @@ const lexer = _Lexer.lex;
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
+"use strict";
 /*!*******************************************!*\
   !*** ./app/components/component-build.js ***!
   \*******************************************/
