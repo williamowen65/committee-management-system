@@ -1067,7 +1067,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("APPPPPPPLICATION\n${mailingAddress}\n\n${waStateBusinessLicenseUbiNumber}\n\n${websiteSocialMedia}\n${medium}\n${email}\n${artistMentor}\n${digitalImage1}\n${digitalImage2}\n${digitalImage4}\n${hasBeenReviewed}\n${phone}\n${digitalImage3}\n${firstName}\n${studioAddress}\n${lastName}\n${artistStatement}\n${isWithinBoundaries}");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n<div>\n    <p>First Name: ${firstName}</p>\n    <p>Last Name: ${lastName}</p>\n    <p>Medium: ${medium}</p>\n    <p>Email: ${email}</p>\n    <p>Phone: ${phone}</p>\n    <p>Mailing Address: ${mailingAddress}</p>\n    <p>Studio Address: ${studioAddress}</p>\n    <p>Website/Social Media: ${websiteSocialMedia}</p>\n    <p>Artist Mentor: ${artistMentor}</p>\n    <p>Digital Image 1: <img width=\"200px\"; src=\"${digitalImage1}\" alt=\"Digital Image 1\"></p>\n    <p>Digital Image 2: <img width=\"200px\"; src=\"${digitalImage2}\" alt=\"Digital Image 2\"></p>\n    <p>Digital Image 3: <img width=\"200px\"; src=\"${digitalImage3}\" alt=\"Digital Image 3\"></p>\n    <p>Digital Image 4: <img width=\"200px\"; src=\"${digitalImage4}\" alt=\"Digital Image 4\"></p>\n    <p>Has Been Reviewed: ${hasBeenReviewed}</p>\n    <p>WA State Business License UBI Number: ${waStateBusinessLicenseUbiNumber}</p>\n    <p>Artist Statement: ${artistStatement}</p>\n    <p>Is Within Boundaries: ${isWithinBoundaries}</p>\n</div>");
 
 /***/ }),
 
