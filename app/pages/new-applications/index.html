@@ -61,19 +61,17 @@
 
 
     
-                    setTimeout(() => {
-                        // Bind the data from this application to the component
-                        const appEl = document.querySelector(`#${randomId}`);
+                    console.log("HI", {application})
+                    
+                    // set the images
+                    // const images = [application["digitalImage1"], application["digitalImage2"], application["digitalImage3"], application["digitalImage4"]];
+                    // const fileInputComponents = document.querySelectorAll(`file-input-component`);
+                    // fileInputComponents.forEach((fileInputComponent, index) => {
+                    //     // fileInputComponent.setAttribute('src', images[index]);
+                    //     fileInputComponent.setImage(images[index]);
+                    // });
 
-                        appEl.connectedCallback();
-                        // set radio buttons
-                        // const radio = appEl.querySelector(`#isWithinBoundaries`)
-    
-                        // radio.checked = true
-                        
-                        // console.log({application, appEl, radio});
-    
-                    }, 1000);
+
 
                 
 

@@ -93,6 +93,8 @@ export async function createCustomElement(name, onload, html, css, options ={}) 
                 createdAt: this.getAttribute('createdAt') || '',
                 studioSharingResponse: this.getAttribute('studioSharingResponse') || '',
                 howDidYouHearAboutUs: this.getAttribute('howDidYouHearAboutUs') || '',
+                artistStatement: this.getAttribute('artistStatement') || '',
+                websiteSocialMedia: this.getAttribute('website-social-media') || '',
                 randomId
                 // paypalClientId: this.getAttribute('PAYPAL_CLIENT_ID') || '',
             };

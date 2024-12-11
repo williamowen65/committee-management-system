@@ -133,13 +133,16 @@ ${howDidYouHearAboutUs}
                 file-input-component {
                     margin: 10px;
                 }
+                img {
+                    width: 200px;
+                    height: 200px;
+                    object-fit: cover;
+                    margin: 10px;
+                }
             </style>
-            <file-input-component required="true" fieldName="digitalImage1" alias="Digital Image 1"
-                accept=".jpg,.jpeg,.png"></file-input-component>
-            <file-input-component required="true" fieldName="digitalImage2" alias="Digital Image 2"
-                accept=".jpg,.jpeg,.png"></file-input-component>
-            <file-input-component required="true" fieldName="digitalImage3" alias="Digital Image 3"
-                accept=".jpg,.jpeg,.png"></file-input-component>
+            <img src="${digitalImage1}"></img>
+            <img src="${digitalImage2}"></img>
+            <img src="${digitalImage3}"></img>
         </div>
 
         <h3>One (1) digital image of your studio (if it is within the studio tour boundaries and you will be showing
@@ -149,17 +152,17 @@ ${howDidYouHearAboutUs}
             and is represented well in your photo.</p>
 
         <div style="display: flex; justify-content: center; flex-wrap: wrap;">
-
-            <file-input-component required="true" fieldName="digitalImage4" alias="Digital Image 1"
-                accept=".jpg,.jpeg,.png"></file-input-component>
+            <img src="${digitalImage3}"></img>
         </div>
 
         <h3>Artist Statement</h3>
-        <textarea-component fieldName="artistStatement" placeholder="Artist Statement" required
-            description="This  is a short statement that describes what art you make, how you make it and why you make it.  (Limit 200 words)"></textarea-component>
+        <textarea-component fieldName="artistStatement-${randomId}" placeholder="Artist Statement" required
+            description="This  is a short statement that describes what art you make, how you make it and why you make it.  (Limit 200 words)"
+            value="${artistStatement}"></textarea-component>
         <h3>Your art website or social media sites</h3>
-        <textarea-component placeholder="Website & Social media presence " fieldName="website-social-media" required
-            description="If you have an art website and/or social media sites, list them here.  If you don't have any of those, type in NONE"></textarea-component>
+        <textarea-component placeholder="Website & Social media presence " fieldName="website-social-media-${randomId}" required
+            description="If you have an art website and/or social media sites, list them here.  If you don't have any of those, type in NONE"
+            value="${websiteSocialMedia}"></textarea-component>
 
             <div style="text-align: center;">
                 <button>Approve</button>
