@@ -497,7 +497,7 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         // Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )
-        if (file.size < 2000000) {
+        if (file.size < 1000000) {
           var error = document.createElement('p');
           error.textContent = 'This image is too small. Please upload a 2-3MB image.';
           error.classList.add('error');
