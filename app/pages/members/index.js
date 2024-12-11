@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
           const sidePanel = getGhostSidePanel(contract.committeeRoleId)
 
-          document.querySelector('#user-role').innerHTML = `<h3>Committee Role:</h3>${sidePanel.trim() ? sidePanel : 'No role assigned'}`
+          document.querySelector('#user-role').innerHTML = `<h3>My Committee Role${contract.committeeRoleId.length > 1 ? 's' : ''}:</h3>${sidePanel.trim() ? sidePanel : 'No role assigned'}`
 
 
 
@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
          * @param {Array int} roleId
          */
         function getGhostSidePanel(roleIds) {
+          if(!roleIds) return ''
           return roleIds.map(roleId => {
             const role = roles[roleId].title
             console.log({ role })

@@ -696,7 +696,7 @@ function _createCustomElement() {
                   width: this.getAttribute('width') || '',
                   slotLinks: this.getAttribute('slotLinks') || '',
                   placeholder: this.getAttribute('placeholder') || '',
-                  app: {}
+                  test: this.getAttribute('test') || ''
                   // PAYPAL_CLIENT_ID: this.getAttribute('PAYPAL_CLIENT_ID') || '',
                 };
                 var evaluatedTemplate = evaluateTemplate(html, context);
@@ -1045,7 +1045,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("APPPPPPPLICATION\n${app.test}");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("APPPPPPPLICATION\n${test}");
 
 /***/ }),
 
