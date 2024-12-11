@@ -125,13 +125,13 @@ createCustomElement('file-input-component', function () {
                     this.querySelector(".file-input-component").setAttribute('hasError', true);
                 }
                 // make sure the image isn't too big
-                if (file.size > 3000000) { // 3 MB
-                    const error = document.createElement('p');
-                    error.textContent = 'File is too large. Please upload an image less than 3 mb.';
-                    error.classList.add('error');
-                    parentContainer.appendChild(error);
-                    this.querySelector(".file-input-component").setAttribute('hasError', true);
-                }
+                // if (file.size > 3000000) { // 3 MB
+                //     const error = document.createElement('p');
+                //     error.textContent = 'File is too large. Please upload an image less than 3 mb.';
+                //     error.classList.add('error');
+                //     parentContainer.appendChild(error);
+                //     this.querySelector(".file-input-component").setAttribute('hasError', true);
+                // }
 
 
                 // Get attribute "square" from component

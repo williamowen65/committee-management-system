@@ -507,14 +507,13 @@ __webpack_require__.r(__webpack_exports__);
           _this.querySelector(".file-input-component").setAttribute('hasError', true);
         }
         // make sure the image isn't too big
-        if (file.size > 3000000) {
-          // 3 MB
-          var _error = document.createElement('p');
-          _error.textContent = 'File is too large. Please upload an image less than 3 mb.';
-          _error.classList.add('error');
-          parentContainer.appendChild(_error);
-          _this.querySelector(".file-input-component").setAttribute('hasError', true);
-        }
+        // if (file.size > 3000000) { // 3 MB
+        //     const error = document.createElement('p');
+        //     error.textContent = 'File is too large. Please upload an image less than 3 mb.';
+        //     error.classList.add('error');
+        //     parentContainer.appendChild(error);
+        //     this.querySelector(".file-input-component").setAttribute('hasError', true);
+        // }
 
         // Get attribute "square" from component
         var squareRequirement = _this.getAttribute('square-requirement');
@@ -530,10 +529,10 @@ __webpack_require__.r(__webpack_exports__);
               height: height
             });
             if (width !== height) {
-              var _error2 = document.createElement('p');
-              _error2.textContent = 'Image is not square. Please upload a square image.';
-              _error2.classList.add('error');
-              parentContainer.appendChild(_error2);
+              var _error = document.createElement('p');
+              _error.textContent = 'Image is not square. Please upload a square image.';
+              _error.classList.add('error');
+              parentContainer.appendChild(_error);
             }
           };
         }
