@@ -51,6 +51,7 @@ export async function createCustomElement(name, onload, html, css, options ={}) 
         }
 
         updateTemplate() {
+            const randomId = Math.floor(Math.random() * 1000000);
             const context = {
                 fieldName: this.getAttribute('fieldName') || 'defaultFieldName',
                 alias: this.getAttribute('alias') || '',
@@ -90,6 +91,9 @@ export async function createCustomElement(name, onload, html, css, options ={}) 
                 artistStatement: this.getAttribute('artistStatement') || '',
                 isWithinBoundaries: this.getAttribute('isWithinBoundaries') || '',
                 createdAt: this.getAttribute('createdAt') || '',
+                studioSharingResponse: this.getAttribute('studioSharingResponse') || '',
+                howDidYouHearAboutUs: this.getAttribute('howDidYouHearAboutUs') || '',
+                randomId
                 // paypalClientId: this.getAttribute('PAYPAL_CLIENT_ID') || '',
             };
 

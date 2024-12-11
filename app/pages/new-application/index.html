@@ -64,7 +64,7 @@
         <textarea-component required="true" fieldName="studio-address" alias="Studio Address"></textarea-component>
         <textarea-component required="true" fieldName="mailing-address" alias="Mailing Address"></textarea-component>
 
-        <h3>Medium(s)</h3>
+        <h3>Medium(s) *</h3>
         <input-component required="true" fieldName="medium"
             placeholder="Comma separated list of mediums"></input-component>
 
@@ -88,7 +88,7 @@
             No, my studio is outside the boundary and I will need to share studio space with another artist
         </label>
 
-        <h3>Studio Availability</h3>
+        <h3>Studio Availability *</h3>
         <style>
             input,
             textarea {
@@ -106,11 +106,11 @@
         <p style="margin: 0;">If sharing a studio, have you made arrangements to do so? If so, please name the Tour
             Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host
             you in their studio.</p>
-        <textarea style="width: 100%; box-sizing: border-box; "></textarea>
+        <textarea required name="studioSharingResponse" style="width: 100%; box-sizing: border-box; "></textarea>
         <!-- <textarea-component description="If sharing a studio, have you made arrangements to do so? If so, please name the Tour Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host you in their studio."></textarea-component> -->
 
         <h3>I would like an artist mentor (an experienced artist who can talk to me about preparing for the tour,
-            marketing and answer my questions)</h3>
+            marketing and answer my questions) *</h3>
         <label for="artistMentor">
             <input required type="radio" name="artistMentor" value="Yes, I would like an artist mentor"
                 id="artistMentor"></input>
@@ -122,10 +122,10 @@
             No, I do not need an artist mentor
         </label>
 
-        <h3>How did you hear about the GHOST Tour?</h3>
-        <textarea style="width: 100%; box-sizing: border-box; "></textarea>
+        <h3>How did you hear about the GHOST Tour? *</h3>
+        <textarea required name="howDidYouHearAboutUs" style="width: 100%; box-sizing: border-box; "></textarea>
 
-        <h3>Three (3) digital images of your art</h3>
+        <h3>Three (3) digital images of your art *</h3>
         <p>Make sure that your images look professional and are jpgs that are a minimum of 150 KB (No thumbnails). 2D art should only
             be of your art image (no background or frame.) 3D art and jewelry should have a plain background (ex, black
             or white) and have enough lighting to show good detail. Crop the image so that your art fills most of the
@@ -155,9 +155,9 @@
                 accept=".jpg,.jpeg,.png"></file-input-component>
         </div>
 
-        <h3>Artist Statement</h3>
+        <h3>Artist Statement *</h3>
         <textarea-component fieldName="artistStatement" placeholder="Artist Statement" required description="This  is a short statement that describes what art you make, how you make it and why you make it.  (Limit 200 words)"></textarea-component>
-        <h3>Your art website or social media sites</h3>
+        <h3>Your art website or social media sites *</h3>
         <textarea-component placeholder="Website & Social media presence " fieldName="website-social-media" required description="If you have an art website and/or social media sites, list them here.  If you don't have any of those, type in NONE"></textarea-component>
 
         <button type="submit" style="margin: auto; display: block; ">Submit Application</button>
