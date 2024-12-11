@@ -32,8 +32,11 @@
         </div>
         <div>
             <h4>Status: </h4>
-            <span>${approved ? "Approved" : ""}</span>
-            <span>${hasBeenReviewed ? "Not been reviewed" : !approved ? "Not Approved" : ""}</span>
+            <span class="status">
+                <span>${approved ? "Approved" : ""}</span>
+                <span>${hasBeenReviewed=='true' ? "" : "Has not been approved"}</span>
+                <span>${hasBeenReviewed ? "" : !approved ? "Not Approved" : ""}</span>
+            </span>
             <!-- <span>${approved  ? "Approved" :  hasBeenReviewed ?  "Not Approved": "Has not been reviewed" }</span> -->
         </div>
         <button class="expandApplication show" onclick="event.target.closest('.artist-application-review').classList.toggle('expanded')"

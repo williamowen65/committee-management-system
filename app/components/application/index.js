@@ -35,6 +35,14 @@ window.updateReview = function (event, reviewAnswer) {
     setTimeout(() => {
       button.removeAttribute('disabled')
       button.innerHTML = btnText
+    
+      // collapse the application
+        const application = button.closest('.artist-application-review')
+        application.classList.toggle('expanded');
+
+        // update status text
+        application.querySelector('.status').innerHTML = reviewAnswer ? 'Approved' : 'Not Approved'
+
     }, 3000)
 
     // move and collapse the application
