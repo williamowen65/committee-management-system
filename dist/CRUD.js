@@ -48,7 +48,10 @@ window.CRUD = {
             const docData = doc.data()
             docData.fbId = doc.id
 
-            docData.createdAt = docData.createdAt.toDate().toLocaleDateString()
+            if(docData.createdAt){
+
+                docData.createdAt = docData.createdAt.toDate().toLocaleDateString()
+            }
 
             data.push(docData)
         })

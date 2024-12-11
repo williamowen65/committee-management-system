@@ -14,8 +14,31 @@ createCustomElement('application-component', function () {
 }, applicationTemplate, styles);
 
 
-window.updateReview = function (event) {
-  alert("update review")
+window.updateReview = function (event, reviewAnswer) {
+    console.log("updateReview", event)
+    // update button to loading
+    const button = event.target;
+    const btnText = button.innerHTML
+    button.setAttribute('disabled', 'disabled')
+    button.innerHTML = 'Loading...'
+
+    // get the fbId
+    const fbId = button.getAttribute('data-fb-id');
+
+
+  CRUD.update('new-applications', fbId, 
+    {hasBeenReviewed: true, approved: reviewAnswer} )
+  .then(() =>{
+
+    // update the button text
+    button.innerHTML = 'Review Submitted'
+    setTimeout(() => {
+      button.removeAttribute('disabled')
+      button.innerHTML = btnText
+    }, 3000)
+
+    // move and collapse the application
+  })
 }
 
 // export function toggleApplication(event){

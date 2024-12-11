@@ -32,7 +32,7 @@
         </div>
         <div>
             <h4>Status: </h4>
-            <span>${approved  ? "Approved" :  hasBeenReviewed ? "Has not been reviewed" : "Not Approved"}</span>
+            <span>${approved  ? "Approved" :  hasBeenReviewed ?  "Not Approved": "Has not been reviewed" }</span>
         </div>
         <button class="expandApplication show" onclick="event.target.closest('.artist-application-review').classList.toggle('expanded')"
         >${hasBeenReviewed =='true' ? "Review Old Application" : "Review"}</button>
@@ -169,10 +169,9 @@ ${howDidYouHearAboutUs}
             value="${websiteSocialMedia}"></textarea-component>
 
             <div style="text-align: center;">
-              
+                <button data-fb-id="${fbId}" onclick="window.updateReview(event,true)">Approve</button>
+                <button data-fb-id="${fbId}" onclick="window.updateReview(event,false)">Disapprove</button>
 
-                <button onclick="CRUD.update('new-applications', '${fbId}', {hasBeenReviewed: true, approved: true} ).then(() => console.log('Success'))" class="approve">Approve</button>
-                <button onclick="CRUD.update('new-applications', '${fbId}', {hasBeenReviewed: true, approved: false} ).then(() => console.log('Success'))" class="disapprove">Disapprove</button>
             </div>
     </div>
 
