@@ -18,7 +18,9 @@ window.CRUD = {
         console.log("read data", { collection, id })
         const docRef = firebase.doc(firebase.collection(firebase.db, collection), id)
         const doc = await firebase.getDoc(docRef)
-        return doc.data();
+        const docData = doc.data()
+        docData.fbId = doc.id
+        return docData;
     },
     listen: async function (collection, id, cb) {
         if (id) {
@@ -29,7 +31,9 @@ window.CRUD = {
             return firebase.onSnapshot(firebase.collection(firebase.db, collection), (snapshot) => {
                 const data = []
                 snapshot.forEach(doc => {
-                    data.push(doc.data())
+                    const docData = doc.data()
+                    docData.fbId = doc.id
+                    data.push(docData)
                 })
                 cb(data)
             });
@@ -42,6 +46,7 @@ window.CRUD = {
         docs.forEach(doc => {
             // convert createdAt to a formatted date
             const docData = doc.data()
+            docData.fbId = doc.id
 
             docData.createdAt = docData.createdAt.toDate().toLocaleDateString()
 

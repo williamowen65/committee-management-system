@@ -95,6 +95,8 @@ export async function createCustomElement(name, onload, html, css, options ={}) 
                 howDidYouHearAboutUs: this.getAttribute('howDidYouHearAboutUs') || '',
                 artistStatement: this.getAttribute('artistStatement') || '',
                 websiteSocialMedia: this.getAttribute('website-social-media') || '',
+                fbId: this.getAttribute('fbId') || '',
+                approved: this.getAttribute('approved') && this.getAttribute('approved') == "true" || false,
                 randomId
                 // paypalClientId: this.getAttribute('PAYPAL_CLIENT_ID') || '',
             };

@@ -7,24 +7,16 @@ import styles from './style.scss.txt';
 createCustomElement('application-component', function () {
 
         
+    // Fot some reason whe nthe component is loaded via javascript, this call back doesnt fire.
 
-        // console.log(`application-component loaded`);
-    
-        // // set the radio buttons... check attribute
-        // const isWithinBoundaries = this.getAttribute('isWithinBoundaries');
-        // const radioButton = this.querySelector(`input[value="${isWithinBoundaries}"]`);
-        // console.log({radioButton})
-        // radioButton.checked = true;
-
-        this.querySelector('button.expandApplication').addEventListener('click', (e) => {
-            const application = this.querySelector('.artist-application-review');
-            application.classList.toggle('expanded');
-        })
+    // events must be inline
 
 }, applicationTemplate, styles);
 
 
-
+window.updateReview = function (event) {
+  alert("update review")
+}
 
 // export function toggleApplication(event){
 //     event.target.closest('.artist-application-review').classList.toggle('expanded');
