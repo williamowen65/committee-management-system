@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         CRUD.read('ghost-contracts', user.uid).then(contract => {
           console.log(contract)
           // Get role name
-
+          contract.committeeRoleId = contract.committeeRoleId || []
           const sidePanel = getGhostSidePanel(contract.committeeRoleId)
 
           document.querySelector('#user-role').innerHTML = `<h3>My Committee Role${contract.committeeRoleId.length > 1 ? 's' : ''}:</h3>${sidePanel.trim() ? sidePanel : 'No role assigned'}`
