@@ -211,6 +211,23 @@ function initializePaypalButtons() {
 
 /***/ }),
 
+/***/ "./app/components/application/index.js":
+/*!*********************************************!*\
+  !*** ./app/components/application/index.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/application/index.html.txt");
+/* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
+
+
+// import styles from './style.scss.txt';
+
+(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('application-component', function () {}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], "");
+
+/***/ }),
+
 /***/ "./app/components/dual-login-form/index.js":
 /*!*************************************************!*\
   !*** ./app/components/dual-login-form/index.js ***!
@@ -676,7 +693,8 @@ function _createCustomElement() {
                   "description": this.getAttribute('description') || '',
                   width: this.getAttribute('width') || '',
                   slotLinks: this.getAttribute('slotLinks') || '',
-                  placeholder: this.getAttribute('placeholder') || ''
+                  placeholder: this.getAttribute('placeholder') || '',
+                  app: {}
                   // PAYPAL_CLIENT_ID: this.getAttribute('PAYPAL_CLIENT_ID') || '',
                 };
                 var evaluatedTemplate = evaluateTemplate(html, context);
@@ -1012,6 +1030,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n<div class=\"payPalContainer\" style=\"\"></div>");
+
+/***/ }),
+
+/***/ "./app/components/application/index.html.txt":
+/*!***************************************************!*\
+  !*** ./app/components/application/index.html.txt ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("APPPPPPPLICATION\n${app.phone}");
 
 /***/ }),
 
@@ -4225,7 +4257,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dual_login_form_global_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./dual-login-form/global.scss */ "./app/components/dual-login-form/global.scss");
 /* harmony import */ var _footer_index_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./footer/index.js */ "./app/components/footer/index.js");
 /* harmony import */ var _3rdParty_paypal_index_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./3rdParty/paypal/index.js */ "./app/components/3rdParty/paypal/index.js");
+/* harmony import */ var _application_index_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./application/index.js */ "./app/components/application/index.js");
  // Import the styles (These are really the global styles for the app -- They could have their own web pack config)
+
 
 
 

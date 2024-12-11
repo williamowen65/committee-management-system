@@ -8,6 +8,7 @@
     <script src="/dist/components.js"></script>
     <script type="module" src="/dist/firebase.js"></script>
     <link rel="stylesheet" href="/dist/styles.css" />
+    <script type="module" src="/dist/crud.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,6 +17,25 @@
             /* background-color: #f4f4f4; */
         }
     </style>
+    <script>
+        // possibly redirect based on user roles
+        document.addEventListener("DOMContentLoaded", function() {
+
+
+            CRUD.readAll('new-applications').then(applications => {
+                console.log(applications);
+                
+                applications.forEach(application => {
+                    const applicationComponent = document.createElement('application-component');
+                  
+                    // Bind the data from this application to the component
+                    applicationComponent.app = application;
+
+                    document.querySelector('#applications').appendChild(applicationComponent);
+                });
+            });
+        });
+    </script>
 
     <!-- Must have the correct role to  view this page: Artist Application Chair or President -->
 </head>
@@ -26,6 +46,7 @@
     <div class="container">
         Review new artist applications<br>
         page should only be view able by the admin and application chair
+        <div id="applications"></div>
     </div>
 
     <footer-component></footer-component>
