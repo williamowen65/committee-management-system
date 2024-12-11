@@ -30,7 +30,10 @@
             <p>Has Been Reviewed: ${hasBeenReviewed}</p>
             <p>Created At: ${createdAt}</p>
         </div>
-        <button class="expandApplication" onclick="event.target.closest('.artist-application-review').classList.toggle('expanded')        ">${hasBeenReviewed =='true' ? "Review Old Application" : "Review"}</button>
+        <button class="expandApplication show" onclick="event.target.closest('.artist-application-review').classList.toggle('expanded')"
+        >${hasBeenReviewed =='true' ? "Review Old Application" : "Review"}</button>
+        <button class="expandApplication hide" onclick="event.target.closest('.artist-application-review').classList.toggle('expanded')"
+        >Minimize Application</button>
         
     </div>
     <div class="app-contents">
@@ -154,8 +157,10 @@
         <textarea-component placeholder="Website & Social media presence " fieldName="website-social-media" required
             description="If you have an art website and/or social media sites, list them here.  If you don't have any of those, type in NONE"></textarea-component>
 
-            <button>Approve</button>
-        <button>Disapprove</button>
+            <div style="text-align: center;">
+                <button>Approve</button>
+                <button>Disapprove</button>
+            </div>
     </div>
 
 </div>

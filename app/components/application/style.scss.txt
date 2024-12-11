@@ -2,14 +2,28 @@
     .app-contents{
         display: none
     }
+    .app-contents, .app-preview{
+        padding: 10px;
+        margin: 10px;
+    }
+    .expandApplication.hide{
+        display: none;
+    }
 
     &.expanded{
         border: 1px solid black;
-        
-        .app-contents, .app-preview{
-            padding: 10px;
-            margin: 10px;
+
+        .expandApplication{
+
+            &.hide{
+                display: block;
+            }
+            &.show{
+                display: none;
+            }
         }
+        
+      
         .app-contents{
             display: block;
         }
