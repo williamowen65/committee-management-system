@@ -29,34 +29,37 @@ document.addEventListener('DOMContentLoaded', function () {
          * @param {Array int} roleId
          */
         function getGhostSidePanel(roleIds) {
-          if(!roleIds) return ''
+          if (!roleIds) return ''
           return roleIds.map(roleId => {
             const role = roles[roleId].title
             console.log({ role })
             userRoles[roleId] = role
-            switch (role) {
-              case 'New Artist Applications Chair':
-              case 'President':
-                setTimeout(() => {
-                  // listen to new applications changes
-                  CRUD.listen('new-applications', null, (newApplications) => {
-                    console.log({ newApplications })
-                    const totalToReview = newApplications.filter(app => app.hasBeenReviewed === false).length
-                    const badge = document.querySelector('.badge')
-                    badge.innerText = totalToReview
-                    badge.setAttribute('data-count', totalToReview)
-                  })
-                }, 1)
 
-                return `
-                <h4>${role}</h4>
-                  <a href="/new-applications">
-                    <button style="position: relative;">New Artist Applications Received <span class="badge" data-count="0"></span></button>
-                </a>`
+            let sidePanelHTML = `<h4>${role}</h4>`
+            if(role === 'New Artist Applications Chair') {
+              sidePanelHTML += newApplicationsSidePanel(role)
+            } else if (role === 'President'){
+              sidePanelHTML += [newApplicationsSidePanel(role), newScholarshipApplicationsButton(role)].join("")
+            } else if (["President","Vice President", "Treasurer", "Secretary", "Member-At-Large"].includes(role)){
+              sidePanelHTML += [newScholarshipApplicationsButton(role)].join("")
 
-              default:
-                return `<h4>${role}</h4>`
+            } 
+            else {
+              return ``
             }
+            return sidePanelHTML
+
+            // switch (role) {
+
+            //   case 'New Artist Applications Chair':
+            //   case 'President':
+            //     return newApplicationsSidePanel(role)
+
+
+            //   case 'Artist Applications Chair':
+            //   default:
+            //     return `<h4>${role}</h4>`
+            // }
           }).join("")
         }
       }
@@ -70,3 +73,29 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   })
 })
+
+function newApplicationsSidePanel(role) {
+
+  setTimeout(() => {
+    // listen to new applications changes
+    CRUD.listen('new-applications', null, (newApplications) => {
+      console.log({ newApplications })
+      const totalToReview = newApplications.filter(app => app.hasBeenReviewed === false).length
+      const badge = document.querySelector('.badge')
+      badge.innerText = totalToReview
+      badge.setAttribute('data-count', totalToReview)
+    })
+  }, 1)
+
+  return `
+      <a href="/new-applications">
+        <button style="position: relative;">New Artist Applications Received <span class="badge" data-count="0"></span></button>
+    </a>`
+}
+
+function newScholarshipApplicationsButton(role) {
+  return `
+      <a href="/scholarship-applications">
+        <button>New Scholarship Applications Received</button>
+    </a>`
+}
