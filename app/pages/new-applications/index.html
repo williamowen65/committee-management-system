@@ -29,16 +29,32 @@
 
                     // Create component element
 
-                    document.querySelector('#applications').innerHTML = `<application-component test="123"></application-component>`;
-                   
-                  
+                    document.querySelector('#applications').innerHTML += `
+                    <application-component 
+                    mailing-address="${application["mailing-address"]}"
+                    wa-state-business-license-ubi-number="${application["wa-state-business-license-ubi-number"]}"
+                    website-social-media="${application["website-social-media"]}"
+                    medium="${application["medium"]}"
+                    email="${application["email"]}"
+                    artistMentor="${application["artistMentor"]}"
+                    digitalImage1="${application["digitalImage1"]}"
+                    digitalImage2="${application["digitalImage2"]}"
+                    digitalImage4="${application["digitalImage4"]}"
+                    hasBeenReviewed="${application["hasBeenReviewed"]}"
+                    phone="${application["phone"]}"
+                    digitalImage3="${application["digitalImage3"]}"
+                    firstName="${application["firstName"]}"
+                    studio-address="${application["studio-address"]}"
+                    lastName="${application["lastName"]}"
+                    artistStatement="${application["artistStatement"]}"
+                    isWithinBoundaries="${application["isWithinBoundaries"]}"
+                    ></application-component>`;
+    
                     // Bind the data from this application to the component
-                    applicationComponent.app = application;
                     
 
                     console.log({application});
 
-                    document.querySelector('#applications').appendChild(applicationComponent);
                 });
             });
         });

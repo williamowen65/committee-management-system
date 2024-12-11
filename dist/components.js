@@ -690,17 +690,39 @@ function _createCustomElement() {
                   accept: this.getAttribute('accept') || '',
                   labelClass: this.getAttribute('labelClass') || '',
                   redirect: this.getAttribute('redirect') || '',
-                  "loginImage": this.getAttribute('loginImage') || '',
-                  "signupImage": this.getAttribute('signupImage') || '',
-                  "description": this.getAttribute('description') || '',
+                  loginImage: this.getAttribute('loginImage') || '',
+                  signupImage: this.getAttribute('signupImage') || '',
+                  description: this.getAttribute('description') || '',
                   width: this.getAttribute('width') || '',
                   slotLinks: this.getAttribute('slotLinks') || '',
                   placeholder: this.getAttribute('placeholder') || '',
-                  test: this.getAttribute('test') || ''
-                  // PAYPAL_CLIENT_ID: this.getAttribute('PAYPAL_CLIENT_ID') || '',
+                  test: this.getAttribute('test') || '',
+                  mailingAddress: this.getAttribute('mailing-address') || '',
+                  waStateBusinessLicenseUbiNumber: this.getAttribute('wa-state-business-license-ubi-number') || '',
+                  websiteSocialMedia: this.getAttribute('website-social-media') || '',
+                  medium: this.getAttribute('medium') || '',
+                  email: this.getAttribute('email') || '',
+                  artistMentor: this.getAttribute('artistMentor') || '',
+                  digitalImage1: this.getAttribute('digitalImage1') || '',
+                  digitalImage2: this.getAttribute('digitalImage2') || '',
+                  digitalImage4: this.getAttribute('digitalImage4') || '',
+                  hasBeenReviewed: this.getAttribute('hasBeenReviewed') || '',
+                  phone: this.getAttribute('phone') || '',
+                  digitalImage3: this.getAttribute('digitalImage3') || '',
+                  firstName: this.getAttribute('firstName') || '',
+                  studioAddress: this.getAttribute('studio-address') || '',
+                  lastName: this.getAttribute('lastName') || '',
+                  artistStatement: this.getAttribute('artistStatement') || '',
+                  isWithinBoundaries: this.getAttribute('isWithinBoundaries') || ''
+                  // paypalClientId: this.getAttribute('PAYPAL_CLIENT_ID') || '',
                 };
                 var evaluatedTemplate = evaluateTemplate(html, context);
                 this.innerHTML = "\n                <style>\n                ".concat(css, "\n                </style>\n                ").concat(evaluatedTemplate, "\n                ");
+              }
+            }], [{
+              key: "observedAttributes",
+              get: function get() {
+                return ['fieldName', 'alias', 'required', 'type', 'multiple', 'accept', 'labelClass', 'redirect', 'loginImage', 'signupImage', 'description', 'width', 'slotLinks', 'placeholder', 'test', 'mailing-address', 'wa-state-business-license-ubi-number', 'website-social-media', 'medium', 'email', 'artistMentor', 'digitalImage1', 'digitalImage2', 'digitalImage4', 'hasBeenReviewed', 'phone', 'digitalImage3', 'firstName', 'studio-address', 'lastName', 'artistStatement', 'isWithinBoundaries'];
               }
             }]);
           }(/*#__PURE__*/_wrapNativeSuper(HTMLElement));
@@ -1045,7 +1067,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("APPPPPPPLICATION\n${test}");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("APPPPPPPLICATION\n${mailingAddress}\n\n${waStateBusinessLicenseUbiNumber}\n\n${websiteSocialMedia}\n${medium}\n${email}\n${artistMentor}\n${digitalImage1}\n${digitalImage2}\n${digitalImage4}\n${hasBeenReviewed}\n${phone}\n${digitalImage3}\n${firstName}\n${studioAddress}\n${lastName}\n${artistStatement}\n${isWithinBoundaries}");
 
 /***/ }),
 

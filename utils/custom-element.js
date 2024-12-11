@@ -31,6 +31,17 @@ export async function createCustomElement(name, onload, html, css) {
             }
         }
 
+        static get observedAttributes() {
+            return [
+                'fieldName', 'alias', 'required', 'type', 'multiple', 'accept', 'labelClass', 'redirect', 
+                'loginImage', 'signupImage', 'description', 'width', 'slotLinks', 'placeholder', 'test', 
+                'mailing-address', 'wa-state-business-license-ubi-number', 'website-social-media', 'medium', 
+                'email', 'artistMentor', 'digitalImage1', 'digitalImage2', 'digitalImage4', 'hasBeenReviewed', 
+                'phone', 'digitalImage3', 'firstName', 'studio-address', 'lastName', 'artistStatement', 
+                'isWithinBoundaries'
+            ];
+        }
+
         updateTemplate() {
             const context = {
                 fieldName: this.getAttribute('fieldName') || 'defaultFieldName',
@@ -42,14 +53,31 @@ export async function createCustomElement(name, onload, html, css) {
                 accept: this.getAttribute('accept') || '',
                 labelClass: this.getAttribute('labelClass') || '',
                 redirect: this.getAttribute('redirect') || '',
-                "loginImage": this.getAttribute('loginImage') || '',
-                "signupImage": this.getAttribute('signupImage') || '',
-                "description": this.getAttribute('description') || '',
+                loginImage: this.getAttribute('loginImage') || '',
+                signupImage: this.getAttribute('signupImage') || '',
+                description: this.getAttribute('description') || '',
                 width: this.getAttribute('width') || '',
                 slotLinks: this.getAttribute('slotLinks') || '',
                 placeholder: this.getAttribute('placeholder') || '',
                 test: this.getAttribute('test') || '',
-                // PAYPAL_CLIENT_ID: this.getAttribute('PAYPAL_CLIENT_ID') || '',
+                mailingAddress: this.getAttribute('mailing-address') || '',
+                waStateBusinessLicenseUbiNumber: this.getAttribute('wa-state-business-license-ubi-number') || '',
+                websiteSocialMedia: this.getAttribute('website-social-media') || '',
+                medium: this.getAttribute('medium') || '',
+                email: this.getAttribute('email') || '',
+                artistMentor: this.getAttribute('artistMentor') || '',
+                digitalImage1: this.getAttribute('digitalImage1') || '',
+                digitalImage2: this.getAttribute('digitalImage2') || '',
+                digitalImage4: this.getAttribute('digitalImage4') || '',
+                hasBeenReviewed: this.getAttribute('hasBeenReviewed') || '',
+                phone: this.getAttribute('phone') || '',
+                digitalImage3: this.getAttribute('digitalImage3') || '',
+                firstName: this.getAttribute('firstName') || '',
+                studioAddress: this.getAttribute('studio-address') || '',
+                lastName: this.getAttribute('lastName') || '',
+                artistStatement: this.getAttribute('artistStatement') || '',
+                isWithinBoundaries: this.getAttribute('isWithinBoundaries') || '',
+                // paypalClientId: this.getAttribute('PAYPAL_CLIENT_ID') || '',
             };
 
 
