@@ -19,14 +19,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const name = form.querySelector('input[id="name"]').value;
         const email = form.querySelector('input[id="email"]').value;
-        const hasReceivedScholarshipPreviously = form.querySelector('input[id="hasReceivedScholarship"]').checked;
+        const hasNotReceivedScholarshipPreviously = form.querySelector('input[id="hasNotReceivedScholarship"]').checked;
         const needForScholarship = form.querySelector('textarea[id="needForScholarship"]').value;
 
         // save to firebase
         CRUD.create('scholarship-applications', {
             name,
             email,
-            hasReceivedScholarshipPreviously,
+            hasNotReceivedScholarshipPreviously,
             needForScholarship
         }).then(() => {
             // change the button text back to original
