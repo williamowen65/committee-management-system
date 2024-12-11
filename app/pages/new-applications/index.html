@@ -27,10 +27,15 @@
                 
                 applications.forEach(application => {
 
+                    
+                    // get app review status
+                    const reviewed = application.hasBeenReviewed;
+                    // translate this to div ids
+                    const divId = reviewed ? 'reviewed' : 'under-review';
+                    
                     const randomId = "app" + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
                     // Create component element
-
-                    document.querySelector('#applications').innerHTML += `
+                    document.querySelector(`#applications #${divId}`).innerHTML += `
                     <application-component id="${randomId}"
                     mailing-address="${application["mailing-address"]}"
                     wa-state-business-license-ubi-number="${application["wa-state-business-license-ubi-number"]}"
@@ -82,7 +87,14 @@
             <div>(counts) Under-review: Reviewed:</div>
             <!-- <b>this page should only be view able by the admin and application chair</b> -->
         </div>
-        <div id="applications"></div>
+        <div id="applications">
+            <div id="under-review">
+                <h2>Under Review</h2>
+            </div>
+            <div id="reviewed">
+                <h2>Reviewed</h2>
+            </div>
+        </div>
     </div>
 
     <footer-component></footer-component>

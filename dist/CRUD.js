@@ -11,6 +11,7 @@
 // CRUD pattern
 window.CRUD = {
     create: async function (collection,data) {
+        data.createdAt = firebase.serverTimestamp()
         await firebase.addDoc(firebase.collection(firebase.db, collection), data)
     },
     read: async function (collection, id) {
