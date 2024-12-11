@@ -40,14 +40,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     CRUD.listen('new-applications', null, (newApplications) => {
                         console.log({newApplications})
                         const totalToReview = newApplications.filter(app => app.hasBeenReviewed === false).length
-
-                        document.querySelector('.badge').innerText = totalToReview
+                        const badge = document.querySelector('.badge')
+                        badge.innerText = totalToReview
+                        badge.setAttribute('data-count', totalToReview)
                     })
                 }, 1)
+
                 return `
                 <h4>${role}</h4>
                   <a href="/new-applications">
-                    <button style="position: relative;">New Artist Applications Received <span class="badge"></span></button>
+                    <button style="position: relative;">New Artist Applications Received <span class="badge" data-count="0"></span></button>
                 </a>`
         
             default:
