@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
             userRoles[roleId] = role
             switch (role) {
               case 'New Artist Applications Chair':
+              case 'President':
                 setTimeout(() => {
                   // listen to new applications changes
                   CRUD.listen('new-applications', null, (newApplications) => {
