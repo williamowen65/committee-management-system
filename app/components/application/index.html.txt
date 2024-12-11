@@ -24,10 +24,13 @@
 <div class="artist-application-review" expanded="false">
 
     <div class="app-preview">
-        ${firstName} ${lastName} ${medium}
-        <p>Has Been Reviewed: ${hasBeenReviewed}</p>
-        <p>Created At: ${createdAt}</p>
+        <div>
 
+            ${firstName} ${lastName} ${medium}
+            <p>Has Been Reviewed: ${hasBeenReviewed}</p>
+            <p>Created At: ${createdAt}</p>
+        </div>
+        <button>${hasBeenReviewed =='true' ? "Review Old Application" : "Review"}</button>
         
     </div>
     <div class="app-contents">

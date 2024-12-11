@@ -1,5 +1,23 @@
-.artist-application-review[expanded=false]{
-    .app-contents{
-        display: none
+.artist-application-review{
+
+    &[expanded=false]{
+        .app-contents{
+            display: none
+        }
+    }
+
+    .app-contents, .app-preview{
+        padding: 10px;
+        margin: 10px;
+    }
+
+    .app-preview{
+        display: flex;
+        justify-content: space-between;
+        // border: 1px solid black;
+        button{
+            height: fit-content;
+        }
+       
     }
 }
