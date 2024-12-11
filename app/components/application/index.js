@@ -6,5 +6,6 @@ import { createCustomElement, evaluateTemplate } from '../../../utils/custom-ele
 
 createCustomElement('application-component', function () {
 
+    console.log(`application-component loaded`);
 
 }, applicationTemplate, "");

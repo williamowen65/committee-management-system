@@ -1,2 +1,2 @@
 APPPPPPPLICATION
-${app.phone}
+${app.test}

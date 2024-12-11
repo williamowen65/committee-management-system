@@ -224,7 +224,9 @@ __webpack_require__.r(__webpack_exports__);
 
 // import styles from './style.scss.txt';
 
-(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('application-component', function () {}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], "");
+(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('application-component', function () {
+  console.log("application-component loaded");
+}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], "");
 
 /***/ }),
 
@@ -497,9 +499,9 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         // Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )
-        if (file.size < 1000000) {
+        if (file.size < 150000) {
           var error = document.createElement('p');
-          error.textContent = 'This image is too small. Please upload a 2-3MB image.';
+          error.textContent = 'This image is too small. Please upload an image larger than 150KB.';
           error.classList.add('error');
           parentContainer.appendChild(error);
           _this.querySelector(".file-input-component").setAttribute('hasError', true);
@@ -1044,7 +1046,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("APPPPPPPLICATION\n${app.phone}");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("APPPPPPPLICATION\n${app.test}");
 
 /***/ }),
 

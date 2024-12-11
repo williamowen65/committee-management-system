@@ -117,13 +117,12 @@ createCustomElement('file-input-component', function () {
                 console.log("file size check ", { fileSize: file.size, fileName: file.name, fileType: file.type });
 
                 // Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )
-                if (file.size < 1000000) {
+                if (file.size < 150000) {
                     const error = document.createElement('p');
-                    error.textContent = 'This image is too small. Please upload a 2-3MB image.';
+                    error.textContent = 'This image is too small. Please upload an image larger than 150KB.';
                     error.classList.add('error');
                     parentContainer.appendChild(error);
                     this.querySelector(".file-input-component").setAttribute('hasError', true);
-
                 }
                 // make sure the image isn't too big
                 if (file.size > 3000000) { // 3 MB
