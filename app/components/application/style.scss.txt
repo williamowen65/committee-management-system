@@ -1,14 +1,19 @@
 .artist-application-review{
-
-    &[expanded=false]{
-        .app-contents{
-            display: none
-        }
+    .app-contents{
+        display: none
     }
 
-    .app-contents, .app-preview{
-        padding: 10px;
-        margin: 10px;
+    &.expanded{
+        border: 1px solid black;
+        
+        .app-contents, .app-preview{
+            padding: 10px;
+            margin: 10px;
+        }
+        .app-contents{
+            display: block;
+        }
+     
     }
 
     .app-preview{

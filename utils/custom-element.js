@@ -19,6 +19,7 @@ export async function createCustomElement(name, onload, html, css, options ={}) 
         }
 
         connectedCallback() {
+            // console.log('connectedCallback');
             if(options.afterDomLoaded){
                 onload.bind(this)
             }
@@ -27,6 +28,8 @@ export async function createCustomElement(name, onload, html, css, options ={}) 
             }
             this.updateTemplate();
         }
+
+        
 
 
 

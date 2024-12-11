@@ -21,7 +21,7 @@
 </div> -->
 
 
-<div class="artist-application-review" expanded="false">
+<div class="artist-application-review" >
 
     <div class="app-preview">
         <div>
@@ -30,7 +30,7 @@
             <p>Has Been Reviewed: ${hasBeenReviewed}</p>
             <p>Created At: ${createdAt}</p>
         </div>
-        <button class="expandApplication">${hasBeenReviewed =='true' ? "Review Old Application" : "Review"}</button>
+        <button class="expandApplication" onclick="event.target.closest('.artist-application-review').classList.toggle('expanded')        ">${hasBeenReviewed =='true' ? "Review Old Application" : "Review"}</button>
         
     </div>
     <div class="app-contents">

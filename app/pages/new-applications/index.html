@@ -56,16 +56,20 @@
                     isWithinBoundaries="${application["isWithinBoundaries"]}"
                     createdAt="${application["createdAt"]}"
                     ></application-component> <hr>`;
+
+
     
                     setTimeout(() => {
                         // Bind the data from this application to the component
                         const appEl = document.querySelector(`#${randomId}`);
+
+                        appEl.connectedCallback();
                         // set radio buttons
-                        const radio = appEl.querySelector(`#isWithinBoundaries`)
+                        // const radio = appEl.querySelector(`#isWithinBoundaries`)
     
-                        radio.checked = true
+                        // radio.checked = true
                         
-                        console.log({application, appEl, radio});
+                        // console.log({application, appEl, radio});
     
                     }, 1000);
 

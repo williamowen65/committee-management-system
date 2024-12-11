@@ -16,4 +16,17 @@ createCustomElement('application-component', function () {
         // console.log({radioButton})
         // radioButton.checked = true;
 
-}, applicationTemplate, styles, {afterDomLoaded: true});
+        this.querySelector('button.expandApplication').addEventListener('click', (e) => {
+            const application = this.querySelector('.artist-application-review');
+            application.classList.toggle('expanded');
+        })
+
+}, applicationTemplate, styles);
+
+
+
+
+// export function toggleApplication(event){
+//     event.target.closest('.artist-application-review').classList.toggle('expanded');
+    
+// }
