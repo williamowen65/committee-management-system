@@ -225,8 +225,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('application-component', function () {
-  console.log("application-component loaded");
-}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+  // console.log(`application-component loaded`);
+
+  // // set the radio buttons... check attribute
+  // const isWithinBoundaries = this.getAttribute('isWithinBoundaries');
+  // const radioButton = this.querySelector(`input[value="${isWithinBoundaries}"]`);
+  // console.log({radioButton})
+  // radioButton.checked = true;
+}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  afterDomLoaded: true
+});
 
 /***/ }),
 
@@ -414,6 +423,12 @@ __webpack_require__.r(__webpack_exports__);
 }, _types_text_input_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_4__["default"]);
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_3__.createCustomElement)('textarea-component', function () {
   moveLabel.bind(this)();
+
+  // check for value 
+  var value = this.getAttribute('value');
+  if (value) {
+    this.querySelector('textarea').innerText = value;
+  }
 }, _types_textarea_input_html_txt__WEBPACK_IMPORTED_MODULE_2__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_4__["default"]);
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_3__.createCustomElement)('file-input-component', function () {
   var _this = this;
@@ -644,10 +659,14 @@ function createCustomElement(_x, _x2, _x3, _x4) {
 }
 function _createCustomElement() {
   _createCustomElement = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(name, onload, html, css) {
-    var template, customElementType;
+    var options,
+      template,
+      customElementType,
+      _args = arguments;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
+          options = _args.length > 4 && _args[4] !== undefined ? _args[4] : {};
           // create an HTML template element
           template = document.createElement('template');
           template.innerHTML = "\n        <style>\n            ".concat(css, "\n        </style>\n        ").concat(html, "\n    ");
@@ -665,7 +684,11 @@ function _createCustomElement() {
             return _createClass(customElementType, [{
               key: "connectedCallback",
               value: function connectedCallback() {
-                document.addEventListener('DOMContentLoaded', onload.bind(this));
+                if (options.afterDomLoaded) {
+                  onload.bind(this);
+                } else {
+                  document.addEventListener('DOMContentLoaded', onload.bind(this));
+                }
                 this.updateTemplate();
               }
             }, {
@@ -699,11 +722,13 @@ function _createCustomElement() {
                   test: this.getAttribute('test') || '',
                   disabled: this.hasAttribute('disabled') || false,
                   value: this.getAttribute('value') || '',
-                  mailingAddress: this.getAttribute('mailing-address') || '',
+                  checked: this.hasAttribute('checked') || false,
+                  firstName: this.getAttribute('firstName') || '',
+                  lastName: this.getAttribute('lastName') || '',
+                  email: this.getAttribute('email') || '',
                   waStateBusinessLicenseUbiNumber: this.getAttribute('wa-state-business-license-ubi-number') || '',
                   websiteSocialMedia: this.getAttribute('website-social-media') || '',
                   medium: this.getAttribute('medium') || '',
-                  email: this.getAttribute('email') || '',
                   artistMentor: this.getAttribute('artistMentor') || '',
                   digitalImage1: this.getAttribute('digitalImage1') || '',
                   digitalImage2: this.getAttribute('digitalImage2') || '',
@@ -711,9 +736,8 @@ function _createCustomElement() {
                   hasBeenReviewed: this.getAttribute('hasBeenReviewed') || '',
                   phone: this.getAttribute('phone') || '',
                   digitalImage3: this.getAttribute('digitalImage3') || '',
-                  firstName: this.getAttribute('firstName') || '',
+                  mailingAddress: this.getAttribute('mailing-address') || '',
                   studioAddress: this.getAttribute('studio-address') || '',
-                  lastName: this.getAttribute('lastName') || '',
                   artistStatement: this.getAttribute('artistStatement') || '',
                   isWithinBoundaries: this.getAttribute('isWithinBoundaries') || ''
                   // paypalClientId: this.getAttribute('PAYPAL_CLIENT_ID') || '',
@@ -729,7 +753,7 @@ function _createCustomElement() {
             }]);
           }(/*#__PURE__*/_wrapNativeSuper(HTMLElement));
           customElements.define(name, customElementType);
-        case 4:
+        case 5:
         case "end":
           return _context.stop();
       }
@@ -1069,7 +1093,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!-- \n<div class=\"application-entry\">\n    <p>First Name: ${firstName}</p>\n    <p>Last Name: ${lastName}</p>\n    <p>Medium: ${medium}</p>\n    \n    <p>Email: ${email}</p>\n    <p>Phone: ${phone}</p>\n    <p>Mailing Address: ${mailingAddress}</p>\n    <p>Studio Address: ${studioAddress}</p>\n    <p>Website/Social Media: ${websiteSocialMedia}</p>\n    <p>Artist Mentor: ${artistMentor}</p>\n    <p>Digital Image 1: <img width=\"200px\"; src=\"${digitalImage1}\" alt=\"Digital Image 1\"></p>\n    <p>Digital Image 2: <img width=\"200px\"; src=\"${digitalImage2}\" alt=\"Digital Image 2\"></p>\n    <p>Digital Image 3: <img width=\"200px\"; src=\"${digitalImage3}\" alt=\"Digital Image 3\"></p>\n    <p>Digital Image 4: <img width=\"200px\"; src=\"${digitalImage4}\" alt=\"Digital Image 4\"></p>\n    <p>Has Been Reviewed: ${hasBeenReviewed}</p>\n    <p>WA State Business License UBI Number: ${waStateBusinessLicenseUbiNumber}</p>\n    <p>Artist Statement: ${artistStatement}</p>\n    <p>Is Within Boundaries: ${isWithinBoundaries}</p>\n</div> -->\n\n<h3>Artist Name</h3>\n<div class=\"row\">\n    <input-component value=\"${firstName}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" fieldName=\"firstName\"\n        alias=\"First Name\"></input-component>\n    <input-component disabled=\"true\" style=\"width: 48%\" required=\"true\" fieldName=\"lastName\"\n        alias=\"Last Name\"></input-component>\n</div>\n<h3>Contact Info</h3>\n<div class=\"row\">\n    <input-component disabled=\"true\" style=\"width: 48%\" required=\"true\" type=\"email\" fieldName=\"email\"\n        alias=\"Email\"></input-component>\n    <input-component disabled=\"true\" style=\"width: 48%\" required=\"true\" fieldName=\"phone\" alias=\"Phone\"></input-component>\n</div>\n<textarea-component required=\"true\" fieldName=\"studio-address\" alias=\"Studio Address\"></textarea-component>\n<textarea-component required=\"true\" fieldName=\"mailing-address\" alias=\"Mailing Address\"></textarea-component>\n\n<h3>Medium(s)</h3>\n<input-component disabled=\"true\" required=\"true\" fieldName=\"medium\"\n    placeholder=\"Comma separated list of mediums\"></input-component>\n\n<h3>WA State Business License (UBI) Number *</h3>\n<p>A Washington State Business License (UBI) Number is required to be in the tour. If you don't have one, apply:\n    https://bls.dor.wa.gov/. </p>\n<input-component disabled=\"true\" required=\"true\" fieldName=\"wa-state-business-license-ubi-number\"\n    placeholder=\"UBI Number\"></input-component>\n\n<h3>Is your studio within the GHOST Tour Boundaries? (That map is available on the Join page) *</h3>\n\n<label for=\"isWithinBoundaries\">\n    <input required type=\"radio\" name=\"isWithinBoundaries\" value=\"Yes, my studio falls within the boundary\"\n        id=\"isWithinBoundaries\"></input>\n    Yes, my studio falls within the boundary\n</label>\n<label for=\"isNotWithinBoundaries\">\n    <input required type=\"radio\" name=\"isWithinBoundaries\"\n        value=\"No, my studio is outside the boundary and I will need to share studio space with another artist\"\n        id=\"isNotWithinBoundaries\"></input>\n    No, my studio is outside the boundary and I will need to share studio space with another artist\n</label>\n\n<h3>Studio Availability</h3>\n<style>\n    input,\n    textarea {\n        margin: 10px 0 0 0;\n        padding: 10px;\n        border: 1px solid #ccc;\n        border-radius: 5px;\n    }\n\n    textarea {\n        resize: vertical;\n        min-height: 100px;\n    }\n</style>\n<p style=\"margin: 0;\">If sharing a studio, have you made arrangements to do so? If so, please name the Tour\n    Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host\n    you in their studio.</p>\n<textarea style=\"width: 100%; box-sizing: border-box; \"></textarea>\n<!-- <textarea-component description=\"If sharing a studio, have you made arrangements to do so? If so, please name the Tour Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host you in their studio.\"></textarea-component> -->\n\n<h3>I would like an artist mentor (an experienced artist who can talk to me about preparing for the tour,\n    marketing and answer my questions)</h3>\n<label for=\"artistMentor\">\n    <input required type=\"radio\" name=\"artistMentor\" value=\"Yes, I would like an artist mentor\"\n        id=\"artistMentor\"></input>\n    Yes, I would like an artist mentor\n</label>\n<label for=\"noArtistMentor\">\n    <input required type=\"radio\" name=\"artistMentor\" value=\"No, I do not need an artist mentor\"\n        id=\"noArtistMentor\"></input>\n    No, I do not need an artist mentor\n</label>\n\n<h3>How did you hear about the GHOST Tour?</h3>\n<textarea style=\"width: 100%; box-sizing: border-box; \"></textarea>\n\n<h3>Three (3) digital images of your art</h3>\n<p>Make sure that your images look professional and are jpgs that are a minimum of 150 KB (No thumbnails). 2D art should only\n    be of your art image (no background or frame.) 3D art and jewelry should have a plain background (ex, black\n    or white) and have enough lighting to show good detail. Crop the image so that your art fills most of the\n    image and make sure the image is crisp and does justice to your art.</p>\n<div style=\"display: flex; justify-content: center; flex-wrap: wrap;\">\n    <style>\n        file-input-component {\n            margin: 10px;\n        }\n    </style>\n    <file-input-component required=\"true\" fieldName=\"digitalImage1\" alias=\"Digital Image 1\"\n        accept=\".jpg,.jpeg,.png\"></file-input-component>\n    <file-input-component required=\"true\" fieldName=\"digitalImage2\" alias=\"Digital Image 2\"\n        accept=\".jpg,.jpeg,.png\"></file-input-component>\n    <file-input-component required=\"true\" fieldName=\"digitalImage3\" alias=\"Digital Image 3\"\n        accept=\".jpg,.jpeg,.png\"></file-input-component>\n</div>\n\n<h3>One (1) digital image of your studio (if it is within the studio tour boundaries and you will be showing\n    there) or your booth (if you will be showing at another artist's studio)</h3>\n<p>This should be a jpg image that is a minimum of 150 KB (No thumbnails). Make sure your display space looks professional, has good lighting\n    and is represented well in your photo.</p>\n\n<div style=\"display: flex; justify-content: center; flex-wrap: wrap;\">\n\n    <file-input-component required=\"true\" fieldName=\"digitalImage4\" alias=\"Digital Image 1\"\n        accept=\".jpg,.jpeg,.png\"></file-input-component>\n</div>\n\n<h3>Artist Statement</h3>\n<textarea-component fieldName=\"artistStatement\" placeholder=\"Artist Statement\" required description=\"This  is a short statement that describes what art you make, how you make it and why you make it.  (Limit 200 words)\"></textarea-component>\n<h3>Your art website or social media sites</h3>\n<textarea-component placeholder=\"Website & Social media presence \" fieldName=\"website-social-media\" required description=\"If you have an art website and/or social media sites, list them here.  If you don't have any of those, type in NONE\"></textarea-component>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!-- \n<div class=\"application-entry\">\n    <p>First Name: ${firstName}</p>\n    <p>Last Name: ${lastName}</p>\n    <p>Medium: ${medium}</p>\n    \n    <p>Email: ${email}</p>\n    <p>Phone: ${phone}</p>\n    <p>Mailing Address: ${mailingAddress}</p>\n    <p>Studio Address: ${studioAddress}</p>\n    <p>Website/Social Media: ${websiteSocialMedia}</p>\n    <p>Artist Mentor: ${artistMentor}</p>\n    <p>Digital Image 1: <img width=\"200px\"; src=\"${digitalImage1}\" alt=\"Digital Image 1\"></p>\n    <p>Digital Image 2: <img width=\"200px\"; src=\"${digitalImage2}\" alt=\"Digital Image 2\"></p>\n    <p>Digital Image 3: <img width=\"200px\"; src=\"${digitalImage3}\" alt=\"Digital Image 3\"></p>\n    <p>Digital Image 4: <img width=\"200px\"; src=\"${digitalImage4}\" alt=\"Digital Image 4\"></p>\n    <p>Has Been Reviewed: ${hasBeenReviewed}</p>\n    <p>WA State Business License UBI Number: ${waStateBusinessLicenseUbiNumber}</p>\n    <p>Artist Statement: ${artistStatement}</p>\n    <p>Is Within Boundaries: ${isWithinBoundaries}</p>\n</div> -->\n\n\n<div class=\"artist-application-review\">\n\n    <div class=\"app-preview\">\n        ${firstName} ${lastName} ${medium}\n        <p>Has Been Reviewed: ${hasBeenReviewed}</p>\n\n        \n    </div>\n    <div class=\"app-contents\">\n\n\n        <h3>Artist Name</h3>\n        <div class=\"row\">\n            <input-component value=\"${firstName}\" disabled=\"true\" style=\"width: 48%\" required=\"true\"\n                fieldName=\"firstName\" alias=\"First Name\"></input-component>\n            <input-component value=\"${lastName}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" fieldName=\"lastName\"\n                alias=\"Last Name\"></input-component>\n        </div>\n        <h3>Contact Info</h3>\n        <div class=\"row\">\n            <input-component value=\"${email}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" type=\"email\"\n                fieldName=\"email\" alias=\"Email\"></input-component>\n            <input-component value=\"${phone}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" fieldName=\"phone\"\n                alias=\"Phone\"></input-component>\n        </div>\n        <textarea-component value=\"${studioAddress}\" disabled=\"true\" required=\"true\" fieldName=\"studio-address\"\n            alias=\"Studio Address\"></textarea-component>\n        <textarea-component value=\"${mailingAddress}\" disabled=\"true\" required=\"true\" fieldName=\"mailing-address\"\n            alias=\"Mailing Address\"></textarea-component>\n\n        <h3>Medium(s)</h3>\n        <input-component value=\"${medium}\" disabled=\"true\" required=\"true\" fieldName=\"medium\"\n            placeholder=\"Comma separated list of mediums\"></input-component>\n\n        <h3>WA State Business License (UBI) Number *</h3>\n        <p>A Washington State Business License (UBI) Number is required to be in the tour. If you don't have one, apply:\n            https://bls.dor.wa.gov/. </p>\n        <input-component value=\"${waStateBusinessLicenseUbiNumber}\" disabled=\"true\" required=\"true\"\n            fieldName=\"wa-state-business-license-ubi-number\" placeholder=\"UBI Number\"></input-component>\n\n        <h3>Is your studio within the GHOST Tour Boundaries? (That map is available on the Join page) *</h3>\n        <label for=\"isWithinBoundaries\">\n            <input required type=\"radio\" name=\"isWithinBoundaries\" value=\"Yes, my studio falls within the boundary\"\n                id=\"isWithinBoundaries\"></input>\n            Yes, my studio falls within the boundary\n        </label>\n        <label for=\"isNotWithinBoundaries\">\n            <input required type=\"radio\" name=\"isWithinBoundaries\"\n                value=\"No, my studio is outside the boundary and I will need to share studio space with another artist\"\n                id=\"isNotWithinBoundaries\"></input>\n            No, my studio is outside the boundary and I will need to share studio space with another artist\n        </label>\n\n        <h3>Studio Availability</h3>\n        <style>\n            input,\n            textarea {\n                margin: 10px 0 0 0;\n                padding: 10px;\n                border: 1px solid #ccc;\n                border-radius: 5px;\n            }\n\n            textarea {\n                resize: vertical;\n                min-height: 100px;\n            }\n        </style>\n        <p style=\"margin: 0;\">If sharing a studio, have you made arrangements to do so? If so, please name the Tour\n            Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host\n            you in their studio.</p>\n        <textarea style=\"width: 100%; box-sizing: border-box; \"></textarea>\n        <!-- <textarea-component description=\"If sharing a studio, have you made arrangements to do so? If so, please name the Tour Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host you in their studio.\"></textarea-component> -->\n\n        <h3>I would like an artist mentor (an experienced artist who can talk to me about preparing for the tour,\n            marketing and answer my questions)</h3>\n        <label for=\"artistMentor\">\n            <input required type=\"radio\" name=\"artistMentor\" value=\"Yes, I would like an artist mentor\"\n                id=\"artistMentor\"></input>\n            Yes, I would like an artist mentor\n        </label>\n        <label for=\"noArtistMentor\">\n            <input required type=\"radio\" name=\"artistMentor\" value=\"No, I do not need an artist mentor\"\n                id=\"noArtistMentor\"></input>\n            No, I do not need an artist mentor\n        </label>\n\n        <h3>How did you hear about the GHOST Tour?</h3>\n        <textarea style=\"width: 100%; box-sizing: border-box; \"></textarea>\n\n        <h3>Three (3) digital images of your art</h3>\n        <p>Make sure that your images look professional and are jpgs that are a minimum of 150 KB (No thumbnails). 2D\n            art should only\n            be of your art image (no background or frame.) 3D art and jewelry should have a plain background (ex, black\n            or white) and have enough lighting to show good detail. Crop the image so that your art fills most of the\n            image and make sure the image is crisp and does justice to your art.</p>\n        <div style=\"display: flex; justify-content: center; flex-wrap: wrap;\">\n            <style>\n                file-input-component {\n                    margin: 10px;\n                }\n            </style>\n            <file-input-component required=\"true\" fieldName=\"digitalImage1\" alias=\"Digital Image 1\"\n                accept=\".jpg,.jpeg,.png\"></file-input-component>\n            <file-input-component required=\"true\" fieldName=\"digitalImage2\" alias=\"Digital Image 2\"\n                accept=\".jpg,.jpeg,.png\"></file-input-component>\n            <file-input-component required=\"true\" fieldName=\"digitalImage3\" alias=\"Digital Image 3\"\n                accept=\".jpg,.jpeg,.png\"></file-input-component>\n        </div>\n\n        <h3>One (1) digital image of your studio (if it is within the studio tour boundaries and you will be showing\n            there) or your booth (if you will be showing at another artist's studio)</h3>\n        <p>This should be a jpg image that is a minimum of 150 KB (No thumbnails). Make sure your display space looks\n            professional, has good lighting\n            and is represented well in your photo.</p>\n\n        <div style=\"display: flex; justify-content: center; flex-wrap: wrap;\">\n\n            <file-input-component required=\"true\" fieldName=\"digitalImage4\" alias=\"Digital Image 1\"\n                accept=\".jpg,.jpeg,.png\"></file-input-component>\n        </div>\n\n        <h3>Artist Statement</h3>\n        <textarea-component fieldName=\"artistStatement\" placeholder=\"Artist Statement\" required\n            description=\"This  is a short statement that describes what art you make, how you make it and why you make it.  (Limit 200 words)\"></textarea-component>\n        <h3>Your art website or social media sites</h3>\n        <textarea-component placeholder=\"Website & Social media presence \" fieldName=\"website-social-media\" required\n            description=\"If you have an art website and/or social media sites, list them here.  If you don't have any of those, type in NONE\"></textarea-component>\n\n            <button>Approve</button>\n        <button>Disapprove</button>\n    </div>\n\n</div>");
 
 /***/ }),
 
@@ -1209,7 +1233,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<label for=\"${fieldName}\" class=\"${labelClass || \"\"}  ${value ? \"moveLabel\" : \"\"}\" style=\"${width ? \"width:\"+ width + \";\" : \"\"}\">\r\n    <small class=\"text\" part=\"labelText\">${alias && required ? alias + \"*\" : alias ? alias : \"\"} </small>\r\n    <input  ${disabled ? \"disabled\" : \"\"} ${value ? \"value=\" + value : \"\"}  placeholder=\"${placeholder}\" type=\"${type}\" id=\"${fieldName}\" name=\"${fieldName}\" class=\"${labelClass || \"\"}\" ${required ? \"required\" :\"\"} ${type === 'number' ? 'min=\"0\"' : ''} />\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</label>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<label for=\"${fieldName}\" class=\"${labelClass || \"\"}  ${value ? \"moveLabel\" : \"\"}\" style=\"${width ? \"width:\"+ width + \";\" : \"\"}\">\r\n    <small class=\"text\" part=\"labelText\">${alias && required ? alias + \"*\" : alias ? alias : \"\"} </small>\r\n    <input  ${disabled ? \"disabled\" : \"\"} ${value ? \"value=\" + value : \"\"}  placeholder=\"${placeholder}\" type=\"${type}\" id=\"${fieldName}\" name=\"${fieldName}\" class=\"${labelClass || \"\"}\" ${required ? \"required\" :\"\"} ${type === 'number' ? 'min=\"0\"' : ''} ${checked ? 'checked' :''} />\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</label>");
 
 /***/ }),
 
@@ -1223,7 +1247,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<div>${description}</div>\r\n<label for=\"${fieldName}\" style=\"width: 100%; box-sizing: border-box; margin-top: 20px;\" >\r\n    <small class=\"text\" part=\"labelText\">${alias && required ? alias + \"*\" : alias ? alias : \"\"} </small>\r\n    <textarea  placeholder=\"${placeholder}\" id=\"${fieldName}\" name=\"${fieldName}\" ${required ? \"required\" : \"\"}></textarea>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</label>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div>${description}</div>\r\n<label for=\"${fieldName}\" style=\"width: 100%; box-sizing: border-box; margin-top: 20px;\" class=\"${value ? \" moveLabel\"\r\n    : \"\" }\">\r\n    <small class=\"text\" part=\"labelText\">${alias && required ? alias + \"*\" : alias ? alias : \"\"} </small>\r\n    <textarea ${disabled ? \"disabled\" : \"\" } placeholder=\"${placeholder}\" id=\"${fieldName}\" name=\"${fieldName}\"\r\n        ${required ? \"required\" : \"\" }>${value ? value : \"\"}</textarea>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</label>");
 
 /***/ }),
 

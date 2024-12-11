@@ -16,6 +16,13 @@ createCustomElement('input-component', function () {
 
 createCustomElement('textarea-component', function () {
     moveLabel.bind(this)();
+
+    // check for value 
+    const value = this.getAttribute('value');
+    if(value){
+        this.querySelector('textarea').innerText = value;
+    }
+    
 }, textareaTemplate, styles);
 
 

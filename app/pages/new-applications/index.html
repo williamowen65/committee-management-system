@@ -27,10 +27,11 @@
                 
                 applications.forEach(application => {
 
+                    const randomId = "app" + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
                     // Create component element
 
                     document.querySelector('#applications').innerHTML += `
-                    <application-component 
+                    <application-component id="${randomId}"
                     mailing-address="${application["mailing-address"]}"
                     wa-state-business-license-ubi-number="${application["wa-state-business-license-ubi-number"]}"
                     website-social-media="${application["website-social-media"]}"
@@ -50,10 +51,19 @@
                     isWithinBoundaries="${application["isWithinBoundaries"]}"
                     ></application-component> <hr>`;
     
-                    // Bind the data from this application to the component
-                    
+                    setTimeout(() => {
+                        // Bind the data from this application to the component
+                        const appEl = document.querySelector(`#${randomId}`);
+                        // set radio buttons
+                        const radio = appEl.querySelector(`#isWithinBoundaries`)
+    
+                        radio.checked = true
+                        
+                        console.log({application, appEl, radio});
+    
+                    }, 1000);
 
-                    console.log({application});
+                
 
                 });
             });
@@ -67,8 +77,11 @@
     <header-component slotLinks="members"></header-component>
 
     <div class="container">
-       <h1> Review new artist applications</h1>
-       <b>this page should only be view able by the admin and application chair</b>
+        <div style="text-align: center;">
+            <h1> Review new artist applications</h1>
+            <div>(counts) Under-review: Reviewed:</div>
+            <!-- <b>this page should only be view able by the admin and application chair</b> -->
+        </div>
         <div id="applications"></div>
     </div>
 

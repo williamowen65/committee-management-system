@@ -1,9 +1,8 @@
-
-
-
 <div>${description}</div>
-<label for="${fieldName}" style="width: 100%; box-sizing: border-box; margin-top: 20px;" >
+<label for="${fieldName}" style="width: 100%; box-sizing: border-box; margin-top: 20px;" class="${value ? " moveLabel"
+    : "" }">
     <small class="text" part="labelText">${alias && required ? alias + "*" : alias ? alias : ""} </small>
-    <textarea  placeholder="${placeholder}" id="${fieldName}" name="${fieldName}" ${required ? "required" : ""}></textarea>
+    <textarea ${disabled ? "disabled" : "" } placeholder="${placeholder}" id="${fieldName}" name="${fieldName}"
+        ${required ? "required" : "" }>${value ? value : ""}</textarea>
     <div id="${fieldName}-error" class="error-message"></div>
 </label>

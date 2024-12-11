@@ -1,4 +1,4 @@
-export async function createCustomElement(name, onload, html, css) {
+export async function createCustomElement(name, onload, html, css, options ={}) {
     // create an HTML template element
     const template = document.createElement('template');
 
@@ -19,7 +19,12 @@ export async function createCustomElement(name, onload, html, css) {
         }
 
         connectedCallback() {
-            document.addEventListener('DOMContentLoaded', onload.bind(this));
+            if(options.afterDomLoaded){
+                onload.bind(this)
+            }
+            else {
+                document.addEventListener('DOMContentLoaded', onload.bind(this));
+            }
             this.updateTemplate();
         }
 
@@ -62,12 +67,14 @@ export async function createCustomElement(name, onload, html, css) {
                 test: this.getAttribute('test') || '',
                 disabled: this.hasAttribute('disabled') || false,
                 value: this.getAttribute('value') || '',
+                checked: this.hasAttribute('checked') || false,
 
-                mailingAddress: this.getAttribute('mailing-address') || '',
+                firstName: this.getAttribute('firstName') || '',
+                lastName: this.getAttribute('lastName') || '',
+                email: this.getAttribute('email') || '',
                 waStateBusinessLicenseUbiNumber: this.getAttribute('wa-state-business-license-ubi-number') || '',
                 websiteSocialMedia: this.getAttribute('website-social-media') || '',
                 medium: this.getAttribute('medium') || '',
-                email: this.getAttribute('email') || '',
                 artistMentor: this.getAttribute('artistMentor') || '',
                 digitalImage1: this.getAttribute('digitalImage1') || '',
                 digitalImage2: this.getAttribute('digitalImage2') || '',
@@ -75,9 +82,8 @@ export async function createCustomElement(name, onload, html, css) {
                 hasBeenReviewed: this.getAttribute('hasBeenReviewed') || '',
                 phone: this.getAttribute('phone') || '',
                 digitalImage3: this.getAttribute('digitalImage3') || '',
-                firstName: this.getAttribute('firstName') || '',
+                mailingAddress: this.getAttribute('mailing-address') || '',
                 studioAddress: this.getAttribute('studio-address') || '',
-                lastName: this.getAttribute('lastName') || '',
                 artistStatement: this.getAttribute('artistStatement') || '',
                 isWithinBoundaries: this.getAttribute('isWithinBoundaries') || '',
                 // paypalClientId: this.getAttribute('PAYPAL_CLIENT_ID') || '',
