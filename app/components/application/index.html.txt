@@ -26,9 +26,9 @@
     <div class="app-preview">
         <div>
 
-            ${firstName} ${lastName} ${medium}
+           <h3> ${firstName} ${lastName}: ${medium}</h3>
             <p>Has Been Reviewed: ${hasBeenReviewed}</p>
-            <p>Created At: ${createdAt}</p>
+            <p>Submitted on: ${createdAt}</p>
         </div>
         <button class="expandApplication show" onclick="event.target.closest('.artist-application-review').classList.toggle('expanded')"
         >${hasBeenReviewed =='true' ? "Review Old Application" : "Review"}</button>
