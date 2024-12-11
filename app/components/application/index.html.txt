@@ -1,8 +1,9 @@
-
-<div>
+<!-- 
+<div class="application-entry">
     <p>First Name: ${firstName}</p>
     <p>Last Name: ${lastName}</p>
     <p>Medium: ${medium}</p>
+    
     <p>Email: ${email}</p>
     <p>Phone: ${phone}</p>
     <p>Mailing Address: ${mailingAddress}</p>
@@ -17,4 +18,116 @@
     <p>WA State Business License UBI Number: ${waStateBusinessLicenseUbiNumber}</p>
     <p>Artist Statement: ${artistStatement}</p>
     <p>Is Within Boundaries: ${isWithinBoundaries}</p>
+</div> -->
+
+<h3>Artist Name</h3>
+<div class="row">
+    <input-component value="${firstName}" disabled="true" style="width: 48%" required="true" fieldName="firstName"
+        alias="First Name"></input-component>
+    <input-component disabled="true" style="width: 48%" required="true" fieldName="lastName"
+        alias="Last Name"></input-component>
 </div>
+<h3>Contact Info</h3>
+<div class="row">
+    <input-component disabled="true" style="width: 48%" required="true" type="email" fieldName="email"
+        alias="Email"></input-component>
+    <input-component disabled="true" style="width: 48%" required="true" fieldName="phone" alias="Phone"></input-component>
+</div>
+<textarea-component required="true" fieldName="studio-address" alias="Studio Address"></textarea-component>
+<textarea-component required="true" fieldName="mailing-address" alias="Mailing Address"></textarea-component>
+
+<h3>Medium(s)</h3>
+<input-component disabled="true" required="true" fieldName="medium"
+    placeholder="Comma separated list of mediums"></input-component>
+
+<h3>WA State Business License (UBI) Number *</h3>
+<p>A Washington State Business License (UBI) Number is required to be in the tour. If you don't have one, apply:
+    https://bls.dor.wa.gov/. </p>
+<input-component disabled="true" required="true" fieldName="wa-state-business-license-ubi-number"
+    placeholder="UBI Number"></input-component>
+
+<h3>Is your studio within the GHOST Tour Boundaries? (That map is available on the Join page) *</h3>
+
+<label for="isWithinBoundaries">
+    <input required type="radio" name="isWithinBoundaries" value="Yes, my studio falls within the boundary"
+        id="isWithinBoundaries"></input>
+    Yes, my studio falls within the boundary
+</label>
+<label for="isNotWithinBoundaries">
+    <input required type="radio" name="isWithinBoundaries"
+        value="No, my studio is outside the boundary and I will need to share studio space with another artist"
+        id="isNotWithinBoundaries"></input>
+    No, my studio is outside the boundary and I will need to share studio space with another artist
+</label>
+
+<h3>Studio Availability</h3>
+<style>
+    input,
+    textarea {
+        margin: 10px 0 0 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+</style>
+<p style="margin: 0;">If sharing a studio, have you made arrangements to do so? If so, please name the Tour
+    Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host
+    you in their studio.</p>
+<textarea style="width: 100%; box-sizing: border-box; "></textarea>
+<!-- <textarea-component description="If sharing a studio, have you made arrangements to do so? If so, please name the Tour Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host you in their studio."></textarea-component> -->
+
+<h3>I would like an artist mentor (an experienced artist who can talk to me about preparing for the tour,
+    marketing and answer my questions)</h3>
+<label for="artistMentor">
+    <input required type="radio" name="artistMentor" value="Yes, I would like an artist mentor"
+        id="artistMentor"></input>
+    Yes, I would like an artist mentor
+</label>
+<label for="noArtistMentor">
+    <input required type="radio" name="artistMentor" value="No, I do not need an artist mentor"
+        id="noArtistMentor"></input>
+    No, I do not need an artist mentor
+</label>
+
+<h3>How did you hear about the GHOST Tour?</h3>
+<textarea style="width: 100%; box-sizing: border-box; "></textarea>
+
+<h3>Three (3) digital images of your art</h3>
+<p>Make sure that your images look professional and are jpgs that are a minimum of 150 KB (No thumbnails). 2D art should only
+    be of your art image (no background or frame.) 3D art and jewelry should have a plain background (ex, black
+    or white) and have enough lighting to show good detail. Crop the image so that your art fills most of the
+    image and make sure the image is crisp and does justice to your art.</p>
+<div style="display: flex; justify-content: center; flex-wrap: wrap;">
+    <style>
+        file-input-component {
+            margin: 10px;
+        }
+    </style>
+    <file-input-component required="true" fieldName="digitalImage1" alias="Digital Image 1"
+        accept=".jpg,.jpeg,.png"></file-input-component>
+    <file-input-component required="true" fieldName="digitalImage2" alias="Digital Image 2"
+        accept=".jpg,.jpeg,.png"></file-input-component>
+    <file-input-component required="true" fieldName="digitalImage3" alias="Digital Image 3"
+        accept=".jpg,.jpeg,.png"></file-input-component>
+</div>
+
+<h3>One (1) digital image of your studio (if it is within the studio tour boundaries and you will be showing
+    there) or your booth (if you will be showing at another artist's studio)</h3>
+<p>This should be a jpg image that is a minimum of 150 KB (No thumbnails). Make sure your display space looks professional, has good lighting
+    and is represented well in your photo.</p>
+
+<div style="display: flex; justify-content: center; flex-wrap: wrap;">
+
+    <file-input-component required="true" fieldName="digitalImage4" alias="Digital Image 1"
+        accept=".jpg,.jpeg,.png"></file-input-component>
+</div>
+
+<h3>Artist Statement</h3>
+<textarea-component fieldName="artistStatement" placeholder="Artist Statement" required description="This  is a short statement that describes what art you make, how you make it and why you make it.  (Limit 200 words)"></textarea-component>
+<h3>Your art website or social media sites</h3>
+<textarea-component placeholder="Website & Social media presence " fieldName="website-social-media" required description="If you have an art website and/or social media sites, list them here.  If you don't have any of those, type in NONE"></textarea-component>

@@ -1,0 +1,7 @@
+.application-entry{
+    display: grid;
+    grid-template-columns: repeat(20, 100px);
+    p {
+       
+    }
+}

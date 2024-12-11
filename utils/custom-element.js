@@ -60,6 +60,9 @@ export async function createCustomElement(name, onload, html, css) {
                 slotLinks: this.getAttribute('slotLinks') || '',
                 placeholder: this.getAttribute('placeholder') || '',
                 test: this.getAttribute('test') || '',
+                disabled: this.hasAttribute('disabled') || false,
+                value: this.getAttribute('value') || '',
+
                 mailingAddress: this.getAttribute('mailing-address') || '',
                 waStateBusinessLicenseUbiNumber: this.getAttribute('wa-state-business-license-ubi-number') || '',
                 websiteSocialMedia: this.getAttribute('website-social-media') || '',

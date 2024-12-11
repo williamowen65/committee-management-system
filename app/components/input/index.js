@@ -9,9 +9,8 @@ import styles from './style.scss.txt';
 createCustomElement('input-component', function () {
     console.log('input-component loaded');
     // set slot
-
+   
     moveLabel.bind(this)();
-
 
 }, inputTemplate, styles);
 
