@@ -1,6 +1,7 @@
 
 const { handleResponse, generateAccessToken, base } = require("./common.js");
 require("dotenv").config();
+const fetch = require("node-fetch");
 
 /**
  * Capture payment for the created order to complete the transaction.
@@ -12,6 +13,8 @@ const captureOrder = async (req, res, next) => {
         const { orderID } = req.body;
         const url = `${base}/v2/checkout/orders/${orderID}/capture`;
         // console.log("captureOrder", { orderID, accessToken, url })
+
+
         const response = await fetch(url, {
           method: "POST",
           headers: {
