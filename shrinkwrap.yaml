@@ -7,6 +7,7 @@ dependencies:
   express: 4.21.1
   googleapis: 144.0.0
   marked: 15.0.3
+  node-fetch: 3.3.2
 devDependencies:
   '@babel/core': 7.26.0
   '@babel/preset-env': 7.26.0
@@ -1859,6 +1860,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
+  /data-uri-to-buffer/4.0.1:
+    dev: false
+    engines:
+      node: '>= 12'
+    resolution:
+      integrity: sha512-0R9ikRb668HB7QDxT1vkpuUBtqc53YyAwMwGeUFKRojY/NWKvdZ+9UYtRfGmhqNbRkTSVpMbmyhXipFFv2cb/A==
   /debug/2.6.9:
     dependencies:
       ms: 2.0.0
@@ -2096,6 +2103,15 @@ packages:
       node: '>= 4.9.1'
     resolution:
       integrity: sha512-eRnCtTTtGZFpQCwhJiUOuxPQWRXVKYDn0b2PeHfXL6/Zi53SLAzAHfVhVWK2AryC/WH05kGfxhFIPvTF0SXQzg==
+  /fetch-blob/3.2.0:
+    dependencies:
+      node-domexception: 1.0.0
+      web-streams-polyfill: 3.3.3
+    dev: false
+    engines:
+      node: ^12.20 || >= 14.13
+    resolution:
+      integrity: sha512-7yAQpD2UMJzLi1Dqv7qFYnPbaPx7ZfFK6PiIxQ4PfkGPyNyl2Ugx+a/umUonmKqjhM4DnfbMvdX6otXq83soQQ==
   /fill-range/7.1.1:
     dependencies:
       to-regex-range: 5.0.1
@@ -2156,6 +2172,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==
+  /formdata-polyfill/4.0.10:
+    dependencies:
+      fetch-blob: 3.2.0
+    dev: false
+    engines:
+      node: '>=12.20.0'
+    resolution:
+      integrity: sha512-buewHzMvYL29jdeQTVILecSaZKnt/RJWjoZCF5OW60Z67/GmSLBkOFM7qh1PI3zFNtJbaZL5eQu1vLfazOwj4g==
   /forwarded/0.2.0:
     dev: false
     engines:
@@ -2690,6 +2714,12 @@ packages:
     optional: true
     resolution:
       integrity: sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==
+  /node-domexception/1.0.0:
+    dev: false
+    engines:
+      node: '>=10.5.0'
+    resolution:
+      integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==
   /node-fetch/2.7.0:
     dependencies:
       whatwg-url: 5.0.0
@@ -2700,6 +2730,16 @@ packages:
       encoding: ^0.1.0
     resolution:
       integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==
+  /node-fetch/3.3.2:
+    dependencies:
+      data-uri-to-buffer: 4.0.1
+      fetch-blob: 3.2.0
+      formdata-polyfill: 4.0.10
+    dev: false
+    engines:
+      node: ^12.20.0 || ^14.13.1 || >=16.0.0
+    resolution:
+      integrity: sha512-dRB78srN/l6gqWulah9SrxeYnxeddIG30+GOqK/9OlLVyLg3HPnr6SqOWTWOXKRwC2eGYCkZ59NNuSgvSrpgOA==
   /node-releases/2.0.18:
     dev: true
     resolution:
@@ -3500,6 +3540,12 @@ packages:
       node: '>=10.13.0'
     resolution:
       integrity: sha512-TnbFSbcOCcDgjZ4piURLCbJ3nJhznVh9kw6F6iokjiFPl8ONxe9A6nMDVXDiNbrSfLILs6vB07F7wLBrwPYzJw==
+  /web-streams-polyfill/3.3.3:
+    dev: false
+    engines:
+      node: '>= 8'
+    resolution:
+      integrity: sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==
   /webidl-conversions/3.0.1:
     dev: false
     resolution:
@@ -3632,6 +3678,7 @@ specifiers:
   express: ^4.21.1
   googleapis: ^144.0.0
   marked: ^15.0.3
+  node-fetch: ^3.3.2
   raw-loader: ^4.0.2
   sass: ^1.81.0
   sass-loader: ^16.0.3
