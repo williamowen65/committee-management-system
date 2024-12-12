@@ -13,6 +13,8 @@ createCustomElement('application-component', function () {
 
 }, applicationTemplate, styles);
 
+document.addEventListener('DOMContentLoaded', function() {
+
 
 window.updateReview = function (event, reviewAnswer) {
     console.log("updateReview", event)
@@ -48,6 +50,8 @@ window.updateReview = function (event, reviewAnswer) {
     // move and collapse the application
   })
 }
+
+})
 
 // export function toggleApplication(event){
 //     event.target.closest('.artist-application-review').classList.toggle('expanded');

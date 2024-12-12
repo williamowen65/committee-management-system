@@ -230,37 +230,39 @@ __webpack_require__.r(__webpack_exports__);
 
   // events must be inline
 }, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__["default"]);
-window.updateReview = function (event, reviewAnswer) {
-  console.log("updateReview", event);
-  // update button to loading
-  var button = event.target;
-  var btnText = button.innerHTML;
-  button.setAttribute('disabled', 'disabled');
-  button.innerHTML = 'Loading...';
+document.addEventListener('DOMContentLoaded', function () {
+  window.updateReview = function (event, reviewAnswer) {
+    console.log("updateReview", event);
+    // update button to loading
+    var button = event.target;
+    var btnText = button.innerHTML;
+    button.setAttribute('disabled', 'disabled');
+    button.innerHTML = 'Loading...';
 
-  // get the fbId
-  var fbId = button.getAttribute('data-fb-id');
-  CRUD.update('new-applications', fbId, {
-    hasBeenReviewed: true,
-    approved: reviewAnswer
-  }).then(function () {
-    // update the button text
-    button.innerHTML = 'Review Submitted';
-    setTimeout(function () {
-      button.removeAttribute('disabled');
-      button.innerHTML = btnText;
+    // get the fbId
+    var fbId = button.getAttribute('data-fb-id');
+    CRUD.update('new-applications', fbId, {
+      hasBeenReviewed: true,
+      approved: reviewAnswer
+    }).then(function () {
+      // update the button text
+      button.innerHTML = 'Review Submitted';
+      setTimeout(function () {
+        button.removeAttribute('disabled');
+        button.innerHTML = btnText;
 
-      // collapse the application
-      var application = button.closest('.artist-application-review');
-      application.classList.toggle('expanded');
+        // collapse the application
+        var application = button.closest('.artist-application-review');
+        application.classList.toggle('expanded');
 
-      // update status text
-      application.querySelector('.status').innerHTML = reviewAnswer ? 'Approved' : 'Not Approved';
-    }, 3000);
+        // update status text
+        application.querySelector('.status').innerHTML = reviewAnswer ? 'Approved' : 'Not Approved';
+      }, 3000);
 
-    // move and collapse the application
-  });
-};
+      // move and collapse the application
+    });
+  };
+});
 
 // export function toggleApplication(event){
 //     event.target.closest('.artist-application-review').classList.toggle('expanded');
