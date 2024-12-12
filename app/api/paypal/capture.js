@@ -30,7 +30,9 @@ const captureOrder = async (req, res, next) => {
         console.log("capture api",{ resData })
         res.json(resData);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ 
+            fn: 'captureOrder',
+            message: error.message });
     }
   };
 

@@ -22,12 +22,15 @@ async function createOrderMiddleware(req, res, next) {
             method: "POST",
             body: JSON.stringify(payload),
         });
+
         const resData = await handleResponse(response);
         req.orderResponse = resData;
         console.log("order api", {resData})
         res.json(resData);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ 
+            fn: 'createOrder',
+            message: error.message });
     }
 }
 
