@@ -85,9 +85,18 @@ function initializePaypalButtons(){
               body: JSON.stringify(paypalPayload),
             });
 
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
+            // if (!response.ok) {
+
+
+
+
+                // SOMETHING FISHY IS GOING ON HERE
+                // The pay pal error is because caused by a json parsing error
+
+
+
+            //   throw new Error(`HTTP error! status: ${response.status}`);
+            // }
 
             const orderData = await response.json()
 
@@ -157,7 +166,7 @@ function initializePaypalButtons(){
             //     `Transaction ${transaction.status}: ${transaction.id}<br><br>Sending Email`
             //   )
               console.log(
-                'Capture result',
+                'WCapture result',
                 orderData,
                 JSON.stringify(orderData, null, 2)
               )

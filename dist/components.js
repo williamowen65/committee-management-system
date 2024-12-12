@@ -98,30 +98,24 @@ function initializePaypalButtons() {
               });
             case 3:
               response = _context.sent;
-              if (response.ok) {
-                _context.next = 6;
-                break;
-              }
-              throw new Error("HTTP error! status: ".concat(response.status));
-            case 6:
-              _context.next = 8;
+              _context.next = 6;
               return response.json();
-            case 8:
+            case 6:
               orderData = _context.sent;
               if (!orderData.jsonResponse.id) {
-                _context.next = 13;
+                _context.next = 11;
                 break;
               }
               return _context.abrupt("return", orderData.jsonResponse.id);
-            case 13:
+            case 11:
               errorDetail = (_orderData$jsonRespon = orderData.jsonResponse) === null || _orderData$jsonRespon === void 0 || (_orderData$jsonRespon = _orderData$jsonRespon.details) === null || _orderData$jsonRespon === void 0 ? void 0 : _orderData$jsonRespon[0];
               errorMessage = errorDetail ? "".concat(errorDetail.issue, " ").concat(errorDetail.description, " (").concat(orderData.jsonResponse.debug_id, ")") : JSON.stringify(orderData);
               throw new Error(errorMessage);
-            case 16:
-              _context.next = 23;
+            case 14:
+              _context.next = 21;
               break;
-            case 18:
-              _context.prev = 18;
+            case 16:
+              _context.prev = 16;
               _context.t0 = _context["catch"](0);
               err = JSON.parse(_context.t0.message);
               console.log({
@@ -134,11 +128,11 @@ function initializePaypalButtons() {
               // resultMessage(
               //   `Could not initiate PayPal Checkout...<br><br>${err.jsonResponse.error_description}`
               // )
-            case 23:
+            case 21:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[0, 18]]);
+        }, _callee, null, [[0, 16]]);
       }))();
     },
     onApprove: function onApprove(data, actions) {
@@ -194,7 +188,7 @@ function initializePaypalButtons() {
               transaction = ((_orderData2 = orderData) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.purchase_units) === null || _orderData2 === void 0 || (_orderData2 = _orderData2[0]) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.payments) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.captures) === null || _orderData2 === void 0 ? void 0 : _orderData2[0]) || ((_orderData3 = orderData) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.purchase_units) === null || _orderData3 === void 0 || (_orderData3 = _orderData3[0]) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.payments) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.authorizations) === null || _orderData3 === void 0 ? void 0 : _orderData3[0]); //   resultMessage(
               //     `Transaction ${transaction.status}: ${transaction.id}<br><br>Sending Email`
               //   )
-              console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+              console.log('WCapture result', orderData, JSON.stringify(orderData, null, 2));
               //   processSuccessfulClassPayment(orderData, transaction)
             case 25:
               _context2.next = 31;
