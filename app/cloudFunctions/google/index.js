@@ -12,8 +12,8 @@ app.use(express.json());
 
 app.get('/gmail', async (req, res) => {
   const auth = new google.auth.GoogleAuth({
-    keyFile: 'credentials.json',
-    scopes: ['https://www.googleapis.com/auth/gmail.readonly'],
+    keyFile: './credentials.json',
+    scopes: ['https://mail.google.com/'],
   });
   const client = await auth.getClient();
   const gmail = google.gmail({ version: 'v1', auth: client });
