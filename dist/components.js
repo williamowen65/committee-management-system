@@ -149,7 +149,7 @@ function initializePaypalButtons() {
               return fetch("/api/paypal/capture", {
                 method: 'POST',
                 headers: {
-                  'Content-Type': 'application/json'
+                  'ZContent-Type': 'application/json'
                 },
                 body: JSON.stringify({
                   orderId: data.orderID
