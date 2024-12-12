@@ -34,7 +34,7 @@ function initializePaypalButtons(){
 
     // Initialize paypal buttons
     let paypalPayload = {
-        intent: 'APTURE',
+        intent: 'CAPTURE',
         purchase_units: [
           {
             amount: {
@@ -83,7 +83,11 @@ function initializePaypalButtons(){
               // use the "body" param to optionally pass additional order information
               // like product ids and quantities
               body: JSON.stringify(paypalPayload),
-            })
+            });
+
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
 
             const orderData = await response.json()
 

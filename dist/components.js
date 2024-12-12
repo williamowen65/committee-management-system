@@ -46,7 +46,7 @@ function initializePaypalButtons() {
 
   // Initialize paypal buttons
   var paypalPayload = {
-    intent: 'APTURE',
+    intent: 'CAPTURE',
     purchase_units: [{
       amount: {
         currency_code: 'USD',
@@ -98,24 +98,30 @@ function initializePaypalButtons() {
               });
             case 3:
               response = _context.sent;
-              _context.next = 6;
-              return response.json();
+              if (response.ok) {
+                _context.next = 6;
+                break;
+              }
+              throw new Error("HTTP error! status: ".concat(response.status));
             case 6:
+              _context.next = 8;
+              return response.json();
+            case 8:
               orderData = _context.sent;
               if (!orderData.jsonResponse.id) {
-                _context.next = 11;
+                _context.next = 13;
                 break;
               }
               return _context.abrupt("return", orderData.jsonResponse.id);
-            case 11:
+            case 13:
               errorDetail = (_orderData$jsonRespon = orderData.jsonResponse) === null || _orderData$jsonRespon === void 0 || (_orderData$jsonRespon = _orderData$jsonRespon.details) === null || _orderData$jsonRespon === void 0 ? void 0 : _orderData$jsonRespon[0];
               errorMessage = errorDetail ? "".concat(errorDetail.issue, " ").concat(errorDetail.description, " (").concat(orderData.jsonResponse.debug_id, ")") : JSON.stringify(orderData);
               throw new Error(errorMessage);
-            case 14:
-              _context.next = 21;
-              break;
             case 16:
-              _context.prev = 16;
+              _context.next = 23;
+              break;
+            case 18:
+              _context.prev = 18;
               _context.t0 = _context["catch"](0);
               err = JSON.parse(_context.t0.message);
               console.log({
@@ -128,11 +134,11 @@ function initializePaypalButtons() {
               // resultMessage(
               //   `Could not initiate PayPal Checkout...<br><br>${err.jsonResponse.error_description}`
               // )
-            case 21:
+            case 23:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[0, 16]]);
+        }, _callee, null, [[0, 18]]);
       }))();
     },
     onApprove: function onApprove(data, actions) {
