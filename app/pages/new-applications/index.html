@@ -25,6 +25,12 @@
             CRUD.readAll('new-applications').then(applications => {
                 console.log(applications);
                 
+                const totalReviewed = applications.filter(application => application.hasBeenReviewed).length;
+                const totalNotReviewed = applications.filter(application => !application.hasBeenReviewed).length;
+
+                document.querySelector('#reviewedCount').innerText = totalReviewed;
+                document.querySelector('#notReveiwedCount').innerText = totalNotReviewed;
+
                 applications.forEach(application => {
 
                     
@@ -90,7 +96,7 @@
     <div class="container">
         <div style="text-align: center;">
             <h1> Review new artist applications</h1>
-            <div>(counts) Under-review: Reviewed:</div>
+            <div>Under-review: <span id="notReveiwedCount"></span>  / Reviewed: <span id="reviewedCount"></span></div>
             <!-- <b>this page should only be view able by the admin and application chair</b> -->
         </div>
         <div id="applications">

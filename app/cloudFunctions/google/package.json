@@ -12,6 +12,7 @@
   "author": "William Owen <william.owen.dev@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@google-cloud/functions-framework": "^3.4.2"
+    "@google-cloud/functions-framework": "^3.4.2",
+    "googleapis": "^144.0.0"
   }
 }

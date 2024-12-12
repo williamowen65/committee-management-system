@@ -65,13 +65,11 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     })
 
-  document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('logout').addEventListener('click', () => {
       firebase.signOut(firebase.auth).then(() => {
         window.location.href = '/artist-sign-on'
       })
     })
-  })
 })
 
 function newApplicationsSidePanel(role) {
