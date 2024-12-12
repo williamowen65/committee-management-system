@@ -1,2 +1,2 @@
 
-<div class="payPalContainer" style=""></div>
+<div class="payPalContainer" style="width:fit-content; margin: auto "></div>

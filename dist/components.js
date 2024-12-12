@@ -24,6 +24,7 @@ var script = document.createElement('script');
 // Add a custom Client ID 
 script.src = "https://www.paypal.com/sdk/js?client-id=Afs2Ei8jIPZLq82X3RlBG8IjcfeWrKTabg0JPbykmgR1yv9VkQIqCt86C65x42Zi0vPnHrjlRuRAuIiD&components=buttons&enable-funding=venmo&disable-funding=credit&currency=USD";
 document.head.appendChild(script);
+script.onload = initializePaypalButtons;
 
 /**
  * This component is a wrapper for the paypal button and logic
@@ -35,8 +36,9 @@ document.head.appendChild(script);
  */
 var paypalButtonAction;
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('paypal-component', function () {
+
   // Initialize paypal buttons
-  initializePaypalButtons();
+  // initializePaypalButtons(); // using script on load event
 }, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], "");
 function initializePaypalButtons() {
   // Create random Id for the paypal interaction
@@ -1116,7 +1118,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n<div class=\"payPalContainer\" style=\"\"></div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n<div class=\"payPalContainer\" style=\"width:fit-content; margin: auto \"></div>");
 
 /***/ }),
 

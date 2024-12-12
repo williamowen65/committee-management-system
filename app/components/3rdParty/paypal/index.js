@@ -7,6 +7,7 @@ const script = document.createElement('script');
 // Add a custom Client ID 
 script.src = "https://www.paypal.com/sdk/js?client-id=Afs2Ei8jIPZLq82X3RlBG8IjcfeWrKTabg0JPbykmgR1yv9VkQIqCt86C65x42Zi0vPnHrjlRuRAuIiD&components=buttons&enable-funding=venmo&disable-funding=credit&currency=USD";
 document.head.appendChild(script);
+script.onload = initializePaypalButtons
 
 /**
  * This component is a wrapper for the paypal button and logic
@@ -21,7 +22,7 @@ let paypalButtonAction
 createCustomElement('paypal-component', function () {
 
         // Initialize paypal buttons
-        initializePaypalButtons();
+        // initializePaypalButtons(); // using script on load event
     
 
 }, paypalTemplate, "");
