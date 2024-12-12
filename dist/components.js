@@ -46,7 +46,7 @@ function initializePaypalButtons() {
 
   // Initialize paypal buttons
   var paypalPayload = {
-    intent: 'CAPTURE',
+    intent: 'APTURE',
     purchase_units: [{
       amount: {
         currency_code: 'USD',

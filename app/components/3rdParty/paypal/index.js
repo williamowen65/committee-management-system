@@ -34,7 +34,7 @@ function initializePaypalButtons(){
 
     // Initialize paypal buttons
     let paypalPayload = {
-        intent: 'CAPTURE',
+        intent: 'APTURE',
         purchase_units: [
           {
             amount: {

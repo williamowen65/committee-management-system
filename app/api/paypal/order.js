@@ -21,7 +21,7 @@ async function createOrderMiddleware(req, res, next) {
                 Authorization: `Bearer ${accessToken}`,
             },
             method: "POST",
-            body: payload,
+            body: JSON.stringify(payload),
         });
 
         const resData = await handleResponse(response);
