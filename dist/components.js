@@ -734,7 +734,7 @@ function _createCustomElement() {
               key: "updateTemplate",
               value: function updateTemplate() {
                 var randomId = Math.floor(Math.random() * 1000000);
-                var context = _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({
+                var context = _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({
                   fieldName: this.getAttribute('fieldName') || 'defaultFieldName',
                   alias: this.getAttribute('alias') || '',
                   required: this.hasAttribute('required') || false,
@@ -776,7 +776,7 @@ function _createCustomElement() {
                   createdAt: this.getAttribute('createdAt') || '',
                   studioSharingResponse: this.getAttribute('studioSharingResponse') || '',
                   howDidYouHearAboutUs: this.getAttribute('howDidYouHearAboutUs') || ''
-                }, "artistStatement", this.getAttribute('artistStatement') || ''), "websiteSocialMedia", this.getAttribute('website-social-media') || ''), "fbId", this.getAttribute('fbId') || ''), "approved", this.getAttribute('approved') && this.getAttribute('approved') == "true" || false), "randomId", randomId);
+                }, "artistStatement", this.getAttribute('artistStatement') || ''), "websiteSocialMedia", this.getAttribute('website-social-media') || ''), "fbId", this.getAttribute('fbId') || ''), "approved", this.getAttribute('approved') && this.getAttribute('approved') == "true" || false), "randomId", randomId), "CRUD", window.CRUD);
                 var evaluatedTemplate = evaluateTemplate(html, context);
                 this.innerHTML = "\n                <style>\n                ".concat(css, "\n                </style>\n                ").concat(evaluatedTemplate, "\n                ");
               }

@@ -97,7 +97,8 @@ export async function createCustomElement(name, onload, html, css, options ={}) 
                 websiteSocialMedia: this.getAttribute('website-social-media') || '',
                 fbId: this.getAttribute('fbId') || '',
                 approved: this.getAttribute('approved') && this.getAttribute('approved') == "true" || false,
-                randomId
+                randomId,
+                CRUD: window.CRUD,
                 // paypalClientId: this.getAttribute('PAYPAL_CLIENT_ID') || '',
             };
 
