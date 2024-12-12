@@ -2,3 +2,4 @@ node_modules
 private_key.json
 .env
 app/api/paypal/sandbox-test.http
+app/cloudFunctions/google/credentials.json
