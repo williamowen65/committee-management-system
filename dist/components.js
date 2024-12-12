@@ -50,11 +50,11 @@ function initializePaypalButtons() {
     purchase_units: [{
       amount: {
         currency_code: 'USD',
-        value: "10.00"
+        value: "1.00"
       },
       reference_id: transactionId,
       custom_id: transactionId,
-      description: 'CUSTOM DESCRIPTION '.slice(0, 127)
+      description: 'A TEST PAYPAL EXCHANGE'.slice(0, 127)
     }],
     application_context: {
       shipping_preference: 'NO_SHIPPING'
