@@ -5,7 +5,8 @@ const port = process.env.PORT || 3000;
 const fs = require('fs');
 const cors = require('cors');
 const createOrderMiddleware = require('./app/api/paypal/order.js');
-
+const createCaptureMiddleware = require('./app/api/paypal/capture.js');
+const bodyParser = require('body-parser');
 
 
 // console.log("hi", {
@@ -16,6 +17,13 @@ app.use(cors({
     credentials: true
 }));
 
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+});
+
+// Parse JSON bodies
+app.use(bodyParser.json());
 
 
 
@@ -25,6 +33,7 @@ app.post('/submit', (req, res) => {
     res.send('Data received');
 });
 
+app.post('/api/paypal/capture', createCaptureMiddleware);
 app.post('/api/paypal/order', createOrderMiddleware);
 
 // Serve static files from the "public" directory
