@@ -75,7 +75,7 @@ function initializePaypalButtons(){
         //   consoleIf('paypal')?.log('createOrder', { data, actions })
 
           try {
-            const response = await fetch('/api/paypal/order', {
+            const response = await fetch('../api/paypal/order', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

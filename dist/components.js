@@ -87,7 +87,7 @@ function initializePaypalButtons() {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return fetch('/api/paypal/order', {
+              return fetch('../api/paypal/order', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'
