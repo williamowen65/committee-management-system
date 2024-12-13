@@ -30,7 +30,7 @@ async function handleResponse(response) {
 const generateAccessToken = async () => {
     try {
         if (!PAYPAL_CLIENT_ID ||  !PAYPAL_SECRET) {
-            // console.log({env: process.env})
+            console.log({env: process.env})
             throw new Error("MISSING_API_CREDENTIALS");
         }
         const auth = Buffer.from(
