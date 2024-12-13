@@ -1,7 +1,5 @@
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-(async () => {
-    await import('dotenv').then(dotenv => dotenv.config());
-})();
+require('dotenv').config()
 
 
 const { PAYPAL_CLIENT_ID, PAYPAL_SECRET, DEPLOYMENT} = process.env
@@ -32,8 +30,7 @@ async function handleResponse(response) {
 const generateAccessToken = async () => {
     try {
         if (!PAYPAL_CLIENT_ID ||  !PAYPAL_SECRET) {
-            console.log({env: process.env})
-            throw new Error("MISSING_API_CREDENTIALS");
+            throw new Error("MISSING_API_CREDENTIALS IDS: " + PAYPAL_CLIENT_ID + " " + PAYPAL_SECRET);
         }
         const auth = Buffer.from(
             PAYPAL_CLIENT_ID + ":" + PAYPAL_SECRET,
