@@ -9,6 +9,9 @@ const createCaptureMiddleware = require('./app/api/paypal/capture.js');
 const bodyParser = require('body-parser');
 
 
+console.log("Starting up server.js");
+
+
 // console.log("hi", {
 
 // Enable CORS for requests from http://localhost:5500
