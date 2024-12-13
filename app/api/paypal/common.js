@@ -47,7 +47,8 @@ const generateAccessToken = async () => {
         console.log("generateAccessToken", {
             token: data.access_token,
             auth,
-            test:123
+            test:123,
+            base
         })
         // console.log({ auth, base })
         return data.access_token;
