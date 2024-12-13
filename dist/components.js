@@ -22,7 +22,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 // Attach the paypal script to the head of the document
 var script = document.createElement('script');
 // Add a custom Client ID 
-script.src = "https://www.paypal.com/sdk/js?client-id=Afs2Ei8jIPZLq82X3RlBG8IjcfeWrKTabg0JPbykmgR1yv9VkQIqCt86C65x42Zi0vPnHrjlRuRAuIiD&components=buttons&enable-funding=venmo&disable-funding=credit&currency=USD";
+var deploymentClientId = 'AVzTno9fB7HGr_vYJlE_ZgGqVONSnSJVdRwqoY0CRyA5GZh75iubhs2myXQW5mlNolH7lcQDpooNGf5_';
+script.src = "https://www.paypal.com/sdk/js?client-id=".concat(deploymentClientId, "&components=buttons&enable-funding=venmo&disable-funding=credit&currency=USD");
 document.head.appendChild(script);
 script.onload = initializePaypalButtons;
 
@@ -1118,7 +1119,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n<div class=\"payPalContainer\" style=\"width:fit-content; margin: auto \"></div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n<div class=\"payPalContainer\" style=\"width:fit-content; margin: auto \"></div>");
 
 /***/ }),
 

@@ -2,10 +2,14 @@ import paypalTemplate from './index.html.txt';
 import { createCustomElement, evaluateTemplate } from '../../../../utils/custom-element';
 // import styles from './style.scss.txt';
 
+
+
 // Attach the paypal script to the head of the document
 const script = document.createElement('script');
 // Add a custom Client ID 
-script.src = "https://www.paypal.com/sdk/js?client-id=Afs2Ei8jIPZLq82X3RlBG8IjcfeWrKTabg0JPbykmgR1yv9VkQIqCt86C65x42Zi0vPnHrjlRuRAuIiD&components=buttons&enable-funding=venmo&disable-funding=credit&currency=USD";
+const deploymentClientId = 'AVzTno9fB7HGr_vYJlE_ZgGqVONSnSJVdRwqoY0CRyA5GZh75iubhs2myXQW5mlNolH7lcQDpooNGf5_'
+
+script.src = `https://www.paypal.com/sdk/js?client-id=${deploymentClientId}&components=buttons&enable-funding=venmo&disable-funding=credit&currency=USD`;
 document.head.appendChild(script);
 script.onload = initializePaypalButtons
 
@@ -85,20 +89,7 @@ function initializePaypalButtons(){
               body: JSON.stringify(paypalPayload),
             });
 
-            // if (!response.ok) {
-
-
-
-
-                // SOMETHING FISHY IS GOING ON HERE
-                // The pay pal error is because caused by a json parsing error
-                // apply logs....
-
-
-
-            //   throw new Error(`HTTP error! status: ${response.status}`);
-            // }
-
+      
             const orderData = await response.json()
 
             // consoleIf('paypal')?.log('createdOrder', { orderData })
