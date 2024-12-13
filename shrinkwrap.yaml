@@ -2,6 +2,7 @@ dependencies:
   '@fortawesome/fontawesome-svg-core': 6.7.1
   '@fortawesome/free-solid-svg-icons': 6.7.1
   '@google-cloud/functions-framework': 3.4.2
+  axios: 1.7.9
   cors: 2.8.5
   dotenv: 16.4.7
   express: 4.21.1
@@ -1596,6 +1597,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-PCVAQswWemu6UdxsDFFX/+gVeYqKAod3D3UVm91jHwynguOwAvYPhx8nNlM++NqRcK6CxxpUafjmhIdKiHibqg==
+  /asynckit/0.4.0:
+    dev: false
+    resolution:
+      integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
   /available-typed-arrays/1.0.7:
     dependencies:
       possible-typed-array-names: 1.0.0
@@ -1604,6 +1609,14 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==
+  /axios/1.7.9:
+    dependencies:
+      follow-redirects: 1.15.9
+      form-data: 4.0.1
+      proxy-from-env: 1.1.0
+    dev: false
+    resolution:
+      integrity: sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==
   /babel-loader/9.2.1:
     dependencies:
       find-cache-dir: 4.0.0
@@ -1768,6 +1781,14 @@ packages:
     dev: true
     resolution:
       integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==
+  /combined-stream/1.0.8:
+    dependencies:
+      delayed-stream: 1.0.0
+    dev: false
+    engines:
+      node: '>= 0.8'
+    resolution:
+      integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
   /commander/10.0.1:
     dev: true
     engines:
@@ -1889,6 +1910,12 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-rBMvIzlpA8v6E+SJZoo++HAYqsLrkg7MSfIinMPFhmkorw7X+dOXVJQs+QT69zGkzMyfDnIMN2Wid1+NbL3T+A==
+  /delayed-stream/1.0.0:
+    dev: false
+    engines:
+      node: '>=0.4.0'
+    resolution:
+      integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==
   /depd/2.0.0:
     dev: false
     engines:
@@ -2166,12 +2193,28 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-b6suED+5/3rTpUBdG1gupIl8MPFCAMA0QXwmljLhvCUKcUvdE4gWky9zpuGCcXHOsz4J9wPGNWq6OKpmIzz3hQ==
+  /follow-redirects/1.15.9:
+    dev: false
+    engines:
+      node: '>=4.0'
+    resolution:
+      integrity: sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==
   /for-each/0.3.3:
     dependencies:
       is-callable: 1.2.7
     dev: false
     resolution:
       integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==
+  /form-data/4.0.1:
+    dependencies:
+      asynckit: 0.4.0
+      combined-stream: 1.0.8
+      mime-types: 2.1.35
+    dev: false
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-tzN8e4TX8+kkxGPK8D5u0FNmjPUjw3lwC9lSLxxoB/+GtsJG91CO8bSWy73APlgAZzZbXEYZJuxjkHH2w+Ezhw==
   /formdata-polyfill/4.0.10:
     dependencies:
       fetch-blob: 3.2.0
@@ -2968,6 +3011,10 @@ packages:
       node: '>= 0.10'
     resolution:
       integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==
+  /proxy-from-env/1.1.0:
+    dev: false
+    resolution:
+      integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==
   /punycode/2.3.1:
     dev: true
     engines:
@@ -3671,6 +3718,7 @@ specifiers:
   '@fortawesome/fontawesome-svg-core': ^6.7.1
   '@fortawesome/free-solid-svg-icons': ^6.7.1
   '@google-cloud/functions-framework': ^3.4.2
+  axios: ^1.7.9
   babel-loader: ^9.2.1
   cors: ^2.8.5
   css-loader: ^7.1.2
