@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "This is a deployment of a website which is clasped to a squarespace website.",
   "main": "server.js",
+  
   "devDependencies": {
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",

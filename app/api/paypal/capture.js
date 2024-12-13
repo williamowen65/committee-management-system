@@ -33,6 +33,7 @@ const captureOrder = async (req, res, next) => {
         const resData = await handleResponse(response);
       
         console.log("capture api",{ resData })
+        // res.json(resData);
         res.json(resData);
     } catch (error) {
         res.status(500).json({ 
