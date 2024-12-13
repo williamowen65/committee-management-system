@@ -12,14 +12,14 @@ const fetch = require("node-fetch");
 
 console.log("Starting up server.js");
 console.log("process.env.PORT", process.env.PORT);
-console.log("fetch", fetch);
+// console.log("fetch", fetch);
 
 
 // console.log("hi", {
 
 // Enable CORS for requests from http://localhost:5500
 app.use(cors({
-    origin: 'http://localhost:5500',
+    origin: ['http://localhost:5500', 'http://localhost:3000', 'https://few-right-mandible.glitch.me', 'https://gig-harbor-studio-tour.org'],
     credentials: true
 }));
 

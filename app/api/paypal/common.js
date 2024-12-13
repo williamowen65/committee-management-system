@@ -44,7 +44,11 @@ const generateAccessToken = async () => {
         });
 
         const data = await response.json();
-        console.log("generateAccessToken", data.access_token)
+        console.log("generateAccessToken", {
+            token: data.access_token,
+            auth,
+            test:123
+        })
         // console.log({ auth, base })
         return data.access_token;
     } catch (error) {
