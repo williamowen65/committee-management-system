@@ -1,7 +1,6 @@
 
 const { handleResponse, generateAccessToken, base } = require("./common.js");
 require("dotenv").config();
-// 
 const fetch = require("node-fetch");
 
 /**
@@ -13,7 +12,7 @@ const captureOrder = async (req, res, next) => {
         const accessToken = await generateAccessToken();
         const { orderID } = req.body;
         const url = `${base}/v2/checkout/orders/${orderID}/capture`;
-        // console.log("captureOrder", { orderID, accessToken, url })
+        console.log("captureOrder", { orderID, accessToken, url })
 
 
         const response = await fetch(url, {
