@@ -5,7 +5,8 @@ const fetch = require('node-fetch')
 const { PAYPAL_CLIENT_ID, PAYPAL_SECRET, DEPLOYMENT} = process.env
 console.log({PAYPAL_CLIENT_ID, PAYPAL_SECRET, DEPLOYMENT})
 
-const base = DEPLOYMENT == 'sandbox' ? 'https://api-m.sandbox.paypal.com' : 'https://api-m.paypal.com'
+// const base = DEPLOYMENT == 'sandbox' ? 'https://api-m.sandbox.paypal.com' : 'https://api-m.paypal.com'
+const base = 'https://api-m.paypal.com'
 
 
 async function handleResponse(response) {
