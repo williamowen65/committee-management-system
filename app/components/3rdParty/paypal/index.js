@@ -157,9 +157,37 @@ window.initializePaypalButtons = function (cost = 250.00) {
               console.log(
                 'Capture result',
                 orderData,
-                JSON.stringify(orderData, null, 2)
+                JSON.stringify(orderData, null, 2),
+                CRUD
               )
-            //   processSuccessfulClassPayment(orderData, transaction)
+
+              // get user Id
+              const userId = firebase.auth.currentUser.uid
+
+              CRUD.update('ghost-contracts', userId, {
+                artistDetails: {
+                  membershipPaid: true,
+                  membershipReceipt: {
+                    transactionId: transaction.id,
+                    status: transaction.status,
+                    amount: transaction.amount.value,
+                    currency: transaction.amount.currency_code,
+                    createdAt: firebase.serverTimestamp(),
+                  }
+                }
+              }).then(() => {
+                // show success message
+                alert('Membership payment successful')
+                // redirect to the dashboard
+                window.location.href = '/members'
+              })
+
+              // save data to the database
+              // if (orderData) {
+              //    CRUD
+              // }
+
+
             }
           } catch (error) {
             console.log(error)

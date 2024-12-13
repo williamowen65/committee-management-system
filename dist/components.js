@@ -138,7 +138,7 @@ window.initializePaypalButtons = function () {
     },
     onApprove: function onApprove(data, actions) {
       return _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var _orderData, response, orderData, errorDetail, _orderData2, _orderData3, transaction;
+        var _orderData, response, orderData, errorDetail, _orderData2, _orderData3, transaction, userId;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
@@ -189,24 +189,48 @@ window.initializePaypalButtons = function () {
               transaction = ((_orderData2 = orderData) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.purchase_units) === null || _orderData2 === void 0 || (_orderData2 = _orderData2[0]) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.payments) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.captures) === null || _orderData2 === void 0 ? void 0 : _orderData2[0]) || ((_orderData3 = orderData) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.purchase_units) === null || _orderData3 === void 0 || (_orderData3 = _orderData3[0]) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.payments) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.authorizations) === null || _orderData3 === void 0 ? void 0 : _orderData3[0]); //   resultMessage(
               //     `Transaction ${transaction.status}: ${transaction.id}<br><br>Sending Email`
               //   )
-              console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-              //   processSuccessfulClassPayment(orderData, transaction)
-            case 25:
-              _context2.next = 31;
-              break;
+              console.log('Capture result', orderData, JSON.stringify(orderData, null, 2), CRUD);
+
+              // get user Id
+              userId = firebase.auth.currentUser.uid;
+              CRUD.update('ghost-contracts', userId, {
+                artistDetails: {
+                  membershipPaid: true,
+                  membershipReceipt: {
+                    transactionId: transaction.id,
+                    status: transaction.status,
+                    amount: transaction.amount.value,
+                    currency: transaction.amount.currency_code,
+                    createdAt: firebase.serverTimestamp()
+                  }
+                }
+              }).then(function () {
+                // show success message
+                alert('Membership payment successful');
+                // redirect to the dashboard
+                window.location.href = '/members';
+              });
+
+              // save data to the database
+              // if (orderData) {
+              //    CRUD
+              // }
             case 27:
-              _context2.prev = 27;
+              _context2.next = 33;
+              break;
+            case 29:
+              _context2.prev = 29;
               _context2.t0 = _context2["catch"](1);
               console.log(_context2.t0);
               console.error(_context2.t0);
               // resultMessage(
               //   `Sorry, your transaction could not be processed...<br><br>${error}`
               // )
-            case 31:
+            case 33:
             case "end":
               return _context2.stop();
           }
-        }, _callee2, null, [[1, 27]]);
+        }, _callee2, null, [[1, 29]]);
       }))();
     }
   }).render('.payPalContainer');
