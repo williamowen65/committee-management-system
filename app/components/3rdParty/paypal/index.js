@@ -11,7 +11,6 @@ const deploymentClientId = 'AVzTno9fB7HGr_vYJlE_ZgGqVONSnSJVdRwqoY0CRyA5GZh75iub
 
 script.src = `https://www.paypal.com/sdk/js?client-id=${deploymentClientId}&components=buttons&enable-funding=venmo&disable-funding=credit&currency=USD`;
 document.head.appendChild(script);
-script.onload = initializePaypalButtons
 
 /**
  * This component is a wrapper for the paypal button and logic
@@ -24,15 +23,12 @@ script.onload = initializePaypalButtons
 let paypalButtonAction
 
 createCustomElement('paypal-component', function () {
-
         // Initialize paypal buttons
         // initializePaypalButtons(); // using script on load event
-    
-
 }, paypalTemplate, "");
 
 
-function initializePaypalButtons(){
+window.initializePaypalButtons = function (cost = 250.00) {
     // Create random Id for the paypal interaction
     const transactionId = 'ghost-artist-fee-recept-id_' + Math.floor(Math.random() * 1000000)
 
@@ -43,11 +39,12 @@ function initializePaypalButtons(){
           {
             amount: {
               currency_code: 'USD',
-              value: "1.00",
+              // value: "1.00",
+              value: cost,
             },
             reference_id: transactionId,
             custom_id: transactionId,
-            description: ('A TEST PAYPAL EXCHANGE').slice(0, 127),
+            description: (`GHOST membership fee `).slice(0, 127),
           },
         ],
         application_context: {

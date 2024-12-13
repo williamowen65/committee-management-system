@@ -25,7 +25,6 @@ var script = document.createElement('script');
 var deploymentClientId = 'AVzTno9fB7HGr_vYJlE_ZgGqVONSnSJVdRwqoY0CRyA5GZh75iubhs2myXQW5mlNolH7lcQDpooNGf5_';
 script.src = "https://www.paypal.com/sdk/js?client-id=".concat(deploymentClientId, "&components=buttons&enable-funding=venmo&disable-funding=credit&currency=USD");
 document.head.appendChild(script);
-script.onload = initializePaypalButtons;
 
 /**
  * This component is a wrapper for the paypal button and logic
@@ -37,11 +36,11 @@ script.onload = initializePaypalButtons;
  */
 var paypalButtonAction;
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('paypal-component', function () {
-
   // Initialize paypal buttons
   // initializePaypalButtons(); // using script on load event
 }, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], "");
-function initializePaypalButtons() {
+window.initializePaypalButtons = function () {
+  var cost = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 250.00;
   // Create random Id for the paypal interaction
   var transactionId = 'ghost-artist-fee-recept-id_' + Math.floor(Math.random() * 1000000);
 
@@ -51,11 +50,12 @@ function initializePaypalButtons() {
     purchase_units: [{
       amount: {
         currency_code: 'USD',
-        value: "1.00"
+        // value: "1.00",
+        value: cost
       },
       reference_id: transactionId,
       custom_id: transactionId,
-      description: 'A TEST PAYPAL EXCHANGE'.slice(0, 127)
+      description: "GHOST membership fee ".slice(0, 127)
     }],
     application_context: {
       shipping_preference: 'NO_SHIPPING'
@@ -210,7 +210,7 @@ function initializePaypalButtons() {
       }))();
     }
   }).render('.payPalContainer');
-}
+};
 
 /***/ }),
 
@@ -375,7 +375,9 @@ function setUXEventListeners() {
         userId: result.user.uid,
         artistDetails: {
           firstName: firstName,
-          lastName: lastName
+          lastName: lastName,
+          scholarshipApplied: false,
+          membershipPaid: false
         },
         createdAt: firebase.serverTimestamp()
       }).then(function () {

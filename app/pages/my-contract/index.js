@@ -45,6 +45,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Set Artistic demonstration
         setArtisticDemonstrationForm(contracts);
+
+        // set Paypal 
+        setPaypalButton(contracts);
     })
 
     CRUD.listen('ghost-contracts', null, (existingContracts) => {
@@ -543,4 +546,17 @@ function setArtistDetailsForm(contracts) {
             input.dispatchEvent(event)
         })
     }
+}
+
+function setPaypalButton(contracts){
+    const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+    const scholarshipApplied = contract.artistDetails.scholarshipApplied
+    window.initializePaypalButtons(scholarshipApplied ? 125 : 225)
+
+    if(scholarshipApplied){
+        document.querySelector('.standard-fee').style['text-decoration'] = 'line-through'
+        document.querySelector('.scholarship-fee').style['text-decoration'] = 'none'
+        document.querySelector('.scholarship-fee').style.display = 'inline-block'
+    }
+
 }

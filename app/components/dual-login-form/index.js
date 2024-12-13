@@ -103,6 +103,8 @@ function setUXEventListeners() {
                     artistDetails: {
                         firstName,
                         lastName,
+                        scholarshipApplied: false,
+                        membershipPaid: false,
                     },
                     createdAt: firebase.serverTimestamp()
             }).then(() => {
