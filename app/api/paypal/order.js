@@ -4,6 +4,7 @@
 
 
 const { handleResponse, generateAccessToken, base } = require("./common.js");
+const axios = require('axios');
 require("dotenv").config();
 
 // const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
@@ -17,15 +18,12 @@ async function createOrderMiddleware(req, res, next) {
         const url = `${base}/v2/checkout/orders`;
         const payload = order;
 
-        const response = await fetch(url, {
+        const response = await axios.post(url, payload, {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${accessToken}`,
             },
-            method: "POST",
-            body: JSON.stringify(payload),
-        });
-
+        });  
         const resData = await handleResponse(response);
         req.orderResponse = resData;
         console.log("order api", {resData})
