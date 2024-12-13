@@ -551,12 +551,19 @@ function setArtistDetailsForm(contracts) {
 function setPaypalButton(contracts){
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
     const scholarshipApplied = contract.artistDetails.scholarshipApplied
+    const membershipPaid = contract.artistDetails.membershipPaid
+
     window.initializePaypalButtons(scholarshipApplied ? 125 : 225)
 
     if(scholarshipApplied){
         document.querySelector('.standard-fee').style['text-decoration'] = 'line-through'
         document.querySelector('.scholarship-fee').style['text-decoration'] = 'none'
         document.querySelector('.scholarship-fee').style.display = 'inline-block'
+    }
+
+    if(membershipPaid){
+        document.querySelector('.membership-paid').style.display = 'inline-block'
+        document.querySelector('.membership-payment-due').style.display = 'none'
     }
 
 }
