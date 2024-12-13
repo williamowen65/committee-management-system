@@ -127,7 +127,7 @@ function initializePaypalButtons(){
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify({
-                orderId: data.orderID,
+                orderID: data.orderID,
               }),
             })
             let orderData = await response.json()
