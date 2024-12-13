@@ -553,8 +553,8 @@ function setPaypalButton(contracts){
     const scholarshipApplied = contract.artistDetails.scholarshipApplied
     const membershipPaid = contract.artistDetails.membershipPaid
 
-    // window.initializePaypalButtons(scholarshipApplied ? 125 : 225)
-    window.initializePaypalButtons(1)
+    window.initializePaypalButtons(scholarshipApplied ? 125 : 225)
+    // window.initializePaypalButtons(1)
 
     if(scholarshipApplied){
         document.querySelector('.standard-fee').style['text-decoration'] = 'line-through'
