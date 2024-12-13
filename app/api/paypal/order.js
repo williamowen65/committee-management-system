@@ -16,20 +16,23 @@ async function createOrderMiddleware(req, res, next) {
         const url = `${base}/v2/checkout/orders`;
         const payload = order;
 
-        const response = await axios.post(url, payload, {
+        const response = await fetch(url, {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${accessToken}`,
             },
-        });  
+            body: JSON.stringify(payload),
+        });
         const resData = await handleResponse(response);
         req.orderResponse = resData;
-        console.log("order api", {resData})
+        console.log("order api", { resData })
         res.json(resData);
     } catch (error) {
-        res.status(500).json({ 
+        res.status(500).json({
             fn: 'createOrder',
-            message: error.message });
+            message: error.message
+        });
     }
 }
 
