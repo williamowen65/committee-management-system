@@ -92,6 +92,7 @@ function initializePaypalButtons(){
 
                 // SOMETHING FISHY IS GOING ON HERE
                 // The pay pal error is because caused by a json parsing error
+                // apply logs....
 
 
 
@@ -132,7 +133,7 @@ function initializePaypalButtons(){
             const response = await fetch(`/api/paypal/capture`, {
               method: 'POST',
               headers: {
-                'ZContent-Type': 'application/json',
+                'Content-Type': 'application/json',
               },
               body: JSON.stringify({
                 orderId: data.orderID,
@@ -166,7 +167,7 @@ function initializePaypalButtons(){
             //     `Transaction ${transaction.status}: ${transaction.id}<br><br>Sending Email`
             //   )
               console.log(
-                'WCapture result',
+                'Capture result',
                 orderData,
                 JSON.stringify(orderData, null, 2)
               )

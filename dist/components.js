@@ -149,7 +149,7 @@ function initializePaypalButtons() {
               return fetch("/api/paypal/capture", {
                 method: 'POST',
                 headers: {
-                  'ZContent-Type': 'application/json'
+                  'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                   orderId: data.orderID
@@ -188,7 +188,7 @@ function initializePaypalButtons() {
               transaction = ((_orderData2 = orderData) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.purchase_units) === null || _orderData2 === void 0 || (_orderData2 = _orderData2[0]) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.payments) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.captures) === null || _orderData2 === void 0 ? void 0 : _orderData2[0]) || ((_orderData3 = orderData) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.purchase_units) === null || _orderData3 === void 0 || (_orderData3 = _orderData3[0]) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.payments) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.authorizations) === null || _orderData3 === void 0 ? void 0 : _orderData3[0]); //   resultMessage(
               //     `Transaction ${transaction.status}: ${transaction.id}<br><br>Sending Email`
               //   )
-              console.log('WCapture result', orderData, JSON.stringify(orderData, null, 2));
+              console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
               //   processSuccessfulClassPayment(orderData, transaction)
             case 25:
               _context2.next = 31;
