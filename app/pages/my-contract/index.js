@@ -565,6 +565,16 @@ function setPaypalButton(contracts){
     if(membershipPaid){
         document.querySelector('.membership-paid').style.display = 'inline-block'
         document.querySelector('.membership-payment-due').style.display = 'none'
+
+        // show recept 
+        const membershipReceipt = contract.artistDetails.membershipReceipt
+        if(membershipReceipt){
+            const paidOn = new Date(membershipReceipt.createdAt.seconds * 1000).toLocaleString();
+            document.querySelector('.membership-receipt').innerText = 
+            `Transaction ID: ${membershipReceipt.transactionId} \nAmount: ${membershipReceipt.amount} \nStatus: ${membershipReceipt.status}`+
+            `\nPaid on: ${paidOn}`;
+        }
+
     }
 
 }
