@@ -7,9 +7,12 @@ const cors = require('cors');
 const createOrderMiddleware = require('./app/api/paypal/order.js');
 const createCaptureMiddleware = require('./app/api/paypal/capture.js');
 const bodyParser = require('body-parser');
+const fetch = require("node-fetch");
 
 
 console.log("Starting up server.js");
+console.log("process.env.PORT", process.env.PORT);
+console.log("fetch", fetch);
 
 
 // console.log("hi", {

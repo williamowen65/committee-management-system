@@ -2,8 +2,7 @@
 const { handleResponse, generateAccessToken, base } = require("./common.js");
 require("dotenv").config();
 // 
-// const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-// const fetch = require("node-fetch");
+const fetch = require("node-fetch");
 
 /**
  * Capture payment for the created order to complete the transaction.

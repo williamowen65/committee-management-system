@@ -4,11 +4,9 @@
 
 
 const { handleResponse, generateAccessToken, base } = require("./common.js");
-// const axios = require('axios');
 require("dotenv").config();
 
-// const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-// const fetch = require("node-fetch");
+const fetch = require("node-fetch");
 const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } = process.env;
 
 async function createOrderMiddleware(req, res, next) {
