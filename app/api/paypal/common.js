@@ -38,8 +38,8 @@ const generateAccessToken = async () => {
         const response = await fetch(`${base}/v1/oauth2/token`, {
             method: "POST",
             body: "grant_type=client_credentials",
-            'Content-Type': 'application/x-www-form-urlencoded',
             headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
                 Authorization: `Basic ${auth}`,
             },
         });
