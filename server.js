@@ -12,11 +12,8 @@ const logIf = require('./utils/logIf.js');
 
 
 logIf.server && console.log("Starting up server.js");
-logIf.server && console.log("process.env.PORT", process.env.PORT);
-// logIf.server && console.log("fetch", fetch);
+logIf.archive && console.log("process.env.PORT", process.env.PORT);
 
-
-// logIf.server && console.log("hi", {
 
 // Enable CORS for requests from http://localhost:5500
 app.use(cors({

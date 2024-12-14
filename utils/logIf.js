@@ -1,6 +1,8 @@
 const logIf = {
     server: true,
     client: false,
+    archive: false,
+    paypal: false
 };
 
 

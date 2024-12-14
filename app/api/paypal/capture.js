@@ -2,6 +2,9 @@
 const { handleResponse, generateAccessToken, base } = require("./common.js");
 require("dotenv").config();
 const fetch = require("node-fetch");
+const logIf = require('../../../utils/logIf.js');
+// import '../../../utils/logIf.js'; // This is a special way to import the module, it will work in both Node.js and the browser. 
+
 
 /**
  * Capture payment for the created order to complete the transaction.
@@ -12,7 +15,7 @@ const captureOrder = async (req, res, next) => {
         const accessToken = await generateAccessToken();
         const { orderID } = req.body;
         const url = `${base}/v2/checkout/orders/${orderID}/capture`;
-        console.log("captureOrder", { orderID, accessToken, url })
+        logIf.archive && console.log("captureOrder", { orderID, accessToken, url })
 
 
         const response = await fetch(url, {
@@ -30,7 +33,7 @@ const captureOrder = async (req, res, next) => {
       
         const resData = await handleResponse(response);
       
-        console.log("capture api",{ resData })
+        logIf.archive && console.log("capture api",{ resData })
         // res.json(resData);
         res.json(resData);
     } catch (error) {

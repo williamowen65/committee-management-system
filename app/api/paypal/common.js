@@ -1,9 +1,9 @@
 require('dotenv').config()
 const fetch = require('node-fetch')
-
+const logIf = require('../../../utils/logIf.js');
 
 const { PAYPAL_CLIENT_ID, PAYPAL_SECRET, DEPLOYMENT} = process.env
-console.log({PAYPAL_CLIENT_ID, PAYPAL_SECRET, DEPLOYMENT})
+logIf.paypal && console.log({PAYPAL_CLIENT_ID, PAYPAL_SECRET, DEPLOYMENT})
 
 // const base = DEPLOYMENT == 'sandbox' ? 'https://api-m.sandbox.paypal.com' : 'https://api-m.paypal.com'
 const base = 'https://api-m.paypal.com'
@@ -46,13 +46,13 @@ const generateAccessToken = async () => {
         });
 
         const data = await response.json();
-        console.log("generateAccessToken", {
+        logIf.paypal && console.log("generateAccessToken", {
             token: data.access_token,
             auth,
             test:123,
             base
         })
-        // console.log({ auth, base })
+        
         return data.access_token;
     } catch (error) {
         console.error("Failed to generate Access Token:", error);
