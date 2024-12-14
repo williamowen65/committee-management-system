@@ -553,6 +553,8 @@ function setPaypalButton(contracts){
     const scholarshipApplied = contract.artistDetails.scholarshipApplied
     const membershipPaid = contract.artistDetails.membershipPaid
 
+    // use sandbox logic here.
+
     window.initializePaypalButtons(scholarshipApplied ? 125 : 225)
     // window.initializePaypalButtons(1)
 

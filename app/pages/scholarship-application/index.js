@@ -27,7 +27,10 @@ document.addEventListener('DOMContentLoaded', function () {
             name,
             email,
             hasNotReceivedScholarshipPreviously,
-            needForScholarship
+            needForScholarship,
+            hasBeenReviewed: false,
+            // scholarshipGranted: false,
+            createdAt: new Date().toISOString(),
         }).then(() => {
             // change the button text back to original
             btnSubmit.innerText = "Your scholarship application has been submitted successfully!"

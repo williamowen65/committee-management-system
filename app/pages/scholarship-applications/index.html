@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/dist/components.js"></script>
+    <script type="module" src="/dist/firebase.js"></script>
+    <link rel="stylesheet" href="/dist/styles.css" />
+    <script type="module" src="/dist/CRUD.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            /* background-color: #f4f4f4; */
+        }
+    </style>
+    <script>
+        // possibly redirect based on user roles
+        document.addEventListener("DOMContentLoaded", function() {
+
+
+            CRUD.readAll('scholarship-applications').then(applications => {
+                console.log(applications);
+                
+                const totalReviewed = applications.filter(application => application.hasBeenReviewed).length;
+                const totalNotReviewed = applications.filter(application => !application.hasBeenReviewed).length;
+
+                document.querySelector('#reviewedCount').innerText = totalReviewed;
+                document.querySelector('#notReveiwedCount').innerText = totalNotReviewed;
+
+                applications.forEach(application => {
+
+                    
+                    // get app review status
+                    const reviewed = application.hasBeenReviewed;
+                    // translate this to div ids
+                    const divId = reviewed ? 'reviewed' : 'under-review';
+                    
+                    const randomId = "app" + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                    // Create component element
+                    document.querySelector(`#applications #${divId}`).innerHTML += `
+                    <application-component id="${randomId}"
+                    mailing-address="${application["mailing-address"]}"
+                    wa-state-business-license-ubi-number="${application["wa-state-business-license-ubi-number"]}"
+                    website-social-media="${application["website-social-media"]}"
+                    medium="${application["medium"]}"
+                    email="${application["email"]}"
+                    artistMentor="${application["artistMentor"]}"
+                    digitalImage1="${application["digitalImage1"]}"
+                    digitalImage2="${application["digitalImage2"]}"
+                    digitalImage4="${application["digitalImage4"]}"
+                    hasBeenReviewed="${application["hasBeenReviewed"]}"
+                    phone="${application["phone"]}"
+                    digitalImage3="${application["digitalImage3"]}"
+                    firstName="${application["firstName"]}"
+                    studio-address="${application["studio-address"]}"
+                    lastName="${application["lastName"]}"
+                    artistStatement="${application["artistStatement"]}"
+                    isWithinBoundaries="${application["isWithinBoundaries"]}"
+                    createdAt="${application["createdAt"]}"
+                    howDidYouHearAboutUs="${application["howDidYouHearAboutUs"]}"
+                    studioSharingResponse="${application["studioSharingResponse"]}"
+                    fbId="${application["fbId"]}"
+                    approved="${application["approved"]}"
+                    ></application-component> <hr>`;
+
+                });
+            });
+        });
+    </script>
+
+    <!-- Must have the correct role to  view this page: Artist Application Chair or President -->
+</head>
+
+<body style="">
+    <header-component slotLinks="members"></header-component>
+
+    <div class="container">
+        <div style="text-align: center;">
+            <h1> Review Scholarship Applications <br>for GHOST Membership </h1>
+            <div>Under-review: <span id="notReveiwedCount"></span>  / Reviewed: <span id="reviewedCount"></span></div>
+            <!-- <b>this page should only be view able by the admin and application chair</b> -->
+        </div>
+        <div id="applications">
+            <div id="under-review">
+                <h2>Under Review</h2>
+            </div>
+            <div id="reviewed">
+                <h2>Reviewed</h2>
+            </div>
+        </div>
+    </div>
+
+    <footer-component></footer-component>
+</body>
+
+</html>
