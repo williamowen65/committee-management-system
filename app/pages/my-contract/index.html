@@ -453,17 +453,30 @@
     </form>
     <hr>
 
+    <style>
+      .scholarship-btn {
+        background-color: #4CAF50; color: white; border: none;    padding: 2px 8px;text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 5px;
+      }
+      markdown-component p{
+        text-align: left;
+      }
+    </style>
+
     <!-- Payment Form -->
     <form id="payment-form">
       <h3>Payment</h3>
       <div style="text-align: center;" class="membership-payment-due">
       <markdown-component>
         <span slot="markdown-content">
+          <p class="scholarship-btn-container" style="display:none"> If interested in applying for a scholarship of a $100 discount, please fill out this additional <a href="/scholarship-application"><button type="button" class="scholarship-btn">Scholarship Form</button></a> and obtain approval before submitting payment.</p>
+
           The fee for participating in the Gig Harbor Open Studio Tour is <b class="standard-fee">$225.00</b><b style="display:none; margin-left: 10px;" class="scholarship-fee">($125.00 👈 <i>Scholarship discount applied</i>)</b> <b class="scholarship-pending" style="display:none">( 👈 Scholarship status is pending )</b>. 
           
           Please submit payment by March 2, 2025.
 
           Payments must be made online. Click the button below to checkout. Your receipt will be emailed and displayed here on your contract.
+
+       
 
           
         </span>

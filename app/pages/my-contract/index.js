@@ -556,7 +556,8 @@ async function setPaypalButton(contracts) {
     // get scholarship status from scholarship data collection
     await CRUD.read('scholarship-applications', firebase.auth.currentUser.uid).then(scholarship => {
 
-        logIf.client && console.log("scholarship", {scholarship})
+        // logIf.client && console.log("scholarship", {scholarship})
+        true && console.log("scholarship", {scholarship})
         // use sandbox logic here.
         const scholarshipGranted = scholarship.scholarshipGranted
         window.initializePaypalButtons(scholarshipGranted ? 125 : 225)
@@ -567,8 +568,14 @@ async function setPaypalButton(contracts) {
             document.querySelector('.scholarship-fee').style['text-decoration'] = 'none'
             document.querySelector('.scholarship-fee').style.display = 'inline-block'
         }
-        if(!scholarship.hasBeenReviewed){
+        if(scholarship.name && !scholarship.hasBeenReviewed){
             document.querySelector('.scholarship-pending').style.display = 'inline-block'
+        }
+
+        if(scholarship.name){ // If an application has been submitted
+            document.querySelector('.scholarship-btn-container').style.display = 'none'
+        } else {
+            document.querySelector('.scholarship-btn-container').style.display = 'block'
         }
 
     })
