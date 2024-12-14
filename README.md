@@ -21,8 +21,6 @@ This is a project for a local community of artist in Gig Harbor. It is deployed 
   - The scholarships can be reviewed by GHOST board members
 
 - Gmail and Google Sheets integrations
-  - See app/cloudFunctions/google
-    - This directory can be deployed to GCP via 'npm run deploy:gcf:googleapis'
   - This integration requires a Google Workspace for a minimum of $6/month.
     - Google Workspaces require owning a domain. (SquareSpace has a solution for verification)
 
@@ -33,10 +31,10 @@ This is a project for a local community of artist in Gig Harbor. It is deployed 
 ```
 app/
     api/
-        paypal/
+        paypal/ <-- Served from server.js
     cloudFunctions/
-        google/
-    components/
+        google/  <--- Deploy to GCP with 'npm run deploy:gcf:googleapis'
+    components/ <--- Encapsulations of styles & logic (custom html components)
         3rdParty/
         application/
         dual-login-form/
