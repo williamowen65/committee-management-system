@@ -39,7 +39,11 @@
         </div>
         
 
-       
+        <label for="hasNotReceivedScholarshipPreviously">
+            <input disabled ${hasNotReceivedScholarshipPreviously == "true" ? "checked" : ""}  required type="checkbox" name="hasNotReceivedScholarshipPreviously" value="true"
+                id="hasNotReceivedScholarshipPreviously"></input>
+                Click here to verify that you have not received a GHOST artist scholarship previously
+        </label>
    
         <textarea-component disabled   fieldName="needForScholarship-${randomId}" required
              alias=" Please explain your need for a scholarship"

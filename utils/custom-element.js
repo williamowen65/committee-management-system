@@ -102,6 +102,7 @@ export async function createCustomElement(name, onload, html, css, options ={}) 
                 needForScholarship: this.getAttribute('needForScholarship') || '',
                 scholarshipGranted: this.getAttribute('scholarshipGranted') || '',
                 name: this.getAttribute('name') || '',
+                hasNotReceivedScholarshipPreviously: this.getAttribute('hasNotReceivedScholarshipPreviously') || '',
                 // paypalClientId: this.getAttribute('PAYPAL_CLIENT_ID') || '',
             };
 
