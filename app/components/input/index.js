@@ -3,8 +3,7 @@ import fileInputTemplate from './types/file-input.html.txt';
 import textareaTemplate from './types/textarea-input.html.txt';
 import { createCustomElement, evaluateTemplate } from '../../../utils/custom-element';
 import styles from './style.scss.txt';
-import '../../../utils/logIf.js';
-
+const logIf = require("../../../utils/logIf.js");
 
 
 createCustomElement('input-component', function () {

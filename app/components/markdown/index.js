@@ -2,7 +2,7 @@ import { createCustomElement, evaluateTemplate } from '../../../utils/custom-ele
 import {marked} from 'marked';
 import markdownTemplate from './index.html.txt';
 import styles from './style.scss.txt';
-import '../../../utils/logIf.js';   
+const logIf = require("../../../utils/logIf.js");
 
 createCustomElement('markdown-component', function () {
     // convert the inner markdown to html

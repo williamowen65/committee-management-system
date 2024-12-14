@@ -3,7 +3,6 @@ const { handleResponse, generateAccessToken, base } = require("./common.js");
 require("dotenv").config();
 const fetch = require("node-fetch");
 const logIf = require('../../../utils/logIf.js');
-// import '../../../utils/logIf.js'; // This is a special way to import the module, it will work in both Node.js and the browser. 
 
 
 /**
