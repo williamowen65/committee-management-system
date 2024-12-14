@@ -1,5 +1,19 @@
-This is a deployment of a website which is clasped to a squarespace website.
+# GHOST Committee
 
-I didn't want to deal with square space limits.. 
+> Gig Harbor Open Studio Tour
 
-So A button on squarespace can link to this external site and vice versa.
+This is a projects for a local community of artist. 
+
+The requirements for the project were:
+
+- Workflow automation where members can electronically fill out contracts. 
+  - Contracts can be processed into PDFs
+  - Contracts can be edited up to a specific date
+  - Contracts contain a real-time "Committee Role" self-assignment section
+  - Contracts are integrated with a PayPal checkout solution
+    - The checkout can accept a automated discount
+- Community members can apply to join GHOST
+  - New applications are reviewed by contract members with the Role: President or Applicant Review Chair
+- GHOST members can apply for scholarships
+  - The can edit their application 
+  - The scholarships can be reviewed by GHOST board members
