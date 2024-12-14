@@ -19,10 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
           const sidePanel = getGhostSidePanel(contract.committeeRoleId)
 
           document.querySelector('#user-role').innerHTML = `<h3>My Committee Role${contract.committeeRoleId.length > 1 ? 's' : ''}:</h3>${sidePanel.trim() ? sidePanel : 'No role assigned'}`
-
-
-
         })
+
+   
 
         /**
          * Side Panels are unique based on the role of the user

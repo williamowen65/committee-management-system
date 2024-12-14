@@ -1,6 +1,7 @@
 import '../../../utils/logIf.js';
 
 document.addEventListener('DOMContentLoaded', function () {
+    let existingApplication = {}
 
     // Populate the name field with first and last name from user profile
     firebase.auth.onAuthStateChanged(function (user) {
@@ -13,6 +14,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.querySelector('input[id="name"]').dispatchEvent(new Event('change'))
             }
         })
+        CRUD.read('scholarship-applications', user.uid).then((application) => {
+            if (application) {
+                existingApplication = application
+                document.querySelector('input[id="name"]').value = application.name
+                document.querySelector('input[id="name"]').dispatchEvent(new Event('change'))
+                document.querySelector('input[id="email"]').value = application.email
+                document.querySelector('input[id="email"]').dispatchEvent(new Event('change'))
+                document.querySelector('input[id="hasNotReceivedScholarship"]').checked = application.hasNotReceivedScholarshipPreviously
+                document.querySelector('textarea[id="needForScholarship"]').value = application.needForScholarship
+                document.querySelector('textarea[id="needForScholarship"]').dispatchEvent(new Event('change'))
+            }
+        })   
     })
 
 
@@ -43,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
             email,
             hasNotReceivedScholarshipPreviously,
             needForScholarship,
-            hasBeenReviewed: false,
+            hasBeenReviewed: existingApplication.hasBeenReviewed || false,
             // scholarshipGranted: false, // defined by reviewer
             createdAt: firebase.serverTimestamp(),
         }).then(() => {
