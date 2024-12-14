@@ -2,6 +2,8 @@ import dualLoginForm from './index.html.txt';
 import { createCustomElement, evaluateTemplate } from '../../../utils/custom-element';
 import styles from './style.scss.txt';
 
+import '../../../utils/logIf.js';
+
 
 
 createCustomElement('dual-login-form-component', function () {
@@ -43,7 +45,7 @@ function setUXEventListeners() {
 
         return firebase.signInWithEmailAndPassword(firebase.auth, email, password).then((user) => {
             // redirect to members
-            console.log('redirecting to members page');
+            logIf.auth && console.log('redirecting to members page');
             window.location.href = '/members'
         }).catch(() => {
             // change the button text back to original
@@ -86,14 +88,14 @@ function setUXEventListeners() {
             return
         }
 
-        console.log("about to create user with email and password", { email, password, auth: firebase.auth });
+        logIf.auth && console.log("about to create user with email and password", { email, password, auth: firebase.auth });
 
         return firebase.createUserWithEmailAndPassword(firebase.auth, email, password).then(function (result) {
-            console.log("result", result);
+            logIf.auth && console.log("result", result);
             return firebase.updateProfile(result.user, {
                 displayName: fullName
             }).then(() => {
-                console.log("user profile updated")
+                logIf.auth && console.log("user profile updated")
                 return result
             })
         }).then((result) => {
@@ -109,7 +111,7 @@ function setUXEventListeners() {
                     createdAt: firebase.serverTimestamp()
             }).then(() => {
                 // redirect to members
-                console.log('redirecting to members page');
+                logIf.auth &&  console.log('redirecting to members page');
                 window.location.href = '/members'
             })
 
@@ -119,7 +121,7 @@ function setUXEventListeners() {
             // enable the button
             btnSubmit.disabled = false
             // show error message
-            console.log({err})
+            logIf.auth && console.log({err})
             alert('There was an error creating your account. Please try again')
         })
 

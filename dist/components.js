@@ -306,6 +306,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/dual-login-form/index.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
 /* harmony import */ var _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss.txt */ "./app/components/dual-login-form/style.scss.txt");
+/* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js");
+/* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_utils_logIf_js__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -341,7 +344,7 @@ function setUXEventListeners() {
     var password = form.querySelector('input[id="password-login"]').value;
     return firebase.signInWithEmailAndPassword(firebase.auth, email, password).then(function (user) {
       // redirect to members
-      console.log('redirecting to members page');
+      logIf.auth && console.log('redirecting to members page');
       window.location.href = '/members';
     })["catch"](function () {
       // change the button text back to original
@@ -378,17 +381,17 @@ function setUXEventListeners() {
       btnSubmit.disabled = false;
       return;
     }
-    console.log("about to create user with email and password", {
+    logIf.auth && console.log("about to create user with email and password", {
       email: email,
       password: password,
       auth: firebase.auth
     });
     return firebase.createUserWithEmailAndPassword(firebase.auth, email, password).then(function (result) {
-      console.log("result", result);
+      logIf.auth && console.log("result", result);
       return firebase.updateProfile(result.user, {
         displayName: fullName
       }).then(function () {
-        console.log("user profile updated");
+        logIf.auth && console.log("user profile updated");
         return result;
       });
     }).then(function (result) {
@@ -404,7 +407,7 @@ function setUXEventListeners() {
         createdAt: firebase.serverTimestamp()
       }).then(function () {
         // redirect to members
-        console.log('redirecting to members page');
+        logIf.auth && console.log('redirecting to members page');
         window.location.href = '/members';
       });
     })["catch"](function (err) {
@@ -413,7 +416,7 @@ function setUXEventListeners() {
       // enable the button
       btnSubmit.disabled = false;
       // show error message
-      console.log({
+      logIf.auth && console.log({
         err: err
       });
       alert('There was an error creating your account. Please try again');
@@ -904,9 +907,30 @@ function evaluateTemplate(template, context) {
 /*!************************!*\
   !*** ./utils/logIf.js ***!
   \************************/
-/***/ (() => {
+/***/ ((module, exports) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\utils\\logIf.js: Unexpected token, expected \",\" (6:15)\n\n\u001b[0m \u001b[90m 4 |\u001b[39m     archive\u001b[33m:\u001b[39m \u001b[36mfalse\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 5 |\u001b[39m     paypal\u001b[33m:\u001b[39m \u001b[36mfalse\u001b[39m\u001b[33m,\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 6 |\u001b[39m     auth\u001b[33m:\u001b[39m \u001b[36mfalse\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m   |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 7 |\u001b[39m }\u001b[33m;\u001b[39m\n \u001b[90m 8 |\u001b[39m\n \u001b[90m 9 |\u001b[39m\u001b[0m\n    at constructor (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:359:19)\n    at Parser.raise (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:3266:19)\n    at Parser.unexpected (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:3286:16)\n    at Parser.expect (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:3596:12)\n    at Parser.parseObjectLike (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:11357:14)\n    at Parser.parseExprAtom (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10881:23)\n    at Parser.parseExprSubscripts (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10615:23)\n    at Parser.parseUpdate (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10600:21)\n    at Parser.parseMaybeUnary (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10580:23)\n    at Parser.parseMaybeUnaryOrPrivate (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10434:61)\n    at Parser.parseExprOps (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10439:23)\n    at Parser.parseMaybeConditional (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10416:23)\n    at Parser.parseMaybeAssign (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10379:21)\n    at C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10349:39\n    at Parser.allowInAnd (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:11946:16)\n    at Parser.parseMaybeAssignAllowIn (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10349:17)\n    at Parser.parseVar (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12878:91)\n    at Parser.parseVarStatement (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12724:10)\n    at Parser.parseStatementContent (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12340:23)\n    at Parser.parseStatementLike (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12257:17)\n    at Parser.parseModuleItem (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12234:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12810:36)\n    at Parser.parseBlockBody (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12803:10)\n    at Parser.parseProgram (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12131:10)\n    at Parser.parseTopLevel (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12121:25)\n    at Parser.parse (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:13929:10)\n    at parse (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:13963:38)\n    at parser (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\core\\lib\\parser\\index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:64:37)\n    at normalizeFile.next (<anonymous>)\n    at run (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\core\\lib\\transformation\\index.js:22:50)\n    at run.next (<anonymous>)\n    at transform (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\core\\lib\\transform.js:22:33)\n    at transform.next (<anonymous>)\n    at step (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\gensync\\index.js:261:32)\n    at C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\gensync\\index.js:223:11)");
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var logIf = {
+  server: true,
+  client: false,
+  archive: false,
+  paypal: false,
+  auth: false
+};
+
+/**
+ * This is a special way to export the module, it will work in both Node.js and the browser.
+ */
+if ( true && typeof module.exports !== 'undefined') {
+  module.exports = logIf;
+} else {
+  // ES6 export
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+      return logIf;
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+}
 
 /***/ }),
 
