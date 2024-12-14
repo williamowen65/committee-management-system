@@ -2,6 +2,19 @@ import '../../../utils/logIf.js';
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    // Populate the name field with first and last name from user profile
+    firebase.auth.onAuthStateChanged(function (user) {
+        CRUD.read('ghost-contracts', user.uid).then((contract) => {
+            console.log({ contract })
+            if (contract) {
+                const artistDetails = contract.artistDetails
+                document.querySelector('input[id="name"]').value = artistDetails.firstName + ' ' + artistDetails.lastName
+                // trigger change event to show the name label
+                document.querySelector('input[id="name"]').dispatchEvent(new Event('change'))
+            }
+        })
+    })
+
 
     // Handle submit event for scholarship application form
     document.querySelector('form#scholarship-application').addEventListener('submit', function (e) {
