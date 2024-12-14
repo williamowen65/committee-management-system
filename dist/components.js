@@ -475,13 +475,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types_textarea_input_html_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./types/textarea-input.html.txt */ "./app/components/input/types/textarea-input.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
 /* harmony import */ var _style_scss_txt__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss.txt */ "./app/components/input/style.scss.txt");
+/* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js");
+/* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_utils_logIf_js__WEBPACK_IMPORTED_MODULE_5__);
+
 
 
 
 
 
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_3__.createCustomElement)('input-component', function () {
-  console.log('input-component loaded');
+  logIf.component && console.log('input-component loaded');
   // set slot
 
   moveLabel.bind(this)();
@@ -572,7 +575,7 @@ __webpack_require__.r(__webpack_exports__);
         // Must not be a thumbnail image.
         // One image must be a square
 
-        console.log("file size check ", {
+        logIf.component && console.log("file size check ", {
           fileSize: file.size,
           fileName: file.name,
           fileType: file.type
@@ -604,7 +607,7 @@ __webpack_require__.r(__webpack_exports__);
           image.onload = function () {
             var width = image.width,
               height = image.height;
-            console.log({
+            logIf.component && console.log({
               width: width,
               height: height
             });
@@ -662,6 +665,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! marked */ "./node_modules/marked/lib/marked.esm.js");
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/markdown/index.html.txt");
 /* harmony import */ var _style_scss_txt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss.txt */ "./app/components/markdown/style.scss.txt");
+/* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js");
+/* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_utils_logIf_js__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -669,7 +675,11 @@ __webpack_require__.r(__webpack_exports__);
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_0__.createCustomElement)('markdown-component', function () {
   // convert the inner markdown to html
   var markdown = this.querySelector('span[slot="markdown-content"]').innerHTML;
-  // console.log({marked, markdown, this: this})
+  logIf.component && console.log({
+    marked: marked__WEBPACK_IMPORTED_MODULE_1__.marked,
+    markdown: markdown,
+    "this": this
+  });
   // const html = marked(markdown);
   var html = marked__WEBPACK_IMPORTED_MODULE_1__.marked.parse("".concat(trimString(markdown)));
   this.innerHTML = "<style>".concat(_style_scss_txt__WEBPACK_IMPORTED_MODULE_3__["default"], "</style>") + html;
@@ -695,6 +705,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/scholarship-application/index.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
 /* harmony import */ var _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss.txt */ "./app/components/scholarship-application/style.scss.txt");
+/* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js");
+/* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_utils_logIf_js__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -706,7 +719,7 @@ __webpack_require__.r(__webpack_exports__);
 }, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__["default"]);
 document.addEventListener('DOMContentLoaded', function () {
   window.updateReview = function (event, reviewAnswer) {
-    console.log("updateReview", event);
+    logIf.component && console.log("updateReview", event);
     // update button to loading
     var button = event.target;
     var btnText = button.innerHTML;
@@ -739,11 +752,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   };
 });
-
-// export function toggleApplication(event){
-//     event.target.closest('.artist-application-review').classList.toggle('expanded');
-
-// }
 
 /***/ }),
 
@@ -914,7 +922,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var logIf = {
   client: false,
   archive: false,
   paypal: false,
-  auth: false
+  auth: false,
+  component: false
 };
 
 /**

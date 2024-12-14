@@ -3,11 +3,12 @@ import fileInputTemplate from './types/file-input.html.txt';
 import textareaTemplate from './types/textarea-input.html.txt';
 import { createCustomElement, evaluateTemplate } from '../../../utils/custom-element';
 import styles from './style.scss.txt';
+import '../../../utils/logIf.js';
 
 
 
 createCustomElement('input-component', function () {
-    console.log('input-component loaded');
+    logIf.component && console.log('input-component loaded');
     // set slot
    
     moveLabel.bind(this)();
@@ -120,7 +121,7 @@ createCustomElement('file-input-component', function () {
                 // Must not be a thumbnail image.
                 // One image must be a square
 
-                console.log("file size check ", { fileSize: file.size, fileName: file.name, fileType: file.type });
+                logIf.component &&  console.log("file size check ", { fileSize: file.size, fileName: file.name, fileType: file.type });
 
                 // Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )
                 if (file.size < 150000) {
@@ -150,7 +151,7 @@ createCustomElement('file-input-component', function () {
                     image.src = reader.result;
                     image.onload = () => {
                         const { width, height } = image;
-                        console.log({ width, height });
+                        logIf.component &&  console.log({ width, height });
                         if (width !== height) {
                             const error = document.createElement('p');
                             error.textContent = 'Image is not square. Please upload a square image.';

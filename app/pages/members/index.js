@@ -1,4 +1,5 @@
 import roles from '../my-contract/committee-roles.js'
+import '../../../utils/logIf.js'
 
 
 const userRoles = {}
@@ -12,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('#username').innerText = `Hello, ${user.displayName}`
 
         CRUD.read('ghost-contracts', user.uid).then(contract => {
-          console.log(contract)
+          logIf.client && console.log(contract)
           // Get role name
           contract.committeeRoleId = contract.committeeRoleId || []
           const sidePanel = getGhostSidePanel(contract.committeeRoleId)
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
           if (!roleIds) return ''
           return roleIds.map(roleId => {
             const role = roles[roleId].title
-            console.log({ role })
+            logIf.client && console.log({ role })
             userRoles[roleId] = role
 
             let sidePanelHTML = `<h4>${role}</h4>`
@@ -77,7 +78,7 @@ function newApplicationsSidePanel(role) {
   setTimeout(() => {
     // listen to new applications changes
     CRUD.listen('new-applications', null, (newApplications) => {
-      console.log({ newApplications })
+      logIf.client && console.log({ newApplications })
       const totalToReview = newApplications.filter(app => app.hasBeenReviewed === false).length
       const badge = document.querySelector('a[href="/new-applications"] .badge')
       badge.innerText = totalToReview
@@ -95,7 +96,7 @@ function newApplicationsSidePanel(role) {
 function newScholarshipApplicationsButton(role) {
   setTimeout(() => {
     CRUD.listen('scholarship-applications', null, (newApplications) => {
-      console.log({ newApplications })
+      logIf.client && console.log({ newApplications })
       const totalToReview = newApplications.filter(app => app.hasBeenReviewed === false).length
       const badge = document.querySelector('a[href="/scholarship-applications"] .badge')
       badge.innerText = totalToReview

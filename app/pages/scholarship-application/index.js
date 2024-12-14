@@ -1,3 +1,5 @@
+import '../../../utils/logIf.js';
+
 document.addEventListener('DOMContentLoaded', function () {
 
 
@@ -46,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // enable the button
             btnSubmit.disabled = false
             // show error message
-            console.log({ err })
+            logIf.client && console.log({ err })
             alert('There was an error submitting your scholarship application. Please try again')
         });
     });

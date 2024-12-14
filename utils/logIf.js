@@ -3,7 +3,8 @@ const logIf = {
     client: false,
     archive: false,
     paypal: false,
-    auth: false
+    auth: false,
+    component: false
 };
 
 

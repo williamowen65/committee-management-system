@@ -1,6 +1,7 @@
 import applicationTemplate from './index.html.txt';
 import { createCustomElement, evaluateTemplate } from '../../../utils/custom-element';
 import styles from './style.scss.txt';
+import '../../../utils/logIf.js';
 
 
 
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 window.updateReview = function (event, reviewAnswer) {
-    console.log("updateReview", event)
+  logIf.component &&  console.log("updateReview", event)
     // update button to loading
     const button = event.target;
     const btnText = button.innerHTML
@@ -55,7 +56,3 @@ window.updateReview = function (event, reviewAnswer) {
 
 })
 
-// export function toggleApplication(event){
-//     event.target.closest('.artist-application-review').classList.toggle('expanded');
-    
-// }

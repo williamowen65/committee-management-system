@@ -1,12 +1,14 @@
+import '../../../utils/logIf.js';
+
 document.addEventListener('DOMContentLoaded', function() {
     const form  = document.querySelector('form#new-application-form')
-    console.log({form, CRUD})
+    logIf.client && console.log({form, CRUD})
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
         const { values, form } = getFormValues('form#new-application-form')
-        console.log({ values, form })
+        logIf.client && console.log({ values, form })
 
         values.hasBeenReviewed = false
 

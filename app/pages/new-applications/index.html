@@ -9,6 +9,7 @@
     <script type="module" src="/dist/firebase.js"></script>
     <link rel="stylesheet" href="/dist/styles.css" />
     <script type="module" src="/dist/CRUD.js"></script>
+    <script src="/utils/logIf.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,7 +24,7 @@
 
 
             CRUD.readAll('new-applications').then(applications => {
-                console.log(applications);
+                lofIf.client && console.log(applications);
                 
                 const totalReviewed = applications.filter(application => application.hasBeenReviewed).length;
                 const totalNotReviewed = applications.filter(application => !application.hasBeenReviewed).length;
