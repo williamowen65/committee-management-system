@@ -50,8 +50,8 @@
             value="${needForScholarship}"></textarea-component>
 
             <div style="text-align: center;">
-                <button data-fb-id="${fbId}" onclick="window.updateReview(event,true)">Approve</button>
-                <button data-fb-id="${fbId}" onclick="window.updateReview(event,false)">Disapprove</button>
+                <button data-fb-id="${fbId}" onclick="window.updateScholarship(event,true)">Approve Scholarship</button>
+                <button data-fb-id="${fbId}" onclick="window.updateScholarship(event,false)">Disapprove</button>
 
             </div>
     </div>

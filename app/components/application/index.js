@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 window.updateReview = function (event, reviewAnswer) {
-  logIf.auth && console.log("updateReview", event)
+  // logIf.crud && console.log("updateReview", event)
+   console.log("updateReview", event)
     // update button to loading
     const button = event.target;
     const btnText = button.innerHTML
@@ -49,6 +50,10 @@ window.updateReview = function (event, reviewAnswer) {
     }, 3000)
 
     // move and collapse the application
+  }).catch((err) => {
+    console.error(err)
+    button.innerHTML = btnText
+    button.removeAttribute('disabled')
   })
 }
 

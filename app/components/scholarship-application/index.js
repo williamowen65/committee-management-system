@@ -17,8 +17,8 @@ createCustomElement('scholarship-application-component', function () {
 document.addEventListener('DOMContentLoaded', function() {
 
 
-window.updateReview = function (event, reviewAnswer) {
-  logIf.component &&  console.log("updateReview", event)
+window.updateScholarship = function (event, reviewAnswer) {
+  logIf.component &&  console.log("updateScholarship", event)
     // update button to loading
     const button = event.target;
     const btnText = button.innerHTML

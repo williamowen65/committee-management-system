@@ -19,7 +19,8 @@ const logIf = {
     archive: false,
     paypal: false,
     auth: false,
-    component: false
+    component: false,
+    crud: true,
 };
 
 
