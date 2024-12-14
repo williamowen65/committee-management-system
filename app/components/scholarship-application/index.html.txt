@@ -14,7 +14,7 @@
             <span class="status">
                 <span>${scholarshipGranted=='true' ? "Scholarship Granted" : ""}</span>
                 <span>${hasBeenReviewed=='true' ? "" : "Application needs review"}</span>
-                <span>${hasBeenReviewed ? "" : !scholarshipGranted ? "Not approved for scholarship" : ""}</span>
+                <span>${(hasBeenReviewed && scholarshipGranted=="false") ? "Not approved for scholarship" : ""}</span>
             </span>
             <!-- <span>${approved  ? "Approved" :  hasBeenReviewed ?  "Not Approved": "Has not been reviewed" }</span> -->
         </div>
@@ -38,7 +38,7 @@
                 fieldName="email" alias="Email"></input-component>
         </div>
         
-        
+
        
    
         <textarea-component disabled   fieldName="needForScholarship-${randomId}" required
