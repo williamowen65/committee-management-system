@@ -7,6 +7,7 @@ import "./dual-login-form/global.scss"
 import "./footer/index.js";
 import "./3rdParty/paypal/index.js";
 import './application/index.js'
+import './scholarship-application/index.js'
 
 
 // global google services api

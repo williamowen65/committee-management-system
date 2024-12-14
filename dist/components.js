@@ -679,6 +679,68 @@ function trimString(a) {
 
 /***/ }),
 
+/***/ "./app/components/scholarship-application/index.js":
+/*!*********************************************************!*\
+  !*** ./app/components/scholarship-application/index.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/scholarship-application/index.html.txt");
+/* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
+/* harmony import */ var _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss.txt */ "./app/components/scholarship-application/style.scss.txt");
+
+
+
+(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('scholarship-application-component', function () {
+
+  // Fot some reason whe nthe component is loaded via javascript, this call back doesnt fire.
+
+  // events must be inline
+}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__["default"]);
+document.addEventListener('DOMContentLoaded', function () {
+  window.updateReview = function (event, reviewAnswer) {
+    console.log("updateReview", event);
+    // update button to loading
+    var button = event.target;
+    var btnText = button.innerHTML;
+    button.setAttribute('disabled', 'disabled');
+    button.innerHTML = 'Loading...';
+
+    // get the fbId
+    var fbId = button.getAttribute('data-fb-id');
+    CRUD.update('scholarship-applications', fbId, {
+      hasBeenReviewed: true,
+      scholarshipGranted: reviewAnswer
+    }).then(function () {
+      // update the button text
+      button.innerHTML = 'Review Submitted';
+      setTimeout(function () {
+        button.removeAttribute('disabled');
+        button.innerHTML = btnText;
+
+        // collapse the application
+        var application = button.closest('.artist-application-review');
+        application.classList.toggle('expanded');
+
+        // update status text
+        application.querySelector('.status').innerHTML = reviewAnswer ? 'Scholarship Granted' : 'Not Approved for Scholarship';
+
+        // move to new spot?
+      }, 3000);
+
+      // move and collapse the application
+    });
+  };
+});
+
+// export function toggleApplication(event){
+//     event.target.closest('.artist-application-review').classList.toggle('expanded');
+
+// }
+
+/***/ }),
+
 /***/ "./utils/custom-element.js":
 /*!*********************************!*\
   !*** ./utils/custom-element.js ***!
@@ -765,7 +827,7 @@ function _createCustomElement() {
               key: "updateTemplate",
               value: function updateTemplate() {
                 var randomId = Math.floor(Math.random() * 1000000);
-                var context = _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({
+                var context = _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({
                   fieldName: this.getAttribute('fieldName') || 'defaultFieldName',
                   alias: this.getAttribute('alias') || '',
                   required: this.hasAttribute('required') || false,
@@ -807,7 +869,7 @@ function _createCustomElement() {
                   createdAt: this.getAttribute('createdAt') || '',
                   studioSharingResponse: this.getAttribute('studioSharingResponse') || '',
                   howDidYouHearAboutUs: this.getAttribute('howDidYouHearAboutUs') || ''
-                }, "artistStatement", this.getAttribute('artistStatement') || ''), "websiteSocialMedia", this.getAttribute('website-social-media') || ''), "fbId", this.getAttribute('fbId') || ''), "approved", this.getAttribute('approved') && this.getAttribute('approved') == "true" || false), "randomId", randomId), "CRUD", window.CRUD);
+                }, "artistStatement", this.getAttribute('artistStatement') || ''), "websiteSocialMedia", this.getAttribute('website-social-media') || ''), "fbId", this.getAttribute('fbId') || ''), "approved", this.getAttribute('approved') && this.getAttribute('approved') == "true" || false), "randomId", randomId), "CRUD", window.CRUD), "needForScholarship", this.getAttribute('needForScholarship') || ''), "scholarshipGranted", this.getAttribute('scholarshipGranted') || ''), "name", this.getAttribute('name') || '');
                 var evaluatedTemplate = evaluateTemplate(html, context);
                 this.innerHTML = "\n                <style>\n                ".concat(css, "\n                </style>\n                ").concat(evaluatedTemplate, "\n                ");
               }
@@ -1342,6 +1404,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("markdown-component{\n    width: fit-content;\n    display: block;\n    justify-self: center;\n    p{\n        width: fit-content;\n        ul{\n            width: fit-content;\n        }\n    }\n}");
+
+/***/ }),
+
+/***/ "./app/components/scholarship-application/index.html.txt":
+/*!***************************************************************!*\
+  !*** ./app/components/scholarship-application/index.html.txt ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n\n<div class=\"artist-application-review\" >\n\n    <div class=\"app-preview\">\n        <div>\n\n           <h3>${name}</h3>\n           \n            <p>Submitted on: ${createdAt}</p>\n        </div>\n        <div>\n            <h4>Status: </h4>\n            <span class=\"status\">\n                <span>${scholarshipGranted=='true' ? \"Scholarship Granted\" : \"\"}</span>\n                <span>${hasBeenReviewed=='true' ? \"\" : \"Application needs review\"}</span>\n                <span>${hasBeenReviewed ? \"\" : !scholarshipGranted ? \"Not approved for scholarship\" : \"\"}</span>\n            </span>\n            <!-- <span>${approved  ? \"Approved\" :  hasBeenReviewed ?  \"Not Approved\": \"Has not been reviewed\" }</span> -->\n        </div>\n        <button class=\"expandApplication show\" onclick=\"event.target.closest('.artist-application-review').classList.toggle('expanded')\"\n        >${hasBeenReviewed =='true' ? \"Review Old Application\" : \"Review\"}</button>\n        <button class=\"expandApplication hide\" onclick=\"event.target.closest('.artist-application-review').classList.toggle('expanded')\"\n        >Minimize Application</button>\n        \n    </div>\n    <div class=\"app-contents\">\n\n\n        <h3>Artist Name</h3>\n        <div class=\"row\">\n            <input-component value=\"${name}\" disabled=\"true\" style=\"width: 48%\" required=\"true\"\n                fieldName=\"name\" alias=\"Name\"></input-component>\n      \n        </div>\n        <div class=\"row\">\n            <input-component value=\"${email}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" type=\"email\"\n                fieldName=\"email\" alias=\"Email\"></input-component>\n        </div>\n        \n        \n       \n   \n        <textarea-component disabled   fieldName=\"needForScholarship-${randomId}\" required\n             alias=\" Please explain your need for a scholarship\"\n            value=\"${needForScholarship}\"></textarea-component>\n\n            <div style=\"text-align: center;\">\n                <button data-fb-id=\"${fbId}\" onclick=\"window.updateReview(event,true)\">Approve</button>\n                <button data-fb-id=\"${fbId}\" onclick=\"window.updateReview(event,false)\">Disapprove</button>\n\n            </div>\n    </div>\n\n</div>");
+
+/***/ }),
+
+/***/ "./app/components/scholarship-application/style.scss.txt":
+/*!***************************************************************!*\
+  !*** ./app/components/scholarship-application/style.scss.txt ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (".artist-application-review{\n    .app-contents{\n        display: none\n    }\n    .app-contents, .app-preview{\n        padding: 10px;\n        margin: 10px;\n    }\n    .app-preview{\n        top:0;\n        background-color: white;\n        position: sticky;\n        z-index: 10;\n    }\n\n    .expandApplication.hide{\n        display: none;\n    }\n\n    &.expanded{\n        border: 1px solid black;\n\n        .expandApplication{\n\n            &.hide{\n                display: block;\n            }\n            &.show{\n                display: none;\n            }\n        }\n        \n      \n        .app-contents{\n            display: block;\n        }\n     \n    }\n\n    .app-preview{\n        display: flex;\n        justify-content: space-between;\n        // border: 1px solid black;\n        button{\n            height: fit-content;\n        }\n       \n    }\n}\n");
 
 /***/ }),
 
@@ -4388,7 +4478,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _footer_index_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./footer/index.js */ "./app/components/footer/index.js");
 /* harmony import */ var _3rdParty_paypal_index_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./3rdParty/paypal/index.js */ "./app/components/3rdParty/paypal/index.js");
 /* harmony import */ var _application_index_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./application/index.js */ "./app/components/application/index.js");
+/* harmony import */ var _scholarship_application_index_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./scholarship-application/index.js */ "./app/components/scholarship-application/index.js");
  // Import the styles (These are really the global styles for the app -- They could have their own web pack config)
+
 
 
 

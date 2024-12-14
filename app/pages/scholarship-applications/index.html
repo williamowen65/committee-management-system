@@ -42,30 +42,16 @@
                     const randomId = "app" + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
                     // Create component element
                     document.querySelector(`#applications #${divId}`).innerHTML += `
-                    <application-component id="${randomId}"
-                    mailing-address="${application["mailing-address"]}"
-                    wa-state-business-license-ubi-number="${application["wa-state-business-license-ubi-number"]}"
-                    website-social-media="${application["website-social-media"]}"
-                    medium="${application["medium"]}"
-                    email="${application["email"]}"
-                    artistMentor="${application["artistMentor"]}"
-                    digitalImage1="${application["digitalImage1"]}"
-                    digitalImage2="${application["digitalImage2"]}"
-                    digitalImage4="${application["digitalImage4"]}"
-                    hasBeenReviewed="${application["hasBeenReviewed"]}"
-                    phone="${application["phone"]}"
-                    digitalImage3="${application["digitalImage3"]}"
-                    firstName="${application["firstName"]}"
-                    studio-address="${application["studio-address"]}"
-                    lastName="${application["lastName"]}"
-                    artistStatement="${application["artistStatement"]}"
-                    isWithinBoundaries="${application["isWithinBoundaries"]}"
+                    <scholarship-application-component 
+                    id="${randomId}"
                     createdAt="${application["createdAt"]}"
-                    howDidYouHearAboutUs="${application["howDidYouHearAboutUs"]}"
-                    studioSharingResponse="${application["studioSharingResponse"]}"
+                    email="${application["email"]}"
+                    hasBeenReviewed="${application["hasBeenReviewed"]}"
+                    scholarshipGranted="${application["scholarshipGranted"]}"
                     fbId="${application["fbId"]}"
-                    approved="${application["approved"]}"
-                    ></application-component> <hr>`;
+                    name="${application["name"]}"
+                    needForScholarship="${application["needForScholarship"]}"
+                    ></scholarship-application-component> <hr>`;
 
                 });
             });

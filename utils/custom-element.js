@@ -99,6 +99,9 @@ export async function createCustomElement(name, onload, html, css, options ={}) 
                 approved: this.getAttribute('approved') && this.getAttribute('approved') == "true" || false,
                 randomId,
                 CRUD: window.CRUD,
+                needForScholarship: this.getAttribute('needForScholarship') || '',
+                scholarshipGranted: this.getAttribute('scholarshipGranted') || '',
+                name: this.getAttribute('name') || '',
                 // paypalClientId: this.getAttribute('PAYPAL_CLIENT_ID') || '',
             };
 

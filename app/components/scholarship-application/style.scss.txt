@@ -1,0 +1,49 @@
+.artist-application-review{
+    .app-contents{
+        display: none
+    }
+    .app-contents, .app-preview{
+        padding: 10px;
+        margin: 10px;
+    }
+    .app-preview{
+        top:0;
+        background-color: white;
+        position: sticky;
+        z-index: 10;
+    }
+
+    .expandApplication.hide{
+        display: none;
+    }
+
+    &.expanded{
+        border: 1px solid black;
+
+        .expandApplication{
+
+            &.hide{
+                display: block;
+            }
+            &.show{
+                display: none;
+            }
+        }
+        
+      
+        .app-contents{
+            display: block;
+        }
+     
+    }
+
+    .app-preview{
+        display: flex;
+        justify-content: space-between;
+        // border: 1px solid black;
+        button{
+            height: fit-content;
+        }
+       
+    }
+}
