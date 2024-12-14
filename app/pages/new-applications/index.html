@@ -24,7 +24,7 @@
 
 
             CRUD.readAll('new-applications').then(applications => {
-                lofIf.client && console.log(applications);
+                logIf.client && console.log(applications);
                 
                 const totalReviewed = applications.filter(application => application.hasBeenReviewed).length;
                 const totalNotReviewed = applications.filter(application => !application.hasBeenReviewed).length;
