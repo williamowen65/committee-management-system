@@ -63,10 +63,10 @@ dist/     <---- STATIC FOLDER
     firebase.js  <--- Database/Image storage
     styles.css <-- Built by running 'npm run watch:scss'
 utils/
-    custom-element.js
-    logIf.js
-server.js
-watch.json
-webpack.components.config.js
+    custom-element.js  <--- Core file for creating custom elements.
+    logIf.js  <--- A Global Constant for handling logs.
+server.js  <--- Serves all content (Entry point). Run with 'npm run start:w'
+watch.json <--- Config file (hosted on Glitch)
+webpack.components.config.js  <--- Run with 'npm run build:w'
 
 ```
