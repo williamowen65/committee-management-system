@@ -1,5 +1,5 @@
 import roles from './committee-roles.js'
-import '../../../utils/logIf.js';
+import '../../../utils/logIf.js'; // This is a special way to import the module, it will work in both Node.js and the browser. 
 
 
 let contracts;
@@ -585,8 +585,5 @@ async function setPaypalButton(contracts) {
                 `Transaction ID: ${membershipReceipt.transactionId} \nAmount: ${membershipReceipt.amount} \nStatus: ${membershipReceipt.status}` +
                 `\nPaid on: ${paidOn}`;
         }
-
     }
-
-
 }
