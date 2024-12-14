@@ -79,10 +79,11 @@ function newApplicationsSidePanel(role) {
     CRUD.listen('new-applications', null, (newApplications) => {
       console.log({ newApplications })
       const totalToReview = newApplications.filter(app => app.hasBeenReviewed === false).length
-      const badge = document.querySelector('.badge')
+      const badge = document.querySelector('a[href="/new-applications"] .badge')
       badge.innerText = totalToReview
       badge.setAttribute('data-count', totalToReview)
     })
+  
   }, 1)
 
   return `
@@ -92,8 +93,17 @@ function newApplicationsSidePanel(role) {
 }
 
 function newScholarshipApplicationsButton(role) {
+  setTimeout(() => {
+    CRUD.listen('scholarship-applications', null, (newApplications) => {
+      console.log({ newApplications })
+      const totalToReview = newApplications.filter(app => app.hasBeenReviewed === false).length
+      const badge = document.querySelector('a[href="/scholarship-applications"] .badge')
+      badge.innerText = totalToReview
+      badge.setAttribute('data-count', totalToReview)
+    })
+  })
   return `
       <a href="/scholarship-applications">
-        <button>New Scholarship Applications Received</button>
+        <button  style="position: relative;">New Scholarship Applications Received <span class="badge" data-count="0"></span></button>
     </a>`
 }
