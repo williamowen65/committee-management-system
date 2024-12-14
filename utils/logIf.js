@@ -2,7 +2,8 @@ const logIf = {
     server: true,
     client: false,
     archive: false,
-    paypal: false
+    paypal: false,
+    auth: false;
 };
 
 

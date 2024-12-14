@@ -1,6 +1,7 @@
 import paypalTemplate from './index.html.txt';
 import { createCustomElement, evaluateTemplate } from '../../../../utils/custom-element';
 // import styles from './style.scss.txt';
+import '../../../../utils/logIf.js';
 
 
 
@@ -59,7 +60,7 @@ window.initializePaypalButtons = function (cost = 250.00) {
         //   const modal = jQuery('#' + modalId)
         //   const modalData = modal.data()
 
-          console.log('oninit', {
+          logIf.paypal && console.log('oninit', {
             data,
             actions,
           })
@@ -103,7 +104,7 @@ window.initializePaypalButtons = function (cost = 250.00) {
             }
           } catch (error) {
             const err = JSON.parse(error.message)
-            console.log({
+            logIf.paypal && console.log({
               'error.message': error.message,
               'typeof error.message': typeof error.message,
               err,
@@ -116,7 +117,7 @@ window.initializePaypalButtons = function (cost = 250.00) {
           }
         },
         async onApprove(data, actions) {
-          console.log({ onApprove: data })
+          logIf.paypal && console.log({ onApprove: data })
           try {
             const response = await fetch(`/api/paypal/capture`, {
               method: 'POST',
@@ -130,7 +131,7 @@ window.initializePaypalButtons = function (cost = 250.00) {
             let orderData = await response.json()
             orderData = orderData.jsonResponse
 
-            console.log({ orderData })
+            logIf.paypal && console.log({ orderData })
 
             const errorDetail = orderData?.details?.[0]
             if (errorDetail?.issue === 'INSTRUMENT_DECLINED') {
@@ -151,10 +152,8 @@ window.initializePaypalButtons = function (cost = 250.00) {
                 orderData?.purchase_units?.[0]?.payments?.captures?.[0] ||
                 orderData?.purchase_units?.[0]?.payments?.authorizations?.[0]
 
-            //   resultMessage(
-            //     `Transaction ${transaction.status}: ${transaction.id}<br><br>Sending Email`
-            //   )
-              console.log(
+        
+            logIf.paypal && console.log(
                 'Capture result',
                 orderData,
                 JSON.stringify(orderData, null, 2),
@@ -190,11 +189,8 @@ window.initializePaypalButtons = function (cost = 250.00) {
 
             }
           } catch (error) {
-            console.log(error)
+            logIf.paypal && console.log(error)
             console.error(error)
-            // resultMessage(
-            //   `Sorry, your transaction could not be processed...<br><br>${error}`
-            // )
           }
         },
       })

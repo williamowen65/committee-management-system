@@ -1,5 +1,4 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./app/components/3rdParty/paypal/index.js":
@@ -8,9 +7,12 @@
   \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/3rdParty/paypal/index.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../utils/custom-element */ "./utils/custom-element.js");
+/* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../utils/logIf.js */ "./utils/logIf.js");
+/* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_utils_logIf_js__WEBPACK_IMPORTED_MODULE_2__);
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -18,6 +20,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 
 
 // import styles from './style.scss.txt';
+
 
 // Attach the paypal script to the head of the document
 var script = document.createElement('script');
@@ -67,7 +70,7 @@ window.initializePaypalButtons = function () {
       //   const modal = jQuery('#' + modalId)
       //   const modalData = modal.data()
 
-      console.log('oninit', {
+      logIf.paypal && console.log('oninit', {
         data: data,
         actions: actions
       });
@@ -119,7 +122,7 @@ window.initializePaypalButtons = function () {
               _context.prev = 16;
               _context.t0 = _context["catch"](0);
               err = JSON.parse(_context.t0.message);
-              console.log({
+              logIf.paypal && console.log({
                 'error.message': _context.t0.message,
                 'typeof error.message': _typeof(_context.t0.message),
                 err: err
@@ -142,7 +145,7 @@ window.initializePaypalButtons = function () {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
-              console.log({
+              logIf.paypal && console.log({
                 onApprove: data
               });
               _context2.prev = 1;
@@ -163,7 +166,7 @@ window.initializePaypalButtons = function () {
             case 7:
               orderData = _context2.sent;
               orderData = orderData.jsonResponse;
-              console.log({
+              logIf.paypal && console.log({
                 orderData: orderData
               });
               errorDetail = (_orderData = orderData) === null || _orderData === void 0 || (_orderData = _orderData.details) === null || _orderData === void 0 ? void 0 : _orderData[0];
@@ -186,10 +189,8 @@ window.initializePaypalButtons = function () {
               throw new Error(JSON.stringify(orderData));
             case 23:
               // Success
-              transaction = ((_orderData2 = orderData) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.purchase_units) === null || _orderData2 === void 0 || (_orderData2 = _orderData2[0]) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.payments) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.captures) === null || _orderData2 === void 0 ? void 0 : _orderData2[0]) || ((_orderData3 = orderData) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.purchase_units) === null || _orderData3 === void 0 || (_orderData3 = _orderData3[0]) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.payments) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.authorizations) === null || _orderData3 === void 0 ? void 0 : _orderData3[0]); //   resultMessage(
-              //     `Transaction ${transaction.status}: ${transaction.id}<br><br>Sending Email`
-              //   )
-              console.log('Capture result', orderData, JSON.stringify(orderData, null, 2), CRUD);
+              transaction = ((_orderData2 = orderData) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.purchase_units) === null || _orderData2 === void 0 || (_orderData2 = _orderData2[0]) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.payments) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.captures) === null || _orderData2 === void 0 ? void 0 : _orderData2[0]) || ((_orderData3 = orderData) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.purchase_units) === null || _orderData3 === void 0 || (_orderData3 = _orderData3[0]) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.payments) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.authorizations) === null || _orderData3 === void 0 ? void 0 : _orderData3[0]);
+              logIf.paypal && console.log('Capture result', orderData, JSON.stringify(orderData, null, 2), CRUD);
 
               // get user Id
               userId = firebase.auth.currentUser.uid;
@@ -221,11 +222,8 @@ window.initializePaypalButtons = function () {
             case 29:
               _context2.prev = 29;
               _context2.t0 = _context2["catch"](1);
-              console.log(_context2.t0);
+              logIf.paypal && console.log(_context2.t0);
               console.error(_context2.t0);
-              // resultMessage(
-              //   `Sorry, your transaction could not be processed...<br><br>${error}`
-              // )
             case 33:
             case "end":
               return _context2.stop();
@@ -244,10 +242,14 @@ window.initializePaypalButtons = function () {
   \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/application/index.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
 /* harmony import */ var _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss.txt */ "./app/components/application/style.scss.txt");
+/* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js");
+/* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_utils_logIf_js__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -259,7 +261,7 @@ __webpack_require__.r(__webpack_exports__);
 }, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__["default"]);
 document.addEventListener('DOMContentLoaded', function () {
   window.updateReview = function (event, reviewAnswer) {
-    console.log("updateReview", event);
+    logIf.auth && console.log("updateReview", event);
     // update button to loading
     var button = event.target;
     var btnText = button.innerHTML;
@@ -291,11 +293,6 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 });
 
-// export function toggleApplication(event){
-//     event.target.closest('.artist-application-review').classList.toggle('expanded');
-
-// }
-
 /***/ }),
 
 /***/ "./app/components/dual-login-form/index.js":
@@ -304,6 +301,7 @@ document.addEventListener('DOMContentLoaded', function () {
   \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/dual-login-form/index.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
@@ -431,6 +429,7 @@ function setUXEventListeners() {
   \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _footer_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./footer.html.txt */ "./app/components/footer/footer.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
@@ -448,6 +447,7 @@ __webpack_require__.r(__webpack_exports__);
   \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _header_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./header.html.txt */ "./app/components/header/header.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
@@ -465,6 +465,7 @@ __webpack_require__.r(__webpack_exports__);
   \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types_text_input_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types/text-input.html.txt */ "./app/components/input/types/text-input.html.txt");
 /* harmony import */ var _types_file_input_html_txt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types/file-input.html.txt */ "./app/components/input/types/file-input.html.txt");
@@ -652,6 +653,7 @@ function moveLabel() {
   \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
 /* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! marked */ "./node_modules/marked/lib/marked.esm.js");
@@ -685,6 +687,7 @@ function trimString(a) {
   \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/scholarship-application/index.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
@@ -747,6 +750,7 @@ document.addEventListener('DOMContentLoaded', function () {
   \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createCustomElement: () => (/* binding */ createCustomElement),
@@ -896,12 +900,23 @@ function evaluateTemplate(template, context) {
 
 /***/ }),
 
+/***/ "./utils/logIf.js":
+/*!************************!*\
+  !*** ./utils/logIf.js ***!
+  \************************/
+/***/ (() => {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\utils\\logIf.js: Unexpected token, expected \",\" (6:15)\n\n\u001b[0m \u001b[90m 4 |\u001b[39m     archive\u001b[33m:\u001b[39m \u001b[36mfalse\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 5 |\u001b[39m     paypal\u001b[33m:\u001b[39m \u001b[36mfalse\u001b[39m\u001b[33m,\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 6 |\u001b[39m     auth\u001b[33m:\u001b[39m \u001b[36mfalse\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m   |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 7 |\u001b[39m }\u001b[33m;\u001b[39m\n \u001b[90m 8 |\u001b[39m\n \u001b[90m 9 |\u001b[39m\u001b[0m\n    at constructor (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:359:19)\n    at Parser.raise (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:3266:19)\n    at Parser.unexpected (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:3286:16)\n    at Parser.expect (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:3596:12)\n    at Parser.parseObjectLike (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:11357:14)\n    at Parser.parseExprAtom (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10881:23)\n    at Parser.parseExprSubscripts (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10615:23)\n    at Parser.parseUpdate (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10600:21)\n    at Parser.parseMaybeUnary (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10580:23)\n    at Parser.parseMaybeUnaryOrPrivate (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10434:61)\n    at Parser.parseExprOps (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10439:23)\n    at Parser.parseMaybeConditional (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10416:23)\n    at Parser.parseMaybeAssign (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10379:21)\n    at C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10349:39\n    at Parser.allowInAnd (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:11946:16)\n    at Parser.parseMaybeAssignAllowIn (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:10349:17)\n    at Parser.parseVar (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12878:91)\n    at Parser.parseVarStatement (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12724:10)\n    at Parser.parseStatementContent (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12340:23)\n    at Parser.parseStatementLike (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12257:17)\n    at Parser.parseModuleItem (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12234:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12810:36)\n    at Parser.parseBlockBody (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12803:10)\n    at Parser.parseProgram (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12131:10)\n    at Parser.parseTopLevel (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:12121:25)\n    at Parser.parse (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:13929:10)\n    at parse (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\parser\\lib\\index.js:13963:38)\n    at parser (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\core\\lib\\parser\\index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:64:37)\n    at normalizeFile.next (<anonymous>)\n    at run (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\core\\lib\\transformation\\index.js:22:50)\n    at run.next (<anonymous>)\n    at transform (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\@babel\\core\\lib\\transform.js:22:33)\n    at transform.next (<anonymous>)\n    at step (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\gensync\\index.js:261:32)\n    at C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (C:\\Users\\willi\\OneDrive\\Desktop\\Glitch\\node_modules\\gensync\\index.js:223:11)");
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./app/components/dual-login-form/global.scss":
 /*!*********************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./app/components/dual-login-form/global.scss ***!
   \*********************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -965,6 +980,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `@media only screen and (max-width: 767
   \******************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1084,6 +1100,7 @@ button:hover {
   \*****************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /*
@@ -1178,6 +1195,7 @@ module.exports = function (cssWithMappingToString) {
   \************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 module.exports = function (item) {
@@ -1203,6 +1221,7 @@ module.exports = function (item) {
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1217,6 +1236,7 @@ __webpack_require__.r(__webpack_exports__);
   \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1231,6 +1251,7 @@ __webpack_require__.r(__webpack_exports__);
   \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1245,6 +1266,7 @@ __webpack_require__.r(__webpack_exports__);
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1259,6 +1281,7 @@ __webpack_require__.r(__webpack_exports__);
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1273,6 +1296,7 @@ __webpack_require__.r(__webpack_exports__);
   \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1287,6 +1311,7 @@ __webpack_require__.r(__webpack_exports__);
   \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1301,6 +1326,7 @@ __webpack_require__.r(__webpack_exports__);
   \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1315,6 +1341,7 @@ __webpack_require__.r(__webpack_exports__);
   \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1329,6 +1356,7 @@ __webpack_require__.r(__webpack_exports__);
   \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1343,6 +1371,7 @@ __webpack_require__.r(__webpack_exports__);
   \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1357,6 +1386,7 @@ __webpack_require__.r(__webpack_exports__);
   \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1371,6 +1401,7 @@ __webpack_require__.r(__webpack_exports__);
   \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1385,6 +1416,7 @@ __webpack_require__.r(__webpack_exports__);
   \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1399,6 +1431,7 @@ __webpack_require__.r(__webpack_exports__);
   \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1413,6 +1446,7 @@ __webpack_require__.r(__webpack_exports__);
   \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1427,6 +1461,7 @@ __webpack_require__.r(__webpack_exports__);
   \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1441,6 +1476,7 @@ __webpack_require__.r(__webpack_exports__);
   \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1493,6 +1529,7 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
   \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1545,6 +1582,7 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
   \****************************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 var stylesInDOM = [];
@@ -1638,6 +1676,7 @@ module.exports = function (list, options) {
   \********************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 var memo = {};
@@ -1681,6 +1720,7 @@ module.exports = insertBySelector;
   \**********************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -1700,6 +1740,7 @@ module.exports = insertStyleElement;
   \**********************************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -1719,6 +1760,7 @@ module.exports = setAttributesWithoutAttributes;
   \***************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -1789,6 +1831,7 @@ module.exports = domAPI;
   \*********************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -1812,6 +1855,7 @@ module.exports = styleTagTransform;
   \***********************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Hooks: () => (/* binding */ _Hooks),
@@ -4463,8 +4507,9 @@ const lexer = _Lexer.lex;
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
+"use strict";
 /*!*******************************************!*\
   !*** ./app/components/component-build.js ***!
   \*******************************************/
@@ -4479,7 +4524,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _3rdParty_paypal_index_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./3rdParty/paypal/index.js */ "./app/components/3rdParty/paypal/index.js");
 /* harmony import */ var _application_index_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./application/index.js */ "./app/components/application/index.js");
 /* harmony import */ var _scholarship_application_index_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./scholarship-application/index.js */ "./app/components/scholarship-application/index.js");
+/* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utils/logIf.js */ "./utils/logIf.js");
+/* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_utils_logIf_js__WEBPACK_IMPORTED_MODULE_10__);
  // Import the styles (These are really the global styles for the app -- They could have their own web pack config)
+
+
 
 
 
@@ -4496,7 +4545,7 @@ __webpack_require__.r(__webpack_exports__);
 // Globals file
 // Helper function to get form values
 window.getFormValues = function (formSelector) {
-  console.log("Getting form values and about to set loading");
+  (_utils_logIf_js__WEBPACK_IMPORTED_MODULE_10___default().client) && console.log("Getting form values and about to set loading");
   var form = document.querySelector(formSelector);
   var formData = new FormData(form);
   setLoading(form, true);
@@ -4513,7 +4562,7 @@ window.setLoading = function (form, isLoading) {
     cbText: "Your changes have been saved"
   };
   if (!config.success) return; // Don't set loading if there was an error
-  console.log("Setting loading", {
+  (_utils_logIf_js__WEBPACK_IMPORTED_MODULE_10___default().client) && console.log("Setting loading", {
     form: form,
     isLoading: isLoading,
     config: config

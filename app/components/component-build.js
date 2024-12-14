@@ -8,6 +8,8 @@ import "./footer/index.js";
 import "./3rdParty/paypal/index.js";
 import './application/index.js'
 import './scholarship-application/index.js'
+import '../../utils/logIf.js'
+import logIf from '../../utils/logIf.js';
 
 
 // global google services api
@@ -17,7 +19,7 @@ import './scholarship-application/index.js'
 // Globals file
 // Helper function to get form values
 window.getFormValues = function(formSelector) {
-    console.log("Getting form values and about to set loading")
+   logIf.client && console.log("Getting form values and about to set loading")
     const form = document.querySelector(formSelector);
     const formData = new FormData(form);
     setLoading(form, true)
@@ -29,7 +31,7 @@ window.getFormValues = function(formSelector) {
 // global function to set loading state
 window.setLoading = function(form, isLoading, config = { success: true, cbText: "Your changes have been saved" }) {
     if (!config.success) return; // Don't set loading if there was an error
-    console.log("Setting loading", { form, isLoading, config })
+    logIf.client && console.log("Setting loading", { form, isLoading, config })
     const submitButton = form.querySelector('button[type="submit"]')
     if (isLoading) {
         // get submit button text 
