@@ -19,8 +19,10 @@ window.CRUD = {
         const docRef = firebase.doc(firebase.collection(firebase.db, collection), id)
         const doc = await firebase.getDoc(docRef)
         const docData = doc.data()
-        docData.fbId = doc.id
-        return docData;
+        if(docData){
+            docData.fbId = doc.id
+        }
+        return docData || {}
     },
     listen: async function (collection, id, cb) {
         if (id) {

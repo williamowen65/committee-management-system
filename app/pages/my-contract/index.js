@@ -382,8 +382,8 @@ function updateVolunteerResponsibilityForm(contracts) {
 
                 // Set the user name next to the checkbox
                 const committeeMemberContract = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))
-                label.querySelector('.user-name').innerText =  committeeMemberContract.artistDetails.firstName || "[UNKNOWN]"
-                
+                label.querySelector('.user-name').innerText = committeeMemberContract.artistDetails.firstName || "[UNKNOWN]"
+
 
                 // Get this users contract
                 const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
@@ -405,7 +405,7 @@ function updateVolunteerResponsibilityForm(contracts) {
                     const existingButton = role.querySelector('.offload-button')
                     console.log("existingButton", existingButton)
                     if (!existingButton) {
-                        
+
 
 
                         role.insertAdjacentElement("beforeend", button)
@@ -430,7 +430,7 @@ function setUpStudioSharingForm(contracts) {
         console.log("Setting up studio sharing form", { contract })
         const form = document.querySelector('form#studio-sharing-form')
         const studioSharingInfo = contract.StudioSharingInfo
-        if(!studioSharingInfo) return;
+        if (!studioSharingInfo) return;
 
         // set the inputs
         Object.values(studioSharingInfo).forEach(value => {
@@ -548,35 +548,45 @@ function setArtistDetailsForm(contracts) {
     }
 }
 
-function setPaypalButton(contracts){
+async function setPaypalButton(contracts) {
+    console.log("setPaypalButton", {contracts})
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
-    const scholarshipApplied = contract.artistDetails.scholarshipApplied
     const membershipPaid = contract.artistDetails.membershipPaid
 
-    // use sandbox logic here.
+    // get scholarship status from scholarship data collection
+    await CRUD.read('scholarship-applications', firebase.auth.currentUser.uid).then(scholarship => {
 
-    window.initializePaypalButtons(scholarshipApplied ? 125 : 225)
-    // window.initializePaypalButtons(1)
+        console.log("scholarship", {scholarship})
+        // use sandbox logic here.
+        const scholarshipGranted = scholarship.scholarshipGranted
+        window.initializePaypalButtons(scholarshipGranted ? 125 : 225)
+        // window.initializePaypalButtons(1)
 
-    if(scholarshipApplied){
-        document.querySelector('.standard-fee').style['text-decoration'] = 'line-through'
-        document.querySelector('.scholarship-fee').style['text-decoration'] = 'none'
-        document.querySelector('.scholarship-fee').style.display = 'inline-block'
-    }
+        if (scholarshipGranted) {
+            document.querySelector('.standard-fee').style['text-decoration'] = 'line-through'
+            document.querySelector('.scholarship-fee').style['text-decoration'] = 'none'
+            document.querySelector('.scholarship-fee').style.display = 'inline-block'
+        }
+        if(!scholarship.hasBeenReviewed){
+            document.querySelector('.scholarship-pending').style.display = 'inline-block'
+        }
 
-    if(membershipPaid){
+    })
+
+    if (membershipPaid) {
         document.querySelector('.membership-paid').style.display = 'inline-block'
         document.querySelector('.membership-payment-due').style.display = 'none'
 
         // show recept 
         const membershipReceipt = contract.artistDetails.membershipReceipt
-        if(membershipReceipt){
+        if (membershipReceipt) {
             const paidOn = new Date(membershipReceipt.createdAt.seconds * 1000).toLocaleString();
-            document.querySelector('.membership-receipt').innerText = 
-            `Transaction ID: ${membershipReceipt.transactionId} \nAmount: ${membershipReceipt.amount} \nStatus: ${membershipReceipt.status}`+
-            `\nPaid on: ${paidOn}`;
+            document.querySelector('.membership-receipt').innerText =
+                `Transaction ID: ${membershipReceipt.transactionId} \nAmount: ${membershipReceipt.amount} \nStatus: ${membershipReceipt.status}` +
+                `\nPaid on: ${paidOn}`;
         }
 
     }
+
 
 }

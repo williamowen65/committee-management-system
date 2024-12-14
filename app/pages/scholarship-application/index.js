@@ -22,15 +22,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const hasNotReceivedScholarshipPreviously = form.querySelector('input[id="hasNotReceivedScholarship"]').checked;
         const needForScholarship = form.querySelector('textarea[id="needForScholarship"]').value;
 
-        // save to firebase
-        CRUD.create('scholarship-applications', {
+        // save to firebase (by membership Id -- unlike the normal applications page)
+        CRUD.update('scholarship-applications', firebase.auth.currentUser.uid, {
             name,
             email,
             hasNotReceivedScholarshipPreviously,
             needForScholarship,
             hasBeenReviewed: false,
-            // scholarshipGranted: false,
-            createdAt: new Date().toISOString(),
+            // scholarshipGranted: false, // defined by reviewer
+            createdAt: firebase.serverTimestamp(),
         }).then(() => {
             // change the button text back to original
             btnSubmit.innerText = "Your scholarship application has been submitted successfully!"
