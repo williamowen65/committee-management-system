@@ -8,14 +8,15 @@ const createOrderMiddleware = require('./app/api/paypal/order.js');
 const createCaptureMiddleware = require('./app/api/paypal/capture.js');
 const bodyParser = require('body-parser');
 const fetch = require("node-fetch");
+const logIf = require('./utils/logIf.js');
 
 
-console.log("Starting up server.js");
-console.log("process.env.PORT", process.env.PORT);
-// console.log("fetch", fetch);
+logIf.server && console.log("Starting up server.js");
+logIf.server && console.log("process.env.PORT", process.env.PORT);
+// logIf.server && console.log("fetch", fetch);
 
 
-// console.log("hi", {
+// logIf.server && console.log("hi", {
 
 // Enable CORS for requests from http://localhost:5500
 app.use(cors({
@@ -24,7 +25,7 @@ app.use(cors({
 }));
 
 app.use((req, res, next) => {
-    console.log(`${req.method} ${req.url}`);
+    logIf.server && console.log(`${req.method} ${req.url}`);
     next();
 });
 
@@ -35,7 +36,7 @@ app.use(bodyParser.json());
 
 app.post('/submit', (req, res) => {
     const data = req.body;
-    console.log('Received data:', data);
+    logIf.server && console.log('Received data:', data);
     res.send('Data received');
 });
 
@@ -45,6 +46,7 @@ app.post('/api/paypal/order', createOrderMiddleware);
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
+app.use('/utils', express.static(path.join(__dirname, 'utils')));
 
 app.get('/', (req, res) => {   
     res.redirect('/members')
@@ -53,7 +55,7 @@ app.get('/', (req, res) => {
 const pagesDir = path.join(__dirname, 'app/pages');
 fs.readdir(pagesDir, (err, folders) => {
     if (err) {
-        console.error('Unable to read pages directory:', err);
+        logIf.server && console.error('Unable to read pages directory:', err);
         return;
     }
     folders.forEach(folder => {
@@ -69,7 +71,7 @@ fs.readdir(pagesDir, (err, folders) => {
 // const apiDir = path.join(__dirname, 'app/api');
 // fs.readdir(apiDir, (err, files) => {
 //     if (err) {
-//         console.error('Unable to read api directory:', err);
+//         logIf.server && console.error('Unable to read api directory:', err);
 //         return;
 //     }
 //     files.forEach(file => {
@@ -129,6 +131,6 @@ app.use('/api', (req, res) => {
 
 
 app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+    logIf.server && console.log(`Server is running at http://localhost:${port}`);
 });
 

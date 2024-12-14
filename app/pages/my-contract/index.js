@@ -1,5 +1,5 @@
 import roles from './committee-roles.js'
-
+import '../../../utils/logIf.js';
 
 
 let contracts;
@@ -7,7 +7,7 @@ const imageFields = ['digitalImage1', 'digitalImage2', 'digitalImage3', 'artistI
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    console.log("My Contract Page Loaded")
+    logIf.client && console.log("My Contract Page Loaded")
 
     // set listeners on forms
     const listeners = {
@@ -87,7 +87,7 @@ async function handleDigitalImagesForm(e) {
     e.preventDefault();
 
     const { values, form } = getFormValues('form#digital-images-form')
-    console.log({ values, form })
+    logIf.client && console.log({ values, form })
 
     // save images to storage
     // Get file url and save it to firebase by image element id.
@@ -201,14 +201,14 @@ function handleStudioSharingForm(e) {
 
     }
 
-    console.log({ StudioSharingPayload })
+    logIf.client && console.log({ StudioSharingPayload })
 
 
 
 
 
     // const {values} = getFormValues('form#studio-sharing-form')
-    // console.log({values, form})
+    // logIf.client && console.log({values, form})
 
     // Save to firestore
     setLoading(form, true)
@@ -217,7 +217,7 @@ function handleStudioSharingForm(e) {
     })
 
     function formAlert(message) {
-        console.log("Form Alert", message)
+        logIf.client && console.log("Form Alert", message)
         alert(message)
     }
 
@@ -228,7 +228,7 @@ function handleVolunteerResponsibilityForm(e) {
     e.preventDefault();
 
     const { values, form } = getFormValues('form#volunteer-responsibility-form')
-    console.log({ values, form })
+    logIf.client && console.log({ values, form })
     setLoading(form, false)
 }
 
@@ -237,7 +237,7 @@ function handleArtisticDemonstrationForm(e) {
 
     const { values, form } = getFormValues('form#artistic-demonstration-form');
 
-    console.log({ values, form })
+    logIf.client && console.log({ values, form })
     CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, { ...values }).then(() => {
         setLoading(form, false)
     })
@@ -257,7 +257,7 @@ function handleCheckboxChange(e) {
         return alert("You can only select 3 roles")
     }
 
-    console.log("make updates to firebase ", { checked, name, CRUD })
+    logIf.client && console.log("make updates to firebase ", { checked, name, CRUD })
     CRUD.update('ghost-contracts', userId, { committeeRoleId: [...existingRoles, roleId] })
 }
 
@@ -269,7 +269,7 @@ function handleCheckboxChange(e) {
 function setUpVolunteerResponsibilityForm(contracts) {
 
     const filledRoles = Object.values(contracts).map(contract => contract.committeeRoleId).flat()
-    console.log("setUpVolunteerResponsibilityForm", { contracts, filledRoles })
+    logIf.client && console.log("setUpVolunteerResponsibilityForm", { contracts, filledRoles })
 
 
     // Set timeout is a work around b/c the form is not loaded when the document is ready
@@ -293,7 +293,7 @@ function setUpVolunteerResponsibilityForm(contracts) {
             const roleId = role.getAttribute('data-role-id')
             const hasMyRoles = myRoles.includes(roleId)
 
-            // console.log("Bugfix, multiple offload button ",{ roleId, myRoles, hasMyRoles, role, button })
+            // logIf.client && console.log("Bugfix, multiple offload button ",{ roleId, myRoles, hasMyRoles, role, button })
 
             // check if this role is filled
             if (hasMyRoles) {
@@ -339,7 +339,7 @@ function setUpVolunteerResponsibilityForm(contracts) {
 }
 
 function handleOffload(e) {
-    console.log("Offloading", e.target.parentNode.getAttribute('data-role-id'))
+    logIf.client && console.log("Offloading", e.target.parentNode.getAttribute('data-role-id'))
     const roleId = e.target.parentNode.getAttribute('data-role-id');
     const userId = firebase.auth.currentUser.uid;
     let committeeRoleIds = contracts.find(contract => contract.userId === userId)?.committeeRoleId || [];
@@ -395,7 +395,7 @@ function updateVolunteerResponsibilityForm(contracts) {
                 const myRoles = contract.committeeRoleId || []
 
 
-                console.log("Updating offload buttons", { myRoles, roleId, "myRoles.includes(roleId)": myRoles.includes(roleId), contract })
+                logIf.client && console.log("Updating offload buttons", { myRoles, roleId, "myRoles.includes(roleId)": myRoles.includes(roleId), contract })
 
 
 
@@ -403,7 +403,7 @@ function updateVolunteerResponsibilityForm(contracts) {
                     const button = createOffloadButton(role)
                     // check role for existing button
                     const existingButton = role.querySelector('.offload-button')
-                    console.log("existingButton", existingButton)
+                    logIf.client &&  console.log("existingButton", existingButton)
                     if (!existingButton) {
 
 
@@ -424,10 +424,10 @@ function updateVolunteerResponsibilityForm(contracts) {
 }
 
 function setUpStudioSharingForm(contracts) {
-    console.log("setUpStudioSharingForm", { contracts })
+    logIf.client && console.log("setUpStudioSharingForm", { contracts })
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
     if (contract) {
-        console.log("Setting up studio sharing form", { contract })
+        logIf.client && console.log("Setting up studio sharing form", { contract })
         const form = document.querySelector('form#studio-sharing-form')
         const studioSharingInfo = contract.StudioSharingInfo
         if (!studioSharingInfo) return;
@@ -454,7 +454,7 @@ function setUpStudioSharingForm(contracts) {
 
 
 function setDigitalImagesForm(contracts) {
-    console.log("setDigitalImagesForm", { contracts })
+    logIf.client && console.log("setDigitalImagesForm", { contracts })
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
     if (contract) {
 
@@ -462,12 +462,12 @@ function setDigitalImagesForm(contracts) {
         imageFields.forEach(field => {
 
 
-            console.log("Setting up digital images form", { contract, field })
+            logIf.client && console.log("Setting up digital images form", { contract, field })
             const form = document.querySelector('form#digital-images-form')
             if (!contract.images) return;
             const digitalImage = contract.images[field]
             if (digitalImage) {
-                console.log("Setting digital image", { digitalImage })
+                logIf.client && console.log("Setting digital image", { digitalImage })
                 const component = form.querySelector(`file-input-component[fieldname="${field}"]`)
 
                 // get image name
@@ -479,7 +479,7 @@ function setDigitalImagesForm(contracts) {
                 // Set not required for input (to allow form to be submitted when user has existing image) --- you cannot set the value for file inputs 
                 thisComponent.querySelector('input[type=file]').removeAttribute('required')
 
-                console.log({ thisComponent })
+                logIf.client && console.log({ thisComponent })
             }
         })
 
@@ -490,11 +490,11 @@ function setDigitalImagesForm(contracts) {
 function setArtisticDemonstrationForm(contracts) {
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
     if (contract) {
-        console.log("Setting up artistic demonstration form", { contract })
+        logIf.client && console.log("Setting up artistic demonstration form", { contract })
         const form = document.querySelector('form#artistic-demonstration-form')
         const artisticDemonstration = contract.artisticDemonstration
         if (artisticDemonstration) {
-            console.log("Setting artistic demonstration", { artisticDemonstration })
+            logIf.client && console.log("Setting artistic demonstration", { artisticDemonstration })
             const textarea = form.querySelector(`textarea[name="artisticDemonstration"]`)
             textarea.value = artisticDemonstration
             // trigger change
@@ -503,7 +503,7 @@ function setArtisticDemonstrationForm(contracts) {
         }
         const artistMentor = contract.artistMentor
         if (artistMentor) {
-            console.log("Setting artistic mentor", { artistMentor })
+            logIf.client && console.log("Setting artistic mentor", { artistMentor })
             const checkbox = form.querySelector(`input[name="artistMentor"]`)
             checkbox.checked = true
             // trigger change
@@ -516,11 +516,11 @@ function setArtisticDemonstrationForm(contracts) {
 function setSignatureForm(contracts) {
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
     if (contract) {
-        console.log("Setting up signature form", { contract })
+        logIf.client && console.log("Setting up signature form", { contract })
         const form = document.querySelector('form#my-signature-form')
         const signature = contract.signature
         if (signature) {
-            console.log("Setting signature", { signature })
+            logIf.client && console.log("Setting signature", { signature })
             const input = form.querySelector(`input[name="signature"]`)
             input.value = signature
             // trigger change
@@ -534,9 +534,9 @@ function setArtistDetailsForm(contracts) {
     const form = document.querySelector('form#artist-details-form')
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
     const artistDetails = contract.artistDetails
-    console.log("Setting up artist details form", { artistDetails, contract })
+    logIf.client && console.log("Setting up artist details form", { artistDetails, contract })
     if (artistDetails) {
-        console.log("Setting artist details", { artistDetails })
+        logIf.client && console.log("Setting artist details", { artistDetails })
         const inputs = form.querySelectorAll('input, textarea')
         inputs.forEach(input => {
             const name = input.name
@@ -549,14 +549,14 @@ function setArtistDetailsForm(contracts) {
 }
 
 async function setPaypalButton(contracts) {
-    console.log("setPaypalButton", {contracts})
+    logIf.client && console.log("setPaypalButton", {contracts})
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
     const membershipPaid = contract.artistDetails.membershipPaid
 
     // get scholarship status from scholarship data collection
     await CRUD.read('scholarship-applications', firebase.auth.currentUser.uid).then(scholarship => {
 
-        console.log("scholarship", {scholarship})
+        logIf.client && console.log("scholarship", {scholarship})
         // use sandbox logic here.
         const scholarshipGranted = scholarship.scholarshipGranted
         window.initializePaypalButtons(scholarshipGranted ? 125 : 225)
