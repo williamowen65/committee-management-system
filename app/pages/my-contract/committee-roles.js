@@ -46,9 +46,9 @@ const roles = {
         responsibility: "Maintain the organization's website",
         prerequisite: 'Experience in web design and maintenance',
         tasks: [
-            'Update website design (with board input) and add online contract',
-            'Update map to be interactive',
-            'Update yearly information on the website (dates, forms, images, map, etc.)'
+            // 'Update website design (with board input) and add online contract',
+            // 'Update map to be interactive',
+            // 'Update yearly information on the website (dates, forms, images, map, etc.)'
         ],
         sideBarButtons: []
     },
@@ -65,7 +65,9 @@ const roles = {
         committee: 'Social Media',
         responsibility: "Design general GHOST posts (using Canva)",
         prerequisite: 'Experience with Canva and social media design',
-        tasks: ["Create posts for the organization's social media accounts"],
+        tasks: [
+            // "Create posts for the organization's social media accounts"
+        ],
         sideBarButtons: []
     },
     9: {
@@ -73,7 +75,9 @@ const roles = {
         committee: 'Social Media',
         responsibility: "Design mosaics of individual artists (using Canva)",
         prerequisite: 'Experience with Canva and social media design',
-        tasks: ["Create posts for the organization's social media accounts"],
+        tasks: [
+            // "Create posts for the organization's social media accounts"
+        ],
         sideBarButtons: []
     },
     10: {
@@ -81,7 +85,9 @@ const roles = {
         committee: 'Social Media',
         responsibility: "Design Sponsor and “Make It a Weekend” posts with advertisers using Canva",
         prerequisite: 'Experience with Canva and social media design',
-        tasks: ["Create posts for the organization's social media accounts"],
+        tasks: [
+            // "Create posts for the organization's social media accounts"
+        ],
         sideBarButtons: []
     },
     11: {
@@ -89,13 +95,15 @@ const roles = {
         committee: 'Social Media',
         responsibility: 'Prepare short videos',
         prerequisite: 'Experience in video creation and editing',
-        tasks: ["Create posts for the organization's social media accounts"],
+        tasks: [
+            // "Create posts for the organization's social media accounts"
+        ],
         sideBarButtons: []
     },
     12: {
         title: 'Artist Images Chair',
         committee: 'Art Images',
-        responsibility: 'Take photos of artists',
+        responsibility: 'Reviews images from artists',
         prerequisite: 'Needs comfort with manipulating image size and using Google Drive folders',
         tasks: [
             "Evaluate incoming images for size and proper cropping for brochures (1-3 MB jpeg, cropped square) and organize them in artist image folders on GHOST Google Drive",
@@ -248,31 +256,31 @@ const roles = {
         sideBarButtons: []
     },
     31: {
-        title: 'General Advertising Chair',
-        committee: 'General Advertising',
-        responsibility: 'Oversee all general advertising activities',
+        title: 'General Advertising Signs Chair',
+        committee: 'Signs for General Advertising',
+        responsibility: 'Oversee all general advertising signs activities',
         prerequisite: 'Experience in advertising',
         tasks: [],
         sideBarButtons: []
     },
     32: {
-        title: 'General Advertising Distributor',
-        committee: 'General Advertising',
+        title: 'General Advertising Signs Distributor',
+        committee: 'Signs for General Advertising',
         responsibility: 'Install 4-5 signs in Gig Harbor (Downtown, Pioneer Ave and Kimball Ave) then collect them after the tour – early August',
         prerequisite: 'Experience in advertising',
         tasks: [],
         sideBarButtons: []
     },
     33: {
-        title: 'General Advertising Distributor',
-        committee: 'General Advertising',
+        title: 'General Advertising Signs Distributor',
+        committee: 'Signs for General Advertising',
         responsibility: 'Install 4-5 signs in Gig Harbor (Costco and Point Fosdick business corridors) then collect them after the tour – early August',
         prerequisite: 'Experience in advertising',
         tasks: [],
         sideBarButtons: []
     },
     34: {
-        title: 'General Advertising Distributor',
+        title: 'General Advertising Signs Distributor',
         committee: 'General Advertising',
         responsibility: 'Install 4-5 signs in Port Orchard/Olalla (including near the Southworth ferry) then collect them after the tour – early August',
         prerequisite: 'Experience in advertising',
@@ -280,23 +288,23 @@ const roles = {
         sideBarButtons: []
     },
     35: {
-        title: 'General Advertising Distributor',
-        committee: 'General Advertising',
+        title: 'General Advertising Signs Distributor',
+        committee: 'Signs for General Advertising',
         responsibility: 'Install 4-5 signs in selected areas in Tacoma and Olympia then collect them after the tour – early August',
         prerequisite: 'Experience in advertising',
         tasks: [],
         sideBarButtons: []
     },
     36: {
-        title: 'General Advertising Distributor',
-        committee: 'General Advertising',
+        title: 'General Advertising Signs Distributor',
+        committee: 'Signs for General Advertising',
         responsibility: 'Install 4-5 signs in selected areas in Seattle, Bellevue and Mercer Island then collect them after the tour – early August',
         prerequisite: 'Experience in advertising',
         tasks: [],
         sideBarButtons: []
     },
     37: {
-        title: 'General Advertising Distributor',
+        title: 'General Advertising Signs Distributor',
         committee: 'General Advertising',
         responsibility: 'Install 4-5 signs in selected areas in Bremerton (including on the ferry), Bainbridge Island, Poulsbo and Port Townsend then collect them after the tour – early August',
         prerequisite: 'Experience in advertising',
@@ -314,7 +322,7 @@ const roles = {
     39: {
         title: 'Advertising/Publicity Chair',
         committee: 'Advertising/Publicity',
-        responsibility: 'Oversee all advertising and publicity activities',
+        responsibility: 'Oversee special advertisement and publicity',
         prerequisite: 'Experience in advertising and publicity',
         tasks: [],
         sideBarButtons: []
