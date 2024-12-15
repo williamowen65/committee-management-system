@@ -205,12 +205,45 @@ const roles = {
 
     // Mailing List/Mail Chimp
     // add 1 role
+    38: {
+        title: 'Mailing List Coordinator',
+        committee: 'Mailing List/Mail Chimp',
+        responsibility: 'Manage the mailing list and send out newsletters using Mail Chimp',
+    },
 
     // Advertising/Publicity
-    // add 1 role
+    39: {
+        title: 'Advertising/Publicity Chair',
+        committee: 'Advertising/Publicity',
+        responsibility: 'Oversee all advertising and publicity activities',
+    },
 
-    // GHOST Information Booth at PAL Summer ARt Festival
-    // add 5 roles
+    // GHOST Information Booth at PAL Summer Art Festival
+    40: {
+        title: 'Information Booth Chair',
+        committee: 'Information Booth',
+        responsibility: 'Oversee the setup and operation of the information booth',
+    },
+    41: {
+        title: 'Information Booth Assistant',
+        committee: 'Information Booth',
+        responsibility: 'Assist chair with booth set up and tear down',
+    },
+    42: {
+        title: 'Information Booth Volunteer',
+        committee: 'Information Booth',
+        responsibility: 'Man the booth Friday, July 18th',
+    },
+    43: {
+        title: 'Information Booth Volunteer',
+        committee: 'Information Booth',
+        responsibility: 'Man the booth Friday, July 19th',
+    },
+    44: {
+        title: 'Information Booth Volunteer',
+        committee: 'Information Booth',
+        responsibility: 'Man the booth Friday, July 20th',
+    },
 
 
 
