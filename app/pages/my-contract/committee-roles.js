@@ -25,29 +25,37 @@ const roles = {
         committee: 'Board',
         responsibility: 'Assist with various tasks as needed',
     },
-    /* Committees */
-    // New Artist Recruitment
-    15: {
-        title: 'New Artist Recruitment Chair',
-        committee: 'Recruitment',
-        responsibility: 'Recruit new artists',
-    },
-    16: {
-        title: 'New Artist Recruitment Assistant',
-        committee: 'Recruitment',
-        responsibility: 'Recruit new artists',
-    },
-    // New Artist Applications
-    17: {
-        title: 'New Artist Applications Chair',
-        committee: 'Artists Applications',
-        responsibility: 'Review new artist applications',
-    },
     // Website Design and Maintenance
     6: {
         title: 'Web Design/Maintenance Chair',
         committee: 'Web Design and Maintenance',
         responsibility: "Maintain the organization's website",
+    },
+    // Social Media Committee
+    7: {
+        title: 'Social Media Chair',
+        committee: 'Social Media',
+        responsibility: "Manage the organization's social media accounts",
+    },
+    8: {
+        title: 'Design general GHOST posts (using Canva)',
+        committee: 'Social Media',
+        responsibility: "Create posts for the organization's social media accounts",
+    },
+    9: {
+        title: 'Design mosaics of individual artists (using Canva)',
+        committee: 'Social Media',
+        responsibility: "Create posts for the organization's social media accounts",
+    },
+    10: {
+        title: 'Design Sponsor and "Make It a Weekend" posts (using Canva)',
+        committee: 'Social Media',
+        responsibility: "Create posts for the organization's social media accounts",
+    },
+    11: {
+        title: 'Prepare short videos',
+        committee: 'Social Media',
+        responsibility: 'Create posts for the organization',
     },
     // Artist Images
     12: {
@@ -65,6 +73,23 @@ const roles = {
         title: 'Brochure and Poster Designer',
         committee: 'Marketing',
         responsibility: 'Design brochures and posters',
+    },
+    // New Artist Recruitment
+    15: {
+        title: 'New Artist Recruitment Chair',
+        committee: 'Recruitment',
+        responsibility: 'Recruit new artists',
+    },
+    16: {
+        title: 'New Artist Recruitment Assistant',
+        committee: 'Recruitment',
+        responsibility: 'Recruit new artists',
+    },
+    // New Artist Applications
+    17: {
+        title: 'New Artist Applications Chair',
+        committee: 'Artists Applications',
+        responsibility: 'Review new artist applications',
     },
     // Distribution
     18: {
@@ -97,34 +122,6 @@ const roles = {
         committee: 'Distribution',
         responsibility: 'Distribute brochures and posters to selected areas in Bremerton (including on the ferry), Bainbridge Island, Poulsbo and Port Townsend',
     },
-
-    // Social Media Committee
-    7: {
-        title: 'Social Media Chair',
-        committee: 'Social Media',
-        responsibility: "Manage the organization's social media accounts",
-    },
-    8: {
-        title: 'Design general GHOST posts (using Canva)',
-        committee: 'Social Media',
-        responsibility: "Create posts for the organization's social media accounts",
-    },
-    9: {
-        title: 'Design mosaics of individual artists (using Canva)',
-        committee: 'Social Media',
-        responsibility: "Create posts for the organization's social media accounts",
-    },
-    10: {
-        title: 'Design Sponsor and "Make It a Weekend" posts (using Canva)',
-        committee: 'Social Media',
-        responsibility: "Create posts for the organization's social media accounts",
-    },
-    11: {
-        title: 'Prepare short videos',
-        committee: 'Social Media',
-        responsibility: 'Create posts for the organization',
-    },
-
     // Sponsorship Committee
     24: {
         title: 'Sponsorship Chair',
@@ -136,7 +133,6 @@ const roles = {
         committee: 'Sponsorship',
         responsibility: 'Assist with sponsorship activities and maintain relationships with sponsors (including paid ads)',
     },
-
     // Signs for Artist Studios
     26: {
         title: 'Signs for Artist Studios Chair',
@@ -153,7 +149,6 @@ const roles = {
         committee: 'Signs for Artist Studios',
         responsibility: 'Sign repairs plus bundling signs for distribution and help collecting signs at end of year',
     },
-
     // banners
     29: {
         title: 'Banners Chair',
@@ -165,7 +160,6 @@ const roles = {
         committee: 'Banners',
         responsibility: 'Assist with the creation and distribution of banners',
     },
-
     // signs for general advertising
     31: {
         title: 'General Advertising Chair',
@@ -202,22 +196,18 @@ const roles = {
         committee: 'General Advertising',
         responsibility: 'Install 4-5 signs in selected areas in Bremerton (including on the ferry), Bainbridge Island, Poulsbo and Port Townsend then collect them after the tour – early August',
     },
-
     // Mailing List/Mail Chimp
-    // add 1 role
     38: {
         title: 'Mailing List Coordinator',
         committee: 'Mailing List/Mail Chimp',
         responsibility: 'Manage the mailing list and send out newsletters using Mail Chimp',
     },
-
     // Advertising/Publicity
     39: {
         title: 'Advertising/Publicity Chair',
         committee: 'Advertising/Publicity',
         responsibility: 'Oversee all advertising and publicity activities',
     },
-
     // GHOST Information Booth at PAL Summer Art Festival
     40: {
         title: 'Information Booth Chair',
@@ -244,9 +234,6 @@ const roles = {
         committee: 'Information Booth',
         responsibility: 'Man the booth Friday, July 20th',
     },
-
-
-
 }
 
 export default roles
