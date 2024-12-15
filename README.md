@@ -34,6 +34,7 @@ app/
         paypal/ <-- Served from server.js
     cloudFunctions/
         google/  <--- Deploy to GCP with 'npm run deploy:gcf:googleapis'
+          Make sure to use 'gcloud config set project [PROJECT ID]' first
     components/ <--- Encapsulations of styles & logic (custom html components)
         3rdParty/
         application/
@@ -66,15 +67,18 @@ utils/
 server.js  <--- Serves all content (Entry point). Run with 'npm run start:w'
 watch.json <--- Config file (hosted on Glitch)
 webpack.components.config.js  <--- Run with 'npm run build:w'
-
+package.json <--- Build scripts
+    Make sure to have logged into the correct gmail account for GCF
 ```
 
 ### Google Workspace Integration Steps 
 
 
 
-
 To set up email functionality alongside other Google APIs using a **service worker** (likely referring to a backend service or middleware with Google APIs), follow these steps:
+
+
+> What I learned. make sure to set polices for project and organization withing google workspace
 
 ---
 

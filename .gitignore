@@ -3,3 +3,4 @@ private_key.json
 .env
 app/api/paypal/sandbox-test.http
 app/cloudFunctions/google/credentials.json
+app/cloudFunctions/google/sandbox.http
