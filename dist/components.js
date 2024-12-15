@@ -608,7 +608,12 @@ var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js
               width: width,
               height: height
             });
-            if (width !== height) {
+            var isWithinRange = function isWithinRange(value1, value2, range) {
+              // Roughly 10 percent of the range
+              var tenPercent = range * 0.1;
+              return value1 > value2 - tenPercent && value1 < value2 + tenPercent;
+            };
+            if (!isWithinRange(width, height, width)) {
               var _error = document.createElement('p');
               _error.textContent = 'Image is not square. Please upload a square image.';
               _error.classList.add('error');

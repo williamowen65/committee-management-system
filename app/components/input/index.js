@@ -143,20 +143,26 @@ createCustomElement('file-input-component', function () {
                 // Get attribute "square" from component
                 const squareRequirement = this.getAttribute('square-requirement');
                 if (squareRequirement) {
-
-
                     // check for square size
                     const image = new Image();
                     image.src = reader.result;
                     image.onload = () => {
                         const { width, height } = image;
                         logIf.component &&  console.log({ width, height });
-                        if (width !== height) {
+
+                        const isWithinRange = (value1, value2, range) => {
+                            // Roughly 10 percent of the range
+                            const tenPercent = range * 0.1;
+                            return value1 > value2 - tenPercent && value1 < value2 + tenPercent;
+                        }
+
+                        if (!isWithinRange(width, height, width)) {
                             const error = document.createElement('p');
                             error.textContent = 'Image is not square. Please upload a square image.';
                             error.classList.add('error');
                             parentContainer.appendChild(error);
                         }
+
                     }
                 }
 
