@@ -9,6 +9,14 @@
   <script src="/my-contract/index.js" type="module"></script>
   <script src="/dist/CRUD.js" type="module"></script>
   <script type="module" src="/dist/firebase.js"></script>
+
+   
+  <link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+  integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+  crossorigin="anonymous"
+/>
   <script type="module">
       firebase.redirectIfNotLoggedIn('/artist-sign-on')
     </script>
@@ -342,6 +350,20 @@
                 background: yellow;
                 color: black;
               }
+
+              .info-icon {
+                position: absolute;
+                /* left: 0; */
+                scale: 0.7;
+                translate: -11px -3px;
+                opacity: 0.3;
+                transition: all 0.3s;
+                cursor: pointer;
+              }
+              .info-icon:hover{
+                opacity: 1;
+                
+              }
             </style>
 
             <div id="committee-positions">
@@ -349,17 +371,16 @@
 
               <h3>1. Board: 5 people – All year</h3>
               <ol>
-                <li class="role" data-role-id="1"><b>President</b></li>
-                <li class="role" data-role-id="2"><b>Vice President</b></li>
-                <li class="role" data-role-id="3"><b>Treasurer</b></li>
-                <li class="role" data-role-id="4"><b>Secretary</b></li>
-                <li class="role" data-role-id="5"><b>Member-At-Large</b></li>
+                <li class="role" data-role-id="1"><b>President</b><span class="responsibility"></span></li>
+                <li class="role" data-role-id="2"><b>Vice President</b><span class="responsibility"></span></li>
+                <li class="role" data-role-id="3"><b>Treasurer</b><span class="responsibility"></span></li>
+                <li class="role" data-role-id="4"><b>Secretary</b><span class="responsibility"></span></li>
+                <li class="role" data-role-id="5"><b>Member-At-Large</b><span class="responsibility"></span></li>
               </ol>
-
               <h3>2. Website Design and Maintenance: 1 person – All year – done from home</h3>
               <ol>
                 <li class="role" data-role-id="6">
-                  <b>Chair</b> --- Needs computer technical skills and will work with a hired computer programmer
+                  <b>Chair</b> <span class="responsibility"></span> --- Needs computer technical skills and will work with a hired computer programmer
                 </li>
                 <ul>
                   <li>Update website design (with board input) and add online contract</li>
@@ -371,21 +392,21 @@
               <h3>3. Social Media: 5 people, including chair – April to August – done from home</h3>
               <ol>
                 <li class="role" data-role-id="7">
-                  <b>Chair</b> --- (Needs familiarity with Canva or the ability to learn Canva to schedule posts and
+                  <b>Chair</b> <span class="responsibility"></span> --- (Needs familiarity with Canva or the ability to learn Canva to schedule posts and
                   arrange advertising; Provides training and specific guidance to committee members)
                 </li>
-                <li class="role" data-role-id="8">1 person to design general GHOST posts using Canva</li>
-                <li class="role" data-role-id="9">1 person to design mosaics of individual artists using Canva</li>
-                <li class="role" data-role-id="10">1 person to design Sponsor and “Make It a Weekend” posts with
+                <li class="role" data-role-id="8">1 person <span class="responsibility"></span> to design general GHOST posts using Canva</li>
+                <li class="role" data-role-id="9">1 person <span class="responsibility"></span> to design mosaics of individual artists using Canva</li>
+                <li class="role" data-role-id="10">1 person <span class="responsibility"></span> to design Sponsor and “Make It a Weekend” posts with
                   advertisers using Canva</li>
-                <li class="role" data-role-id="11">1 person to prepare short videos (must already have relevant
+                <li class="role" data-role-id="11">1 person <span class="responsibility"></span> to prepare short videos (must already have relevant
                   computer skills)</li>
               </ol>
 
               <h3>4. Artist Images: 1 person – January to early March – done from home</h3>
               <ol>
                 <li class="role" data-role-id="12">
-                  <b>Chair</b> --- (Needs comfort with manipulating image size and using Google Drive folders)
+                  <b>Chair</b> <span class="responsibility"></span> --- (Needs comfort with manipulating image size and using Google Drive folders)
                 </li>
                 <ul>
                   <li>Evaluate incoming images for size and proper cropping for brochures (1-3 MB jpeg, cropped square)
@@ -398,27 +419,27 @@
               <h3>5. Brochure and Poster: 2 people, including chair – January to early June</h3>
               <ol>
                 <li class="role" data-role-id="13">
-                  <b>Chair</b> --- (proposes budget for brochures/posters, coordinates with printer, oversees timetable,
+                  <b>Chair</b> <span class="responsibility"></span> --- (proposes budget for brochures/posters, coordinates with printer, oversees timetable,
                   and explores layout options)
                 </li>
-                <li class="role" data-role-id="14">1 person to design brochure and posters
+                <li class="role" data-role-id="14">1 person <span class="responsibility"></span> to design brochure and posters
                   (Requirement: familiarity with a graphic design app)</li>
               </ol>
 
               <h3>6. New Artist Recruitment: 2 people – Year-round</h3>
               <ol>
                 <li class="role" data-role-id="15">
-                  <b>Chair</b> --- (visits galleries and local festivals to recruit potential artists, collects contact
+                  <b>Chair</b> <span class="responsibility"></span> --- (visits galleries and local festivals to recruit potential artists, collects contact
                   info, and sends email reminders in Nov, Dec, and early Jan)
                 </li>
-                <li class="role"  data-role-id="16">1 assistant to help with gallery visits and
+                <li class="role"  data-role-id="16">1 assistant <span class="responsibility"></span> to help with gallery visits and
                   recruitment</li>
               </ol>
 
               <h3>7. New Artist Applications: 1 person – January to March</h3>
               <ol>
                 <li class="role" data-role-id="17">
-                  <b>Chair</b> --- (manages new artist applications and arranges screening committee)
+                  <b>Chair</b> <span class="responsibility"></span> --- (manages new artist applications and arranges screening committee)
                 </li>
               </ol>
             </div>

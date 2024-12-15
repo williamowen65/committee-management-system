@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // set up artist details form
         setArtistDetailsForm(contracts);
 
-        // Set up volunteer responsibility form 
+        // Set up volunteer responsibility form (Adds checkboxes to the form)
         setUpVolunteerResponsibilityForm(contracts);
 
         // set the Studio Sharing form
@@ -50,6 +50,8 @@ document.addEventListener('DOMContentLoaded', function () {
         setPaypalButton(contracts);
     })
 
+    // Set the users assigned roles 
+    // listen to other peoples roles
     CRUD.listen('ghost-contracts', null, (existingContracts) => {
         contracts = existingContracts;
         updateVolunteerResponsibilityForm(contracts);
@@ -282,7 +284,10 @@ function setUpVolunteerResponsibilityForm(contracts) {
             // find all the roles
             // Add html to each role 
             const input = createCheckbox(role)
+            const responsibility = createResponsibility(role)
             const button = createOffloadButton(role)
+            const infoIcon = createInfoIcon(role)
+            role.querySelector('.responsibility').appendChild(responsibility)
             role.insertAdjacentElement("afterbegin", input)
             input.addEventListener('change', handleCheckboxChange)
 
@@ -312,6 +317,24 @@ function setUpVolunteerResponsibilityForm(contracts) {
             // }
         })
     }, 0)
+
+    function createInfoIcon(role) {
+        const icon = document.createElement('i')
+        icon.classList.add('fas', 'fa-info-circle', 'info-icon')
+        icon.setAttribute('data-bs-toggle', 'tooltip')
+        icon.setAttribute('data-bs-placement', 'top')
+        icon.setAttribute('title', roles[role.getAttribute('data-role-id')].responsibility)
+        return icon
+    }
+
+    function createResponsibility(role) {
+        const roleId = role.getAttribute('data-role-id')
+        const thisRole = roles[roleId]
+        const responsibility = document.createElement('span')
+        responsibility.classList.add('responsibility')
+        responsibility.innerText = thisRole.responsibility
+        return responsibility
+    }
 
     function createCheckbox(role) {
         const isRoleFilled = filledRoles.includes(role.getAttribute('data-role-id'))
