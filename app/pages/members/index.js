@@ -35,10 +35,12 @@ document.addEventListener('DOMContentLoaded', function () {
           if (!roleIds) return ''
           return roleIds.map(roleId => {
             const role = roles[roleId].title
+            const roleButtons = roles[roleId].sideBarButtons
+            const responsibility = roles[roleId].responsibility
             logIf.memberSidePanel && console.log("Rendering Member SidePanel for role", { role })
             userRoles[roleId] = role
 
-            let sidePanelHTML = `<h4>${role}</h4>`
+            let sidePanelHTML = `<h4>${role}</h4><div>${responsibility}</div>`
             if(role === 'New Artist Applications Chair') {
               sidePanelHTML += newApplicationsSidePanel(role)
             } else if (role === 'President'){
