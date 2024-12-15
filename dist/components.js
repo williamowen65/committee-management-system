@@ -931,7 +931,8 @@ var logIf = {
   paypal: false,
   auth: false,
   component: false,
-  crud: true
+  crud: true,
+  memberSidePanel: true
 };
 
 /**

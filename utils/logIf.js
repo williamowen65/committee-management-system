@@ -21,6 +21,7 @@ const logIf = {
     auth: false,
     component: false,
     crud: true,
+    memberSidePanel: true
 };
 
 

@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
           if (!roleIds) return ''
           return roleIds.map(roleId => {
             const role = roles[roleId].title
-            logIf.client && console.log({ role })
+            logIf.memberSidePanel && console.log("Rendering Member SidePanel for role", { role })
             userRoles[roleId] = role
 
             let sidePanelHTML = `<h4>${role}</h4>`
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             } 
             else {
-              return ``
+              sidePanelHTML += ``
             }
             return sidePanelHTML
 
