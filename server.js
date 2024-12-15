@@ -61,6 +61,13 @@ fs.readdir(pagesDir, (err, folders) => {
         const folderPath = path.join(pagesDir, folder);
         if (fs.lstatSync(folderPath).isDirectory()) {
             app.use(`/${folder}`, express.static(folderPath));
+
+
+            // conditionally serve a nest folder 'modal' if it exists
+            const modalDir = path.join(folderPath, 'modal');
+            if (fs.existsSync(modalDir)) {
+                app.use(`/${folder}/modal`, express.static(modalDir));
+            }
         }
     });
 });

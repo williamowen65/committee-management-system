@@ -10,7 +10,10 @@ document.addEventListener('DOMContentLoaded', function () {
       if (user) {
 
         document.body.style.display = 'block'
-        document.querySelector('#username').innerText = `Hello, ${user.displayName}`
+        const userDiv = document.querySelector('#user')
+        userDiv.style.display = 'block'
+        userDiv.querySelector('#username').innerHTML = `Hello, ${user.displayName}` 
+        
 
         CRUD.read('ghost-contracts', user.uid).then(contract => {
           logIf.client && console.log(contract)

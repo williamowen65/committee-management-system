@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/dist/styles.css">
   <script src="/dist/CRUD.js"></script>
   <script src="/members/index.js" type="module"></script>
+  <script src="/members/modal/reset-password.js" type="module"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -22,6 +23,11 @@
     .buttons-container button {
       width: 100%;
     }
+
+    #user button:not(#hamburger-menu){
+      width: fit-content;
+      margin-left: auto ;
+    }
   </style>
 
 </head>
@@ -31,8 +37,30 @@
   <header-component></header-component>
   <div class="" style="display: flex; flex-direction: column">
     <div style="text-align: right">
-      <span id="username"></span>
-      <button id="logout">Logout</button>
+      <span id="user" style="display: none">
+        <div style="display:flex; justify-content: end; align-items: center;">
+          <div id="username"></div>
+          <button id="hamburger-menu" aria-label="Menu">&#9776;</button>
+        </div>
+        <nav id="menu" style="display: none;">
+          <ul style="display: flex; flex-direction: column;">
+            <button id="reset-password">Reset Password</button>
+            <button id="logout">Logout</button>
+          </ul>
+        </nav>
+        <script>
+          document.getElementById('hamburger-menu').addEventListener('click', function() {
+            var menu = document.getElementById('menu');
+            if (menu.style.display === 'none') {
+              menu.style.display = 'block';
+            } else {
+              menu.style.display = 'none';
+            }
+          });
+        </script>
+
+       
+      </span>
     </div>
     <div style="display: flex; flex-wrap: wrap; gap: 10px;">
       <div class="buttons-container" style="display: flex; flex-direction: column; gap: 10px;">
