@@ -45,61 +45,68 @@ const roles = {
         committee: 'Web Design and Maintenance',
         responsibility: "Maintain the organization's website",
         prerequisite: 'Experience in web design and maintenance',
-        tasks: [],
+        tasks: [
+            'Update website design (with board input) and add online contract',
+            'Update map to be interactive',
+            'Update yearly information on the website (dates, forms, images, map, etc.)'
+        ],
         sideBarButtons: []
     },
     7: {
         title: 'Social Media Chair',
         committee: 'Social Media',
         responsibility: "Manage the organization's social media accounts",
-        prerequisite: 'Experience in social media management',
+        prerequisite: 'Needs familiarity with Canva or the ability to learn Canva to schedule posts and arrange advertising; Provides training and specific guidance to committee members',
         tasks: [],
         sideBarButtons: []
     },
     8: {
-        title: 'Design general GHOST posts (using Canva)',
+        title: 'Social Media Assistant',
         committee: 'Social Media',
-        responsibility: "Create posts for the organization's social media accounts",
+        responsibility: "Design general GHOST posts (using Canva)",
         prerequisite: 'Experience with Canva and social media design',
-        tasks: [],
+        tasks: ["Create posts for the organization's social media accounts"],
         sideBarButtons: []
     },
     9: {
-        title: 'Design mosaics of individual artists (using Canva)',
+        title: 'Social Media Assistant',
         committee: 'Social Media',
-        responsibility: "Create posts for the organization's social media accounts",
+        responsibility: "Design mosaics of individual artists (using Canva)",
         prerequisite: 'Experience with Canva and social media design',
-        tasks: [],
+        tasks: ["Create posts for the organization's social media accounts"],
         sideBarButtons: []
     },
     10: {
-        title: 'Design Sponsor and "Make It a Weekend" posts (using Canva)',
+        title: 'Social Media Assistant',
         committee: 'Social Media',
-        responsibility: "Create posts for the organization's social media accounts",
+        responsibility: "Design Sponsor and “Make It a Weekend” posts with advertisers using Canva",
         prerequisite: 'Experience with Canva and social media design',
-        tasks: [],
+        tasks: ["Create posts for the organization's social media accounts"],
         sideBarButtons: []
     },
     11: {
-        title: 'Prepare short videos',
+        title: 'Social Media Assistant',
         committee: 'Social Media',
-        responsibility: 'Create posts for the organization',
+        responsibility: 'Prepare short videos',
         prerequisite: 'Experience in video creation and editing',
-        tasks: [],
+        tasks: ["Create posts for the organization's social media accounts"],
         sideBarButtons: []
     },
     12: {
         title: 'Artist Images Chair',
         committee: 'Art Images',
         responsibility: 'Take photos of artists',
-        prerequisite: 'Experience in photography',
-        tasks: [],
+        prerequisite: 'Needs comfort with manipulating image size and using Google Drive folders',
+        tasks: [
+            "Evaluate incoming images for size and proper cropping for brochures (1-3 MB jpeg, cropped square) and organize them in artist image folders on GHOST Google Drive",
+            "Assist artists with image resizing, cropping, and jpeg uploading as needed during contract submission"
+        ],
         sideBarButtons: []
     },
     13: {
         title: 'Brochure and Poster Chair',
         committee: 'Marketing',
-        responsibility: 'Design brochures and posters',
+        responsibility: 'Proposes budget for brochures/posters, coordinates with printer, oversees timetable, and explores layout options',
         prerequisite: 'Experience in graphic design',
         tasks: [],
         sideBarButtons: []
@@ -115,7 +122,7 @@ const roles = {
     15: {
         title: 'New Artist Recruitment Chair',
         committee: 'Recruitment',
-        responsibility: 'Recruit new artists',
+        responsibility: 'visits galleries and local festivals to recruit potential artists, collects contact info, and sends email reminders in Nov, Dec, and early Jan',
         prerequisite: 'Experience in recruitment',
         tasks: [],
         sideBarButtons: []
@@ -123,7 +130,7 @@ const roles = {
     16: {
         title: 'New Artist Recruitment Assistant',
         committee: 'Recruitment',
-        responsibility: 'Recruit new artists',
+        responsibility: 'Help with gallery visits and recruitment',
         prerequisite: 'Experience in recruitment',
         tasks: [],
         sideBarButtons: []
@@ -131,7 +138,7 @@ const roles = {
     17: {
         title: 'New Artist Applications Chair',
         committee: 'Artists Applications',
-        responsibility: 'Review new artist applications',
+        responsibility: 'Manage new artist applications and arranges screening committee',
         prerequisite: 'Experience in reviewing applications',
         tasks: [],
         sideBarButtons: []
@@ -357,4 +364,3 @@ const roles = {
 export default roles
 
 
-export default roles

@@ -285,10 +285,12 @@ function setUpVolunteerResponsibilityForm(contracts) {
             // Add html to each role 
             const input = createCheckbox(role)
             const responsibility = createResponsibility(role)
+            const tasks = createRoleTasks(role)
             const button = createOffloadButton(role)
             const infoIcon = createInfoIcon(role)
             role.querySelector('.responsibility').appendChild(responsibility)
             role.insertAdjacentElement("afterbegin", input)
+            if(tasks) responsibility.insertAdjacentElement("beforeend", tasks)
             input.addEventListener('change', handleCheckboxChange)
 
             // get my role set
@@ -318,6 +320,19 @@ function setUpVolunteerResponsibilityForm(contracts) {
         })
     }, 0)
 
+    function createRoleTasks(role) {
+        const roleId = role.getAttribute('data-role-id')
+        const thisRole = roles[roleId]
+        const tasks = document.createElement('ul')
+        tasks.classList.add('tasks')
+        thisRole.tasks.forEach(task => {
+            const li = document.createElement('li')
+            li.innerText = task
+            tasks.appendChild(li)
+        })
+        return tasks
+    }
+
     function createInfoIcon(role) {
         const icon = document.createElement('i')
         icon.classList.add('fas', 'fa-info-circle', 'info-icon')
@@ -330,8 +345,8 @@ function setUpVolunteerResponsibilityForm(contracts) {
     function createResponsibility(role) {
         const roleId = role.getAttribute('data-role-id')
         const thisRole = roles[roleId]
-        const responsibility = document.createElement('span')
-        responsibility.classList.add('responsibility')
+        const responsibility = document.createElement('div')
+        // responsibility.classList.add('responsibility')
         responsibility.innerText = thisRole.responsibility
         return responsibility
     }
