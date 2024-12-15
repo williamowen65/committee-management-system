@@ -20,6 +20,7 @@ app.use(cors({
     origin: ['http://localhost:5500', 'http://localhost:3000', 'https://few-right-mandible.glitch.me', 'https://gig-harbor-studio-tour.org'],
     credentials: true
 }));
+app.use(express.json());
 
 app.use((req, res, next) => {
     logIf.server && console.log(`${req.method} ${req.url}`);

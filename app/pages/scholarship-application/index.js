@@ -15,14 +15,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         CRUD.read('scholarship-applications', user.uid).then((application) => {
-            if (application) {
+            if (Object.keys(application.length !== 0)) {
                 existingApplication = application
-                document.querySelector('input[id="name"]').value = application.name
+                document.querySelector('input[id="name"]').value = application.name || user.displayName
                 document.querySelector('input[id="name"]').dispatchEvent(new Event('change'))
-                document.querySelector('input[id="email"]').value = application.email
+                document.querySelector('input[id="email"]').value = application.email || ''
                 document.querySelector('input[id="email"]').dispatchEvent(new Event('change'))
-                document.querySelector('input[id="hasNotReceivedScholarship"]').checked = application.hasNotReceivedScholarshipPreviously
-                document.querySelector('textarea[id="needForScholarship"]').value = application.needForScholarship
+                document.querySelector('input[id="hasNotReceivedScholarship"]').checked = application.hasNotReceivedScholarshipPreviously || false;
+                document.querySelector('textarea[id="needForScholarship"]').value = application.needForScholarship || ""
                 document.querySelector('textarea[id="needForScholarship"]').dispatchEvent(new Event('change'))
             }
         })   

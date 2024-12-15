@@ -23,7 +23,7 @@
     "webpack": "webpack",
     "build:scss": "sass app/styles.scss dist/styles.css",
     "watch:scss": "sass --watch app/styles.scss dist/styles.css",
-    "deploy:gcf:googleapis": "cd app\\cloudFunctions\\google && gcloud functions deploy googleapis --runtime nodejs20 --trigger-http --allow-unauthenticated && cd ..\\..\\..",
+    "deploy:gcf:googleapis": "cd app\\cloudFunctions\\google && gcloud functions deploy googleapis --runtime nodejs20 --trigger-http --allow-unauthenticated --service-account 13428009497-compute@developer.gserviceaccount.com && cd ..\\..\\..",
     "logs:gcf:googleapis": "gcloud functions logs read googleapis"
   },
   "author": "William Owen <william.owen.dev@gmail.com>",

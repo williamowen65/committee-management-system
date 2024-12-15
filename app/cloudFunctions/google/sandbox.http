@@ -3,4 +3,9 @@ GET https://us-central1-ghost-444721.cloudfunctions.net/googleapis
 
 ###
 
-GET https://us-central1-ghost-444721.cloudfunctions.net/googleapis/gmail
+POST https://us-central1-ghost-444721.cloudfunctions.net/googleapis/gmail
+Content-Type: application/json
+
+{
+  "test": "gmail"
+}
