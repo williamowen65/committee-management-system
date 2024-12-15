@@ -41,30 +41,20 @@ document.addEventListener('DOMContentLoaded', function () {
             userRoles[roleId] = role
 
             let sidePanelHTML = `<h4>${role}</h4><div>${responsibility}</div>`
-            if(role === 'New Artist Applications Chair') {
-              sidePanelHTML += newApplicationsSidePanel(role)
-            } else if (role === 'President'){
-              sidePanelHTML += [newApplicationsSidePanel(role), newScholarshipApplicationsButton(role)].join("")
-            } else if (["President","Vice President", "Treasurer", "Secretary", "Member-At-Large"].includes(role)){
-              sidePanelHTML += [newScholarshipApplicationsButton(role)].join("")
 
-            } 
-            else {
-              sidePanelHTML += ``
+            if (roleButtons) {
+              if(roleButtons.includes('newApplications')) {
+                sidePanelHTML += newApplicationsSidePanel(role)
+              }
+              if(roleButtons.includes('newScholarshipApplications')) {
+                sidePanelHTML += newScholarshipApplicationsButton(role)
+              }
+
             }
+
             return sidePanelHTML
 
-            // switch (role) {
-
-            //   case 'New Artist Applications Chair':
-            //   case 'President':
-            //     return newApplicationsSidePanel(role)
-
-
-            //   case 'Artist Applications Chair':
-            //   default:
-            //     return `<h4>${role}</h4>`
-            // }
+       
           }).join("")
         }
       }
