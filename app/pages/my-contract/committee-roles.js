@@ -126,16 +126,82 @@ const roles = {
     },
 
     // Sponsorship Committee
-    // add 2 roles
+    24: {
+        title: 'Sponsorship Chair',
+        committee: 'Sponsorship',
+        responsibility: 'Oversee sponsorship activities and relationships with sponsors (including paid ads)',
+    },
+    25: {
+        title: 'Sponsorship Assistant',
+        committee: 'Sponsorship',
+        responsibility: 'Assist with sponsorship activities and maintain relationships with sponsors (including paid ads)',
+    },
 
     // Signs for Artist Studios
-    // add 3 roles for Signs for Artist Studios
+    26: {
+        title: 'Signs for Artist Studios Chair',
+        committee: 'Signs for Artist Studios',
+        responsibility: 'Oversee the creation and distribution of signs for artist studios',
+    },
+    27: {
+        title: 'Signs for Artist Studios Assistant',
+        committee: 'Signs for Artist Studios',
+        responsibility: 'Sign repairs plus bundling signs for distribution and help collecting signs at end of year',
+    },
+    28: {
+        title: 'Signs for Artist Studios Assistant',
+        committee: 'Signs for Artist Studios',
+        responsibility: 'Sign repairs plus bundling signs for distribution and help collecting signs at end of year',
+    },
 
     // banners
-    // add 2 roles
+    29: {
+        title: 'Banners Chair',
+        committee: 'Banners',
+        responsibility: 'Oversee the creation and distribution of banners',
+    },
+    30: {
+        title: 'Banners Assistant',
+        committee: 'Banners',
+        responsibility: 'Assist with the creation and distribution of banners',
+    },
 
     // signs for general advertising
-    // add 7 roles
+    31: {
+        title: 'General Advertising Chair',
+        committee: 'General Advertising',
+        responsibility: 'Oversee all general advertising activities',
+    },
+    32: {
+        title: 'General Advertising Distributor',
+        committee: 'General Advertising',
+        responsibility: 'Install 4-5 signs in Gig Harbor (Downtown, Pioneer Ave and Kimball Ave) then collect them after the tour – early August',
+    },
+    33: {
+        title: 'General Advertising Distributor',
+        committee: 'General Advertising',
+        responsibility: 'Install 4-5 signs in Gig Harbor (Costco and Point Fosdick business corridors) then collect them after the tour – early August',
+    },
+    34: {
+        title: 'General Advertising Distributor',
+        committee: 'General Advertising',
+        responsibility: 'Install 4-5 signs in Port Orchard/Olalla (including near the Southworth ferry) then collect them after the tour – early August',
+    },
+    35: {
+        title: 'General Advertising Distributor',
+        committee: 'General Advertising',
+        responsibility: 'Install 4-5 signs in selected areas in Tacoma and Olympia then collect them after the tour – early August',
+    },
+    36: {
+        title: 'General Advertising Distributor',
+        committee: 'General Advertising',
+        responsibility: 'Install 4-5 signs in selected areas in Seattle, Bellevue and Mercer Island then collect them after the tour – early August',
+    },
+    37: {
+        title: 'General Advertising Distributor',
+        committee: 'General Advertising',
+        responsibility: 'Install 4-5 signs in selected areas in Bremerton (including on the ferry), Bainbridge Island, Poulsbo and Port Townsend then collect them after the tour – early August',
+    },
 
     // Mailing List/Mail Chimp
     // add 1 role
