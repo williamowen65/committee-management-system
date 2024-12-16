@@ -8,7 +8,7 @@ crossorigin="anonymous"
 
 <!-- I don't remember what data-primary meant -->
 <div class="os-dual-form" data-primary="login" auth-mode="login">
-  <form id="signup" class="left">
+  <form id="signup" class="left" autocomplete="off">
     <h1>Sign up</h1>
     <os-form-feedback feedbackName="success"></os-form-feedback>
 
@@ -60,7 +60,7 @@ crossorigin="anonymous"
     </div>
     <os-form-feedback feedbackName="submit"></os-form-feedback>
   </form>
-  <form id="login" class="right">
+  <form id="login" class="right"  autocomplete="off">
     <h1>Login</h1>
     <input-component
       required="true"
