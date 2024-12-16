@@ -358,11 +358,14 @@ function setUXEventListeners() {
       // redirect to members
       logIf.auth && console.log('redirecting to members page');
       window.location.href = '/members';
-    })["catch"](function () {
+    })["catch"](function (err) {
       // change the button text back to original
       btnSubmit.innerText = btnText;
       // enable the button
       btnSubmit.disabled = false;
+      console.log("There was an error signing in to your account. ", {
+        err: err
+      });
       // show error message
       alert('There was an error signing in to your account. Please try again');
     });
@@ -428,7 +431,7 @@ function setUXEventListeners() {
       // enable the button
       btnSubmit.disabled = false;
       // show error message
-      logIf.auth && console.log({
+      console.log('There was an error creating your account.', {
         err: err
       });
       alert('There was an error creating your account. Please try again');
