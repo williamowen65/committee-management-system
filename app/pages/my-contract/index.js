@@ -597,7 +597,10 @@ function setArtistDetailsForm(contracts) {
 async function setPaypalButton(contracts) {
     logIf.client && console.log("setPaypalButton", {contracts})
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
-    if(!contract) return;
+    if(!contract) {
+        document.querySelector('.scholarship-btn-container').style.display = 'block';
+        return
+    };
     const membershipPaid = contract.artistDetails.membershipPaid
 
     // get scholarship status from scholarship data collection
