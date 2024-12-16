@@ -12,6 +12,40 @@ createCustomElement('input-component', function () {
    
     moveLabel.bind(this)();
 
+    setPasswordVisibilityListener.bind(this)();
+
+
+    function setPasswordVisibilityListener() {
+        setTimeout(() => {
+
+        // Ensure elements exist before adding event listeners
+        const passwordToggles = this.querySelectorAll('.password-toggle');
+        if (passwordToggles.length > 0) {
+            passwordToggles.forEach((el) => {
+                el.addEventListener('click', (e) => {
+                    const target = e.target
+                    const label = target.closest('label');
+                    if (label) {
+                        const input = label.querySelector('input') 
+                        const isShowingPassword = label.getAttribute('password-toggle') === "hide";
+                        if (isShowingPassword) {
+                            input.type = 'text';
+                            label.setAttribute('password-toggle', "show");
+                        } else {
+                            input.type = 'password';
+                            label.setAttribute('password-toggle', "hide");
+                        }
+                    }
+                });
+            });
+        } else {
+            console.error('No elements with class "password-toggle" found.');
+        }
+    }, 100)
+
+    }
+
+
 }, inputTemplate, styles);
 
 createCustomElement('textarea-component', function () {
