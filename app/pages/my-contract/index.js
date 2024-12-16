@@ -5,7 +5,7 @@ import '../../../utils/logIf.js'; // This is a special way to import the module,
 let contracts;
 const imageFields = ['digitalImage1', 'digitalImage2', 'digitalImage3', 'artistInStudioImage', 'brochureImage']
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
 
     logIf.client && console.log("My Contract Page Loaded")
 
@@ -24,6 +24,13 @@ document.addEventListener('DOMContentLoaded', function () {
             form.addEventListener('submit', listeners[key])
         }
     })
+
+    // Add the Committee html
+    await fetch('/my-contract/committee-positions.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.querySelector('#committee-positions-container').innerHTML = data;
+                })
 
     CRUD.readAll('ghost-contracts').then((existingContracts) => {
         contracts = existingContracts
@@ -632,3 +639,7 @@ async function setPaypalButton(contracts) {
         }
     }
 }
+
+
+
+/// 

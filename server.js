@@ -50,6 +50,14 @@ app.use('/utils', express.static(path.join(__dirname, 'utils')));
 app.get('/', (req, res) => {   
     res.redirect('/members')
  });
+
+// Specific imports
+app.get('/my-contract/committee-positions.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'app/pages/my-contract/committee-positions.html'));
+})
+
+
+
 // Serve all folders in pages as a page
 const pagesDir = path.join(__dirname, 'app/pages');
 fs.readdir(pagesDir, (err, folders) => {
