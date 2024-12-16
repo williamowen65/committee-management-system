@@ -387,9 +387,9 @@ function setUXEventListeners() {
     var firstName = form.querySelector('input[id="firstName"]').value;
     var lastName = form.querySelector('input[id="lastName"]').value;
     var fullName = "".concat(firstName, " ").concat(lastName);
-    var email = form.querySelector('input[id="email"]').value;
-    var password = form.querySelector('input[id="password"]').value;
-    var confirmPassword = form.querySelector('input[id="confirm-password"]').value;
+    var email = form.querySelector('input[id="email"]').value.trim();
+    var password = form.querySelector('input[id="password"]').value.trim();
+    var confirmPassword = form.querySelector('input[id="confirm-password"]').value.trim();
     if (password !== confirmPassword) {
       alert('Passwords do not match');
       btnSubmit.innerText = btnText;

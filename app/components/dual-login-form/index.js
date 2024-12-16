@@ -91,9 +91,9 @@ function setUXEventListeners() {
         const firstName = form.querySelector('input[id="firstName"]').value;
         const lastName = form.querySelector('input[id="lastName"]').value;
         const fullName = `${firstName} ${lastName}`
-        const email = form.querySelector('input[id="email"]').value;
-        const password = form.querySelector('input[id="password"]').value;
-        const confirmPassword = form.querySelector('input[id="confirm-password"]').value;
+        const email = form.querySelector('input[id="email"]').value.trim()
+        const password = form.querySelector('input[id="password"]').value.trim()
+        const confirmPassword = form.querySelector('input[id="confirm-password"]').value.trim()
 
         if (password !== confirmPassword) {
             alert('Passwords do not match')
