@@ -60,6 +60,13 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     })
 
+    document.querySelector('#reset-password').addEventListener('click', () => {
+      const email = firebase.auth.currentUser.email
+      firebase.sendPasswordResetEmail(firebase.auth, email).then(() => {
+        alert(`Password reset email sent to ${email}`)
+      })
+    })
+
     document.getElementById('logout').addEventListener('click', () => {
       firebase.signOut(firebase.auth).then(() => {
         window.location.href = '/artist-sign-on'

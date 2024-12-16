@@ -10,6 +10,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  sendPasswordResetEmail,
   updateProfile
 } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js'
 import {
@@ -68,6 +69,7 @@ window.firebase = {
   doc,
   signOut,
   updateProfile,
+  sendPasswordResetEmail,
   setDoc,
   storage: {
     getStorage,getBlob,

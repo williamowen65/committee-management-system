@@ -24,6 +24,19 @@ function setUXEventListeners() {
         })
     })
 
+    // listener on reset password
+    this.querySelector('.reset-password').addEventListener('click', (e) => {
+        e.preventDefault();
+        const email = prompt('Enter your email address')
+        if (email) {
+            firebase.sendPasswordResetEmail(firebase.auth, email).then(() => {
+                alert('Password reset email sent')
+            }).catch(() => {
+                alert('There was an error sending the password reset email')
+            })
+        }
+    })
+
     // handle submit event for login form
     this.querySelector('form#login').addEventListener('submit', function (e) {
         e.preventDefault();

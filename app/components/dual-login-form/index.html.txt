@@ -17,7 +17,7 @@
         alias="Last Name"
       ></input-component>
     </div>
-    <div class="" style="margin-right: auto; margin-left: 10px;;">
+    <div class="" style="margin-right: auto; margin-left: 10px">
       <!-- <input-component
         required="true"
         fieldName="username"
@@ -28,13 +28,13 @@
     </div>
     <div class="row">
       <input-component
-      required="true"
+        required="true"
         fieldName="password"
         type="password"
         alias="Password"
       ></input-component>
       <input-component
-      required="true"
+        required="true"
         fieldName="confirm-password"
         type="password"
         alias="Confirm Password"
@@ -55,19 +55,33 @@
   <form id="login" class="right">
     <h1>Login</h1>
     <input-component
-    required="true"
+      required="true"
       fieldName="email-login"
       alias="Email"
       type="email"
     ></input-component>
     <input-component
-    required="true"
+      required="true"
       fieldName="password-login"
       type="password"
       alias="Password"
     ></input-component>
     <div class="column submitBtnsContainer">
       <button type="submit">Submit</button>
+      <style>
+        .reset-password {
+          color: #007bff;
+          text-decoration: none;
+          cursor: pointer;
+          margin-top: 10px;
+          position: absolute;
+          bottom: 0;
+        }
+        .reset-password:hover {
+          text-decoration: underline;
+        }
+      </style>
+      <a type="button" class="reset-password">Reset Password</a>
       <button type="button" class="mobile-view toggleAuthType">
         Register new account
       </button>
