@@ -2,7 +2,9 @@ import roles from '../my-contract/committee-roles.js'
 
 document.addEventListener('DOMContentLoaded', async () => { 
 
-
+    await CRUD.readAll('ghost-contracts').then(contracts => {
+        setVolunteerResponsibilityForm(contracts);
+    })
     
     CRUD.listen('ghost-contracts', null, (existingContracts) => {
         let contracts = existingContracts;
@@ -11,7 +13,47 @@ document.addEventListener('DOMContentLoaded', async () => {
  })
 
 
-function updateVolunteerResponsibilityForm(contracts) {
+
+ function updateVolunteerResponsibilityForm(contracts) {
+    setTimeout(() => {
+
+        const filledRoles = Object.values(contracts).map(contract => contract.committeeRoleId).flat()
+        const form = document.querySelector('div#committee-positions')
+        const roles = form.querySelectorAll('li.role')
+        roles.forEach(role => {
+            const roleId = role.getAttribute('data-role-id')
+            const isRoleFilled = filledRoles.includes(roleId)
+
+            // mark the role icon with the user's name
+            const userNameSpan = role.querySelector('.user-name')
+            if (isRoleFilled) {
+
+                // Set the user name next to the checkbox
+                const committeeMemberContract = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))
+                userNameSpan.innerText = committeeMemberContract.artistDetails.firstName 
+
+
+                // Get this users contract
+                const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+
+                const userId = contract?.userId
+                // get my roles fresh from the DB
+                // get my role set
+                // myRoles and filledRoles are an array of ids (ints)
+                const myRoles = contract.committeeRoleId || []
+
+
+                // logIf.client && console.log("Updating offload buttons", { myRoles, roleId, "myRoles.includes(roleId)": myRoles.includes(roleId), contract })
+
+            } else {
+                userNameSpan.innerText = '[ OPEN POSITION ]'
+            }
+
+        })
+    }, 0)
+}
+
+function setVolunteerResponsibilityForm(contracts) {
 
     const filledRoles = Object.values(contracts).map(contract => contract.committeeRoleId).flat()
     // logIf.client && console.log("setUpVolunteerResponsibilityForm", { contracts, filledRoles })
@@ -28,6 +70,8 @@ function updateVolunteerResponsibilityForm(contracts) {
             // Add html to each role 
             const responsibility = createResponsibility(role)
             const tasks = createRoleTasks(role)
+            const userName = createUserName(role)
+            role.insertAdjacentElement("afterbegin", userName)
             role.querySelector('.responsibility').appendChild(responsibility)
             if(tasks) responsibility.insertAdjacentElement("beforeend", tasks)
 
@@ -65,6 +109,28 @@ function updateVolunteerResponsibilityForm(contracts) {
         // responsibility.classList.add('responsibility')
         responsibility.innerText = thisRole.responsibility
         return responsibility
+    }
+
+
+    function createUserName(role) {
+
+        // span for username
+        const userNameSpan = document.createElement('span')
+        userNameSpan.classList.add('user-name')
+
+        // get the user id
+        const roleId = role.getAttribute('data-role-id')
+        // get the user name
+        const committeeMemberContract = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))
+
+        if(committeeMemberContract){   
+            userNameSpan.innerText = committeeMemberContract.artistDetails.firstName 
+        } else {
+            userNameSpan.innerText = "[ OPEN POSITION ]"
+        }
+
+
+        return userNameSpan
     }
 
 

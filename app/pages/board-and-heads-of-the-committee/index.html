@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Artist Application - GHOST</title>
@@ -9,19 +8,21 @@
     <script type="module" src="/dist/firebase.js"></script>
     <script src="/dist/CRUD.js"></script>
     <link rel="stylesheet" href="/dist/styles.css" />
-    <script src="/board-and-heads-of-the-committee/index.js" type="module"></script>
+    <script
+      src="/board-and-heads-of-the-committee/index.js"
+      type="module"
+    ></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // fetch 'my-contract/committee-positions.html' and insert it into the 'container' div
-            fetch('/my-contract/committee-positions.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.querySelector('.container').innerHTML = data;
-                });
-            
-        });
+      document.addEventListener('DOMContentLoaded', () => {
+        // fetch 'my-contract/committee-positions.html' and insert it into the 'container' div
+        fetch('/my-contract/committee-positions.html')
+          .then((response) => response.text())
+          .then((data) => {
+            document.querySelector('.container').innerHTML = data
+          })
+      })
     </script>
-    
+
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
@@ -29,24 +30,68 @@
       crossorigin="anonymous"
     />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 10px;
-            /* background-color: #f4f4f4; */
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 10px;
+        /* background-color: #f4f4f4; */
+      }
     </style>
-</head>
+    <style>
+      #committee-positions b {
+        text-wrap: nowrap;
+      }
 
-<body style="">
+      #committee-positions ol {
+        list-style: none;
+      }
+
+      #committee-positions li.role:has(input[type='checkbox']:not(:checked)) {
+        background: yellow;
+        color: black;
+      }
+
+      .info-icon {
+        position: absolute;
+        /* left: 0; */
+        scale: 0.7;
+        translate: -11px -3px;
+        opacity: 0.3;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+      .info-icon:hover {
+        opacity: 1;
+      }
+      .responsibility {
+        margin-left: 5px;
+      }
+      .tasks {
+        /* margin-left: 63px; */
+      }
+      li.role {
+        display: flex;
+        align-items: baseline;
+      }
+      .user-name:not(:empty) {
+        border: 1px solid springgreen;
+        margin-left: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #000;
+        padding: 3px 5px;
+        margin: 5px 10px 0px 0px;
+        text-wrap: nowrap;
+
+      }
+    </style>
+  </head>
+
+  <body style="">
     <header-component slotLinks="members"></header-component>
 
-    <div class="container">
-        hi
-
-    </div>
+    <div class="container"></div>
 
     <footer-component></footer-component>
-</body>
-
+  </body>
 </html>
