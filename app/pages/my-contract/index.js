@@ -432,7 +432,7 @@ function updateVolunteerResponsibilityForm(contracts) {
 
                 // Get this users contract
                 const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
-
+                if(!contract) return;
                 const userId = contract?.userId
                 // get my roles fresh from the DB
                 // get my role set
@@ -578,6 +578,7 @@ function setSignatureForm(contracts) {
 function setArtistDetailsForm(contracts) {
     const form = document.querySelector('form#artist-details-form')
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+    if(!contract) return
     const artistDetails = contract.artistDetails
     logIf.client && console.log("Setting up artist details form", { artistDetails, contract })
     if (artistDetails) {
@@ -596,6 +597,7 @@ function setArtistDetailsForm(contracts) {
 async function setPaypalButton(contracts) {
     logIf.client && console.log("setPaypalButton", {contracts})
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+    if(!contract) return;
     const membershipPaid = contract.artistDetails.membershipPaid
 
     // get scholarship status from scholarship data collection

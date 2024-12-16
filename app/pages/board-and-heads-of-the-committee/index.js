@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 // Get this users contract
                 const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
-
+                if(!contract) return;
                 const userId = contract?.userId
                 // get my roles fresh from the DB
                 // get my role set

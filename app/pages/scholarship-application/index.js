@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     firebase.auth.onAuthStateChanged(function (user) {
         CRUD.read('ghost-contracts', user.uid).then((contract) => {
             console.log({ contract })
-            if (contract) {
+            if (contract && contract.artistDetails) {
                 const artistDetails = contract.artistDetails
                 document.querySelector('input[id="name"]').value = artistDetails.firstName + ' ' + artistDetails.lastName
                 // trigger change event to show the name label
