@@ -9,39 +9,43 @@ const logIf = require("../../../utils/logIf.js");
 createCustomElement('input-component', function () {
     logIf.component && console.log('input-component loaded');
     // set slot
-   
+
     moveLabel.bind(this)();
 
-    setPasswordVisibilityListener.bind(this)();
 
+    if (this.getAttribute('type') === 'password') {
+
+        setPasswordVisibilityListener.bind(this)();
+
+    }
 
     function setPasswordVisibilityListener() {
         setTimeout(() => {
 
-        // Ensure elements exist before adding event listeners
-        const passwordToggles = this.querySelectorAll('.password-toggle');
-        if (passwordToggles.length > 0) {
-            passwordToggles.forEach((el) => {
-                el.addEventListener('click', (e) => {
-                    const target = e.target
-                    const label = target.closest('label');
-                    if (label) {
-                        const input = label.querySelector('input') 
-                        const isShowingPassword = label.getAttribute('password-toggle') === "hide";
-                        if (isShowingPassword) {
-                            input.type = 'text';
-                            label.setAttribute('password-toggle', "show");
-                        } else {
-                            input.type = 'password';
-                            label.setAttribute('password-toggle', "hide");
+            // Ensure elements exist before adding event listeners
+            const passwordToggles = this.querySelectorAll('.password-toggle');
+            if (passwordToggles.length > 0) {
+                passwordToggles.forEach((el) => {
+                    el.addEventListener('click', (e) => {
+                        const target = e.target
+                        const label = target.closest('label');
+                        if (label) {
+                            const input = label.querySelector('input')
+                            const isShowingPassword = label.getAttribute('password-toggle') === "hide";
+                            if (isShowingPassword) {
+                                input.type = 'text';
+                                label.setAttribute('password-toggle', "show");
+                            } else {
+                                input.type = 'password';
+                                label.setAttribute('password-toggle', "hide");
+                            }
                         }
-                    }
+                    });
                 });
-            });
-        } else {
-            console.error('No elements with class "password-toggle" found.');
-        }
-    }, 100)
+            } else {
+                console.error('No elements with class "password-toggle" found.');
+            }
+        }, 100)
 
     }
 
@@ -53,10 +57,10 @@ createCustomElement('textarea-component', function () {
 
     // check for value 
     const value = this.getAttribute('value');
-    if(value){
+    if (value) {
         this.querySelector('textarea').innerText = value;
     }
-    
+
 }, textareaTemplate, styles);
 
 
@@ -98,7 +102,7 @@ createCustomElement('file-input-component', function () {
             // guarantee that the file input is required
             fileInput.setAttribute('required', 'required');
 
-          
+
             // prevent bubbling event on delete image button
             e.stopPropagation();
             e.stopImmediatePropagation();
@@ -154,7 +158,7 @@ createCustomElement('file-input-component', function () {
                 // Must not be a thumbnail image.
                 // One image must be a square
 
-                logIf.component &&  console.log("file size check ", { fileSize: file.size, fileName: file.name, fileType: file.type });
+                logIf.component && console.log("file size check ", { fileSize: file.size, fileName: file.name, fileType: file.type });
 
                 // Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )
                 if (file.size < 150000) {
@@ -182,7 +186,7 @@ createCustomElement('file-input-component', function () {
                     image.src = reader.result;
                     image.onload = () => {
                         const { width, height } = image;
-                        logIf.component &&  console.log({ width, height });
+                        logIf.component && console.log({ width, height });
 
                         const isWithinRange = (value1, value2, range) => {
                             // Roughly 10 percent of the range

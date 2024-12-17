@@ -427,7 +427,7 @@ function updateVolunteerResponsibilityForm(contracts) {
 
                 // Set the user name next to the checkbox
                 const committeeMemberContract = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))
-                label.querySelector('.user-name').innerText = committeeMemberContract.artistDetails.firstName || "[UNKNOWN]"
+                label.querySelector('.user-name').innerText =committeeMemberContract && committeeMemberContract.artistDetails && committeeMemberContract.artistDetails.firstName || "[UNKNOWN]"
 
 
                 // Get this users contract
@@ -601,7 +601,8 @@ async function setPaypalButton(contracts) {
         document.querySelector('.scholarship-btn-container').style.display = 'block';
         return
     };
-    const membershipPaid = contract.artistDetails.membershipPaid
+    
+    const membershipPaid = contract && contract.artistDetails && contract.artistDetails.membershipPaid || false
 
     // get scholarship status from scholarship data collection
     await CRUD.read('scholarship-applications', firebase.auth.currentUser.uid).then(scholarship => {
