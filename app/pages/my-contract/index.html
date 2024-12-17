@@ -35,7 +35,7 @@
         <span slot="markdown-content">
           This contract, along with all required images and electronic payment, are due on or before March 2, 2025.
 
-          <u><strong>I hereby agree:</strong></u>
+          <u><strong style="text-wrap: nowrap;">I hereby agree:</strong></u>
 
           - My studio is either within the boundaries of the GHOST tour map OR I will be sharing studio space
           with another artist
@@ -339,6 +339,12 @@
             <style>
               #committee-positions b {
                 text-wrap: nowrap;
+              }
+
+              @media (max-width: 900px) {
+                  #committee-positions b {
+                      text-wrap: wrap;              
+                    }
               }
 
               #committee-positions ol {
