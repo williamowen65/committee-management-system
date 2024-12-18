@@ -244,7 +244,7 @@ window.initializePaypalButtons = function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/application/index.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
-/* harmony import */ var _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss.txt */ "./app/components/application/style.scss.txt");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './style.scss.txt'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 
@@ -254,7 +254,7 @@ var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js
   // Fot some reason whe nthe component is loaded via javascript, this call back doesnt fire.
 
   // events must be inline
-}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__["default"]);
+}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '');
 document.addEventListener('DOMContentLoaded', function () {
   window.updateReview = function (event, reviewAnswer) {
     // logIf.crud && console.log("updateReview", event)
@@ -306,14 +306,14 @@ document.addEventListener('DOMContentLoaded', function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/dual-login-form/index.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
-/* harmony import */ var _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss.txt */ "./app/components/dual-login-form/style.scss.txt");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './style.scss.txt'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 
 var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js");
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('dual-login-form-component', function () {
   setUXEventListeners.bind(this)();
-}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__["default"]);
+}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '');
 function setUXEventListeners() {
   // Change form from signup to login
   var dividerEl = this.querySelector('.os-dual-form');
@@ -451,11 +451,11 @@ function setUXEventListeners() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _footer_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./footer.html.txt */ "./app/components/footer/footer.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
-/* harmony import */ var _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss.txt */ "./app/components/footer/style.scss.txt");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './style.scss.txt'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 
-(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('footer-component', function () {}, _footer_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__["default"]);
+(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('footer-component', function () {}, _footer_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '');
 
 /***/ }),
 
@@ -469,11 +469,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _header_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./header.html.txt */ "./app/components/header/header.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
-/* harmony import */ var _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss.txt */ "./app/components/header/style.scss.txt");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./app/components/header/style.scss");
 
 
 
-(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('header-component', function () {}, _header_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__["default"]);
+(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('header-component', function () {}, _header_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '');
 
 /***/ }),
 
@@ -751,7 +751,7 @@ function trimString(a) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/scholarship-application/index.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
-/* harmony import */ var _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss.txt */ "./app/components/scholarship-application/style.scss.txt");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './style.scss.txt'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 
@@ -761,7 +761,7 @@ var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js
   // Fot some reason whe nthe component is loaded via javascript, this call back doesnt fire.
 
   // events must be inline
-}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], _style_scss_txt__WEBPACK_IMPORTED_MODULE_2__["default"]);
+}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '');
 document.addEventListener('DOMContentLoaded', function () {
   window.updateScholarship = function (event, reviewAnswer) {
     logIf.component && console.log("updateScholarship", event);
@@ -1065,6 +1065,16 @@ ___CSS_LOADER_EXPORT___.push([module.id, `@media only screen and (max-width: 767
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./app/components/header/style.scss":
+/*!***********************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./app/components/header/style.scss ***!
+  \***********************************************************************************************************************/
+/***/ (() => {
+
+throw new Error("Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\nexpected \"}\".\n\u001b[34m   ╷\u001b[0m\n\u001b[34m55 │\u001b[0m }\u001b[31m\u001b[0m\n\u001b[34m   │\u001b[0m \u001b[31m ^\u001b[0m\n\u001b[34m   ╵\u001b[0m\n  app\\components\\header\\style.scss 55:2  root stylesheet");
 
 /***/ }),
 
@@ -1579,21 +1589,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./app/components/application/style.scss.txt":
-/*!***************************************************!*\
-  !*** ./app/components/application/style.scss.txt ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (".artist-application-review{\n    .app-contents{\n        display: none\n    }\n    .app-contents, .app-preview{\n        padding: 10px;\n        margin: 10px;\n    }\n    .app-preview{\n        top:0;\n        background-color: white;\n        position: sticky;\n        z-index: 10;\n    }\n\n    .expandApplication.hide{\n        display: none;\n    }\n\n    &.expanded{\n        border: 1px solid black;\n\n        .expandApplication{\n\n            &.hide{\n                display: block;\n            }\n            &.show{\n                display: none;\n            }\n        }\n        \n      \n        .app-contents{\n            display: block;\n        }\n     \n    }\n\n    .app-preview{\n        display: flex;\n        justify-content: space-between;\n        // border: 1px solid black;\n        button{\n            height: fit-content;\n        }\n       \n    }\n}\n");
-
-/***/ }),
-
 /***/ "./app/components/dual-login-form/index.html.txt":
 /*!*******************************************************!*\
   !*** ./app/components/dual-login-form/index.html.txt ***!
@@ -1606,21 +1601,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n<link\r\nrel=\"stylesheet\"\r\nhref=\"https://use.fontawesome.com/releases/v5.7.2/css/all.css\"\r\nintegrity=\"sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr\"\r\ncrossorigin=\"anonymous\"\r\n/>\r\n\r\n<!-- I don't remember what data-primary meant -->\r\n<div class=\"os-dual-form\" data-primary=\"login\" auth-mode=\"login\">\r\n  <form id=\"signup\" class=\"left\" autocomplete=\"off\">\r\n    <h1>Sign up</h1>\r\n    <os-form-feedback feedbackName=\"success\"></os-form-feedback>\r\n\r\n    <div class=\"row\">\r\n      <input-component\r\n        required=\"true\"\r\n        fieldName=\"firstName\"\r\n        alias=\"First Name\"\r\n      ></input-component>\r\n\r\n      <input-component\r\n        required=\"true\"\r\n        fieldName=\"lastName\"\r\n        alias=\"Last Name\"\r\n      ></input-component>\r\n    </div>\r\n    <div class=\"\" style=\"margin-right: auto; margin-left: 10px\">\r\n      <!-- <input-component\r\n        required=\"true\"\r\n        fieldName=\"username\"\r\n        alias=\"Username\"\r\n      ></input-component> -->\r\n      <input-component required=\"true\" fieldName=\"email\" alias=\"Email\">\r\n      </input-component>\r\n    </div>\r\n    <div class=\"row\">\r\n      <input-component\r\n        required=\"true\"\r\n        fieldName=\"password\"\r\n        type=\"password\"\r\n        alias=\"Password\"\r\n      ></input-component>\r\n      <input-component\r\n        required=\"true\"\r\n        fieldName=\"confirm-password\"\r\n        type=\"password\"\r\n        alias=\"Confirm Password\"\r\n      ></input-component>\r\n    </div>\r\n    <!-- <div id=\"reCAPTCHA\"></div>\r\n      <os-form-feedback feedbackName=\"reCAPTCHA\"></os-form-feedback> -->\r\n\r\n    <div class=\"column submitBtnsContainer\">\r\n      <button type=\"submit\">Submit</button>\r\n\r\n      <button type=\"button\" class=\"mobile-view toggleAuthType\">\r\n        Go to Log in\r\n      </button>\r\n    </div>\r\n    <os-form-feedback feedbackName=\"submit\"></os-form-feedback>\r\n  </form>\r\n  <form id=\"login\" class=\"right\"  autocomplete=\"off\">\r\n    <h1>Login</h1>\r\n    <input-component\r\n      required=\"true\"\r\n      fieldName=\"email-login\"\r\n      alias=\"Email\"\r\n      type=\"email\"\r\n    ></input-component>\r\n    <input-component\r\n      required=\"true\"\r\n      fieldName=\"password-login\"\r\n      type=\"password\"\r\n      alias=\"Password\"\r\n    ></input-component>\r\n    <div class=\"column submitBtnsContainer\">\r\n      <button type=\"submit\">Submit</button>\r\n      <style>\r\n        .reset-password {\r\n          color: #007bff;\r\n          text-decoration: none;\r\n          cursor: pointer;\r\n          margin-top: 10px;\r\n          position: absolute;\r\n          bottom: 0;\r\n        }\r\n        .reset-password:hover {\r\n          text-decoration: underline;\r\n        }\r\n      </style>\r\n      <a type=\"button\" class=\"reset-password\">Reset Password</a>\r\n      <button type=\"button\" class=\"mobile-view toggleAuthType\">\r\n        Register new account\r\n      </button>\r\n    </div>\r\n    <os-form-feedback feedbackName=\"submit\"></os-form-feedback>\r\n  </form>\r\n\r\n  <div class=\"cover left login\" style=\"background-image: url(${loginImage})\">\r\n    <button type=\"button\" class=\"toggleAuthType secondary\">\r\n      Register new account\r\n    </button>\r\n  </div>\r\n  <div class=\"cover right signup\" style=\"background-image: url(${signupImage})\">\r\n    <button type=\"button\" class=\"toggleAuthType\">Go to Log in</button>\r\n  </div>\r\n</div>\r\n");
-
-/***/ }),
-
-/***/ "./app/components/dual-login-form/style.scss.txt":
-/*!*******************************************************!*\
-  !*** ./app/components/dual-login-form/style.scss.txt ***!
-  \*******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n\r\ninput{\r\n    // all:initial;\r\n    // width:fit-content !important;\r\n\r\n}\r\nh1{\r\n    text-align: center;\r\n}\r\n\r\nform:not(#reCAPTCHAForm) {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: center;\r\n    height: 70vh;\r\n    width: 400px;\r\n}\r\n\r\n\r\n\r\nlabel {\r\n    // translate: 30px 30px;\r\n}\r\n\r\n.row {\r\n    display: flex;\r\n    flex-direction: row;\r\n    gap: 10px;\r\n    justify-content: space-between;\r\n}\r\n\r\n.os-dual-form {\r\n    /* Todo- Expose this class (with correct styles) */\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    height: 80vh;\r\n    display: flex;\r\n    justify-content: space-around;\r\n    width: 800px;\r\n    margin: auto;\r\n    border: 1px solid #ccc;\r\n    position: relative;\r\n    overflow: hidden;\r\n    margin-top: 50px;\r\n}\r\n\r\n.cover {\r\n    z-index: 1;\r\n    width: 400px;\r\n    // height: 70vh;\r\n    height: 100%;\r\n    position: absolute;\r\n    background-color: lightgray;\r\n    background-size: cover;\r\n    transition: left 0.5s, translate 0.5s;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    padding: 50px 10px;\r\n    box-sizing: border-box;\r\n    text-align: center;\r\n    &.left {\r\n        left: 00%;\r\n        &::before {\r\n            background-image: url('./assets/authformImgs/image-1.jpg'); \r\n        }\r\n    }\r\n\r\n    &.right {\r\n        left: 100%;\r\n        translate: -100% 0;\r\n        &::before {\r\n            background-image: url('./assets/authformImgs/image-3.jpg'); \r\n        }\r\n    }\r\n\r\n}\r\n\r\ndiv[auth-mode=\"login\"] {\r\n    .cover.right {\r\n        translate: 0;\r\n    }\r\n}\r\n\r\ndiv[auth-mode=\"signup\"] {\r\n    .cover.left {\r\n        translate: -100%;\r\n    }\r\n}\r\n\r\n\r\n.mobile-view{ \r\n    display: none;\r\n}\r\n\r\n\r\n\r\nlabel {\r\n    font-size: 1.2rem;\r\n    position: relative;\r\n    margin-bottom: 5px;\r\n    margin-top: 5px;\r\n    display: inline-block;\r\n\r\n    .text {\r\n        position: absolute;\r\n        z-index: 1;\r\n        transition: all 0.5s;\r\n        transform: translate(8px, 14px);\r\n        user-select: none;\r\n        cursor: text;\r\n    }\r\n\r\n    &.moveLabel {\r\n        .text {\r\n            transform: translate(0px, -7px);\r\n            font-size: 0.75rem;\r\n            font-weight: bold;\r\n        }\r\n    }\r\n    .password-container{\r\n        position: relative;\r\n        // background-color: #ccc;\r\n        .password-toggle {\r\n            width: 24px;\r\n            position: absolute;\r\n            top: 27px;\r\n            translate: -100% -50%;\r\n            right: 0;\r\n            scale: .8;\r\n            cursor: pointer;\r\n            font-size: 12px;\r\n        }\r\n    }\r\n\r\n    .static-label-text {\r\n        font-size: 0.75rem;\r\n        white-space: nowrap;\r\n        margin-top: 4px;\r\n    }\r\n\r\n    &[for=\"remember-me\"] {\r\n        translate: -44px 0;\r\n        display: flex;\r\n        align-items: center;\r\n        justify-content: center;\r\n\r\n        input {\r\n            scale: 1.3;\r\n            translate: 5px -5px;\r\n            transform-origin: top left;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n\r\n    input {\r\n        width: 80%;\r\n        margin: 10px 0 0 0;\r\n        padding: 10px;\r\n        border: 1px solid #ccc;\r\n        border-radius: 5px;\r\n    }\r\n\r\n    .hide-password {\r\n        display: none;\r\n    }\r\n\r\n    .show-password {\r\n        display: block;\r\n    }\r\n\r\n    &[password-toggle=\"show\"] {\r\n        .hide-password {\r\n            display: block;\r\n        }\r\n\r\n        .show-password {\r\n            display: none;\r\n        }\r\n    }\r\n\r\n    .error-message {\r\n        font-size: 0.8rem;\r\n        user-select: none;\r\n        z-index: 1;\r\n        line-height: 12px;\r\n    }\r\n}\r\n\r\n\r\n\r\n// Written with laptop first (rather than mobile first)\r\n\r\nbutton {\r\n    cursor: pointer;\r\n    margin-inline: 5px;\r\n}\r\n\r\n.row{\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    // width: 400px;\r\n    // margin: auto;\r\n    // margin-top: 10px;\r\n    button {\r\n        // width: 48%;\r\n        // margin: auto;\r\n    }\r\n}\r\n\r\n#auth-container {\r\n    h2 {\r\n        user-select: none;\r\n    }\r\n    display: flex;\r\n    justify-content: space-around;\r\n    width: 800px;\r\n    margin: auto;\r\n    border: 1px solid #ccc;\r\n    position: relative;\r\n    overflow: hidden;\r\n    margin-top:50px;\r\n    .g-recaptcha{\r\n        padding-top: 10px;;\r\n    }\r\n\r\n    button  {\r\n        margin-top: 10px;\r\n        padding: 10px;\r\n        font-weight: bold;;\r\n        color: white;\r\n        border: none;\r\n        border-radius: 5px;\r\n        &[type=\"submit\"] {\r\n            background-color: blue;\r\n        }\r\n        &[type=\"button\"] {\r\n            background-color: #04ff36;\r\n            color: black;\r\n        }\r\n    }\r\n\r\n\r\n    .cover {\r\n\r\n        z-index: 1;\r\n        width: 400px;\r\n        height: 70vh;\r\n        position: absolute;\r\n        // background-color: blue;\r\n        background-size: cover;\r\n        // filter: contrast(0.5);\r\n        transition: left 0.5s, translate 0.5s;\r\n        display: flex;\r\n        flex-direction: column;\r\n        justify-content: center;\r\n        align-items: center;\r\n        padding: 50px 10px;\r\n        box-sizing: border-box;\r\n        text-align: center;\r\n        &::before {\r\n            content: '';\r\n            position: absolute;\r\n            top: 0;\r\n            left: 0;\r\n            width: 100%;\r\n            height: 100%;\r\n            background-size: cover;\r\n            filter: contrast(0.5);\r\n            z-index: -1; // Ensure the pseudo-element is behind the content\r\n        }\r\n\r\n        h2{\r\n            color: rgb(0, 0, 0);\r\n            background-color: #cccccc64;\r\n            height: fit-content;\r\n            z-index: 1;\r\n            user-select: none;\r\n        }\r\n        &.left {\r\n            left: 00%;\r\n            &::before {\r\n                background-image: url('./assets/authformImgs/image-1.jpg'); \r\n            }\r\n        }\r\n\r\n        &.right {\r\n            left: 100%;\r\n            translate: -100% 0;\r\n            &::before {\r\n                background-image: url('./assets/authformImgs/image-3.jpg'); \r\n            }\r\n        }\r\n        button {\r\n            margin-top:auto;\r\n        }\r\n    }\r\n\r\n    &[auth-mode=\"login\"] {\r\n        .cover.right {\r\n            translate: 0;\r\n        }\r\n    }\r\n\r\n    &[auth-mode=\"signup\"] {\r\n        .cover.left {\r\n            translate: -100%;\r\n        }\r\n    }\r\n\r\n    form:not(#reCAPTCHAForm) {\r\n        display: flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content: center;\r\n        height: 70vh;\r\n        width: 400px;\r\n\r\n    }\r\n\r\n    label {\r\n        font-size: 1.2rem;\r\n        position: relative;\r\n        margin-bottom:5px;\r\n        .text{\r\n            position: absolute;\r\n            z-index: 1;\r\n            transition: all 0.5s;\r\n            transform: translate(8px, 14px);\r\n            user-select: none;\r\n            cursor: text;\r\n        }\r\n        &.moveLabel {\r\n            .text{\r\n                transform: translate(0px, -7px);\r\n                font-size: 0.75rem;\r\n                font-weight: bold;\r\n            }\r\n        }\r\n        .static-label-text{\r\n            font-size: 0.75rem;\r\n            white-space: nowrap;\r\n            margin-top:4px;\r\n        }\r\n        &[for=\"remember-me\"]{\r\n            translate: -44px 0;\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: center;\r\n            input {\r\n                scale: 1.3;\r\n                translate: 5px -5px;\r\n                transform-origin: top left;\r\n                cursor: pointer;\r\n            }\r\n        }\r\n        input {\r\n            width: 80%;\r\n            margin: 10px 0 0 0;\r\n            padding: 10px;\r\n            border: 1px solid #ccc;\r\n            border-radius: 5px;\r\n        }\r\n        .hide-password{\r\n            display: none;\r\n        }\r\n        .show-password{\r\n            display: block;\r\n        }\r\n        &[password-toggle=\"show\"]{\r\n            .hide-password{\r\n                display: block;\r\n            }\r\n            .show-password{\r\n                display: none;\r\n            }\r\n        }\r\n        .error-message {\r\n            font-size: 0.8rem;\r\n            user-select: none;\r\n            z-index: 1;\r\n            line-height: 12px;\r\n        }\r\n    }\r\n    .row, .column{\r\n        display: flex;\r\n        &.column{\r\n            flex-direction: column;\r\n            align-items: center;\r\n        }\r\n    }\r\n    .password-container{\r\n        position: relative;\r\n\r\n        .password-strength{\r\n            background-color: blue;\r\n            width: 91.5%;\r\n            height: 5px;\r\n            position: absolute;\r\n            top: 42px;\r\n            border-radius: 0 0 5px 5px;\r\n        }\r\n        .password-toggle{\r\n            position: absolute;\r\n            top: 27px;\r\n            translate: -100% -50%;\r\n            right: 0;\r\n            scale: 0.8;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n\r\n    .forgot-password{\r\n        position: absolute;\r\n        bottom: 10px;\r\n    }\r\n}\r\n\r\n\r\n.mobile-view{ \r\n    display: none;\r\n}\r\n.submitBtnsContainer{\r\n    align-items: center;\r\n}\r\n\r\n\r\n// Media query for mobile \r\n// These are in ./app/components/dual-login-form/global.scss\r\n");
 
 /***/ }),
 
@@ -1639,21 +1619,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./app/components/footer/style.scss.txt":
-/*!**********************************************!*\
-  !*** ./app/components/footer/style.scss.txt ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("footer{\n    margin: 100px 0 20px;\n    display: flex;\n    justify-content: center;\n    // align-items: end;\n    // flex-direction: column;\n    a{\n        margin: 10px;\n    }\n    img{\n        width: 100px;\n        height: 100px;\n        margin-left: 20px;\n    }\n    #footer-logo{\n        display: flex;\n        align-items: center;\n        text-align: center;\n        h1{\n            margin: 0;\n        }\n        small{\n            margin: 0;\n        }\n    }\n    nav#links{\n        display: flex;\n        a{\n            margin: 10px;\n        }\n    }\n}");
-
-/***/ }),
-
 /***/ "./app/components/header/header.html.txt":
 /*!***********************************************!*\
   !*** ./app/components/header/header.html.txt ***!
@@ -1666,21 +1631,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<header>\r\n  <div id=\"header-logo\">\r\n    <div>\r\n      <h1>Gig Harbor <br>Open Studio Tour</h1>\r\n      <small>Artist Portal</small>\r\n    </div>\r\n    <img src=\"/dist/assets/ghost-logo-pink (1).jpg\" />\r\n  </div>\r\n\r\n  <nav id=\"links\">\r\n \r\n\r\n    ${window.location.href.includes('members') ? '' : slotLinks.includes('members') ? '<a href=\"/members\">Go back to Members page</a>' : ''}\r\n    <a href=\"https://gigharboropenstudiotour.org/\">Go back to GHOST Website</a>\r\n  </nav>\r\n</header>\r\n");
-
-/***/ }),
-
-/***/ "./app/components/header/style.scss.txt":
-/*!**********************************************!*\
-  !*** ./app/components/header/style.scss.txt ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("header{\n    padding: 10px;\n    display: flex;\n    justify-content: space-between;\n    // align-items: end;\n    // flex-direction: column;\n    a{\n        margin: 10px;\n    }\n    img{\n        width: 100px;\n        height: 100px;\n        margin-left: 20px;\n    }\n    #header-logo{\n        display: flex;\n        align-items: center;\n        text-align: center;\n        h1{\n            margin: 0;\n        }\n        small{\n            margin: 0;\n        }\n    }\n    nav#links{\n        display: flex;\n        a{\n            margin: 10px;\n        }\n    }\n\n    @media (max-width: 900px) {\n        flex-direction: column;\n        align-items: center;\n       #header-logo {\n        display: flex;\n            flex-direction: column;\n            align-items: center;\n\n        img {\n            width: 80px;\n            height: 80px;\n            margin-left: 0;\n        }\n\n        nav#links {\n            flex-direction: column;\n            align-items: center;\n            a {\n                margin: 5px 0;\n            }\n        }\n    }\n}");
 
 /***/ }),
 
@@ -1759,21 +1709,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./app/components/scholarship-application/style.scss.txt":
-/*!***************************************************************!*\
-  !*** ./app/components/scholarship-application/style.scss.txt ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (".artist-application-review{\n    .app-contents{\n        display: none\n    }\n    .app-contents, .app-preview{\n        padding: 10px;\n        margin: 10px;\n    }\n    .app-preview{\n        top:0;\n        background-color: white;\n        position: sticky;\n        z-index: 10;\n    }\n\n    .expandApplication.hide{\n        display: none;\n    }\n\n    &.expanded{\n        border: 1px solid black;\n\n        .expandApplication{\n\n            &.hide{\n                display: block;\n            }\n            &.show{\n                display: none;\n            }\n        }\n        \n      \n        .app-contents{\n            display: block;\n        }\n     \n    }\n\n    .app-preview{\n        display: flex;\n        justify-content: space-between;\n        // border: 1px solid black;\n        button{\n            height: fit-content;\n        }\n       \n    }\n}\n");
-
-/***/ }),
-
 /***/ "./app/components/dual-login-form/global.scss":
 /*!****************************************************!*\
   !*** ./app/components/dual-login-form/global.scss ***!
@@ -1823,6 +1758,63 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
        /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_global_scss__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_global_scss__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_global_scss__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
+
+
+/***/ }),
+
+/***/ "./app/components/header/style.scss":
+/*!******************************************!*\
+  !*** ./app/components/header/style.scss ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_style_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/dist/cjs.js!./style.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./app/components/header/style.scss");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_style_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_style_scss__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
+/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_style_scss__WEBPACK_IMPORTED_MODULE_6__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_style_scss__WEBPACK_IMPORTED_MODULE_6__[__WEBPACK_IMPORT_KEY__]
+/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+var options = {};
+
+options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
+options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
+options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
+options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
+options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()((_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_style_scss__WEBPACK_IMPORTED_MODULE_6___default()), options);
+
+
+
+
+       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_style_scss__WEBPACK_IMPORTED_MODULE_6___default()) && (_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_style_scss__WEBPACK_IMPORTED_MODULE_6___default().locals) ? (_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_style_scss__WEBPACK_IMPORTED_MODULE_6___default().locals) : undefined);
 
 
 /***/ }),

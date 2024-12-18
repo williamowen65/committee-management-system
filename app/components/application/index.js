@@ -1,6 +1,6 @@
 import applicationTemplate from './index.html.txt';
 import { createCustomElement, evaluateTemplate } from '../../../utils/custom-element';
-import styles from './style.scss.txt';
+import './style.scss.txt';
 const logIf = require("../../../utils/logIf.js");
 
 
@@ -12,7 +12,7 @@ createCustomElement('application-component', function () {
 
     // events must be inline
 
-}, applicationTemplate, styles);
+}, applicationTemplate, '');
 
 document.addEventListener('DOMContentLoaded', function() {
 
