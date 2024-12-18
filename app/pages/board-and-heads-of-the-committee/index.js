@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 // Set the user name next to the checkbox
                 const committeeMemberContract = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))
-                userNameSpan.innerText = committeeMemberContract.artistDetails.firstName 
+                  const fullName = committeeMemberContract && committeeMemberContract.artistDetails && committeeMemberContract.artistDetails.firstName + ' ' + committeeMemberContract.artistDetails.lastName
+            userNameSpan.innerText = fullName  || "[UNKNOWN]"
 
 
                 // Get this users contract
@@ -124,7 +125,8 @@ function setVolunteerResponsibilityForm(contracts) {
         const committeeMemberContract = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))
 
         if(committeeMemberContract){   
-            userNameSpan.innerText = committeeMemberContract.artistDetails.firstName 
+            const fullName = committeeMemberContract && committeeMemberContract.artistDetails && committeeMemberContract.artistDetails.firstName + ' ' + committeeMemberContract.artistDetails.lastName
+            userNameSpan.innerText = fullName  || "[UNKNOWN]"
         } else {
             userNameSpan.innerText = "[ OPEN POSITION ]"
         }

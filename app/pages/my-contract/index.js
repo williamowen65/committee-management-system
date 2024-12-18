@@ -427,7 +427,8 @@ function updateVolunteerResponsibilityForm(contracts) {
 
                 // Set the user name next to the checkbox
                 const committeeMemberContract = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))
-                label.querySelector('.user-name').innerText =committeeMemberContract && committeeMemberContract.artistDetails && committeeMemberContract.artistDetails.firstName || "[UNKNOWN]"
+                const fullName = committeeMemberContract && committeeMemberContract.artistDetails && committeeMemberContract.artistDetails.firstName + ' ' + committeeMemberContract.artistDetails.lastName
+                label.querySelector('.user-name').innerText = fullName  || "[UNKNOWN]"
 
 
                 // Get this users contract
