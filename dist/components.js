@@ -1150,7 +1150,18 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `.os-dual-form {
+___CSS_LOADER_EXPORT___.push([module.id, `h1 {
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.os-dual-form {
   /* Todo- Expose this class (with correct styles) */
   display: flex;
   justify-content: center;
@@ -1165,22 +1176,13 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.os-dual-form {
   overflow: hidden;
   margin-top: 50px;
 }
-.os-dual-form h1 {
-  text-align: center;
-}
-.os-dual-form form.os-dual-form:not(#reCAPTCHAForm) {
+.os-dual-form form:not(#reCAPTCHAForm) {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 70vh;
   width: 400px;
-}
-.os-dual-form .row {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  justify-content: space-between;
 }
 .os-dual-form .cover {
   z-index: 1;
@@ -1204,15 +1206,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.os-dual-form {
 .os-dual-form .cover.right {
   left: 100%;
   translate: -100% 0;
-}
-.os-dual-form div[auth-mode=login] .cover.right {
-  translate: 0;
-}
-.os-dual-form div[auth-mode=signup] .cover.left {
-  translate: -100%;
-}
-.os-dual-form .mobile-view {
-  display: none;
 }
 .os-dual-form label {
   font-size: 1.2rem;
@@ -1265,7 +1258,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.os-dual-form {
   cursor: pointer;
 }
 .os-dual-form label input {
-  width: 80%;
+  width: 100%;
   margin: 10px 0 0 0;
   padding: 10px;
   border: 1px solid #ccc;
@@ -1289,198 +1282,35 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.os-dual-form {
   z-index: 1;
   line-height: 12px;
 }
-.os-dual-form button {
+
+div[auth-mode=login] .cover.right {
+  translate: 0;
+}
+
+div[auth-mode=signup] .cover.left {
+  translate: -100%;
+}
+
+.mobile-view {
+  display: none;
+}
+
+button {
   cursor: pointer;
   margin-inline: 5px;
 }
-.os-dual-form .row {
+
+.row {
   display: flex;
   justify-content: center;
 }
-.os-dual-form #auth-container {
-  display: flex;
-  justify-content: space-around;
-  width: 800px;
-  margin: auto;
-  border: 1px solid #ccc;
-  position: relative;
-  overflow: hidden;
-  margin-top: 50px;
-}
-.os-dual-form #auth-container h2 {
-  user-select: none;
-}
-.os-dual-form #auth-container .g-recaptcha {
-  padding-top: 10px;
-}
-.os-dual-form #auth-container button {
-  margin-top: 10px;
-  padding: 10px;
-  font-weight: bold;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-.os-dual-form #auth-container button[type=submit] {
-  background-color: blue;
-}
-.os-dual-form #auth-container button[type=button] {
-  background-color: #04ff36;
-  color: black;
-}
-.os-dual-form #auth-container .cover {
-  z-index: 1;
-  width: 400px;
-  height: 70vh;
-  position: absolute;
-  background-size: cover;
-  transition: left 0.5s, translate 0.5s;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 50px 10px;
-  box-sizing: border-box;
-  text-align: center;
-}
-.os-dual-form #auth-container .cover::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  filter: contrast(0.5);
-  z-index: -1;
-}
-.os-dual-form #auth-container .cover h2 {
-  color: rgb(0, 0, 0);
-  background-color: rgba(204, 204, 204, 0.3921568627);
-  height: fit-content;
-  z-index: 1;
-  user-select: none;
-}
-.os-dual-form #auth-container .cover.left {
-  left: 0%;
-}
-.os-dual-form #auth-container .cover.right {
-  left: 100%;
-  translate: -100% 0;
-}
-.os-dual-form #auth-container .cover button {
-  margin-top: auto;
-}
-.os-dual-form #auth-container[auth-mode=login] .cover.right {
-  translate: 0;
-}
-.os-dual-form #auth-container[auth-mode=signup] .cover.left {
-  translate: -100%;
-}
-.os-dual-form #auth-container form:not(#reCAPTCHAForm) {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 70vh;
-  width: 400px;
-}
-.os-dual-form #auth-container label {
-  font-size: 1.2rem;
-  position: relative;
-  margin-bottom: 5px;
-}
-.os-dual-form #auth-container label .text {
-  position: absolute;
-  z-index: 1;
-  transition: all 0.5s;
-  transform: translate(8px, 14px);
-  user-select: none;
-  cursor: text;
-}
-.os-dual-form #auth-container label.moveLabel .text {
-  transform: translate(0px, -7px);
-  font-size: 0.75rem;
-  font-weight: bold;
-}
-.os-dual-form #auth-container label .static-label-text {
-  font-size: 0.75rem;
-  white-space: nowrap;
-  margin-top: 4px;
-}
-.os-dual-form #auth-container label[for=remember-me] {
-  translate: -44px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.os-dual-form #auth-container label[for=remember-me] input {
-  scale: 1.3;
-  translate: 5px -5px;
-  transform-origin: top left;
-  cursor: pointer;
-}
-.os-dual-form #auth-container label input {
-  width: 80%;
-  margin: 10px 0 0 0;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-.os-dual-form #auth-container label .hide-password {
+.mobile-view {
   display: none;
 }
-.os-dual-form #auth-container label .show-password {
-  display: block;
-}
-.os-dual-form #auth-container label[password-toggle=show] .hide-password {
-  display: block;
-}
-.os-dual-form #auth-container label[password-toggle=show] .show-password {
-  display: none;
-}
-.os-dual-form #auth-container label .error-message {
-  font-size: 0.8rem;
-  user-select: none;
-  z-index: 1;
-  line-height: 12px;
-}
-.os-dual-form #auth-container .row, .os-dual-form #auth-container .column {
-  display: flex;
-}
-.os-dual-form #auth-container .row.column, .os-dual-form #auth-container .column.column {
-  flex-direction: column;
+
+.submitBtnsContainer {
   align-items: center;
-}
-.os-dual-form #auth-container .password-container {
-  position: relative;
-}
-.os-dual-form #auth-container .password-container .password-strength {
-  background-color: blue;
-  width: 91.5%;
-  height: 5px;
-  position: absolute;
-  top: 42px;
-  border-radius: 0 0 5px 5px;
-}
-.os-dual-form #auth-container .password-container .password-toggle {
-  position: absolute;
-  top: 27px;
-  translate: -100% -50%;
-  right: 0;
-  scale: 0.8;
-  cursor: pointer;
-}
-.os-dual-form #auth-container .forgot-password {
-  position: absolute;
-  bottom: 10px;
-}
-.os-dual-form .mobile-view {
-  display: none;
-}
-.os-dual-form .submitBtnsContainer {
-  align-items: center;
-}`, "",{"version":3,"sources":["webpack://./app/components/dual-login-form/style.scss"],"names":[],"mappings":"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","sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./app/components/dual-login-form/style.scss"],"names":[],"mappings":"AAMA;EACI,kBAAA;AALJ;;AAgBA;EACI,aAAA;EACA,mBAAA;EACA,SAAA;EACA,8BAAA;AAbJ;;AAgBA;EACI,kDAAA;EACA,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,YAAA;EACA,aAAA;EACA,6BAAA;EACA,YAAA;EACA,YAAA;EACA,sBAAA;EACA,kBAAA;EACA,gBAAA;EACA,gBAAA;AAbJ;AAeI;EACI,aAAA;EACA,sBAAA;EACA,mBAAA;EACA,uBAAA;EACA,YAAA;EACA,YAAA;AAbR;AAgBI;EACI,UAAA;EACA,YAAA;EAEA,YAAA;EACA,kBAAA;EACA,2BAAA;EACA,sBAAA;EACA,qCAAA;EACA,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,kBAAA;EACA,sBAAA;EACA,kBAAA;AAfR;AAiBQ;EACI,QAAA;AAfZ;AAqBQ;EACI,UAAA;EACA,kBAAA;AAnBZ;AA4BI;EACI,iBAAA;EACA,kBAAA;EACA,kBAAA;EACA,eAAA;EACA,qBAAA;AA1BR;AA4BQ;EACI,kBAAA;EACA,UAAA;EACA,oBAAA;EACA,+BAAA;EACA,iBAAA;EACA,YAAA;AA1BZ;AA8BY;EACI,+BAAA;EACA,kBAAA;EACA,iBAAA;AA5BhB;AAgCQ;EACI,kBAAA;AA9BZ;AAiCY;EACI,WAAA;EACA,kBAAA;EACA,SAAA;EACA,qBAAA;EACA,QAAA;EACA,UAAA;EACA,eAAA;EACA,eAAA;AA/BhB;AAmCQ;EACI,kBAAA;EACA,mBAAA;EACA,eAAA;AAjCZ;AAoCQ;EACI,kBAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;AAlCZ;AAoCY;EACI,UAAA;EACA,mBAAA;EACA,0BAAA;EACA,eAAA;AAlChB;AAsCQ;EACI,WAAA;EACA,kBAAA;EACA,aAAA;EACA,sBAAA;EACA,kBAAA;AApCZ;AAuCQ;EACI,aAAA;AArCZ;AAwCQ;EACI,cAAA;AAtCZ;AA0CY;EACI,cAAA;AAxChB;AA2CY;EACI,aAAA;AAzChB;AA6CQ;EACI,iBAAA;EACA,iBAAA;EACA,UAAA;EACA,iBAAA;AA3CZ;;AA4DI;EACI,YAAA;AAzDR;;AA8DI;EACI,gBAAA;AA3DR;;AAgEA;EACI,aAAA;AA7DJ;;AAuEA;EACI,eAAA;EACA,kBAAA;AApEJ;;AAuEA;EAEI,aAAA;EACA,uBAAA;AArEJ;AA0TA;EACI,aAAA;AAxTJ;;AA2TA;EACI,mBAAA;AAxTJ","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
