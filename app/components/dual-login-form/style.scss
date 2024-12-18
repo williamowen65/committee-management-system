@@ -67,17 +67,17 @@ label {
     text-align: center;
     &.left {
         left: 00%;
-        &::before {
-            background-image: url('./assets/authformImgs/image-1.jpg'); 
-        }
+        // &::before {
+        //     background-image: url('/assets/authformImgs/image-1.jpg'); 
+        // }
     }
 
     &.right {
         left: 100%;
         translate: -100% 0;
-        &::before {
-            background-image: url('./assets/authformImgs/image-3.jpg'); 
-        }
+        // &::before {
+        //     background-image: url('./assets/authformImgs/image-3.jpg'); 
+        // }
     }
 
 }
@@ -286,17 +286,17 @@ button {
         }
         &.left {
             left: 00%;
-            &::before {
-                background-image: url('./assets/authformImgs/image-1.jpg'); 
-            }
+            // &::before {
+            //     background-image: url('./assets/authformImgs/image-1.jpg'); 
+            // }
         }
 
         &.right {
             left: 100%;
             translate: -100% 0;
-            &::before {
-                background-image: url('./assets/authformImgs/image-3.jpg'); 
-            }
+            // &::before {
+            //     background-image: url('./assets/authformImgs/image-3.jpg'); 
+            // }
         }
         button {
             margin-top:auto;

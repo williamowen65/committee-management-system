@@ -1,31 +1,38 @@
-header{
+header {
     padding: 10px;
     display: flex;
     justify-content: space-between;
+
     // align-items: end;
     // flex-direction: column;
-    a{
+    a {
         margin: 10px;
     }
-    img{
+
+    img {
         width: 100px;
         height: 100px;
         margin-left: 20px;
     }
-    #header-logo{
+
+    #header-logo {
         display: flex;
         align-items: center;
         text-align: center;
-        h1{
+
+        h1 {
             margin: 0;
         }
-        small{
+
+        small {
             margin: 0;
         }
     }
-    nav#links{
+
+    nav#links {
         display: flex;
-        a{
+
+        a {
             margin: 10px;
         }
     }
@@ -33,23 +40,27 @@ header{
     @media (max-width: 900px) {
         flex-direction: column;
         align-items: center;
-       #header-logo {
-        display: flex;
+
+        #header-logo {
+            display: flex;
             flex-direction: column;
             align-items: center;
 
-        img {
-            width: 80px;
-            height: 80px;
-            margin-left: 0;
-        }
+            img {
+                width: 80px;
+                height: 80px;
+                margin-left: 0;
+            }
 
-        nav#links {
-            flex-direction: column;
-            align-items: center;
-            a {
-                margin: 5px 0;
+            nav#links {
+                flex-direction: column;
+                align-items: center;
+
+                a {
+                    margin: 5px 0;
+                }
             }
         }
     }
+
 }

@@ -1,6 +1,6 @@
 import dualLoginForm from './index.html.txt';
 import { createCustomElement, evaluateTemplate } from '../../../utils/custom-element';
-import './style.scss.txt';
+import './style.scss';
 
 const logIf = require("../../../utils/logIf.js");
 
