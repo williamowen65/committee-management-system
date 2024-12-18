@@ -1,7 +1,7 @@
 import { createCustomElement, evaluateTemplate } from '../../../utils/custom-element';
 import {marked} from 'marked';
 import markdownTemplate from './index.html.txt';
-import styles from './style.scss.txt';
+import './style.scss';
 const logIf = require("../../../utils/logIf.js");
 
 createCustomElement('markdown-component', function () {
@@ -10,7 +10,7 @@ createCustomElement('markdown-component', function () {
     logIf.component && console.log({marked, markdown, this: this})
     // const html = marked(markdown);
     const html = marked.parse(`${trimString(markdown)}`);
-    this.innerHTML = `<style>${styles}</style>`  + html
+    this.innerHTML =   html
 }, markdownTemplate, "");
 
 
