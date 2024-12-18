@@ -105,6 +105,7 @@ label {
     }
     .images-container{
         display: flex;
+        -webkit-flex-wrap: wrap;
         flex-wrap: wrap;
         position: relative;
         // justify-content: center;
@@ -116,6 +117,7 @@ label {
         img{
             width: 100%;
             height: 100%;
+            -webkit-object-fit: contain;
             object-fit: contain;
             // margin-right: 10px;
             // margin-bottom: 10px;
