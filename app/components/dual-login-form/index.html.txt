@@ -82,8 +82,8 @@ crossorigin="anonymous"
           text-decoration: none;
           cursor: pointer;
           margin-top: 10px;
-          position: absolute;
-          bottom: 0;
+          /* position: absolute; */
+          /* bottom: 0; */
         }
         .reset-password:hover {
           text-decoration: underline;
