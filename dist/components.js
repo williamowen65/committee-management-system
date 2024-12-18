@@ -612,7 +612,7 @@ var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js
       var reader = new FileReader();
       reader.onloadend = function () {
         _this2.setImage(reader.result, file);
-        _this2.querySelector(".file-input-component").setAttribute('hasError', false);
+        _this2.querySelector(".file-input-component").classList.remove('hasError');
 
         // Display possible errors with this file
         // Requirements: Size must be no larger than 3 mb. 
@@ -631,7 +631,7 @@ var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js
           error.textContent = 'This image is too small. Please upload an image larger than 150KB.';
           error.classList.add('error');
           parentContainer.appendChild(error);
-          _this2.querySelector(".file-input-component").setAttribute('hasError', true);
+          _this2.querySelector(".file-input-component").classList.add('hasError');
         }
         // make sure the image isn't too big
         // if (file.size > 3000000) { // 3 MB
@@ -1245,16 +1245,15 @@ label .images-container.file-input-display.has-images .ifEmpty {
   font-weight: bold;
 }
 
-.file-input-component[haserror=true] .alert-icon {
+.file-input-component .alert-icon {
+  display: none;
+}
+.file-input-component.hasError .alert-icon {
   position: absolute;
   top: 10px;
   left: 10px;
   font-size: 60px;
   color: #ff0000;
-}
-
-.file-input-component[haserror=false] .alert-icon {
-  display: none;
 }
 
 .password-toggle {
@@ -1264,7 +1263,7 @@ label .images-container.file-input-display.has-images .ifEmpty {
   right: 10px;
   scale: 0.8;
   cursor: pointer;
-}`, "",{"version":3,"sources":["webpack://./app/components/input/style.scss"],"names":[],"mappings":"AAAA;EAQI,kBAAA;EACA,kBAAA;EACA,eAAA;EACA,qBAAA;EACA,WAAA;AANJ;AAHI;EACI,iBAAA;AAKR;AAII;EACI,WAAA;AAFR;AAKI;EACI,kBAAA;EACA,UAAA;EACA,oBAAA;EACA,+BAAA;EACA,iBAAA;EACA,YAAA;AAHR;AAOQ;EACI,+BAAA;EACA,kBAAA;EACA,iBAAA;AALZ;AAQI;EACI,kBAAA;AANR;AAQQ;EACI,WAAA;EACA,kBAAA;EACA,SAAA;EACA,qBAAA;EACA,QAAA;EACA,UAAA;EACA,eAAA;EACA,eAAA;AANZ;AAUI;EACI,kBAAA;EACA,mBAAA;EACA,eAAA;AARR;AAWI;EACI,kBAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;AATR;AAWQ;EACI,UAAA;EACA,mBAAA;EACA,0BAAA;EACA,eAAA;AATZ;AAaI;EAEI,kBAAA;EACA,aAAA;EACA,sBAAA;EACA,kBAAA;AAZR;AAeI;EACI,gBAAA;EACA,iBAAA;AAbR;AAgBI;EACI,aAAA;AAdR;AAiBI;EACI,cAAA;AAfR;AAmBQ;EACI,cAAA;AAjBZ;AAoBQ;EACI,aAAA;AAlBZ;AAsBI;EACI,iBAAA;EACA,iBAAA;EACA,UAAA;EACA,iBAAA;AApBR;AAsBI;EACI,aAAA;EACA,uBAAA;EACA,eAAA;EACA,kBAAA;AApBR;AA2BQ;EACI,WAAA;EACA,YAAA;EACA,2BAAA;EACA,mBAAA;AAzBZ;AA6BQ;EAEQ,2BAAA;EACJ,kBAAA;AA5BZ;AA6BY;EACI,kBAAA;EACA,OAAA;AA3BhB;AA+BQ;EACI,YAAA;EACA,aAAA;EAEA,gBAAA;EACA,eAAA;AA9BZ;AA+BY;EACI,uBAAA;AA7BhB;AAgCY;EACI,eAAA;EACA,kBAAA;EACA,YAAA;AA9BhB;AAiCY;EACI,YAAA;AA/BhB;AAmCgB;EACI,aAAA;AAjCpB;;AAwCA;EAKI,YAAA;AAzCJ;AAqCI;EACI,uBAAA;AAnCR;AAuCI;EACI,kBAAA;EACA,YAAA;EACA,aAAA;EACA,iBAAA;EACA,YAAA;AArCR;AAwCI;EACI,kBAAA;EACA,MAAA;EACA,QAAA;EACA,qBAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;EACA,eAAA;AAtCR;AAyCI;EAEI,kBAAA;AAxCR;AA0CI;EACI,uBAAA;EACA,UAAA;EACA,iBAAA;AAxCR;;AAgDI;EACI,kBAAA;EACA,SAAA;EACA,UAAA;EACA,eAAA;EACA,cAAA;AA7CR;;AAkDI;EACI,aAAA;AA/CR;;AAqDA;EACI,kBAAA;EACA,SAAA;EACA,kBAAA;EACA,WAAA;EACA,UAAA;EACA,eAAA;AAlDJ","sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./app/components/input/style.scss"],"names":[],"mappings":"AAAA;EAQI,kBAAA;EACA,kBAAA;EACA,eAAA;EACA,qBAAA;EACA,WAAA;AANJ;AAHI;EACI,iBAAA;AAKR;AAII;EACI,WAAA;AAFR;AAKI;EACI,kBAAA;EACA,UAAA;EACA,oBAAA;EACA,+BAAA;EACA,iBAAA;EACA,YAAA;AAHR;AAOQ;EACI,+BAAA;EACA,kBAAA;EACA,iBAAA;AALZ;AAQI;EACI,kBAAA;AANR;AAQQ;EACI,WAAA;EACA,kBAAA;EACA,SAAA;EACA,qBAAA;EACA,QAAA;EACA,UAAA;EACA,eAAA;EACA,eAAA;AANZ;AAUI;EACI,kBAAA;EACA,mBAAA;EACA,eAAA;AARR;AAWI;EACI,kBAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;AATR;AAWQ;EACI,UAAA;EACA,mBAAA;EACA,0BAAA;EACA,eAAA;AATZ;AAaI;EAEI,kBAAA;EACA,aAAA;EACA,sBAAA;EACA,kBAAA;AAZR;AAeI;EACI,gBAAA;EACA,iBAAA;AAbR;AAgBI;EACI,aAAA;AAdR;AAiBI;EACI,cAAA;AAfR;AAmBQ;EACI,cAAA;AAjBZ;AAoBQ;EACI,aAAA;AAlBZ;AAsBI;EACI,iBAAA;EACA,iBAAA;EACA,UAAA;EACA,iBAAA;AApBR;AAsBI;EACI,aAAA;EACA,uBAAA;EACA,eAAA;EACA,kBAAA;AApBR;AA2BQ;EACI,WAAA;EACA,YAAA;EACA,2BAAA;EACA,mBAAA;AAzBZ;AA6BQ;EAEQ,2BAAA;EACJ,kBAAA;AA5BZ;AA6BY;EACI,kBAAA;EACA,OAAA;AA3BhB;AA+BQ;EACI,YAAA;EACA,aAAA;EAEA,gBAAA;EACA,eAAA;AA9BZ;AA+BY;EACI,uBAAA;AA7BhB;AAgCY;EACI,eAAA;EACA,kBAAA;EACA,YAAA;AA9BhB;AAiCY;EACI,YAAA;AA/BhB;AAmCgB;EACI,aAAA;AAjCpB;;AAwCA;EAKI,YAAA;AAzCJ;AAqCI;EACI,uBAAA;AAnCR;AAuCI;EACI,kBAAA;EACA,YAAA;EACA,aAAA;EACA,iBAAA;EACA,YAAA;AArCR;AAwCI;EACI,kBAAA;EACA,MAAA;EACA,QAAA;EACA,qBAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;EACA,eAAA;AAtCR;AAyCI;EAEI,kBAAA;AAxCR;AA0CI;EACI,uBAAA;EACA,UAAA;EACA,iBAAA;AAxCR;;AAgDI;EACI,aAAA;AA7CR;AAiDQ;EACI,kBAAA;EACA,SAAA;EACA,UAAA;EACA,eAAA;EACA,cAAA;AA/CZ;;AAsDA;EACI,kBAAA;EACA,SAAA;EACA,kBAAA;EACA,WAAA;EACA,UAAA;EACA,eAAA;AAnDJ","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

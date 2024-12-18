@@ -151,7 +151,7 @@ createCustomElement('file-input-component', function () {
 
                 this.setImage(reader.result, file)
 
-                this.querySelector(".file-input-component").setAttribute('hasError', false);
+                this.querySelector(".file-input-component").classList.remove('hasError');
 
                 // Display possible errors with this file
                 // Requirements: Size must be no larger than 3 mb. 
@@ -166,7 +166,7 @@ createCustomElement('file-input-component', function () {
                     error.textContent = 'This image is too small. Please upload an image larger than 150KB.';
                     error.classList.add('error');
                     parentContainer.appendChild(error);
-                    this.querySelector(".file-input-component").setAttribute('hasError', true);
+                    this.querySelector(".file-input-component").classList.add('hasError');
                 }
                 // make sure the image isn't too big
                 // if (file.size > 3000000) { // 3 MB
