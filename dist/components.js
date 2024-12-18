@@ -626,21 +626,22 @@ var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js
         });
 
         // Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )
-        if (file.size < 150000) {
+        if (file.size < 400000) {
           var error = document.createElement('p');
-          error.textContent = 'This image is too small. Please upload an image larger than 150KB.';
+          error.textContent = 'This image is too small. Please upload an image larger than 400 KB';
           error.classList.add('error');
           parentContainer.appendChild(error);
           _this2.querySelector(".file-input-component").classList.add('hasError');
         }
         // make sure the image isn't too big
-        // if (file.size > 3000000) { // 3 MB
-        //     const error = document.createElement('p');
-        //     error.textContent = 'File is too large. Please upload an image less than 3 mb.';
-        //     error.classList.add('error');
-        //     parentContainer.appendChild(error);
-        //     this.querySelector(".file-input-component").setAttribute('hasError', true);
-        // }
+        if (file.size > 5000000) {
+          // 5 MB
+          var _error = document.createElement('p');
+          _error.textContent = 'File is too large. Please upload an image less than 5 mb.';
+          _error.classList.add('error');
+          parentContainer.appendChild(_error);
+          _this2.querySelector(".file-input-component").setAttribute('hasError', true);
+        }
 
         // Get attribute "square" from component
         var squareRequirement = _this2.getAttribute('square-requirement');
@@ -661,10 +662,10 @@ var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js
               return value1 > value2 - tenPercent && value1 < value2 + tenPercent;
             };
             if (!isWithinRange(width, height, width)) {
-              var _error = document.createElement('p');
-              _error.textContent = 'Image is not square. Please upload a square image.';
-              _error.classList.add('error');
-              parentContainer.appendChild(_error);
+              var _error2 = document.createElement('p');
+              _error2.textContent = 'Image is not square. Please upload a square image.';
+              _error2.classList.add('error');
+              parentContainer.appendChild(_error2);
             }
           };
         }

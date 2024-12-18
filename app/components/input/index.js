@@ -161,21 +161,21 @@ createCustomElement('file-input-component', function () {
                 logIf.component && console.log("file size check ", { fileSize: file.size, fileName: file.name, fileType: file.type });
 
                 // Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )
-                if (file.size < 150000) {
+                if (file.size < 400000) {
                     const error = document.createElement('p');
-                    error.textContent = 'This image is too small. Please upload an image larger than 150KB.';
+                    error.textContent = 'This image is too small. Please upload an image larger than 400 KB';
                     error.classList.add('error');
                     parentContainer.appendChild(error);
                     this.querySelector(".file-input-component").classList.add('hasError');
                 }
                 // make sure the image isn't too big
-                // if (file.size > 3000000) { // 3 MB
-                //     const error = document.createElement('p');
-                //     error.textContent = 'File is too large. Please upload an image less than 3 mb.';
-                //     error.classList.add('error');
-                //     parentContainer.appendChild(error);
-                //     this.querySelector(".file-input-component").setAttribute('hasError', true);
-                // }
+                if (file.size > 5000000) { // 5 MB
+                    const error = document.createElement('p');
+                    error.textContent = 'File is too large. Please upload an image less than 5 mb.';
+                    error.classList.add('error');
+                    parentContainer.appendChild(error);
+                    this.querySelector(".file-input-component").setAttribute('hasError', true);
+                }
 
 
                 // Get attribute "square" from component
