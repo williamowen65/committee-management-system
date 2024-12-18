@@ -1153,7 +1153,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `h1 {
   text-align: center;
 }
 
-form:not(#reCAPTCHAForm) {
+form.os-dual-form:not(#reCAPTCHAForm) {
   display: flex;
   flex-direction: column;
   align-items: center;
