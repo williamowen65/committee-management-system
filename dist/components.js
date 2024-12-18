@@ -1295,13 +1295,14 @@ ___CSS_LOADER_EXPORT___.push([module.id, `markdown-component {
   width: fit-content;
   display: block;
   justify-self: center;
+  margin: auto;
 }
 markdown-component p {
   width: fit-content;
 }
 markdown-component p ul {
   width: fit-content;
-}`, "",{"version":3,"sources":["webpack://./app/components/markdown/style.scss"],"names":[],"mappings":"AAAA;EACI,kBAAA;EACA,cAAA;EACA,oBAAA;AACJ;AAAI;EACI,kBAAA;AAER;AADQ;EACI,kBAAA;AAGZ","sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./app/components/markdown/style.scss"],"names":[],"mappings":"AAAA;EACI,kBAAA;EACA,cAAA;EACA,oBAAA;EACA,YAAA;AACJ;AAAI;EACI,kBAAA;AAER;AADQ;EACI,kBAAA;AAGZ","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
