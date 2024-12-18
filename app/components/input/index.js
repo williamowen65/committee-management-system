@@ -2,7 +2,7 @@ import inputTemplate from './types/text-input.html.txt';
 import fileInputTemplate from './types/file-input.html.txt';
 import textareaTemplate from './types/textarea-input.html.txt';
 import { createCustomElement, evaluateTemplate } from '../../../utils/custom-element';
-import styles from './style.scss.txt';
+import  './style.scss';
 const logIf = require("../../../utils/logIf.js");
 
 
@@ -50,7 +50,7 @@ createCustomElement('input-component', function () {
     }
 
 
-}, inputTemplate, styles);
+}, inputTemplate, '');
 
 createCustomElement('textarea-component', function () {
     moveLabel.bind(this)();
@@ -61,7 +61,7 @@ createCustomElement('textarea-component', function () {
         this.querySelector('textarea').innerText = value;
     }
 
-}, textareaTemplate, styles);
+}, textareaTemplate, '');
 
 
 createCustomElement('file-input-component', function () {
@@ -211,7 +211,7 @@ createCustomElement('file-input-component', function () {
     })
 
 
-}, fileInputTemplate, styles);
+}, fileInputTemplate, '');
 
 
 function moveLabel() {
