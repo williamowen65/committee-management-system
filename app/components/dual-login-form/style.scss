@@ -11,7 +11,7 @@ h1{
     text-align: center;
 }
 
-form:not(#reCAPTCHAForm) {
+form.os-dual-form:not(#reCAPTCHAForm) {
     display: flex;
     flex-direction: column;
     align-items: center;
