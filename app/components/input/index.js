@@ -10,7 +10,11 @@ createCustomElement('input-component', function () {
     logIf.component && console.log('input-component loaded');
     // set slot
 
-    moveLabel.bind(this)();
+    if(!this.getAttribute('moveLabel')){
+
+        moveLabel.bind(this)();
+    }
+
 
 
     if (this.getAttribute('type') === 'password') {

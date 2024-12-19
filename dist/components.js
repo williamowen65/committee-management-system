@@ -504,7 +504,9 @@ var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js
   logIf.component && console.log('input-component loaded');
   // set slot
 
-  moveLabel.bind(this)();
+  if (!this.getAttribute('moveLabel')) {
+    moveLabel.bind(this)();
+  }
   if (this.getAttribute('type') === 'password') {
     setPasswordVisibilityListener.bind(this)();
   }
