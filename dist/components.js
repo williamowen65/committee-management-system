@@ -595,6 +595,24 @@ var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js
     imagesContainer.classList.add('has-images');
     img.src = src;
 
+    // Make sure the image fits within the container
+    img.onload = function () {
+      var width = img.width,
+        height = img.height;
+      if (width > height) {
+        img.style.width = '100%';
+        var aspectRatio = height / width;
+        img.style.height = "".concat(aspectRatio * 100, "%");
+        img.style.width = '100%';
+      } else {
+        img.style.height = '100%';
+        var _aspectRatio = width / height;
+        img.style.width = "".concat(_aspectRatio * 100, "%");
+      }
+    };
+    img.style.display = 'block';
+    img.style.margin = 'auto';
+
     // display the name of the file
     var fileName = document.createElement('p');
     fileName.textContent = file.name;

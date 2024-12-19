@@ -120,6 +120,25 @@ createCustomElement('file-input-component', function () {
 
         img.src = src;
 
+        // Make sure the image fits within the container
+        img.onload = () => {
+            const { width, height } = img;
+            if (width > height) {
+                img.style.width = '100%';
+                const aspectRatio = height / width;
+                img.style.height = `${aspectRatio * 100}%`;
+                img.style.width = '100%';
+            } else {
+                img.style.height = '100%';
+                const aspectRatio = width / height;
+                img.style.width = `${aspectRatio * 100}%`;
+            }
+        }
+
+        img.style.display = 'block';
+        img.style.margin = 'auto';
+
+
         // display the name of the file
         const fileName = document.createElement('p');
         fileName.textContent = file.name;
