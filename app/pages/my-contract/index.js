@@ -127,20 +127,32 @@ I do not have room for additional artists.
 I am willing to show my art at another artist's studio space, even though I have my own studio. 
 I don’t have my own art canopy so would need a covered space (ie, a garage or indoors) to set up"
 */
-function handleStudioSharingForm(e) {
+async function handleStudioSharingForm(e) {
     e.preventDefault();
     const form = document.querySelector('form#studio-sharing-form')
+
+    // get user ID
+    let contract;
+
+    await new Promise((resolve, reject) => {
+        firebase.auth.onAuthStateChanged(async (user) => {
+            contract = await CRUD.read('ghost-contracts', user.uid)
+            resolve()
+        })
+    })
 
 
     const StudioSharingPayload = {
         StudioSharingAnswer: "",
-        StudioSharingInfo: {
+        StudioSharingInfo: contract && contract.StudioSharingInfo || {
             studioPreference: "",
             studioAvailability: "",
             artistsAccommodated: "",
             studioSharingPlans: "",
             willingnessToRelocate: "",
             canopyPreference: "",
+            "canopy-studio": "",
+            "canopy-no-studio": "",
         }
     }
 
@@ -181,6 +193,7 @@ function handleStudioSharingForm(e) {
             if (!studioSharingPlans.value) return formAlert("Please provide information on how you plan to share your studio space");
             // StudioSharingAnswer += ' \n\t\t' + studioSharingPlans.value.trim();
             StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + "I am planning to share my space with " + studioSharingPlans.value.trim();
+       
             StudioSharingPayload.StudioSharingInfo.studioSharingPlans = studioSharingPlans.value;
         }
 
@@ -188,6 +201,7 @@ function handleStudioSharingForm(e) {
 
         // Check for willingness to relocate
         const willingnessToRelocate = form.querySelector('input[name="willingnessToRelocate"]:checked')
+        if (!willingnessToRelocate.value) return formAlert("Please provide information: Art you willing to show your art at another studio?");
         if (willingnessToRelocate) {
             if (willingnessToRelocate.value === 'yes') {
 
@@ -201,7 +215,7 @@ function handleStudioSharingForm(e) {
                 if (canopyPreference) {
                     // StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
                     StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
-                    StudioSharingPayload.StudioSharingInfo.canopyPreference = canopyPreference.value;
+                    StudioSharingPayload.StudioSharingInfo['canopy-studio'] = canopyPreference.value;
                 }
                 
             } else {
@@ -220,7 +234,7 @@ function handleStudioSharingForm(e) {
         if (!canopyPreference) return formAlert("Please select an option. Do you have a canopy?");
         // StudioSharingAnswer += ' \n\t' + canopyPreference.parentNode.innerText;
         StudioSharingPayload.StudioSharingAnswer += ' \n\t' + canopyPreference.parentNode.innerText;
-        StudioSharingPayload.StudioSharingInfo.canopyPreference = canopyPreference.value
+        StudioSharingPayload.StudioSharingInfo['canopy-no-studio'] = canopyPreference.value
 
     }
 
@@ -518,7 +532,7 @@ function setUpStudioSharingForm(contracts) {
                 textarea.dispatchEvent(event)
 
             }
-            if(artistsAccommodated){
+            if(artistsAccommodated && key === 'artistsAccommodated'){
                 artistsAccommodated.value = Number(value)
                 const event = new Event('change')
                 artistsAccommodated.dispatchEvent(event)
