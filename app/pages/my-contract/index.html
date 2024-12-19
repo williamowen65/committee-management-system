@@ -248,11 +248,14 @@
           <!-- Willingness to locate -->
            <div class="level-1">
 
-             <label style="font-size: 1rem" class="" for="willingnessToRelocate">I am willing to show my art at another artist's studio space, even though I have my own studio.</label>
-             <label for="yes" class="level-1">
+             <label style="font-size: 1rem" class="" for="willingnessToRelocate">
+              <input type="checkbox" name="willingnessToRelocate" for="willingnessToRelocate"
+              id="willingnessToRelocate"></input>
+              I am willing to show my art at another artist's studio space, even though I have my own studio.</label>
+             <!-- <label for="yes" class="level-1">
                <input type="radio" name="willingnessToRelocate" 
              id="yes" value="yes"></input>
-             Yes
+             Yes, I do -->
             </label>
             <div class="level-3" id="canopy-studio">
               <label for="hasCanopy" visible-if="willingnessToRelocate">
@@ -266,11 +269,11 @@
             
          
           </div>
-          <label for="no" class="level-1">
+          <!-- <label for="no" class="level-1">
             <input  type="radio" name="willingnessToRelocate" 
               id="no" value="no"></input>
-              No
-          </label>
+              No, I don't
+          </label> -->
 
           <!--END: Willingness to locate -->
         </div>
