@@ -156,6 +156,8 @@ async function handleStudioSharingForm(e) {
         }
     }
 
+    console.log("StudioSharingPayload", StudioSharingPayload)
+
     // Get first string (aka "studioPreference")
     const studioPreference = form.querySelector('input[name="studioPreference"]:checked')
     if (!studioPreference) return formAlert("Please select an option. Do you have a studio space or not?");
@@ -184,7 +186,7 @@ async function handleStudioSharingForm(e) {
 
             // Studio description
             const studioDescription = form.querySelector('textarea[name="studioDescription"]')
-            if (!studioDescription.value) return formAlert("Please provide information about your studio space");   
+            if (!studioDescription.value) return formAlert("Please provide information about your studio space");
             StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + "Here is a description of my place: " + studioDescription.value.trim();
             StudioSharingPayload.StudioSharingInfo.studioDescription = studioDescription.value;
 
@@ -193,36 +195,26 @@ async function handleStudioSharingForm(e) {
             if (!studioSharingPlans.value) return formAlert("Please provide information on how you plan to share your studio space");
             // StudioSharingAnswer += ' \n\t\t' + studioSharingPlans.value.trim();
             StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + "I am planning to share my space with " + studioSharingPlans.value.trim();
-       
+
             StudioSharingPayload.StudioSharingInfo.studioSharingPlans = studioSharingPlans.value;
         }
 
-
-
         // Check for willingness to relocate
         const willingnessToRelocate = form.querySelector('input[name="willingnessToRelocate"]:checked')
-        if (!willingnessToRelocate.value) return formAlert("Please provide information: Art you willing to show your art at another studio?");
+        console.log("willingnessToRelocate", willingnessToRelocate)
         if (willingnessToRelocate) {
-            if (willingnessToRelocate.value === 'yes') {
-
-                // StudioSharingAnswer += ' \n\t' + willingnessToRelocate.parentNode.innerText;
-                const willingnessToRelocateAnswer = document.querySelector('label[for=willingnessToRelocate]').innerText;
-                StudioSharingPayload.StudioSharingAnswer += ' \n\t' + willingnessToRelocateAnswer
-
-                // find canopy preference 
-                const canopyPreference = form.querySelector('input[name="canopy-studio"]:checked')
-                if (!canopyPreference) return formAlert("Please select an option. Do you have a canopy?");
-                if (canopyPreference) {
-                    // StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
-                    StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
-                    StudioSharingPayload.StudioSharingInfo['canopy-studio'] = canopyPreference.value;
-                }
-                
-            } else {
-                StudioSharingPayload.StudioSharingAnswer += ' \n\t' + "I am not willing to go another studio."
-            }
+            // StudioSharingAnswer += ' \n\t' + willingnessToRelocate.parentNode.innerText;
+            StudioSharingPayload.StudioSharingAnswer += ' \n\t' + willingnessToRelocate.parentNode.innerText;
             StudioSharingPayload.StudioSharingInfo.willingnessToRelocate = willingnessToRelocate.value;
 
+            // find canopy preference 
+            const canopyPreference = form.querySelector('input[name="canopy-studio"]:checked')
+            if (!canopyPreference) return formAlert("Please select an option. Do you have a canopy?");
+            if (canopyPreference) {
+                // StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
+                StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
+                StudioSharingPayload.StudioSharingInfo['canopy-studio'] = canopyPreference.value;
+            }
 
         }
 
@@ -510,9 +502,10 @@ function setUpStudioSharingForm(contracts) {
         Object.entries(studioSharingInfo).forEach(([key, value]) => {
             const input = form.querySelector(`input[name="${key}"][value="${value}"]`)
             const artistsAccommodated = form.querySelector(`input[name="artistsAccommodated"`)
+            const willingnessToRelocate = form.querySelector(`input[name="willingnessToRelocate"`)
             const textarea = form.querySelector(`textarea[name="${key}"]`)
             if (input) {
-                if (input.type === 'text') {     
+                if (input.type === 'text') {
                     input.value = value
                 } else if (input.type === 'number') {
                     console.log("Setting number", { value })
@@ -522,9 +515,9 @@ function setUpStudioSharingForm(contracts) {
                 // trigger change event
                 const event = new Event('change')
                 input.dispatchEvent(event)
-               
+
             } else {
-               
+
             }
             if (textarea) {
                 textarea.value = value
@@ -532,10 +525,15 @@ function setUpStudioSharingForm(contracts) {
                 textarea.dispatchEvent(event)
 
             }
-            if(artistsAccommodated && key === 'artistsAccommodated'){
+            if (artistsAccommodated && key === 'artistsAccommodated') {
                 artistsAccommodated.value = Number(value)
                 const event = new Event('change')
                 artistsAccommodated.dispatchEvent(event)
+            }
+            if(willingnessToRelocate && key === 'willingnessToRelocate'){
+                willingnessToRelocate.checked = true
+                const event = new Event('change')
+                willingnessToRelocate.dispatchEvent(event)
             }
         })
 
