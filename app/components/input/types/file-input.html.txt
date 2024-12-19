@@ -7,6 +7,9 @@
                 <div class="ifEmpty">
                     <div class="alias">${alias ? alias : ""}</div>
                 </div>
+                <div class="ifLoading">
+                    Loading ...
+                </div>
             </div>
         </label>
     </div>

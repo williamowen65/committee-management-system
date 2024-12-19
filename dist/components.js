@@ -490,6 +490,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types_textarea_input_html_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./types/textarea-input.html.txt */ "./app/components/input/types/textarea-input.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./app/components/input/style.scss");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 
 
 
@@ -607,72 +611,102 @@ var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js
   });
 
   // Set listeners to display images added to file input
-  this.querySelector('input').addEventListener('change', function (e) {
-    Array.from(e.target.files).forEach(function (file) {
-      var reader = new FileReader();
-      reader.onloadend = function () {
-        _this2.setImage(reader.result, file);
-        _this2.querySelector(".file-input-component").classList.remove('hasError');
-
-        // Display possible errors with this file
-        // Requirements: Size must be no larger than 3 mb. 
-        // Must not be a thumbnail image.
-        // One image must be a square
-
-        logIf.component && console.log("file size check ", {
-          fileSize: file.size,
-          fileName: file.name,
-          fileType: file.type
-        });
-
-        // Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )
-        if (file.size < 400000) {
-          var error = document.createElement('p');
-          error.textContent = 'This image is too small. Please upload an image larger than 400 KB';
-          error.classList.add('error');
-          parentContainer.appendChild(error);
-          _this2.querySelector(".file-input-component").classList.add('hasError');
-        }
-        // make sure the image isn't too big
-        if (file.size > 5000000) {
-          // 5 MB
-          var _error = document.createElement('p');
-          _error.textContent = 'File is too large. Please upload an image less than 5 mb.';
-          _error.classList.add('error');
-          parentContainer.appendChild(_error);
-          _this2.querySelector(".file-input-component").setAttribute('hasError', true);
-        }
-
-        // Get attribute "square" from component
-        var squareRequirement = _this2.getAttribute('square-requirement');
-        if (squareRequirement) {
-          // check for square size
-          var image = new Image();
-          image.src = reader.result;
-          image.onload = function () {
-            var width = image.width,
-              height = image.height;
-            logIf.component && console.log({
-              width: width,
-              height: height
+  this.querySelector('input').addEventListener('change', /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
+      var fileInput, fileInputUI;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            // get the file input
+            fileInput = e.target; // Disable the input while processing
+            fileInput.disabled = true;
+            // get the file input UI element
+            fileInputUI = fileInput.closest('.file-input-component');
+            fileInputUI.classList.add('loading');
+            _context.next = 6;
+            return new Promise(function (resolve) {
+              return setTimeout(resolve, 5000);
             });
-            var isWithinRange = function isWithinRange(value1, value2, range) {
-              // Roughly 10 percent of the range
-              var tenPercent = range * 0.1;
-              return value1 > value2 - tenPercent && value1 < value2 + tenPercent;
-            };
-            if (!isWithinRange(width, height, width)) {
-              var _error2 = document.createElement('p');
-              _error2.textContent = 'Image is not square. Please upload a square image.';
-              _error2.classList.add('error');
-              parentContainer.appendChild(_error2);
-            }
-          };
+          case 6:
+            Array.from(e.target.files).forEach(function (file) {
+              var reader = new FileReader();
+              reader.onloadend = function () {
+                _this2.setImage(reader.result, file);
+                _this2.querySelector(".file-input-component").classList.remove('hasError');
+
+                // Display possible errors with this file
+                // Requirements: Size must be no larger than 3 mb. 
+                // Must not be a thumbnail image.
+                // One image must be a square
+
+                logIf.component && console.log("file size check ", {
+                  fileSize: file.size,
+                  fileName: file.name,
+                  fileType: file.type
+                });
+
+                // Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )
+                if (file.size < 400000) {
+                  var error = document.createElement('p');
+                  error.textContent = 'This image is too small. Please upload an image larger than 400 KB';
+                  error.classList.add('error');
+                  parentContainer.appendChild(error);
+                  _this2.querySelector(".file-input-component").classList.add('hasError');
+                }
+                // make sure the image isn't too big
+                if (file.size > 5000000) {
+                  // 5 MB
+                  var _error = document.createElement('p');
+                  _error.textContent = 'File is too large. Please upload an image less than 5 mb.';
+                  _error.classList.add('error');
+                  parentContainer.appendChild(_error);
+                  _this2.querySelector(".file-input-component").setAttribute('hasError', true);
+                }
+
+                // Get attribute "square" from component
+                var squareRequirement = _this2.getAttribute('square-requirement');
+                if (squareRequirement) {
+                  // check for square size
+                  var image = new Image();
+                  image.src = reader.result;
+                  image.onload = function () {
+                    var width = image.width,
+                      height = image.height;
+                    logIf.component && console.log({
+                      width: width,
+                      height: height
+                    });
+                    var isWithinRange = function isWithinRange(value1, value2, range) {
+                      // Roughly 10 percent of the range
+                      var tenPercent = range * 0.1;
+                      return value1 > value2 - tenPercent && value1 < value2 + tenPercent;
+                    };
+                    if (!isWithinRange(width, height, width)) {
+                      var _error2 = document.createElement('p');
+                      _error2.textContent = 'Image is not square. Please upload a square image.';
+                      _error2.classList.add('error');
+                      parentContainer.appendChild(_error2);
+                    }
+                  };
+                }
+
+                // Disable the input while processing
+                fileInput.disabled = false;
+                // get the file input UI element
+                fileInputUI.classList.remove('loading');
+              };
+              reader.readAsDataURL(file);
+            });
+          case 7:
+          case "end":
+            return _context.stop();
         }
-      };
-      reader.readAsDataURL(file);
-    });
-  });
+      }, _callee);
+    }));
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }());
 }, _types_file_input_html_txt__WEBPACK_IMPORTED_MODULE_1__["default"], '');
 function moveLabel() {
   this.querySelectorAll('input, textarea').forEach(function (el) {
@@ -1483,7 +1517,8 @@ ___CSS_LOADER_EXPORT___.push([module.id, `label {
 label:not(:has(input[type=radio], input[type=checkbox])) {
   font-size: 1.2rem;
 }
-label input:not([type=radio], [type=checkbox]), label textarea {
+label input:not([type=radio], [type=checkbox]),
+label textarea {
   width: 100%;
 }
 label .text {
@@ -1529,7 +1564,8 @@ label[for=remember-me] input {
   transform-origin: top left;
   cursor: pointer;
 }
-label input, label textarea {
+label input,
+label textarea {
   margin: 10px 0 0 0;
   padding: 10px;
   border: 1px solid #ccc;
@@ -1621,7 +1657,8 @@ label .images-container.file-input-display.has-images .ifEmpty {
   padding: 5px;
   cursor: pointer;
 }
-.file-input-component .file-name, .file-input-component .error {
+.file-input-component .file-name,
+.file-input-component .error {
   text-align: center;
 }
 .file-input-component .error {
@@ -1631,6 +1668,19 @@ label .images-container.file-input-display.has-images .ifEmpty {
 }
 
 .file-input-component .alert-icon {
+  display: none;
+}
+.file-input-component .ifLoading {
+  display: none;
+}
+.file-input-component.loading .ifLoading {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.file-input-component.loading .ifEmpty {
   display: none;
 }
 .file-input-component.hasError .alert-icon {
@@ -1648,7 +1698,7 @@ label .images-container.file-input-display.has-images .ifEmpty {
   right: 10px;
   scale: 0.8;
   cursor: pointer;
-}`, "",{"version":3,"sources":["webpack://./app/components/input/style.scss"],"names":[],"mappings":"AAAA;EAQI,kBAAA;EACA,kBAAA;EACA,eAAA;EACA,qBAAA;EACA,WAAA;AANJ;AAHI;EACI,iBAAA;AAKR;AAII;EACI,WAAA;AAFR;AAKI;EACI,kBAAA;EACA,UAAA;EACA,oBAAA;EACA,+BAAA;EACA,iBAAA;EACA,YAAA;AAHR;AAOQ;EACI,+BAAA;EACA,kBAAA;EACA,iBAAA;AALZ;AAQI;EACI,kBAAA;AANR;AAQQ;EACI,WAAA;EACA,kBAAA;EACA,SAAA;EACA,qBAAA;EACA,QAAA;EACA,UAAA;EACA,eAAA;EACA,eAAA;AANZ;AAUI;EACI,kBAAA;EACA,mBAAA;EACA,eAAA;AARR;AAWI;EACI,kBAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;AATR;AAWQ;EACI,UAAA;EACA,mBAAA;EACA,0BAAA;EACA,eAAA;AATZ;AAaI;EAEI,kBAAA;EACA,aAAA;EACA,sBAAA;EACA,kBAAA;AAZR;AAeI;EACI,gBAAA;EACA,iBAAA;AAbR;AAgBI;EACI,aAAA;AAdR;AAiBI;EACI,cAAA;AAfR;AAmBQ;EACI,cAAA;AAjBZ;AAoBQ;EACI,aAAA;AAlBZ;AAsBI;EACI,iBAAA;EACA,iBAAA;EACA,UAAA;EACA,iBAAA;AApBR;AAsBI;EACI,aAAA;EACA,uBAAA;EACA,eAAA;EACA,kBAAA;AApBR;AA2BQ;EACI,WAAA;EACA,YAAA;EACA,2BAAA;EACA,mBAAA;AAzBZ;AA6BQ;EAEQ,2BAAA;EACJ,kBAAA;AA5BZ;AA6BY;EACI,kBAAA;EACA,OAAA;AA3BhB;AA+BQ;EACI,YAAA;EACA,aAAA;EAEA,gBAAA;EACA,eAAA;AA9BZ;AA+BY;EACI,uBAAA;AA7BhB;AAgCY;EACI,eAAA;EACA,kBAAA;EACA,YAAA;AA9BhB;AAiCY;EACI,YAAA;AA/BhB;AAmCgB;EACI,aAAA;AAjCpB;;AAwCA;EAKI,YAAA;AAzCJ;AAqCI;EACI,uBAAA;AAnCR;AAuCI;EACI,kBAAA;EACA,YAAA;EACA,aAAA;EACA,iBAAA;EACA,YAAA;AArCR;AAwCI;EACI,kBAAA;EACA,MAAA;EACA,QAAA;EACA,qBAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;EACA,eAAA;AAtCR;AAyCI;EAEI,kBAAA;AAxCR;AA0CI;EACI,uBAAA;EACA,UAAA;EACA,iBAAA;AAxCR;;AAgDI;EACI,aAAA;AA7CR;AAiDQ;EACI,kBAAA;EACA,SAAA;EACA,UAAA;EACA,eAAA;EACA,cAAA;AA/CZ;;AAsDA;EACI,kBAAA;EACA,SAAA;EACA,kBAAA;EACA,WAAA;EACA,UAAA;EACA,eAAA;AAnDJ","sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./app/components/input/style.scss"],"names":[],"mappings":"AAAA;EASI,kBAAA;EACA,kBAAA;EACA,eAAA;EACA,qBAAA;EACA,WAAA;AAPJ;AAFI;EACI,iBAAA;AAIR;AAMI;;EAEI,WAAA;AAJR;AAOI;EACI,kBAAA;EACA,UAAA;EACA,oBAAA;EACA,+BAAA;EACA,iBAAA;EACA,YAAA;AALR;AASQ;EACI,+BAAA;EACA,kBAAA;EACA,iBAAA;AAPZ;AAWI;EACI,kBAAA;AATR;AAYQ;EACI,WAAA;EACA,kBAAA;EACA,SAAA;EACA,qBAAA;EACA,QAAA;EACA,UAAA;EACA,eAAA;EACA,eAAA;AAVZ;AAcI;EACI,kBAAA;EACA,mBAAA;EACA,eAAA;AAZR;AAeI;EACI,kBAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;AAbR;AAeQ;EACI,UAAA;EACA,mBAAA;EACA,0BAAA;EACA,eAAA;AAbZ;AAiBI;;EAGI,kBAAA;EACA,aAAA;EACA,sBAAA;EACA,kBAAA;AAhBR;AAmBI;EACI,gBAAA;EACA,iBAAA;AAjBR;AAoBI;EACI,aAAA;AAlBR;AAqBI;EACI,cAAA;AAnBR;AAuBQ;EACI,cAAA;AArBZ;AAwBQ;EACI,aAAA;AAtBZ;AA0BI;EACI,iBAAA;EACA,iBAAA;EACA,UAAA;EACA,iBAAA;AAxBR;AA2BI;EACI,aAAA;EACA,uBAAA;EACA,eAAA;EACA,kBAAA;AAzBR;AAiCQ;EACI,WAAA;EACA,YAAA;EACA,2BAAA;EACA,mBAAA;AA/BZ;AAoCQ;EAEI,2BAAA;EACA,kBAAA;AAnCZ;AAqCY;EACI,kBAAA;EACA,OAAA;AAnChB;AAuCQ;EACI,YAAA;EACA,aAAA;EAEA,gBAAA;EACA,eAAA;AAtCZ;AAwCY;EACI,uBAAA;AAtChB;AAyCY;EACI,eAAA;EACA,kBAAA;EACA,YAAA;AAvChB;AA2CY;EACI,YAAA;AAzChB;AA6CgB;EACI,aAAA;AA3CpB;;AAoDA;EAKI,YAAA;AArDJ;AAiDI;EACI,uBAAA;AA/CR;AAoDI;EACI,kBAAA;EACA,YAAA;EACA,aAAA;EACA,iBAAA;EACA,YAAA;AAlDR;AAqDI;EACI,kBAAA;EACA,MAAA;EACA,QAAA;EACA,qBAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;EACA,eAAA;AAnDR;AAsDI;;EAGI,kBAAA;AArDR;AAwDI;EACI,uBAAA;EACA,UAAA;EACA,iBAAA;AAtDR;;AA+DI;EACI,aAAA;AA5DR;AA+DI;EACI,aAAA;AA7DR;AAiEQ;EACI,cAAA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,gCAAA;AA/DZ;AAkEQ;EACI,aAAA;AAhEZ;AAqEQ;EACI,kBAAA;EACA,SAAA;EACA,UAAA;EACA,eAAA;EACA,cAAA;AAnEZ;;AA0EA;EACI,kBAAA;EACA,SAAA;EACA,kBAAA;EACA,WAAA;EACA,UAAA;EACA,eAAA;AAvEJ","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2081,7 +2131,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"file-input-component\" style=\"position: relative;\">\r\n    <div class=\"label-container\">\r\n        <label for=\"${fieldName}\" style=\"\">\r\n            <input style=\"opacity: 0; height: 0; width: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);\" ${required ? \"required\" : \"\" } type=\"file\" id=\"${fieldName}\" name=\"${fieldName}\"\r\n            ${multiple ? \"multiple=true\" : \"\" } ${accept ? `accept=\"${accept}\" ` : \"\" } />\r\n            <div class=\"images-container file-input-display\">\r\n                <div class=\"ifEmpty\">\r\n                    <div class=\"alias\">${alias ? alias : \"\"}</div>\r\n                </div>\r\n            </div>\r\n        </label>\r\n    </div>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"file-input-component\" style=\"position: relative;\">\r\n    <div class=\"label-container\">\r\n        <label for=\"${fieldName}\" style=\"\">\r\n            <input style=\"opacity: 0; height: 0; width: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);\" ${required ? \"required\" : \"\" } type=\"file\" id=\"${fieldName}\" name=\"${fieldName}\"\r\n            ${multiple ? \"multiple=true\" : \"\" } ${accept ? `accept=\"${accept}\" ` : \"\" } />\r\n            <div class=\"images-container file-input-display\">\r\n                <div class=\"ifEmpty\">\r\n                    <div class=\"alias\">${alias ? alias : \"\"}</div>\r\n                </div>\r\n                <div class=\"ifLoading\">\r\n                    Loading ...\r\n                </div>\r\n            </div>\r\n        </label>\r\n    </div>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</div>");
 
 /***/ }),
 

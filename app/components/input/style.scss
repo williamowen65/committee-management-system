@@ -1,17 +1,20 @@
 label {
+
     // margin: 10px;
     // box-sizing: border-box;
-    &:not(:has(input[type=radio], input[type=checkbox])){
+    &:not(:has(input[type=radio], input[type=checkbox])) {
         font-size: 1.2rem;
-    } 
+    }
 
-        
+
     position: relative;
     margin-bottom: 5px;
     margin-top: 5px;
     display: inline-block;
     width: 100%;
-    input:not([type=radio],[type=checkbox]),textarea{
+
+    input:not([type=radio], [type=checkbox]),
+    textarea {
         width: 100%;
     }
 
@@ -31,8 +34,10 @@ label {
             font-weight: bold;
         }
     }
-    .password-container{
+
+    .password-container {
         position: relative;
+
         // background-color: #ccc;
         .password-toggle {
             width: 24px;
@@ -66,7 +71,8 @@ label {
         }
     }
 
-    input, textarea{
+    input,
+    textarea {
         // width: 80%;
         margin: 10px 0 0 0;
         padding: 10px;
@@ -103,18 +109,20 @@ label {
         z-index: 1;
         line-height: 12px;
     }
-    .images-container{
+
+    .images-container {
         display: flex;
         -webkit-flex-wrap: wrap;
         flex-wrap: wrap;
         position: relative;
+
         // justify-content: center;
         // .file-name{
         //     font-size: 15px;
         //     margin-top: 10px;
         //     text-align: center;
         // }
-        img{
+        img {
             width: 100%;
             height: 100%;
             -webkit-object-fit: contain;
@@ -122,52 +130,59 @@ label {
             // margin-right: 10px;
             // margin-bottom: 10px;
         }
-        .img-container{
 
-                overflow: hidden !important;
+        .img-container {
+
+            overflow: hidden !important;
             position: relative;
+
             button.delete-button {
                 position: absolute;
                 left: 0;
             }
         }
 
-        &.file-input-display{
+        &.file-input-display {
             width: 200px;
             height: 200px;
             // overflow: visible;
             overflow: hidden;
             cursor: pointer;
-            &:not(.has-images){
+
+            &:not(.has-images) {
                 border: 1px solid black;
             }
-          
-            .alias{
+
+            .alias {
                 font-size: 12px;
                 text-align: center;
                 margin: 10px;
-             
+
             }
-            .ifEmpty{
+
+            .ifEmpty {
                 margin: auto;
             }
 
-            &.has-images{
-                .ifEmpty{
+            &.has-images {
+                .ifEmpty {
                     display: none;
                 }
             }
+
+
         }
     }
 }
 
 .file-input-component {
-    .img-container:not(:empty){
+    .img-container:not(:empty) {
         border: 1px solid black;
     }
 
     width: 220px;
-    .label-container{
+
+    .label-container {
         position: relative;
         width: 200px;
         height: 200px;
@@ -175,7 +190,7 @@ label {
         margin: auto;
     }
 
-    .delete-button{
+    .delete-button {
         position: absolute;
         top: 0;
         right: 0;
@@ -186,10 +201,12 @@ label {
         cursor: pointer;
     }
 
-    .file-name, .error{
+    .file-name,
+    .error {
         // position: absolute;
         text-align: center;
     }
+
     .error {
         border: 1px solid black;
         color: red;
@@ -199,14 +216,33 @@ label {
 
 
 }
-.file-input-component{
 
-    .alert-icon{
+.file-input-component {
+
+    .alert-icon {
         display: none;
     }
 
-    &.hasError{
-        .alert-icon{
+    .ifLoading {
+        display: none;
+    }
+
+    &.loading {
+        .ifLoading {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .ifEmpty {
+            display: none;
+        }
+    }
+
+    &.hasError {
+        .alert-icon {
             position: absolute;
             top: 10px;
             left: 10px;
@@ -218,7 +254,7 @@ label {
 
 
 
-.password-toggle{
+.password-toggle {
     position: absolute;
     top: 27px;
     translate: 0% -50%;

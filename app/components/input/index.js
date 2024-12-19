@@ -2,7 +2,7 @@ import inputTemplate from './types/text-input.html.txt';
 import fileInputTemplate from './types/file-input.html.txt';
 import textareaTemplate from './types/textarea-input.html.txt';
 import { createCustomElement, evaluateTemplate } from '../../../utils/custom-element';
-import  './style.scss';
+import './style.scss';
 const logIf = require("../../../utils/logIf.js");
 
 
@@ -141,8 +141,18 @@ createCustomElement('file-input-component', function () {
 
 
     // Set listeners to display images added to file input
-    this.querySelector('input').addEventListener('change', (e) => {
+    this.querySelector('input').addEventListener('change', async (e) => {
 
+        // get the file input
+        const fileInput = e.target;
+        // Disable the input while processing
+        fileInput.disabled = true;
+        // get the file input UI element
+        const fileInputUI = fileInput.closest('.file-input-component');
+        fileInputUI.classList.add('loading');
+
+
+        await new Promise(resolve => setTimeout(resolve, 5000));
 
 
         Array.from(e.target.files).forEach((file) => {
@@ -205,6 +215,10 @@ createCustomElement('file-input-component', function () {
                 }
 
 
+                // Disable the input while processing
+                fileInput.disabled = false;
+                // get the file input UI element
+                fileInputUI.classList.remove('loading');
             };
             reader.readAsDataURL(file);
         });
