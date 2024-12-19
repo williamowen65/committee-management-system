@@ -500,8 +500,14 @@ function setUpStudioSharingForm(contracts) {
 
 
 function setDigitalImagesForm(contracts) {
-    logIf.client && console.log("setDigitalImagesForm", { contracts })
+    logIf.client || true && console.log("setDigitalImagesForm", { contracts })
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+    const digitalImageCommitteeMember = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes('12'))
+
+    if(digitalImageCommitteeMember){
+        document.querySelector('#digitalImageCommitteeMember').appendChild(document.createTextNode("(" + digitalImageCommitteeMember.artistDetails.firstName + ' ' + digitalImageCommitteeMember.artistDetails.lastName + " - " + (digitalImageCommitteeMember.artistDetails.personalEmail || "") + ")"))
+    }
+
     if (contract) {
 
 
