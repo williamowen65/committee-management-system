@@ -27,10 +27,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // Add the Committee html
     await fetch('/my-contract/committee-positions.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.querySelector('#committee-positions-container').innerHTML = data;
-                })
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector('#committee-positions-container').innerHTML = data;
+        })
 
     CRUD.readAll('ghost-contracts').then((existingContracts) => {
         contracts = existingContracts
@@ -165,16 +165,22 @@ function handleStudioSharingForm(e) {
         const subOption2Selected = studioAvailabilityAnswer.includes('I can share my studio space')
         if (subOption2Selected) {
             // get how many artists can be accommodated
-            const artistsAccommodated = form.querySelector('input[name="studioSharingInfo"]')
+            const artistsAccommodated = form.querySelector('input[name="artistsAccommodated"]')
             if (!artistsAccommodated.value) return formAlert("Please provide information on how many artists can be accommodated");
-            StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + artistsAccommodated.value.trim();
+            StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + artistsAccommodated.value.trim() + " artists can be accommodated";
             StudioSharingPayload.StudioSharingInfo.artistsAccommodated = artistsAccommodated.value;
+
+            // Studio description
+            const studioDescription = form.querySelector('textarea[name="studioDescription"]')
+            if (!studioDescription.value) return formAlert("Please provide information about your studio space");   
+            StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + "Here is a description of my place: " + studioDescription.value.trim();
+            StudioSharingPayload.StudioSharingInfo.studioDescription = studioDescription.value;
 
             // get plans to share studio space
             const studioSharingPlans = form.querySelector('textarea[name="studioSharingPlans"]')
             if (!studioSharingPlans.value) return formAlert("Please provide information on how you plan to share your studio space");
             // StudioSharingAnswer += ' \n\t\t' + studioSharingPlans.value.trim();
-            StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + studioSharingPlans.value.trim();
+            StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + "I am planning to share my space with " + studioSharingPlans.value.trim();
             StudioSharingPayload.StudioSharingInfo.studioSharingPlans = studioSharingPlans.value;
         }
 
@@ -183,18 +189,26 @@ function handleStudioSharingForm(e) {
         // Check for willingness to relocate
         const willingnessToRelocate = form.querySelector('input[name="willingnessToRelocate"]:checked')
         if (willingnessToRelocate) {
-            // StudioSharingAnswer += ' \n\t' + willingnessToRelocate.parentNode.innerText;
-            StudioSharingPayload.StudioSharingAnswer += ' \n\t' + willingnessToRelocate.parentNode.innerText;
+            if (willingnessToRelocate.value === 'yes') {
+
+                // StudioSharingAnswer += ' \n\t' + willingnessToRelocate.parentNode.innerText;
+                const willingnessToRelocateAnswer = document.querySelector('label[for=willingnessToRelocate]').innerText;
+                StudioSharingPayload.StudioSharingAnswer += ' \n\t' + willingnessToRelocateAnswer
+
+                // find canopy preference 
+                const canopyPreference = form.querySelector('input[name="canopy-studio"]:checked')
+                if (!canopyPreference) return formAlert("Please select an option. Do you have a canopy?");
+                if (canopyPreference) {
+                    // StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
+                    StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
+                    StudioSharingPayload.StudioSharingInfo.canopyPreference = canopyPreference.value;
+                }
+                
+            } else {
+                StudioSharingPayload.StudioSharingAnswer += ' \n\t' + "I am not willing to go another studio."
+            }
             StudioSharingPayload.StudioSharingInfo.willingnessToRelocate = willingnessToRelocate.value;
 
-            // find canopy preference 
-            const canopyPreference = form.querySelector('input[name="canopy-studio"]:checked')
-            if (!canopyPreference) return formAlert("Please select an option. Do you have a canopy?");
-            if (canopyPreference) {
-                // StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
-                StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
-                StudioSharingPayload.StudioSharingInfo.canopyPreference = canopyPreference.value;
-            }
 
         }
 
@@ -297,7 +311,7 @@ function setUpVolunteerResponsibilityForm(contracts) {
             const infoIcon = createInfoIcon(role)
             role.querySelector('.responsibility').appendChild(responsibility)
             role.insertAdjacentElement("afterbegin", input)
-            if(tasks) responsibility.insertAdjacentElement("beforeend", tasks)
+            if (tasks) responsibility.insertAdjacentElement("beforeend", tasks)
             input.addEventListener('change', handleCheckboxChange)
 
             // get my role set
@@ -428,12 +442,12 @@ function updateVolunteerResponsibilityForm(contracts) {
                 // Set the user name next to the checkbox
                 const committeeMemberContract = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))
                 const fullName = committeeMemberContract && committeeMemberContract.artistDetails && committeeMemberContract.artistDetails.firstName + ' ' + committeeMemberContract.artistDetails.lastName
-                label.querySelector('.user-name').innerText = fullName  || "[UNKNOWN]"
+                label.querySelector('.user-name').innerText = fullName || "[UNKNOWN]"
 
 
                 // Get this users contract
                 const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
-                if(!contract) return;
+                if (!contract) return;
                 const userId = contract?.userId
                 // get my roles fresh from the DB
                 // get my role set
@@ -449,7 +463,7 @@ function updateVolunteerResponsibilityForm(contracts) {
                     const button = createOffloadButton(role)
                     // check role for existing button
                     const existingButton = role.querySelector('.offload-button')
-                    logIf.client &&  console.log("existingButton", existingButton)
+                    logIf.client && console.log("existingButton", existingButton)
                     if (!existingButton) {
 
 
@@ -479,21 +493,57 @@ function setUpStudioSharingForm(contracts) {
         if (!studioSharingInfo) return;
 
         // set the inputs
-        Object.values(studioSharingInfo).forEach(value => {
-            const input = form.querySelector(`input[id="${value}"]`)
+        Object.entries(studioSharingInfo).forEach(([key, value]) => {
+            const input = form.querySelector(`input[name="${key}"][value="${value}"]`)
+            const textarea = form.querySelector(`textarea[name="${key}"]`)
             if (input) {
-                // if input it radio or checkbox 
-                if (input.type === 'radio' || input.type === 'checkbox') {
-                    input.checked = true;
-                    // trigger change event
-                    const event = new Event('change')
-                    input.dispatchEvent(event)
-                } else {
+                if (input.type === 'text') {     
                     input.value = value
+                } else if (input.type === 'number') {
+                    input.value = Number(value)
                 }
+                input.checked = true
+                // trigger change event
+                const event = new Event('change')
+                input.dispatchEvent(event)
+               
+            } else {
+               
+            }
+            if (textarea) {
+                textarea.value = value
+                const event = new Event('change')
+                textarea.dispatchEvent(event)
 
             }
         })
+
+
+        // Object.values(studioSharingInfo).forEach(value => {
+        //     const input = form.querySelector(`input[id="${value}"]`)
+        //     const textarea = form.querySelector(`textarea[id="${value}"]`)
+        //     if (input) {
+        //         // if input it radio or checkbox 
+        //         if (input.type === 'radio' || input.type === 'checkbox') {
+        //             input.checked = true;
+        //             // trigger change event
+        //             const event = new Event('change')
+        //             input.dispatchEvent(event)
+        //         } else {
+        //             // check input type 
+                    // if (input.type === 'text') {   
+                    //     input.value = value
+                    // } else if (input.type === 'number') {
+                    //     input.value = Number(value)
+                    // }
+        //         }
+        //     }
+
+        //     if(textarea){
+        //         textarea.value = value
+        //     }
+
+        // })
     }
 }
 
@@ -504,7 +554,7 @@ function setDigitalImagesForm(contracts) {
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
     const digitalImageCommitteeMember = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes('12'))
 
-    if(digitalImageCommitteeMember){
+    if (digitalImageCommitteeMember) {
         document.querySelector('#digitalImageCommitteeMember').appendChild(document.createTextNode("(" + digitalImageCommitteeMember.artistDetails.firstName + ' ' + digitalImageCommitteeMember.artistDetails.lastName + " - " + (digitalImageCommitteeMember.artistDetails.personalEmail || "") + ")"))
     }
 
@@ -585,7 +635,7 @@ function setSignatureForm(contracts) {
 function setArtistDetailsForm(contracts) {
     const form = document.querySelector('form#artist-details-form')
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
-    if(!contract) return
+    if (!contract) return
     const artistDetails = contract.artistDetails
     logIf.client && console.log("Setting up artist details form", { artistDetails, contract })
     if (artistDetails) {
@@ -602,20 +652,20 @@ function setArtistDetailsForm(contracts) {
 }
 
 async function setPaypalButton(contracts) {
-    logIf.client && console.log("setPaypalButton", {contracts})
+    logIf.client && console.log("setPaypalButton", { contracts })
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
-    if(!contract) {
+    if (!contract) {
         document.querySelector('.scholarship-btn-container').style.display = 'block';
         return
     };
-    
+
     const membershipPaid = contract && contract.artistDetails && contract.artistDetails.membershipPaid || false
 
     // get scholarship status from scholarship data collection
     await CRUD.read('scholarship-applications', firebase.auth.currentUser.uid).then(scholarship => {
 
         // logIf.client && console.log("scholarship", {scholarship})
-        true && console.log("scholarship", {scholarship})
+        true && console.log("scholarship", { scholarship })
         // use sandbox logic here.
         const scholarshipGranted = scholarship.scholarshipGranted
         window.initializePaypalButtons(scholarshipGranted ? 125 : 225)
@@ -626,11 +676,11 @@ async function setPaypalButton(contracts) {
             document.querySelector('.scholarship-fee').style['text-decoration'] = 'none'
             document.querySelector('.scholarship-fee').style.display = 'inline-block'
         }
-        if(scholarship.name && !scholarship.hasBeenReviewed){
+        if (scholarship.name && !scholarship.hasBeenReviewed) {
             document.querySelector('.scholarship-pending').style.display = 'inline-block'
         }
 
-        if(scholarship.name){ // If an application has been submitted
+        if (scholarship.name) { // If an application has been submitted
             document.querySelector('.scholarship-btn-container').style.display = 'none'
         } else {
             document.querySelector('.scholarship-btn-container').style.display = 'block'
