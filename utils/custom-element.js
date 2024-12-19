@@ -103,6 +103,10 @@ export async function createCustomElement(name, onload, html, css, options ={}) 
                 scholarshipGranted: this.getAttribute('scholarshipGranted') || '',
                 name: this.getAttribute('name') || '',
                 hasNotReceivedScholarshipPreviously: this.getAttribute('hasNotReceivedScholarshipPreviously') || '',
+                subcaption: this.getAttribute('subcaption') || '',
+                className: this.getAttribute('className') || '',
+                id: this.getAttribute('id') || '',
+                moveLabel: this.getAttribute('moveLabel') || '',
                 // paypalClientId: this.getAttribute('PAYPAL_CLIENT_ID') || '',
             };
 

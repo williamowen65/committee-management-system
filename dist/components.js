@@ -939,8 +939,9 @@ function _createCustomElement() {
             }, {
               key: "updateTemplate",
               value: function updateTemplate() {
+                var _context;
                 var randomId = Math.floor(Math.random() * 1000000);
-                var context = _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({
+                var context = (_context = {
                   fieldName: this.getAttribute('fieldName') || 'defaultFieldName',
                   alias: this.getAttribute('alias') || '',
                   required: this.hasAttribute('required') || false,
@@ -982,7 +983,7 @@ function _createCustomElement() {
                   createdAt: this.getAttribute('createdAt') || '',
                   studioSharingResponse: this.getAttribute('studioSharingResponse') || '',
                   howDidYouHearAboutUs: this.getAttribute('howDidYouHearAboutUs') || ''
-                }, "artistStatement", this.getAttribute('artistStatement') || ''), "websiteSocialMedia", this.getAttribute('website-social-media') || ''), "fbId", this.getAttribute('fbId') || ''), "approved", this.getAttribute('approved') && this.getAttribute('approved') == "true" || false), "randomId", randomId), "CRUD", window.CRUD), "needForScholarship", this.getAttribute('needForScholarship') || ''), "scholarshipGranted", this.getAttribute('scholarshipGranted') || ''), "name", this.getAttribute('name') || ''), "hasNotReceivedScholarshipPreviously", this.getAttribute('hasNotReceivedScholarshipPreviously') || '');
+                }, _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_context, "artistStatement", this.getAttribute('artistStatement') || ''), "websiteSocialMedia", this.getAttribute('website-social-media') || ''), "fbId", this.getAttribute('fbId') || ''), "approved", this.getAttribute('approved') && this.getAttribute('approved') == "true" || false), "randomId", randomId), "CRUD", window.CRUD), "needForScholarship", this.getAttribute('needForScholarship') || ''), "scholarshipGranted", this.getAttribute('scholarshipGranted') || ''), "name", this.getAttribute('name') || ''), "hasNotReceivedScholarshipPreviously", this.getAttribute('hasNotReceivedScholarshipPreviously') || ''), _defineProperty(_defineProperty(_defineProperty(_defineProperty(_context, "subcaption", this.getAttribute('subcaption') || ''), "className", this.getAttribute('className') || ''), "id", this.getAttribute('id') || ''), "moveLabel", this.getAttribute('moveLabel') || ''));
                 var evaluatedTemplate = evaluateTemplate(html, context);
                 this.innerHTML = "\n                <style>\n                ".concat(css, "\n                </style>\n                ").concat(evaluatedTemplate, "\n                ");
               }
@@ -2164,7 +2165,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<label for=\"${fieldName}\" class=\"${labelClass || \"\"}  ${value ? \"moveLabel\" : \"\"}\" style=\"${width ? \"width:\"+ width + \";\" : \"\"}\">\r\n    <small class=\"text\" part=\"labelText\">${alias && required ? alias + \"*\" : alias ? alias : \"\"} </small>\r\n    <input  ${disabled ? \"disabled\" : \"\"} ${value ? \"value=\" + value : \"\"}  placeholder=\"${placeholder}\" type=\"${type}\" id=\"${fieldName}\" name=\"${fieldName}\" class=\"${labelClass || \"\"}\" ${required ? \"required\" :\"\"} ${type === 'number' ? 'min=\"0\"' : ''} ${checked ? 'checked' :''} />\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n    ${type == 'password' ? `\r\n    <i class=\"password-toggle show-password fa fa-solid fa-eye-slash\"></i>\r\n    <i class=\"password-toggle hide-password fa fa-solid fa-eye\"></i>\r\n    ` : ''}\r\n    \r\n</label>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<span class=\"${className}\" id=\"${id}\">\r\n\r\n\r\n    <label for=\"${fieldName}\" class=\"${labelClass || \"\"} ${moveLabel ? \"moveLabel\": \"\"}  ${value ? \"moveLabel\" : \"\"}\" style=\"${width ? \"width:\"+ width + \";\" : \"\"}\">\r\n        <small class=\"text\" part=\"labelText\">${alias && required ? alias + \"*\" : alias ? alias : \"\"} </small>\r\n        <input  ${disabled ? \"disabled\" : \"\"} ${value ? \"value=\" + value : \"\"}  placeholder=\"${placeholder}\" type=\"${type}\" id=\"${fieldName}\" name=\"${fieldName}\" class=\"${labelClass || \"\"}\" ${required ? \"required\" :\"\"} ${type === 'number' ? 'min=\"0\"' : ''} ${checked ? 'checked' :''} />\r\n        <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n    ${type == 'password' ? `\r\n    <i class=\"password-toggle show-password fa fa-solid fa-eye-slash\"></i>\r\n    <i class=\"password-toggle hide-password fa fa-solid fa-eye\"></i>\r\n    ` : ''}\r\n</label>\r\n<small>${subcaption}</small>\r\n</span>\r\n\r\n</span>\r\n\r\n\r\n");
 
 /***/ }),
 
