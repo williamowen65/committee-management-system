@@ -495,11 +495,13 @@ function setUpStudioSharingForm(contracts) {
         // set the inputs
         Object.entries(studioSharingInfo).forEach(([key, value]) => {
             const input = form.querySelector(`input[name="${key}"][value="${value}"]`)
+            const artistsAccommodated = form.querySelector(`input[name="artistsAccommodated"`)
             const textarea = form.querySelector(`textarea[name="${key}"]`)
             if (input) {
                 if (input.type === 'text') {     
                     input.value = value
                 } else if (input.type === 'number') {
+                    console.log("Setting number", { value })
                     input.value = Number(value)
                 }
                 input.checked = true
@@ -516,34 +518,13 @@ function setUpStudioSharingForm(contracts) {
                 textarea.dispatchEvent(event)
 
             }
+            if(artistsAccommodated){
+                artistsAccommodated.value = Number(value)
+                const event = new Event('change')
+                artistsAccommodated.dispatchEvent(event)
+            }
         })
 
-
-        // Object.values(studioSharingInfo).forEach(value => {
-        //     const input = form.querySelector(`input[id="${value}"]`)
-        //     const textarea = form.querySelector(`textarea[id="${value}"]`)
-        //     if (input) {
-        //         // if input it radio or checkbox 
-        //         if (input.type === 'radio' || input.type === 'checkbox') {
-        //             input.checked = true;
-        //             // trigger change event
-        //             const event = new Event('change')
-        //             input.dispatchEvent(event)
-        //         } else {
-        //             // check input type 
-                    // if (input.type === 'text') {   
-                    //     input.value = value
-                    // } else if (input.type === 'number') {
-                    //     input.value = Number(value)
-                    // }
-        //         }
-        //     }
-
-        //     if(textarea){
-        //         textarea.value = value
-        //     }
-
-        // })
     }
 }
 
