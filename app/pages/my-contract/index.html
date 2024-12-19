@@ -244,6 +244,37 @@
           I have my own studio space within the GHOST tour boundaries....
         </label>
         <div id="studioElement" visible-if="studioPreference === 'hasStudio'">
+          
+          <!-- Willingness to locate -->
+           <div class="level-1">
+
+             <label style="font-size: 1rem" class="" for="willingnessToRelocate">I am willing to show my art at another artist's studio space, even though I have my own studio.</label>
+             <label for="yes" class="level-1">
+               <input type="radio" name="willingnessToRelocate" 
+             id="yes" value="yes"></input>
+             Yes
+            </label>
+            <div class="level-3" id="canopy-studio">
+              <label for="hasCanopy" visible-if="willingnessToRelocate">
+                <input type="radio" name="canopy-studio" id="hasCanopy" value="hasCanopy">
+                I have my own own art canopy to use
+           </label>
+           <label for="doesNotHaveCanopy">
+             <input type="radio" name="canopy-studio" id="doesNotHaveCanopy" value="doesNotHaveCanopy">
+             I don't have my own art canopy so would need a covered space (ie, a garage or indoors) to set up
+            </label>
+            
+         
+          </div>
+          <label for="no" class="level-1">
+            <input  type="radio" name="willingnessToRelocate" 
+              id="no" value="no"></input>
+              No
+          </label>
+
+          <!--END: Willingness to locate -->
+        </div>
+
           <label for="noRoom" class="level-1">
             <input type="radio" name="studioAvailability" id="noRoom" value="noRoom">
             I do not have room for additional artists.
@@ -262,37 +293,10 @@
               alias="Describe the space you have available (outdoors, indoors, garage, etc) "></textarea-component>
             <textarea-component style="width:100%" fieldName="studioSharingPlans"
               alias="If you already have plans for someone to share your studio space, list them here: (If none, type N/A)"></textarea-component>
-          
-              <!-- Willing to Locate -->
-              <label style="font-size: 1rem" class="" for="willingnessToRelocate">I am willing to show my art at another artist's studio space, even though I have my own studio.</label>
-              <label for="yes" class="level-1">
-                <input type="radio" name="willingnessToRelocate" 
-                  id="yes" value="yes"></input>
-                  Yes
-              </label>
-              <div class="level-3" id="canopy-studio">
-                <label for="hasCanopy" visible-if="willingnessToRelocate">
-                  <input type="radio" name="canopy-studio" id="hasCanopy" value="hasCanopy">
-                  I have my own own art canopy to use
-                </label>
-                <label for="doesNotHaveCanopy">
-                  <input type="radio" name="canopy-studio" id="doesNotHaveCanopy" value="doesNotHaveCanopy">
-                  I don't have my own art canopy so would need a covered space (ie, a garage or indoors) to set up
-                </label>
-                 <!-- End: Willing to Locate -->
-              </div>
-    
-              <label for="no" class="level-1">
-                <input  type="radio" name="willingnessToRelocate" 
-                  id="no" value="no"></input>
-                  No
-              </label>
-          
           </div>
 
-
-        
      
+        </div>
         <label for="doesNotHaveStudio">
           <input type="radio" name="studioPreference" id="doesNotHaveStudio" value="doesNotHaveStudio">
           I don't have a studio and I need to show my art at another artist's studio space
