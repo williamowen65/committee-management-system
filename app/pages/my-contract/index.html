@@ -252,16 +252,6 @@
             <input type="radio" name="studioAvailability" id="canShare" value="canShare">
             I can share my studio space with more artists, and I have adequate parking.
           </label>
-          <div class="level-2" id="additionalStudioInfo" visible-if="studioAvailability === 'canShare'"
-            style="margin-top: 10px;">
-            <input-component type="number" width="100%" fieldName="studioSharingInfo"
-              alias="How many additional artists can you share it with (not including yourself?)"></input-component>
-            <div style="margin-top: 20px;"></div>
-            <textarea-component style="width:100%" fieldName="studioDescription"
-              alias="Describe the space you have available (outdoors, indoors, garage, etc) "></textarea-component>
-            <textarea-component style="width:100%" fieldName="studioSharingPlans"
-              alias="If you already have plans for someone to share your studio space, list them here: (If none, type N/A)"></textarea-component>
-          </div>
           <label for="willingnessToRelocate" class="level-1">
             <input type="checkbox" name="willingnessToRelocate" for="willingnessToRelocate"
               id="willingnessToRelocate"></input>
@@ -277,6 +267,17 @@
               I don't have my own art canopy so would need a covered space (ie, a garage or indoors) to set up
             </label>
           </div>
+          <div class="level-2" id="additionalStudioInfo" visible-if="studioAvailability === 'canShare'"
+            style="margin-top: 10px;">
+            <input-component type="number" width="100%" fieldName="studioSharingInfo"
+              alias="How many additional artists can you share it with (not including yourself?)"></input-component>
+            <div style="margin-top: 20px;"></div>
+            <textarea-component style="width:100%" fieldName="studioDescription"
+              alias="Describe the space you have available (outdoors, indoors, garage, etc) "></textarea-component>
+            <textarea-component style="width:100%" fieldName="studioSharingPlans"
+              alias="If you already have plans for someone to share your studio space, list them here: (If none, type N/A)"></textarea-component>
+          </div>
+          
         </div>
         <label for="doesNotHaveStudio">
           <input type="radio" name="studioPreference" id="doesNotHaveStudio" value="doesNotHaveStudio">
