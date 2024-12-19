@@ -153,6 +153,7 @@ async function handleStudioSharingForm(e) {
             canopyPreference: "",
             "canopy-studio": "",
             "canopy-no-studio": "",
+            studioSigns: "",
         }
     }
 
@@ -183,6 +184,12 @@ async function handleStudioSharingForm(e) {
             if (!artistsAccommodated.value) return formAlert("Please provide information on how many artists can be accommodated");
             StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + artistsAccommodated.value.trim() + " artists can be accommodated";
             StudioSharingPayload.StudioSharingInfo.artistsAccommodated = artistsAccommodated.value;
+
+            // Studio number of signs
+            const studioSigns = form.querySelector('input[name="studioSigns"]')
+            if (!studioSigns.value) return formAlert("Please provide information on how many signs you have");
+            StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + "I have " + studioSigns.value.trim() + " signs";
+            StudioSharingPayload.StudioSharingInfo.studioSigns = studioSigns.value;
 
             // Studio description
             const studioDescription = form.querySelector('textarea[name="studioDescription"]')
@@ -502,6 +509,7 @@ function setUpStudioSharingForm(contracts) {
         Object.entries(studioSharingInfo).forEach(([key, value]) => {
             const input = form.querySelector(`input[name="${key}"][value="${value}"]`)
             const artistsAccommodated = form.querySelector(`input[name="artistsAccommodated"`)
+            const studioSigns = form.querySelector(`input[name="studioSigns"`)
             const willingnessToRelocate = form.querySelector(`input[name="willingnessToRelocate"`)
             const textarea = form.querySelector(`textarea[name="${key}"]`)
             if (input) {
@@ -529,6 +537,11 @@ function setUpStudioSharingForm(contracts) {
                 artistsAccommodated.value = Number(value)
                 const event = new Event('change')
                 artistsAccommodated.dispatchEvent(event)
+            }
+            if (studioSigns && key === 'studioSigns') {
+                studioSigns.value = Number(value)
+                const event = new Event('change')
+                studioSigns.dispatchEvent(event)
             }
             if(willingnessToRelocate && key === 'willingnessToRelocate'){
                 willingnessToRelocate.checked = true
