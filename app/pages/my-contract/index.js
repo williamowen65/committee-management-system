@@ -154,6 +154,7 @@ async function handleStudioSharingForm(e) {
             "canopy-studio": "",
             "canopy-no-studio": "",
             studioSigns: "",
+            'studioSigns-2': "",
         }
     }
 
@@ -176,9 +177,19 @@ async function handleStudioSharingForm(e) {
         StudioSharingPayload.StudioSharingAnswer += ' \n\t' + studioAvailabilityAnswer;
         StudioSharingPayload.StudioSharingInfo.studioAvailability = studioAvailability.value;
 
+        const IDontHaveRoomForAdditionalArtists = studioAvailabilityAnswer.includes('I want to stay at my own studio but do not have room for additional artists')
+        /// Get number of signs
+        if (IDontHaveRoomForAdditionalArtists) {
+            const studioSigns2 = form.querySelector('input[name="studioSigns-2"]')
+            if (!studioSigns2.value) return formAlert("Please provide information on how many signs you have");
+            StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + "I have " + studioSigns2.value.trim() + " signs";
+            StudioSharingPayload.StudioSharingInfo['studioSigns-2'] = studioSigns2.value;
+        }
+
+
         // Check for type of answer  "I can share my studio space"
-        const subOption2Selected = studioAvailabilityAnswer.includes('I can share my studio space')
-        if (subOption2Selected) {
+        const ICanShareMySpace = studioAvailabilityAnswer.includes('I can share my studio space')
+        if (ICanShareMySpace) {
             // get how many artists can be accommodated
             const artistsAccommodated = form.querySelector('input[name="artistsAccommodated"]')
             if (!artistsAccommodated.value) return formAlert("Please provide information on how many artists can be accommodated");
@@ -510,6 +521,7 @@ function setUpStudioSharingForm(contracts) {
             const input = form.querySelector(`input[name="${key}"][value="${value}"]`)
             const artistsAccommodated = form.querySelector(`input[name="artistsAccommodated"`)
             const studioSigns = form.querySelector(`input[name="studioSigns"`)
+            const studioSigns2 = form.querySelector(`input[name="studioSigns-2"`)
             const willingnessToRelocate = form.querySelector(`input[name="willingnessToRelocate"`)
             const textarea = form.querySelector(`textarea[name="${key}"]`)
             if (input) {
@@ -542,6 +554,11 @@ function setUpStudioSharingForm(contracts) {
                 studioSigns.value = Number(value)
                 const event = new Event('change')
                 studioSigns.dispatchEvent(event)
+            }
+            if (studioSigns2 && key === 'studioSigns-2') {
+                studioSigns2.value = Number(value)
+                const event = new Event('change')
+                studioSigns2.dispatchEvent(event)
             }
             if(willingnessToRelocate && key === 'willingnessToRelocate'){
                 willingnessToRelocate.checked = true

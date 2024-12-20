@@ -249,9 +249,9 @@
            <div class="level-1">
 
              <label style="font-size: 1rem" class="" for="willingnessToRelocate">
-              <input type="checkbox" name="willingnessToRelocate" for="willingnessToRelocate"
+              <input type="radio" name="studioAvailability" for="willingnessToRelocate"
               id="willingnessToRelocate"></input>
-              I am willing to show my art at another artist's studio space, even though I have my own studio.</label>
+              I have my own studio but am willing to show my art at another artist's studio space.</label>
              <!-- <label for="yes" class="level-1">
                <input type="radio" name="willingnessToRelocate" 
              id="yes" value="yes"></input>
@@ -280,11 +280,17 @@
 
           <label for="noRoom" class="level-1">
             <input type="radio" name="studioAvailability" id="noRoom" value="noRoom">
-            I do not have room for additional artists.
+            I want to stay at my own studio but do not have room for additional artists
           </label>
+          <div class="level-2" visible-if="studioAvailability === 'noRoom' ">
+            <input-component moveLabel="true" type="number" width="100%" fieldName="studioSigns-2" className="studioSignsQuestion"
+            subcaption="If you will be at your own studio, how many directional artist studio signs do you need?  Be sure to include a street sign by your studio driveway as well at the major intersections near your studio." alias="Number of studio signs needed"></input-component>
+          </div>
+
+
           <label for="canShare" class="level-1">
             <input type="radio" name="studioAvailability" id="canShare" value="canShare">
-            I can share my studio space with more artists, and I have adequate parking.
+            I want to stay at my own studio and I can share my studio space with more artists and have adequate parking.
           </label>
          
           <div class="level-2" id="additionalStudioInfo" visible-if="studioAvailability === 'canShare'"
@@ -300,7 +306,7 @@
               alias="If you already have plans for someone to share your studio space, list them here: (If none, type N/A)"></textarea-component>
               <input-component moveLabel="true" type="number" width="100%" fieldName="studioSigns" className="studioSignsQuestion"
               subcaption="If you will be at your own studio, how many directional artist studio signs do you need?  Be sure to include a street sign by your studio driveway as well at the major intersections near your studio.  If other artists will be sharing your studio,  include extra signs that can be placed on your property to point the way to where they are located.
-              If you are sharing someone else's studio, write 0." alias="Number of studio signs"></input-component>
+              If you are sharing someone else's studio, write 0." alias="Number of studio signs needed"></input-component>
             </div>
 
      
@@ -351,7 +357,7 @@
             width: fit-content;
             margin: auto; ">
 
-              <div style="text-align: center; font-weight: bold; background-color: yellow; width: fit-content; margin: auto;">Changes are saved in this section are saved automatically.</div>
+              <div style="text-align: center; font-weight: bold; background-color: yellow; width: fit-content; margin: auto;">Changes made in this section are saved automatically.</div>
 
               Below is a list of each committee with volunteer positions available for that committee.with a basic job description, an estimate of the time of year that committee is active and whether that job can be done from home. If special skills are required for that position, it will be indicated in the description.
 
