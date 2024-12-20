@@ -12,7 +12,21 @@ createCustomElement('scholarship-application-component', function () {
 
     // events must be inline
 
-}, applicationTemplate, '');
+}, applicationTemplate, '', {
+  attributes:[
+    'createdAt',
+    'scholarshipGranted',
+    'hasBeenReviewed',
+    'approved',
+    'email',
+    'hasNotReceivedScholarshipPreviously',
+    'needForScholarship',
+    'fbId',
+    'name',
+    'firstName',
+    'lastName',
+  ]
+});
 
 document.addEventListener('DOMContentLoaded', function() {
 

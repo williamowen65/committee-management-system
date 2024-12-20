@@ -847,7 +847,9 @@ var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js
   // Fot some reason whe nthe component is loaded via javascript, this call back doesnt fire.
 
   // events must be inline
-}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '');
+}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '', {
+  attributes: ['createdAt', 'scholarshipGranted', 'hasBeenReviewed', 'approved', 'email', 'hasNotReceivedScholarshipPreviously', 'needForScholarship', 'fbId', 'name', 'firstName', 'lastName']
+});
 document.addEventListener('DOMContentLoaded', function () {
   window.updateScholarship = function (event, reviewAnswer) {
     logIf.component && console.log("updateScholarship", event);
