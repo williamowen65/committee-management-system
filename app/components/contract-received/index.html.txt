@@ -1,10 +1,14 @@
 <div class="contract-received ">
   <div class="preview">
 
-    <h2 class="user-name">
-      ${firstName}
-      ${lastName}
-    </h2>
+    <div>
+
+      <h2 class="user-name" style="margin-bottom: 0">
+        ${firstName}
+        ${lastName}
+      </h2>
+      <b><ul style="margin: 0; padding: 0; list-style: none;">${committeeRoles}</ul></b>
+    </div>
     <button onclick="event.target.closest('.contract-received').classList.toggle('reveal')">View Details</button>
   </div>
   <div class="content ">
@@ -26,13 +30,7 @@
     <div><b>Artist Statement:</b> 
     <div class="level-1" style="translate: 0px -10px">${artistStatement ? artistStatement : 'N/A' }</div></div>
     <div><b>Artist Tagline:</b> ${artistTagline ? artistTagline : 'N/A'}</div>
-   
-
-
-   
-    <div><b>Committee Roles:</b> ${committeeRoles}</div>
-
-
+  
     <div style="display: flex; justify-content: center; flex-wrap: wrap; align-items: end;">
       <style>
         img {
@@ -68,7 +66,6 @@
       </div>
     </div>
 
-    <div><b>Signature:</b> ${signature ? signature : 'N/A'}</div>
   </div>
 
 </div>
