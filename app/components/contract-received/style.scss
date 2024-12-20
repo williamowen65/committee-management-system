@@ -1,3 +1,15 @@
 .contract-received{
-    border: 1px solid black
+    
+    .preview{
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .hide{
+        display: none;
+    }
+    .content{
+        padding: 10px;
+    }
 }

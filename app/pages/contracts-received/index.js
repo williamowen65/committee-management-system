@@ -46,7 +46,11 @@ function renderContracts(contracts) {
 
         contractDiv.init()
 
+        const div=document.createElement('div')
+        div.classList.add('container')
+        div.appendChild(contractDiv)
 
-        contractsDiv.appendChild(contractDiv)
+        div.appendChild(document.createElement('hr'))
+        contractsDiv.appendChild(div)
     })
 }

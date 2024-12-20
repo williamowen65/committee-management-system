@@ -1152,9 +1152,17 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `.contract-received {
-  border: 1px solid black;
-}`, "",{"version":3,"sources":["webpack://./app/components/contract-received/style.scss"],"names":[],"mappings":"AAAA;EACI,uBAAA;AACJ","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, `.contract-received .preview {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+.contract-received .hide {
+  display: none;
+}
+.contract-received .content {
+  padding: 10px;
+}`, "",{"version":3,"sources":["webpack://./app/components/contract-received/style.scss"],"names":[],"mappings":"AAEI;EACI,aAAA;EACA,8BAAA;EACA,aAAA;AADR;AAII;EACI,aAAA;AAFR;AAII;EACI,aAAA;AAFR","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2147,7 +2155,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n<div class=\"contract-received\">\r\n  <div class=\"user-name\">\r\n    ${firstName}\r\n    ${lastName}\r\n  </div>\r\n  <div style=\"display: none;\">\r\n\r\n  ${membershipPaid}\r\n  ${scholarshipApplied}\r\n  ${studioSharingAnswer}\r\n  ${artisticDemonstration}\r\n  ${artistStatement}\r\n  ${artistTagline}\r\n  ${businessEmail}\r\n  ${facebook}\r\n  ${instagram}\r\n  ${mailingAddress}\r\n  ${membershipPaid}\r\n  ${personalEmail}\r\n  ${phone}\r\n  ${studioAddress}\r\n  ${website}\r\n  ${committeeRoleId}\r\n  ${artistInStudioImage}\r\n  ${brochureImage}\r\n  ${digitalImage1}\r\n  ${digitalImage2}\r\n  ${digitalImage3}\r\n  ${signature}\r\n</div>\r\n\r\n</div>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n<div class=\"contract-received \">\r\n  <div class=\"preview\">\r\n\r\n    <div class=\"user-name\">\r\n      ${firstName}\r\n      ${lastName}\r\n    </div>\r\n    <button onclick=\"event.target.closest('.contract-received').querySelector('.content').classList.toggle('hide')\">View Details</button>\r\n  </div>\r\n    <div class=\"hide content \">\r\n${membershipPaid}\r\n${scholarshipApplied}\r\n${studioSharingAnswer}\r\n${artisticDemonstration}\r\n${artistStatement}\r\n${artistTagline}\r\n${businessEmail}\r\n${facebook}\r\n${instagram}\r\n${mailingAddress}\r\n${membershipPaid}\r\n${personalEmail}\r\n${phone}\r\n${studioAddress}\r\n${website}\r\n${committeeRoleId}\r\n${artistInStudioImage}\r\n${brochureImage}\r\n${digitalImage1}\r\n  ${digitalImage2}\r\n  ${digitalImage3}\r\n  ${signature}\r\n</div>\r\n\r\n</div>\r\n");
 
 /***/ }),
 
