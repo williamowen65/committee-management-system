@@ -122,11 +122,12 @@ function allContractsButton(role) {
 
   setTimeout(() => {
     // listen to new applications changes
-    CRUD.listen('ghost-contracts', null, (contracts) => {
-      const totalToReview = contracts.filter(app => app.hasBeenReviewed === false).length
-      const badge = document.querySelector('a[href="/contracts-received"] .badge')
-      badge.innerText = totalToReview
-      badge.setAttribute('data-count', totalToReview)
+    CRUD.readAll('ghost-contracts').then(contracts => {
+        logIf.client || true && console.log({ contracts })
+        const totalToReview = contracts.length
+        const badge = document.querySelector('a[href="/contracts-received"] .badge')
+        badge.innerText = totalToReview
+        badge.setAttribute('data-count', totalToReview)
     })
   
   }, 1)
