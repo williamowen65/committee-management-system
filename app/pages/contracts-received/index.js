@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    CRUD.readAll('ghost-contracts').then(renderContracts)
+    CRUD.readAll('ghost-contracts').then(contracts => {
+        return contracts.filter(contract => contract.artistDetails.membershipPaid === true)
+    }).then(renderContracts)
 })
 
 function renderContracts(contracts) {
@@ -15,7 +17,7 @@ function renderContracts(contracts) {
             lastName: contract?.artistDetails?.lastName || '',
             membershipPaid: contract?.artistDetails?.membershipPaid || '',
             scholarshipApplied: contract?.artistDetails?.scholarshipApplied || '',
-            studioSharingAnswer: contract?.artistDetails?.studioSharingAnswer || '',
+            studioSharingAnswer: contract?.StudioSharingAnswer || '',
             artisticDemonstration: contract?.artistDetails?.artisticDemonstration || '',
             artistStatement: contract?.artistDetails?.artistStatement || '',
             artistTagline: contract?.artistDetails?.artistTagline || '',
@@ -35,6 +37,8 @@ function renderContracts(contracts) {
             digitalImage3: contract?.images?.digitalImage3 || '',
             signature: contract?.signature || '',
         }
+
+        console.log({ contractData, contract })
 
         // set each attribute
         Object.keys(contractData).forEach(key => {

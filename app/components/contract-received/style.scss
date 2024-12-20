@@ -4,6 +4,9 @@
         display: flex;
         justify-content: space-between;
         padding: 10px;
+        .user-name{
+            font-weight: bold;
+        }
     }
 
     .hide{
@@ -11,5 +14,9 @@
     }
     .content{
         padding: 10px;
+        div {
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+        }
     }
 }

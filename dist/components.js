@@ -1157,12 +1157,19 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.contract-received .preview {
   justify-content: space-between;
   padding: 10px;
 }
+.contract-received .preview .user-name {
+  font-weight: bold;
+}
 .contract-received .hide {
   display: none;
 }
 .contract-received .content {
   padding: 10px;
-}`, "",{"version":3,"sources":["webpack://./app/components/contract-received/style.scss"],"names":[],"mappings":"AAEI;EACI,aAAA;EACA,8BAAA;EACA,aAAA;AADR;AAII;EACI,aAAA;AAFR;AAII;EACI,aAAA;AAFR","sourceRoot":""}]);
+}
+.contract-received .content div {
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+}`, "",{"version":3,"sources":["webpack://./app/components/contract-received/style.scss"],"names":[],"mappings":"AAEI;EACI,aAAA;EACA,8BAAA;EACA,aAAA;AADR;AAEQ;EACI,iBAAA;AAAZ;AAII;EACI,aAAA;AAFR;AAII;EACI,aAAA;AAFR;AAGQ;EACI,mBAAA;EACA,qBAAA;AADZ","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2155,7 +2162,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n<div class=\"contract-received \">\r\n  <div class=\"preview\">\r\n\r\n    <div class=\"user-name\">\r\n      ${firstName}\r\n      ${lastName}\r\n    </div>\r\n    <button onclick=\"event.target.closest('.contract-received').querySelector('.content').classList.toggle('hide')\">View Details</button>\r\n  </div>\r\n    <div class=\"hide content \">\r\n${membershipPaid}\r\n${scholarshipApplied}\r\n${studioSharingAnswer}\r\n${artisticDemonstration}\r\n${artistStatement}\r\n${artistTagline}\r\n${businessEmail}\r\n${facebook}\r\n${instagram}\r\n${mailingAddress}\r\n${membershipPaid}\r\n${personalEmail}\r\n${phone}\r\n${studioAddress}\r\n${website}\r\n${committeeRoleId}\r\n${artistInStudioImage}\r\n${brochureImage}\r\n${digitalImage1}\r\n  ${digitalImage2}\r\n  ${digitalImage3}\r\n  ${signature}\r\n</div>\r\n\r\n</div>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n<div class=\"contract-received \">\r\n  <div class=\"preview\">\r\n\r\n    <div class=\"user-name\">\r\n      ${firstName}\r\n      ${lastName}\r\n    </div>\r\n    <button onclick=\"event.target.closest('.contract-received').querySelector('.content').classList.toggle('hide')\">View Details</button>\r\n  </div>\r\n    <div class=\"hide content \">\r\n<div>Membership Paid: ${membershipPaid ? 'True' : 'False'}</div>\r\n<div>Scholarship Applied: ${scholarshipApplied ? 'True' : 'False'}</div>\r\n<div>Studio Sharing Answer: ${studioSharingAnswer ? studioSharingAnswer : 'N/A'}</div>\r\n<div>Artistic Demonstration: ${artisticDemonstration ?  artisticDemonstration : 'N/A'}</div>\r\n<div>Artist Statement: ${artistStatement ? artistStatement : 'N/A' }</div>\r\n<div>Artist Tagline: ${artistTagline ? artistTagline : 'N/A'}</div>\r\n\r\n${businessEmail}\r\n${facebook}\r\n${instagram}\r\n${mailingAddress}\r\n${membershipPaid}\r\n${personalEmail}\r\n${phone}\r\n${studioAddress}\r\n${website}\r\n${committeeRoleId}\r\n${artistInStudioImage}\r\n${brochureImage}\r\n${digitalImage1}\r\n  ${digitalImage2}\r\n  ${digitalImage3}\r\n  ${signature}\r\n</div>\r\n\r\n</div>\r\n");
 
 /***/ }),
 

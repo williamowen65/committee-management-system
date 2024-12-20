@@ -9,12 +9,13 @@
     <button onclick="event.target.closest('.contract-received').querySelector('.content').classList.toggle('hide')">View Details</button>
   </div>
     <div class="hide content ">
-${membershipPaid}
-${scholarshipApplied}
-${studioSharingAnswer}
-${artisticDemonstration}
-${artistStatement}
-${artistTagline}
+<div>Membership Paid: ${membershipPaid ? 'True' : 'False'}</div>
+<div>Scholarship Applied: ${scholarshipApplied ? 'True' : 'False'}</div>
+<div>Studio Sharing Answer: ${studioSharingAnswer ? studioSharingAnswer : 'N/A'}</div>
+<div>Artistic Demonstration: ${artisticDemonstration ?  artisticDemonstration : 'N/A'}</div>
+<div>Artist Statement: ${artistStatement ? artistStatement : 'N/A' }</div>
+<div>Artist Tagline: ${artistTagline ? artistTagline : 'N/A'}</div>
+
 ${businessEmail}
 ${facebook}
 ${instagram}
