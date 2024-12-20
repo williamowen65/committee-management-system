@@ -2,7 +2,7 @@ import contractReceived from './index.html.txt';
 import { createCustomElement, evaluateTemplate } from '../../../utils/custom-element';
 import './style.scss';
 
-function renderCommitteeRole(committeeRoleId) {}
+
 
 
 createCustomElement('contract-received', function () {
@@ -27,7 +27,7 @@ createCustomElement('contract-received', function () {
         'phone',
         'studioAddress',
         'website',
-        'committeeRoleId',
+        'committeeRoles',
         'artistInStudioImage',
         'brochureImage',
         'digitalImage1',
@@ -35,7 +35,4 @@ createCustomElement('contract-received', function () {
         'digitalImage3',
         'signature',
     ],
-    methods: [
-        renderCommitteeRole
-    ]
 });

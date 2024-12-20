@@ -25,8 +25,8 @@
 <div><b>Phone:</b> ${phone ? phone : 'N/A'}</div>
 <div><b>Studio Address:</b> ${studioAddress ? studioAddress : 'N/A'}</div>
 <div><b>Website:</b> ${website ? website : 'N/A'}</div>
+<div><b>Committee Roles:</b> ${committeeRoles}</div>
 
-${committeeRoleId}
 ${artistInStudioImage}
 ${brochureImage}
 ${digitalImage1}

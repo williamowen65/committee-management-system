@@ -1,5 +1,5 @@
+import roles from '../my-contract/committee-roles.js'
 document.addEventListener('DOMContentLoaded', () => {
-
     CRUD.readAll('ghost-contracts').then(contracts => {
         return contracts.filter(contract => contract.artistDetails.membershipPaid === true)
     }).then(renderContracts)
@@ -29,7 +29,7 @@ function renderContracts(contracts) {
             phone: contract?.artistDetails?.phone || '',
             studioAddress: contract?.artistDetails?.studioAddress || '',
             website: contract?.artistDetails?.website || '',
-            committeeRoleId: contract?.committeeRoleId || '',
+            committeeRoles: contract?.committeeRoleId && renderCommitteeRoles(contract.committeeRoleId) || '',
             artistInStudioImage: contract?.images?.artistInStudioImage || '',
             brochureImage: contract?.images?.brochureImage || '',
             digitalImage1: contract?.images?.digitalImage1 || '',
@@ -57,4 +57,15 @@ function renderContracts(contracts) {
         div.appendChild(document.createElement('hr'))
         contractsDiv.appendChild(div)
     })
+}
+
+function renderCommitteeRoles(committeeRoleId) {
+
+
+    return committeeRoleId.map(role => {
+
+        const title = roles[role].title
+
+        return `<li>${title}</li>`
+    }).join('')
 }
