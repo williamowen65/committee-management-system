@@ -119,6 +119,18 @@ function newScholarshipApplicationsButton(role) {
 }
 
 function allContractsButton(role) {
+
+  setTimeout(() => {
+    // listen to new applications changes
+    CRUD.listen('ghost-contracts', null, (contracts) => {
+      const totalToReview = contracts.filter(app => app.hasBeenReviewed === false).length
+      const badge = document.querySelector('a[href="/contracts-received"] .badge')
+      badge.innerText = totalToReview
+      badge.setAttribute('data-count', totalToReview)
+    })
+  
+  }, 1)
+
   return `
       <a href="/contracts-received">
         <button style="position: relative;">Contracts Received <span class="badge" data-count="0"></span></button>
