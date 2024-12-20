@@ -1162,6 +1162,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.contract-received {
   padding: 10px;
   position: sticky;
   background: white;
+  z-index: 100;
   top: 0;
 }
 .contract-received .preview .user-name {
@@ -1183,7 +1184,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.contract-received {
 }
 .contract-received .level-1 {
   padding-left: 50px;
-}`, "",{"version":3,"sources":["webpack://./app/components/contract-received/style.scss"],"names":[],"mappings":"AAAA;EACI,kBAAA;AACJ;AACI;EACI,aAAA;EACA,qBAAA;EACA,8BAAA;EACA,aAAA;EACA,gBAAA;EACA,iBAAA;EACA,MAAA;AACR;AAAQ;EACI,iBAAA;AAEZ;AAGI;EACI,aAAA;EACA,aAAA;AADR;AAEQ;EACI,mBAAA;EACA,qBAAA;AAAZ;AAGI;EACI,uBAAA;AADR;AAEQ;EACI,cAAA;AAAZ;AAII;EACI,kBAAA;AAFR","sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./app/components/contract-received/style.scss"],"names":[],"mappings":"AAAA;EACI,kBAAA;AACJ;AACI;EACI,aAAA;EACA,qBAAA;EACA,8BAAA;EACA,aAAA;EACA,gBAAA;EACA,iBAAA;EACA,YAAA;EACA,MAAA;AACR;AAAQ;EACI,iBAAA;AAEZ;AAGI;EACI,aAAA;EACA,aAAA;AADR;AAEQ;EACI,mBAAA;EACA,qBAAA;AAAZ;AAGI;EACI,uBAAA;AADR;AAEQ;EACI,cAAA;AAAZ;AAII;EACI,kBAAA;AAFR","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
