@@ -1,6 +1,6 @@
 import contractReceived from './index.html.txt';
 import { createCustomElement, evaluateTemplate } from '../../../utils/custom-element';
-// import './style.scss';
+import './style.scss';
 
 
 

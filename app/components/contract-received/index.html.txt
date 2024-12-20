@@ -1,7 +1,11 @@
 
-<div>
-  ${firstName}
-  ${lastName}
+<div class="contract-received">
+  <div class="user-name">
+    ${firstName}
+    ${lastName}
+  </div>
+  <div style="display: none;">
+
   ${membershipPaid}
   ${scholarshipApplied}
   ${studioSharingAnswer}
@@ -24,4 +28,6 @@
   ${digitalImage2}
   ${digitalImage3}
   ${signature}
+</div>
+
 </div>
