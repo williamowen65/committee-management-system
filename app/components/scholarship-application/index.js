@@ -23,6 +23,7 @@ createCustomElement('scholarship-application-component', function () {
     'needForScholarship',
     'fbId',
     'name',
+    'disabled',
     'firstName',
     'lastName',
   ]

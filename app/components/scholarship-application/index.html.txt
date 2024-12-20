@@ -45,7 +45,7 @@
                 Click here to verify that you have not received a GHOST artist scholarship previously
         </label>
    
-        <textarea-component disabled   fieldName="needForScholarship-${randomId}" required
+        <textarea-component disabled fieldName="needForScholarship-${randomId}" required
              alias=" Please explain your need for a scholarship"
             value="${needForScholarship}"></textarea-component>
 

@@ -547,13 +547,13 @@ var inputAttributes = ['waStateBusinessLicenseUbiNumber', 'subcaption', 'checked
             var label = target.closest('label');
             if (label) {
               var input = label.querySelector('input');
-              var isShowingPassword = label.getAttribute('password-toggle') === "hide";
+              var isShowingPassword = label.getAttribute('password-toggle') === 'hide';
               if (isShowingPassword) {
                 input.type = 'text';
-                label.setAttribute('password-toggle', "show");
+                label.setAttribute('password-toggle', 'show');
               } else {
                 input.type = 'password';
-                label.setAttribute('password-toggle', "hide");
+                label.setAttribute('password-toggle', 'hide');
               }
             }
           });
@@ -569,7 +569,7 @@ var inputAttributes = ['waStateBusinessLicenseUbiNumber', 'subcaption', 'checked
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_3__.createCustomElement)('textarea-component', function () {
   moveLabel.bind(this)();
 
-  // check for value 
+  // check for value
   var value = this.getAttribute('value');
   if (value) {
     this.querySelector('textarea').innerText = value;
@@ -681,14 +681,14 @@ var inputAttributes = ['waStateBusinessLicenseUbiNumber', 'subcaption', 'checked
               var reader = new FileReader();
               reader.onloadend = function () {
                 _this2.setImage(reader.result, file);
-                _this2.querySelector(".file-input-component").classList.remove('hasError');
+                _this2.querySelector('.file-input-component').classList.remove('hasError');
 
                 // Display possible errors with this file
-                // Requirements: Size must be no larger than 3 mb. 
+                // Requirements: Size must be no larger than 3 mb.
                 // Must not be a thumbnail image.
                 // One image must be a square
 
-                logIf.component && console.log("file size check ", {
+                logIf.component && console.log('file size check ', {
                   fileSize: file.size,
                   fileName: file.name,
                   fileType: file.type
@@ -700,7 +700,7 @@ var inputAttributes = ['waStateBusinessLicenseUbiNumber', 'subcaption', 'checked
                   error.textContent = 'This image is too small. Please upload an image larger than 400 KB';
                   error.classList.add('error');
                   parentContainer.appendChild(error);
-                  _this2.querySelector(".file-input-component").classList.add('hasError');
+                  _this2.querySelector('.file-input-component').classList.add('hasError');
                 }
                 // make sure the image isn't too big
                 if (file.size > 5000000) {
@@ -709,7 +709,7 @@ var inputAttributes = ['waStateBusinessLicenseUbiNumber', 'subcaption', 'checked
                   _error.textContent = 'File is too large. Please upload an image less than 5 mb.';
                   _error.classList.add('error');
                   parentContainer.appendChild(_error);
-                  _this2.querySelector(".file-input-component").setAttribute('hasError', true);
+                  _this2.querySelector('.file-input-component').setAttribute('hasError', true);
                 }
 
                 // Get attribute "square" from component
@@ -848,7 +848,7 @@ var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js
 
   // events must be inline
 }, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '', {
-  attributes: ['createdAt', 'scholarshipGranted', 'hasBeenReviewed', 'approved', 'email', 'hasNotReceivedScholarshipPreviously', 'needForScholarship', 'fbId', 'name', 'firstName', 'lastName']
+  attributes: ['createdAt', 'scholarshipGranted', 'hasBeenReviewed', 'approved', 'email', 'hasNotReceivedScholarshipPreviously', 'needForScholarship', 'fbId', 'name', 'disabled', 'firstName', 'lastName']
 });
 document.addEventListener('DOMContentLoaded', function () {
   window.updateScholarship = function (event, reviewAnswer) {
@@ -2197,7 +2197,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div>${description}</div>\r\n<label for=\"${fieldName}\" style=\"width: 100%; box-sizing: border-box; margin-top: 20px;\" class=\"${value ? \" moveLabel\"\r\n    : \"\" }\">\r\n    <small class=\"text\" part=\"labelText\">${alias && required ? alias + \"*\" : alias ? alias : \"\"} </small>\r\n    <textarea ${disabled ? \"disabled\" : \"\" } placeholder=\"${placeholder}\" id=\"${fieldName}\" name=\"${fieldName}\"\r\n        ${required ? \"required\" : \"\" }>${value ? value : \"\"}</textarea>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</label>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div>${description}</div>\r\n<label for=\"${fieldName}\" style=\"width: 100%; box-sizing: border-box; margin-top: 20px;\" class=\"${value ? \" moveLabel\"\r\n    : \"\" }\">\r\n    <small class=\"text\" part=\"labelText\">${alias && required ? alias + \"*\" : alias ? alias : \"\"} </small>\r\n    <textarea ${disabled ? \"disabled=true\" : \"\" } placeholder=\"${placeholder}\" id=\"${fieldName}\" name=\"${fieldName}\"\r\n        ${required ? \"required\" : \"\" }>${value ? value : \"\"}</textarea>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</label>");
 
 /***/ }),
 
@@ -2227,7 +2227,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n\n<div class=\"artist-application-review\" >\n\n    <div class=\"app-preview\">\n        <div>\n\n           <h3>${name}</h3>\n           \n            <p>Submitted on: ${createdAt}</p>\n        </div>\n        <div>\n            <h4>Status: </h4>\n            <span class=\"status\">\n                <span>${scholarshipGranted=='true' ? \"Scholarship Granted\" : \"\"}</span>\n                <span>${hasBeenReviewed=='true' ? \"\" : \"Application needs review\"}</span>\n                <span>${(hasBeenReviewed && scholarshipGranted==\"false\") ? \"Not approved for scholarship\" : \"\"}</span>\n            </span>\n            <!-- <span>${approved  ? \"Approved\" :  hasBeenReviewed ?  \"Not Approved\": \"Has not been reviewed\" }</span> -->\n        </div>\n        <button class=\"expandApplication show\" onclick=\"event.target.closest('.artist-application-review').classList.toggle('expanded')\"\n        >${hasBeenReviewed =='true' ? \"Review Old Application\" : \"Review\"}</button>\n        <button class=\"expandApplication hide\" onclick=\"event.target.closest('.artist-application-review').classList.toggle('expanded')\"\n        >Minimize Application</button>\n        \n    </div>\n    <div class=\"app-contents\">\n\n\n        <h3>Artist Name</h3>\n        <div class=\"row\">\n            <input-component value=\"${name}\" disabled=\"true\" style=\"width: 48%\" required=\"true\"\n                fieldName=\"name\" alias=\"Name\"></input-component>\n      \n        </div>\n        <div class=\"row\">\n            <input-component value=\"${email}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" type=\"email\"\n                fieldName=\"email\" alias=\"Email\"></input-component>\n        </div>\n        \n\n        <label for=\"hasNotReceivedScholarshipPreviously\">\n            <input disabled ${hasNotReceivedScholarshipPreviously == \"true\" ? \"checked\" : \"\"}  required type=\"checkbox\" name=\"hasNotReceivedScholarshipPreviously\" value=\"true\"\n                id=\"hasNotReceivedScholarshipPreviously\"></input>\n                Click here to verify that you have not received a GHOST artist scholarship previously\n        </label>\n   \n        <textarea-component disabled   fieldName=\"needForScholarship-${randomId}\" required\n             alias=\" Please explain your need for a scholarship\"\n            value=\"${needForScholarship}\"></textarea-component>\n\n            <div style=\"text-align: center;\">\n                <button data-fb-id=\"${fbId}\" onclick=\"window.updateScholarship(event,true)\">Approve Scholarship</button>\n                <button data-fb-id=\"${fbId}\" onclick=\"window.updateScholarship(event,false)\">Disapprove</button>\n\n            </div>\n    </div>\n\n</div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n\n<div class=\"artist-application-review\" >\n\n    <div class=\"app-preview\">\n        <div>\n\n           <h3>${name}</h3>\n           \n            <p>Submitted on: ${createdAt}</p>\n        </div>\n        <div>\n            <h4>Status: </h4>\n            <span class=\"status\">\n                <span>${scholarshipGranted=='true' ? \"Scholarship Granted\" : \"\"}</span>\n                <span>${hasBeenReviewed=='true' ? \"\" : \"Application needs review\"}</span>\n                <span>${(hasBeenReviewed && scholarshipGranted==\"false\") ? \"Not approved for scholarship\" : \"\"}</span>\n            </span>\n            <!-- <span>${approved  ? \"Approved\" :  hasBeenReviewed ?  \"Not Approved\": \"Has not been reviewed\" }</span> -->\n        </div>\n        <button class=\"expandApplication show\" onclick=\"event.target.closest('.artist-application-review').classList.toggle('expanded')\"\n        >${hasBeenReviewed =='true' ? \"Review Old Application\" : \"Review\"}</button>\n        <button class=\"expandApplication hide\" onclick=\"event.target.closest('.artist-application-review').classList.toggle('expanded')\"\n        >Minimize Application</button>\n        \n    </div>\n    <div class=\"app-contents\">\n\n\n        <h3>Artist Name</h3>\n        <div class=\"row\">\n            <input-component value=\"${name}\" disabled=\"true\" style=\"width: 48%\" required=\"true\"\n                fieldName=\"name\" alias=\"Name\"></input-component>\n      \n        </div>\n        <div class=\"row\">\n            <input-component value=\"${email}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" type=\"email\"\n                fieldName=\"email\" alias=\"Email\"></input-component>\n        </div>\n        \n\n        <label for=\"hasNotReceivedScholarshipPreviously\">\n            <input disabled ${hasNotReceivedScholarshipPreviously == \"true\" ? \"checked\" : \"\"}  required type=\"checkbox\" name=\"hasNotReceivedScholarshipPreviously\" value=\"true\"\n                id=\"hasNotReceivedScholarshipPreviously\"></input>\n                Click here to verify that you have not received a GHOST artist scholarship previously\n        </label>\n   \n        <textarea-component disabled fieldName=\"needForScholarship-${randomId}\" required\n             alias=\" Please explain your need for a scholarship\"\n            value=\"${needForScholarship}\"></textarea-component>\n\n            <div style=\"text-align: center;\">\n                <button data-fb-id=\"${fbId}\" onclick=\"window.updateScholarship(event,true)\">Approve Scholarship</button>\n                <button data-fb-id=\"${fbId}\" onclick=\"window.updateScholarship(event,false)\">Disapprove</button>\n\n            </div>\n    </div>\n\n</div>");
 
 /***/ }),
 
