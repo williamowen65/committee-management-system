@@ -1,38 +1,70 @@
-
 <div class="contract-received ">
   <div class="preview">
 
-    <div class="user-name">
+    <h2 class="user-name">
       ${firstName}
       ${lastName}
-    </div>
+    </h2>
     <button onclick="event.target.closest('.contract-received').classList.toggle('reveal')">View Details</button>
   </div>
-    <div class="content ">
-<div><b>Membership Paid:</b> ${membershipPaid ? 'True' : 'False'}</div>
-<div><b>Scholarship Applied:</b> ${scholarshipApplied ? 'True' : 'False'}</div>
-<div><b>Studio Sharing Answer:</b> <div class="level-1">${studioSharingAnswer ? studioSharingAnswer : 'N/A'}</div></div>
-<div><b>Artistic Demonstration:</b> ${artisticDemonstration ?  artisticDemonstration : 'N/A'}</div>
-<div><b>Artist Statement:</b> ${artistStatement ? artistStatement : 'N/A' }</div>
-<div><b>Artist Tagline:</b> ${artistTagline ? artistTagline : 'N/A'}</div>
-<div><b>Business Email:</b> ${businessEmail ? businessEmail : 'N/A'} </div>
+  <div class="content ">
+    <div><b>Membership Paid:</b> ${membershipPaid ? 'True' : 'False'}</div>
+    <div><b>Scholarship Applied:</b> ${scholarshipApplied ? 'True' : 'False'}</div>
+    <div><b>Studio Sharing Answer:</b>
+      <div class="level-1">${studioSharingAnswer ? studioSharingAnswer : 'N/A'}</div>
+    </div>
+    <div><b>Artistic Demonstration:</b> ${artisticDemonstration ? artisticDemonstration : 'N/A'}</div>
+    <div><b>Artist Statement:</b> ${artistStatement ? artistStatement : 'N/A' }</div>
+    <div><b>Artist Tagline:</b> ${artistTagline ? artistTagline : 'N/A'}</div>
+    <div><b>Business Email:</b> ${businessEmail ? businessEmail : 'N/A'} </div>
 
-<div><b>Facebook:</b> ${facebook ? facebook : 'N/A'}</div>
-<div><b>Instagram:</b> ${instagram ? instagram : 'N/A'}</div>
-<div><b>Mailing Address:</b> ${mailingAddress ? mailingAddress : 'N/A'}</div>
-<div><b>Membership Paid:</b> ${membershipPaid ? 'True' : 'False'}</div>
-<div><b>Personal Email:</b> ${personalEmail ? personalEmail : 'N/A'}</div>
-<div><b>Phone:</b> ${phone ? phone : 'N/A'}</div>
-<div><b>Studio Address:</b> ${studioAddress ? studioAddress : 'N/A'}</div>
-<div><b>Website:</b> ${website ? website : 'N/A'}</div>
-<div><b>Committee Roles:</b> ${committeeRoles}</div>
+    <div><b>Facebook:</b> ${facebook ? facebook : 'N/A'}</div>
+    <div><b>Instagram:</b> ${instagram ? instagram : 'N/A'}</div>
+    <div><b>Mailing Address:</b> ${mailingAddress ? mailingAddress : 'N/A'}</div>
+    <div><b>Membership Paid:</b> ${membershipPaid ? 'True' : 'False'}</div>
+    <div><b>Personal Email:</b> ${personalEmail ? personalEmail : 'N/A'}</div>
+    <div><b>Phone:</b> ${phone ? phone : 'N/A'}</div>
+    <div><b>Studio Address:</b> ${studioAddress ? studioAddress : 'N/A'}</div>
+    <div><b>Website:</b> ${website ? website : 'N/A'}</div>
+    <div><b>Committee Roles:</b> ${committeeRoles}</div>
 
-${artistInStudioImage}
-${brochureImage}
-${digitalImage1}
-  ${digitalImage2}
-  ${digitalImage3}
-  ${signature}
-</div>
+
+    <div style="display: flex; justify-content: center; flex-wrap: wrap; align-items: end;">
+      <style>
+        img {
+          width: 200px;
+          height: 200px;
+          object-fit: cover;
+          margin: 10px;
+        }
+      </style>
+      <div>
+        <b>Digital Image 1:</b>
+        <img src="${digitalImage1}"></img>
+      </div>
+      <div><b>Digital Image 2:</b>
+        <img src="${digitalImage2}"></img>
+      </div>
+      <div><b>Digital Image 3:</b>
+        <img src="${digitalImage3}"></img>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+      <div>
+        <b>Brochure Image:</b>
+        <img src="${brochureImage}"></img>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+      <div><b>Artist in Studio Image:</b>
+        <img src="${artistInStudioImage}"></img>
+      </div>
+    </div>
+
+    <div><b>Signature:</b> ${signature ? signature : 'N/A'}</div>
+  </div>
 
 </div>
