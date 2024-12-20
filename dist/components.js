@@ -255,7 +255,7 @@ var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js
 
   // events must be inline
 }, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '', {
-  attributes: ['firstName', 'lastName', 'medium', 'createdAt', 'approved', 'hasBeenReviewed', 'email', 'phone', 'website', 'studioAddress', 'mailingAddress', 'isWithinBoundaries', 'randomId']
+  attributes: ['firstName', 'lastName', 'medium', 'createdAt', 'approved', 'hasBeenReviewed', 'email', 'phone', 'website', 'studioAddress', 'mailingAddress', 'isWithinBoundaries', 'randomId', 'waStateBusinessLicenseUbiNumber', 'studioSharingResponse', 'artistMentor', 'howDidYouHearAboutUs', 'digitalImage1', 'digitalImage2', 'digitalImage3', 'digitalImage4', 'artistStatement', 'websiteSocialMedia', 'fbId']
 });
 document.addEventListener('DOMContentLoaded', function () {
   window.updateReview = function (event, reviewAnswer) {
@@ -524,7 +524,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 
 
 var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js");
-var inputAttributes = ['subcaption', 'checked', 'placeholder', 'width', 'disabled', 'alias', 'labelClass', 'id', 'type', 'value', 'moveLabel', 'className', 'fieldName', 'required', 'multiple', 'accept', 'description'];
+var inputAttributes = ['waStateBusinessLicenseUbiNumber', 'subcaption', 'checked', 'placeholder', 'width', 'disabled', 'alias', 'labelClass', 'id', 'type', 'value', 'moveLabel', 'className', 'fieldName', 'required', 'multiple', 'accept', 'description'];
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_3__.createCustomElement)('input-component', function () {
   logIf.component && console.log('input-component loaded');
   // set slot

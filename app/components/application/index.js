@@ -26,8 +26,18 @@ createCustomElement('application-component', function () {
     'studioAddress',
     'mailingAddress',
     'isWithinBoundaries',
-    'randomId'
-  
+    'randomId',
+    'waStateBusinessLicenseUbiNumber',
+    'studioSharingResponse',
+    'artistMentor',
+    'howDidYouHearAboutUs',
+    'digitalImage1',
+    'digitalImage2',
+    'digitalImage3',
+    'digitalImage4',
+    'artistStatement',
+    'websiteSocialMedia',
+    'fbId'
   ]
 });
 

@@ -5,7 +5,7 @@ import { createCustomElement, evaluateTemplate } from '../../../utils/custom-ele
 import './style.scss';
 const logIf = require("../../../utils/logIf.js");
 
-const inputAttributes =['subcaption', 'checked', 'placeholder','width','disabled', 'alias','labelClass','id', 'type', 'value', 'moveLabel', 'className', 'fieldName', 'required', 'multiple', 'accept', 'description']
+const inputAttributes =['waStateBusinessLicenseUbiNumber','subcaption', 'checked', 'placeholder','width','disabled', 'alias','labelClass','id', 'type', 'value', 'moveLabel', 'className', 'fieldName', 'required', 'multiple', 'accept', 'description']
 
 createCustomElement('input-component', function () {
     logIf.component && console.log('input-component loaded');
