@@ -10,7 +10,9 @@ createCustomElement('dual-login-form-component', function () {
 
     setUXEventListeners.bind(this)();
 
-}, dualLoginForm, '');
+}, dualLoginForm, '', {
+    attributes: ['loginImage', 'signupImage']
+});
 
 
 function setUXEventListeners() {

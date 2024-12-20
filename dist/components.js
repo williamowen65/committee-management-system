@@ -335,7 +335,9 @@ __webpack_require__.r(__webpack_exports__);
 var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js");
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('dual-login-form-component', function () {
   setUXEventListeners.bind(this)();
-}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '');
+}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '', {
+  attributes: ['loginImage', 'signupImage']
+});
 function setUXEventListeners() {
   // Change form from signup to login
   var dividerEl = this.querySelector('.os-dual-form');
