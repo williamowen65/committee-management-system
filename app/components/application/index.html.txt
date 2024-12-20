@@ -1,25 +1,3 @@
-<!-- 
-<div class="application-entry">
-    <p>First Name: ${firstName}</p>
-    <p>Last Name: ${lastName}</p>
-    <p>Medium: ${medium}</p>
-    
-    <p>Email: ${email}</p>
-    <p>Phone: ${phone}</p>
-    <p>Mailing Address: ${mailingAddress}</p>
-    <p>Studio Address: ${studioAddress}</p>
-    <p>Website/Social Media: ${websiteSocialMedia}</p>
-    <p>Artist Mentor: ${artistMentor}</p>
-    <p>Digital Image 1: <img width="200px" src="${digitalImage1}" alt="Digital Image 1"></p>
-    <p>Digital Image 2: <img width="200px" src="${digitalImage2}" alt="Digital Image 2"></p>
-    <p>Digital Image 3: <img width="200px" src="${digitalImage3}" alt="Digital Image 3"></p>
-    <p>Digital Image 4: <img width="200px" src="${digitalImage4}" alt="Digital Image 4"></p>
-    <p>Has Been Reviewed: ${hasBeenReviewed}</p>
-    <p>WA State Business License UBI Number: ${waStateBusinessLicenseUbiNumber}</p>
-    <p>Artist Statement: ${artistStatement}</p>
-    <p>Is Within Boundaries: ${isWithinBoundaries}</p>
-</div> -->
-
 
 <div class="artist-application-review" >
 

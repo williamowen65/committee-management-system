@@ -5,6 +5,7 @@ import { createCustomElement, evaluateTemplate } from '../../../utils/custom-ele
 import './style.scss';
 const logIf = require("../../../utils/logIf.js");
 
+const inputAttributes =['subcaption', 'checked', 'placeholder','width','disabled', 'alias','labelClass','id', 'type', 'value', 'moveLabel', 'className', 'fieldName', 'required', 'multiple', 'accept', 'description']
 
 createCustomElement('input-component', function () {
     logIf.component && console.log('input-component loaded');
@@ -54,7 +55,9 @@ createCustomElement('input-component', function () {
     }
 
 
-}, inputTemplate, '');
+}, inputTemplate, '', {
+    attributes: inputAttributes
+});
 
 createCustomElement('textarea-component', function () {
     moveLabel.bind(this)();
@@ -65,7 +68,9 @@ createCustomElement('textarea-component', function () {
         this.querySelector('textarea').innerText = value;
     }
 
-}, textareaTemplate, '');
+}, textareaTemplate, '',{
+    attributes: inputAttributes
+});
 
 
 createCustomElement('file-input-component', function () {
@@ -248,7 +253,9 @@ createCustomElement('file-input-component', function () {
     })
 
 
-}, fileInputTemplate, '');
+}, fileInputTemplate, '', {
+    attributes: inputAttributes
+});
 
 
 function moveLabel() {

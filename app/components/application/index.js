@@ -12,7 +12,24 @@ createCustomElement('application-component', function () {
 
     // events must be inline
 
-}, applicationTemplate, '');
+}, applicationTemplate, '', {
+  attributes:[
+    'firstName',
+    'lastName',
+    'medium',
+    'createdAt',
+    'approved',
+    'hasBeenReviewed',
+    'email',
+    'phone',
+    'website',
+    'studioAddress',
+    'mailingAddress',
+    'isWithinBoundaries',
+    'randomId'
+  
+  ]
+});
 
 document.addEventListener('DOMContentLoaded', function() {
 

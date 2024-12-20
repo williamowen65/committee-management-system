@@ -1,4 +1,6 @@
-export async function createCustomElement(name, onload, html, css, options ={}) {
+export async function createCustomElement(name, onload, html, css, options = {
+    attributes: [],
+}) {
     // create an HTML template element
     const template = document.createElement('template');
 
@@ -36,88 +38,23 @@ export async function createCustomElement(name, onload, html, css, options ={}) 
         }
 
         
-
-
-
-        attributeChangedCallback(name, oldValue, newValue) {
-            if (oldValue !== newValue) {
-                this.updateTemplate();
-            }
-        }
-
-        static get observedAttributes() {
-            return [
-                'fieldName', 'alias', 'required', 'type', 'multiple', 'accept', 'labelClass', 'redirect', 
-                'loginImage', 'signupImage', 'description', 'width', 'slotLinks', 'placeholder', 'test', 
-                'mailing-address', 'wa-state-business-license-ubi-number', 'website-social-media', 'medium', 
-                'email', 'artistMentor', 'digitalImage1', 'digitalImage2', 'digitalImage4', 'hasBeenReviewed', 
-                'phone', 'digitalImage3', 'firstName', 'studio-address', 'lastName', 'artistStatement', 
-                'isWithinBoundaries'
-            ];
-        }
-
         updateTemplate() {
+                // The random Id is to avoid conflicts with other instances of the same component
+            // in the same page (if you use the id attribute in a component.)
             const randomId = Math.floor(Math.random() * 1000000);
-            const context = {
-                fieldName: this.getAttribute('fieldName') || 'defaultFieldName',
-                alias: this.getAttribute('alias') || '',
-                required: this.hasAttribute('required') || false,
-                capitalizeFirstLetter: (str) => str.charAt(0).toUpperCase() + str.slice(1),
-                type: this.getAttribute('type') || 'text',
-                multiple: this.hasAttribute('multiple') || false,
-                accept: this.getAttribute('accept') || '',
-                labelClass: this.getAttribute('labelClass') || '',
-                redirect: this.getAttribute('redirect') || '',
-                loginImage: this.getAttribute('loginImage') || '',
-                signupImage: this.getAttribute('signupImage') || '',
-                description: this.getAttribute('description') || '',
-                width: this.getAttribute('width') || '',
-                slotLinks: this.getAttribute('slotLinks') || '',
-                placeholder: this.getAttribute('placeholder') || '',
-                test: this.getAttribute('test') || '',
-                disabled: this.hasAttribute('disabled') || false,
-                value: this.getAttribute('value') || '',
-                checked: this.hasAttribute('checked') || false,
 
-                firstName: this.getAttribute('firstName') || '',
-                lastName: this.getAttribute('lastName') || '',
-                email: this.getAttribute('email') || '',
-                waStateBusinessLicenseUbiNumber: this.getAttribute('wa-state-business-license-ubi-number') || '',
-                websiteSocialMedia: this.getAttribute('website-social-media') || '',
-                medium: this.getAttribute('medium') || '',
-                artistMentor: this.getAttribute('artistMentor') || '',
-                digitalImage1: this.getAttribute('digitalImage1') || '',
-                digitalImage2: this.getAttribute('digitalImage2') || '',
-                digitalImage4: this.getAttribute('digitalImage4') || '',
-                hasBeenReviewed: this.getAttribute('hasBeenReviewed') || '',
-                phone: this.getAttribute('phone') || '',
-                digitalImage3: this.getAttribute('digitalImage3') || '',
-                mailingAddress: this.getAttribute('mailing-address') || '',
-                studioAddress: this.getAttribute('studio-address') || '',
-                artistStatement: this.getAttribute('artistStatement') || '',
-                isWithinBoundaries: this.getAttribute('isWithinBoundaries') || '',
-                createdAt: this.getAttribute('createdAt') || '',
-                studioSharingResponse: this.getAttribute('studioSharingResponse') || '',
-                howDidYouHearAboutUs: this.getAttribute('howDidYouHearAboutUs') || '',
-                artistStatement: this.getAttribute('artistStatement') || '',
-                websiteSocialMedia: this.getAttribute('website-social-media') || '',
-                fbId: this.getAttribute('fbId') || '',
-                approved: this.getAttribute('approved') && this.getAttribute('approved') == "true" || false,
-                randomId,
-                CRUD: window.CRUD,
-                needForScholarship: this.getAttribute('needForScholarship') || '',
-                scholarshipGranted: this.getAttribute('scholarshipGranted') || '',
-                name: this.getAttribute('name') || '',
-                hasNotReceivedScholarshipPreviously: this.getAttribute('hasNotReceivedScholarshipPreviously') || '',
-                subcaption: this.getAttribute('subcaption') || '',
-                className: this.getAttribute('className') || '',
-                id: this.getAttribute('id') || '',
-                moveLabel: this.getAttribute('moveLabel') || '',
-                // paypalClientId: this.getAttribute('PAYPAL_CLIENT_ID') || '',
+            
+            // Get all the attributes of the custom element and pass them to the template
+            const context = {
+                // set default values of "" (empty string) for all attributes
+                ...options.attributes.reduce((acc, attr) => {
+                    acc[attr] = this.getAttribute(attr) || '';
+                    return acc;
+                }, {}),
+                randomId
             };
 
-
-            const evaluatedTemplate = evaluateTemplate(html, context);
+            const evaluatedTemplate = evaluateTemplate(html, context, name);
             this.innerHTML = `
                 <style>
                 ${css}

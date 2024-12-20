@@ -7,4 +7,6 @@ import './style.scss';
 createCustomElement('header-component', function () {
 
 
-}, headerTemplate, '');
+}, headerTemplate, '', {
+    attributes: ['slotLinks']
+});
