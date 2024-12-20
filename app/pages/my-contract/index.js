@@ -166,9 +166,9 @@ async function handleStudioSharingForm(e) {
     StudioSharingPayload.StudioSharingAnswer = studioPreference.parentNode.innerText;
     StudioSharingPayload.StudioSharingInfo.studioPreference = studioPreference.value;
 
-    const option1Selected = StudioSharingPayload.StudioSharingAnswer.includes('I have my own studio space')
+    const IHaveAStudio = StudioSharingPayload.StudioSharingAnswer.includes('I have my own studio space')
     // Get second string based on studioPreference 
-    if (option1Selected) {
+    if (IHaveAStudio) {
         const studioAvailability = form.querySelector('input[name="studioAvailability"]:checked')
         if (!studioAvailability) return formAlert("Please select an option. Can you share your studio space?");
         let studioAvailabilityAnswer = studioAvailability.parentNode.innerText;
@@ -177,14 +177,27 @@ async function handleStudioSharingForm(e) {
         StudioSharingPayload.StudioSharingAnswer += ' \n\t' + studioAvailabilityAnswer;
         StudioSharingPayload.StudioSharingInfo.studioAvailability = studioAvailability.value;
 
-        const IDontHaveRoomForAdditionalArtists = studioAvailabilityAnswer.includes('I want to stay at my own studio but do not have room for additional artists')
-        /// Get number of signs
-        if (IDontHaveRoomForAdditionalArtists) {
+        // Check for willingness to relocate
+        if (studioAvailabilityAnswer.includes("I have my own studio but am willing to show my art at another artist's studio space")) {
+            // find canopy preference 
+            const canopyPreference = form.querySelector('input[name="canopy-studio"]:checked')
+            if (!canopyPreference) return formAlert("Please select an option. Do you have a canopy?");
+            if (canopyPreference) {
+                // StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
+                StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
+                StudioSharingPayload.StudioSharingInfo['canopy-studio'] = canopyPreference.value;
+            }
+        }
+
+        // Check for no room at studio
+        if(studioAvailabilityAnswer.includes("I want to stay at my own studio but do not have room for additional artists")){
             const studioSigns2 = form.querySelector('input[name="studioSigns-2"]')
             if (!studioSigns2.value) return formAlert("Please provide information on how many signs you have");
-            StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + "I have " + studioSigns2.value.trim() + " signs";
+            StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + "I would like " + studioSigns2.value.trim() + " signs";
             StudioSharingPayload.StudioSharingInfo['studioSigns-2'] = studioSigns2.value;
         }
+
+       
 
 
         // Check for type of answer  "I can share my studio space"
@@ -196,11 +209,7 @@ async function handleStudioSharingForm(e) {
             StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + artistsAccommodated.value.trim() + " artists can be accommodated";
             StudioSharingPayload.StudioSharingInfo.artistsAccommodated = artistsAccommodated.value;
 
-            // Studio number of signs
-            const studioSigns = form.querySelector('input[name="studioSigns"]')
-            if (!studioSigns.value) return formAlert("Please provide information on how many signs you have");
-            StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + "I have " + studioSigns.value.trim() + " signs";
-            StudioSharingPayload.StudioSharingInfo.studioSigns = studioSigns.value;
+         
 
             // Studio description
             const studioDescription = form.querySelector('textarea[name="studioDescription"]')
@@ -213,28 +222,16 @@ async function handleStudioSharingForm(e) {
             if (!studioSharingPlans.value) return formAlert("Please provide information on how you plan to share your studio space");
             // StudioSharingAnswer += ' \n\t\t' + studioSharingPlans.value.trim();
             StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + "I am planning to share my space with " + studioSharingPlans.value.trim();
-
             StudioSharingPayload.StudioSharingInfo.studioSharingPlans = studioSharingPlans.value;
+
+            // Studio number of signs
+            const studioSigns = form.querySelector('input[name="studioSigns"]')
+            if (!studioSigns.value) return formAlert("Please provide information on how many signs you have");
+            StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + "I would like " + studioSigns.value.trim() + " signs";
+            StudioSharingPayload.StudioSharingInfo.studioSigns = studioSigns.value;
         }
 
-        // Check for willingness to relocate
-        const willingnessToRelocate = form.querySelector('input[name="willingnessToRelocate"]:checked')
-        console.log("willingnessToRelocate", willingnessToRelocate)
-        if (willingnessToRelocate) {
-            // StudioSharingAnswer += ' \n\t' + willingnessToRelocate.parentNode.innerText;
-            StudioSharingPayload.StudioSharingAnswer += ' \n\t' + willingnessToRelocate.parentNode.innerText;
-            StudioSharingPayload.StudioSharingInfo.willingnessToRelocate = willingnessToRelocate.value;
-
-            // find canopy preference 
-            const canopyPreference = form.querySelector('input[name="canopy-studio"]:checked')
-            if (!canopyPreference) return formAlert("Please select an option. Do you have a canopy?");
-            if (canopyPreference) {
-                // StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
-                StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + canopyPreference.parentNode.innerText;
-                StudioSharingPayload.StudioSharingInfo['canopy-studio'] = canopyPreference.value;
-            }
-
-        }
+        
 
 
 
