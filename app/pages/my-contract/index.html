@@ -250,15 +250,15 @@
 
              <label style="font-size: 1rem" class="" for="willingnessToRelocate">
               <input type="radio" name="studioAvailability" for="willingnessToRelocate"
-              id="willingnessToRelocate"></input>
+              id="willingnessToRelocate" value="willingnessToRelocate"></input>
               I have my own studio but am willing to show my art at another artist's studio space.</label>
              <!-- <label for="yes" class="level-1">
                <input type="radio" name="willingnessToRelocate" 
              id="yes" value="yes"></input>
              Yes, I do -->
             </label>
-            <div class="level-3" id="canopy-studio">
-              <label for="hasCanopy" visible-if="willingnessToRelocate">
+            <div class="level-3" id="canopy-studio"  visible-if="studioAvailability === 'willingnessToRelocate'">
+              <label for="hasCanopy">
                 <input type="radio" name="canopy-studio" id="hasCanopy" value="hasCanopy">
                 I have my own own art canopy to use
            </label>
@@ -266,8 +266,6 @@
              <input type="radio" name="canopy-studio" id="doesNotHaveCanopy" value="doesNotHaveCanopy">
              I don't have my own art canopy so would need a covered space (ie, a garage or indoors) to set up
             </label>
-            
-         
           </div>
           <!-- <label for="no" class="level-1">
             <input  type="radio" name="willingnessToRelocate" 
@@ -282,7 +280,7 @@
             <input type="radio" name="studioAvailability" id="noRoom" value="noRoom">
             I want to stay at my own studio but do not have room for additional artists
           </label>
-          <div class="level-2" visible-if="studioAvailability === 'noRoom' ">
+          <div class="level-2" visible-if="studioAvailability === 'noRoom'" id="studioSigns-2">
             <input-component moveLabel="true" type="number" width="100%" fieldName="studioSigns-2" className="studioSignsQuestion"
             subcaption="If you will be at your own studio, how many directional artist studio signs do you need?  Be sure to include a street sign by your studio driveway as well at the major intersections near your studio." alias="Number of studio signs needed"></input-component>
           </div>
@@ -512,10 +510,10 @@
       document.querySelectorAll('input[name="studioAvailability"]').forEach(function (radio) {
         radio.addEventListener('change', handleStudioAvailabilityChange);
       });
-      handleWillingnessToRelocate();
-      document.querySelectorAll('input[name="willingnessToRelocate"]').forEach(function (checkbox) {
-        checkbox.addEventListener('change', handleWillingnessToRelocate);
-      });
+      // handleWillingnessToRelocate();
+      // document.querySelectorAll('input[name="willingnessToRelocate"]').forEach(function (checkbox) {
+      //   checkbox.addEventListener('change', handleWillingnessToRelocate);
+      // });
     });
 
     function handleStudioPreferenceChange() {
@@ -525,13 +523,31 @@
     }
 
     function handleStudioAvailabilityChange() {
+      var studioElement = document.getElementById('studioElement');
+      studioElement.querySelectorAll('*[visible-if]').forEach(function (element) {
+        element.style.display = 'none';
+      });
+
       var studioAvailability = document.querySelector('input[name="studioAvailability"]:checked')?.value || "";
-      var additionalStudioInfo = document.getElementById('additionalStudioInfo');
-      additionalStudioInfo.style.display = (studioAvailability === 'canShare') ? 'block' : 'none';
+
+      console.log("studioAvailability", studioAvailability);
+      if(studioAvailability === 'noRoom'){
+        document.querySelector(`*[id="studioSigns-2"]`).style.display = 'block';
+        
+      } 
+
+      if(studioAvailability === 'canShare'){
+        document.querySelector('#additionalStudioInfo').style.display = 'block';
+      } 
+
+      if(studioAvailability === "willingnessToRelocate"){
+        document.querySelector('#canopy-studio').style.display = 'block';
+      } 
+
     }
 
     function handleWillingnessToRelocate() {
-      var willingnessToRelocate = document.querySelector('input[name="willingnessToRelocate"]')?.checked || false;
+      var willingnessToRelocate = document.querySelector('input[name="willingnessToRelocate"]')?.value || false;
       var canopy = document.getElementById('canopy-studio');
       canopy.style.display = willingnessToRelocate ? 'block' : 'none';
     }
