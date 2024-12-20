@@ -23,7 +23,8 @@
       <div class="level-1">${studioSharingAnswer ? studioSharingAnswer : 'N/A'}</div>
     </div>
     <div><b>Artistic Demonstration:</b> ${artisticDemonstration ? artisticDemonstration : 'N/A'}</div>
-    <div><b>Artist Statement:</b> ${artistStatement ? artistStatement : 'N/A' }</div>
+    <div><b>Artist Statement:</b> 
+    <div class="level-1" style="translate: 0px -10px">${artistStatement ? artistStatement : 'N/A' }</div></div>
     <div><b>Artist Tagline:</b> ${artistTagline ? artistTagline : 'N/A'}</div>
    
 

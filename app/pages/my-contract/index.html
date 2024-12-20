@@ -10,17 +10,13 @@
   <script src="/dist/CRUD.js" type="module"></script>
   <script type="module" src="/dist/firebase.js"></script>
 
-   
-  <link
-  rel="stylesheet"
-  href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-  integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-  crossorigin="anonymous"
-/>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
   <script type="module">
-      firebase.redirectIfNotLoggedIn('/artist-sign-on')
-    </script>
-    <link rel="stylesheet" href="style.css">
+    firebase.redirectIfNotLoggedIn('/artist-sign-on')
+  </script>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 
@@ -105,7 +101,7 @@
       </markdown-component>
       <div class="" style="width: 400px; display: flex; flex-direction: column; margin: auto; ">
         <style>
-          input[name="signature"]{
+          input[name="signature"] {
             text-align: center;
           }
         </style>
@@ -150,13 +146,13 @@
         <input-component type="link" fieldName="facebook" alias="Facebook"></input-component>
         <input-component type="link" fieldName="instagram" alias="Instagram"></input-component>
       </div>
-      
+
       <div class="row">
-        <div   class="w-100">
+        <div class="w-100">
 
           <h4 style="margin-bottom: 0;">Medium(s)</h4>
-          <input-component  required="true" fieldName="medium"  class="w-100"
-          placeholder="Comma separated list of mediums"></input-component>
+          <input-component required="true" fieldName="medium" class="w-100"
+            placeholder="Comma separated list of mediums"></input-component>
         </div>
       </div>
       <div class="row">
@@ -187,11 +183,14 @@
         <markdown-component>
           <span slot="markdown-content">
             ### Digital Images:
-            Please upload the following required digital images as jpg files of a minimum of 400 KB and maximum of 5 MB. (No thumbnails - The ideal size is between 2-5 MB). 
-            
-            All images must have a professional appearance. 2D artwork must be cropped so that matting/framing does not show in the image.
+            Please upload the following required digital images as jpg files of a minimum of 400 KB and maximum of 5 MB.
+            (No thumbnails - The ideal size is between 2-5 MB).
 
-            If you are having trouble figuring out how to submit your digital images, contact <span id="digitalImageCommitteeMember"> the Artist Images Chair. </span>
+            All images must have a professional appearance. 2D artwork must be cropped so that matting/framing does not
+            show in the image.
+
+            If you are having trouble figuring out how to submit your digital images, contact <span
+              id="digitalImageCommitteeMember"> the Artist Images Chair. </span>
           </span>
         </markdown-component>
         <div style="max-width: 800px; margin:auto">
@@ -220,14 +219,15 @@
             This image should be one of the three images that you submitted above, but cropped so that it's square.
             Label like this example: DonSmithBrochure.jpg</h4>
           <div style="display: flex; justify-content: center; ">
-            <file-input-component required="true" square-requirement="true" fieldName="brochureImage" alias="Brochure Image"
-              accept=".jpg,.jpeg,.png"></file-input-component>
+            <file-input-component required="true" square-requirement="true" fieldName="brochureImage"
+              alias="Brochure Image" accept=".jpg,.jpeg,.png"></file-input-component>
           </div>
 
 
         </div>
       </div>
-      <button type="submit" id="save-digital-images" style="margin: auto; margin-top: 20px; display: block; ">Save Digital Images</button>
+      <button type="submit" id="save-digital-images" style="margin: auto; margin-top: 20px; display: block; ">Save
+        Digital Images</button>
 
     </form>
 
@@ -238,7 +238,8 @@
         <span slot="markdown-content">
           ### <b>Sharing studios:</b>
 
-          <p>Please note that we would like to encourage artists to share studio space where possible since these studios
+          <p>Please note that we would like to encourage artists to share studio space where possible since these
+            studios
             will get the most visitors! Our goal is to have at least 2 artists per studio – more, if possible. Shared
             studio space could include garages and indoor spaces.</p>
 
@@ -253,45 +254,47 @@
           I have my own studio space within the GHOST tour boundaries....
         </label>
         <div id="studioElement" visible-if="studioPreference === 'hasStudio'">
-          
-          <!-- Willingness to locate -->
-           <div class="level-1">
 
-             <label style="font-size: 1rem" class="" for="willingnessToRelocate">
-              <input type="radio" name="studioAvailability" for="willingnessToRelocate"
-              id="willingnessToRelocate" value="willingnessToRelocate"></input>
+          <!-- Willingness to locate -->
+          <div class="level-1">
+
+            <label style="font-size: 1rem" class="" for="willingnessToRelocate">
+              <input type="radio" name="studioAvailability" for="willingnessToRelocate" id="willingnessToRelocate"
+                value="willingnessToRelocate"></input>
               I have my own studio but am willing to show my art at another artist's studio space.</label>
-             <!-- <label for="yes" class="level-1">
+            <!-- <label for="yes" class="level-1">
                <input type="radio" name="willingnessToRelocate" 
              id="yes" value="yes"></input>
              Yes, I do -->
             </label>
-            <div class="level-3" id="canopy-studio"  visible-if="studioAvailability === 'willingnessToRelocate'">
+            <div class="level-3" id="canopy-studio" visible-if="studioAvailability === 'willingnessToRelocate'">
               <label for="hasCanopy">
                 <input type="radio" name="canopy-studio" id="hasCanopy" value="hasCanopy">
                 I have my own own art canopy to use
-           </label>
-           <label for="doesNotHaveCanopy">
-             <input type="radio" name="canopy-studio" id="doesNotHaveCanopy" value="doesNotHaveCanopy">
-             I don't have my own art canopy so would need a covered space (ie, a garage or indoors) to set up
-            </label>
-          </div>
-          <!-- <label for="no" class="level-1">
+              </label>
+              <label for="doesNotHaveCanopy">
+                <input type="radio" name="canopy-studio" id="doesNotHaveCanopy" value="doesNotHaveCanopy">
+                I don't have my own art canopy so would need a covered space (ie, a garage or indoors) to set up
+              </label>
+            </div>
+            <!-- <label for="no" class="level-1">
             <input  type="radio" name="willingnessToRelocate" 
               id="no" value="no"></input>
               No, I don't
           </label> -->
 
-          <!--END: Willingness to locate -->
-        </div>
+            <!--END: Willingness to locate -->
+          </div>
 
           <label for="noRoom" class="level-1">
             <input type="radio" name="studioAvailability" id="noRoom" value="noRoom">
             I want to stay at my own studio but do not have room for additional artists
           </label>
           <div class="level-2" visible-if="studioAvailability === 'noRoom'" id="studioSigns-2">
-            <input-component moveLabel="true" type="number" width="100%" fieldName="studioSigns-2" className="studioSignsQuestion"
-            subcaption="If you will be at your own studio, how many directional artist studio signs do you need?  Be sure to include a street sign by your studio driveway as well at the major intersections near your studio." alias="Number of studio signs needed"></input-component>
+            <input-component moveLabel="true" type="number" width="100%" fieldName="studioSigns-2"
+              className="studioSignsQuestion"
+              subcaption="If you will be at your own studio, how many directional artist studio signs do you need?  Be sure to include a street sign by your studio driveway as well at the major intersections near your studio."
+              alias="Number of studio signs needed"></input-component>
           </div>
 
 
@@ -299,24 +302,25 @@
             <input type="radio" name="studioAvailability" id="canShare" value="canShare">
             I want to stay at my own studio and I can share my studio space with more artists and have adequate parking.
           </label>
-         
+
           <div class="level-2" id="additionalStudioInfo" visible-if="studioAvailability === 'canShare'"
             style="margin-top: 10px;">
             <input-component type="number" width="100%" fieldName="artistsAccommodated"
               alias="How many additional artists can you share it with (not including yourself?)"></input-component>
-              <div style="margin-top: 20px;"></div>
-           
+            <div style="margin-top: 20px;"></div>
+
             <div style="margin-top: 20px;"></div>
             <textarea-component style="width:100%" fieldName="studioDescription"
               alias="Describe the space you have available (outdoors, indoors, garage, etc) "></textarea-component>
             <textarea-component style="width:100%" fieldName="studioSharingPlans"
               alias="If you already have plans for someone to share your studio space, list them here: (If none, type N/A)"></textarea-component>
-              <input-component moveLabel="true" type="number" width="100%" fieldName="studioSigns" className="studioSignsQuestion"
-              subcaption="If you will be at your own studio, how many directional artist studio signs do you need?  Be sure to include a street sign by your studio driveway as well at the major intersections near your studio.  If other artists will be sharing your studio,  include extra signs that can be placed on your property to point the way to where they are located.
-              If you are sharing someone else's studio, write 0." alias="Number of studio signs needed"></input-component>
-            </div>
+            <input-component moveLabel="true" type="number" width="100%" fieldName="studioSigns"
+              className="studioSignsQuestion" subcaption="If you will be at your own studio, how many directional artist studio signs do you need?  Be sure to include a street sign by your studio driveway as well at the major intersections near your studio.  If other artists will be sharing your studio,  include extra signs that can be placed on your property to point the way to where they are located.
+              If you are sharing someone else's studio, write 0."
+              alias="Number of studio signs needed"></input-component>
+          </div>
 
-     
+
         </div>
         <label for="doesNotHaveStudio">
           <input type="radio" name="studioPreference" id="doesNotHaveStudio" value="doesNotHaveStudio">
@@ -364,18 +368,28 @@
             width: fit-content;
             margin: auto; ">
 
-              <div style="text-align: center; font-weight: bold; background-color: yellow; width: fit-content; margin: auto;">Changes made in this section are saved automatically.</div>
+              <div
+                style="text-align: center; font-weight: bold; background-color: yellow; width: fit-content; margin: auto;">
+                Changes made in this section are saved automatically.</div>
 
-              Below is a list of each committee with volunteer positions available for that committee.with a basic job description, an estimate of the time of year that committee is active and whether that job can be done from home. If special skills are required for that position, it will be indicated in the description.
+              Below is a list of each committee with volunteer positions available for that committee.with a basic job
+              description, an estimate of the time of year that committee is active and whether that job can be done
+              from home. If special skills are required for that position, it will be indicated in the description.
 
-              Check the box by the specific volunteer job you are willing to be responsible for, as long as that position shows that at least one more person is needed. You can participate in more than one position, if desired (many of us do and we appreciate that!!)
+              Check the box by the specific volunteer job you are willing to be responsible for, as long as that
+              position shows that at least one more person is needed. You can participate in more than one position, if
+              desired (many of us do and we appreciate that!!)
 
-              If the specific position involves specific skills, make sure you already have those skills or at least a comfort level and willingness to learn those skills before signing up for that position so that you don't let down your committee!
+              If the specific position involves specific skills, make sure you already have those skills or at least a
+              comfort level and willingness to learn those skills before signing up for that position so that you don't
+              let down your committee!
 
-              Please note that failure to fulfill your committee responsibility will make you ineligible to participate in future Open Studio Tours.
+              Please note that failure to fulfill your committee responsibility will make you ineligible to participate
+              in future Open Studio Tours.
 
               **Pick at least one committee position to volunteer for by selecting a checkbox beside the role:**
-              <div style="background-color:yellow; width: fit-content; margin: auto">(Open roles are highlighted yellow)</div>
+              <div style="background-color:yellow; width: fit-content; margin: auto">(Open roles are highlighted yellow)
+              </div>
 
             </div>
 
@@ -386,16 +400,16 @@
               }
 
               @media (max-width: 900px) {
-                  #committee-positions b {
-                      text-wrap: wrap;              
-                    }
+                #committee-positions b {
+                  text-wrap: wrap;
+                }
               }
 
               #committee-positions ol {
                 list-style: none;
               }
 
-                #committee-positions li.role:has(input[type="checkbox"]:not(:checked)) {
+              #committee-positions li.role:has(input[type="checkbox"]:not(:checked)) {
                 background: yellow;
                 color: black;
               }
@@ -409,21 +423,26 @@
                 transition: all 0.3s;
                 cursor: pointer;
               }
-              .info-icon:hover{
+
+              .info-icon:hover {
                 opacity: 1;
-                
+
               }
+
               .responsibility {
                 margin-left: 5px;
               }
-              .tasks{
+
+              .tasks {
                 /* margin-left: 63px; */
               }
+
               li.role {
                 display: flex;
                 align-items: baseline;
               }
-              li.role .user-name{
+
+              li.role .user-name {
                 text-wrap: nowrap;
               }
             </style>
@@ -446,8 +465,7 @@
 
 
       <h2>Artistic Demonstration</h2>
-      <textarea-component required fieldName="artisticDemonstration"
-        required="true"
+      <textarea-component required fieldName="artisticDemonstration" required="true"
         alias="HOW YOU WILL BE DEMONSTRATING YOUR ARTISTIC PROCESS DURING THE TOUR:"
         description="Educating the public about how art is produced is an important part of this tour.  Include a tentative description of how you plan on demonstrating your artistic process (ie, live artist demonstration, actual artwork in various stages of your process, a display board with photos of your process)"></textarea-component>
 
@@ -465,9 +483,20 @@
 
     <style>
       .scholarship-btn {
-        background-color: #4CAF50; color: white; border: none;    padding: 2px 8px;text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 2px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
       }
-      markdown-component p{
+
+      markdown-component p {
         text-align: left;
       }
     </style>
@@ -476,31 +505,38 @@
     <form id="payment-form">
       <h3>Payment</h3>
       <div style="text-align: center;" class="membership-payment-due">
-      <markdown-component>
-        <span slot="markdown-content">
-          <p class="scholarship-btn-container" style="display:none"> If interested in applying for a scholarship of a $100 discount, please fill out this additional <a href="/scholarship-application"><button type="button" class="scholarship-btn">Scholarship Form</button></a> and obtain approval before submitting payment.</p>
+        <markdown-component>
+          <span slot="markdown-content">
+            <p class="scholarship-btn-container" style="display:none"> If interested in applying for a scholarship of a
+              $100 discount, please fill out this additional <a href="/scholarship-application"><button type="button"
+                  class="scholarship-btn">Scholarship Form</button></a> and obtain approval before submitting payment.
+            </p>
 
-          The fee for participating in the Gig Harbor Open Studio Tour is <b class="standard-fee">$225.00</b><b style="display:none; margin-left: 10px;" class="scholarship-fee">($125.00 👈 <i>Scholarship discount applied</i>)</b> <b class="scholarship-pending" style="display:none">( 👈 Scholarship status is pending )</b>. 
-          
-          Please submit payment by March 2, 2025.
+            The fee for participating in the Gig Harbor Open Studio Tour is <b class="standard-fee">$225.00</b><b
+              style="display:none; margin-left: 10px;" class="scholarship-fee">($125.00 👈 <i>Scholarship discount
+                applied</i>)</b> <b class="scholarship-pending" style="display:none">( 👈 Scholarship status is pending
+              )</b>.
 
-          Payments must be made online. Click the button below to checkout. Your receipt will be emailed and displayed here on your contract.
+            Please submit payment by March 2, 2025.
 
-       
+            Payments must be made online. Click the button below to checkout. Your receipt will be emailed and displayed
+            here on your contract.
 
-          
-        </span>
-      </markdown-component>
 
-           <!--  Paypal Integration -->
-       
-          <paypal-component></paypal-component>
-        </div>
 
-        <div class="membership-paid" style="display:none; text-align: center; width:100%">
-          <b>You have already paid</b>
-          <div class="membership-receipt" style="text-align: left; max-width: 267px;margin: 21px auto 0;;"></div>
-        </div>
+
+          </span>
+        </markdown-component>
+
+        <!--  Paypal Integration -->
+
+        <paypal-component></paypal-component>
+      </div>
+
+      <div class="membership-paid" style="display:none; text-align: center; width:100%">
+        <b>You have already paid</b>
+        <div class="membership-receipt" style="text-align: left; max-width: 267px;margin: 21px auto 0;;"></div>
+      </div>
 
 
       <!-- <button type="submit" id="pay-online" style="margin: auto;  display: block;">Pay Online</button> -->
@@ -540,18 +576,18 @@
       var studioAvailability = document.querySelector('input[name="studioAvailability"]:checked')?.value || "";
 
       console.log("studioAvailability", studioAvailability);
-      if(studioAvailability === 'noRoom'){
+      if (studioAvailability === 'noRoom') {
         document.querySelector(`*[id="studioSigns-2"]`).style.display = 'block';
-        
-      } 
 
-      if(studioAvailability === 'canShare'){
+      }
+
+      if (studioAvailability === 'canShare') {
         document.querySelector('#additionalStudioInfo').style.display = 'block';
-      } 
+      }
 
-      if(studioAvailability === "willingnessToRelocate"){
+      if (studioAvailability === "willingnessToRelocate") {
         document.querySelector('#canopy-studio').style.display = 'block';
-      } 
+      }
 
     }
 
