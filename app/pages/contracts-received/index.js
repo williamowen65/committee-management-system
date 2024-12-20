@@ -18,7 +18,7 @@ function renderContracts(contracts) {
             membershipPaid: contract?.artistDetails?.membershipPaid || '',
             scholarshipApplied: contract?.artistDetails?.scholarshipApplied || '',
             studioSharingAnswer: contract?.StudioSharingAnswer || '',
-            artisticDemonstration: contract?.artistDetails?.artisticDemonstration || '',
+            artisticDemonstration: contract?.artisticDemonstration || '',
             artistStatement: contract?.artistDetails?.artistStatement || '',
             artistTagline: contract?.artistDetails?.artistTagline || '',
             businessEmail: contract?.artistDetails?.businessEmail || '',
@@ -36,6 +36,7 @@ function renderContracts(contracts) {
             digitalImage2: contract?.images?.digitalImage2 || '',
             digitalImage3: contract?.images?.digitalImage3 || '',
             signature: contract?.signature || '',
+            medium: contract?.artistDetails?.medium || ''
         }
 
         console.log({ contractData, contract })

@@ -34,5 +34,6 @@ createCustomElement('contract-received', function () {
         'digitalImage2',
         'digitalImage3',
         'signature',
+        'medium'
     ],
 });
