@@ -8,11 +8,15 @@ function renderContracts(contracts){
     const contractsDiv = document.querySelector('#contracts')
     contractsDiv.innerHTML = ''
     contracts.forEach(contract => {
-        const contractDiv = document.createElement('div')
-        contractDiv.innerHTML = `
-            <h3>${contract.title}</h3>
-            <p>${contract.description}</p>
-        `
+        const contractDiv = document.createElement('contract-received')
+
+
+
+
+
+        contractDiv.init()
+
+
         contractsDiv.appendChild(contractDiv)
     })
 }

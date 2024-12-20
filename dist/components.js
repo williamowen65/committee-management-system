@@ -296,6 +296,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
+/***/ "./app/components/contract-received/index.js":
+/*!***************************************************!*\
+  !*** ./app/components/contract-received/index.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/contract-received/index.html.txt");
+/* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/custom-element */ "./utils/custom-element.js");
+
+
+// import './style.scss';
+
+(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('contract-received', function () {
+  console.log("hi");
+}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '');
+
+/***/ }),
+
 /***/ "./app/components/dual-login-form/index.js":
 /*!*************************************************!*\
   !*** ./app/components/dual-login-form/index.js ***!
@@ -929,6 +949,14 @@ function _createCustomElement() {
                 } else {
                   document.addEventListener('DOMContentLoaded', onload.bind(this));
                 }
+                this.updateTemplate();
+              }
+
+              // You can call this if rendering the element after the DOM has loaded
+            }, {
+              key: "init",
+              value: function init() {
+                onload.bind(this)();
                 this.updateTemplate();
               }
             }, {
@@ -2093,6 +2121,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!-- \n<div class=\"application-entry\">\n    <p>First Name: ${firstName}</p>\n    <p>Last Name: ${lastName}</p>\n    <p>Medium: ${medium}</p>\n    \n    <p>Email: ${email}</p>\n    <p>Phone: ${phone}</p>\n    <p>Mailing Address: ${mailingAddress}</p>\n    <p>Studio Address: ${studioAddress}</p>\n    <p>Website/Social Media: ${websiteSocialMedia}</p>\n    <p>Artist Mentor: ${artistMentor}</p>\n    <p>Digital Image 1: <img width=\"200px\" src=\"${digitalImage1}\" alt=\"Digital Image 1\"></p>\n    <p>Digital Image 2: <img width=\"200px\" src=\"${digitalImage2}\" alt=\"Digital Image 2\"></p>\n    <p>Digital Image 3: <img width=\"200px\" src=\"${digitalImage3}\" alt=\"Digital Image 3\"></p>\n    <p>Digital Image 4: <img width=\"200px\" src=\"${digitalImage4}\" alt=\"Digital Image 4\"></p>\n    <p>Has Been Reviewed: ${hasBeenReviewed}</p>\n    <p>WA State Business License UBI Number: ${waStateBusinessLicenseUbiNumber}</p>\n    <p>Artist Statement: ${artistStatement}</p>\n    <p>Is Within Boundaries: ${isWithinBoundaries}</p>\n</div> -->\n\n\n<div class=\"artist-application-review\" >\n\n    <div class=\"app-preview\">\n        <div>\n\n           <h3> ${firstName} ${lastName}: ${medium}</h3>\n           \n            <p>Submitted on: ${createdAt}</p>\n        </div>\n        <div>\n            <h4>Status: </h4>\n            <span class=\"status\">\n                <span>${approved ? \"Approved\" : \"\"}</span>\n                <span>${hasBeenReviewed=='true' ? \"\" : \"Has not been approved\"}</span>\n                <span>${hasBeenReviewed ? \"\" : !approved ? \"Not Approved\" : \"\"}</span>\n            </span>\n            <!-- <span>${approved  ? \"Approved\" :  hasBeenReviewed ?  \"Not Approved\": \"Has not been reviewed\" }</span> -->\n        </div>\n        <button class=\"expandApplication show\" onclick=\"event.target.closest('.artist-application-review').classList.toggle('expanded')\"\n        >${hasBeenReviewed =='true' ? \"Review Old Application\" : \"Review\"}</button>\n        <button class=\"expandApplication hide\" onclick=\"event.target.closest('.artist-application-review').classList.toggle('expanded')\"\n        >Minimize Application</button>\n        \n    </div>\n    <div class=\"app-contents\">\n\n\n        <h3>Artist Name</h3>\n        <div class=\"row\">\n            <input-component value=\"${firstName}\" disabled=\"true\" style=\"width: 48%\" required=\"true\"\n                fieldName=\"firstName\" alias=\"First Name\"></input-component>\n            <input-component value=\"${lastName}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" fieldName=\"lastName\"\n                alias=\"Last Name\"></input-component>\n        </div>\n        <h3>Contact Info</h3>\n        <div class=\"row\">\n            <input-component value=\"${email}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" type=\"email\"\n                fieldName=\"email\" alias=\"Email\"></input-component>\n            <input-component value=\"${phone}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" fieldName=\"phone\"\n                alias=\"Phone\"></input-component>\n        </div>\n        <textarea-component value=\"${studioAddress}\" disabled=\"true\" required=\"true\" fieldName=\"studio-address\"\n            alias=\"Studio Address\"></textarea-component>\n        <textarea-component value=\"${mailingAddress}\" disabled=\"true\" required=\"true\" fieldName=\"mailing-address\"\n            alias=\"Mailing Address\"></textarea-component>\n\n        <h3>Medium(s)</h3>\n        <input-component value=\"${medium}\" disabled=\"true\" required=\"true\" fieldName=\"medium\"\n            placeholder=\"Comma separated list of mediums\"></input-component>\n\n        <h3>WA State Business License (UBI) Number *</h3>\n        <p>A Washington State Business License (UBI) Number is required to be in the tour. If you don't have one, apply:\n            https://bls.dor.wa.gov/. </p>\n        <input-component value=\"${waStateBusinessLicenseUbiNumber}\" disabled=\"true\" required=\"true\"\n            fieldName=\"wa-state-business-license-ubi-number\" placeholder=\"UBI Number\"></input-component>\n\n        <h3>Is your studio within the GHOST Tour Boundaries? (That map is available on the Join page) *</h3>\n        <label for=\"isWithinBoundaries-${randomId}\">\n            <input disabled ${isWithinBoundaries == \"Yes, my studio falls within the boundary\" ? \"checked\" : \"\"} type=\"radio\" name=\"isWithinBoundaries-${randomId}\" value=\"Yes, my studio falls within the boundary\"\n                id=\"isWithinBoundaries-${randomId}\"></input>\n            Yes, my studio falls within the boundary\n        </label>\n        <label for=\"isNotWithinBoundaries-${randomId}\">\n            <input  disabled ${isWithinBoundaries == \"Yes, my studio falls within the boundary\" ? \"\": \"checked\"} type=\"radio\" name=\"isWithinBoundaries-${randomId}\"\n                value=\"No, my studio is outside the boundary and I will need to share studio space with another artist\"\n                id=\"isNotWithinBoundaries-${randomId}\"></input>\n            No, my studio is outside the boundary and I will need to share studio space with another artist\n        </label>\n\n        <h3>Studio Availability</h3>\n        <style>\n            input,\n            textarea {\n                margin: 10px 0 0 0;\n                padding: 10px;\n                border: 1px solid #ccc;\n                border-radius: 5px;\n            }\n\n            textarea {\n                resize: vertical;\n                min-height: 100px;\n            }\n        </style>\n        <p style=\"margin: 0;\">If sharing a studio, have you made arrangements to do so? If so, please name the Tour\n            Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host\n            you in their studio.</p>\n        <textarea style=\"width: 100%; box-sizing: border-box; \">\n${studioSharingResponse}\n        </textarea>\n        <!-- <textarea-component description=\"If sharing a studio, have you made arrangements to do so? If so, please name the Tour Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host you in their studio.\"></textarea-component> -->\n\n        <h3>I would like an artist mentor (an experienced artist who can talk to me about preparing for the tour,\n            marketing and answer my questions)</h3>\n        <label for=\"artistMentor\">\n            <input disabled ${artistMentor == \"Yes, I would like an artist mentor\" ? \"checked\": \"\"} required type=\"radio\" name=\"artistMentor\" value=\"Yes, I would like an artist mentor\"\n                id=\"artistMentor\"></input>\n            Yes, I would like an artist mentor\n        </label>\n        <label for=\"noArtistMentor\">\n            <input disabled ${artistMentor == \"Yes, I would like an artist mentor\" ? \"\": \"checked\"}  required type=\"radio\" name=\"artistMentor\" value=\"No, I do not need an artist mentor\"\n                id=\"noArtistMentor\"></input>\n            No, I do not need an artist mentor\n        </label>\n\n        <h3>How did you hear about the GHOST Tour?</h3>\n        <textarea disabled style=\"width: 100%; box-sizing: border-box; \">\n${howDidYouHearAboutUs}\n        </textarea>\n\n        <h3>Three (3) digital images of your art</h3>\n        <p>Make sure that your images look professional and are jpgs that are a minimum of 150 KB (No thumbnails). 2D\n            art should only\n            be of your art image (no background or frame.) 3D art and jewelry should have a plain background (ex, black\n            or white) and have enough lighting to show good detail. Crop the image so that your art fills most of the\n            image and make sure the image is crisp and does justice to your art.</p>\n        <div style=\"display: flex; justify-content: center; flex-wrap: wrap;\">\n            <style>\n                file-input-component {\n                    margin: 10px;\n                }\n                img {\n                    width: 200px;\n                    height: 200px;\n                    object-fit: cover;\n                    margin: 10px;\n                }\n            </style>\n            <img src=\"${digitalImage1}\"></img>\n            <img src=\"${digitalImage2}\"></img>\n            <img src=\"${digitalImage3}\"></img>\n        </div>\n\n        <h3>One (1) digital image of your studio (if it is within the studio tour boundaries and you will be showing\n            there) or your booth (if you will be showing at another artist's studio)</h3>\n        <p>This should be a jpg image that is a minimum of 150 KB (No thumbnails). Make sure your display space looks\n            professional, has good lighting\n            and is represented well in your photo.</p>\n\n        <div style=\"display: flex; justify-content: center; flex-wrap: wrap;\">\n            <img src=\"${digitalImage3}\"></img>\n        </div>\n\n        <h3>Artist Statement</h3>\n        <textarea-component  disabled fieldName=\"artistStatement-${randomId}\" placeholder=\"Artist Statement\" required\n            description=\"This  is a short statement that describes what art you make, how you make it and why you make it.  (Limit 200 words)\"\n            value=\"${artistStatement}\"></textarea-component>\n        <h3>Your art website or social media sites</h3>\n        <textarea-component disabled  placeholder=\"Website & Social media presence \" fieldName=\"website-social-media-${randomId}\" required\n            description=\"If you have an art website and/or social media sites, list them here.  If you don't have any of those, type in NONE\"\n            value=\"${websiteSocialMedia}\"></textarea-component>\n\n            <div style=\"text-align: center;\">\n                <button data-fb-id=\"${fbId}\" onclick=\"window.updateReview(event,true)\">Approve Application</button>\n                <button data-fb-id=\"${fbId}\" onclick=\"window.updateReview(event,false)\">Disapprove</button>\n\n            </div>\n    </div>\n\n</div>");
+
+/***/ }),
+
+/***/ "./app/components/contract-received/index.html.txt":
+/*!*********************************************************!*\
+  !*** ./app/components/contract-received/index.html.txt ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n<div>\r\n  CONTRAAAAAACT RECEIVED\r\n</div>\r\n");
 
 /***/ }),
 
@@ -5643,7 +5686,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scholarship_application_index_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./scholarship-application/index.js */ "./app/components/scholarship-application/index.js");
 /* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utils/logIf.js */ "./utils/logIf.js");
 /* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_utils_logIf_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _contract_received_index_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./contract-received/index.js */ "./app/components/contract-received/index.js");
  // Import the styles (These are really the global styles for the app -- They could have their own web pack config)
+
 
 
 

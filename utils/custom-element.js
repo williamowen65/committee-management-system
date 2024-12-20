@@ -29,6 +29,12 @@ export async function createCustomElement(name, onload, html, css, options ={}) 
             this.updateTemplate();
         }
 
+        // You can call this if rendering the element after the DOM has loaded
+        init(){
+            onload.bind(this)();
+            this.updateTemplate();
+        }
+
         
 
 

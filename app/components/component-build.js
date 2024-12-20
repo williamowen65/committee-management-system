@@ -9,6 +9,7 @@ import "./3rdParty/paypal/index.js";
 import './application/index.js'
 import './scholarship-application/index.js'
 import '../../utils/logIf.js'
+import './contract-received/index.js'
 import logIf from '../../utils/logIf.js';
 
 
