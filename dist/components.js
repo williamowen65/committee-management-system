@@ -312,8 +312,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+function renderCommitteeRole(committeeRoleId) {}
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('contract-received', function () {}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '', {
-  attributes: ['firstName', 'lastName', 'membershipPaid', 'scholarshipApplied', 'studioSharingAnswer', 'artisticDemonstration', 'artistStatement', 'artistTagline', 'businessEmail', 'facebook', 'instagram', 'mailingAddress', 'membershipPaid', 'personalEmail', 'phone', 'studioAddress', 'website', 'committeeRoleId', 'artistInStudioImage', 'brochureImage', 'digitalImage1', 'digitalImage2', 'digitalImage3', 'signature']
+  attributes: ['firstName', 'lastName', 'membershipPaid', 'scholarshipApplied', 'studioSharingAnswer', 'artisticDemonstration', 'artistStatement', 'artistTagline', 'businessEmail', 'facebook', 'instagram', 'mailingAddress', 'membershipPaid', 'personalEmail', 'phone', 'studioAddress', 'website', 'committeeRoleId', 'artistInStudioImage', 'brochureImage', 'digitalImage1', 'digitalImage2', 'digitalImage3', 'signature'],
+  methods: [renderCommitteeRole]
 });
 
 /***/ }),
@@ -1152,24 +1154,38 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `.contract-received .preview {
+___CSS_LOADER_EXPORT___.push([module.id, `.contract-received {
+  position: relative;
+}
+.contract-received .preview {
   display: flex;
+  align-items: baseline;
   justify-content: space-between;
   padding: 10px;
+  position: sticky;
+  background: white;
+  top: 0;
 }
 .contract-received .preview .user-name {
   font-weight: bold;
 }
-.contract-received .hide {
-  display: none;
-}
 .contract-received .content {
+  display: none;
   padding: 10px;
 }
 .contract-received .content div {
   margin-bottom: 10px;
   white-space: pre-wrap;
-}`, "",{"version":3,"sources":["webpack://./app/components/contract-received/style.scss"],"names":[],"mappings":"AAEI;EACI,aAAA;EACA,8BAAA;EACA,aAAA;AADR;AAEQ;EACI,iBAAA;AAAZ;AAII;EACI,aAAA;AAFR;AAII;EACI,aAAA;AAFR;AAGQ;EACI,mBAAA;EACA,qBAAA;AADZ","sourceRoot":""}]);
+}
+.contract-received.reveal {
+  border: 1px solid black;
+}
+.contract-received.reveal .content {
+  display: block;
+}
+.contract-received .level-1 {
+  padding-left: 50px;
+}`, "",{"version":3,"sources":["webpack://./app/components/contract-received/style.scss"],"names":[],"mappings":"AAAA;EACI,kBAAA;AACJ;AACI;EACI,aAAA;EACA,qBAAA;EACA,8BAAA;EACA,aAAA;EACA,gBAAA;EACA,iBAAA;EACA,MAAA;AACR;AAAQ;EACI,iBAAA;AAEZ;AAGI;EACI,aAAA;EACA,aAAA;AADR;AAEQ;EACI,mBAAA;EACA,qBAAA;AAAZ;AAGI;EACI,uBAAA;AADR;AAEQ;EACI,cAAA;AAAZ;AAII;EACI,kBAAA;AAFR","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2162,7 +2178,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n<div class=\"contract-received \">\r\n  <div class=\"preview\">\r\n\r\n    <div class=\"user-name\">\r\n      ${firstName}\r\n      ${lastName}\r\n    </div>\r\n    <button onclick=\"event.target.closest('.contract-received').querySelector('.content').classList.toggle('hide')\">View Details</button>\r\n  </div>\r\n    <div class=\"hide content \">\r\n<div>Membership Paid: ${membershipPaid ? 'True' : 'False'}</div>\r\n<div>Scholarship Applied: ${scholarshipApplied ? 'True' : 'False'}</div>\r\n<div>Studio Sharing Answer: ${studioSharingAnswer ? studioSharingAnswer : 'N/A'}</div>\r\n<div>Artistic Demonstration: ${artisticDemonstration ?  artisticDemonstration : 'N/A'}</div>\r\n<div>Artist Statement: ${artistStatement ? artistStatement : 'N/A' }</div>\r\n<div>Artist Tagline: ${artistTagline ? artistTagline : 'N/A'}</div>\r\n\r\n${businessEmail}\r\n${facebook}\r\n${instagram}\r\n${mailingAddress}\r\n${membershipPaid}\r\n${personalEmail}\r\n${phone}\r\n${studioAddress}\r\n${website}\r\n${committeeRoleId}\r\n${artistInStudioImage}\r\n${brochureImage}\r\n${digitalImage1}\r\n  ${digitalImage2}\r\n  ${digitalImage3}\r\n  ${signature}\r\n</div>\r\n\r\n</div>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n<div class=\"contract-received \">\r\n  <div class=\"preview\">\r\n\r\n    <div class=\"user-name\">\r\n      ${firstName}\r\n      ${lastName}\r\n    </div>\r\n    <button onclick=\"event.target.closest('.contract-received').classList.toggle('reveal')\">View Details</button>\r\n  </div>\r\n    <div class=\"content \">\r\n<div><b>Membership Paid:</b> ${membershipPaid ? 'True' : 'False'}</div>\r\n<div><b>Scholarship Applied:</b> ${scholarshipApplied ? 'True' : 'False'}</div>\r\n<div><b>Studio Sharing Answer:</b> <div class=\"level-1\">${studioSharingAnswer ? studioSharingAnswer : 'N/A'}</div></div>\r\n<div><b>Artistic Demonstration:</b> ${artisticDemonstration ?  artisticDemonstration : 'N/A'}</div>\r\n<div><b>Artist Statement:</b> ${artistStatement ? artistStatement : 'N/A' }</div>\r\n<div><b>Artist Tagline:</b> ${artistTagline ? artistTagline : 'N/A'}</div>\r\n<div><b>Business Email:</b> ${businessEmail ? businessEmail : 'N/A'} </div>\r\n\r\n<div><b>Facebook:</b> ${facebook ? facebook : 'N/A'}</div>\r\n<div><b>Instagram:</b> ${instagram ? instagram : 'N/A'}</div>\r\n<div><b>Mailing Address:</b> ${mailingAddress ? mailingAddress : 'N/A'}</div>\r\n<div><b>Membership Paid:</b> ${membershipPaid ? 'True' : 'False'}</div>\r\n<div><b>Personal Email:</b> ${personalEmail ? personalEmail : 'N/A'}</div>\r\n<div><b>Phone:</b> ${phone ? phone : 'N/A'}</div>\r\n<div><b>Studio Address:</b> ${studioAddress ? studioAddress : 'N/A'}</div>\r\n<div><b>Website:</b> ${website ? website : 'N/A'}</div>\r\n\r\n${committeeRoleId}\r\n${artistInStudioImage}\r\n${brochureImage}\r\n${digitalImage1}\r\n  ${digitalImage2}\r\n  ${digitalImage3}\r\n  ${signature}\r\n</div>\r\n\r\n</div>\r\n");
 
 /***/ }),
 

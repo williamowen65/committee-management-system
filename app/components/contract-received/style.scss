@@ -1,22 +1,36 @@
 .contract-received{
+    position: relative;
     
     .preview{
         display: flex;
+        align-items: baseline;
         justify-content: space-between;
         padding: 10px;
+        position: sticky;
+        background: white;
+        top:0;
         .user-name{
             font-weight: bold;
         }
     }
 
-    .hide{
-        display: none;
-    }
+
     .content{
+        display: none;;
         padding: 10px;
         div {
             margin-bottom: 10px;
             white-space: pre-wrap;
         }
+    }
+    &.reveal {
+        border: 1px solid black;
+        .content{
+            display: block;
+        }
+    }
+
+    .level-1{
+        padding-left: 50px;
     }
 }

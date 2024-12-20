@@ -671,6 +671,11 @@ function setArtistDetailsForm(contracts) {
     }
 }
 
+
+
+
+/* TODO: Only allow payment if the rest of the contract has been filled */
+
 async function setPaypalButton(contracts) {
     logIf.client && console.log("setPaypalButton", { contracts })
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)

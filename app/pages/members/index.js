@@ -124,7 +124,7 @@ function allContractsButton(role) {
     // listen to new applications changes
     CRUD.readAll('ghost-contracts').then(contracts => {
         logIf.client || true && console.log({ contracts })
-        const totalToReview = contracts.length
+        const totalToReview = contracts.filter(contract => contract.artistDetails.membershipPaid).length
         const badge = document.querySelector('a[href="/contracts-received"] .badge')
         badge.innerText = totalToReview
         badge.setAttribute('data-count', totalToReview)

@@ -6,25 +6,26 @@
       ${firstName}
       ${lastName}
     </div>
-    <button onclick="event.target.closest('.contract-received').querySelector('.content').classList.toggle('hide')">View Details</button>
+    <button onclick="event.target.closest('.contract-received').classList.toggle('reveal')">View Details</button>
   </div>
-    <div class="hide content ">
-<div>Membership Paid: ${membershipPaid ? 'True' : 'False'}</div>
-<div>Scholarship Applied: ${scholarshipApplied ? 'True' : 'False'}</div>
-<div>Studio Sharing Answer: ${studioSharingAnswer ? studioSharingAnswer : 'N/A'}</div>
-<div>Artistic Demonstration: ${artisticDemonstration ?  artisticDemonstration : 'N/A'}</div>
-<div>Artist Statement: ${artistStatement ? artistStatement : 'N/A' }</div>
-<div>Artist Tagline: ${artistTagline ? artistTagline : 'N/A'}</div>
+    <div class="content ">
+<div><b>Membership Paid:</b> ${membershipPaid ? 'True' : 'False'}</div>
+<div><b>Scholarship Applied:</b> ${scholarshipApplied ? 'True' : 'False'}</div>
+<div><b>Studio Sharing Answer:</b> <div class="level-1">${studioSharingAnswer ? studioSharingAnswer : 'N/A'}</div></div>
+<div><b>Artistic Demonstration:</b> ${artisticDemonstration ?  artisticDemonstration : 'N/A'}</div>
+<div><b>Artist Statement:</b> ${artistStatement ? artistStatement : 'N/A' }</div>
+<div><b>Artist Tagline:</b> ${artistTagline ? artistTagline : 'N/A'}</div>
+<div><b>Business Email:</b> ${businessEmail ? businessEmail : 'N/A'} </div>
 
-${businessEmail}
-${facebook}
-${instagram}
-${mailingAddress}
-${membershipPaid}
-${personalEmail}
-${phone}
-${studioAddress}
-${website}
+<div><b>Facebook:</b> ${facebook ? facebook : 'N/A'}</div>
+<div><b>Instagram:</b> ${instagram ? instagram : 'N/A'}</div>
+<div><b>Mailing Address:</b> ${mailingAddress ? mailingAddress : 'N/A'}</div>
+<div><b>Membership Paid:</b> ${membershipPaid ? 'True' : 'False'}</div>
+<div><b>Personal Email:</b> ${personalEmail ? personalEmail : 'N/A'}</div>
+<div><b>Phone:</b> ${phone ? phone : 'N/A'}</div>
+<div><b>Studio Address:</b> ${studioAddress ? studioAddress : 'N/A'}</div>
+<div><b>Website:</b> ${website ? website : 'N/A'}</div>
+
 ${committeeRoleId}
 ${artistInStudioImage}
 ${brochureImage}
