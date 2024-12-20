@@ -41,16 +41,24 @@ document.addEventListener('DOMContentLoaded', function () {
             userRoles[roleId] = role
 
             let sidePanelHTML = `<h4>${role}</h4><div>${responsibility}</div>`
+            let buttons = document.createElement('div')
+            buttons.setAttribute('style', 'display: flex; flex-direction: column;')
+
 
             if (roleButtons) {
               if(roleButtons.includes('newApplications')) {
-                sidePanelHTML += newApplicationsSidePanel(role)
+                buttons.insertAdjacentHTML('beforeend',newApplicationsSidePanel(role))
               }
               if(roleButtons.includes('newScholarshipApplications')) {
-                sidePanelHTML += newScholarshipApplicationsButton(role)
+                buttons.insertAdjacentHTML('beforeend',newScholarshipApplicationsButton(role))
+              }
+              if(roleButtons.includes('contracts-received')) {
+                buttons.insertAdjacentHTML('beforeend',allContractsButton(role))
               }
 
             }
+
+            sidePanelHTML += buttons.outerHTML
 
             return sidePanelHTML
 
@@ -107,5 +115,12 @@ function newScholarshipApplicationsButton(role) {
   return `
       <a href="/scholarship-applications">
         <button  style="position: relative;">New Scholarship Applications Received <span class="badge" data-count="0"></span></button>
+    </a>`
+}
+
+function allContractsButton(role) {
+  return `
+      <a href="/contracts-received">
+        <button style="position: relative;">Contracts Received <span class="badge" data-count="0"></span></button>
     </a>`
 }
