@@ -1,12 +1,10 @@
-
-
-<div class="artist-application-review" >
+<div class="artist-application-review">
 
     <div class="app-preview">
         <div>
 
-           <h3>${name}</h3>
-           
+            <h3>${name}</h3>
+
             <p>Submitted on: ${createdAt}</p>
         </div>
         <div>
@@ -18,42 +16,44 @@
             </span>
             <!-- <span>${approved  ? "Approved" :  hasBeenReviewed ?  "Not Approved": "Has not been reviewed" }</span> -->
         </div>
-        <button class="expandApplication show" onclick="event.target.closest('.artist-application-review').classList.toggle('expanded')"
-        >${hasBeenReviewed =='true' ? "Review Old Application" : "Review"}</button>
-        <button class="expandApplication hide" onclick="event.target.closest('.artist-application-review').classList.toggle('expanded')"
-        >Minimize Application</button>
-        
+        <button class="expandApplication show"
+            onclick="event.target.closest('.artist-application-review').classList.toggle('expanded')">${hasBeenReviewed
+            =='true' ? "Review Old Application" : "Review"}</button>
+        <button class="expandApplication hide"
+            onclick="event.target.closest('.artist-application-review').classList.toggle('expanded')">Minimize
+            Application</button>
+
     </div>
     <div class="app-contents">
 
 
         <h3>Artist Name</h3>
         <div class="row">
-            <input-component value="${name}" disabled="true" style="width: 48%" required="true"
-                fieldName="name" alias="Name"></input-component>
-      
+            <input-component value="${name}" disabled="true" style="width: 48%" required="true" fieldName="name"
+                alias="Name"></input-component>
+
         </div>
         <div class="row">
             <input-component value="${email}" disabled="true" style="width: 48%" required="true" type="email"
                 fieldName="email" alias="Email"></input-component>
         </div>
-        
+
 
         <label for="hasNotReceivedScholarshipPreviously">
-            <input disabled ${hasNotReceivedScholarshipPreviously == "true" ? "checked" : ""}  required type="checkbox" name="hasNotReceivedScholarshipPreviously" value="true"
+            <input disabled ${hasNotReceivedScholarshipPreviously=="true" ? "checked" : "" } required type="checkbox"
+                name="hasNotReceivedScholarshipPreviously" value="true"
                 id="hasNotReceivedScholarshipPreviously"></input>
-                Click here to verify that you have not received a GHOST artist scholarship previously
+            Click here to verify that you have not received a GHOST artist scholarship previously
         </label>
-   
-        <textarea-component disabled fieldName="needForScholarship-${randomId}" required
-             alias=" Please explain your need for a scholarship"
-            value="${needForScholarship}"></textarea-component>
 
-            <div style="text-align: center;">
-                <button data-fb-id="${fbId}" onclick="window.updateScholarship(event,true)">Approve Scholarship</button>
-                <button data-fb-id="${fbId}" onclick="window.updateScholarship(event,false)">Disapprove</button>
+        <textarea-component disabled="disabled" fieldName="needForScholarship-${randomId}" required
+            alias=" Please explain your need for a scholarship" value="${needForScholarship}"></textarea-component>
 
-            </div>
+        <div style="text-align: center;">
+            <button data-fb-id="${fbId}" onclick="window.updateScholarship(event,true)">Approve Scholarship</button>
+            <button data-fb-id="${fbId}" onclick="window.updateScholarship(event,false)">Disapprove</button>
+
+        </div>
     </div>
 
 </div>

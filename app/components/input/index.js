@@ -14,7 +14,7 @@ const inputAttributes = [
   'checked',
   'placeholder',
   'width',
-  'disabled',
+  'disabled', // Why is this not working on the textarea?
   'alias',
   'labelClass',
   'id',
@@ -89,6 +89,14 @@ createCustomElement(
     if (value) {
       this.querySelector('textarea').innerText = value
     }
+
+    // check for attribute 'disabled'
+    const disabled = this.getAttribute('disabled')
+    console.log({ disabled })
+    if (disabled) {
+      this.querySelector('textarea').setAttribute('disabled', 'disabled')
+    }
+
   },
   textareaTemplate,
   '',

@@ -57,6 +57,15 @@
                     ></scholarship-application-component> <hr>`;
 
                 });
+
+                // init each component
+                document.querySelectorAll('scholarship-application-component').forEach(component => {
+                    component.init();
+                    // get all nested textarea components
+                    component.querySelectorAll('textarea-component').forEach(textarea => {
+                        textarea.init();
+                    });
+                });
             });
         });
     </script>
