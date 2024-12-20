@@ -6,6 +6,32 @@ import { createCustomElement, evaluateTemplate } from '../../../utils/custom-ele
 
 createCustomElement('contract-received', function () {
 
-console.log("hi")
 
-}, contractReceived, '');
+}, contractReceived, '', {
+    attributes: [
+        'firstName',
+        'lastName',
+        'membershipPaid',
+        'scholarshipApplied',
+        'studioSharingAnswer',
+        'artisticDemonstration',
+        'artistStatement',
+        'artistTagline',
+        'businessEmail',
+        'facebook',
+        'instagram',
+        'mailingAddress',
+        'membershipPaid',
+        'personalEmail',
+        'phone',
+        'studioAddress',
+        'website',
+        'committeeRoleId',
+        'artistInStudioImage',
+        'brochureImage',
+        'digitalImage1',
+        'digitalImage2',
+        'digitalImage3',
+        'signature',
+    ]
+});

@@ -1,4 +1,27 @@
 
 <div>
-  CONTRAAAAAACT RECEIVED
+  ${firstName}
+  ${lastName}
+  ${membershipPaid}
+  ${scholarshipApplied}
+  ${studioSharingAnswer}
+  ${artisticDemonstration}
+  ${artistStatement}
+  ${artistTagline}
+  ${businessEmail}
+  ${facebook}
+  ${instagram}
+  ${mailingAddress}
+  ${membershipPaid}
+  ${personalEmail}
+  ${phone}
+  ${studioAddress}
+  ${website}
+  ${committeeRoleId}
+  ${artistInStudioImage}
+  ${brochureImage}
+  ${digitalImage1}
+  ${digitalImage2}
+  ${digitalImage3}
+  ${signature}
 </div>

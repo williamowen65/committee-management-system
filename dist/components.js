@@ -312,9 +312,9 @@ __webpack_require__.r(__webpack_exports__);
 
 // import './style.scss';
 
-(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('contract-received', function () {
-  console.log("hi");
-}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '');
+(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('contract-received', function () {}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '', {
+  attributes: ['firstName', 'lastName', 'membershipPaid', 'scholarshipApplied', 'studioSharingAnswer', 'artisticDemonstration', 'artistStatement', 'artistTagline', 'businessEmail', 'facebook', 'instagram', 'mailingAddress', 'membershipPaid', 'personalEmail', 'phone', 'studioAddress', 'website', 'committeeRoleId', 'artistInStudioImage', 'brochureImage', 'digitalImage1', 'digitalImage2', 'digitalImage3', 'signature']
+});
 
 /***/ }),
 
@@ -2118,7 +2118,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n<div>\r\n  CONTRAAAAAACT RECEIVED\r\n</div>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n<div>\r\n  ${firstName}\r\n  ${lastName}\r\n  ${membershipPaid}\r\n  ${scholarshipApplied}\r\n  ${studioSharingAnswer}\r\n  ${artisticDemonstration}\r\n  ${artistStatement}\r\n  ${artistTagline}\r\n  ${businessEmail}\r\n  ${facebook}\r\n  ${instagram}\r\n  ${mailingAddress}\r\n  ${membershipPaid}\r\n  ${personalEmail}\r\n  ${phone}\r\n  ${studioAddress}\r\n  ${website}\r\n  ${committeeRoleId}\r\n  ${artistInStudioImage}\r\n  ${brochureImage}\r\n  ${digitalImage1}\r\n  ${digitalImage2}\r\n  ${digitalImage3}\r\n  ${signature}\r\n</div>\r\n");
 
 /***/ }),
 
