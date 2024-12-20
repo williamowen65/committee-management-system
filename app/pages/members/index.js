@@ -114,7 +114,7 @@ function newScholarshipApplicationsButton(role) {
   })
   return `
       <a href="/scholarship-applications">
-        <button  style="position: relative;">New Scholarship Applications Received <span class="badge" data-count="0"></span></button>
+        <button  style="position: relative;">Scholarships Received <span class="badge" data-count="0"></span></button>
     </a>`
 }
 
