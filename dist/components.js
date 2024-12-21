@@ -139,7 +139,7 @@ window.initializePaypalButtons = function () {
     },
     onApprove: function onApprove(data, actions) {
       return _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var _orderData, response, orderData, errorDetail, _orderData2, _orderData3, transaction, userId;
+        var _orderData, response, orderData, errorDetail, _orderData2, _orderData3, transaction, userId, email, user, invoice;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
@@ -192,41 +192,54 @@ window.initializePaypalButtons = function () {
 
               // get user Id
               userId = firebase.auth.currentUser.uid;
-              CRUD.update('ghost-contracts', userId, {
-                artistDetails: {
-                  membershipPaid: true,
-                  membershipReceipt: {
-                    transactionId: transaction.id,
-                    status: transaction.status,
-                    amount: transaction.amount.value,
-                    currency: transaction.amount.currency_code,
-                    createdAt: firebase.serverTimestamp()
-                  }
+              email = firebase.auth.currentUser.email;
+              _context2.next = 29;
+              return CRUD.read('ghost-contracts', userId);
+            case 29:
+              user = _context2.sent;
+              invoice = {
+                membershipPaid: true,
+                membershipReceipt: {
+                  transactionId: transaction.id,
+                  status: transaction.status,
+                  amount: transaction.amount.value,
+                  currency: transaction.amount.currency_code,
+                  createdAt: firebase.serverTimestamp()
                 }
+              };
+              CRUD.update('ghost-contracts', userId, {
+                artistDetails: invoice
               }).then(function () {
+                window.sendMessageToParent({
+                  controller: 'gmailController',
+                  to: "".concat(email, ", ").concat(user.artistDetails.personalEmail, ", ").concat(user.artistDetails.businessEmail),
+                  subject: 'GHOST Contract Invoice',
+                  body: "<h1>Congratulations on joining the Gig Harbor Open Studio Tour </h1>\n                  \n                  <p>Here is you invoice for your membership fee</p>\n                  <p>Transaction ID: ".concat(transaction.id, "</p>\n                  <p>Amount: ").concat(transaction.amount.value, "</p>\n                  <p>Currency: ").concat(transaction.amount.currency_code, "</p>\n                  <p>Status: ").concat(transaction.status, "</p>\n                  <p>Created At: ").concat(new Date().toLocaleString(), "</p>\n                 \n\n                  <p>Thank you for your membership payment. </p>\n              \n                  <p>Best Regards, </p>\n                  <p>Gig Harbor Open Studio Tour</p>\n                  \n                  ")
+                });
+
                 // show success message
-                alert('Membership payment successful');
+                // alert('Membership payment successful: Email is being sent.')
                 // redirect to the dashboard
-                window.location.href = '/members';
+                // window.location.href = '/members'
               });
 
               // save data to the database
               // if (orderData) {
               //    CRUD
               // }
-            case 27:
-              _context2.next = 33;
+            case 32:
+              _context2.next = 38;
               break;
-            case 29:
-              _context2.prev = 29;
+            case 34:
+              _context2.prev = 34;
               _context2.t0 = _context2["catch"](1);
               logIf.paypal && console.log(_context2.t0);
               console.error(_context2.t0);
-            case 33:
+            case 38:
             case "end":
               return _context2.stop();
           }
-        }, _callee2, null, [[1, 29]]);
+        }, _callee2, null, [[1, 34]]);
       }))();
     }
   }).render('.payPalContainer');
