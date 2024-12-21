@@ -144,7 +144,7 @@ function allContractsButton(role) {
 function testEmailButton(role){
   setTimeout(()=> {
     document.getElementById('sendEmail').addEventListener('click', () => {
-      window.sendMessageToParent({ controller: 'gmailController', to: 'william.owen.career@gmail.com', subject: 'Test Email', body: 'This is a test email from the Ghost website' })
+      window.sendMessageToParent({ controller: 'gmailController', to: 'william.owen.career@gmail.com', subject: 'Test Email', body: 'This is a test email from the <b>Ghost website</b>' })
     }, 1)
   })
   return `        <button id="sendEmail" style="position: relative;">Test Email </button>`
