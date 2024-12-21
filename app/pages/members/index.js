@@ -171,6 +171,7 @@ function testSheetsButton(role) {
         sheetName: 'testSheet',
         spreadsheetId: '1sAka-Rs4LhHhkX3J4s7SaDlpIXEdv5R5Qm7meGIL6Wk',
         action: 'upsert',
+        key: 'rowId',
         data: JSON.parse(data)
       })
 
@@ -211,6 +212,7 @@ function textProcessToSheetsButton(role) {
         sheetName: 'ghost-contracts',
         spreadsheetId: '1cmfgdGc8L5li_kx79W9SO5-ZwukiaXxlV5EZ3o8RYpY', // spreadsheet "GHOST Spreadsheet Data"
         action: 'upsertAll',
+        key: "userId",
         data: contracts
       })
 
