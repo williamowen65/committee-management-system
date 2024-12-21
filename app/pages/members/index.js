@@ -164,6 +164,23 @@ function testEmailButton(role){
             `
   })
 
+  window.addEventListener("message", (event) => {
+
+    if(event.dispatch !== 'gmailController-response') return
+
+    if (event.error) {
+      alert('Error sending email')
+      return
+    }
+    
+    console.log('Message received from parent:', event.data);
+    // You can add additional logic here to handle the message
+    // show success message
+    alert('Membership payment successful: Email is being sent.')
+    // redirect to the dashboard
+    window.location.href = '/test'
+  });
+
 
 
     }, 1)
