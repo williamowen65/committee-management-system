@@ -163,7 +163,10 @@ function testSheetsButton(role){
         sheetName: 'testSheet',
         spreadsheetId: '1sAka-Rs4LhHhkX3J4s7SaDlpIXEdv5R5Qm7meGIL6Wk',
         action: 'upsert',
-        data: [['test-1', 'test-2'],[1,2]]
+        data: {
+          "name": "William Owen",
+          "email": "test@gmail.com"
+        }
       } )
 
       window.addEventListener("message", (event) => {
