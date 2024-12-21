@@ -55,6 +55,9 @@ document.addEventListener('DOMContentLoaded', function () {
               if(roleButtons.includes('contracts-received')) {
                 buttons.insertAdjacentHTML('beforeend',allContractsButton(role))
               }
+              if(roleButtons.includes('testEmail')) {
+                buttons.insertAdjacentHTML('beforeend',testEmailButton(role))
+              }
 
             }
 
@@ -136,4 +139,9 @@ function allContractsButton(role) {
       <a href="/contracts-received">
         <button style="position: relative;">Contracts Received <span class="badge" data-count="0"></span></button>
     </a>`
+}
+
+function testEmailButton(role){
+  return `
+        <button style="position: relative;">Test Email </button>`
 }
