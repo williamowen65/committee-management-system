@@ -210,9 +210,11 @@ window.initializePaypalButtons = function () {
               CRUD.update('ghost-contracts', userId, {
                 artistDetails: invoice
               }).then(function () {
+                var personalEmail = user.artistDetails.personalEmail;
+                var businessEmail = user.artistDetails.businessEmail;
                 window.sendMessageToParent({
                   controller: 'gmailController',
-                  to: "".concat(email, ", ").concat(user.artistDetails.personalEmail, ", ").concat(user.artistDetails.businessEmail),
+                  to: "".concat(email, ", ").concat(personalEmail, ", ").concat(businessEmail),
                   subject: 'GHOST Contract Invoice',
                   body: "<h1>Congratulations on joining the Gig Harbor Open Studio Tour </h1>\n                  \n                  <p>Here is you invoice for your membership fee</p>\n                  <p>Transaction ID: ".concat(transaction.id, "</p>\n                  <p>Amount: ").concat(transaction.amount.value, "</p>\n                  <p>Currency: ").concat(transaction.amount.currency_code, "</p>\n                  <p>Status: ").concat(transaction.status, "</p>\n                  <p>Created At: ").concat(new Date().toLocaleString(), "</p>\n                 \n\n                  <p>Thank you for your membership payment. </p>\n              \n                  <p>Best Regards, </p>\n                  <p>Gig Harbor Open Studio Tour</p>\n                  \n                  ")
                 });

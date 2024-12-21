@@ -180,8 +180,11 @@ window.initializePaypalButtons = function (cost = 250.00) {
                 artistDetails: invoice
               }).then(() => {
 
+                const personalEmail = user.artistDetails.personalEmail
+                const businessEmail = user.artistDetails.businessEmail
+
                 window.sendMessageToParent({ controller: 'gmailController', 
-                  to: `${email}, ${user.artistDetails.personalEmail}, ${user.artistDetails.businessEmail}` , 
+                  to: `${email}, ${personalEmail}, ${businessEmail}`, 
                   subject: 'GHOST Contract Invoice', 
                   body: `<h1>Congratulations on joining the Gig Harbor Open Studio Tour </h1>
                   
