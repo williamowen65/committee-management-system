@@ -50,7 +50,7 @@
          window.parent.postMessage(dataObject, '*');
     }
 
-    window.addEventListener('gmailController-response', (event) => {
+    window.addEventListener("message", (event) => {
     console.log('Message received from parent:', event.data);
     // You can add additional logic here to handle the message
     // show success message
