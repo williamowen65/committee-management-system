@@ -148,7 +148,18 @@ function allContractsButton(role) {
 function testSheetsButton(role){
   setTimeout(()=> {
     document.getElementById('generateSheets').addEventListener('click', () => {
-      
+      window.sendMessageToParent({ controller: 'sheetsController'} )
+
+      window.addEventListener("message", (event) => {
+        if(event.data.dispatch !== 'sheetsController-response') return
+        if (event.data.error) {
+          alert('Error generating sheets')
+          return
+        }
+        // You can add additional logic here to handle the message
+        // show success message
+        alert('Sheets generated successfully')
+      })
     })
   }, 1)
 
