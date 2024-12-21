@@ -190,17 +190,20 @@ window.initializePaypalButtons = function (cost = 250.00) {
                 body: `
                  <div style="text-align:center">
                   <h1>Congratulations on joining the Gig Harbor Open Studio Tour</h1>
-                  <p>Here is your invoice for the membership fee</p>
+                  <p>Here is your invoice for the membership fee. 
+                  <br> Your contract has been submitted. 
+                  <br> You will be able to make changes to the contract up until March 2nd, 2025
+                   </p>
                 
-                  <fieldset>
+                  <fieldset style="width:"fit-content; margin:auto;">
                   
                   <legend>Invoice</legend>
                   
-                  <p style="margin:0;">Transaction ID: ${transaction.id}</p>
-                  <p style="margin:0;">Amount: ${transaction.amount.value}</p>
-                  <p style="margin:0;">Currency: ${transaction.amount.currency_code}</p>
-                  <p style="margin:0;">Status: ${transaction.status}</p>
-                  <p style="margin:0;">Created At: ${new Date().toLocaleString()}</p>
+                  <p style="margin:0; text-align:start;">Transaction ID: ${transaction.id}</p>
+                  <p style="margin:0; text-align:start;">Amount: ${transaction.amount.value}</p>
+                  <p style="margin:0; text-align:start;">Currency: ${transaction.amount.currency_code}</p>
+                  <p style="margin:0; text-align:start;">Status: ${transaction.status}</p>
+                  <p style="margin:0; text-align:start;">Created At: ${new Date().toLocaleString()}</p>
                   </fieldset>
 
                   <p>Thank you for your membership payment.</p>
@@ -209,11 +212,17 @@ window.initializePaypalButtons = function (cost = 250.00) {
                   `
               })
 
+              window.addEventListener('gmailController-response', (event) => {
+                console.log('Message received from parent:', event.data);
+                // You can add additional logic here to handle the message
+                // show success message
+                alert('Membership payment successful: Email is being sent.')
+                // redirect to the dashboard
+                window.location.href = '/members'
+              });
 
-              // show success message
-              // alert('Membership payment successful: Email is being sent.')
-              // redirect to the dashboard
-              // window.location.href = '/members'
+
+
             })
 
             // save data to the database
