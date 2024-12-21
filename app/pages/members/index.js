@@ -185,7 +185,7 @@ function testSheetsButton(role) {
   }, 1)
 
   return `<button id="generateSheets" style="position: relative;">Test Sheets </button>
-  <textarea>
+  <textarea style="height:100px; width: 200px;">
 {
   "rowId": 1,
   "name": "",
