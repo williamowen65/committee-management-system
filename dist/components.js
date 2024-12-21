@@ -190,12 +190,17 @@ window.initializePaypalButtons = function () {
               transaction = ((_orderData2 = orderData) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.purchase_units) === null || _orderData2 === void 0 || (_orderData2 = _orderData2[0]) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.payments) === null || _orderData2 === void 0 || (_orderData2 = _orderData2.captures) === null || _orderData2 === void 0 ? void 0 : _orderData2[0]) || ((_orderData3 = orderData) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.purchase_units) === null || _orderData3 === void 0 || (_orderData3 = _orderData3[0]) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.payments) === null || _orderData3 === void 0 || (_orderData3 = _orderData3.authorizations) === null || _orderData3 === void 0 ? void 0 : _orderData3[0]);
               logIf.paypal && console.log('Capture result', orderData, JSON.stringify(orderData, null, 2), CRUD);
 
+              // replace the buttons with a success message
+
+              document.querySelector('.payPalContainer').style = "display:none";
+              document.querySelector('.payPalContainer').insertAdjacentHTML('afterend', "<div class='processPayment'>Processing Payment....</div>");
+
               // get user Id
               userId = firebase.auth.currentUser.uid;
               email = firebase.auth.currentUser.email;
-              _context2.next = 29;
+              _context2.next = 31;
               return CRUD.read('ghost-contracts', userId);
-            case 29:
+            case 31:
               user = _context2.sent;
               invoice = {
                 membershipPaid: true,
@@ -210,6 +215,8 @@ window.initializePaypalButtons = function () {
               CRUD.update('ghost-contracts', userId, {
                 artistDetails: invoice
               }).then(function () {
+                // send email to the user
+
                 var personalEmail = user.artistDetails.personalEmail || "";
                 var businessEmail = user.artistDetails.businessEmail || "";
                 window.sendMessageToParent({
@@ -221,13 +228,14 @@ window.initializePaypalButtons = function () {
                 window.addEventListener("message", function (event) {
                   if (event.data.dispatch !== 'gmailController-response') return;
                   if (event.data.error) {
-                    alert('Error sending email');
+                    document.querySelector('.processPayment').innerText = "<div style='color:red; font-weight: bold'>Payment successful but error sending email</div>";
                     return;
                   }
 
                   // You can add additional logic here to handle the message
                   // show success message
-                  alert('Membership payment successful: Email is being sent.');
+                  alert('Membership payment successful: Email sent.');
+                  document.querySelector('.processPayment').innerText = "Payment Successful - Email Sent";
                   // redirect to the dashboard
                   window.location.href = '/members';
                 });
@@ -237,19 +245,19 @@ window.initializePaypalButtons = function () {
               // if (orderData) {
               //    CRUD
               // }
-            case 32:
-              _context2.next = 38;
-              break;
             case 34:
-              _context2.prev = 34;
+              _context2.next = 40;
+              break;
+            case 36:
+              _context2.prev = 36;
               _context2.t0 = _context2["catch"](1);
               logIf.paypal && console.log(_context2.t0);
               console.error(_context2.t0);
-            case 38:
+            case 40:
             case "end":
               return _context2.stop();
           }
-        }, _callee2, null, [[1, 34]]);
+        }, _callee2, null, [[1, 36]]);
       }))();
     }
   }).render('.payPalContainer');

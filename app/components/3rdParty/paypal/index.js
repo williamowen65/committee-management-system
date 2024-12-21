@@ -160,6 +160,13 @@ window.initializePaypalButtons = function (cost = 250.00) {
               CRUD
             )
 
+            // replace the buttons with a success message
+
+            document.querySelector('.payPalContainer').style="display:none";
+            document.querySelector('.payPalContainer').insertAdjacentHTML('afterend', "<div class='processPayment'>Processing Payment....</div>")
+
+
+
             // get user Id
             const userId = firebase.auth.currentUser.uid
             const email = firebase.auth.currentUser.email
@@ -179,6 +186,9 @@ window.initializePaypalButtons = function (cost = 250.00) {
             CRUD.update('ghost-contracts', userId, {
               artistDetails: invoice
             }).then(() => {
+
+              // send email to the user
+
 
               const personalEmail = user.artistDetails.personalEmail || ""
               const businessEmail = user.artistDetails.businessEmail || ""
@@ -217,13 +227,15 @@ window.initializePaypalButtons = function (cost = 250.00) {
                 if (event.data.dispatch !== 'gmailController-response') return
 
                 if (event.data.error) {
-                  alert('Error sending email')
+                   document.querySelector('.processPayment').innerText = "<div style='color:red; font-weight: bold'>Payment successful but error sending email</div>"
                   return
                 }
 
                 // You can add additional logic here to handle the message
                 // show success message
-                alert('Membership payment successful: Email is being sent.')
+                alert('Membership payment successful: Email sent.')
+
+                document.querySelector('.processPayment').innerText = "Payment Successful - Email Sent"
                 // redirect to the dashboard
                 window.location.href = '/members'
               });
