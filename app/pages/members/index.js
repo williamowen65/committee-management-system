@@ -209,8 +209,8 @@ function textProcessToSheetsButton(role) {
         return contracts.map(contract => {
           return {
             userId: contract.userId,
-            ...artistDetails,
-            ...images,
+            ...contract.artistDetails,
+            ...contract.images,
             'Committee Roles': JSON.stringify(contract.committeeRoleId), // get committee roles
           }
         })
