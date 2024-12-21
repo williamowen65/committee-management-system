@@ -209,7 +209,7 @@ function textProcessToSheetsButton(role) {
       window.sendMessageToParent({
         controller: 'sheetsController',
         sheetName: 'ghost-contracts',
-        spreadsheetId: '1sAka-Rs4LhHhkX3J4s7SaDlpIXEdv5R5Qm7meGIL6Wk',
+        spreadsheetId: '1cmfgdGc8L5li_kx79W9SO5-ZwukiaXxlV5EZ3o8RYpY', // spreadsheet "GHOST Spreadsheet Data"
         action: 'upsertAll',
         data: contracts
       })
