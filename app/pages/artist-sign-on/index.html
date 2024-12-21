@@ -8,15 +8,24 @@
     <script type="module" src="/dist/firebase.js"></script>
 
     <script>
-      window.addEventListener('message', function (event) {
-        var data = event.data
-        console.log('Received message:', {data})
+         function sendMessageToParent() {
+            var message = { key: 'value' }; // Replace with your actual data
+            window.parent.postMessage(message, '*');
+        }
 
-        // Handle the received data
-      })
+        // Example: Send a message to the parent when the iframe content is loaded
+        window.onload = function() {
+            sendMessageToParent();
+        };
+
+        // Example: Send a message to the parent on a button click
+        document.querySelector('button#sendMail').addEventListener('click', function() {
+            sendMessageToParent();
+        });
     </script>
   </head>
   <body>
+    <button id="sendMail">Test button</button>
     <header-component> </header-component>
     <!-- Define 
      the images to pass here
