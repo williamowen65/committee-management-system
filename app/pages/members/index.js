@@ -58,6 +58,9 @@ document.addEventListener('DOMContentLoaded', function () {
               if(roleButtons.includes('testEmail')) {
                 buttons.insertAdjacentHTML('beforeend',testEmailButton(role))
               }
+              if(roleButtons.includes('testSheets')) {
+                buttons.insertAdjacentHTML('beforeend',testSheetsButton(role))
+              }
 
             }
 
@@ -139,6 +142,17 @@ function allContractsButton(role) {
       <a href="/contracts-received">
         <button style="position: relative;">Contracts Received <span class="badge" data-count="0"></span></button>
     </a>`
+}
+
+
+function testSheetsButton(role){
+  setTimeout(()=> {
+    document.getElementById('generateSheets').addEventListener('click', () => {
+      
+    })
+  }, 1)
+
+  return `button id="generateSheets" style="position: relative;">Test Sheets </button>`
 }
 
 function testEmailButton(role){
