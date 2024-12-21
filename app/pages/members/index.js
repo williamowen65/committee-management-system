@@ -144,11 +144,30 @@ function allContractsButton(role) {
     </a>`
 }
 
+/**
+  payload:{
+    controller: 'sheetsController',
+    sheetName: string,
+    spreadsheetId: string,
+    action: ['upsert', 'delete'],
+    data: {object}
+  }
+ */
+
 
 function testSheetsButton(role){
   setTimeout(()=> {
     document.getElementById('generateSheets').addEventListener('click', () => {
-      window.sendMessageToParent({ controller: 'sheetsController'} )
+      window.sendMessageToParent({ 
+        controller: 'sheetsController',
+        sheetName: 'testSheet',
+        spreadsheetId: '1sAka-Rs4LhHhkX3J4s7SaDlpIXEdv5R5Qm7meGIL6Wk',
+        action: 'upsert',
+        data: {
+          name: 'William Owen',
+          email: 'test@gamil.com'
+        }
+      } )
 
       window.addEventListener("message", (event) => {
         if(event.data.dispatch !== 'sheetsController-response') return
