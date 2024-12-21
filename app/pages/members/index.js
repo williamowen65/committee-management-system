@@ -164,6 +164,7 @@ function testSheetsButton(role){
         spreadsheetId: '1sAka-Rs4LhHhkX3J4s7SaDlpIXEdv5R5Qm7meGIL6Wk',
         action: 'upsert',
         data: {
+          "rowId": 1,
           "name": "William Owen",
           "email": "test@gmail.com",
           "newField": 123
