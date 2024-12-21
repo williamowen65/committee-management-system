@@ -218,8 +218,13 @@ window.initializePaypalButtons = function () {
                   subject: 'GHOST Contract Invoice',
                   body: "\n                 <div style=\"text-align:center\">\n                  <h1>Congratulations on joining the Gig Harbor Open Studio Tour</h1>\n                  <p>Here is your invoice for the membership fee. \n                  <br> Your contract has been submitted. \n                  <br> You will be able to make changes to the contract up until March 2nd, 2025\n                   </p>\n                \n                  <fieldset style=\"width:\"fit-content; margin:auto;\">\n                  \n                  <legend>Invoice</legend>\n                  \n                  <p style=\"margin:0; text-align:start;\">Transaction ID: ".concat(transaction.id, "</p>\n                  <p style=\"margin:0; text-align:start;\">Amount: ").concat(transaction.amount.value, "</p>\n                  <p style=\"margin:0; text-align:start;\">Currency: ").concat(transaction.amount.currency_code, "</p>\n                  <p style=\"margin:0; text-align:start;\">Status: ").concat(transaction.status, "</p>\n                  <p style=\"margin:0; text-align:start;\">Created At: ").concat(new Date().toLocaleString(), "</p>\n                  </fieldset>\n\n                  <p>Thank you for your membership payment.</p>\n                   <p>Best Regards, <br>Gig Harbor Open Studio Tour</p>\n                </div>\n                  ")
                 });
-                window.addEventListener('gmailController-response', function (event) {
-                  console.log('Message received from parent:', event.data);
+                window.addEventListener("message", function (event) {
+                  if (event.data.dispatch !== 'gmailController-response') return;
+                  if (event.data.error) {
+                    alert('Error sending email');
+                    return;
+                  }
+
                   // You can add additional logic here to handle the message
                   // show success message
                   alert('Membership payment successful: Email is being sent.');

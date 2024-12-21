@@ -212,8 +212,15 @@ window.initializePaypalButtons = function (cost = 250.00) {
                   `
               })
 
-              window.addEventListener('gmailController-response', (event) => {
-                console.log('Message received from parent:', event.data);
+
+              window.addEventListener("message", (event) => {
+                if (event.data.dispatch !== 'gmailController-response') return
+
+                if (event.data.error) {
+                  alert('Error sending email')
+                  return
+                }
+
                 // You can add additional logic here to handle the message
                 // show success message
                 alert('Membership payment successful: Email is being sent.')

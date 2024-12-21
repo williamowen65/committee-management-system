@@ -165,7 +165,6 @@ function testEmailButton(role){
   })
 
   window.addEventListener("message", (event) => {
-    console.log("Message received from parent:", event.data);
     if(event.data.dispatch !== 'gmailController-response') return
 
     if (event.data.error) {
@@ -173,7 +172,6 @@ function testEmailButton(role){
       return
     }
 
-    console.log('Message received from parent:', event.data);
     // You can add additional logic here to handle the message
     // show success message
     alert('Membership payment successful: Email is being sent.')
