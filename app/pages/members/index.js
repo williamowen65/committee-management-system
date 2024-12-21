@@ -61,6 +61,9 @@ document.addEventListener('DOMContentLoaded', function () {
               if (roleButtons.includes('testSheets')) {
                 buttons.insertAdjacentHTML('beforeend', testSheetsButton(role))
               }
+              if (roleButtons.includes('processToSheets')) {
+                buttons.insertAdjacentHTML('beforeend', textProcessToSheetsButton(role))
+              }
 
             }
 
@@ -194,6 +197,37 @@ function testSheetsButton(role) {
 }
   </textarea>
   `
+}
+
+function textProcessToSheetsButton(role) {
+  setTimeout(() => {
+    document.getElementById('processToSheets').addEventListener('click', () => {
+
+      // get some input from user (for testing purposes)
+      const data = document.querySelector('textarea').value
+
+      window.sendMessageToParent({
+        controller: 'sheetsController',
+        sheetName: 'testSheet',
+        spreadsheetId: '1sAka-Rs4LhHhkX3J4s7SaDlpIXEdv5R5Qm7meGIL6Wk',
+        action: 'upsert',
+        data: JSON.parse(data)
+      })
+
+      window.addEventListener("message", (event) => {
+        if (event.data.dispatch !== 'sheetsController-response') return
+        if (event.data.error) {
+          alert('Error generating sheets')
+          return
+        }
+        // You can add additional logic here to handle the message
+        // show success message
+        alert('Sheets generated successfully')
+      })
+    })
+  }, 1)
+
+  return `<button id="processToSheets" style="position: relative;">Process to Sheets </button>`
 }
 
 function testEmailButton(role) {

@@ -5,7 +5,7 @@ const roles = {
         committee: 'No Committee',
         responsibility: 'Web development and maintenance',
         tasks: [],
-        sideBarButtons: ['testEmail', 'testSheets']
+        sideBarButtons: ['testEmail', 'testSheets','processToSheets']
     },
     1: {
         title: 'President',
