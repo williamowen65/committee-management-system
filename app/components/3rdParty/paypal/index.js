@@ -202,9 +202,9 @@ window.initializePaypalButtons = function (cost = 250.00) {
 
 
                 // show success message
-                alert('Membership payment successful: Email is being sent.')
+                // alert('Membership payment successful: Email is being sent.')
                 // redirect to the dashboard
-                window.location.href = '/members'
+                // window.location.href = '/members'
               })
 
               // save data to the database
