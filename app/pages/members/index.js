@@ -166,9 +166,9 @@ function testEmailButton(role){
 
   window.addEventListener("message", (event) => {
     console.log("Message received from parent:", event.data);
-    if(event.dispatch !== 'gmailController-response') return
+    if(event.data.dispatch !== 'gmailController-response') return
 
-    if (event.error) {
+    if (event.data.error) {
       alert('Error sending email')
       return
     }
