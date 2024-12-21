@@ -180,8 +180,8 @@ window.initializePaypalButtons = function (cost = 250.00) {
                 artistDetails: invoice
               }).then(() => {
 
-                const personalEmail = user.artistDetails.personalEmail
-                const businessEmail = user.artistDetails.businessEmail
+                const personalEmail = user.artistDetails.personalEmail || ""
+                const businessEmail = user.artistDetails.businessEmail || ""
 
                 window.sendMessageToParent({ controller: 'gmailController', 
                   to: `${email}, ${personalEmail}, ${businessEmail}`, 

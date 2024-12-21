@@ -210,8 +210,8 @@ window.initializePaypalButtons = function () {
               CRUD.update('ghost-contracts', userId, {
                 artistDetails: invoice
               }).then(function () {
-                var personalEmail = user.artistDetails.personalEmail;
-                var businessEmail = user.artistDetails.businessEmail;
+                var personalEmail = user.artistDetails.personalEmail || "";
+                var businessEmail = user.artistDetails.businessEmail || "";
                 window.sendMessageToParent({
                   controller: 'gmailController',
                   to: "".concat(email, ", ").concat(personalEmail, ", ").concat(businessEmail),
