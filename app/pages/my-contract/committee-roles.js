@@ -1,12 +1,19 @@
 const roles = {
     // Board Members
+    0: {
+        title: 'Developer ',
+        committee: 'No Committee',
+        responsibility: 'Web development and maintenance',
+        tasks: [],
+        sideBarButtons: ['testEmail']
+    },
     1: {
         title: 'President',
         committee: 'Board',
         responsibility: 'Oversee all aspects of the organization',
         prerequisite: 'Previous experience in a leadership role',
         tasks: [],
-        sideBarButtons: ['testEmail','newScholarshipApplications', 'newApplications', 'contracts-received']
+        sideBarButtons: ['newScholarshipApplications', 'newApplications', 'contracts-received']
     },
     2: {
         title: 'Vice President',
