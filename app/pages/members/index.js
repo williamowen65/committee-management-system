@@ -162,7 +162,8 @@ function testEmailButton(role){
             </fieldset>
 
             <p>Thank you for your membership payment.</p>
-            <p>Best Regards, \nGig Harbor Open Studio Tour</p>
+            
+            <p>Best Regards, <br>Gig Harbor Open Studio Tour</p>
         <div>
             `
   
