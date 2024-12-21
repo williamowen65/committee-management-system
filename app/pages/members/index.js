@@ -165,7 +165,8 @@ function testSheetsButton(role){
         action: 'upsert',
         data: {
           "name": "William Owen",
-          "email": "test@gmail.com"
+          "email": "test@gmail.com",
+          "newField": 123
         }
       } )
 
