@@ -201,17 +201,17 @@ function testSheetsButton(role) {
 
 function textProcessToSheetsButton(role) {
   setTimeout(() => {
-    document.getElementById('processToSheets').addEventListener('click', () => {
+    document.getElementById('processToSheets').addEventListener('click', async () => {
 
-      // get some input from user (for testing purposes)
-      const data = document.querySelector('textarea').value
+      // get all contracts
+      const contracts = await CRUD.readAll('ghost-contracts')
 
       window.sendMessageToParent({
         controller: 'sheetsController',
-        sheetName: 'testSheet',
+        sheetName: 'ghost-contracts',
         spreadsheetId: '1sAka-Rs4LhHhkX3J4s7SaDlpIXEdv5R5Qm7meGIL6Wk',
-        action: 'upsert',
-        data: JSON.parse(data)
+        action: 'upsertAll',
+        data: contracts
       })
 
       window.addEventListener("message", (event) => {
