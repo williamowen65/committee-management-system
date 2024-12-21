@@ -234,10 +234,12 @@ window.initializePaypalButtons = function () {
 
                   // You can add additional logic here to handle the message
                   // show success message
-                  alert('Membership payment successful: Email sent.');
+
                   document.querySelector('.processPayment').innerText = "Payment Successful - Email Sent";
-                  // redirect to the dashboard
-                  window.location.href = '/members';
+                  setTimeout(function () {
+                    // redirect to the dashboard
+                    window.location.href = '/members';
+                  }, 3000);
                 });
               });
 
