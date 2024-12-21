@@ -13,19 +13,12 @@
             window.parent.postMessage(message, '*');
         }
 
-        // Example: Send a message to the parent when the iframe content is loaded
-        window.onload = function() {
-            sendMessageToParent();
-        };
-
-        // Example: Send a message to the parent on a button click
-        document.querySelector('button#sendMail').addEventListener('click', function() {
-            sendMessageToParent();
-        });
+       
+      
     </script>
   </head>
   <body>
-    <button id="sendMail">Test button</button>
+    <button id="sendMail" onclick="sendMessageToParent()">Test button</button>
     <header-component> </header-component>
     <!-- Define 
      the images to pass here
