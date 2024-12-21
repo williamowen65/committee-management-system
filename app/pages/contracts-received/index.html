@@ -10,7 +10,11 @@
     <script src="/dist/CRUD.js"></script>
  
     <script src="/contracts-received/index.js" type="module"></script>
-
+    <script>
+      window.sendMessageToParent = function(dataObject) {
+           window.parent.postMessage(dataObject, '*');
+      }
+    </script>
 
     <link
       rel="stylesheet"

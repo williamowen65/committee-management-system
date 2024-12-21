@@ -9,7 +9,11 @@
   <script src="/my-contract/index.js" type="module"></script>
   <script src="/dist/CRUD.js" type="module"></script>
   <script type="module" src="/dist/firebase.js"></script>
-
+  <script>
+    window.sendMessageToParent = function(dataObject) {
+         window.parent.postMessage(dataObject, '*');
+    }
+  </script>
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />

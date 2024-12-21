@@ -9,6 +9,11 @@
     <script src="/dist/CRUD.js" type="module"></script>
     <script type="module" src="/dist/firebase.js"></script>
     <link rel="stylesheet" href="style.css" />
+    <script>
+      window.sendMessageToParent = function(dataObject) {
+           window.parent.postMessage(dataObject, '*');
+      }
+    </script>
   </head>
   <body>
     <header-component slotLinks="ghost-members"></header-component>

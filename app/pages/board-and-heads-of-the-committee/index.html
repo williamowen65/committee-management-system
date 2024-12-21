@@ -13,6 +13,11 @@
       type="module"
     ></script>
     <script>
+      window.sendMessageToParent = function(dataObject) {
+           window.parent.postMessage(dataObject, '*');
+      }
+    </script>
+    <script>
       document.addEventListener('DOMContentLoaded', () => {
         // fetch 'my-contract/committee-positions.html' and insert it into the 'container' div
         fetch('/my-contract/committee-positions.html')
