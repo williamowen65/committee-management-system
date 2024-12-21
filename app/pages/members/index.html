@@ -45,6 +45,12 @@
     }
   </style>
 
+  <script>
+    window.sendMessageToParent = function(dataObject) {
+    window.parent.postMessage(dataObject, '*');
+}
+  </script>
+
 </head>
 
 <body style="display:none !important; ">
