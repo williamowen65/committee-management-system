@@ -163,10 +163,7 @@ function testSheetsButton(role){
         sheetName: 'testSheet',
         spreadsheetId: '1sAka-Rs4LhHhkX3J4s7SaDlpIXEdv5R5Qm7meGIL6Wk',
         action: 'upsert',
-        data: {
-          name: 'William Owen',
-          email: 'test@gamil.com'
-        }
+        data: [['test1', 'test2', 'test3'], ['test4', 'test5', 'test6']])
       } )
 
       window.addEventListener("message", (event) => {
