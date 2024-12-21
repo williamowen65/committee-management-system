@@ -146,10 +146,11 @@ function testEmailButton(role){
     document.getElementById('sendEmail').addEventListener('click', () => {
    
       window.sendMessageToParent({ controller: 'gmailController', to: 'william.owen.career@gmail.com', subject: 'Test Email', body: `
-        <h1>Congratulations on joining the Gig Harbor Open Studio Tour</h1>
+        <div style="text-align:center">
+        <h1>Congratulations on joining the <br>Gig Harbor Open Studio Tour</h1>
             <p>Here is your invoice for the membership fee</p>
           
-            <fieldset>
+            <fieldset style="width:fit-content; margin: auto;">
             
             <legend>Invoice</legend>
             
@@ -162,6 +163,7 @@ function testEmailButton(role){
 
             <p>Thank you for your membership payment.</p>
             <p>Best Regards, \nGig Harbor Open Studio Tour</p>
+        <div>
             `
   
   })
