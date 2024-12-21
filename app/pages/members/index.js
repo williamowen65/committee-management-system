@@ -160,6 +160,7 @@ function testEmailButton(role){
             <p>Thank you for your membership payment.</p>
             <p>Best Regards, <br>Gig Harbor Open Studio Tour</p>
         <div>
+        
             `
   
   })

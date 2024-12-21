@@ -188,6 +188,7 @@ window.initializePaypalButtons = function (cost = 250.00) {
                 to: `${email}, ${personalEmail}, ${businessEmail}`,
                 subject: 'GHOST Contract Invoice',
                 body: `
+                 <div style="text-align:center">
                   <h1>Congratulations on joining the Gig Harbor Open Studio Tour</h1>
                   <p>Here is your invoice for the membership fee</p>
                 
@@ -203,7 +204,8 @@ window.initializePaypalButtons = function (cost = 250.00) {
                   </fieldset>
 
                   <p>Thank you for your membership payment.</p>
-                  <p>Best Regards, \nGig Harbor Open Studio Tour</p>
+                   <p>Best Regards, <br>Gig Harbor Open Studio Tour</p>
+                </div>
                   `
               })
 
