@@ -144,7 +144,28 @@ function allContractsButton(role) {
 function testEmailButton(role){
   setTimeout(()=> {
     document.getElementById('sendEmail').addEventListener('click', () => {
-      window.sendMessageToParent({ controller: 'gmailController', to: 'william.owen.career@gmail.com', subject: 'Test Email', body: 'This is a test email from the <b>Ghost website</b>' })
+   
+      window.sendMessageToParent({ controller: 'gmailController', to: 'william.owen.career@gmail.com', subject: 'Test Email', body: `
+        <h1>Congratulations on joining the Gig Harbor Open Studio Tour</h1>
+            <p>Here is your invoice for the membership fee</p>
+          
+            <fieldset>
+            
+            <legend>Invoice</legend>
+            
+            <p style="margin:0;">Transaction ID: 123</p>
+            <p style="margin:0;">Amount: 123}</p>
+            <p style="margin:0;">Currency:USD</p>
+            <p style="margin:0;">Status: complete </p>
+            <p style="margin:0;">Created At: ${new Date().toLocaleString()}</p>
+            </fieldset>
+
+            <p>Thank you for your membership payment.</p>
+            <p>Best Regards, \nGig Harbor Open Studio Tour</p>
+            `
+  
+  })
+
     }, 1)
   })
   return `        <button id="sendEmail" style="position: relative;">Test Email </button>`

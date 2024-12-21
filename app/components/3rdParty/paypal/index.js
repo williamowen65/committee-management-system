@@ -24,204 +24,208 @@ document.head.appendChild(script);
 let paypalButtonAction
 
 createCustomElement('paypal-component', function () {
-        // Initialize paypal buttons
-        // initializePaypalButtons(); // using script on load event
+  // Initialize paypal buttons
+  // initializePaypalButtons(); // using script on load event
 }, paypalTemplate, "");
 
 
 window.initializePaypalButtons = function (cost = 250.00) {
-    // Create random Id for the paypal interaction
-    const transactionId = 'ghost-artist-fee-recept-id_' + Math.floor(Math.random() * 1000000)
+  // Create random Id for the paypal interaction
+  const transactionId = 'ghost-artist-fee-recept-id_' + Math.floor(Math.random() * 1000000)
 
-    // Initialize paypal buttons
-    let paypalPayload = {
-        intent: 'CAPTURE',
-        purchase_units: [
-          {
-            amount: {
-              currency_code: 'USD',
-              // value: "1.00",
-              value: cost,
-            },
-            reference_id: transactionId,
-            custom_id: transactionId,
-            description: (`GHOST membership fee `).slice(0, 127),
-          },
-        ],
-        application_context: {
-          shipping_preference: 'NO_SHIPPING',
+  // Initialize paypal buttons
+  let paypalPayload = {
+    intent: 'CAPTURE',
+    purchase_units: [
+      {
+        amount: {
+          currency_code: 'USD',
+          // value: "1.00",
+          value: cost,
         },
-      }
+        reference_id: transactionId,
+        custom_id: transactionId,
+        description: (`GHOST membership fee `).slice(0, 127),
+      },
+    ],
+    application_context: {
+      shipping_preference: 'NO_SHIPPING',
+    },
+  }
 
-      paypal
-      .Buttons({
-        onInit: function (data, actions) {
-          // Disable the buttons
+  paypal
+    .Buttons({
+      onInit: function (data, actions) {
+        // Disable the buttons
         //   const modal = jQuery('#' + modalId)
         //   const modalData = modal.data()
 
-          logIf.paypal && console.log('oninit', {
-            data,
-            actions,
-          })
+        logIf.paypal && console.log('oninit', {
+          data,
+          actions,
+        })
 
-          // actions.disable()
-          paypalButtonAction = actions
+        // actions.disable()
+        paypalButtonAction = actions
 
-          // // Disable the buttons if based on form data
+        // // Disable the buttons if based on form data
 
         //   resultMessage('')
-          // actions.disable()
-        },
-        async createOrder(data, actions) {
+        // actions.disable()
+      },
+      async createOrder(data, actions) {
         //   consoleIf('paypal')?.log('createOrder', { data, actions })
 
-          try {
-            const response = await fetch('/api/paypal/order', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              // use the "body" param to optionally pass additional order information
-              // like product ids and quantities
-              body: JSON.stringify(paypalPayload),
-            });
+        try {
+          const response = await fetch('/api/paypal/order', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            // use the "body" param to optionally pass additional order information
+            // like product ids and quantities
+            body: JSON.stringify(paypalPayload),
+          });
 
-      
-            const orderData = await response.json()
 
-            // consoleIf('paypal')?.log('createdOrder', { orderData })
+          const orderData = await response.json()
 
-            if (orderData.jsonResponse.id) {
-              return orderData.jsonResponse.id
-            } else {
-              const errorDetail = orderData.jsonResponse?.details?.[0]
-              const errorMessage = errorDetail
-                ? `${errorDetail.issue} ${errorDetail.description} (${orderData.jsonResponse.debug_id})`
-                : JSON.stringify(orderData)
+          // consoleIf('paypal')?.log('createdOrder', { orderData })
 
-              throw new Error(errorMessage)
-            }
-          } catch (error) {
-            const err = JSON.parse(error.message)
-            logIf.paypal && console.log({
-              'error.message': error.message,
-              'typeof error.message': typeof error.message,
-              err,
-            })
-            console.error(error)
+          if (orderData.jsonResponse.id) {
+            return orderData.jsonResponse.id
+          } else {
+            const errorDetail = orderData.jsonResponse?.details?.[0]
+            const errorMessage = errorDetail
+              ? `${errorDetail.issue} ${errorDetail.description} (${orderData.jsonResponse.debug_id})`
+              : JSON.stringify(orderData)
 
-            // resultMessage(
-            //   `Could not initiate PayPal Checkout...<br><br>${err.jsonResponse.error_description}`
-            // )
+            throw new Error(errorMessage)
           }
-        },
-        async onApprove(data, actions) {
-          logIf.paypal && console.log({ onApprove: data })
-          try {
-            const response = await fetch(`/api/paypal/capture`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                orderID: data.orderID,
-              }),
-            })
-            let orderData = await response.json()
-            orderData = orderData.jsonResponse
+        } catch (error) {
+          const err = JSON.parse(error.message)
+          logIf.paypal && console.log({
+            'error.message': error.message,
+            'typeof error.message': typeof error.message,
+            err,
+          })
+          console.error(error)
 
-            logIf.paypal && console.log({ orderData })
+          // resultMessage(
+          //   `Could not initiate PayPal Checkout...<br><br>${err.jsonResponse.error_description}`
+          // )
+        }
+      },
+      async onApprove(data, actions) {
+        logIf.paypal && console.log({ onApprove: data })
+        try {
+          const response = await fetch(`/api/paypal/capture`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              orderID: data.orderID,
+            }),
+          })
+          let orderData = await response.json()
+          orderData = orderData.jsonResponse
 
-            const errorDetail = orderData?.details?.[0]
-            if (errorDetail?.issue === 'INSTRUMENT_DECLINED') {
-              // (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
-              // recoverable state, per https://developer.paypal.com/docs/checkout/standard/customize/handle-funding-failures/
-              return actions.restart()
-            } else if (errorDetail) {
-              // (2) Other non-recoverable errors -> Show a failure message
-              throw new Error(
-                `${errorDetail.description} (${orderData.debug_id})`
-              )
-            } else if (!orderData.purchase_units) {
-              // Error 3
-              throw new Error(JSON.stringify(orderData))
-            } else {
-              // Success
-              const transaction =
-                orderData?.purchase_units?.[0]?.payments?.captures?.[0] ||
-                orderData?.purchase_units?.[0]?.payments?.authorizations?.[0]
+          logIf.paypal && console.log({ orderData })
 
-        
+          const errorDetail = orderData?.details?.[0]
+          if (errorDetail?.issue === 'INSTRUMENT_DECLINED') {
+            // (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+            // recoverable state, per https://developer.paypal.com/docs/checkout/standard/customize/handle-funding-failures/
+            return actions.restart()
+          } else if (errorDetail) {
+            // (2) Other non-recoverable errors -> Show a failure message
+            throw new Error(
+              `${errorDetail.description} (${orderData.debug_id})`
+            )
+          } else if (!orderData.purchase_units) {
+            // Error 3
+            throw new Error(JSON.stringify(orderData))
+          } else {
+            // Success
+            const transaction =
+              orderData?.purchase_units?.[0]?.payments?.captures?.[0] ||
+              orderData?.purchase_units?.[0]?.payments?.authorizations?.[0]
+
+
             logIf.paypal && console.log(
-                'Capture result',
-                orderData,
-                JSON.stringify(orderData, null, 2),
-                CRUD
-              )
+              'Capture result',
+              orderData,
+              JSON.stringify(orderData, null, 2),
+              CRUD
+            )
 
-              // get user Id
-              const userId = firebase.auth.currentUser.uid
-              const email = firebase.auth.currentUser.email
-              let user = await CRUD.read('ghost-contracts', userId)
+            // get user Id
+            const userId = firebase.auth.currentUser.uid
+            const email = firebase.auth.currentUser.email
+            let user = await CRUD.read('ghost-contracts', userId)
 
-              const invoice = {
-                membershipPaid: true,
-                membershipReceipt: {
-                  transactionId: transaction.id,
-                  status: transaction.status,
-                  amount: transaction.amount.value,
-                  currency: transaction.amount.currency_code,
-                  createdAt: firebase.serverTimestamp(),
-                }
+            const invoice = {
+              membershipPaid: true,
+              membershipReceipt: {
+                transactionId: transaction.id,
+                status: transaction.status,
+                amount: transaction.amount.value,
+                currency: transaction.amount.currency_code,
+                createdAt: firebase.serverTimestamp(),
               }
+            }
 
-              CRUD.update('ghost-contracts', userId, {
-                artistDetails: invoice
-              }).then(() => {
+            CRUD.update('ghost-contracts', userId, {
+              artistDetails: invoice
+            }).then(() => {
 
-                const personalEmail = user.artistDetails.personalEmail || ""
-                const businessEmail = user.artistDetails.businessEmail || ""
+              const personalEmail = user.artistDetails.personalEmail || ""
+              const businessEmail = user.artistDetails.businessEmail || ""
 
-                window.sendMessageToParent({ controller: 'gmailController', 
-                  to: `${email}, ${personalEmail}, ${businessEmail}`, 
-                  subject: 'GHOST Contract Invoice', 
-                  body: `<h1>Congratulations on joining the Gig Harbor Open Studio Tour </h1>
+              window.sendMessageToParent({
+                controller: 'gmailController',
+                to: `${email}, ${personalEmail}, ${businessEmail}`,
+                subject: 'GHOST Contract Invoice',
+                body: `
+                  <h1>Congratulations on joining the Gig Harbor Open Studio Tour</h1>
+                  <p>Here is your invoice for the membership fee</p>
+                
+                  <fieldset>
                   
-                  <p>Here is you invoice for your membership fee</p>
-                  <p>Transaction ID: ${transaction.id}</p>
-                  <p>Amount: ${transaction.amount.value}</p>
-                  <p>Currency: ${transaction.amount.currency_code}</p>
-                  <p>Status: ${transaction.status}</p>
-                  <p>Created At: ${ new Date().toLocaleString()}</p>
-                 
-
-                  <p>Thank you for your membership payment. </p>
-              
-                  <p>Best Regards, </p>
-                  <p>Gig Harbor Open Studio Tour</p>
+                  <legend>Invoice</legend>
                   
-                  ` })
+                  <p style="margin:0;">Transaction ID: ${transaction.id}</p>
+                  <p style="margin:0;">Amount: ${transaction.amount.value}</p>
+                  <p style="margin:0;">Currency: ${transaction.amount.currency_code}</p>
+                  <p style="margin:0;">Status: ${transaction.status}</p>
+                  <p style="margin:0;">Created At: ${new Date().toLocaleString()}</p>
+                  </fieldset>
 
-
-                // show success message
-                // alert('Membership payment successful: Email is being sent.')
-                // redirect to the dashboard
-                // window.location.href = '/members'
+                  <p>Thank you for your membership payment.</p>
+                  <p>Best Regards, \nGig Harbor Open Studio Tour</p>
+                  `
               })
 
-              // save data to the database
-              // if (orderData) {
-              //    CRUD
-              // }
+
+              // show success message
+              // alert('Membership payment successful: Email is being sent.')
+              // redirect to the dashboard
+              // window.location.href = '/members'
+            })
+
+            // save data to the database
+            // if (orderData) {
+            //    CRUD
+            // }
 
 
-            }
-          } catch (error) {
-            logIf.paypal && console.log(error)
-            console.error(error)
           }
-        },
-      })
-      .render('.payPalContainer')
+        } catch (error) {
+          logIf.paypal && console.log(error)
+          console.error(error)
+        }
+      },
+    })
+    .render('.payPalContainer')
 }
