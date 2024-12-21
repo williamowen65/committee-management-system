@@ -53,6 +53,7 @@ window.setLoading = function(form, isLoading, config = { success: true, cbText: 
 }
 
 window.addEventListener('message', function(event) {
+    console.log('Received message:', event);
     // Make sure to validate the origin of the message
     if (event.origin !== 'https://few-right-mandible.glitch.me') {
         return;
