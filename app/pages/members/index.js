@@ -234,7 +234,7 @@ function textProcessToSheetsButton(role) {
         sheetName: 'ghost-contracts',
         spreadsheetId: '1cmfgdGc8L5li_kx79W9SO5-ZwukiaXxlV5EZ3o8RYpY', // spreadsheet "GHOST Spreadsheet Data"
         action: 'upsertAll',
-        key: "userId",
+        key: "GHOST Member Id",
         data: contracts
       })
 
