@@ -6,18 +6,30 @@
     <title>Document</title>
     <script src="/dist/components.js"></script>
     <script type="module" src="/dist/firebase.js"></script>
+
+    <script>
+      window.addEventListener('message', function (event) {
+        console.log('Received message:', event)
+        // Make sure to validate the origin of the message
+        if (event.origin !== 'https://few-right-mandible.glitch.me') {
+          return
+        }
+        var data = event.data
+        console.log('Received message:', data)
+        // Handle the received data
+      })
+    </script>
   </head>
   <body>
-    <header-component>
-    </header-component>
+    <header-component> </header-component>
     <!-- Define 
      the images to pass here
      The redirect on success
      -->
-    <dual-login-form-component 
-    redirect="/members" 
-    loginImage="/dist/assets/login.jpeg"
-    signupImage="/dist/assets/signup.jpg"
+    <dual-login-form-component
+      redirect="/members"
+      loginImage="/dist/assets/login.jpeg"
+      signupImage="/dist/assets/signup.jpg"
     ></dual-login-form-component>
 
     <footer-component></footer-component>
