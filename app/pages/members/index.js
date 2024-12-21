@@ -144,7 +144,7 @@ function allContractsButton(role) {
 function testEmailButton(role){
   setTimeout(()=> {
     document.getElementById('sendEmail').addEventListener('click', () => {
-      sendMessageToParent({ type: 'sendEmail' })
+      window.sendMessageToParent({ type: 'sendEmail' })
     }, 1)
   })
   return `        <button id="sendEmail" style="position: relative;">Test Email </button>`

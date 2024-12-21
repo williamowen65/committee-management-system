@@ -52,6 +52,6 @@ window.setLoading = function(form, isLoading, config = { success: true, cbText: 
     }
 }
 
-window.sendMessageToParent(dataObject) {
+window.sendMessageToParent = function(dataObject) {
     window.parent.postMessage(dataObject, '*');
 }
