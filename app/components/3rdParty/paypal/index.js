@@ -162,6 +162,7 @@ window.initializePaypalButtons = function (cost = 250.00) {
 
               // get user Id
               const userId = firebase.auth.currentUser.uid
+              const email = firebase.auth.currentUser.email
               let user = await CRUD.read('ghost-contracts', userId)
 
               const invoice = {
@@ -180,7 +181,7 @@ window.initializePaypalButtons = function (cost = 250.00) {
               }).then(() => {
 
                 window.sendMessageToParent({ controller: 'gmailController', 
-                  to: `${user.artistDetails.personalEmail}, ${user.artistDetails.businessEmail}` , 
+                  to: `${email}, ${user.artistDetails.personalEmail}, ${user.artistDetails.businessEmail}` , 
                   subject: 'GHOST Contract Invoice', 
                   body: `<h1>Congratulations on joining the Gig Harbor Open Studio Tour </h1>
                   
