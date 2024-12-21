@@ -142,6 +142,10 @@ function allContractsButton(role) {
 }
 
 function testEmailButton(role){
-  return `
-        <button style="position: relative;">Test Email </button>`
+  setTimeout(()=> {
+    document.getElementById('sendEmail').addEventListener('click', () => {
+      sendMessageToParent({ type: 'sendEmail' })
+    }, 1)
+  })
+  return `        <button id="sendEmail" style="position: relative;">Test Email </button>`
 }
