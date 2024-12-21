@@ -152,7 +152,7 @@ function testSheetsButton(role){
     })
   }, 1)
 
-  return `button id="generateSheets" style="position: relative;">Test Sheets </button>`
+  return `<button id="generateSheets" style="position: relative;">Test Sheets </button>`
 }
 
 function testEmailButton(role){
