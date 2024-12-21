@@ -208,10 +208,22 @@ function textProcessToSheetsButton(role) {
       const contracts = await CRUD.readAll('ghost-contracts').then(contracts => {
         return contracts.map(contract => {
           return {
-            userId: contract.userId,
-            ...contract.artistDetails,
-            ...contract.images,
-            'Committee Roles': JSON.stringify(contract.committeeRoleId), // get committee roles
+            "GHOST Member Id": contract.userId,
+            "First Name": contract.artistDetails.firstName,
+            "Last Name": contract.artistDetails.lastName,
+            "Committee Role(s)": contract.committeeRoleId.map(roleId => roles[roleId].title).join(", "),
+            "Personal Email": contract.artistDetails.personalEmail,
+            "Business Email": contract.artistDetails.personalEmail,
+            "Phone": contract.artistDetails.phone,
+            "Medium": contract.artistDetails.medium,
+            "Artist Statement": contract.artistDetails.artistStatement,
+            "Website": contract.artistDetails.website,
+            "Facebook": contract.artistDetails.facebook,
+            "Instagram": contract.artistDetails.instagram,
+            'Digital Image 1': contract.images.digitalImage1,
+            'Digital Image 2': contract.images.digitalImage2,
+            'Digital Image 3': contract.images.digitalImage3,
+            'Artist in Studio Image': contract.images.artistInStudioImage,
           }
         })
       })
