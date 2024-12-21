@@ -190,14 +190,14 @@ async function handleStudioSharingForm(e) {
         }
 
         // Check for no room at studio
-        if(studioAvailabilityAnswer.includes("I want to stay at my own studio but do not have room for additional artists")){
+        if (studioAvailabilityAnswer.includes("I want to stay at my own studio but do not have room for additional artists")) {
             const studioSigns2 = form.querySelector('input[name="studioSigns-2"]')
             if (!studioSigns2.value) return formAlert("Please provide information on how many signs you have");
             StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + "I would like " + studioSigns2.value.trim() + " signs";
             StudioSharingPayload.StudioSharingInfo['studioSigns-2'] = studioSigns2.value;
         }
 
-       
+
 
 
         // Check for type of answer  "I can share my studio space"
@@ -209,7 +209,7 @@ async function handleStudioSharingForm(e) {
             StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + artistsAccommodated.value.trim() + " artists can be accommodated";
             StudioSharingPayload.StudioSharingInfo.artistsAccommodated = artistsAccommodated.value;
 
-         
+
 
             // Studio description
             const studioDescription = form.querySelector('textarea[name="studioDescription"]')
@@ -231,7 +231,7 @@ async function handleStudioSharingForm(e) {
             StudioSharingPayload.StudioSharingInfo.studioSigns = studioSigns.value;
         }
 
-        
+
 
 
 
@@ -557,7 +557,7 @@ function setUpStudioSharingForm(contracts) {
                 const event = new Event('change')
                 studioSigns2.dispatchEvent(event)
             }
-            if(willingnessToRelocate && key === 'willingnessToRelocate'){
+            if (willingnessToRelocate && key === 'willingnessToRelocate') {
                 willingnessToRelocate.checked = true
                 const event = new Event('change')
                 willingnessToRelocate.dispatchEvent(event)
@@ -693,7 +693,8 @@ async function setPaypalButton(contracts) {
         true && console.log("scholarship", { scholarship })
         // use sandbox logic here.
         const scholarshipGranted = scholarship.scholarshipGranted
-        window.initializePaypalButtons(scholarshipGranted ? 125 : 225)
+        const bypass = scholarship.bypass
+        window.initializePaypalButtons(scholarshipGranted ? (bypass ? bypass : 125) : 225)
         // window.initializePaypalButtons(1)
 
         if (scholarshipGranted) {
