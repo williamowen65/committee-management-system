@@ -195,7 +195,7 @@ window.initializePaypalButtons = function (cost = 250.00) {
                   <br> You will be able to make changes to the contract up until March 2nd, 2025
                    </p>
                 
-                  <fieldset style="width:"fit-content; margin:auto;">
+                  <fieldset style="width:fit-content; margin:auto;">
                   
                   <legend>Invoice</legend>
                   
