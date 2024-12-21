@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.style.display = 'block'
         const userDiv = document.querySelector('#user')
         userDiv.style.display = 'block'
-        userDiv.querySelector('#username').innerHTML = `Hello, ${user.displayName}` 
-        
+        userDiv.querySelector('#username').innerHTML = `Hello, ${user.displayName}`
+
 
         CRUD.read('ghost-contracts', user.uid).then(contract => {
           logIf.client && console.log(contract)
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
           document.querySelector('#user-role').innerHTML = `<h3>My Committee Role${contract.committeeRoleId.length > 1 ? 's' : ''}:</h3>${sidePanel.trim() ? sidePanel : 'No role assigned'}`
         })
 
-   
+
 
         /**
          * Side Panels are unique based on the role of the user
@@ -46,20 +46,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
             if (roleButtons) {
-              if(roleButtons.includes('newApplications')) {
-                buttons.insertAdjacentHTML('beforeend',newApplicationsSidePanel(role))
+              if (roleButtons.includes('newApplications')) {
+                buttons.insertAdjacentHTML('beforeend', newApplicationsSidePanel(role))
               }
-              if(roleButtons.includes('newScholarshipApplications')) {
-                buttons.insertAdjacentHTML('beforeend',newScholarshipApplicationsButton(role))
+              if (roleButtons.includes('newScholarshipApplications')) {
+                buttons.insertAdjacentHTML('beforeend', newScholarshipApplicationsButton(role))
               }
-              if(roleButtons.includes('contracts-received')) {
-                buttons.insertAdjacentHTML('beforeend',allContractsButton(role))
+              if (roleButtons.includes('contracts-received')) {
+                buttons.insertAdjacentHTML('beforeend', allContractsButton(role))
               }
-              if(roleButtons.includes('testEmail')) {
-                buttons.insertAdjacentHTML('beforeend',testEmailButton(role))
+              if (roleButtons.includes('testEmail')) {
+                buttons.insertAdjacentHTML('beforeend', testEmailButton(role))
               }
-              if(roleButtons.includes('testSheets')) {
-                buttons.insertAdjacentHTML('beforeend',testSheetsButton(role))
+              if (roleButtons.includes('testSheets')) {
+                buttons.insertAdjacentHTML('beforeend', testSheetsButton(role))
               }
 
             }
@@ -68,24 +68,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
             return sidePanelHTML
 
-       
+
           }).join("")
         }
       }
     })
 
-    document.querySelector('#reset-password').addEventListener('click', () => {
-      const email = firebase.auth.currentUser.email
-      firebase.sendPasswordResetEmail(firebase.auth, email).then(() => {
-        alert(`Password reset email sent to ${email}`)
-      })
+  document.querySelector('#reset-password').addEventListener('click', () => {
+    const email = firebase.auth.currentUser.email
+    firebase.sendPasswordResetEmail(firebase.auth, email).then(() => {
+      alert(`Password reset email sent to ${email}`)
     })
+  })
 
-    document.getElementById('logout').addEventListener('click', () => {
-      firebase.signOut(firebase.auth).then(() => {
-        window.location.href = '/artist-sign-on'
-      })
+  document.getElementById('logout').addEventListener('click', () => {
+    firebase.signOut(firebase.auth).then(() => {
+      window.location.href = '/artist-sign-on'
     })
+  })
 })
 
 function newApplicationsSidePanel(role) {
@@ -99,7 +99,7 @@ function newApplicationsSidePanel(role) {
       badge.innerText = totalToReview
       badge.setAttribute('data-count', totalToReview)
     })
-  
+
   }, 1)
 
   return `
@@ -129,13 +129,13 @@ function allContractsButton(role) {
   setTimeout(() => {
     // listen to new applications changes
     CRUD.readAll('ghost-contracts').then(contracts => {
-        logIf.client || true && console.log({ contracts })
-        const totalToReview = contracts.filter(contract => contract.artistDetails.membershipPaid).length
-        const badge = document.querySelector('a[href="/contracts-received"] .badge')
-        badge.innerText = totalToReview
-        badge.setAttribute('data-count', totalToReview)
+      logIf.client || true && console.log({ contracts })
+      const totalToReview = contracts.filter(contract => contract.artistDetails.membershipPaid).length
+      const badge = document.querySelector('a[href="/contracts-received"] .badge')
+      badge.innerText = totalToReview
+      badge.setAttribute('data-count', totalToReview)
     })
-  
+
   }, 1)
 
   return `
@@ -155,38 +155,40 @@ function allContractsButton(role) {
  */
 
 
-function testSheetsButton(role){
-  setTimeout(()=> {
+function testSheetsButton(role) {
+  setTimeout(() => {
     document.getElementById('generateSheets').addEventListener('click', () => {
-      window.sendMessageToParent({ 
+      window.sendMessageToParent({
         controller: 'sheetsController',
         sheetName: 'testSheet',
         spreadsheetId: '1sAka-Rs4LhHhkX3J4s7SaDlpIXEdv5R5Qm7meGIL6Wk',
         action: 'upsert',
-        data: [['test1', 'test2', 'test3'], ['test4', 'test5', 'test6']])
-      } )
-
-      window.addEventListener("message", (event) => {
-        if(event.data.dispatch !== 'sheetsController-response') return
-        if (event.data.error) {
-          alert('Error generating sheets')
-          return
-        }
-        // You can add additional logic here to handle the message
-        // show success message
-        alert('Sheets generated successfully')
+        data: [['test1', 'test2', 'test3'], ['test4', 'test5', 'test6']]
       })
     })
-  }, 1)
 
-  return `<button id="generateSheets" style="position: relative;">Test Sheets </button>`
+    window.addEventListener("message", (event) => {
+      if (event.data.dispatch !== 'sheetsController-response') return
+      if (event.data.error) {
+        alert('Error generating sheets')
+        return
+      }
+      // You can add additional logic here to handle the message
+      // show success message
+      alert('Sheets generated successfully')
+    })
+  })
+}, 1)
+
+return `<button id="generateSheets" style="position: relative;">Test Sheets </button>`
 }
 
-function testEmailButton(role){
-  setTimeout(()=> {
+function testEmailButton(role) {
+  setTimeout(() => {
     document.getElementById('sendEmail').addEventListener('click', () => {
-   
-      window.sendMessageToParent({ controller: 'gmailController', to: 'william.owen.career@gmail.com', subject: 'Test Email', body: `
+
+      window.sendMessageToParent({
+        controller: 'gmailController', to: 'william.owen.career@gmail.com', subject: 'Test Email', body: `
         <div style="text-align:center">
         <h1>Congratulations on joining the <br>Gig Harbor Open Studio Tour</h1>
             <p>Here is your invoice for the membership fee</p>
@@ -203,22 +205,22 @@ function testEmailButton(role){
         <div>
 
             `
-  })
+      })
 
-  window.addEventListener("message", (event) => {
-    if(event.data.dispatch !== 'gmailController-response') return
+      window.addEventListener("message", (event) => {
+        if (event.data.dispatch !== 'gmailController-response') return
 
-    if (event.data.error) {
-      alert('Error sending email')
-      return
-    }
+        if (event.data.error) {
+          alert('Error sending email')
+          return
+        }
 
-    // You can add additional logic here to handle the message
-    // show success message
-    alert('Membership payment successful: Email is being sent.')
-    // redirect to the dashboard
-    window.location.href = '/test'
-  });
+        // You can add additional logic here to handle the message
+        // show success message
+        alert('Membership payment successful: Email is being sent.')
+        // redirect to the dashboard
+        window.location.href = '/test'
+      });
 
 
 
