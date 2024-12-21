@@ -205,7 +205,16 @@ function textProcessToSheetsButton(role) {
     document.getElementById('processToSheets').addEventListener('click', async () => {
 
       // get all contracts
-      const contracts = await CRUD.readAll('ghost-contracts')
+      const contracts = await CRUD.readAll('ghost-contracts').then(contracts => {
+        return contracts.map(contract => {
+          return {
+            userId: contract.userId,
+            ...artistDetails,
+            ...images,
+            'Committee Roles': JSON.stringify(contract.committeeRoleId), // get committee roles
+          }
+        })
+      })
 
       window.sendMessageToParent({
         controller: 'sheetsController',
