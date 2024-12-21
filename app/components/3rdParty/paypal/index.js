@@ -164,21 +164,42 @@ window.initializePaypalButtons = function (cost = 250.00) {
               const userId = firebase.auth.currentUser.uid
               let user = await CRUD.read('ghost-contracts', userId)
 
+              const invoice = {
+                membershipPaid: true,
+                membershipReceipt: {
+                  transactionId: transaction.id,
+                  status: transaction.status,
+                  amount: transaction.amount.value,
+                  currency: transaction.amount.currency_code,
+                  createdAt: firebase.serverTimestamp(),
+                }
+              }
 
               CRUD.update('ghost-contracts', userId, {
-                artistDetails: {
-                  membershipPaid: true,
-                  membershipReceipt: {
-                    transactionId: transaction.id,
-                    status: transaction.status,
-                    amount: transaction.amount.value,
-                    currency: transaction.amount.currency_code,
-                    createdAt: firebase.serverTimestamp(),
-                  }
-                }
+                artistDetails: invoice
               }).then(() => {
 
-                window.sendMessageToParent({ controller: 'gmailController', to: `${user.artistDetails.personalEmail}, ${user.artistDetails.businessEmail}` , subject: 'Test Email', body: 'This is a test email from the <b>Ghost website</b>' })
+                window.sendMessageToParent({ controller: 'gmailController', 
+                  to: `${user.artistDetails.personalEmail}, ${user.artistDetails.businessEmail}` , 
+                  subject: 'GHOST Contract Invoice', 
+                  body: `<h1>Congratulations on joining the Gig Harbor Open Studio Tour </h1>
+                  
+                  <p>Here is you invoice for your membership fee</p>
+                  <p>Transaction ID: ${transaction.id}</p>
+                  <p>Amount: ${transaction.amount.value}</p>
+                  <p>Currency: ${transaction.amount.currency_code}</p>
+                  <p>Status: ${transaction.status}</p>
+                  <p>Created At: ${ new Date().toLocaleString()}</p>
+                 
+
+                  <p>Thank you for your membership payment. </p>
+              
+                  <p>Best Regards, </p>
+                  <p>Gig Harbor Open Studio Tour</p>
+                  
+                  ` })
+
+
                 // show success message
                 alert('Membership payment successful: Email is being sent.')
                 // redirect to the dashboard
