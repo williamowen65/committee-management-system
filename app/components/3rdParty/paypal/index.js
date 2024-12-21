@@ -162,6 +162,8 @@ window.initializePaypalButtons = function (cost = 250.00) {
 
               // get user Id
               const userId = firebase.auth.currentUser.uid
+              let user = await CRUD.read('ghost-contracts', userId)
+
 
               CRUD.update('ghost-contracts', userId, {
                 artistDetails: {
@@ -175,8 +177,10 @@ window.initializePaypalButtons = function (cost = 250.00) {
                   }
                 }
               }).then(() => {
+
+                window.sendMessageToParent({ controller: 'gmailController', to: `${user.artistDetails.personalEmail}, ${user.artistDetails.businessEmail}` , subject: 'Test Email', body: 'This is a test email from the <b>Ghost website</b>' })
                 // show success message
-                alert('Membership payment successful')
+                alert('Membership payment successful: Email is being sent.')
                 // redirect to the dashboard
                 window.location.href = '/members'
               })
