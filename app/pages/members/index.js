@@ -161,19 +161,14 @@ function testSheetsButton(role) {
     document.getElementById('generateSheets').addEventListener('click', () => {
 
       // get some input from user (for testing purposes)
-
+      const data = document.querySelector('textarea').value
 
       window.sendMessageToParent({
         controller: 'sheetsController',
         sheetName: 'testSheet',
         spreadsheetId: '1sAka-Rs4LhHhkX3J4s7SaDlpIXEdv5R5Qm7meGIL6Wk',
         action: 'upsert',
-        data: {
-          "rowId": 1,
-          "name": "William Owen",
-          "email": "teCHANGEst@gmail.com",
-          "newField": 1232323
-        }
+        data: JSON.parse(data)
       })
 
       window.addEventListener("message", (event) => {
