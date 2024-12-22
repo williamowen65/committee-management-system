@@ -530,7 +530,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('header-component', function () {}, _header_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '', {
+(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('header-component', function () {
+  // watch for the window change location event
+  window.addEventListener('change-location', function (e) {
+    console.log('change-location', e.detail);
+
+    // set the top location to the same path
+    // window.top.location.href = e.detail;
+  });
+}, _header_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '', {
   attributes: ['slotLinks']
 });
 
