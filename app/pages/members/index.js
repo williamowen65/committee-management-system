@@ -201,7 +201,7 @@ function testSheetsButton(role) {
         }
         // You can add additional logic here to handle the message
         // show success message
-        alert('Sheets generated successfully')
+        alert('Sheets generated successfully: ' + event.data.sheetUrl)
       })
     })
   }, 1)
