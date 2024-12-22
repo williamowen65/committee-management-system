@@ -379,9 +379,8 @@ function testEmailButton(role) {
 
         // You can add additional logic here to handle the message
         // show success message
-        alert('Membership payment successful: Email is being sent.')
+        alert('Email is sent.')
         // redirect to the dashboard
-        window.location.href = '/test'
       });
 
 
