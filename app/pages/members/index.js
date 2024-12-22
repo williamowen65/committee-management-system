@@ -273,6 +273,7 @@ function textProcessToSheetsButton(role) {
     document.getElementById('processToSheets').addEventListener('click', async () => {
 
       const sheetName = prompt("Enter a name for the sheet", "GHOST Contracts")
+      if (!sheetName) return
 
       // get all contracts
       const contracts = await CRUD.readAll('ghost-contracts').then(contracts => {
@@ -348,6 +349,7 @@ function testEmailButton(role) {
     document.getElementById('sendEmail').addEventListener('click', () => {
 
       const email = prompt("Enter an email address to send the test email", firebase.auth.currentUser.email)
+      if (!email) return
 
       window.sendMessageToParent({
         controller: 'gmailController', to: email, subject: 'Test Email', body: `
