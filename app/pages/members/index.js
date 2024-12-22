@@ -262,7 +262,7 @@ function newApplicationsSidePanel(role) {
     CRUD.listen('new-applications', null, (newApplications) => {
       logIf.client && console.log({ newApplications })
       const totalToReview = newApplications.filter(app => app.hasBeenReviewed === false).length
-      const badge = document.querySelector('a[href="/new-applications"] .badge')
+      const badge = document.querySelector('a.new-applications .badge')
       badge.innerText = totalToReview
       badge.setAttribute('data-count', totalToReview)
     })
@@ -270,7 +270,7 @@ function newApplicationsSidePanel(role) {
   }, 1)
 
   return `
-      <a href="/new-applications">
+      <a onclick="navigateTo('/new-applications')" class="new-applications">
         <button style="position: relative;">New Artist Applications Received <span class="badge" data-count="0"></span></button>
     </a>`
 }
@@ -280,13 +280,13 @@ function newScholarshipApplicationsButton(role) {
     CRUD.listen('scholarship-applications', null, (newApplications) => {
       logIf.client && console.log({ newApplications })
       const totalToReview = newApplications.filter(app => app.hasBeenReviewed === false).length
-      const badge = document.querySelector('a[href="/scholarship-applications"] .badge')
+      const badge = document.querySelector('a.scholarship-applications .badge')
       badge.innerText = totalToReview
       badge.setAttribute('data-count', totalToReview)
     })
   })
   return `
-      <a href="/scholarship-applications">
+      <a onclick="navigateTo('/scholarship-applications') class="scholarship-applications">
         <button  style="position: relative;">Scholarships Received <span class="badge" data-count="0"></span></button>
     </a>`
 }
@@ -298,7 +298,7 @@ function allContractsButton(role) {
     CRUD.readAll('ghost-contracts').then(contracts => {
       logIf.client || true && console.log({ contracts })
       const totalToReview = contracts.filter(contract => contract.artistDetails.membershipPaid).length
-      const badge = document.querySelector('a[href="/contracts-received"] .badge')
+      const badge = document.querySelector('a.contracts-received .badge')
       badge.innerText = totalToReview
       badge.setAttribute('data-count', totalToReview)
     })
@@ -306,7 +306,7 @@ function allContractsButton(role) {
   }, 1)
 
   return `
-      <a href="/contracts-received">
+      <a onclick="navigateTo('/contracts-received')" class="contracts-received">
         <button style="position: relative;">Contracts Received <span class="badge" data-count="0"></span></button>
     </a>`
 }
