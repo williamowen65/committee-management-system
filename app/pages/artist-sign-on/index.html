@@ -10,6 +10,11 @@
       window.sendMessageToParent = function(dataObject) {
            window.parent.postMessage(dataObject, '*');
       }
+
+
+      // There is a "flash" when going to a new page
+      // I think anchor links should be replaced with this logic
+
       var message = {
             dispatch: 'navigate',
             path: '/artist-sign-on'
