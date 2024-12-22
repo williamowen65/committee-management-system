@@ -61,7 +61,7 @@ function setUXEventListeners() {
         return firebase.signInWithEmailAndPassword(firebase.auth, email, password).then((user) => {
             // redirect to members
             logIf.auth && console.log('redirecting to members page');
-            window.location.href = '/members'
+            window.top.location.href = '/members'
         }).catch((err) => {
             // change the button text back to original
             btnSubmit.innerText = btnText
@@ -128,7 +128,7 @@ function setUXEventListeners() {
             }).then(() => {
                 // redirect to members
                 logIf.auth &&  console.log('redirecting to members page');
-                window.location.href = '/members'
+                window.top.location.href = '/members'
             })
 
         }).catch((err) => {

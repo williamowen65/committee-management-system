@@ -85,7 +85,7 @@ window.firebase.redirectIfNotLoggedIn = async function (path) {
     window.firebase.onAuthStateChanged(window.firebase.auth, (user) => {
       if (!user) {
         // redirect to 'artist-sign-on' page
-        window.location.href = path;
+        window.top.location.href = path;
         
       }
       resolve(user)
