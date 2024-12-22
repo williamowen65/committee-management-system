@@ -235,13 +235,13 @@ function testCreateDocumentButton(role) {
   setTimeout(() => {
     document.getElementById('createDocument').addEventListener('click', () => {
       window.sendMessageToParent({
-        controller: 'docController',
+        controller: 'docsController',
         action: 'createDoc',
         documentName: 'Test Document'
       })
 
       window.addEventListener("message", (event) => {
-        if (event.data.dispatch !== 'docController-response') return
+        if (event.data.dispatch !== 'docsController-response') return
         if (event.data.error) {
           alert('Error creating document')
           return
