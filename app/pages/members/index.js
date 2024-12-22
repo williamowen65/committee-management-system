@@ -334,10 +334,11 @@ function textProcessToSheetsButton(role) {
           alert('Error generating sheets')
           return
         }
+        const data = event.data.data
         console.log("sheetsController-response", event)
         // You can add additional logic here to handle the message
         // show success message
-        alert('Sheets generated successfully: ' + event.data.sheetUrl)
+        alert('Sheets generated successfully: ' + data.sheetUrl)
       })
     })
   }, 1)
