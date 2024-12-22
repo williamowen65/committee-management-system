@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const promises = Object.entries(values).map(([key, value]) => {
             if (value instanceof File) {
                 return new Promise((resolve, reject) => {
-                    CRUD.saveImage(value).then(url => {
+                    CRUD.saveImage(value, 'new-applications').then(url => {
                         values[key] = url
                     }).then(() => {
                         resolve()

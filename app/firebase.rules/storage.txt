@@ -6,5 +6,15 @@ service firebase.storage {
       // Allow read and write access only to authenticated users
       allow read, write: if request.auth != null;
     }
+    
+    // Allow read and write access to ghost-members
+    match /ghost-members/{allPaths=**} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Allow read and write access to new-applications for the public
+    match /new-applications/{allPaths=**} {
+      allow read, write: if true;
+    }
   }
 }

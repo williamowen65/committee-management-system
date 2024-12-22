@@ -109,6 +109,152 @@ for each contract: convert to pdf, add to folder
 
 */
 
+function processContractsToPdf() {
+  const folderName = prompt("Enter a name for the folder", "GHOST Contracts")
+  if (!folderName) return
+
+  window.sendMessageToParent({
+    controller: 'driveController',
+    action: 'createFolder',
+    folderName: folderName
+  })
+
+  window.addEventListener("message", (event) => {
+    if (event.data.dispatch !== 'driveController-response') return
+    if (event.data.error) {
+      alert('Error creating folder')
+      return
+    }
+    // You can add additional logic here to handle the message
+    // show success message
+    alert('Folder created successfully')
+    // get all contracts
+    CRUD.readAll('ghost-contracts').then(contracts => {
+      logIf.client || true && console.log({ contracts })
+      contracts.forEach(contract => {
+        const docName = `${contract.artistDetails.firstName} ${contract.artistDetails.lastName} Contract`
+        window.sendMessageToParent({
+          controller: 'docsController',
+          action: 'createDoc',
+          docName: docName
+        })
+
+        window.addEventListener("message", (event) => {
+          if (event.data.dispatch !== 'docsController-response') return
+          if (event.data.error) {
+            alert('Error creating document')
+            return
+          }
+          // You can add additional logic here to handle the message
+          // show success message
+          alert('Document created successfully')
+
+          // add content to the document
+          const docId = event.data.data.docId
+          const content = `
+          <h1>Gig Harbor Open Studio Tour Contract</h1>
+          <p>Contract for ${contract.artistDetails.firstName} ${contract.artistDetails.lastName}</p>
+          <p>Medium: ${contract.artistDetails.medium}</p>
+          <p>Artist Statement: ${contract.artistDetails.artistStatement}</p>
+          <p>Website: ${contract.artistDetails.website}</p>
+          <p>Facebook: ${contract.artistDetails.facebook}</p>
+          <p>Instagram: ${contract.artistDetails.instagram}</p>
+          <p>Phone: ${contract.artistDetails.phone}</p>
+          <p>Personal Email: ${contract.artistDetails.personalEmail}</p>
+          <p>Business Email: ${contract.artistDetails.businessEmail}</p>
+          <p>Images: ${contract.images.digitalImage1}, ${contract.images.digitalImage2}, ${contract.images.digitalImage3}, ${contract.images.artistInStudioImage}</p>
+        }
+        `
+          window.sendMessageToParent({
+            controller: 'docsController',
+            action: 'addContent',
+            docId: docId,
+            content: content
+          })
+
+          window.addEventListener("message", (event) => {
+            if (event.data.dispatch !== 'docsController-response') return
+            if (event.data.error) {
+              alert('Error adding content to document')
+              return
+            }
+            // You can add additional logic here to handle the message
+            // show success message
+            alert('Content added to document successfully')
+
+            // add document to folder
+            window.sendMessageToParent({
+              controller: 'driveController',
+              action: 'addDocToFolder',
+              docId: docId,
+              folderId: event.data.data.folderId
+            })
+
+            window.addEventListener("message", (event) => {
+              if (event.data.dispatch !== 'driveController-response') return
+              if (event.data.error) {
+                alert('Error adding document to folder')
+                return
+              }
+              // You can add additional logic here to handle the message
+              // show success message
+              alert('Document added to folder successfully')
+
+              // convert document to pdf
+              window.sendMessageToParent({
+                controller: 'docsController',
+                action: 'convertToPdf',
+                docId: docId
+              })
+
+              window.addEventListener("message", (event) => {
+                if (event.data.dispatch !== 'docsController-response') return
+                if (event.data.error) {
+                  alert('Error converting document to pdf')
+                  return
+                }
+                // You can add additional logic here to handle the message
+                // show success message
+                alert('Document converted to pdf successfully')
+
+                // add pdf to folder
+                window.sendMessageToParent({
+                  controller: 'driveController',
+                  action: 'addPdfToFolder',
+                  pdfId: event.data.data.pdfId,
+                  folderId: event.data.data.folderId
+                })
+
+                window.addEventListener("message", (event) => {
+                  if (event.data.dispatch !== 'driveController-response') return
+                  if (event.data.error) {
+                    alert('Error adding pdf to folder')
+                    return
+                  }
+                  // You can add additional logic here to handle the message
+                  // show success message
+                  alert('Pdf added to folder successfully')
+
+                })
+
+              })
+
+            })
+
+          })
+
+        })
+
+      })
+    })
+
+  })
+
+}
+
+
+
+        
 function newApplicationsSidePanel(role) {
 
   setTimeout(() => {
