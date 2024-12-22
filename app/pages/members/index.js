@@ -1,5 +1,6 @@
 import roles from '../my-contract/committee-roles.js'
 import '../../../utils/logIf.js'
+import { firebase } from 'googleapis/build/src/apis/firebase/index.js'
 
 
 const userRoles = {}
@@ -347,8 +348,10 @@ function testEmailButton(role) {
   setTimeout(() => {
     document.getElementById('sendEmail').addEventListener('click', () => {
 
+      const email = prompt("Enter an email address to send the test email", firebase.auth.currentUser.email)
+
       window.sendMessageToParent({
-        controller: 'gmailController', to: 'william.owen.career@gmail.com', subject: 'Test Email', body: `
+        controller: 'gmailController', to: email, subject: 'Test Email', body: `
         <div style="text-align:center">
         <h1>Congratulations on joining the <br>Gig Harbor Open Studio Tour</h1>
             <p>Here is your invoice for the membership fee</p>
