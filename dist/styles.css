@@ -93,4 +93,12 @@ button:hover {
   background-color: #0056b3;
 }
 
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:hover {
+  color: darkblue;
+}
+
 /*# sourceMappingURL=styles.css.map */

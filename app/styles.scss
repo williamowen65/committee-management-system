@@ -105,3 +105,12 @@ button {
   button:hover {
     background-color: #0056b3;
   }
+
+a {
+    color: blue;
+    text-decoration: underline;
+
+    &:hover {
+        color: darkblue;
+    }
+}
