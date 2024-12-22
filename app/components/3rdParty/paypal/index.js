@@ -238,7 +238,7 @@ window.initializePaypalButtons = function (cost = 250.00) {
 
                 setTimeout(() => {
                   // redirect to the dashboard
-                  window.top.location.href = '/members'
+                  window.location.href = '/members'
                 }, 3000)
               });
 

@@ -238,7 +238,7 @@ window.initializePaypalButtons = function () {
                   document.querySelector('.processPayment').innerText = "Payment Successful - Email Sent";
                   setTimeout(function () {
                     // redirect to the dashboard
-                    window.top.location.href = '/members';
+                    window.location.href = '/members';
                   }, 3000);
                 });
               });
@@ -414,7 +414,7 @@ function setUXEventListeners() {
     return firebase.signInWithEmailAndPassword(firebase.auth, email, password).then(function (user) {
       // redirect to members
       logIf.auth && console.log('redirecting to members page');
-      window.top.location.href = '/members';
+      window.location.href = '/members';
     })["catch"](function (err) {
       // change the button text back to original
       btnSubmit.innerText = btnText;
@@ -480,7 +480,7 @@ function setUXEventListeners() {
       }).then(function () {
         // redirect to members
         logIf.auth && console.log('redirecting to members page');
-        window.top.location.href = '/members';
+        window.location.href = '/members';
       });
     })["catch"](function (err) {
       // change the button text back to original
@@ -2257,7 +2257,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<header>\r\n  <div id=\"header-logo\">\r\n    <div>\r\n      <h1>Gig Harbor <br>Open Studio Tour</h1>\r\n      <small>Artist Portal</small>\r\n    </div>\r\n    <img src=\"/dist/assets/ghost-logo-pink (1).jpg\" />\r\n  </div>\r\n\r\n  <nav id=\"links\">\r\n \r\n\r\n    ${window.top.location.href.includes('members') ? '' : slotLinks.includes('members') ? '<a href=\"/members\">Go back to Members page</a>' : ''}\r\n    <a href=\"https://gigharboropenstudiotour.org/\">Go back to GHOST Website</a>\r\n  </nav>\r\n</header>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<header>\r\n  <div id=\"header-logo\">\r\n    <div>\r\n      <h1>Gig Harbor <br>Open Studio Tour</h1>\r\n      <small>Artist Portal</small>\r\n    </div>\r\n    <img src=\"/dist/assets/ghost-logo-pink (1).jpg\" />\r\n  </div>\r\n\r\n  <nav id=\"links\">\r\n \r\n\r\n    ${window.location.href.includes('members') ? '' : slotLinks.includes('members') ? '<a href=\"/members\">Go back to Members page</a>' : ''}\r\n    <a href=\"https://gigharboropenstudiotour.org/\">Go back to GHOST Website</a>\r\n  </nav>\r\n</header>\r\n");
 
 /***/ }),
 

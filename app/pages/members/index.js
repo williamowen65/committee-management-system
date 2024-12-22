@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.getElementById('logout').addEventListener('click', () => {
     firebase.signOut(firebase.auth).then(() => {
-      window.top.location.href = '/artist-sign-on'
+      window.location.href = '/artist-sign-on'
     })
   })
 })
