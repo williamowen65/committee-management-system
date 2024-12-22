@@ -236,7 +236,7 @@ function testCreateDocumentButton(role) {
     document.getElementById('createDocument').addEventListener('click', () => {
       window.sendMessageToParent({
         controller: 'driveController',
-        action: 'createDocument',
+        action: 'createDoc',
         documentName: 'Test Document'
       })
 
