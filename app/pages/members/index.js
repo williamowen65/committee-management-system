@@ -1,6 +1,5 @@
 import roles from '../my-contract/committee-roles.js'
 import '../../../utils/logIf.js'
-import { firebase } from 'googleapis/build/src/apis/firebase/index.js'
 
 
 const userRoles = {}
