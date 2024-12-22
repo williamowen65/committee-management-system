@@ -22,7 +22,12 @@
     // watch for the window change location event
     window.addEventListener('message', (e) => {
        console.log("message from parent or child window ", e)
-       window.location.href = '/artist-sign-on'
+       // get the path name of the window 
+        const path = e.data.path;
+        // if the path is not the current path, redirect to the path
+        if (path !== window.location.pathname) {
+          window.location.pathname = path;
+        }
     });
   </script>
 
