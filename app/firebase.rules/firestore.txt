@@ -4,5 +4,11 @@ service cloud.firestore {
       // Allow read and write access only to authenticated users
       allow read, write: if request.auth != null;
     }
+
+    // allow write access to new-applications
+    match /new-applications/{document} {
+      allow write: if true;
+    }
+
   }
 }
