@@ -272,6 +272,8 @@ function textProcessToSheetsButton(role) {
   setTimeout(() => {
     document.getElementById('processToSheets').addEventListener('click', async () => {
 
+      const sheetName = prompt("Enter a name for the sheet", "GHOST Contracts")
+
       // get all contracts
       const contracts = await CRUD.readAll('ghost-contracts').then(contracts => {
         return contracts.map(contract => {
@@ -299,7 +301,7 @@ function textProcessToSheetsButton(role) {
 
       window.sendMessageToParent({
         controller: 'sheetsController',
-        sheetName: 'ghost-contracts',
+        sheetName: sheetName,
         spreadsheetId: '1cmfgdGc8L5li_kx79W9SO5-ZwukiaXxlV5EZ3o8RYpY', // spreadsheet "GHOST Spreadsheet Data"
         action: 'upsertAll',
         key: "GHOST Member Id",
@@ -337,7 +339,8 @@ function textProcessToSheetsButton(role) {
     })
   }, 1)
 
-  return `<button id="processToSheets" style="position: relative;">Process to Sheets </button>`
+  return `<button id="processToSheets" style="position: relative;">Process Contracts to Sheets </button>
+  `
 }
 
 function testEmailButton(role) {
