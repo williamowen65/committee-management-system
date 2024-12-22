@@ -530,12 +530,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('header-component', function () {
-  // watch for the window change location event
-  window.addEventListener('message', function (e) {
-    console.log("message from parent or child window ", e);
-  });
-}, _header_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '', {
+(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('header-component', function () {}, _header_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '', {
   attributes: ['slotLinks']
 });
 

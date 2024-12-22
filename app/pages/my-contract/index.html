@@ -18,6 +18,11 @@
       controller: 'router',
       path: '/my-contract'
     })
+
+    // watch for the window change location event
+    window.addEventListener('message', (e) => {
+       console.log("message from parent or child window ", e)
+    });
   </script>
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
