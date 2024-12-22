@@ -237,7 +237,7 @@ function testCreateDocumentButton(role) {
       window.sendMessageToParent({
         controller: 'docsController',
         action: 'createDoc',
-        documentName: 'Test Document'
+        docName: 'Test Document'
       })
 
       window.addEventListener("message", (event) => {
