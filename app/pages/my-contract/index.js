@@ -102,7 +102,7 @@ async function handleDigitalImagesForm(e) {
     // Get file url and save it to firebase by image element id.
     // Save to firestore
     imageFields.forEach(async (field) => {
-
+        
         try {
             const url = await CRUD.saveImage(values[field])
             CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, {
