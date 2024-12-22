@@ -5875,6 +5875,14 @@ window.setLoading = function (form, isLoading) {
     }, 3000);
   }
 };
+window.navigateTo = function (path) {
+  var message = {
+    dispatch: 'navigate',
+    path: path
+  };
+  // This line update the main window with the new path
+  window.top.postMessage(message, '*');
+};
 })();
 
 /******/ })()
