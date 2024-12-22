@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
           document.querySelector('#user-role').innerHTML = `<h3>My Committee Role${contract.committeeRoleId.length > 1 ? 's' : ''}:</h3>${sidePanel.trim() ? sidePanel : 'No role assigned'}`
         })
 
+        
 
 
         /**
@@ -96,6 +97,17 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   })
 })
+
+/*
+
+Workflow for processing docs to pdf
+
+Get folder name
+create folder
+for each contract: create a document, add content, add to folder
+for each contract: convert to pdf, add to folder
+
+*/
 
 function newApplicationsSidePanel(role) {
 
