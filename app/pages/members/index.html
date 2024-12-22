@@ -11,6 +11,17 @@
   <script src="/dist/CRUD.js"></script>
   <script src="/members/index.js" type="module"></script>
   <script src="/members/modal/reset-password.js" type="module"></script>
+
+  
+<script>
+      var message = {
+        dispatch: 'navigate',
+        path: '/'
+    };
+    // This line update the main window with the new path
+    window.top.postMessage(message, '*');
+
+</script>
    
   <link
   rel="stylesheet"
