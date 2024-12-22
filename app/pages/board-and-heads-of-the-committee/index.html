@@ -16,12 +16,7 @@
       window.sendMessageToParent = function(dataObject) {
            window.parent.postMessage(dataObject, '*');
       }
-      var message = {
-            dispatch: 'navigate',
-            path: '/board-and-heads-of-the-committee'
-        };
-        // This line update the main window with the new path
-        window.top.postMessage(message, '*');
+      
     </script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
