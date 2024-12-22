@@ -11,23 +11,19 @@
     <link rel="stylesheet" href="/dist/styles.css" />
     <script src="/new-application/index.js" type="module"></script>
     <script>
-        window.sendMessageToParent = function(dataObject) {
-             window.parent.postMessage(dataObject, '*');
+        window.sendMessageToParent = function (dataObject) {
+            window.parent.postMessage(dataObject, '*');
         }
 
         var message = {
-    dispatch: 'navigate',
-    path: '/new-application'
-};
-// This line update the main window with the new path
-window.top.postMessage(message, '*');
-      </script>
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-      crossorigin="anonymous"
-    />
+            dispatch: 'navigate',
+            path: '/new-application'
+        };
+        // This line update the main window with the new path
+        window.top.postMessage(message, '*');
+    </script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -137,7 +133,8 @@ window.top.postMessage(message, '*');
         <textarea required name="howDidYouHearAboutUs" style="width: 100%; box-sizing: border-box; "></textarea>
 
         <h3>Three (3) digital images of your art *</h3>
-        <p>Make sure that your images look professional and are jpgs that are a minimum of 150 KB (No thumbnails). 2D art should only
+        <p>Make sure that your images look professional and are jpgs that are a minimum of 150 KB (No thumbnails). 2D
+            art should only
             be of your art image (no background or frame.) 3D art and jewelry should have a plain background (ex, black
             or white) and have enough lighting to show good detail. Crop the image so that your art fills most of the
             image and make sure the image is crisp and does justice to your art.</p>
@@ -157,9 +154,10 @@ window.top.postMessage(message, '*');
 
         <h3>One (1) digital image of your studio (if it is within the studio tour boundaries and you will be showing
             there) or your booth (if you will be showing at another artist's studio)</h3>
-        <p>This should be a jpg image that is a minimum of 150 KB (No thumbnails). Make sure your display space looks professional, has good lighting
+        <p>This should be a jpg image that is a minimum of 150 KB (No thumbnails). Make sure your display space looks
+            professional, has good lighting
             and is represented well in your photo.</p>
-      
+
         <div style="display: flex; justify-content: center; flex-wrap: wrap;">
 
             <file-input-component required="true" fieldName="digitalImage4" alias="Digital Image 1"
@@ -167,9 +165,11 @@ window.top.postMessage(message, '*');
         </div>
 
         <h3>Artist Statement *</h3>
-        <textarea-component fieldName="artistStatement" placeholder="Artist Statement" required description="This  is a short statement that describes what art you make, how you make it and why you make it.  (Limit 200 words)"></textarea-component>
+        <textarea-component fieldName="artistStatement" placeholder="Artist Statement" required
+            description="This  is a short statement that describes what art you make, how you make it and why you make it.  (Limit 200 words)"></textarea-component>
         <h3>Your art website or social media sites *</h3>
-        <textarea-component placeholder="Website & Social media presence " fieldName="website-social-media" required description="If you have an art website and/or social media sites, list them here.  If you don't have any of those, type in NONE"></textarea-component>
+        <textarea-component placeholder="Website & Social media presence " fieldName="website-social-media" required
+            description="If you have an art website and/or social media sites, list them here.  If you don't have any of those, type in NONE"></textarea-component>
 
         <button type="submit" style="margin: auto; display: block; ">Submit Application</button>
 
