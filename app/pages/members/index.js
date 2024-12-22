@@ -199,6 +199,7 @@ function testSheetsButton(role) {
           alert('Error generating sheets')
           return
         }
+        console.log("sheetsController-response", event)
         // You can add additional logic here to handle the message
         // show success message
         alert('Sheets generated successfully: ' + event.data.sheetUrl)
