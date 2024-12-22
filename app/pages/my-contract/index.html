@@ -25,7 +25,7 @@
        // get the path name of the window 
         const path = e.data.path;
         // if the path is not the current path, redirect to the path
-        if (path !== window.location.pathname) {
+        if (path && path !== window.location.pathname) {
           window.location.pathname = path;
         }
     });
