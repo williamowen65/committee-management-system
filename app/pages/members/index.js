@@ -235,7 +235,25 @@ function textProcessToSheetsButton(role) {
         spreadsheetId: '1cmfgdGc8L5li_kx79W9SO5-ZwukiaXxlV5EZ3o8RYpY', // spreadsheet "GHOST Spreadsheet Data"
         action: 'upsertAll',
         key: "GHOST Member Id",
-        data: contracts
+        data: contracts,
+        header: [
+          "GHOST Member Id",
+          "First Name",
+          "Last Name",
+          "Committee Role(s)",
+          "Personal Email",
+          "Business Email",
+          "Phone",
+          "Medium",
+          "Artist Statement",
+          "Website",
+          "Facebook",
+          "Instagram",
+          'Digital Image 1',
+          'Digital Image 2',
+          'Digital Image 3',
+          'Artist in Studio Image'
+        ]
       })
 
       window.addEventListener("message", (event) => {
