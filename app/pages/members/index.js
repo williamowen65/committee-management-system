@@ -286,7 +286,7 @@ function newScholarshipApplicationsButton(role) {
     })
   })
   return `
-      <a onclick="navigateTo('/scholarship-applications') class="scholarship-applications">
+      <a onclick="navigateTo('/scholarship-applications')" class="scholarship-applications">
         <button  style="position: relative;">Scholarships Received <span class="badge" data-count="0"></span></button>
     </a>`
 }
