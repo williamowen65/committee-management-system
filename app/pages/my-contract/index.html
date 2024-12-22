@@ -14,16 +14,13 @@
          window.parent.postMessage(dataObject, '*');
     }
 
-    // sendMessageToParent({
-    //   controller: 'router',
-    //   path: '/my-contract'
-    // })
+
 
     var message = {
                 dispatch: 'navigate',
                 path: '/my-contract'
             };
-    window.top.postMessage(message, '*');
+    // window.top.postMessage(message, '*');
 
     // watch for the window change location event
     // window.addEventListener('message', (e) => {
