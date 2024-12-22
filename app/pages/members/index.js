@@ -67,6 +67,9 @@ document.addEventListener('DOMContentLoaded', function () {
               if (roleButtons.includes('createDriveFolder')) {
                 buttons.insertAdjacentHTML('beforeend', textCreateDriveFolderButton(role))
               }
+              if (roleButtons.includes('createDocument')) {
+                buttons.insertAdjacentHTML('beforeend', testCreateDocumentButton(role))
+              }
 
             }
 
@@ -226,6 +229,31 @@ function textCreateDriveFolderButton(role) {
   }, 1)
 
   return `<button id="createDriveFolder" style="position: relative;">Create Drive Folder </button>`
+}
+
+function testCreateDocumentButton(role) {
+  setTimeout(() => {
+    document.getElementById('createDocument').addEventListener('click', () => {
+      window.sendMessageToParent({
+        controller: 'driveController',
+        action: 'createDocument',
+        documentName: 'Test Document'
+      })
+
+      window.addEventListener("message", (event) => {
+        if (event.data.dispatch !== 'driveController-response') return
+        if (event.data.error) {
+          alert('Error creating document')
+          return
+        }
+        // You can add additional logic here to handle the message
+        // show success message
+        alert('Document created successfully')
+      })
+    })
+  }, 1)
+
+  return `<button id="createDocument" style="position: relative;">Create Drive Document </button>`
 }
 
 function textProcessToSheetsButton(role) {
