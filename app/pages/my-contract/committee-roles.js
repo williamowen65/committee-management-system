@@ -374,6 +374,13 @@ const roles = {
         tasks: [],
         sideBarButtons: []
     },
+    45: {
+        title: "Grants Chair",
+        committee: "Grants",
+        responsibility: "Applying for and monitoring City of Gig Harbor Creative Endeavor Grant",
+        tasks: [],
+        sideBarButtons: []
+    }
 }
 
 export default roles
