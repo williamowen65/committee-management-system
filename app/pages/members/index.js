@@ -497,8 +497,7 @@ function textProcessToSheetsButton(role) {
         // You can add additional logic here to handle the message
         // show success message
         // alert('Sheets generated successfully: ' + data.sheetUrl)
-        console.log({sheetUrl})
-        window.top.open(sheetUrl, '_blank');
+        window.openUrl(sheetUrl)
       })
     })
   }, 1)
