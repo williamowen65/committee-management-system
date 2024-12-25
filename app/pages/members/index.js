@@ -419,7 +419,7 @@ function textProcessToSheetsButton(role) {
   setTimeout(() => {
     document.getElementById('processToSheets').addEventListener('click', async () => {
 
-      const sheetName = `GHOST Contracts Current Year`
+      const sheetName = `GHOST Contracts ${new Date().getFullYear()}`
       if (!sheetName) return
 
       // get the text of the button
