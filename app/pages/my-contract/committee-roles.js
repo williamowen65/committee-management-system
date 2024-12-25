@@ -13,7 +13,7 @@ const roles = {
         responsibility: 'Oversee all aspects of the organization',
         prerequisite: 'Previous experience in a leadership role',
         tasks: [],
-        sideBarButtons: ['newScholarshipApplications', 'newApplications', 'contracts-received']
+        sideBarButtons: ['newScholarshipApplications', 'newApplications', 'contracts-received', 'processToSheets']
     },
     2: {
         title: 'Vice President',

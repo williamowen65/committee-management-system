@@ -19,8 +19,8 @@ import logIf from '../../utils/logIf.js';
 
 // Globals file
 // Helper function to get form values
-window.getFormValues = function(formSelector) {
-   logIf.client && console.log("Getting form values and about to set loading")
+window.getFormValues = function (formSelector) {
+    logIf.client && console.log("Getting form values and about to set loading")
     const form = document.querySelector(formSelector);
     const formData = new FormData(form);
     setLoading(form, true)
@@ -30,7 +30,7 @@ window.getFormValues = function(formSelector) {
 }
 
 // global function to set loading state
-window.setLoading = function(form, isLoading, config = { success: true, cbText: "Your changes have been saved" }) {
+window.setLoading = function (form, isLoading, config = { success: true, cbText: "Your changes have been saved" }) {
     if (!config.success) return; // Don't set loading if there was an error
     logIf.client && console.log("Setting loading", { form, isLoading, config })
     const submitButton = form.querySelector('button[type="submit"]')
@@ -41,8 +41,8 @@ window.setLoading = function(form, isLoading, config = { success: true, cbText: 
         submitButton.innerHTML = 'Loading...'
         submitButton.setAttribute('data-text', text);
     } else {
-       
-            submitButton.innerHTML = config.cbText
+
+        submitButton.innerHTML = config.cbText
         setTimeout(() => {
             submitButton.removeAttribute('disabled')
             const text = submitButton.getAttribute('data-text')
@@ -52,14 +52,28 @@ window.setLoading = function(form, isLoading, config = { success: true, cbText: 
     }
 }
 
-window.navigateTo = function(path) {
 
-    var message = {
-      dispatch: 'navigate',
-      path: path
-  };
-  // This line update the main window with the new path
-  window.top.postMessage(message, '*');
+/**
+ * navigateTo is a method for changing the main url from a nested iframe
+ * But in development, it will just change the url of the current window since there is not iframe
+ * @param {*} path 
+ */
+window.navigateTo = function (path) {
+
+    const isDevEnv = window.location.origin.includes('localhost')
+
+    if (isDevEnv) {
+        // go to the new path
+        window.location.href = window.location.origin + path
+    } else {
+        var message = {
+            dispatch: 'navigate',
+            path: path
+        };
+        // This line update the main window with the new path
+        window.top.postMessage(message, '*');
+    }
+
 }
 
 

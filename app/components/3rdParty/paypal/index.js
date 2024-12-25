@@ -223,6 +223,8 @@ window.initializePaypalButtons = function (cost = 250.00) {
               })
 
 
+
+
               window.addEventListener("message", (event) => {
                 if (event.data.dispatch !== 'gmailController-response') return
 

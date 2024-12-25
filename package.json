@@ -7,6 +7,7 @@
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "babel-loader": "^9.2.1",
+    "concurrently": "^9.1.0",
     "css-loader": "^7.1.2",
     "raw-loader": "^4.0.2",
     "sass": "^1.81.0",
@@ -24,7 +25,9 @@
     "build:scss": "sass app/styles.scss dist/styles.css",
     "watch:scss": "sass --watch app/styles.scss dist/styles.css",
     "deploy:gcf:googleapis": "cd app\\cloudFunctions\\google && gcloud functions deploy googleapis --runtime nodejs20 --trigger-http --allow-unauthenticated --service-account 13428009497-compute@developer.gserviceaccount.com && cd ..\\..\\..",
-    "logs:gcf:googleapis": "gcloud functions logs read googleapis"
+    "logs:gcf:googleapis": "gcloud functions logs read googleapis",
+    "dev": "concurrently -k -n \"SERVER,WEBPACK,SCSS\" -c \"bgBlue.bold,bgGreen.bold,bgMagenta.bold\" \"npm run start:w\" \"npm run build:w\" \"npm run watch:scss\""
+
   },
   "author": "William Owen <william.owen.dev@gmail.com>",
   "license": "ISC",
