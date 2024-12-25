@@ -419,7 +419,7 @@ function textProcessToSheetsButton(role) {
   setTimeout(() => {
     document.getElementById('processToSheets').addEventListener('click', async () => {
 
-      const sheetName = prompt("Enter a name for the sheet", "GHOST Contracts")
+      const sheetName = `GHOST Contracts ${new Date().getFullYear()}`
       if (!sheetName) return
 
       // get the text of the button
@@ -480,20 +480,23 @@ function textProcessToSheetsButton(role) {
       })
 
       window.addEventListener("message", (event) => {
+        // return button text to normal
+        document.getElementById('processToSheets').innerText = buttonText
+
+        
         if (event.data.dispatch !== 'sheetsController-response') return
         if (event.data.error) {
           alert('Error generating sheets')
           return
         }
 
-        // return button text to normal
-        document.getElementById('processToSheets').innerText = buttonText
 
         const data = event.data.data
         console.log("sheetsController-response", event)
         // You can add additional logic here to handle the message
         // show success message
-        alert('Sheets generated successfully: ' + data.sheetUrl)
+        // alert('Sheets generated successfully: ' + data.sheetUrl)
+        window.open(data.sheetUrl, '_blank');
       })
     })
   }, 1)
