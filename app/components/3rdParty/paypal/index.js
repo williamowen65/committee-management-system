@@ -162,7 +162,7 @@ window.initializePaypalButtons = function (cost = 250.00) {
 
             // replace the buttons with a success message
 
-            document.querySelector('.payPalContainer').style="display:none";
+            document.querySelector('.payPalContainer').style = "display:none";
             document.querySelector('.payPalContainer').insertAdjacentHTML('afterend', "<div class='processPayment'>Processing Payment....</div>")
 
 
@@ -183,6 +183,7 @@ window.initializePaypalButtons = function (cost = 250.00) {
               }
             }
 
+            const contracts  = await CRUD.readAll('ghost-contracts') 
             CRUD.update('ghost-contracts', userId, {
               artistDetails: invoice
             }).then(() => {
@@ -222,6 +223,48 @@ window.initializePaypalButtons = function (cost = 250.00) {
                   `
               })
 
+              const newArtist = {
+                name: `${user.artistDetails.firstName} ${user.artistDetails.lastName}`,
+                email: email
+              }
+              const ghostBoardMemberRoleKeys = Object.entries(roles).filter(([key,role]) => {
+                if(role.committee == 'Board') return key
+              }).filter(Boolean)
+
+              const ghostBoardMemberEmails = contracts.filter(contract => {
+                if(ghostBoardMemberRoleKeys.includes(contract.role)) return contract.artistDetails.businessEmail
+              }).filter(Boolean)
+
+
+              window.sendMessageToParent({
+                controller: 'gmailController',
+                // To all the board member emails
+                to: ghostBoardMemberEmails.join(','),
+                subject: `GHOST Contract Payment Submitted by ${newArtist.name}`,
+                body: `
+                 <div style="text-align:center">
+                  <h1>The Gig Harbor Open Studio Tour is Growing</h1>
+                  <p>${newArtist.name} has submitted their membership payment.
+                  <br> Reach out to them to welcome them to the tour.
+                  <br> You can reach them at ${newArtist.email}
+                   </p>
+                
+                  <fieldset style="width:fit-content; margin:auto;">
+                  
+                  <legend>Invoice</legend>
+                  
+                  <p style="margin:0; text-align:start;">Transaction ID: ${transaction.id}</p>
+                  <p style="margin:0; text-align:start;">Amount: ${transaction.amount.value}</p>
+                  <p style="margin:0; text-align:start;">Currency: ${transaction.amount.currency_code}</p>
+                  <p style="margin:0; text-align:start;">Status: ${transaction.status}</p>
+                  <p style="margin:0; text-align:start;">Created At: ${new Date().toLocaleString()}</p>
+                  </fieldset>
+
+                  <p>Thank you for your membership.</p>
+                   <p>Best Regards, <br>Gig Harbor Open Studio Tour</p>
+                </div>
+                  `
+              })
 
 
 
@@ -229,7 +272,7 @@ window.initializePaypalButtons = function (cost = 250.00) {
                 if (event.data.dispatch !== 'gmailController-response') return
 
                 if (event.data.error) {
-                   document.querySelector('.processPayment').innerText = "<div style='color:red; font-weight: bold'>Payment successful but error sending email</div>"
+                  document.querySelector('.processPayment').innerText = "<div style='color:red; font-weight: bold'>Payment successful but error sending email</div>"
                   return
                 }
 
