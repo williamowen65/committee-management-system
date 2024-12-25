@@ -1,6 +1,6 @@
 import paypalTemplate from './index.html.txt';
 import { createCustomElement, evaluateTemplate } from '../../../../utils/custom-element';
-import roles from '../../../pages/my-contract/committee-roles.json';
+import roles from '../../../pages/my-contract/committee-roles.js';
 // import styles from './style.scss.txt';
 const logIf = require("../../../../utils/logIf.js");
 
