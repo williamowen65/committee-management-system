@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const { values, form } = getFormValues('form#new-application-form')
         logIf.client || true && console.log({ values, form })
-        debugger
+       
 
         values.hasBeenReviewed = false
 
@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         Promise.all(promises).then(() => {  
+            debugger
             CRUD.create('new-applications', values).then(() => {
 
                 // get all board members
