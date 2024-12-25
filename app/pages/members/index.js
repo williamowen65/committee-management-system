@@ -422,6 +422,11 @@ function textProcessToSheetsButton(role) {
       const sheetName = prompt("Enter a name for the sheet", "GHOST Contracts")
       if (!sheetName) return
 
+      // get the text of the button
+      const buttonText = document.getElementById('processToSheets').innerText
+      // show loading sign
+      document.getElementById('processToSheets').innerText = 'Loading...'
+
       // get all contracts
       const contracts = await CRUD.readAll('ghost-contracts').then(contracts => {
         return contracts.map(contract => {
@@ -480,6 +485,10 @@ function textProcessToSheetsButton(role) {
           alert('Error generating sheets')
           return
         }
+
+        // return button text to normal
+        document.getElementById('processToSheets').innerText = buttonText
+
         const data = event.data.data
         console.log("sheetsController-response", event)
         // You can add additional logic here to handle the message
@@ -489,7 +498,7 @@ function textProcessToSheetsButton(role) {
     })
   }, 1)
 
-  return `<button id="processToSheets" style="position: relative;">Process Contracts to Sheets </button>
+  return `<button id="processToSheets" style="position: relative;">Google Sheet Summary</button>
   `
 }
 

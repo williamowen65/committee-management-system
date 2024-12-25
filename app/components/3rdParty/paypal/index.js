@@ -232,16 +232,26 @@ window.initializePaypalButtons = function (cost = 250.00) {
                 if(role.committee == 'Board') return key
               }).filter(Boolean)
 
+              const ghostArtistImagesChairRoleKeys = Object.entries(roles).filter(([key,role]) => {
+                if(role.title == 'Artist Images Chair') return key
+              }).filter(Boolean)
+
               const ghostBoardMemberEmails = contracts.filter(contract => {
                 if(ghostBoardMemberRoleKeys.includes(contract.role)) return contract.artistDetails.personalEmail
               }).filter(Boolean)
 
+              const ghostArtistImagesChairEmails = contracts.filter(contract => {
+                if(ghostArtistImagesChairRoleKeys.includes(contract.role)) return contract.artistDetails.personalEmail
+              }).filter(Boolean)
+
+              // To all the board member and artist images chair emails
+              const welcomeEmailAddress = ghostBoardMemberEmails.concat(ghostArtistImagesChairEmails).join(',')
 
               window.sendMessageToParent({
                 controller: 'gmailController',
                 // To all the board member and artist images chair emails
-                // to: ghostBoardMemberEmails.join(','),
-                to: 'bluekayak123@yahoo.com, william.owen.dev@gmail.com',
+                to: welcomeEmailAddress,
+                // to: 'bluekayak123@yahoo.com, william.owen.dev@gmail.com', // <---TESTING
                 subject: `GHOST Contract Payment Submitted by ${newArtist.name}`,
                 body: `
                  <div style="text-align:center">

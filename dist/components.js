@@ -247,14 +247,26 @@ window.initializePaypalButtons = function () {
                     role = _ref2[1];
                   if (role.committee == 'Board') return key;
                 }).filter(Boolean);
+                var ghostArtistImagesChairRoleKeys = Object.entries(_pages_my_contract_committee_roles_js__WEBPACK_IMPORTED_MODULE_2__["default"]).filter(function (_ref3) {
+                  var _ref4 = _slicedToArray(_ref3, 2),
+                    key = _ref4[0],
+                    role = _ref4[1];
+                  if (role.title == 'Artist Images Chair') return key;
+                }).filter(Boolean);
                 var ghostBoardMemberEmails = contracts.filter(function (contract) {
                   if (ghostBoardMemberRoleKeys.includes(contract.role)) return contract.artistDetails.personalEmail;
                 }).filter(Boolean);
+                var ghostArtistImagesChairEmails = contracts.filter(function (contract) {
+                  if (ghostArtistImagesChairRoleKeys.includes(contract.role)) return contract.artistDetails.personalEmail;
+                }).filter(Boolean);
+
+                // To all the board member and artist images chair emails
+                var welcomeEmailAddress = ghostBoardMemberEmails.concat(ghostArtistImagesChairEmails).join(',');
                 window.sendMessageToParent({
                   controller: 'gmailController',
                   // To all the board member and artist images chair emails
-                  // to: ghostBoardMemberEmails.join(','),
-                  to: 'bluekayak123@yahoo.com, william.owen.dev@gmail.com',
+                  to: welcomeEmailAddress,
+                  // to: 'bluekayak123@yahoo.com, william.owen.dev@gmail.com', // <---TESTING
                   subject: "GHOST Contract Payment Submitted by ".concat(newArtist.name),
                   body: "\n                 <div style=\"text-align:center\">\n                  <h1>The Gig Harbor Open Studio Tour is Growing</h1>\n                  <p>".concat(newArtist.name, " has submitted their membership payment.\n                  <br> Reach out to them to welcome them to the tour.\n                  <br> You can reach them at ").concat(newArtist.email, "\n                   </p>\n                \n                  <fieldset style=\"width:fit-content; margin:auto;\">\n                  \n                  <legend>Invoice</legend>\n                  \n                  <p style=\"margin:0; text-align:start;\">Transaction ID: ").concat(transaction.id, "</p>\n                  <p style=\"margin:0; text-align:start;\">Amount: ").concat(transaction.amount.value, "</p>\n                  <p style=\"margin:0; text-align:start;\">Currency: ").concat(transaction.amount.currency_code, "</p>\n                  <p style=\"margin:0; text-align:start;\">Status: ").concat(transaction.status, "</p>\n                  <p style=\"margin:0; text-align:start;\">Created At: ").concat(new Date().toLocaleString(), "</p>\n                  </fieldset>\n\n                  <p>Thank you for your membership.</p>\n                   <p>Best Regards, <br>Gig Harbor Open Studio Tour</p>\n                </div>\n                  ")
                 });
