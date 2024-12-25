@@ -1,5 +1,6 @@
 import paypalTemplate from './index.html.txt';
 import { createCustomElement, evaluateTemplate } from '../../../../utils/custom-element';
+import roles from '../../../../utils/roles';
 // import styles from './style.scss.txt';
 const logIf = require("../../../../utils/logIf.js");
 
@@ -232,14 +233,15 @@ window.initializePaypalButtons = function (cost = 250.00) {
               }).filter(Boolean)
 
               const ghostBoardMemberEmails = contracts.filter(contract => {
-                if(ghostBoardMemberRoleKeys.includes(contract.role)) return contract.artistDetails.businessEmail
+                if(ghostBoardMemberRoleKeys.includes(contract.role)) return contract.artistDetails.personalEmail
               }).filter(Boolean)
 
 
               window.sendMessageToParent({
                 controller: 'gmailController',
-                // To all the board member emails
-                to: ghostBoardMemberEmails.join(','),
+                // To all the board member and artist images chair emails
+                // to: ghostBoardMemberEmails.join(','),
+                to: 'bluekayak123@yahoo.com, william.owen.dev@gmail.com',
                 subject: `GHOST Contract Payment Submitted by ${newArtist.name}`,
                 body: `
                  <div style="text-align:center">

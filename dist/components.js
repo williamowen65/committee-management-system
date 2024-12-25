@@ -11,6 +11,7 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/3rdParty/paypal/index.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../utils/custom-element */ "./utils/custom-element.js");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../../utils/roles'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -21,6 +22,7 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+
 
 
 // import styles from './style.scss.txt';
@@ -239,19 +241,20 @@ window.initializePaypalButtons = function () {
                   name: "".concat(user.artistDetails.firstName, " ").concat(user.artistDetails.lastName),
                   email: email
                 };
-                var ghostBoardMemberRoleKeys = Object.entries(roles).filter(function (_ref) {
+                var ghostBoardMemberRoleKeys = Object.entries(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../../utils/roles'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())).filter(function (_ref) {
                   var _ref2 = _slicedToArray(_ref, 2),
                     key = _ref2[0],
                     role = _ref2[1];
                   if (role.committee == 'Board') return key;
                 }).filter(Boolean);
                 var ghostBoardMemberEmails = contracts.filter(function (contract) {
-                  if (ghostBoardMemberRoleKeys.includes(contract.role)) return contract.artistDetails.businessEmail;
+                  if (ghostBoardMemberRoleKeys.includes(contract.role)) return contract.artistDetails.personalEmail;
                 }).filter(Boolean);
                 window.sendMessageToParent({
                   controller: 'gmailController',
-                  // To all the board member emails
-                  to: ghostBoardMemberEmails.join(','),
+                  // To all the board member and artist images chair emails
+                  // to: ghostBoardMemberEmails.join(','),
+                  to: 'bluekayak123@yahoo.com, william.owen.dev@gmail.com',
                   subject: "GHOST Contract Payment Submitted by ".concat(newArtist.name),
                   body: "\n                 <div style=\"text-align:center\">\n                  <h1>The Gig Harbor Open Studio Tour is Growing</h1>\n                  <p>".concat(newArtist.name, " has submitted their membership payment.\n                  <br> Reach out to them to welcome them to the tour.\n                  <br> You can reach them at ").concat(newArtist.email, "\n                   </p>\n                \n                  <fieldset style=\"width:fit-content; margin:auto;\">\n                  \n                  <legend>Invoice</legend>\n                  \n                  <p style=\"margin:0; text-align:start;\">Transaction ID: ").concat(transaction.id, "</p>\n                  <p style=\"margin:0; text-align:start;\">Amount: ").concat(transaction.amount.value, "</p>\n                  <p style=\"margin:0; text-align:start;\">Currency: ").concat(transaction.amount.currency_code, "</p>\n                  <p style=\"margin:0; text-align:start;\">Status: ").concat(transaction.status, "</p>\n                  <p style=\"margin:0; text-align:start;\">Created At: ").concat(new Date().toLocaleString(), "</p>\n                  </fieldset>\n\n                  <p>Thank you for your membership.</p>\n                   <p>Best Regards, <br>Gig Harbor Open Studio Tour</p>\n                </div>\n                  ")
                 });
