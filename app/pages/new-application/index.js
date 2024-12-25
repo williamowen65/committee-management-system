@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
 
         const { values, form } = getFormValues('form#new-application-form')
-        logIf.client && console.log({ values, form })
+        logIf.client && true && console.log({ values, form })
+        debugger
 
         values.hasBeenReviewed = false
 
@@ -46,31 +47,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 window.sendMessageToParent({
                     controller: 'gmailController',
-                    // To all the board member and artist images chair emails
-                    to: welcomeEmailAddress,
+                    // every one on board, new artist applications chair, new artist recruitment chair and the person who applied
+                //   to: ""
                     // to: 'bluekayak123@yahoo.com, william.owen.dev@gmail.com', // <---TESTING
-                    subject: `GHOST Contract Payment Submitted by ${newArtist.name}`,
+                    subject: `GHOST Contract Application sent from ${newArtist.name}`,
                     body: `
                      <div style="text-align:center">
                       <h1>The Gig Harbor Open Studio Tour is Growing</h1>
-                      <p>${newArtist.name} has submitted their membership payment.
-                      <br> Reach out to them to welcome them to the tour.
-                      <br> You can reach them at ${newArtist.email}
-                       </p>
-                    
-                      <fieldset style="width:fit-content; margin:auto;">
-                      
-                      <legend>Invoice</legend>
-                      
-                      <p style="margin:0; text-align:start;">Transaction ID: ${transaction.id}</p>
-                      <p style="margin:0; text-align:start;">Amount: ${transaction.amount.value}</p>
-                      <p style="margin:0; text-align:start;">Currency: ${transaction.amount.currency_code}</p>
-                      <p style="margin:0; text-align:start;">Status: ${transaction.status}</p>
-                      <p style="margin:0; text-align:start;">Created At: ${new Date().toLocaleString()}</p>
-                      </fieldset>
-    
-                      <p>Thank you for your membership.</p>
-                       <p>Best Regards, <br>Gig Harbor Open Studio Tour</p>
+                        <h2>New Artist Application Received</h2>
+                        <p>Artist Name: ${newArtist.name}</p>
+                        <p>Artist Email: ${newArtist.email}</p>
+                        <p>Artist Phone: ${newArtist.phone}</p>
+                        <p>Artist Address: ${newArtist.address}</p>
+                        <p>Artist Website: ${newArtist.website}</p>
+                        <p>Artist Media: ${newArtist.media}</p>
+                        <p>Artist Description: ${newArtist.description}</p>
+                        <p>Artist Image: <img src="${newArtist.image}" alt="Artist Image" style="max-width: 100%;"></p>
+                        <p>Artist Image 2: <img src="${newArtist.image2}" alt="Artist Image 2" style="max-width: 100%;"></p>
+                        <p>Artist Image 3: <img src="${newArtist.image3}" alt="Artist Image 3" style="max-width: 100%;"></p>
+                        <p>Artist Image 4: <img src="${newArtist.image4}" alt="Artist Image 4" style="max-width: 100%;"></p>
+                        <p>Artist Image 5: <img src="${newArtist.image5}" alt="Artist Image 5" style="max-width: 100%;"></p>
+
+
+
                     </div>
                       `
                   })
