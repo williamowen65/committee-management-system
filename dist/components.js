@@ -6344,6 +6344,20 @@ window.navigateTo = function (path) {
     window.top.postMessage(message, '*');
   }
 };
+window.openUrl = function (url) {
+  var isDevEnv = window.location.origin.includes('localhost');
+  if (isDevEnv) {
+    // go to the new path
+    window.location.href = url;
+  } else {
+    var message = {
+      dispatch: 'openUrl',
+      path: url
+    };
+    // This line update the main window with the new path
+    window.top.postMessage(message, '*');
+  }
+};
 })();
 
 /******/ })()
