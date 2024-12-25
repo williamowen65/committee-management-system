@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
 
         const { values, form } = getFormValues('form#new-application-form')
-        logIf.client && true && console.log({ values, form })
+        logIf.client || true && console.log({ values, form })
         debugger
 
         values.hasBeenReviewed = false
