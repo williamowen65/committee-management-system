@@ -483,7 +483,7 @@ function textProcessToSheetsButton(role) {
         // return button text to normal
         document.getElementById('processToSheets').innerText = buttonText
 
-        
+
         if (event.data.dispatch !== 'sheetsController-response') return
         if (event.data.error) {
           alert('Error generating sheets')
@@ -492,11 +492,13 @@ function textProcessToSheetsButton(role) {
 
 
         const data = event.data.data
+        const sheetUrl = data.sheetUrl
         console.log("sheetsController-response", event)
         // You can add additional logic here to handle the message
         // show success message
         // alert('Sheets generated successfully: ' + data.sheetUrl)
-        window.open(data.sheetUrl, '_blank');
+        console.log({sheetUrl})
+        window.top.open(sheetUrl, '_blank');
       })
     })
   }, 1)
