@@ -11,7 +11,7 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/3rdParty/paypal/index.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../utils/custom-element */ "./utils/custom-element.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../../utils/roles'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../pages/my-contract/committee-roles.json'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -241,7 +241,7 @@ window.initializePaypalButtons = function () {
                   name: "".concat(user.artistDetails.firstName, " ").concat(user.artistDetails.lastName),
                   email: email
                 };
-                var ghostBoardMemberRoleKeys = Object.entries(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../../utils/roles'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())).filter(function (_ref) {
+                var ghostBoardMemberRoleKeys = Object.entries(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../pages/my-contract/committee-roles.json'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())).filter(function (_ref) {
                   var _ref2 = _slicedToArray(_ref, 2),
                     key = _ref2[0],
                     role = _ref2[1];
