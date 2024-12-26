@@ -33,7 +33,21 @@ document.addEventListener('DOMContentLoaded', function () {
           Object.values(userRoles).forEach(role => {
             console.log({ role })
             if(role.privileges && role.privileges.includes('editTimeline')){
-              document.getElementById('timeline').insertAdjacentHTML('afterbegin', '<a type="button" id="editTimeline" class="fa fa-edit" style=""></a>')
+
+              const editButton = document.createElement('a')
+              editButton.setAttribute('type', 'button')
+              editButton.setAttribute('id', 'editTimeline')
+              editButton.setAttribute('class', 'fa fa-edit')
+
+              document.getElementById('timeline').insertAdjacentElement('afterbegin', editButton)
+
+              editButton.addEventListener('click', () => {
+                // get the parent #timeline container and add the edit form
+                const timeline = document.getElementById('timeline')
+                timeline.setAttribute('isEditing',true)
+              })
+
+              
             }
        
           })
