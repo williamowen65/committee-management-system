@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
           editForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
           editForm.innerHTML = getTimeLineEditor()
 
-          function getTimeLineEditor() {
+          function getTimeLineEditor(options = {}) {
             return `
                 <fieldset>
                   <legend></legend>
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                    <button class="small" type="submit">Save</button>
                    <button class="small cancelTimelineEdit" type="button">Cancel</button>
-                   <button class="small deleteTimelineEvent" type="button">Delete</button>
+          ${options.deleteBtn ? '<button class="small deleteTimelineEvent" type="button">Delete</button>' : ''}
 
 
                     </fieldset>
@@ -263,7 +263,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 ${description}
                 </span>
                 <form class="editTimelineForm ifEditing">
-                ${getTimeLineEditor()}
+                ${getTimeLineEditor({
+                  deleteBtn: true
+                })}
                 </form>
                 
               `
