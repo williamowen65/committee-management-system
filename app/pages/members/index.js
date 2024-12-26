@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded',  function () {
               const editButton = document.createElement('a')
               editButton.setAttribute('type', 'button')
            
-              editButton.setAttribute('class', 'fa fa-edit')
+              
 
            
 
@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded',  function () {
               .insertAdjacentElement('afterbegin', editFormClone)
               // create edit button clone
               const editButtonClone = editButton.cloneNode(true)
+              editButtonClone.setAttribute('class', 'fa fa-edit')
               editButtonClone.setAttribute('id', 'editTimeline')
               document.getElementById('timeline').insertAdjacentElement('afterbegin', editButtonClone)
               editButtonClone.addEventListener('click', () => {
@@ -96,6 +97,7 @@ document.addEventListener('DOMContentLoaded',  function () {
                 console.log('cloning button to li',{ event })
 
                 const editButtonClone = editButton.cloneNode(true)
+                editButtonClone.setAttribute('class', 'fa fa-pen')
                 event.insertAdjacentElement('afterbegin', editButtonClone)
                 editButtonClone.addEventListener('click', (e) => {
                   const li = e.target.closest('li')
