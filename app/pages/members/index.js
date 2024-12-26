@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const li = document.createElement('li')
             li.setAttribute('data-id', event.fbId)
             const [year, month, day] = event.date.split('-');
+            console.log({ year, month, day, event })
             const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
             li.innerHTML = `
             <strong>${date}: </strong>
