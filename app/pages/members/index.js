@@ -94,6 +94,8 @@ document.addEventListener('DOMContentLoaded',  function () {
 
                 console.log('cloning button to li',{ event })
 
+
+                // clone a button to the event
                 const editButtonClone = editButton.cloneNode(true)
                 editButtonClone.setAttribute('class', 'fa fa-pen')
                 event.insertAdjacentElement('afterbegin', editButtonClone)
@@ -101,6 +103,14 @@ document.addEventListener('DOMContentLoaded',  function () {
                   const li = e.target.closest('li')
                   li.toggleAttribute('is-editing')
                 })
+
+                // clone the form to the event
+                const editFormClone = editForm.cloneNode(true)
+                editFormClone.classList.add('editTimelineForm')
+                editFormClone.querySelector('input').value = event.querySelector('strong').innerText
+                editFormClone.querySelector('textarea').value = event.querySelector('span').innerText
+                event.appendChild(editFormClone)
+                
               })
 
               
