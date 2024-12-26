@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   <br>
 
                    <button class="small" type="submit">Save</button>
-                   <button class="small" >Cancel</button>
+                   <button class="small" type="button" >Cancel</button>
 
 
                     </fieldset>
