@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function () {
               editForm.classList.add('ifEditing')
               editForm.innerHTML = `
               <li >
-                <input  type="date" ><br>
-                <input  type="text" placeholder="Description">
+                <input  type="date"><br>
+                <input style="width:100%" type="text" placeholder="Description"><br>
                 <button class="small" type="submit">Save</button>
               </li>
               `
