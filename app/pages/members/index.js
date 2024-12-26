@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // event wired up via button (delegated event listener)
               })
               // Append it in the correct position of the timeline (TODO <------------------------------)
-              appendCurrentTimeline()
+              appendCurrentTimeline(li)
 
 
               // stop the edit mode
@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
           })
 
-          function appendCurrentTimeline(){
+          function appendCurrentTimeline(li){
              // find the correct spot to insert the new event
              const timelineEl = document.getElementById('timeline')
              const events = Array.from(timelineEl.querySelectorAll('li')).concat(li)
