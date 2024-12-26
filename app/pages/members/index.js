@@ -93,19 +93,19 @@ document.addEventListener('DOMContentLoaded', function () {
               })
               document.querySelector('#timeline .header').insertAdjacentElement('beforeend', changeYearBtn)
 
-              // // A form to change the year
-              // const changeYearForm = document.createElement('form')
-              // changeYearForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
-              // // Define the form html
-              // changeYearForm.innerHTML = `
-              //  <select id="yearSelect">
-              //     ${Array.from({ length: 10 }, (_, i) => {
-              //       const year = new Date().getFullYear() - i;
-              //       return `<option value="${year}">${year}</option>`;
-              //     }).join('')}
-              //   </select>
-              //   `
-              // document.querySelector('#activeYear').insertAdjacentElement('beforeend', changeYearForm)
+              // A form to change the year
+              const changeYearForm = document.createElement('form')
+              changeYearForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
+              // Define the form html
+              changeYearForm.innerHTML = `
+               <select id="yearSelect">
+                  ${Array.from({ length: 10 }, (_, i) => {
+                    const year = new Date().getFullYear() - i;
+                    return `<option value="${year}">${year}</option>`;
+                  }).join('')}
+                </select>
+                `
+              document.querySelector('#activeYear').insertAdjacentElement('beforeend', changeYearForm)
             
 
 
