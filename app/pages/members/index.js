@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
         function enableTimelinePrivileges(){
           
               // add a way to change the selected year
+              const activeYearContainer = document.getElementById('activeYear')
 
               // A button to toggle editing mode
               const changeYearBtn = document.createElement('a')
@@ -89,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
               changeYearBtn.setAttribute('class', 'fa fa-calendar')
               changeYearBtn.innerHTML = '<small style="margin-left: 10px">Change Year</small>'
               changeYearBtn.addEventListener('click', () => {
-                document.querySelector('#activeYear').toggleAttribute('is-editing')
+                activeYearContainer.toggleAttribute('is-editing')
               })
               document.querySelector('#timeline .header').insertAdjacentElement('beforeend', changeYearBtn)
 
@@ -106,7 +107,20 @@ document.addEventListener('DOMContentLoaded', function () {
                   }).join('')}
                 </select>
                 `
-              document.querySelector('#activeYear').insertAdjacentElement('beforeend', changeYearForm)
+              
+                // create container around the content of the li
+                const contentContainer = document.createElement('span')
+                contentContainer.setAttribute('class', 'contentContainer')
+                // put all the content from the li in the container by moving the nodes
+                while (activeYearContainer.firstChild) {
+                  contentContainer.appendChild(activeYearContainer.firstChild)
+                }
+                // append the container to the li
+                activeYearContainer.appendChild(contentContainer)
+   
+            
+
+                activeYearContainer.insertAdjacentElement('beforeend', changeYearForm)
             
 
 
