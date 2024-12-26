@@ -172,8 +172,10 @@ document.addEventListener('DOMContentLoaded', function () {
           // Create a template form
           const editForm = document.createElement('form')
           editForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
-          // Define the form html
-          editForm.innerHTML = `
+          editForm.innerHTML = getTimeLineEditor()
+
+          function getTimeLineEditor(){
+            return `
                 <fieldset>
                   <legend></legend>
 
@@ -190,6 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </fieldset>
 
               `
+          }
 
           // Using event delegation to handle the cancel button
           document.addEventListener('click', (e) => {
@@ -234,7 +237,9 @@ document.addEventListener('DOMContentLoaded', function () {
               // add the event to the timeline
               const li = document.createElement('li')
               li.setAttribute('data-id', event.id)
-              li.innerHTML = event.description
+              li.innerHTML = getTimeLineEditor()
+              li.querySelector('input').value = date
+              li.querySelector('textarea').value = description
               // Append it in the correct position of the timeline
 
 
