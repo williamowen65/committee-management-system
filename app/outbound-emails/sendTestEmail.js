@@ -16,6 +16,14 @@ export async function  sendTestEmail(){
     const newApplicationEventId = '1Iig2hZFN7MgyFUpjG0q' // A timeline event id for some date in the future
     const specialTimelineEvent  = await CRUD.read('ghost-timeline', newApplicationEventId)
 
+    let date;
+    if(typeof specialTimelineEvent.date === 'string'){
+
+        date = new Date(specialTimelineEvent.date)
+    } else {
+        date = specialTimelineEvent.date.toDate().toLocaleDateString('en-us', {month: 'long', day: 'numeric'})
+    }
+
     window.sendMessageToParent({
         controller: 'gmailController',
         // every one on board, new artist applications chair, new artist recruitment chair and the person who applied
@@ -29,7 +37,7 @@ export async function  sendTestEmail(){
             The committee will be reviewing the application.<br>
             The new artist applicant, ${newArtist.firstName} ${newArtist.lastName}, will receive a notification after the application has been reviewed. 
             <br>
-            Application must be reviewed no later than ${specialTimelineEvent.date.toDate().toLocaleDateString('en-us', {month: 'long', day: 'numeric'})}.
+            Application must be reviewed no later than ${date}.
             </p>
 
 
