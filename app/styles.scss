@@ -100,7 +100,7 @@ button {
     margin: 4px 2px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    .small{
+    &.small{
         padding: 5px 10px;
         font-size: 10px;
     }
