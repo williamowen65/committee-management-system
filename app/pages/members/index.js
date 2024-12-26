@@ -186,9 +186,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
                   <br>
 
-                   <button class="small" type="submit">Save</button>
-                   <button class="small cancelTimelineEdit" type="button">Cancel</button>
-                    <button class="small deleteTimelineEvent" type="button">Delete</button>
+                  <div style="display:flex; justify-content:right">
+                  <button class="small" type="submit">Save</button>
+                  <button class="small cancelTimelineEdit" type="button">Cancel</button>
+                  <button class="small deleteTimelineEvent" type="button">Delete</button>
+                  </div>
 
 
                     </fieldset>
