@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
               editButton.addEventListener('click', () => {
                 // get the parent #timeline container and add the edit form
                 const timeline = document.getElementById('timeline')
-                timeline.setAttribute('isEditing',true)
+                timeline.toggleAttribute('isEditing')
               })
 
               
