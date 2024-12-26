@@ -125,8 +125,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     activeYearContainer.querySelector('.contentContainer').innerText = year
                     // // update the active year in the timeline
                     document.getElementById('timeline').querySelectorAll('li').forEach(li => {
-                      li.className.querySelector('input[type=date]').setAttribute('min', `${year}-01-01`)
-                      li.className.querySelector('input[type=date]').setAttribute('max', `${year}-12-31`)
+                      li.querySelector('input[type=date]').setAttribute('min', `${year}-01-01`)
+                      li.querySelector('input[type=date]').setAttribute('max', `${year}-12-31`)
                     })
 
                     // change out of edit mode
