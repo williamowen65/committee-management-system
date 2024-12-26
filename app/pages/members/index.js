@@ -179,12 +179,21 @@ document.addEventListener('DOMContentLoaded', function () {
                   <br>
 
                    <button class="small" type="submit">Save</button>
-                   <button class="small" type="button" >Cancel</button>
+                   <button class="small" type="button" class="cancelTimelineEdit">Cancel</button>
 
 
                     </fieldset>
 
               `
+
+          // add an event listener to the form
+          editForm.querySelector('.cancelTimelineEdit').addEventListener('click', (e) => {
+            // change out of edit mode
+            e.target.closest('li').removeAttribute('is-editing')
+            
+          })
+
+
           // make a clone of the form to add to the timeline
           const editFormClone = editForm.cloneNode(true)
           editFormClone.setAttribute('id', 'newTimelineEventForm')
