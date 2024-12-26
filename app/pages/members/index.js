@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // get the event data from the time line object
             const eventData = timeline[eventId]
 
-            console.log('cloning button to li', { event })
+            // console.log('cloning button to li', { event })
 
             // create container around the content of the li
             const contentContainer = document.createElement('span')
