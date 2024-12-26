@@ -186,13 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
               `
 
-          const cancelEditButton = editForm.querySelector('.cancelTimelineEdit');
-          if (cancelEditButton) {
-            cancelEditButton.addEventListener('click', (e) => {
-              // change out of edit mode
-              e.target.closest('li').removeAttribute('is-editing');
-            });
-          }
+        
 
 
           // make a clone of the form to add to the timeline
@@ -262,6 +256,16 @@ document.addEventListener('DOMContentLoaded', function () {
             event.appendChild(editFormClone)
 
           })
+
+
+
+          const cancelEditButton = editForm.querySelector('.cancelTimelineEdit');
+          if (cancelEditButton) {
+            cancelEditButton.addEventListener('click', (e) => {
+              // change out of edit mode
+              e.target.closest('li').removeAttribute('is-editing');
+            });
+          }
 
         }
 
