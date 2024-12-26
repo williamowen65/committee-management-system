@@ -1,165 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/dist/components.js"></script>
+    <script type="module" src="/dist/firebase.js"></script>
+    <link rel="stylesheet" href="/dist/styles.css" />
+    <script src="/dist/CRUD.js"></script>
+    <script src="/members/index.js" type="module"></script>
+    <script src="/members/modal/reset-password.js" type="module"></script>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <script src="/dist/components.js"></script>
-  <script type="module" src="/dist/firebase.js"></script>
-  <link rel="stylesheet" href="/dist/styles.css">
-  <script src="/dist/CRUD.js"></script>
-  <script src="/members/index.js" type="module"></script>
-  <script src="/members/modal/reset-password.js" type="module"></script>
+    <script></script>
 
-  
-<script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
 
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 10px;
+        /* background-color: #f4f4f4; */
+      }
 
+      .buttons-container button {
+        width: 100%;
+      }
+      #username {
+        margin-right: 10px;
+      }
 
+      #user button:not(#hamburger-menu) {
+        width: fit-content;
+        margin-left: auto;
+      }
 
-</script>
-   
-  <link
-  rel="stylesheet"
-  href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-  integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-  crossorigin="anonymous"
-/>
+      #sidebar button,
+      #sidebar a {
+        width: fit-content;
+      }
+    </style>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 10px;
-      /* background-color: #f4f4f4; */
-    }
+    <script>
+      window.sendMessageToParent = function (dataObject) {
+        window.parent.postMessage(dataObject, '*')
+      }
+    </script>
+  </head>
 
-
-    .buttons-container button {
-      width: 100%;
-    }
-    #username{
-      margin-right: 10px;;
-    }
-
-    #user button:not(#hamburger-menu){
-      width: fit-content;
-      margin-left: auto ;
-    }
-
-    #sidebar button, #sidebar a {
-      width: fit-content;
-    }
-  </style>
-
-  <script>
-    window.sendMessageToParent = function(dataObject) {
-         window.parent.postMessage(dataObject, '*');
-    }
-
-   
-  </script>
-
-</head>
-
-<body style="display:none !important; ">
-
-  <header-component></header-component>
-  <div class="" style="display: flex; flex-direction: column">
-    <div style="text-align: right">
-      <span id="user" style="display: none">
-        <div style="display:flex; justify-content: end; align-items: center;">
-          <div id="username"></div>
-          <button id="hamburger-menu" aria-label="Menu" style="color:white">&#9776;</button>
-        </div>
-        <nav id="menu" style="display: none;">
-          <ul style="display: flex; flex-direction: column;">
-            <button id="reset-password">Reset Password</button>
-            <button id="logout">Logout</button>
-          </ul>
-        </nav>
-        <script>
-          document.getElementById('hamburger-menu').addEventListener('click', function() {
-            var menu = document.getElementById('menu');
-            if (menu.style.display === 'none') {
-              menu.style.display = 'block';
-            } else {
-              menu.style.display = 'none';
-            }
-          });
-        </script>
-
-       
-      </span>
-    </div>
-    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-      <div class="buttons-container" style="display: flex; flex-direction: column; gap: 10px;">
-        <!-- <a href="/my-account"><button>My Account</button></a> -->
-        <a onclick="navigateTo('/my-contract')" title="Explore Engage Educate"><button>My Contract</button></a>
-        <a onclick="navigateTo('/scholarship-application')"><button>Scholarship Application</button></a>
-        <a target="_top" href="https://gigharboropenstudiotour.org/committee-information"><button>Overview of <br> Committee Responsibilities</button></a>
-        <a onclick="navigateTo('/board-and-heads-of-the-committee')"><button>Board and Committee Sign-ups</button></a>
-        <a href="https://gigharboropenstudiotour.org/ghost-bylaws"><button>Ghost Bylaws</button></a>
-        <a target="_top" href="https://gigharboropenstudiotour.org/join#boundary-map"><button>Ghost Tour
-            <br>Boundaries Map</button></a>
-        <a target="_top" href="https://gigharboropenstudiotour.org/resources-for-new-artists"><button>Resources for New Artists</button></a>
-
+  <body style="display: none !important">
+    <header-component></header-component>
+    <div class="" style="display: flex; flex-direction: column">
+      <div style="text-align: right">
+        <span id="user" style="display: none">
+          <div style="display: flex; justify-content: end; align-items: center">
+            <div id="username"></div>
+            <button id="hamburger-menu" aria-label="Menu" style="color: white">
+              &#9776;
+            </button>
+          </div>
+          <nav id="menu" style="display: none">
+            <ul style="display: flex; flex-direction: column">
+              <button id="reset-password">Reset Password</button>
+              <button id="logout">Logout</button>
+            </ul>
+          </nav>
+          <script>
+            document
+              .getElementById('hamburger-menu')
+              .addEventListener('click', function () {
+                var menu = document.getElementById('menu')
+                if (menu.style.display === 'none') {
+                  menu.style.display = 'block'
+                } else {
+                  menu.style.display = 'none'
+                }
+              })
+          </script>
+        </span>
       </div>
-      <style>
-        #timeline {
-          border: 1px solid black;
-          padding: 10px 15px;
-          flex: 1;
-          margin: 4px 2px;
-          height: fit-content;
-          position: relative;
-        }
-        #timeline ul {
-          list-style-type: none;
-          padding: 0;
-        }
-        #timeline ul li {
-          margin-bottom: 10px;
-        }
-
-        @media (max-width: 900px) {
-          #timeline, #sidebar {
-            width: 100% !important;
-            margin: 0;
+      <div style="display: flex; flex-wrap: wrap; gap: 10px">
+        <div
+          class="buttons-container"
+          style="display: flex; flex-direction: column; gap: 10px"
+        >
+          <!-- <a href="/my-account"><button>My Account</button></a> -->
+          <a onclick="navigateTo('/my-contract')" title="Explore Engage Educate"
+            ><button>My Contract</button></a
+          >
+          <a onclick="navigateTo('/scholarship-application')"
+            ><button>Scholarship Application</button></a
+          >
+          <a
+            target="_top"
+            href="https://gigharboropenstudiotour.org/committee-information"
+            ><button>
+              Overview of <br />
+              Committee Responsibilities
+            </button></a
+          >
+          <a onclick="navigateTo('/board-and-heads-of-the-committee')"
+            ><button>Board and Committee Sign-ups</button></a
+          >
+          <a href="https://gigharboropenstudiotour.org/ghost-bylaws"
+            ><button>Ghost Bylaws</button></a
+          >
+          <a
+            target="_top"
+            href="https://gigharboropenstudiotour.org/join#boundary-map"
+            ><button>Ghost Tour <br />Boundaries Map</button></a
+          >
+          <a
+            target="_top"
+            href="https://gigharboropenstudiotour.org/resources-for-new-artists"
+            ><button>Resources for New Artists</button></a
+          >
+        </div>
+        <style>
+          #timeline {
+            border: 1px solid black;
+            padding: 10px 15px;
+            flex: 1;
+            margin: 4px 2px;
+            height: fit-content;
+            position: relative;
           }
-          .buttons-container {
-            flex-direction: column;
+          #timeline ul {
+            list-style-type: none;
+            padding: 0;
           }
-        }
+          #timeline ul li {
+            margin-bottom: 10px;
+          }
 
-        #timeline button {
-          cursor: pointer;
-           text-decoration:none;
-           color: black;
-           position: absolute;
-           top: 6px;
-           right: 6px;
-        }
-        #timeline button:hover{
-          text-decoration: underline;
-          color: blue
-        } 
+          @media (max-width: 900px) {
+            #timeline,
+            #sidebar {
+              width: 100% !important;
+              margin: 0;
+            }
+            .buttons-container {
+              flex-direction: column;
+            }
+          }
 
-        .ifEditing {
-          display: none;
-        }
+          #timeline a.fa {
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+        
+          }
+          #editTimeline {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+          }
 
-        #timeline[is-editing] .ifEditing {
-          display: block;
-        }
+          #timeline a.fa:hover {
+            text-decoration: underline;
+            color: blue;
+          }
 
-      </style>
-      <div id="timeline">
-        <h3>GHOST Timeline 2025</h3>
-        <ul>
-          <!-- Under Construction -->
-          <!-- <li><strong>Feb 9:</strong> New Artist applications due</li>
+          .ifEditing {
+            display: none;
+          }
+
+          #timeline[is-editing] .ifEditing {
+            display: block;
+          }
+        </style>
+        <div id="timeline">
+          <h3>GHOST Timeline 2025</h3>
+          <ul>
+            <!-- Under Construction -->
+            <!-- <li><strong>Feb 9:</strong> New Artist applications due</li>
           <li><strong>Feb 16:</strong> New Artist screening, notifications sent on Feb 17</li>
           <li><strong>Feb 25:</strong> Artist Scholarship Applications due</li>
           <li><strong>March 2:</strong> All participating artist contracts due (only available online now)</li>
@@ -168,45 +187,36 @@
           <li><strong>August 20:</strong> General members meeting at Gig Harbor Library 5:30-7:00 pm to pick up signs and review plans</li>
           <li><strong>Sept 19, 20 and 21:</strong> GHOST tour dates</li>
           <li><strong>October 22:</strong> General members meeting and potluck (location TBD) to return signs, elect board for 2026, review survey results and discuss ideas for next year</li> -->
-        </ul>
+          </ul>
+        </div>
+
+        <style>
+          #sidebar {
+            border: 1px solid black;
+            padding: 10px 15px;
+            margin: 4px 2px;
+            height: fit-content;
+          }
+          .badge {
+            background-color: red;
+            color: white;
+            padding: 2px 5px;
+            border-radius: 50%;
+            margin-left: 5px;
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            translate: 50% -50%;
+          }
+          .badge[data-count='0'] {
+            display: none;
+          }
+        </style>
+        <div id="sidebar" style="width: 200px">
+          <span id="user-role"> </span>
+        </div>
       </div>
-
-      <style>
-         #sidebar {
-          border: 1px solid black;
-          padding: 10px 15px;
-          margin: 4px 2px;
-          height: fit-content;
-        }
-        .badge {
-          background-color: red;
-          color: white;
-          padding: 2px 5px;
-          border-radius: 50%;
-          margin-left: 5px;
-          position: absolute;
-          top: 2px;
-          right: 2px;
-          translate: 50% -50%;
-        }
-        .badge[data-count="0"] {
-          display: none;
-        }
-       
-      </style>
-      <div id="sidebar" style="width: 200px;">
-        <span id="user-role">
-          
-        </span>
-
-
-      
-
-      </div>
-
     </div>
-  </div>
-  <footer-component></footer-component>
-</body>
-
+    <footer-component></footer-component>
+  </body>
 </html>
