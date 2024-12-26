@@ -30,6 +30,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function applyPrivileges(userRoles) {
           console.log({ userRoles })
+          Object.values(userRoles).forEach(role => {
+            if(role.privileges && privileges.includes('editTimeline')){
+              document.getElementById('timeline').insertAdjacentElement('afterbegin', document.createElement('button'))
+            }
+          })
         }
 
 
