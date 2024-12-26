@@ -222,11 +222,12 @@ document.addEventListener('DOMContentLoaded', function () {
             const description = editFormClone.querySelector('textarea').value
             // add the event to the timeline object
             CRUD.create('ghost-timeline', { date, description }).then((event) => {
+              console.log({ event })
               // add the event to the timeline object
               timeline[event.fbId] = event
               // add the event to the timeline
               const li = document.createElement('li')
-              li.setAttribute('data-id', event.fbId)
+              // li.setAttribute('data-id', event.fbId)
               li.innerHTML = `new event`
 
               // stop the edit mode
