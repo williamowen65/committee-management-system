@@ -32,8 +32,9 @@ document.addEventListener('DOMContentLoaded', function () {
           const timelineContainer = document.getElementById('timeline')
           timeline.forEach(event => {
             const li = document.createElement('li')
+            const todayString = new Date(event.date).toLocaleDateString()
             li.innerHTML = `
-            <b>${event.date}</b>
+            <b>${todayString}</b>
             <p>${event.description}</p>
             `
             timelineContainer.querySelector('ul').appendChild(li)
