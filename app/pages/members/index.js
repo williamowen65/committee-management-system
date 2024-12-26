@@ -82,6 +82,8 @@ document.addEventListener('DOMContentLoaded', function () {
         function enableTimelinePrivileges(){
           
               // add a way to change the selected year
+
+              // A button to toggle editing mode
               const changeYearBtn = document.createElement('a')
               changeYearBtn.setAttribute('type', 'button')
               changeYearBtn.setAttribute('class', 'fa fa-calendar')
@@ -90,6 +92,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.querySelector('#activeYear').toggleAttribute('is-editing')
               })
               document.querySelector('#timeline .header').insertAdjacentElement('beforeend', changeYearBtn)
+
+              // A form to change the year
+              const changeYearForm = document.createElement('form')
+              changeYearForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
+              // Define the form html
+              changeYearForm.innerHTML = `
+               <select id="yearSelect">
+                  ${Array.from({ length: 10 }, (_, i) => {
+                    const year = new Date().getFullYear() - i;
+                    return `<option value="${year}">${year}</option>`;
+                  }).join('')}
+                </select>
+                `
+            
+
 
 
               // Create a template button
