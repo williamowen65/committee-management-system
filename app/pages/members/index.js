@@ -65,12 +65,10 @@ document.addEventListener('DOMContentLoaded',  function () {
               editForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
               // Define the form html
               editForm.innerHTML = `
-              <li>
                 <input type="date"><br>
                 <textarea style="width:100%" type="text" placeholder="Description"></textarea>
                 <br>
                 <button class="small" type="submit">Save</button>
-              </li>
 
 
               `
