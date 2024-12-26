@@ -6,70 +6,11 @@ export function enableTimelinePrivileges(configDocument, timeline) {
 
     setEventDelegation()
 
+    appendCreateEventEditor()
 
 
 
 
-    // make a clone of the form to add to the timeline
-    const newEventForm = editForm.cloneNode(true)
-    newEventForm.setAttribute('id', 'newTimelineEventForm')  /// <--- For adding new events to the timeline
-    // add a title
-    newEventForm.querySelector('legend').innerText = 'New Event'
-    // Add the base "New Entry" form to the timeline
-    document.getElementById('timeline').querySelector('ul')
-        .insertAdjacentElement('beforebegin', newEventForm)
-    // create edit button clone
-    const createNewEventBtn = editButton.cloneNode(true)
-    createNewEventBtn.setAttribute('class', 'fa fa-edit')
-    createNewEventBtn.setAttribute('id', 'editTimeline')
-    document.getElementById('timeline').insertAdjacentElement('afterbegin', createNewEventBtn)
-
-    // add an event listener to the form
-    newEventForm.addEventListener('submit', (e) => {
-        // create a new event in the timeline
-        e.preventDefault()
-        const dateVal = newEventForm.querySelector('input').value
-        const description = newEventForm.querySelector('textarea').value
-        // add the event to the timeline object
-        CRUD.create('ghost-timeline', { date: dateVal, description }).then((event) => {
-            console.log({ event })
-            // const id = event.id
-            // add the event to the timeline object
-            timeline[event.id] = event
-            // add the event to the timeline
-            const li = document.createElement('li')
-            li.setAttribute('data-id', event.id)
-            const [year, month, day] = dateVal.split('-');
-            const dateObj = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
-            li.innerHTML = `
-          <a type="button" class="fa fa-pen editEvent"></a>
-          <span class="contentContainer">
-          <strong>${dateObj.toLocaleDateString('en-us', { month: 'long', day: 'numeric' })}: </strong>
-          ${description}
-          </span>
-          <form class="editTimelineForm ifEditing">
-          ${getTimeLineEditor()}
-          </form>
-          `
-            li.querySelector('input').value = dateObj
-            li.querySelector('textarea').value = description
-
-            // add the form to the event
-            li.querySelector('button[type=submit]').setAttribute('id', 'updateEvent')
-            li.querySelector('form').addEventListener('submit', (e) => {
-                e.preventDefault()
-                // event wired up via button (delegated event listener)
-            })
-            // Append it in the correct position of the timeline (TODO <------------------------------)
-            appendCurrentTimeline(li)
-
-
-            // stop the edit mode
-            document.getElementById('timeline').removeAttribute('is-editing')
-            // clear form
-            newEventForm.reset()
-        })
-    })
 
     function appendCurrentTimeline(li) {
         // find the correct spot to insert the new event
@@ -345,6 +286,70 @@ export function enableTimelinePrivileges(configDocument, timeline) {
 
     }
 
+
+    function appendCreateEventEditor() {
+
+        // make a clone of the form to add to the timeline
+        const newEventForm = editForm.cloneNode(true)
+        newEventForm.setAttribute('id', 'newTimelineEventForm')  /// <--- For adding new events to the timeline
+        // add a title
+        newEventForm.querySelector('legend').innerText = 'New Event'
+        // Add the base "New Entry" form to the timeline
+        document.getElementById('timeline').querySelector('ul')
+            .insertAdjacentElement('beforebegin', newEventForm)
+        // create edit button clone
+        const createNewEventBtn = editButton.cloneNode(true)
+        createNewEventBtn.setAttribute('class', 'fa fa-edit')
+        createNewEventBtn.setAttribute('id', 'editTimeline')
+        document.getElementById('timeline').insertAdjacentElement('afterbegin', createNewEventBtn)
+
+        // add an event listener to the form
+        newEventForm.addEventListener('submit', (e) => {
+            // create a new event in the timeline
+            e.preventDefault()
+            const dateVal = newEventForm.querySelector('input').value
+            const description = newEventForm.querySelector('textarea').value
+            // add the event to the timeline object
+            CRUD.create('ghost-timeline', { date: dateVal, description }).then((event) => {
+                console.log({ event })
+                // const id = event.id
+                // add the event to the timeline object
+                timeline[event.id] = event
+                // add the event to the timeline
+                const li = document.createElement('li')
+                li.setAttribute('data-id', event.id)
+                const [year, month, day] = dateVal.split('-');
+                const dateObj = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
+                li.innerHTML = `
+          <a type="button" class="fa fa-pen editEvent"></a>
+          <span class="contentContainer">
+          <strong>${dateObj.toLocaleDateString('en-us', { month: 'long', day: 'numeric' })}: </strong>
+          ${description}
+          </span>
+          <form class="editTimelineForm ifEditing">
+          ${getTimeLineEditor()}
+          </form>
+          `
+                li.querySelector('input').value = dateObj
+                li.querySelector('textarea').value = description
+
+                // add the form to the event
+                li.querySelector('button[type=submit]').setAttribute('id', 'updateEvent')
+                li.querySelector('form').addEventListener('submit', (e) => {
+                    e.preventDefault()
+                    // event wired up via button (delegated event listener)
+                })
+                // Append it in the correct position of the timeline (TODO <------------------------------)
+                appendCurrentTimeline(li)
+
+
+                // stop the edit mode
+                document.getElementById('timeline').removeAttribute('is-editing')
+                // clear form
+                newEventForm.reset()
+            })
+        })
+    }
 
 
 
