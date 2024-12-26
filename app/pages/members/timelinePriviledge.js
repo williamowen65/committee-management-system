@@ -8,6 +8,7 @@ export function enableTimelinePrivileges(configDocument, timeline) {
 
     appendCreateEventEditor()
 
+    appendUpdateEventEditors()
 
 
 
@@ -30,55 +31,6 @@ export function enableTimelinePrivileges(configDocument, timeline) {
     }
 
 
-
-    // loop through all the event and add a local edit button and edit form (which populates the form with the event data)
-    document.querySelectorAll('#timeline li').forEach(event => {
-
-        // get the id of the event 
-        const eventId = event.getAttribute('data-id')
-        // get the event data from the time line object
-        const eventData = timeline[eventId]
-
-        // console.log('cloning button to li', { event })
-
-        // create container around the content of the li
-        const contentContainer = document.createElement('span')
-        contentContainer.setAttribute('class', 'contentContainer')
-        // put all the content from the li in the container by moving the nodes
-        while (event.firstChild) {
-            contentContainer.appendChild(event.firstChild)
-        }
-        // append the container to the li
-        event.appendChild(contentContainer)
-
-
-        // clone a button to the event
-        const editButtonClone = editButton.cloneNode(true)
-        editButtonClone.setAttribute('class', 'fa fa-pen editEvent')
-        event.insertAdjacentElement('afterbegin', editButtonClone)
-
-
-        // clone the form to the event
-        const editEventForm = editForm.cloneNode(true)
-        editEventForm.classList.add('editTimelineForm')
-
-        // add a title
-        editEventForm.querySelector('legend').innerText = 'Editing an event'
-        const date = new Date(eventData.date + `, ${configDocument.activeYear}`)
-        // console.log({ date })
-        editEventForm.querySelector('input').value = date.toISOString().split('T')[0];
-        editEventForm.querySelector('textarea').value = eventData.description
-
-        editEventForm.querySelector('button[type=submit]').setAttribute('id', 'updateEvent')
-        // add the form to the event
-        editEventForm.addEventListener('submit', (e) => {
-            e.preventDefault()
-            // event wired up via button (delegated event listener)
-        })
-
-        event.appendChild(editEventForm)
-
-    })
 
 
     function createTemplates() {
@@ -351,6 +303,59 @@ export function enableTimelinePrivileges(configDocument, timeline) {
         })
     }
 
+
+    function appendUpdateEventEditors() {
+
+        // loop through all the event and add a local edit button and edit form (which populates the form with the event data)
+        document.querySelectorAll('#timeline li').forEach(event => {
+
+            // get the id of the event 
+            const eventId = event.getAttribute('data-id')
+            // get the event data from the time line object
+            const eventData = timeline[eventId]
+
+            // console.log('cloning button to li', { event })
+
+            // create container around the content of the li
+            const contentContainer = document.createElement('span')
+            contentContainer.setAttribute('class', 'contentContainer')
+            // put all the content from the li in the container by moving the nodes
+            while (event.firstChild) {
+                contentContainer.appendChild(event.firstChild)
+            }
+            // append the container to the li
+            event.appendChild(contentContainer)
+
+
+            // clone a button to the event
+            const editButtonClone = editButton.cloneNode(true)
+            editButtonClone.setAttribute('class', 'fa fa-pen editEvent')
+            event.insertAdjacentElement('afterbegin', editButtonClone)
+
+
+            // clone the form to the event
+            const editEventForm = editForm.cloneNode(true)
+            editEventForm.classList.add('editTimelineForm')
+
+            // add a title
+            editEventForm.querySelector('legend').innerText = 'Editing an event'
+            const date = new Date(eventData.date + `, ${configDocument.activeYear}`)
+            // console.log({ date })
+            editEventForm.querySelector('input').value = date.toISOString().split('T')[0];
+            editEventForm.querySelector('textarea').value = eventData.description
+
+            editEventForm.querySelector('button[type=submit]').setAttribute('id', 'updateEvent')
+            // add the form to the event
+            editEventForm.addEventListener('submit', (e) => {
+                e.preventDefault()
+                // event wired up via button (delegated event listener)
+            })
+
+            event.appendChild(editEventForm)
+
+        })
+
+    }
 
 
 }
