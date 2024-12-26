@@ -11,7 +11,7 @@ export function enableTimelinePrivileges(configDocument, timeline) {
     appendUpdateEventEditors()
 
 
-
+    return
 
     function appendCurrentTimeline(li) {
         // find the correct spot to insert the new event
@@ -52,9 +52,9 @@ export function enableTimelinePrivileges(configDocument, timeline) {
             <fieldset>
               <legend></legend>
   
-            <input required type="date" min="${configDocument.activeYear}-01-01" max="${configDocument.activeYear}-12-31"><br>
+              <input required type="date" min="${configDocument.activeYear}-01-01" max="${configDocument.activeYear}-12-31"><br>
   
-             <textarea required style="width:100%" type="text" placeholder="Description"></textarea>
+              <textarea required style="width:100%" type="text" placeholder="Description"></textarea>
   
               <br>
   
@@ -63,9 +63,7 @@ export function enableTimelinePrivileges(configDocument, timeline) {
               <button class="small cancelTimelineEdit" type="button">Cancel</button>
               <button class="small deleteTimelineEvent" type="button">Delete</button>
               </div>
-  
-  
-                </fieldset>
+            </fieldset>
   
           `
     }
@@ -260,6 +258,7 @@ export function enableTimelinePrivileges(configDocument, timeline) {
             // create a new event in the timeline
             e.preventDefault()
             const dateVal = newEventForm.querySelector('input').value
+            console.log({ dateVal })
             const description = newEventForm.querySelector('textarea').value
             // add the event to the timeline object
             CRUD.create('ghost-timeline', { date: dateVal, description }).then((event) => {
