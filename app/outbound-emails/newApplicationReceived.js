@@ -5,7 +5,7 @@ export async function sendNewApplicationEmail(values){
     // plus new artist applications chair
     // new artist recruitment chair
 
-    const newApplicationEventId = '1Iig2hZFN7MgyFUpjG0q'
+    const newApplicationEventId = '1Iig2hZFN7MgyFUpjG0q' // A timeline event id for some date in the future
     const specialTimelineEvent  = await CRUD.read('ghost-timeline', newApplicationEventId)
 
     window.sendMessageToParent({
