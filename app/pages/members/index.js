@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
               changeYearBtn.setAttribute('class', 'fa fa-calendar')
               changeYearBtn.innerHTML = '<small style="margin-left: 10px">Change Year</small>'
               changeYearBtn.addEventListener('click', () => {
-                document.querySelector('.activeYear').toggleAttribute('is-editing')
+                document.querySelector('#activeYear').toggleAttribute('is-editing')
               })
               document.querySelector('#timeline .header').insertAdjacentElement('beforeend', changeYearBtn)
 
