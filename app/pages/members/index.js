@@ -127,6 +127,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.getElementById('timeline').querySelectorAll('li').forEach(li => {
                       li.querySelector('input[type=date]').setAttribute('min', `${year}-01-01`)
                       li.querySelector('input[type=date]').setAttribute('max', `${year}-12-31`)
+                      // rerender the date input
+                      const date = new Date(timeline[li.getAttribute('data-id')].date + `, ${year}`)
+                      li.querySelector('input[type=date]').value = date.toISOString().split('T')[0]
+                      
                     })
 
                     // change out of edit mode
