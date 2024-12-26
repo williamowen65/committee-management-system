@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         userDiv.querySelector('#username').innerHTML = `Hello, ${user.displayName}`
 
 
+        // Get the GHOST contract for the user
         CRUD.read('ghost-contracts', user.uid).then(contract => {
           logIf.client && console.log(contract)
           // Get role name
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
           document.querySelector('#user-role').innerHTML = `<h3>My Committee Role${contract.committeeRoleId.length > 1 ? 's' : ''}:</h3>${sidePanel.trim() ? sidePanel : 'No role assigned'}`
         })
 
+        // Add timeline event from the database to the timeline
         CRUD.readAll('ghost-timeline').then(timeline => {
           timeline = timeline.sort((a, b) => new Date(b.date) - new Date(a.date)).reverse()
           console.log({ timeline })
@@ -59,8 +61,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
               const editForm = document.createElement('form')
-              editForm.setAttribute('id', 'editTimelineForm')
-              editForm.classList.add('ifEditing')
+              // editForm.setAttribute('id', 'editTimelineForm')
+
+              editForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
+              // Define the form html
               editForm.innerHTML = `
               <li>
                 <input type="date"><br>
@@ -68,11 +72,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 <br>
                 <button class="small" type="submit">Save</button>
               </li>
-              `
-              document.getElementById('timeline').querySelector('ul')
-              .insertAdjacentElement('afterbegin', editForm)
 
-              editButton.addEventListener('click', () => {
+
+              `
+              // make a clone of the form to add to the timeline
+              const editFormClone = editForm.cloneNode(true)
+              editFormClone.setAttribute('id', 'newTimelineEventForm')
+              // Add the base "New Entry" form to the timeline
+              document.getElementById('timeline').querySelector('ul')
+              .insertAdjacentElement('afterbegin', editFormClone)
+
+              editFormClone.addEventListener('click', () => {
                 // get the parent #timeline container and add the edit form
                 const timeline = document.getElementById('timeline')
                 timeline.toggleAttribute('is-editing')
