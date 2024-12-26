@@ -997,7 +997,8 @@ var roles = {
     committee: 'No Committee',
     responsibility: 'Web development and maintenance',
     tasks: [],
-    sideBarButtons: ['testEmail', 'testSheets', 'processToSheets', 'createDriveFolder', 'createDocument', 'newScholarshipApplications', 'newApplications', 'contracts-received']
+    sideBarButtons: ['testEmail', 'testSheets', 'processToSheets', 'createDriveFolder', 'createDocument', 'newScholarshipApplications', 'newApplications', 'contracts-received'],
+    privileges: ['editTimeline']
   },
   1: {
     title: 'President',
@@ -1005,7 +1006,8 @@ var roles = {
     responsibility: 'Oversee all aspects of the organization',
     prerequisite: 'Previous experience in a leadership role',
     tasks: [],
-    sideBarButtons: ['newScholarshipApplications', 'newApplications', 'contracts-received', 'processToSheets']
+    sideBarButtons: ['newScholarshipApplications', 'newApplications', 'contracts-received', 'processToSheets'],
+    privileges: ['editTimeline']
   },
   2: {
     title: 'Vice President',
@@ -1013,7 +1015,8 @@ var roles = {
     responsibility: 'Assist the President and oversee the committees',
     prerequisite: 'Experience in organizational management',
     tasks: [],
-    sideBarButtons: ['newScholarshipApplications', 'contracts-received']
+    sideBarButtons: ['newScholarshipApplications', 'contracts-received'],
+    privileges: []
   },
   3: {
     title: 'Treasurer',
@@ -1021,7 +1024,8 @@ var roles = {
     responsibility: "Manage the organization's finances",
     prerequisite: 'Experience in financial management',
     tasks: [],
-    sideBarButtons: ['newScholarshipApplications', 'contracts-received']
+    sideBarButtons: ['newScholarshipApplications', 'contracts-received'],
+    privileges: []
   },
   4: {
     title: 'Secretary',
@@ -2481,6 +2485,10 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+button.small {
+  padding: 5px 10px;
+  font-size: 10px;
+}
 
 button:hover {
   background-color: #0056b3;
@@ -2492,7 +2500,7 @@ a {
 }
 a:hover {
   color: darkblue;
-}`, "",{"version":3,"sources":["webpack://./app/styles.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,WAAA;EACA,8BAAA;EACA,eAAA;EACA,mBAAA;AACJ;AAMA;EACI,aAAA;EACA,sBAAA;AAJJ;AAKI;EACI,kBAAA;AAHR;;AAMA;EACI,SAAA;EACA,WAAA;EACA,gBAAA;EACA,6DAAA;EACA,cAAA;AAHJ;;AAMA;;;EAGI,sBAAA;AAHJ;;AAWA;EACI,sBAAA;EACA,wCAAA;AARJ;;AAWA;EACG,iBAAA;EACC,cAAA;AARJ;;AAWA;EACI,aAAA;EACA,sBAAA;AARJ;AASI;EACI,kBAAA;EACA,aAAA;EACA,qBAAA;EACA,sBAAA;AAPR;AAQQ;EACI,sBAAA;EACJ,kBAAA;EACC,gBAAA;AANT;AAQQ;EACI,gBAAA;AANZ;AAQQ;EACI,WAAA;AANZ;AAWI;EACI,iBAAA;AATR;AAWI;EACI,iBAAA;AATR;AAWI;EACI,kBAAA;AATR;;AAaA;EAEI,WAAA;AAXJ;;AAeA;EACI,yBAAA;EACA,YAAA;EACA,YAAA;EACA,kBAAA;EACA,iBAAA;EACA,yBAAA;EACA,mBAAA;EACA,kBAAA;EACA,qBAAA;EACA,qBAAA;EACA,eAAA;EACA,eAAA;EACA,eAAA;EACA,sCAAA;AAZJ;;AAeE;EACE,yBAAA;AAZJ;;AAeA;EACI,WAAA;EACA,0BAAA;AAZJ;AAcI;EACI,eAAA;AAZR","sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./app/styles.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,WAAA;EACA,8BAAA;EACA,eAAA;EACA,mBAAA;AACJ;AAMA;EACI,aAAA;EACA,sBAAA;AAJJ;AAKI;EACI,kBAAA;AAHR;;AAMA;EACI,SAAA;EACA,WAAA;EACA,gBAAA;EACA,6DAAA;EACA,cAAA;AAHJ;;AAMA;;;EAGI,sBAAA;AAHJ;;AAWA;EACI,sBAAA;EACA,wCAAA;AARJ;;AAWA;EACG,iBAAA;EACC,cAAA;AARJ;;AAWA;EACI,aAAA;EACA,sBAAA;AARJ;AASI;EACI,kBAAA;EACA,aAAA;EACA,qBAAA;EACA,sBAAA;AAPR;AAQQ;EACI,sBAAA;EACJ,kBAAA;EACC,gBAAA;AANT;AAQQ;EACI,gBAAA;AANZ;AAQQ;EACI,WAAA;AANZ;AAWI;EACI,iBAAA;AATR;AAWI;EACI,iBAAA;AATR;AAWI;EACI,kBAAA;AATR;;AAaA;EAEI,WAAA;AAXJ;;AAeA;EACI,yBAAA;EACA,YAAA;EACA,YAAA;EACA,kBAAA;EACA,iBAAA;EACA,yBAAA;EACA,mBAAA;EACA,kBAAA;EACA,qBAAA;EACA,qBAAA;EACA,eAAA;EACA,eAAA;EACA,eAAA;EACA,sCAAA;AAZJ;AAaI;EACI,iBAAA;EACA,eAAA;AAXR;;AAeE;EACE,yBAAA;AAZJ;;AAeA;EACI,WAAA;EACA,0BAAA;AAZJ;AAcI;EACI,eAAA;AAZR","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
