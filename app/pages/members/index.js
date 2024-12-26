@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
               editForm.innerHTML = `
               <li >
                 <input  type="date"><br>
-                <input style="width:100%" type="text" placeholder="Description"><br>
+                <textarea style="width:100%" type="text" placeholder="Description"><br>
                 <button class="small" type="submit">Save</button>
               </li>
               `
