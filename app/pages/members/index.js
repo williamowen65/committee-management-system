@@ -108,6 +108,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 </select>
                 <button class="small" type="submit">Save</button>
                 `
+                // select the current year
+                changeYearForm.querySelector('select').value = configDocument.activeYear
               
                 // create container around the content of the li
                 const contentContainer = document.createElement('span')
