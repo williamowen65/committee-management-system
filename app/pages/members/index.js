@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded',  function () {
 
               const editButton = document.createElement('a')
               editButton.setAttribute('type', 'button')
-              editButton.setAttribute('id', 'editTimeline')
+           
               editButton.setAttribute('class', 'fa fa-edit')
 
            
@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded',  function () {
               .insertAdjacentElement('afterbegin', editFormClone)
               // create edit button clone
               const editButtonClone = editButton.cloneNode(true)
+              editButtonClone.setAttribute('id', 'editTimeline')
               document.getElementById('timeline').insertAdjacentElement('afterbegin', editButtonClone)
               editButtonClone.addEventListener('click', () => {
                 // get the parent #timeline container and add the edit form
