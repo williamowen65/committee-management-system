@@ -237,7 +237,14 @@ document.addEventListener('DOMContentLoaded', function () {
               // add the event to the timeline
               const li = document.createElement('li')
               li.setAttribute('data-id', event.id)
-              li.innerHTML = getTimeLineEditor()
+              li.innerHTML = `
+                <a type="button" class="fa fa-pen"></a>
+                <span class="contentContainer">
+                <strong>${date}: </strong>
+                ${description}
+                </span>
+                ${getTimeLineEditor()}
+              `
               li.querySelector('input').value = date
               li.querySelector('textarea').value = description
               // Append it in the correct position of the timeline
