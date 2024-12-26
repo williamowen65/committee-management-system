@@ -105,11 +105,11 @@ document.addEventListener('DOMContentLoaded',  function () {
                 })
 
                 // clone the form to the event
-                const editFormClone = editForm.cloneNode(true)
-                editFormClone.classList.add('editTimelineForm')
-                editFormClone.querySelector('input').value = event.querySelector('strong').innerText
-                editFormClone.querySelector('textarea').value = event.querySelector('span').innerText
-                event.appendChild(editFormClone)
+                // const editFormClone = editForm.cloneNode(true)
+                // editFormClone.classList.add('editTimelineForm')
+                // editFormClone.querySelector('input').value = event.querySelector('strong').innerText
+                // editFormClone.querySelector('textarea').value = event.querySelector('span').innerText
+                // event.appendChild(editFormClone)
                 
               })
 
