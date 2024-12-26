@@ -31,16 +31,15 @@ document.addEventListener('DOMContentLoaded', function () {
         CRUD.readAll('ghost-timeline').then(timeline => {
           console.log({ timeline })
           const timelineContainer = document.getElementById('timeline')
-          // timeline.forEach(event => {
-          //   const li = document.createElement('li')
-          //   console.log({ event })
-          //   const todayString = new Date(event.date).toLocaleDateString()
-          //   li.innerHTML = `
-          //   <b>${todayString}</b>
-          //   <p>${event.description}</p>
-          //   `
-          //   timelineContainer.querySelector('ul').appendChild(li)
-          // })
+          timeline.forEach(event => {
+            const li = document.createElement('li')
+            console.log({ event })
+            li.innerHTML = `
+            <b>${event.date}</b>
+            <p>${event.description}</p>
+            `
+            timelineContainer.querySelector('ul').appendChild(li)
+          })
         })
 
 
