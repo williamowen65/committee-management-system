@@ -146,8 +146,12 @@
           color: blue
         } 
 
-        #editTimelineForm input{
-          /* display: inline; */
+        .ifEditing {
+          display: none;
+        }
+
+        *[if-editing] .ifEditing {
+          display: block;
         }
 
       </style>
