@@ -19,12 +19,18 @@ document.addEventListener('DOMContentLoaded', function () {
           logIf.client && console.log(contract)
           // Get role name
           contract.committeeRoleId = contract.committeeRoleId || []
+
+          // Also assigns userRoles object
           const sidePanel = getGhostSidePanel(contract.committeeRoleId)
+
+          applyPrivileges(userRoles)
 
           document.querySelector('#user-role').innerHTML = `<h3>My Committee Role${contract.committeeRoleId.length > 1 ? 's' : ''}:</h3>${sidePanel.trim() ? sidePanel : 'No role assigned'}`
         })
 
-        
+        function applyPrivileges(userRoles) {
+          console.log({ userRoles })
+        }
 
 
         /**
