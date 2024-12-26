@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function () {
               const li = document.createElement('li')
               li.setAttribute('data-id', event.id)
               li.innerHTML = `
-                <a type="button" class="fa fa-pen"></a>
+                <a type="button" class="fa fa-pen editEvent"></a>
                 <span class="contentContainer">
                 <strong>${date}: </strong>
                 ${description}
