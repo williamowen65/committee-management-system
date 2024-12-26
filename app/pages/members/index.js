@@ -1,7 +1,7 @@
 import roles from '../my-contract/committee-roles.js'
 import '../../../utils/logIf.js'
 
-
+const timeline = {}
 const userRoles = {}
 
 document.addEventListener('DOMContentLoaded',  function () {
@@ -18,11 +18,11 @@ document.addEventListener('DOMContentLoaded',  function () {
       
 
         // Add timeline event from the database to the timeline
-        await CRUD.readAll('ghost-timeline').then(timeline => {
-          timeline = timeline.sort((a, b) => new Date(b.date) - new Date(a.date)).reverse()
-          console.log({ timeline })
+        await CRUD.readAll('ghost-timeline').then(ghostTimeline => {
+          ghostTimeline = ghostTimeline.sort((a, b) => new Date(b.date) - new Date(a.date)).reverse()
+          console.log({ timeline: ghostTimeline })
           const timelineContainer = document.getElementById('timeline')
-          timeline.forEach(event => {
+          ghostTimeline.forEach(event => {
             const li = document.createElement('li')
             li.setAttribute('data-id', event.fbId)
             li.innerHTML = `
@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded',  function () {
             ${event.description}
             `
             timelineContainer.querySelector('ul').appendChild(li)
+
+            // Add the event to the timeline object
+            timeline[event.fbId] = event
           })
         })
 
@@ -93,6 +96,11 @@ document.addEventListener('DOMContentLoaded',  function () {
               // loop through all the event and add a local edit button and edit form (which populates the form with the event data)
               document.querySelectorAll('#timeline li').forEach(event => {
 
+                // get the id of the event 
+                const eventId = event.getAttribute('data-id')
+                // get the event data from the time line object
+                const eventData = timeline[eventId]
+
                 console.log('cloning button to li',{ event })
 
                 // create container around the content of the li
@@ -118,8 +126,8 @@ document.addEventListener('DOMContentLoaded',  function () {
                 // clone the form to the event
                 const editFormClone = editForm.cloneNode(true)
                 editFormClone.classList.add('editTimelineForm')
-                // editFormClone.querySelector('input').value = event.querySelector('strong').innerText
-                // editFormClone.querySelector('textarea').value = event.querySelector('span').innerText
+                editFormClone.querySelector('input').value = new Date(eventData.date)
+                editFormClone.querySelector('textarea').value = eventData.description
                 event.appendChild(editFormClone)
                 
               })
