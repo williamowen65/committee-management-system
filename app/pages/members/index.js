@@ -41,13 +41,14 @@ document.addEventListener('DOMContentLoaded', function () {
         function getGhostSidePanel(roleIds) {
           if (!roleIds) return ''
           return roleIds.map(roleId => {
-            const role = roles[roleId].title
-            const roleButtons = roles[roleId].sideBarButtons
-            const responsibility = roles[roleId].responsibility
+            const role = roles[roleId]
+            const roleTitle = role.title
+            const roleButtons = role.sideBarButtons
+            const responsibility = role.responsibility
             logIf.memberSidePanel && console.log("Rendering Member SidePanel for role", { role })
             userRoles[roleId] = role
 
-            let sidePanelHTML = `<h4>${role}</h4><div>${responsibility}</div>`
+            let sidePanelHTML = `<h4>${roleTitle}</h4><div>${responsibility}</div>`
             let buttons = document.createElement('div')
             buttons.setAttribute('style', 'display: flex; flex-direction: column;')
 
