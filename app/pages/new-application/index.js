@@ -39,53 +39,62 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         Promise.all(promises).then(() => {  
-            CRUD.create('new-applications', values).then(() => {
+            CRUD.create('new-applications', values).then(async () => {
 
-                // const newArtist = values
-                // // get all board members
-                // // plus new artist applications chair
-                // // new artist recruitment chair
+                const newArtist = values
+                // get all board members
+                // plus new artist applications chair
+                // new artist recruitment chair
 
-                // window.sendMessageToParent({
-                //     controller: 'gmailController',
-                //     // every one on board, new artist applications chair, new artist recruitment chair and the person who applied
-                // //   to: ""
-                //     // to: 'bluekayak123@yahoo.com, william.owen.dev@gmail.com', // <---TESTING
-                //     subject: `GHOST New Artist Application sent from ${newArtist.firstName} ${newArtist.lastName}`,
-                //     body: `
-                //      <div style="text-align:center">
-                //       <h1>A GHOST New Artist Application has been submitted!</h1>
-                //         <p>The committee will be reviewing the application and new artist application should receive a notification 
-                        
-                //         </p>
+                const newApplicationEventId = '1Iig2hZFN7MgyFUpjG0q'
+                const specialTimelineEvent  = await CRUD.read('ghost-timeline', newApplicationEventId)
+
+                window.sendMessageToParent({
+                    controller: 'gmailController',
+                    // every one on board, new artist applications chair, new artist recruitment chair and the person who applied
+                //   to: ""
+                    to: 'bluekayak123@yahoo.com, william.owen.dev@gmail.com', // <---TESTING
+                    subject: `GHOST New Artist Application sent from ${newArtist.firstName} ${newArtist.lastName}`,
+                    body: `
+                     <div style="text-align:center">
+                      <h1>A GHOST New Artist Application has been submitted!</h1>
+                        <p>
+                        The committee will be reviewing the application.<br>
+                        The new artist applicant, ${newArtist.firstName} ${newArtist.lastName}, will receive a notification after the application has been reviewed. 
+                        <br>
+                        Application must be reviewed no later than ${specialTimelineEvent.date.toDate().toLocaleDateString('en-us', {month: 'long', day: 'numeric'})}.
+                        </p>
+
+
+                        <p>Thank you for your membership.</p>
+                        <p>Best Regards, <br>Gig Harbor Open Studio Tour</p>
 
 
 
-
-                //     </div>
-                //       `
-                //   })
+                    </div>
+                      `
+                  })
     
     
     
-                //   window.addEventListener("message", (event) => {
-                //     // if (event.data.dispatch !== 'gmailController-response') return
+                  window.addEventListener("message", (event) => {
+                    // if (event.data.dispatch !== 'gmailController-response') return
     
-                //     // if (event.data.error) {
-                //     //   document.querySelector('.processPayment').innerText = "<div style='color:red; font-weight: bold'>Payment successful but error sending email</div>"
-                //     //   return
-                //     // }
+                    // if (event.data.error) {
+                    //   document.querySelector('.processPayment').innerText = "<div style='color:red; font-weight: bold'>Payment successful but error sending email</div>"
+                    //   return
+                    // }
     
-                //     // // You can add additional logic here to handle the message
-                //     // // show success message
+                    // // You can add additional logic here to handle the message
+                    // // show success message
     
-                //     // document.querySelector('.processPayment').innerText = "Payment Successful - Email Sent"
+                    // document.querySelector('.processPayment').innerText = "Payment Successful - Email Sent"
     
-                //     // setTimeout(() => {
-                //     //   // redirect to the dashboard
-                //     //   window.location.href = '/members'
-                //     // }, 3000)
-                //   });
+                    // setTimeout(() => {
+                    //   // redirect to the dashboard
+                    //   window.location.href = '/members'
+                    // }, 3000)
+                  });
 
             }).then(() => {
                 const button = document.querySelector('button[type="submit"]')
