@@ -248,7 +248,8 @@ document.addEventListener('DOMContentLoaded', function () {
             if (e.target.closest('#updateEvent')) {
               const li = e.target.closest('li');
               const eventId = li.getAttribute('data-id');
-              const date = li.querySelector('input').value;
+              const dateInput = li.querySelector('input')
+              const date = dateInput.value;
               const description = li.querySelector('textarea').value;
 
               // update the event in the timeline object
