@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <input type="text" placeholder="Description">
               </li>
               `
-              document.getElementById('timeline').insertAdjacentElement('afterbegin', editForm)
+              document.getElementById('timeline').querySelector('ul').insertAdjacentElement('afterbegin', editForm)
 
               editButton.addEventListener('click', () => {
                 // get the parent #timeline container and add the edit form
