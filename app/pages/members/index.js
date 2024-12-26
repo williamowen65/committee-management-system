@@ -243,7 +243,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 <strong>${date}: </strong>
                 ${description}
                 </span>
+                <form class="editTimelineForm ifEditing">
                 ${getTimeLineEditor()}
+                </form>
+                
               `
               li.querySelector('input').value = date
               li.querySelector('textarea').value = description
