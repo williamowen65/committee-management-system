@@ -111,6 +111,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 `
                 // select the current year
                 changeYearForm.querySelector('select').value = configDocument.activeYear
+
+                // add an event listener to the form
+                changeYearForm.addEventListener('submit', (e) => {
+                  // save to ghost-timeline/configDocument { activeYear: year }
+                  e.preventDefault()
+                  const year = changeYearForm.querySelector('select').value
+                  // set the active year in the configDocument
+                  configDocument.activeYear = year
+                  // save the configDocument
+                  CRUD.update('ghost-timeline', 'configDocument', configDocument).then(() => {
+                    // update the active year
+                    // activeYearContainer.innerText = year
+                    // // update the active year in the timeline
+                    // document.getElementById('timeline').querySelectorAll('li').forEach(li => {
+                    //   const eventId = li.getAttribute('data-id')
+                    //   const eventData = timeline[eventId]
+                    //   const date = new Date(eventData.date + `, ${year}`)
+                    //   li.innerHTML = `
+                    //   <strong>${date.toLocaleDateString()}: </strong>
+                    //   ${eventData.description}
+                    //   `
+                    // })
+                  })
+                })
               
                 // create container around the content of the li
                 const contentContainer = document.createElement('span')
