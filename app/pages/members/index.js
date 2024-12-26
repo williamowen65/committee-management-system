@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
           Object.values(userRoles).forEach(role => {
             if (role.privileges && role.privileges.includes('editTimeline')) {
 
-              enableTimelinePrivileges()
+              enableTimelinePrivileges(configDocument, timeline)
 
 
 
