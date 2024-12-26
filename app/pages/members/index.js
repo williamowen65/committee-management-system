@@ -187,6 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                    <button class="small" type="submit">Save</button>
                    <button class="small cancelTimelineEdit" type="button">Cancel</button>
+                   <button class="small deleteTimelineEvent" type="button">Delete</button>
 
 
                     </fieldset>
@@ -201,6 +202,20 @@ document.addEventListener('DOMContentLoaded', function () {
               // change out of edit mode
               e.target.closest('*[is-editing]').removeAttribute('is-editing')
             }
+
+
+            if(e.target.classList.contains('deleteTimelineEvent')){
+              const li = e.target.closest('li')
+              const fbId = li.getAttribute('data-id')
+              CRUD.delete('ghost-timeline', fbId).then(() => {
+                // remove the event from the timeline object
+                delete timeline[fbId]
+                // remove the event from the timeline
+                li.remove()
+              })
+            }
+
+
           })
 
 
@@ -250,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function () {
               `
               li.querySelector('input').value = date
               li.querySelector('textarea').value = description
-              // Append it in the correct position of the timeline
+              // Append it in the correct position of the timeline (TODO <------------------------------)
 
 
               document.getElementById('timeline').querySelector('ul').appendChild(li)
