@@ -175,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
           editForm.innerHTML = getTimeLineEditor()
 
           function getTimeLineEditor(options = {}) {
+            console.log('getTimeLineEditor',{ options })
             return `
                 <fieldset>
                   <legend></legend>
