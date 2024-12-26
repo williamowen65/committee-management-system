@@ -35,8 +35,11 @@ export function sendNewContractSubmissionEmail(user, transaction){
     })
 }
 
-export function sendNewContractSubmissionBoardEmail(user, transaction, contracts){
+export async function sendNewContractSubmissionBoardEmail(user, transaction){
     
+    const contracts  = await CRUD.readAll('ghost-contracts')
+
+
     const newArtist = {
         name: `${user.artistDetails.firstName} ${user.artistDetails.lastName}`,
         email: email
