@@ -89,17 +89,19 @@ document.addEventListener('DOMContentLoaded', function () {
               editForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
               // Define the form html
               editForm.innerHTML = `
-                <div class="title"></div>
+              <fieldset>
+                <legend></legend>
                 <input type="date"><br>
                 <textarea style="width:100%" type="text" placeholder="Description"></textarea>
                 <br>
                 <button class="small" type="submit">Save</button>
+                </fieldset>
               `
               // make a clone of the form to add to the timeline
               const editFormClone = editForm.cloneNode(true)
               editFormClone.setAttribute('id', 'newTimelineEventForm')
               // add a title
-              editFormClone.querySelector('.title').innerText = 'New Event'
+              editFormClone.querySelector('legend').innerText = 'New Event'
               // Add the base "New Entry" form to the timeline
               document.getElementById('timeline').querySelector('ul')
                 .insertAdjacentElement('afterbegin', editFormClone)
@@ -154,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const editFormClone = editForm.cloneNode(true)
                 editFormClone.classList.add('editTimelineForm')
                 // add a title
-              editFormClone.querySelector('.title').innerText = 'Edit Event'
+              editFormClone.querySelector('legend').innerText = 'Editing an event'
                 // const date = new Date(eventData.date + `, ${new Date().getFullYear()}`)
                 // console.log({ date })
                 // editFormClone.querySelector('input').value = date.toISOString().split('T')[0];
