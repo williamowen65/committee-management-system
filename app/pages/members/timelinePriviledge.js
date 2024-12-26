@@ -293,9 +293,10 @@ export function enableTimelinePrivileges(configDocument, timeline) {
                 })
 
                 // add li to the timeline
+                document.getElementById('timeline').querySelector('ul').appendChild(li)
 
                 // Append it in the correct position of the timeline (TODO <------------------------------)
-                appendCurrentTimeline(li)
+                appendCurrentTimeline()
 
 
                 // stop the edit mode
