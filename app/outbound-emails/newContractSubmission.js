@@ -1,3 +1,4 @@
+import roles from "../pages/my-contract/committee-roles"
 
 export function sendNewContractSubmissionEmail(user, transaction){
     
@@ -40,6 +41,8 @@ export async function sendNewContractSubmissionBoardEmail(user, transaction){
     const contracts  = await CRUD.readAll('ghost-contracts')
 
     const email = user.artistDetails.personalEmail || user.artistDetails.businessEmail || firebase.auth.currentUser.email
+
+
 
     const newArtist = {
         name: `${user.artistDetails.firstName} ${user.artistDetails.lastName}`,
