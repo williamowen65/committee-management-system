@@ -22,7 +22,7 @@ export async function  sendTestEmail(){
         date = new Date(specialTimelineEvent.date)
     }
        
-    date = specialTimelineEvent.date.toDate().toLocaleDateString('en-us', {month: 'long', day: 'numeric'})
+    date = date.toDate().toLocaleDateString('en-us', {month: 'long', day: 'numeric'})
 
     window.sendMessageToParent({
         controller: 'gmailController',
