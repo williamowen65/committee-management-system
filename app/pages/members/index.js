@@ -179,19 +179,19 @@ document.addEventListener('DOMContentLoaded', function () {
                   <br>
 
                    <button class="small" type="submit">Save</button>
-                   <button class="small cancelTimelineEdit" type="button">Cancel test</button>
+                   <button class="small cancelTimelineEdit" type="button">Cancel</button>
 
 
                     </fieldset>
 
               `
 
+              // Using event delegation to handle the cancel button
               document.addEventListener('click', (e) => { 
-                console.log('clicking on document', {e})
                 // if the target has the class cancelTimelineEdit
                 if(e.target.classList.contains('cancelTimelineEdit')){
                   // change out of edit mode
-                  e.target.closest('li').removeAttribute('is-editing')
+                  e.target.closest('*[is-editing]').removeAttribute('is-editing')
                 }
               })
             
