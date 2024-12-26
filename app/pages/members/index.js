@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
 
         CRUD.readAll('ghost-timeline').then(timeline => {
-          const timelineContainer = document.getElementById('timeline').querySelector('ul')
+          const timelineContainer = document.getElementById('timeline')
           timeline.forEach(event => {
             const li = document.createElement('li')
             li.innerHTML = `
