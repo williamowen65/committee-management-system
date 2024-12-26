@@ -57,12 +57,12 @@
 
         <h3>Is your studio within the GHOST Tour Boundaries? (That map is available on the Join page) *</h3>
         <label for="isWithinBoundaries-${randomId}">
-            <input disabled ${isWithinBoundaries == "Yes, my studio falls within the boundary" ? "checked" : ""} type="radio" name="isWithinBoundaries-${randomId}" value="Yes, my studio falls within the boundary"
+            <input disabled="true" ${isWithinBoundaries == "Yes, my studio falls within the boundary" ? "checked" : ""} type="radio" name="isWithinBoundaries-${randomId}" value="Yes, my studio falls within the boundary"
                 id="isWithinBoundaries-${randomId}"></input>
             Yes, my studio falls within the boundary
         </label>
         <label for="isNotWithinBoundaries-${randomId}">
-            <input  disabled ${isWithinBoundaries == "Yes, my studio falls within the boundary" ? "": "checked"} type="radio" name="isWithinBoundaries-${randomId}"
+            <input  disabled="true" ${isWithinBoundaries == "Yes, my studio falls within the boundary" ? "": "checked"} type="radio" name="isWithinBoundaries-${randomId}"
                 value="No, my studio is outside the boundary and I will need to share studio space with another artist"
                 id="isNotWithinBoundaries-${randomId}"></input>
             No, my studio is outside the boundary and I will need to share studio space with another artist
@@ -86,7 +86,7 @@
         <p style="margin: 0;">If sharing a studio, have you made arrangements to do so? If so, please name the Tour
             Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host
             you in their studio.</p>
-        <textarea style="width: 100%; box-sizing: border-box; ">
+        <textarea disabled="true" style="width: 100%; box-sizing: border-box; ">
 ${studioSharingResponse}
         </textarea>
         <!-- <textarea-component description="If sharing a studio, have you made arrangements to do so? If so, please name the Tour Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host you in their studio."></textarea-component> -->
@@ -143,11 +143,11 @@ ${howDidYouHearAboutUs}
         </div>
 
         <h3>Artist Statement</h3>
-        <textarea-component  disabled fieldName="artistStatement-${randomId}" placeholder="Artist Statement" required
+        <textarea-component  disabled="true" fieldName="artistStatement-${randomId}" placeholder="Artist Statement" required
             description="This  is a short statement that describes what art you make, how you make it and why you make it.  (Limit 200 words)"
             value="${artistStatement}"></textarea-component>
         <h3>Your art website or social media sites</h3>
-        <textarea-component disabled  placeholder="Website & Social media presence " fieldName="website-social-media-${randomId}" required
+        <textarea-component disabled="true" placeholder="Website & Social media presence " fieldName="website-social-media-${randomId}" required
             description="If you have an art website and/or social media sites, list them here.  If you don't have any of those, type in NONE"
             value="${websiteSocialMedia}"></textarea-component>
 
