@@ -3,6 +3,7 @@ import '../../../utils/logIf.js'
 
 const timeline = {}
 const userRoles = {}
+let configDocument;
 
 document.addEventListener('DOMContentLoaded', function () {
   firebase.redirectIfNotLoggedIn('/artist-sign-on')
@@ -15,10 +16,22 @@ document.addEventListener('DOMContentLoaded', function () {
         userDiv.querySelector('#username').innerHTML = `Hello, ${user.displayName}`
 
 
+       
 
 
         // Add timeline event from the database to the timeline
         await CRUD.readAll('ghost-timeline').then(ghostTimeline => {
+          // remove the configDocument
+          ghostTimeline = ghostTimeline.filter(event => {
+            if(event.fbId !== 'configDocument') return event
+            else {
+              configDocument = event
+            }
+          })
+
+          // set the year to the configDocument year
+          document.getElementById('activeYear').innerText = configDocument.activeYear
+
           ghostTimeline = ghostTimeline.sort((a, b) => new Date(b.date) - new Date(a.date)).reverse()
           console.log({ timeline: ghostTimeline })
           const timelineContainer = document.getElementById('timeline')
@@ -59,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
               const changeYearBtn = document.createElement('a')
               changeYearBtn.setAttribute('type', 'button')
               changeYearBtn.setAttribute('class', 'fa fa-calendar')
-              changeYearBtn.innerHTML = '<small>Change Year</small>'
+              changeYearBtn.innerHTML = '<small style="margin-left: 10px">Change Year</small>'
               changeYearBtn.addEventListener('click', () => {
                 const year = prompt('Enter the year you would like to view')
                 if (!year) return
