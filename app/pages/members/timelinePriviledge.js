@@ -1,4 +1,4 @@
-export function enableTimelinePrivileges() {
+export function enableTimelinePrivileges(configDocument, timeline) {
 
     // add a way to change the selected year
     const activeYearContainer = document.getElementById('activeYear')
