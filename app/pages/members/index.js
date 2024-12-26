@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
               const changeYearBtn = document.createElement('a')
               changeYearBtn.setAttribute('type', 'button')
               changeYearBtn.setAttribute('class', 'fa fa-calendar')
-              changeYearBtn.innerText = 'Change Year'
+              changeYearBtn.innerHTML = '<small>Change Year</small>'
               changeYearBtn.addEventListener('click', () => {
                 const year = prompt('Enter the year you would like to view')
                 if (!year) return
