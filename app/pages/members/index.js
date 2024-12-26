@@ -95,10 +95,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
               // A form to change the year
               const changeYearForm = document.createElement('form')
+              changeYearForm.setAttribute('id', 'changeYearForm') 
               changeYearForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
               // Define the form html
               changeYearForm.innerHTML = `
-               <select id="yearSelect">
+               <select>
                   ${Array.from({ length: 10 }, (_, i) => {
                     const year = new Date().getFullYear() - i;
                     return `<option value="${year}">${year}</option>`;
