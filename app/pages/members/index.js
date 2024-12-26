@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function () {
               })
             }
 
-            if(e.target.classList.contains('.editTimeline')){
+            if(e.target.closest('#editTimeline')){
                 // get the parent #timeline container and add the edit form
                 const timeline = document.getElementById('timeline')
                 timeline.toggleAttribute('is-editing')
