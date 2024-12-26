@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
               // Define the form html
               changeYearForm.innerHTML = `
                <select>
-                  ${Array.from({ length: 1 }, (_, i) => {
+                  ${Array.from({ length: 3 }, (_, i) => {
                     const year = new Date().getFullYear() - i + 2;
                     return `<option value="${year}">${year}</option>`;
                   }).join('')}
