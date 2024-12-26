@@ -51,8 +51,10 @@ window.CRUD = {
             docData.fbId = doc.id
 
             if(docData.createdAt){
-
                 docData.createdAt = docData.createdAt.toDate().toLocaleDateString()
+            }
+            if(docData.date){
+                docData.date = docData.date.toDate().toLocaleDateString()
             }
 
             data.push(docData)
