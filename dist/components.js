@@ -997,8 +997,8 @@ var roles = {
     committee: 'No Committee',
     responsibility: 'Web development and maintenance',
     tasks: [],
-    sideBarButtons: ['testEmail', 'testSheets', 'processToSheets', 'createDriveFolder', 'createDocument', 'newScholarshipApplications', 'newApplications', 'contracts-received'],
-    privileges: ['editTimeline']
+    sideBarButtons: ['testEmail', 'testSheets', 'processToSheets', 'createDriveFolder', 'createDocument', 'newScholarshipApplications', 'newApplications', 'contracts-received']
+    // privileges: ['editTimeline']
   },
   1: {
     title: 'President',
