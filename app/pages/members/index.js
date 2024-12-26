@@ -16,14 +16,14 @@ document.addEventListener('DOMContentLoaded', function () {
         userDiv.querySelector('#username').innerHTML = `Hello, ${user.displayName}`
 
 
-       
+
 
 
         // Add timeline event from the database to the timeline
         await CRUD.readAll('ghost-timeline').then(ghostTimeline => {
           // remove the configDocument
           ghostTimeline = ghostTimeline.filter(event => {
-            if(event.fbId !== 'configDocument') return event
+            if (event.fbId !== 'configDocument') return event
             else {
               configDocument = event
             }
@@ -79,96 +79,96 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
 
-        function enableTimelinePrivileges(){
-          
-              // add a way to change the selected year
-              const activeYearContainer = document.getElementById('activeYear')
+        function enableTimelinePrivileges() {
 
-              // A button to toggle editing mode
-              const changeYearBtn = document.createElement('a')
-              changeYearBtn.setAttribute('type', 'button')
-              changeYearBtn.setAttribute('class', 'fa fa-calendar')
-              changeYearBtn.setAttribute('style', 'margin-left: 10px')
-              changeYearBtn.innerHTML = '<small style="margin-left: 10px"></small>'
-              changeYearBtn.addEventListener('click', () => {
-                activeYearContainer.toggleAttribute('is-editing')
-              })
-             
+          // add a way to change the selected year
+          const activeYearContainer = document.getElementById('activeYear')
 
-              // A form to change the year
-              const changeYearForm = document.createElement('form')
-              changeYearForm.setAttribute('id', 'changeYearForm') 
-              changeYearForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
-              // Define the form html
-              changeYearForm.innerHTML = `
+          // A button to toggle editing mode
+          const changeYearBtn = document.createElement('a')
+          changeYearBtn.setAttribute('type', 'button')
+          changeYearBtn.setAttribute('class', 'fa fa-calendar')
+          changeYearBtn.setAttribute('style', 'margin-left: 10px')
+          changeYearBtn.innerHTML = '<small style="margin-left: 10px"></small>'
+          changeYearBtn.addEventListener('click', () => {
+            activeYearContainer.toggleAttribute('is-editing')
+          })
+
+
+          // A form to change the year
+          const changeYearForm = document.createElement('form')
+          changeYearForm.setAttribute('id', 'changeYearForm')
+          changeYearForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
+          // Define the form html
+          changeYearForm.innerHTML = `
                <select>
                   ${Array.from({ length: 3 }, (_, i) => {
-                    const year = new Date().getFullYear() - i + 2;
-                    return `<option value="${year}">${year}</option>`;
-                  }).join('')}
+            const year = new Date().getFullYear() - i + 2;
+            return `<option value="${year}">${year}</option>`;
+          }).join('')}
                 </select>
                 <button class="small" type="submit">Save</button>
                 `
-                // select the current year
-                changeYearForm.querySelector('select').value = configDocument.activeYear
+          // select the current year
+          changeYearForm.querySelector('select').value = configDocument.activeYear
 
-                // add an event listener to the form
-                changeYearForm.addEventListener('submit', (e) => {
-                  // save to ghost-timeline/configDocument { activeYear: year }
-                  e.preventDefault()
-                  const year = changeYearForm.querySelector('select').value
-                  // set the active year in the configDocument
-                  configDocument.activeYear = year
-                  // save the configDocument
-                  CRUD.update('ghost-timeline', 'configDocument', configDocument).then(() => {
-                    // update the active year
-                    activeYearContainer.querySelector('.contentContainer').innerText = year
-                    // // update the active year in the timeline
-                    document.getElementById('timeline').querySelectorAll('li').forEach(li => {
-                      li.querySelector('input[type=date]').setAttribute('min', `${year}-01-01`)
-                      li.querySelector('input[type=date]').setAttribute('max', `${year}-12-31`)
-                      // rerender the date input
-                      const date = new Date(timeline[li.getAttribute('data-id')].date + `, ${year}`)
-                      li.querySelector('input[type=date]').value = date.toISOString().split('T')[0]
+          // add an event listener to the form
+          changeYearForm.addEventListener('submit', (e) => {
+            // save to ghost-timeline/configDocument { activeYear: year }
+            e.preventDefault()
+            const year = changeYearForm.querySelector('select').value
+            // set the active year in the configDocument
+            configDocument.activeYear = year
+            // save the configDocument
+            CRUD.update('ghost-timeline', 'configDocument', configDocument).then(() => {
+              // update the active year
+              activeYearContainer.querySelector('.contentContainer').innerText = year
+              // // update the active year in the timeline
+              document.getElementById('timeline').querySelectorAll('li').forEach(li => {
+                li.querySelector('input[type=date]').setAttribute('min', `${year}-01-01`)
+                li.querySelector('input[type=date]').setAttribute('max', `${year}-12-31`)
+                // rerender the date input
+                const date = new Date(timeline[li.getAttribute('data-id')].date + `, ${year}`)
+                li.querySelector('input[type=date]').value = date.toISOString().split('T')[0]
 
-                      // update the date in the timeline object in the database
-                      const fbId = li.getAttribute('data-id')
-                        CRUD.update('ghost-timeline', fbId, { date: date.toISOString().split('T')[0] })
+                // update the date in the timeline object in the database
+                const fbId = li.getAttribute('data-id')
+                CRUD.update('ghost-timeline', fbId, { date: date.toISOString().split('T')[0] })
 
-                    })
+              })
 
-                    // change out of edit mode
-                    activeYearContainer.removeAttribute('is-editing')
-                  })
-                })
-              
-                // create container around the content of the li
-                const contentContainer = document.createElement('span')
-                contentContainer.setAttribute('class', 'contentContainer')
-                // put all the content from the li in the container by moving the nodes
-                while (activeYearContainer.firstChild) {
-                  contentContainer.appendChild(activeYearContainer.firstChild)
-                }
-                // append the container to the li
-                activeYearContainer.appendChild(contentContainer)
-                contentContainer.insertAdjacentElement('beforeend', changeYearBtn)
-   
-            
+              // change out of edit mode
+              activeYearContainer.removeAttribute('is-editing')
+            })
+          })
 
-                activeYearContainer.insertAdjacentElement('beforeend', changeYearForm)
-            
+          // create container around the content of the li
+          const contentContainer = document.createElement('span')
+          contentContainer.setAttribute('class', 'contentContainer')
+          // put all the content from the li in the container by moving the nodes
+          while (activeYearContainer.firstChild) {
+            contentContainer.appendChild(activeYearContainer.firstChild)
+          }
+          // append the container to the li
+          activeYearContainer.appendChild(contentContainer)
+          contentContainer.insertAdjacentElement('beforeend', changeYearBtn)
 
 
 
-              // Create a template button
-              const editButton = document.createElement('a')
-              editButton.setAttribute('type', 'button')
+          activeYearContainer.insertAdjacentElement('beforeend', changeYearForm)
 
-              // Create a template form
-              const editForm = document.createElement('form')
-              editForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
-              // Define the form html
-                editForm.innerHTML = `
+
+
+
+          // Create a template button
+          const editButton = document.createElement('a')
+          editButton.setAttribute('type', 'button')
+
+          // Create a template form
+          const editForm = document.createElement('form')
+          editForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
+          // Define the form html
+          editForm.innerHTML = `
                 <fieldset>
                   <legend></legend>
 
@@ -183,73 +183,73 @@ document.addEventListener('DOMContentLoaded', function () {
                     </fieldset>
 
               `
-              // make a clone of the form to add to the timeline
-              const editFormClone = editForm.cloneNode(true)
-              editFormClone.setAttribute('id', 'newTimelineEventForm')
-              // add a title
-              editFormClone.querySelector('legend').innerText = 'New Event'
-              // Add the base "New Entry" form to the timeline
-              document.getElementById('timeline').querySelector('ul')
-                .insertAdjacentElement('afterbegin', editFormClone)
-              // create edit button clone
-              const editButtonClone = editButton.cloneNode(true)
-              editButtonClone.setAttribute('class', 'fa fa-edit')
-              editButtonClone.setAttribute('id', 'editTimeline')
-              document.getElementById('timeline').insertAdjacentElement('afterbegin', editButtonClone)
-              editButtonClone.addEventListener('click', () => {
-                // get the parent #timeline container and add the edit form
-                const timeline = document.getElementById('timeline')
-                timeline.toggleAttribute('is-editing')
+          // make a clone of the form to add to the timeline
+          const editFormClone = editForm.cloneNode(true)
+          editFormClone.setAttribute('id', 'newTimelineEventForm')
+          // add a title
+          editFormClone.querySelector('legend').innerText = 'New Event'
+          // Add the base "New Entry" form to the timeline
+          document.getElementById('timeline').querySelector('ul')
+            .insertAdjacentElement('afterbegin', editFormClone)
+          // create edit button clone
+          const editButtonClone = editButton.cloneNode(true)
+          editButtonClone.setAttribute('class', 'fa fa-edit')
+          editButtonClone.setAttribute('id', 'editTimeline')
+          document.getElementById('timeline').insertAdjacentElement('afterbegin', editButtonClone)
+          editButtonClone.addEventListener('click', () => {
+            // get the parent #timeline container and add the edit form
+            const timeline = document.getElementById('timeline')
+            timeline.toggleAttribute('is-editing')
 
 
-              })
+          })
 
-              // loop through all the event and add a local edit button and edit form (which populates the form with the event data)
+          // loop through all the event and add a local edit button and edit form (which populates the form with the event data)
+          document.querySelectorAll('#timeline li').forEach(event => {
+
+            // get the id of the event 
+            const eventId = event.getAttribute('data-id')
+            // get the event data from the time line object
+            const eventData = timeline[eventId]
+
+            console.log('cloning button to li', { event })
+
+            // create container around the content of the li
+            const contentContainer = document.createElement('span')
+            contentContainer.setAttribute('class', 'contentContainer')
+            // put all the content from the li in the container by moving the nodes
+            while (event.firstChild) {
+              contentContainer.appendChild(event.firstChild)
+            }
+            // append the container to the li
+            event.appendChild(contentContainer)
+
+
+            // clone a button to the event
+            const editButtonClone = editButton.cloneNode(true)
+            editButtonClone.setAttribute('class', 'fa fa-pen')
+            event.insertAdjacentElement('afterbegin', editButtonClone)
+            editButtonClone.addEventListener('click', (e) => {
+              // make sure none of the other events are in edit mode
               document.querySelectorAll('#timeline li').forEach(event => {
-
-                // get the id of the event 
-                const eventId = event.getAttribute('data-id')
-                // get the event data from the time line object
-                const eventData = timeline[eventId]
-
-                console.log('cloning button to li', { event })
-
-                // create container around the content of the li
-                const contentContainer = document.createElement('span')
-                contentContainer.setAttribute('class', 'contentContainer')
-                // put all the content from the li in the container by moving the nodes
-                while (event.firstChild) {
-                  contentContainer.appendChild(event.firstChild)
-                }
-                // append the container to the li
-                event.appendChild(contentContainer)
-
-
-                // clone a button to the event
-                const editButtonClone = editButton.cloneNode(true)
-                editButtonClone.setAttribute('class', 'fa fa-pen')
-                event.insertAdjacentElement('afterbegin', editButtonClone)
-                editButtonClone.addEventListener('click', (e) => {
-                  // make sure none of the other events are in edit mode
-                  document.querySelectorAll('#timeline li').forEach(event => {
-                    event.removeAttribute('is-editing')
-                  })
-                  const li = e.target.closest('li')
-                  li.toggleAttribute('is-editing')
-                })
-
-                // clone the form to the event
-                const editFormClone = editForm.cloneNode(true)
-                editFormClone.classList.add('editTimelineForm')
-                // add a title
-                editFormClone.querySelector('legend').innerText = 'Editing an event'
-                const date = new Date(eventData.date + `, ${configDocument.activeYear}`)
-                // console.log({ date })
-                editFormClone.querySelector('input').value = date.toISOString().split('T')[0];
-                editFormClone.querySelector('textarea').value = eventData.description
-                event.appendChild(editFormClone)
-
+                event.removeAttribute('is-editing')
               })
+              const li = e.target.closest('li')
+              li.toggleAttribute('is-editing')
+            })
+
+            // clone the form to the event
+            const editFormClone = editForm.cloneNode(true)
+            editFormClone.classList.add('editTimelineForm')
+            // add a title
+            editFormClone.querySelector('legend').innerText = 'Editing an event'
+            const date = new Date(eventData.date + `, ${configDocument.activeYear}`)
+            // console.log({ date })
+            editFormClone.querySelector('input').value = date.toISOString().split('T')[0];
+            editFormClone.querySelector('textarea').value = eventData.description
+            event.appendChild(editFormClone)
+
+          })
 
         }
 
