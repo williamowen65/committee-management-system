@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
           editForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
           editForm.innerHTML = getTimeLineEditor()
 
-          function getTimeLineEditor(){
+          function getTimeLineEditor() {
             return `
                 <fieldset>
                   <legend></legend>
@@ -262,6 +262,19 @@ document.addEventListener('DOMContentLoaded', function () {
             })
           })
 
+          // Use delegation to handle the edit button
+          document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('editEvent')) {
+              // make sure none of the other events are in edit mode
+              document.querySelectorAll('#timeline li').forEach(event => {
+                event.removeAttribute('is-editing')
+              })
+              const li = e.target.closest('li')
+              li.toggleAttribute('is-editing')
+            }
+
+          })
+
           // loop through all the event and add a local edit button and edit form (which populates the form with the event data)
           document.querySelectorAll('#timeline li').forEach(event => {
 
@@ -285,16 +298,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // clone a button to the event
             const editButtonClone = editButton.cloneNode(true)
-            editButtonClone.setAttribute('class', 'fa fa-pen')
+            editButtonClone.setAttribute('class', 'fa fa-pen editEvent')
             event.insertAdjacentElement('afterbegin', editButtonClone)
-            editButtonClone.addEventListener('click', (e) => {
-              // make sure none of the other events are in edit mode
-              document.querySelectorAll('#timeline li').forEach(event => {
-                event.removeAttribute('is-editing')
-              })
-              const li = e.target.closest('li')
-              li.toggleAttribute('is-editing')
-            })
+
 
             // clone the form to the event
             const editFormClone = editForm.cloneNode(true)
