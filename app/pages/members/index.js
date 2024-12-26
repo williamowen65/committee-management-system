@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
           const timelineContainer = document.getElementById('timeline')
           timeline.forEach(event => {
             const li = document.createElement('li')
+            console.log({ event })
             const todayString = new Date(event.date).toLocaleDateString()
             li.innerHTML = `
             <b>${todayString}</b>
