@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded',  function () {
                 console.log('cloning button to li',{ event })
 
                 // create container around the content of the li
-                const contentContainer = document.createElement('div')
+                const contentContainer = document.createElement('span')
                 contentContainer.setAttribute('class', 'contentContainer')
                 // put all the content from the li in the container by moving the nodes
                 while (event.firstChild) {
