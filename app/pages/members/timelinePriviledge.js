@@ -14,6 +14,7 @@ export function enableTimelinePrivileges(configDocument, timeline) {
     return
 
     function appendCurrentTimeline(li) {
+        console.log('appendCurrentTimeline', { li })
         // find the correct spot to insert the new event
         const timelineEl = document.getElementById('timeline')
         const events = Array.from(timelineEl.querySelectorAll('li'))
@@ -290,6 +291,9 @@ export function enableTimelinePrivileges(configDocument, timeline) {
                     e.preventDefault()
                     // event wired up via button (delegated event listener)
                 })
+
+                // add li to the timeline
+
                 // Append it in the correct position of the timeline (TODO <------------------------------)
                 appendCurrentTimeline(li)
 
