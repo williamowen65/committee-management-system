@@ -131,6 +131,10 @@ document.addEventListener('DOMContentLoaded', function () {
                       const date = new Date(timeline[li.getAttribute('data-id')].date + `, ${year}`)
                       li.querySelector('input[type=date]').value = date.toISOString().split('T')[0]
 
+                      // update the date in the timeline object in the database
+                      const fbId = li.getAttribute('data-id')
+                        CRUD.update('ghost-timeline', fbId, { date: date.toISOString().split('T')[0] })
+
                     })
 
                     // change out of edit mode
