@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
 
         CRUD.readAll('ghost-timeline').then(timeline => {
-          timeline = timeline.sort((a, b) => new Date(b.date) - new Date(a.date))
+          timeline = timeline.sort((a, b) => new Date(b.date) - new Date(a.date)).reverse()
           console.log({ timeline })
           const timelineContainer = document.getElementById('timeline')
           timeline.forEach(event => {
