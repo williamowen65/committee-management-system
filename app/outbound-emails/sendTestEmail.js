@@ -1,12 +1,14 @@
 import { sendNewContractSubmissionEmail } from "./newContractSubmission.js";
 import { sendNewScholarshipEmail } from "./newScholarshipApplicant.js";
 
-export async function  sendTestEmail(){
+export async function sendTestEmail() {
 
     const user = {
-        firstName: 'William',
-        lastName: 'Owen',
-        email: 'william.owen.dev@gmail.com'
+        artistDetails: {
+            firstName: 'William',
+            lastName: 'Owen',
+            email: 'william.owen.dev@gmail.com'
+        }
     }
 
     const transaction = {
@@ -19,7 +21,7 @@ export async function  sendTestEmail(){
     }
 
     sendNewContractSubmissionEmail(user, transaction)
-    
+
     // sendNewScholarshipEmail({
     //     firstName: 'William',
     //     lastName: 'Owen',
