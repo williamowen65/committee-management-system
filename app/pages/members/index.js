@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                    <button class="small" type="submit">Save</button>
                    <button class="small cancelTimelineEdit" type="button">Cancel</button>
-          ${options.deleteBtn ? '<button class="small deleteTimelineEvent" type="button">Delete</button>' : ''}
+                    <button class="small deleteTimelineEvent" type="button">Delete</button>
 
 
                     </fieldset>
@@ -264,9 +264,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 ${description}
                 </span>
                 <form class="editTimelineForm ifEditing">
-                ${getTimeLineEditor({
-                  deleteBtn: true
-                })}
+                ${getTimeLineEditor()}
                 </form>
                 
               `
@@ -333,6 +331,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // console.log({ date })
             editFormClone.querySelector('input').value = date.toISOString().split('T')[0];
             editFormClone.querySelector('textarea').value = eventData.description
+            
+
             event.appendChild(editFormClone)
 
           })
