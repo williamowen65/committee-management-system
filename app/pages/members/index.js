@@ -275,15 +275,15 @@ document.addEventListener('DOMContentLoaded', function () {
               // Append it in the correct position of the timeline (TODO <------------------------------)
 
               // find the correct spot to insert the new event
-              const timeline = document.getElementById('timeline')
-              const events = Array.from(timeline.querySelectorAll('li')).concat(li)
+              const timelineEl = document.getElementById('timeline')
+              const events = Array.from(timelineEl.querySelectorAll('li')).concat(li)
               events.sort((a, b) => new Date(b.date) - new Date(a.date)).reverse()
 
               // remove all the events
-              timeline.querySelector('ul').innerHTML = ''
+              timelineEl.querySelector('ul').innerHTML = ''
               // add the events back in the correct order
               events.forEach(event => {
-                timeline.querySelector('ul').appendChild(event)
+                timelineEl.querySelector('ul').appendChild(event)
               })
               
               
