@@ -1,4 +1,4 @@
-import roles from "/committee-role.js";
+import roles from "/committee-roles.js";
 
 export function sendNewContractSubmissionEmail(user, transaction){
     
