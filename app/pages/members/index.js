@@ -54,18 +54,38 @@ document.addEventListener('DOMContentLoaded',  function () {
         function applyPrivileges(userRoles) {
           Object.values(userRoles).forEach(role => {
             if(role.privileges && role.privileges.includes('editTimeline')){
+              
+              // add a way to change the selected year
+              const changeYearBtn = document.createElement('a')
+              changeYearBtn.setAttribute('type', 'button')
+              changeYearBtn.innerText = 'Change Year'
+              changeYearBtn.addEventListener('click', () => {
+                const year = prompt('Enter the year you would like to view')
+                if (!year) return
+                // filter the timeline by year
+                // const filteredTimeline = Object.values(timeline).filter(event => new Date(event.date).getFullYear() == year)
+                // // clear the timeline
+                // document.getElementById('timeline').querySelector('ul').innerHTML = ''
+                // // add the filtered events to the timeline
+                // filteredTimeline.forEach(event => {
+                //   const li = document.createElement('li')
+                //   li.setAttribute('data-id', event.fbId)
+                //   li.innerHTML = `
+                //   <strong>${event.date}: </strong>
+                //   ${event.description}
+                //   `
+                //   timelineContainer.querySelector('ul').appendChild(li)
+                // })
+              })
+              document.querySelector('#timeline .header').insertAdjacentElement('afterend', changeYearBtn)
+              
 
+              // Create a template button
               const editButton = document.createElement('a')
               editButton.setAttribute('type', 'button')
            
-              
-
-           
-
-
+              // Create a template form
               const editForm = document.createElement('form')
-              // editForm.setAttribute('id', 'editTimelineForm')
-
               editForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
               // Define the form html
               editForm.innerHTML = `
@@ -73,8 +93,6 @@ document.addEventListener('DOMContentLoaded',  function () {
                 <textarea style="width:100%" type="text" placeholder="Description"></textarea>
                 <br>
                 <button class="small" type="submit">Save</button>
-
-
               `
               // make a clone of the form to add to the timeline
               const editFormClone = editForm.cloneNode(true)
