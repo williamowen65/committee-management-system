@@ -1,7 +1,10 @@
+import { firebase } from "googleapis/build/src/apis/firebase"
+
 export function sendNewContractSubmissionEmail(user, transaction){
     
     const personalEmail = user.artistDetails.personalEmail || ""
     const businessEmail = user.artistDetails.businessEmail || ""
+    const email = firebase.auth.currentUser.email
 
     window.sendMessageToParent({
       controller: 'gmailController',
