@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
               document.getElementById('timeline').querySelector('ul')
               .insertAdjacentElement('afterbegin', editFormClone)
 
-              editFormClone.addEventListener('click', () => {
+              editButton.addEventListener('click', () => {
                 // get the parent #timeline container and add the edit form
                 const timeline = document.getElementById('timeline')
                 timeline.toggleAttribute('is-editing')
