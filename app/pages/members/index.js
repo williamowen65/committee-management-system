@@ -264,6 +264,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 `;
                 // exit edit mode
                 li.removeAttribute('is-editing');
+
+                appendCurrentTimeline()
               });
             }
 
@@ -333,7 +335,10 @@ document.addEventListener('DOMContentLoaded', function () {
           function appendCurrentTimeline(li){
              // find the correct spot to insert the new event
              const timelineEl = document.getElementById('timeline')
-             const events = Array.from(timelineEl.querySelectorAll('li')).concat(li)
+             const events = Array.from(timelineEl.querySelectorAll('li'))
+             if(li){
+               events.concat(li)
+            }
              events.sort((a, b) => new Date(b.querySelector('input[type=date]').value) - new Date(a.querySelector('input[type=date]').value)).reverse()
 
              // remove all the events
