@@ -3,6 +3,6 @@
     : "" }">
     <small class="text" part="labelText">${alias && required ? alias + "*" : alias ? alias : ""} </small>
     <textarea placeholder="${placeholder}" id="${fieldName}" name="${fieldName}"
-        ${required ? "required" : "" }  testing  ${disabled} >${value ? value : ""}</textarea>
+        ${required ? "required" : "" }  ${disabled ? "disabled" : ""} >${value ? value : ""}</textarea>
     <div id="${fieldName}-error" class="error-message"></div>
 </label>
