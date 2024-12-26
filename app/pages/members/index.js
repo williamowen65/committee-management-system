@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
               changeYearBtn.addEventListener('click', () => {
                 activeYearContainer.toggleAttribute('is-editing')
               })
-              document.querySelector('#timeline .header').insertAdjacentElement('beforeend', changeYearBtn)
+             
 
               // A form to change the year
               const changeYearForm = document.createElement('form')
@@ -106,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     return `<option value="${year}">${year}</option>`;
                   }).join('')}
                 </select>
+                <button class="small" type="submit">Save</button>
                 `
               
                 // create container around the content of the li
@@ -117,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 // append the container to the li
                 activeYearContainer.appendChild(contentContainer)
+                activeYearContainer.insertAdjacentElement('beforeend', changeYearBtn)
    
             
 
