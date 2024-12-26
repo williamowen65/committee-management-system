@@ -28,6 +28,19 @@ document.addEventListener('DOMContentLoaded', function () {
           document.querySelector('#user-role').innerHTML = `<h3>My Committee Role${contract.committeeRoleId.length > 1 ? 's' : ''}:</h3>${sidePanel.trim() ? sidePanel : 'No role assigned'}`
         })
 
+        CRUD.readAll('ghost-timeline').then(timeline => {
+          const timelineContainer = document.getElementById('timeline').querySelector('ul')
+          timeline.forEach(event => {
+            const li = document.createElement('li')
+            li.innerHTML = `
+            <b>${event.date}</b>
+            <p>${event.description}</p>
+            `
+            timelineContainer.querySelector('ul').appendChild(li)
+          })
+        })
+
+
         function applyPrivileges(userRoles) {
           console.log({ userRoles })
           Object.values(userRoles).forEach(role => {
@@ -46,14 +59,15 @@ document.addEventListener('DOMContentLoaded', function () {
               editForm.setAttribute('id', 'editTimelineForm')
               editForm.classList.add('ifEditing')
               editForm.innerHTML = `
-              <li >
-                <input  type="date"><br>
+              <li>
+                <input type="date"><br>
                 <textarea style="width:100%" type="text" placeholder="Description"></textarea>
                 <br>
                 <button class="small" type="submit">Save</button>
               </li>
               `
-              document.getElementById('timeline').querySelector('ul').insertAdjacentElement('afterbegin', editForm)
+              document.getElementById('timeline').querySelector('ul')
+              .insertAdjacentElement('afterbegin', editForm)
 
               editButton.addEventListener('click', () => {
                 // get the parent #timeline container and add the edit form
