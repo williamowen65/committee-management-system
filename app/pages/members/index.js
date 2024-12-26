@@ -4,7 +4,7 @@ import '../../../utils/logIf.js'
 
 const userRoles = {}
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
   firebase.redirectIfNotLoggedIn('/artist-sign-on')
     .then(user => {
       if (user) {
@@ -15,22 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
         userDiv.querySelector('#username').innerHTML = `Hello, ${user.displayName}`
 
 
-        // Get the GHOST contract for the user
-        CRUD.read('ghost-contracts', user.uid).then(contract => {
-          logIf.client && console.log(contract)
-          // Get role name
-          contract.committeeRoleId = contract.committeeRoleId || []
-
-          // Also assigns userRoles object
-          const sidePanel = getGhostSidePanel(contract.committeeRoleId)
-
-          applyPrivileges(userRoles)
-
-          document.querySelector('#user-role').innerHTML = `<h3>My Committee Role${contract.committeeRoleId.length > 1 ? 's' : ''}:</h3>${sidePanel.trim() ? sidePanel : 'No role assigned'}`
-        })
+      
 
         // Add timeline event from the database to the timeline
-        CRUD.readAll('ghost-timeline').then(timeline => {
+        await CRUD.readAll('ghost-timeline').then(timeline => {
           timeline = timeline.sort((a, b) => new Date(b.date) - new Date(a.date)).reverse()
           console.log({ timeline })
           const timelineContainer = document.getElementById('timeline')
@@ -43,6 +31,20 @@ document.addEventListener('DOMContentLoaded', function () {
             timelineContainer.querySelector('ul').appendChild(li)
           })
         })
+
+          // Get the GHOST contract for the user
+          CRUD.read('ghost-contracts', user.uid).then(contract => {
+            logIf.client && console.log(contract)
+            // Get role name
+            contract.committeeRoleId = contract.committeeRoleId || []
+  
+            // Also assigns userRoles object
+            const sidePanel = getGhostSidePanel(contract.committeeRoleId)
+  
+            applyPrivileges(userRoles)
+  
+            document.querySelector('#user-role').innerHTML = `<h3>My Committee Role${contract.committeeRoleId.length > 1 ? 's' : ''}:</h3>${sidePanel.trim() ? sidePanel : 'No role assigned'}`
+          })
 
 
         function applyPrivileges(userRoles) {
