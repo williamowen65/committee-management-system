@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function () {
             CRUD.create('ghost-timeline', { date, description }).then((event) => {
               console.log({ event })
               // add the event to the timeline object
-              timeline[event.fbId] = event
+              // timeline[event.fbId] = event
               // add the event to the timeline
               const li = document.createElement('li')
               // li.setAttribute('data-id', event.fbId)
