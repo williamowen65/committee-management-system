@@ -1,5 +1,5 @@
-import { sendNewContractSubmissionEmail } from "./newContractSubmission";
-import { sendNewScholarshipEmail } from "./newScholarshipApplicant";
+import { sendNewContractSubmissionEmail } from "./newContractSubmission.js";
+import { sendNewScholarshipEmail } from "./newScholarshipApplicant.js";
 
 export async function  sendTestEmail(){
 
