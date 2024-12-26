@@ -60,6 +60,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // scholarshipGranted: false, // defined by reviewer
             createdAt: firebase.serverTimestamp(),
         }).then(() => {
+
+            
             // change the button text back to original
             btnSubmit.innerText = "Your scholarship application has been submitted successfully!"
             // enable the button
