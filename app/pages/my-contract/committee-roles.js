@@ -6,7 +6,7 @@ const roles = {
         responsibility: 'Web development and maintenance',
         tasks: [],
         sideBarButtons: ['testEmail', 'testSheets','processToSheets','createDriveFolder','createDocument','newScholarshipApplications', 'newApplications', 'contracts-received'],
-        // privileges: ['editTimeline']
+        privileges: ['editTimeline']
     },
     1: {
         title: 'President',
