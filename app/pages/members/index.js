@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded',  function () {
                 //   timelineContainer.querySelector('ul').appendChild(li)
                 // })
               })
-              document.querySelector('#timeline .header').insertAdjacentElement('afterend', changeYearBtn)
+              document.querySelector('#timeline header').insertAdjacentElement('afterend', changeYearBtn)
               
 
               // Create a template button
