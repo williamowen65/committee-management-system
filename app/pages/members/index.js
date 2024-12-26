@@ -110,10 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const timeline = document.getElementById('timeline')
                 timeline.toggleAttribute('is-editing')
 
-                // make sure none of the other events are in edit mode
-                document.querySelectorAll('#timeline li').forEach(event => {
-                  event.removeAttribute('is-editing')
-                })
+               
               })
 
               // loop through all the event and add a local edit button and edit form (which populates the form with the event data)
