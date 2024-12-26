@@ -274,6 +274,20 @@ document.addEventListener('DOMContentLoaded', function () {
               li.querySelector('textarea').value = description
               // Append it in the correct position of the timeline (TODO <------------------------------)
 
+              // find the correct spot to insert the new event
+              const timeline = document.getElementById('timeline')
+              const events = Array.from(timeline.querySelectorAll('li')).concat(li)
+              events.sort((a, b) => new Date(b.date) - new Date(a.date)).reverse()
+
+              // remove all the events
+              timeline.querySelector('ul').innerHTML = ''
+              // add the events back in the correct order
+              events.forEach(event => {
+                timeline.querySelector('ul').appendChild(event)
+              })
+              
+              
+
 
               document.getElementById('timeline').querySelector('ul').appendChild(li)
 
