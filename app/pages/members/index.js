@@ -90,6 +90,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 timeline.toggleAttribute('is-editing')
               })
 
+              // loop through all the event and add a local edit button and edit form (which populates the form with the event data)
+              document.querySelectorAll('#timeline li').forEach(event => {
+                const editButtonClone = editButton.cloneNode(true)
+                event.insertAdjacentElement('afterbegin', editButtonClone)
+                editButtonClone.addEventListener('click', (e) => {
+                  const li = e.target.closest('li')
+                  li.toggleAttribute('is-editing')
+                })
+              })
+
               
 
               
