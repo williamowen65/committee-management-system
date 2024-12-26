@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
               // add a way to change the selected year
               const changeYearBtn = document.createElement('a')
               changeYearBtn.setAttribute('type', 'button')
+              changeYearBtn.setAttribute('class', 'fa fa-calendar')
               changeYearBtn.innerText = 'Change Year'
               changeYearBtn.addEventListener('click', () => {
                 const year = prompt('Enter the year you would like to view')
@@ -115,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const timeline = document.getElementById('timeline')
                 timeline.toggleAttribute('is-editing')
 
-               
+
               })
 
               // loop through all the event and add a local edit button and edit form (which populates the form with the event data)
@@ -156,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const editFormClone = editForm.cloneNode(true)
                 editFormClone.classList.add('editTimelineForm')
                 // add a title
-              editFormClone.querySelector('legend').innerText = 'Editing an event'
+                editFormClone.querySelector('legend').innerText = 'Editing an event'
                 // const date = new Date(eventData.date + `, ${new Date().getFullYear()}`)
                 // console.log({ date })
                 // editFormClone.querySelector('input').value = date.toISOString().split('T')[0];
