@@ -186,8 +186,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
               `
 
-              editForm.addEventListener('click', (e) => { 
-                console.log('clicking on form', {e})
+              document.addEventListener('click', (e) => { 
+                console.log('clicking on document', {e})
                 // if the target has the class cancelTimelineEdit
                 if(e.target.classList.contains('cancelTimelineEdit')){
                   // change out of edit mode
