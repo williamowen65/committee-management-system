@@ -40,11 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
           ghostTimeline.forEach(event => {
             const li = document.createElement('li')
             li.setAttribute('data-id', event.fbId)
-            const [year, month, day] = event.date.split('-');
-            console.log({ year, month, day, event })
-            const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
             li.innerHTML = `
-            <strong>${date}: </strong>
+            <strong>${event.date}: </strong>
             ${event.description}
             `
             timelineContainer.querySelector('ul').appendChild(li)

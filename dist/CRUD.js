@@ -58,7 +58,9 @@ window.CRUD = {
                 if(docData.date.toDate){
                 docData.date = docData.date.toDate().toLocaleDateString('en-US', options);
                 } else { // if it's a string
-                    docData.date = new Date(docData.date).toLocaleDateString('en-US', options);
+                    const [year, month, day] = docData.date.split('-');
+                    const dateObj = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
+                    docData.date = dateObj.toLocaleDateString('en-US', options);
                 }
             }
 
