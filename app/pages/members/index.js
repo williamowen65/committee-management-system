@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
           ghostTimeline.forEach(event => {
             const li = document.createElement('li')
             li.setAttribute('data-id', event.fbId)
-            const [year, month, day] = dateInput.value.split('-');
+            const [year, month, day] = event.date.split('-');
             const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
             li.innerHTML = `
             <strong>${date}: </strong>
