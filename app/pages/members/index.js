@@ -162,13 +162,20 @@ document.addEventListener('DOMContentLoaded', function () {
               const editForm = document.createElement('form')
               editForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
               // Define the form html
-              editForm.innerHTML = `
-              <fieldset>
-                <legend></legend>
-                <input type="date"><br>
-                <textarea style="width:100%" type="text" placeholder="Description"></textarea>
-                <br>
-                <button class="small" type="submit">Save</button>
+                editForm.innerHTML = `
+                  <legend></legend>
+
+                <input type="date" min="${configDocument.activeYear}-01-01" max="${configDocument.activeYear}-12-31"><br>
+
+                 <textarea style="width:100%" type="text" placeholder="Description"></textarea>
+
+                  <br>
+
+                   <button class="small" type="submit">Save</button>
+
+                    </fieldset>
+
+                     `
                 </fieldset>
               `
               // make a clone of the form to add to the timeline
