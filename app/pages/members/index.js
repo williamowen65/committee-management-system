@@ -87,22 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
               changeYearBtn.setAttribute('class', 'fa fa-calendar')
               changeYearBtn.innerHTML = '<small style="margin-left: 10px">Change Year</small>'
               changeYearBtn.addEventListener('click', () => {
-                const year = prompt('Enter the year you would like to view')
-                if (!year) return
-                // filter the timeline by year
-                // const filteredTimeline = Object.values(timeline).filter(event => new Date(event.date).getFullYear() == year)
-                // // clear the timeline
-                // document.getElementById('timeline').querySelector('ul').innerHTML = ''
-                // // add the filtered events to the timeline
-                // filteredTimeline.forEach(event => {
-                //   const li = document.createElement('li')
-                //   li.setAttribute('data-id', event.fbId)
-                //   li.innerHTML = `
-                //   <strong>${event.date}: </strong>
-                //   ${event.description}
-                //   `
-                //   timelineContainer.querySelector('ul').appendChild(li)
-                // })
+                document.querySelector('.activeYear').toggleAttribute('is-editing')
               })
               document.querySelector('#timeline .header').insertAdjacentElement('beforeend', changeYearBtn)
 
