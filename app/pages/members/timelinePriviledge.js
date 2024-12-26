@@ -123,6 +123,12 @@ export function enableTimelinePrivileges(configDocument, timeline) {
                     const date = new Date(timeline[li.getAttribute('data-id')].date + `, ${year}`)
                     li.querySelector('input[type=date]').value = date.toISOString().split('T')[0]
 
+
+                    /**
+                     * Something weird might be happening here that the dates change when the year is updated ...
+                     * NOPE: I just checked, and this is not the case
+                    */
+
                     // update the date in the timeline object in the database
                     const fbId = li.getAttribute('data-id')
                     CRUD.update('ghost-timeline', fbId, { date: date.toISOString().split('T')[0] })
