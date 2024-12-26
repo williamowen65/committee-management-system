@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 // append the container to the li
                 activeYearContainer.appendChild(contentContainer)
-                activeYearContainer.insertAdjacentElement('beforeend', changeYearBtn)
+                contentContainer.insertAdjacentElement('beforeend', changeYearBtn)
    
             
 
