@@ -245,18 +245,22 @@ document.addEventListener('DOMContentLoaded', function () {
               li.toggleAttribute('is-editing')
             }
 
+            if(e.target.closest('#updateEvent')){
+              alert('update event')
+            }
+
 
           })
 
 
           // make a clone of the form to add to the timeline
-          const editFormClone = editForm.cloneNode(true)
-          editFormClone.setAttribute('id', 'newTimelineEventForm')  /// <--- For adding new events to the timeline
+          const newEventForm = editForm.cloneNode(true)
+          newEventForm.setAttribute('id', 'newTimelineEventForm')  /// <--- For adding new events to the timeline
           // add a title
-          editFormClone.querySelector('legend').innerText = 'New Event'
+          newEventForm.querySelector('legend').innerText = 'New Event'
           // Add the base "New Entry" form to the timeline
           document.getElementById('timeline').querySelector('ul')
-            .insertAdjacentElement('afterbegin', editFormClone)
+            .insertAdjacentElement('afterbegin', newEventForm)
           // create edit button clone
           const createNewEventBtn = editButton.cloneNode(true)
           createNewEventBtn.setAttribute('class', 'fa fa-edit')
@@ -264,11 +268,11 @@ document.addEventListener('DOMContentLoaded', function () {
           document.getElementById('timeline').insertAdjacentElement('afterbegin', createNewEventBtn)
          
           // add an event listener to the form
-          editFormClone.addEventListener('submit', (e) => {
+          newEventForm.addEventListener('submit', (e) => {
             // create a new event in the timeline
             e.preventDefault()
-            const date = editFormClone.querySelector('input').value
-            const description = editFormClone.querySelector('textarea').value
+            const date = newEventForm.querySelector('input').value
+            const description = newEventForm.querySelector('textarea').value
             // add the event to the timeline object
             CRUD.create('ghost-timeline', { date, description }).then((event) => {
               console.log({ event })
@@ -308,15 +312,11 @@ document.addEventListener('DOMContentLoaded', function () {
               // stop the edit mode
               document.getElementById('timeline').removeAttribute('is-editing')
               // clear form
-              editFormClone.reset()
+              newEventForm.reset()
             })
           })
 
-          // Use delegation to handle the edit button
-          document.addEventListener('click', (e) => {
-        
-
-          })
+       
 
           // loop through all the event and add a local edit button and edit form (which populates the form with the event data)
           document.querySelectorAll('#timeline li').forEach(event => {
@@ -346,17 +346,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
             // clone the form to the event
-            const editFormClone = editForm.cloneNode(true)
-            editFormClone.classList.add('editTimelineForm')
+            const editEventForm = editForm.cloneNode(true)
+            editEventForm.classList.add('editTimelineForm')
             // add a title
-            editFormClone.querySelector('legend').innerText = 'Editing an event'
+            editEventForm.querySelector('legend').innerText = 'Editing an event'
             const date = new Date(eventData.date + `, ${configDocument.activeYear}`)
             // console.log({ date })
-            editFormClone.querySelector('input').value = date.toISOString().split('T')[0];
-            editFormClone.querySelector('textarea').value = eventData.description
+            editEventForm.querySelector('input').value = date.toISOString().split('T')[0];
+            editEventForm.querySelector('textarea').value = eventData.description
             
+            editEventForm.querySelector('button[type=submit]').setAttribute('id', 'updateEvent')
 
-            event.appendChild(editFormClone)
+            event.appendChild(editEventForm)
 
           })
 
