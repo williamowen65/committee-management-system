@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded',  function () {
                 // clone the form to the event
                 const editFormClone = editForm.cloneNode(true)
                 editFormClone.classList.add('editTimelineForm')
-                editFormClone.querySelector('input').value = new Date(eventData.date)
+                editFormClone.querySelector('input').value = new Date(eventData.date).toISOString().split('T')[0];
                 editFormClone.querySelector('textarea').value = eventData.description
                 event.appendChild(editFormClone)
                 
