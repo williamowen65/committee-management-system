@@ -206,6 +206,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if(e.target.classList.contains('deleteTimelineEvent')){
               const li = e.target.closest('li')
+
+              // get confirmation
+              if(!confirm('Are you sure you want to delete this event?')) return
+
               const fbId = li.getAttribute('data-id')
               CRUD.delete('ghost-timeline', fbId).then(() => {
                 // remove the event from the timeline object
