@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function () {
               // update the event in the database
               CRUD.update('ghost-timeline', eventId, { date, description }).then(() => {
                 // update the display
-                const [year, month, day] = dateInput.split('-');
+                const [year, month, day] = dateInput.value.split('-');
                 const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
                 console.log(date);
 
