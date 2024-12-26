@@ -88,7 +88,8 @@ document.addEventListener('DOMContentLoaded', function () {
               const changeYearBtn = document.createElement('a')
               changeYearBtn.setAttribute('type', 'button')
               changeYearBtn.setAttribute('class', 'fa fa-calendar')
-              changeYearBtn.innerHTML = '<small style="margin-left: 10px">Change Year</small>'
+              changeYearBtn.setAttribute('style', 'margin-left: 10px')
+              changeYearBtn.innerHTML = '<small style="margin-left: 10px"></small>'
               changeYearBtn.addEventListener('click', () => {
                 activeYearContainer.toggleAttribute('is-editing')
               })
