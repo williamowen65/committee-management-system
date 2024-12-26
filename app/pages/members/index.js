@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const li = document.createElement('li')
             console.log({ event })
             li.innerHTML = `
-            <b>${event.date}</b>
-            <p>${event.description}</p>
+            <strong>${event.date}: </strong>
+            ${event.description}
             `
             timelineContainer.querySelector('ul').appendChild(li)
           })
