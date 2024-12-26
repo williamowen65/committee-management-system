@@ -74,6 +74,8 @@ window.CRUD = {
     },
     delete: async function (id) {
         console.log("delete data", id)
+        const docRef = firebase.doc(firebase.collection(firebase.db, 'users'), id)
+        return await firebase.deleteDoc(docRef)
     },
     /**
      * Saves an image to Firebase Storage and returns the download URL.
