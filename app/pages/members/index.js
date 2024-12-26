@@ -213,8 +213,27 @@ document.addEventListener('DOMContentLoaded', function () {
             // get the parent #timeline container and add the edit form
             const timeline = document.getElementById('timeline')
             timeline.toggleAttribute('is-editing')
+          })
+          // add an event listener to the form
+          editFormClone.addEventListener('submit', (e) => {
+            // create a new event in the timeline
+            e.preventDefault()
+            const date = editFormClone.querySelector('input').value
+            const description = editFormClone.querySelector('textarea').value
+            // add the event to the timeline object
+            CRUD.create('ghost-timeline', { date, description }).then((event) => {
+              // add the event to the timeline object
+              timeline[event.fbId] = event
+              // add the event to the timeline
+              const li = document.createElement('li')
+              li.setAttribute('data-id', event.fbId)
+              li.innerHTML = `new event`
 
-
+              // stop the edit mode
+              document.getElementById('timeline').removeAttribute('is-editing')
+              // clear form
+                editFormClone.reset()
+            })
           })
 
           // loop through all the event and add a local edit button and edit form (which populates the form with the event data)
