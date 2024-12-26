@@ -223,12 +223,17 @@ document.addEventListener('DOMContentLoaded', function () {
             // add the event to the timeline object
             CRUD.create('ghost-timeline', { date, description }).then((event) => {
               console.log({ event })
+              // const id = event.id
               // add the event to the timeline object
-              // timeline[event.fbId] = event
+              timeline[event.id] = event
               // add the event to the timeline
               const li = document.createElement('li')
-              // li.setAttribute('data-id', event.fbId)
-              li.innerHTML = `new event`
+              li.setAttribute('data-id', event.id)
+              li.innerHTML = event.description
+              // Append it in the correct position of the timeline
+              
+
+              document.getElementById('timeline').querySelector('ul').appendChild(li)
 
               // stop the edit mode
               document.getElementById('timeline').removeAttribute('is-editing')
