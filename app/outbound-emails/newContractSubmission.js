@@ -1,4 +1,3 @@
-import { firebase } from "googleapis/build/src/apis/firebase"
 
 export function sendNewContractSubmissionEmail(user, transaction){
     
