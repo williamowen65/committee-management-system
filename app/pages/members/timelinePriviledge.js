@@ -4,89 +4,10 @@ export function enableTimelinePrivileges(configDocument, timeline) {
 
     const { editButton, editForm } = createTemplates()
 
+    setEventDelegation()
 
 
 
-
-    // Using event delegation to handle the cancel button
-    document.addEventListener('click', (e) => {
-        // if the target has the class cancelTimelineEdit
-        if (e.target.classList.contains('cancelTimelineEdit')) {
-            // change out of edit mode
-            e.target.closest('*[is-editing]').removeAttribute('is-editing')
-
-            // reset the form to the original values
-            const li = e.target.closest('li')
-            const eventId = li.getAttribute('data-id')
-            const eventData = timeline[eventId]
-
-            li.querySelector('input').value = new Date(eventData.date + `, ${configDocument.activeYear}`).toISOString().split('T')[0]
-            li.querySelector('textarea').value = eventData.description
-
-        }
-
-
-        if (e.target.classList.contains('deleteTimelineEvent')) {
-            const li = e.target.closest('li')
-
-            // get confirmation
-            if (!confirm('Are you sure you want to delete this event?')) return
-
-            const fbId = li.getAttribute('data-id')
-            CRUD.delete('ghost-timeline', fbId).then(() => {
-                // remove the event from the timeline object
-                delete timeline[fbId]
-                // remove the event from the timeline
-                li.remove()
-            })
-        }
-
-        if (e.target.closest('#editTimeline')) {
-            // get the parent #timeline container and add the edit form
-            const timeline = document.getElementById('timeline')
-            timeline.toggleAttribute('is-editing')
-        }
-
-        if (e.target.classList.contains('editEvent')) {
-            // make sure none of the other events are in edit mode
-            document.querySelectorAll('#timeline li').forEach(event => {
-                event.removeAttribute('is-editing')
-            })
-            const li = e.target.closest('li')
-            li.toggleAttribute('is-editing')
-        }
-
-        if (e.target.closest('#updateEvent')) {
-            const li = e.target.closest('li');
-            const eventId = li.getAttribute('data-id');
-            const dateInput = li.querySelector('input')
-            const date = dateInput.value;
-            const description = li.querySelector('textarea').value;
-
-            // update the event in the timeline object
-            timeline[eventId].date = date;
-            timeline[eventId].description = description;
-
-            // update the event in the database
-            CRUD.update('ghost-timeline', eventId, { date, description }).then(() => {
-                // update the display
-                const [year, month, day] = dateInput.value.split('-');
-                const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
-                console.log(date);
-
-                li.querySelector('.contentContainer').innerHTML = `
-            <strong>${new Date(date).toLocaleDateString('en-us', { month: 'long', day: 'numeric' })}: </strong>
-            ${description}
-          `;
-                // exit edit mode
-                li.removeAttribute('is-editing');
-
-                appendCurrentTimeline()
-            });
-        }
-
-
-    })
 
 
     // make a clone of the form to add to the timeline
@@ -338,6 +259,89 @@ export function enableTimelinePrivileges(configDocument, timeline) {
 
 
         activeYearContainer.insertAdjacentElement('beforeend', changeYearForm)
+
+    }
+
+    function setEventDelegation() {
+        // Using event delegation to handle the cancel button
+        document.addEventListener('click', (e) => {
+            // if the target has the class cancelTimelineEdit
+            if (e.target.classList.contains('cancelTimelineEdit')) {
+                // change out of edit mode
+                e.target.closest('*[is-editing]').removeAttribute('is-editing')
+
+                // reset the form to the original values
+                const li = e.target.closest('li')
+                const eventId = li.getAttribute('data-id')
+                const eventData = timeline[eventId]
+
+                li.querySelector('input').value = new Date(eventData.date + `, ${configDocument.activeYear}`).toISOString().split('T')[0]
+                li.querySelector('textarea').value = eventData.description
+
+            }
+
+
+            if (e.target.classList.contains('deleteTimelineEvent')) {
+                const li = e.target.closest('li')
+
+                // get confirmation
+                if (!confirm('Are you sure you want to delete this event?')) return
+
+                const fbId = li.getAttribute('data-id')
+                CRUD.delete('ghost-timeline', fbId).then(() => {
+                    // remove the event from the timeline object
+                    delete timeline[fbId]
+                    // remove the event from the timeline
+                    li.remove()
+                })
+            }
+
+            if (e.target.closest('#editTimeline')) {
+                // get the parent #timeline container and add the edit form
+                const timeline = document.getElementById('timeline')
+                timeline.toggleAttribute('is-editing')
+            }
+
+            if (e.target.classList.contains('editEvent')) {
+                // make sure none of the other events are in edit mode
+                document.querySelectorAll('#timeline li').forEach(event => {
+                    event.removeAttribute('is-editing')
+                })
+                const li = e.target.closest('li')
+                li.toggleAttribute('is-editing')
+            }
+
+            if (e.target.closest('#updateEvent')) {
+                const li = e.target.closest('li');
+                const eventId = li.getAttribute('data-id');
+                const dateInput = li.querySelector('input')
+                const date = dateInput.value;
+                const description = li.querySelector('textarea').value;
+
+                // update the event in the timeline object
+                timeline[eventId].date = date;
+                timeline[eventId].description = description;
+
+                // update the event in the database
+                CRUD.update('ghost-timeline', eventId, { date, description }).then(() => {
+                    // update the display
+                    const [year, month, day] = dateInput.value.split('-');
+                    const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
+                    console.log(date);
+
+                    li.querySelector('.contentContainer').innerHTML = `
+        <strong>${new Date(date).toLocaleDateString('en-us', { month: 'long', day: 'numeric' })}: </strong>
+        ${description}
+      `;
+                    // exit edit mode
+                    li.removeAttribute('is-editing');
+
+                    appendCurrentTimeline()
+                });
+            }
+
+
+        })
 
     }
 
