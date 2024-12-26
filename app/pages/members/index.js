@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
               <li >
                 <input  type="date" ><br>
                 <input  type="text" placeholder="Description">
-                <button type="submit">Save</button>
+                <button class="small" type="submit">Save</button>
               </li>
               `
               document.getElementById('timeline').querySelector('ul').insertAdjacentElement('afterbegin', editForm)
