@@ -171,9 +171,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 editFormClone.classList.add('editTimelineForm')
                 // add a title
                 editFormClone.querySelector('legend').innerText = 'Editing an event'
-                // const date = new Date(eventData.date + `, ${new Date().getFullYear()}`)
+                const date = new Date(eventData.date + `, ${configDocument.activeYear}`)
                 // console.log({ date })
-                // editFormClone.querySelector('input').value = date.toISOString().split('T')[0];
+                editFormClone.querySelector('input').value = date.toISOString().split('T')[0];
                 editFormClone.querySelector('textarea').value = eventData.description
                 event.appendChild(editFormClone)
 
