@@ -356,6 +356,11 @@ document.addEventListener('DOMContentLoaded', function () {
             editEventForm.querySelector('textarea').value = eventData.description
             
             editEventForm.querySelector('button[type=submit]').setAttribute('id', 'updateEvent')
+            // add the form to the event
+            editEventForm.addEventListener('submit', (e) => {
+              e.preventDefault()
+              // event wired up via button (delegated event listener)
+            })
 
             event.appendChild(editEventForm)
 
