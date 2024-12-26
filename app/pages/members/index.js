@@ -44,8 +44,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
               const editForm = document.createElement('form')
               editForm.setAttribute('id', 'editForm')
+              editForm.classList.add('ifEditing')
               editForm.innerHTML = `
-              <li class="ifEditing">
+              <li class="row">
                 <input type="text" placeholder="Date">
                 <input type="text" placeholder="Description">
               </li>
