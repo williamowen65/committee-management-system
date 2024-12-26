@@ -191,30 +191,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
               `
 
-              // Using event delegation to handle the cancel button
-              document.addEventListener('click', (e) => { 
-                // if the target has the class cancelTimelineEdit
-                if(e.target.classList.contains('cancelTimelineEdit')){
-                  // change out of edit mode
-                  e.target.closest('*[is-editing]').removeAttribute('is-editing')
-                }
-              })
-            
+          // Using event delegation to handle the cancel button
+          document.addEventListener('click', (e) => {
+            // if the target has the class cancelTimelineEdit
+            if (e.target.classList.contains('cancelTimelineEdit')) {
+              // change out of edit mode
+              e.target.closest('*[is-editing]').removeAttribute('is-editing')
+            }
+          })
+
 
           // make a clone of the form to add to the timeline
           const editFormClone = editForm.cloneNode(true)
-          editFormClone.setAttribute('id', 'newTimelineEventForm')
+          editFormClone.setAttribute('id', 'newTimelineEventForm')  /// <--- For adding new events to the timeline
           // add a title
           editFormClone.querySelector('legend').innerText = 'New Event'
           // Add the base "New Entry" form to the timeline
           document.getElementById('timeline').querySelector('ul')
             .insertAdjacentElement('afterbegin', editFormClone)
           // create edit button clone
-          const editButtonClone = editButton.cloneNode(true)
-          editButtonClone.setAttribute('class', 'fa fa-edit')
-          editButtonClone.setAttribute('id', 'editTimeline')
-          document.getElementById('timeline').insertAdjacentElement('afterbegin', editButtonClone)
-          editButtonClone.addEventListener('click', () => {
+          const createNewEventBtn = editButton.cloneNode(true)
+          createNewEventBtn.setAttribute('class', 'fa fa-edit')
+          createNewEventBtn.setAttribute('id', 'editTimeline')
+          document.getElementById('timeline').insertAdjacentElement('afterbegin', createNewEventBtn)
+          createNewEventBtn.addEventListener('click', () => {
             // get the parent #timeline container and add the edit form
             const timeline = document.getElementById('timeline')
             timeline.toggleAttribute('is-editing')
@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
               // stop the edit mode
               document.getElementById('timeline').removeAttribute('is-editing')
               // clear form
-                editFormClone.reset()
+              editFormClone.reset()
             })
           })
 
@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-       
+
 
         }
 
