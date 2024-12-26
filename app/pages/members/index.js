@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
           const timelineContainer = document.getElementById('timeline')
           timeline.forEach(event => {
             const li = document.createElement('li')
-            console.log({ event })
             li.innerHTML = `
             <strong>${event.date}: </strong>
             ${event.description}
@@ -47,9 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         function applyPrivileges(userRoles) {
-          console.log({ userRoles })
           Object.values(userRoles).forEach(role => {
-            console.log({ role })
             if(role.privileges && role.privileges.includes('editTimeline')){
 
               const editButton = document.createElement('a')
@@ -92,6 +89,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
               // loop through all the event and add a local edit button and edit form (which populates the form with the event data)
               document.querySelectorAll('#timeline li').forEach(event => {
+
+                console.log('cloning button to li',{ event })
+
                 const editButtonClone = editButton.cloneNode(true)
                 event.insertAdjacentElement('afterbegin', editButtonClone)
                 editButtonClone.addEventListener('click', (e) => {
