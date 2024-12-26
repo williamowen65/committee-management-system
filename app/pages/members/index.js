@@ -286,10 +286,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 timelineEl.querySelector('ul').appendChild(event)
               })
               
-              
-
-
-              document.getElementById('timeline').querySelector('ul').appendChild(li)
 
               // stop the edit mode
               document.getElementById('timeline').removeAttribute('is-editing')
