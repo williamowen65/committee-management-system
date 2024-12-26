@@ -258,6 +258,10 @@ document.addEventListener('DOMContentLoaded', function () {
               // update the event in the database
               CRUD.update('ghost-timeline', eventId, { date, description }).then(() => {
                 // update the display
+                const [year, month, day] = dateInput.split('-');
+                const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
+                console.log(date);
+
                 li.querySelector('.contentContainer').innerHTML = `
                   <strong>${new Date(date).toLocaleDateString('en-us', { month: 'long', day: 'numeric' })}: </strong>
                   ${description}
