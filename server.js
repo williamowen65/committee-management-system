@@ -47,6 +47,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 app.use('/utils', express.static(path.join(__dirname, 'utils')));
 app.use('/outbound-emails', express.static(path.join(__dirname, 'app/outbound-emails')));
+app.get('/committee-role.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'app/pages/my-contract/committee-role.js'));
+})
 
 app.get('/', (req, res) => {   
     res.redirect('/members')
