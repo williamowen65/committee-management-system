@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   }).join('')}
                 </select>
                 `
+              document.querySelector('#activeYear').insertAdjacentElement('before end', changeYearForm)
             
 
 
