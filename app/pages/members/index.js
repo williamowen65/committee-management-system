@@ -172,9 +172,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 <fieldset>
                   <legend></legend>
 
-                <input type="date" min="${configDocument.activeYear}-01-01" max="${configDocument.activeYear}-12-31"><br>
+                <input required type="date" min="${configDocument.activeYear}-01-01" max="${configDocument.activeYear}-12-31"><br>
 
-                 <textarea style="width:100%" type="text" placeholder="Description"></textarea>
+                 <textarea required style="width:100%" type="text" placeholder="Description"></textarea>
 
                   <br>
 
