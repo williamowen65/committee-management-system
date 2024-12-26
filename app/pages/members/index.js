@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded',  function () {
           const timelineContainer = document.getElementById('timeline')
           timeline.forEach(event => {
             const li = document.createElement('li')
+            li.setAttribute('data-id', event.fbId)
             li.innerHTML = `
             <strong>${event.date}: </strong>
             ${event.description}
