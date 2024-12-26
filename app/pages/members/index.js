@@ -320,18 +320,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // event wired up via button (delegated event listener)
               })
               // Append it in the correct position of the timeline (TODO <------------------------------)
-
-              // find the correct spot to insert the new event
-              const timelineEl = document.getElementById('timeline')
-              const events = Array.from(timelineEl.querySelectorAll('li')).concat(li)
-              events.sort((a, b) => new Date(b.querySelector('input[type=date]').value) - new Date(a.querySelector('input[type=date]').value)).reverse()
-
-              // remove all the events
-              timelineEl.querySelector('ul').innerHTML = ''
-              // add the events back in the correct order
-              events.forEach(event => {
-                timelineEl.querySelector('ul').appendChild(event)
-              })
+              appendCurrentTimeline()
 
 
               // stop the edit mode
@@ -340,6 +329,20 @@ document.addEventListener('DOMContentLoaded', function () {
               newEventForm.reset()
             })
           })
+
+          function appendCurrentTimeline(){
+             // find the correct spot to insert the new event
+             const timelineEl = document.getElementById('timeline')
+             const events = Array.from(timelineEl.querySelectorAll('li')).concat(li)
+             events.sort((a, b) => new Date(b.querySelector('input[type=date]').value) - new Date(a.querySelector('input[type=date]').value)).reverse()
+
+             // remove all the events
+             timelineEl.querySelector('ul').innerHTML = ''
+             // add the events back in the correct order
+             events.forEach(event => {
+               timelineEl.querySelector('ul').appendChild(event)
+             })
+          }
 
 
 
