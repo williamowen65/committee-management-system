@@ -4,7 +4,7 @@ import '../../../utils/logIf.js'
 const timeline = {}
 const userRoles = {}
 
-document.addEventListener('DOMContentLoaded',  function () {
+document.addEventListener('DOMContentLoaded', function () {
   firebase.redirectIfNotLoggedIn('/artist-sign-on')
     .then(async (user) => {
       if (user) {
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded',  function () {
         userDiv.querySelector('#username').innerHTML = `Hello, ${user.displayName}`
 
 
-      
+
 
         // Add timeline event from the database to the timeline
         await CRUD.readAll('ghost-timeline').then(ghostTimeline => {
@@ -36,25 +36,25 @@ document.addEventListener('DOMContentLoaded',  function () {
           })
         })
 
-          // Get the GHOST contract for the user
-          CRUD.read('ghost-contracts', user.uid).then(contract => {
-            logIf.client && console.log(contract)
-            // Get role name
-            contract.committeeRoleId = contract.committeeRoleId || []
-  
-            // Also assigns userRoles object
-            const sidePanel = getGhostSidePanel(contract.committeeRoleId)
-  
-            applyPrivileges(userRoles)
-  
-            document.querySelector('#user-role').innerHTML = `<h3>My Committee Role${contract.committeeRoleId.length > 1 ? 's' : ''}:</h3>${sidePanel.trim() ? sidePanel : 'No role assigned'}`
-          })
+        // Get the GHOST contract for the user
+        CRUD.read('ghost-contracts', user.uid).then(contract => {
+          logIf.client && console.log(contract)
+          // Get role name
+          contract.committeeRoleId = contract.committeeRoleId || []
+
+          // Also assigns userRoles object
+          const sidePanel = getGhostSidePanel(contract.committeeRoleId)
+
+          applyPrivileges(userRoles)
+
+          document.querySelector('#user-role').innerHTML = `<h3>My Committee Role${contract.committeeRoleId.length > 1 ? 's' : ''}:</h3>${sidePanel.trim() ? sidePanel : 'No role assigned'}`
+        })
 
 
         function applyPrivileges(userRoles) {
           Object.values(userRoles).forEach(role => {
-            if(role.privileges && role.privileges.includes('editTimeline')){
-              
+            if (role.privileges && role.privileges.includes('editTimeline')) {
+
               // add a way to change the selected year
               const changeYearBtn = document.createElement('a')
               changeYearBtn.setAttribute('type', 'button')
@@ -78,12 +78,12 @@ document.addEventListener('DOMContentLoaded',  function () {
                 // })
               })
               document.querySelector('#timeline .header').insertAdjacentElement('beforeend', changeYearBtn)
-              
+
 
               // Create a template button
               const editButton = document.createElement('a')
               editButton.setAttribute('type', 'button')
-           
+
               // Create a template form
               const editForm = document.createElement('form')
               editForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded',  function () {
               editFormClone.setAttribute('id', 'newTimelineEventForm')
               // Add the base "New Entry" form to the timeline
               document.getElementById('timeline').querySelector('ul')
-              .insertAdjacentElement('afterbegin', editFormClone)
+                .insertAdjacentElement('afterbegin', editFormClone)
               // create edit button clone
               const editButtonClone = editButton.cloneNode(true)
               editButtonClone.setAttribute('class', 'fa fa-edit')
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded',  function () {
                 // get the event data from the time line object
                 const eventData = timeline[eventId]
 
-                console.log('cloning button to li',{ event })
+                console.log('cloning button to li', { event })
 
                 // create container around the content of the li
                 const contentContainer = document.createElement('span')
@@ -142,6 +142,10 @@ document.addEventListener('DOMContentLoaded',  function () {
                 editButtonClone.setAttribute('class', 'fa fa-pen')
                 event.insertAdjacentElement('afterbegin', editButtonClone)
                 editButtonClone.addEventListener('click', (e) => {
+                  // make sure none of the other events are in edit mode
+                  document.querySelectorAll('#timeline li').forEach(event => {
+                    event.removeAttribute('is-editing')
+                  })
                   const li = e.target.closest('li')
                   li.toggleAttribute('is-editing')
                 })
@@ -154,14 +158,14 @@ document.addEventListener('DOMContentLoaded',  function () {
                 // editFormClone.querySelector('input').value = date.toISOString().split('T')[0];
                 editFormClone.querySelector('textarea').value = eventData.description
                 event.appendChild(editFormClone)
-                
+
               })
 
-              
 
-              
+
+
             }
-       
+
           })
         }
 
@@ -394,7 +398,7 @@ function processContractsToPdf() {
 
 
 
-        
+
 function newApplicationsSidePanel(role) {
 
   setTimeout(() => {
@@ -571,7 +575,7 @@ function textProcessToSheetsButton(role) {
       const contracts = await CRUD.readAll('ghost-contracts').then(contracts => {
         return contracts.map(contract => {
           console.log({ contract })
-            return {
+          return {
             "GHOST Member Id": contract?.userId || "",
             "First Name": contract?.artistDetails?.firstName || "",
             "Last Name": contract?.artistDetails?.lastName || "",
@@ -588,7 +592,7 @@ function textProcessToSheetsButton(role) {
             'Digital Image 2': contract?.images?.digitalImage2 || "",
             'Digital Image 3': contract?.images?.digitalImage3 || "",
             'Artist in Studio Image': contract?.images?.artistInStudioImage || "",
-            }
+          }
         })
       })
 
