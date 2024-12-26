@@ -20,9 +20,9 @@ export async function  sendTestEmail(){
     if(typeof specialTimelineEvent.date === 'string'){
 
         date = new Date(specialTimelineEvent.date)
-    } else {
-        date = specialTimelineEvent.date.toDate().toLocaleDateString('en-us', {month: 'long', day: 'numeric'})
     }
+       
+    date = specialTimelineEvent.date.toDate().toLocaleDateString('en-us', {month: 'long', day: 'numeric'})
 
     window.sendMessageToParent({
         controller: 'gmailController',
