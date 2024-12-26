@@ -1,4 +1,4 @@
-export function sendNewApplicationEmail(values){
+export async function sendNewApplicationEmail(values){
 
     const newArtist = values
     // get all board members
