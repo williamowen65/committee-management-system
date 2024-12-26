@@ -175,8 +175,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     </fieldset>
 
-                     `
-                </fieldset>
               `
               // make a clone of the form to add to the timeline
               const editFormClone = editForm.cloneNode(true)
