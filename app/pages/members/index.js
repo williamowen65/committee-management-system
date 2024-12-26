@@ -47,8 +47,9 @@ document.addEventListener('DOMContentLoaded', function () {
               editForm.classList.add('ifEditing')
               editForm.innerHTML = `
               <li >
-                <input  type="date" >
+                <input  type="date" ><br>
                 <input  type="text" placeholder="Description">
+                <button type="submit">Save</button>
               </li>
               `
               document.getElementById('timeline').querySelector('ul').insertAdjacentElement('afterbegin', editForm)
