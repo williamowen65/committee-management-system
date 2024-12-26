@@ -209,6 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
               const li = e.target.closest('li')
               const eventId = li.getAttribute('data-id')
               const eventData = timeline[eventId]
+              
               li.querySelector('input').value = new Date(eventData.date + `, ${configDocument.activeYear}`).toISOString().split('T')[0]
               li.querySelector('textarea').value = eventData.description
 
@@ -307,10 +308,12 @@ document.addEventListener('DOMContentLoaded', function () {
               // add the event to the timeline
               const li = document.createElement('li')
               li.setAttribute('data-id', event.id)
+              const [year, month, day] = dateInput.value.split('-');
+              const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
               li.innerHTML = `
                 <a type="button" class="fa fa-pen editEvent"></a>
                 <span class="contentContainer">
-                <strong>${new Date(date).toLocaleDateString('en-us', { month: 'long', day: 'numeric' })}: </strong>
+                <strong>${date.toLocaleDateString('en-us', { month: 'long', day: 'numeric' })}: </strong>
                 ${description}
                 </span>
                 <form class="editTimelineForm ifEditing">
