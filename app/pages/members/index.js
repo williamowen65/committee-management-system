@@ -179,6 +179,8 @@ document.addEventListener('DOMContentLoaded', function () {
                   <br>
 
                    <button class="small" type="submit">Save</button>
+                   <button class="small" >Cancel</button>
+
 
                     </fieldset>
 
