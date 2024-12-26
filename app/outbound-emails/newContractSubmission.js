@@ -39,6 +39,7 @@ export async function sendNewContractSubmissionBoardEmail(user, transaction){
     
     const contracts  = await CRUD.readAll('ghost-contracts')
 
+    const email = user.artistDetails.personalEmail || user.artistDetails.businessEmail || firebase.auth.currentUser.email
 
     const newArtist = {
         name: `${user.artistDetails.firstName} ${user.artistDetails.lastName}`,
@@ -66,8 +67,8 @@ export async function sendNewContractSubmissionBoardEmail(user, transaction){
       window.sendMessageToParent({
         controller: 'gmailController',
         // To all the board member and artist images chair emails
-        to: welcomeEmailAddress,
-        // to: 'bluekayak123@yahoo.com, william.owen.dev@gmail.com', // <---TESTING
+        // to: welcomeEmailAddress,
+        to: 'william.owen.dev@gmail.com', // <---TESTING
         subject: `GHOST Contract Payment Submitted by ${newArtist.name}`,
         body: `
          <div style="text-align:center">
