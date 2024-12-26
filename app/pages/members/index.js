@@ -222,6 +222,12 @@ document.addEventListener('DOMContentLoaded', function () {
               })
             }
 
+            if(e.target.classList.contains('editTimeline')){
+                // get the parent #timeline container and add the edit form
+                const timeline = document.getElementById('timeline')
+                timeline.toggleAttribute('is-editing')
+            }
+
 
           })
 
@@ -239,11 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
           createNewEventBtn.setAttribute('class', 'fa fa-edit')
           createNewEventBtn.setAttribute('id', 'editTimeline')
           document.getElementById('timeline').insertAdjacentElement('afterbegin', createNewEventBtn)
-          createNewEventBtn.addEventListener('click', () => {
-            // get the parent #timeline container and add the edit form
-            const timeline = document.getElementById('timeline')
-            timeline.toggleAttribute('is-editing')
-          })
+         
           // add an event listener to the form
           editFormClone.addEventListener('submit', (e) => {
             // create a new event in the timeline
