@@ -285,8 +285,8 @@ document.addEventListener('DOMContentLoaded', function () {
           // add a title
           newEventForm.querySelector('legend').innerText = 'New Event'
           // Add the base "New Entry" form to the timeline
-          document.getElementById('timeline')
-            .insertAdjacentElement('afterbegin', newEventForm)
+          document.getElementById('timeline').querySelector('ul')
+            .insertAdjacentElement('beforebegin', newEventForm)
           // create edit button clone
           const createNewEventBtn = editButton.cloneNode(true)
           createNewEventBtn.setAttribute('class', 'fa fa-edit')
