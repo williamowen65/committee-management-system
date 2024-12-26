@@ -296,6 +296,7 @@ document.addEventListener('DOMContentLoaded', function () {
               li.querySelector('textarea').value = description
 
               // add the form to the event
+              li.querySelector('button[type=submit]').setAttribute('id', 'updateEvent')
               li.querySelector('form').addEventListener('submit', (e) => {
                 e.preventDefault()
                 // event wired up via button (delegated event listener)
