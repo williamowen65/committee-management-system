@@ -41,10 +41,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
               document.getElementById('timeline').insertAdjacentElement('afterbegin', editButton)
 
+
+              const editForm = document.createElement('form')
+              editForm.setAttribute('id', 'editForm')
+              editForm.innerHTML = `
+              <li class="ifEditing">
+                <input type="text" placeholder="Date">
+                <input type="text" placeholder="Description">
+              </li>
+              `
+              document.getElementById('timeline').insertAdjacentElement('afterbegin', editForm)
+
               editButton.addEventListener('click', () => {
                 // get the parent #timeline container and add the edit form
                 const timeline = document.getElementById('timeline')
-                timeline.toggleAttribute('isEditing')
+                timeline.toggleAttribute('is-editing')
               })
 
               
