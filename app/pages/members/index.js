@@ -68,6 +68,19 @@ document.addEventListener('DOMContentLoaded', function () {
           Object.values(userRoles).forEach(role => {
             if (role.privileges && role.privileges.includes('editTimeline')) {
 
+              enableTimelinePrivileges()
+
+
+
+
+            }
+
+          })
+        }
+
+
+        function enableTimelinePrivileges(){
+          
               // add a way to change the selected year
               const changeYearBtn = document.createElement('a')
               changeYearBtn.setAttribute('type', 'button')
@@ -179,14 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
               })
 
-
-
-
-            }
-
-          })
         }
-
 
         /**
          * Side Panels are unique based on the role of the user
