@@ -5,7 +5,8 @@ const roles = {
         committee: 'No Committee',
         responsibility: 'Web development and maintenance',
         tasks: [],
-        sideBarButtons: ['testEmail', 'testSheets','processToSheets','createDriveFolder','createDocument','newScholarshipApplications', 'newApplications', 'contracts-received']
+        sideBarButtons: ['testEmail', 'testSheets','processToSheets','createDriveFolder','createDocument','newScholarshipApplications', 'newApplications', 'contracts-received'],
+        privileges: ['editTimeline']
     },
     1: {
         title: 'President',
@@ -13,7 +14,8 @@ const roles = {
         responsibility: 'Oversee all aspects of the organization',
         prerequisite: 'Previous experience in a leadership role',
         tasks: [],
-        sideBarButtons: ['newScholarshipApplications', 'newApplications', 'contracts-received', 'processToSheets']
+        sideBarButtons: ['newScholarshipApplications', 'newApplications', 'contracts-received', 'processToSheets'],
+        privileges: ['editTimeline']
     },
     2: {
         title: 'Vice President',
@@ -21,7 +23,8 @@ const roles = {
         responsibility: 'Assist the President and oversee the committees',
         prerequisite: 'Experience in organizational management',
         tasks: [],
-        sideBarButtons: ['newScholarshipApplications', 'contracts-received']
+        sideBarButtons: ['newScholarshipApplications', 'contracts-received'],
+        privileges: []
     },
     3: {
         title: 'Treasurer',
@@ -29,7 +32,8 @@ const roles = {
         responsibility: "Manage the organization's finances",
         prerequisite: 'Experience in financial management',
         tasks: [],
-        sideBarButtons: ['newScholarshipApplications', 'contracts-received']
+        sideBarButtons: ['newScholarshipApplications', 'contracts-received'],
+        privileges: []
     },
     4: {
         title: 'Secretary',
