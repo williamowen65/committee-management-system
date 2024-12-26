@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded',  function () {
                   contentContainer.appendChild(event.firstChild)
                 }
                 // append the container to the li
+                event.appendChild(contentContainer)
 
 
                 // clone a button to the event
