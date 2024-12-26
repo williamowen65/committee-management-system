@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
           editForm.innerHTML = getTimeLineEditor()
 
           function getTimeLineEditor(options = {}) {
-            console.log('getTimeLineEditor',{ options })
+            console.log('getTimeLineEditor', { options })
             return `
                 <fieldset>
                   <legend></legend>
@@ -215,11 +215,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
 
-            if(e.target.classList.contains('deleteTimelineEvent')){
+            if (e.target.classList.contains('deleteTimelineEvent')) {
               const li = e.target.closest('li')
 
               // get confirmation
-              if(!confirm('Are you sure you want to delete this event?')) return
+              if (!confirm('Are you sure you want to delete this event?')) return
 
               const fbId = li.getAttribute('data-id')
               CRUD.delete('ghost-timeline', fbId).then(() => {
@@ -230,10 +230,10 @@ document.addEventListener('DOMContentLoaded', function () {
               })
             }
 
-            if(e.target.closest('#editTimeline')){
-                // get the parent #timeline container and add the edit form
-                const timeline = document.getElementById('timeline')
-                timeline.toggleAttribute('is-editing')
+            if (e.target.closest('#editTimeline')) {
+              // get the parent #timeline container and add the edit form
+              const timeline = document.getElementById('timeline')
+              timeline.toggleAttribute('is-editing')
             }
 
             if (e.target.classList.contains('editEvent')) {
@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
               li.toggleAttribute('is-editing')
             }
 
-            if(e.target.closest('#updateEvent')){
+            if (e.target.closest('#updateEvent')) {
               alert('update event')
             }
 
@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function () {
           createNewEventBtn.setAttribute('class', 'fa fa-edit')
           createNewEventBtn.setAttribute('id', 'editTimeline')
           document.getElementById('timeline').insertAdjacentElement('afterbegin', createNewEventBtn)
-         
+
           // add an event listener to the form
           newEventForm.addEventListener('submit', (e) => {
             // create a new event in the timeline
@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function () {
               // add the event to the timeline
               const li = document.createElement('li')
               li.setAttribute('data-id', event.id)
-                li.innerHTML = `
+              li.innerHTML = `
                 <a type="button" class="fa fa-pen editEvent"></a>
                 <span class="contentContainer">
                 <strong>${new Date(date).toLocaleDateString('en-us', { month: 'long', day: 'numeric' })}: </strong>
@@ -294,6 +294,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 `
               li.querySelector('input').value = date
               li.querySelector('textarea').value = description
+
+              // add the form to the event
+              li.querySelector('form').addEventListener('submit', (e) => {
+                e.preventDefault()
+                // event wired up via button (delegated event listener)
+              })
               // Append it in the correct position of the timeline (TODO <------------------------------)
 
               // find the correct spot to insert the new event
@@ -307,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function () {
               events.forEach(event => {
                 timelineEl.querySelector('ul').appendChild(event)
               })
-              
+
 
               // stop the edit mode
               document.getElementById('timeline').removeAttribute('is-editing')
@@ -316,7 +322,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
           })
 
-       
+
 
           // loop through all the event and add a local edit button and edit form (which populates the form with the event data)
           document.querySelectorAll('#timeline li').forEach(event => {
@@ -348,13 +354,14 @@ document.addEventListener('DOMContentLoaded', function () {
             // clone the form to the event
             const editEventForm = editForm.cloneNode(true)
             editEventForm.classList.add('editTimelineForm')
+
             // add a title
             editEventForm.querySelector('legend').innerText = 'Editing an event'
             const date = new Date(eventData.date + `, ${configDocument.activeYear}`)
             // console.log({ date })
             editEventForm.querySelector('input').value = date.toISOString().split('T')[0];
             editEventForm.querySelector('textarea').value = eventData.description
-            
+
             editEventForm.querySelector('button[type=submit]').setAttribute('id', 'updateEvent')
             // add the form to the event
             editEventForm.addEventListener('submit', (e) => {
