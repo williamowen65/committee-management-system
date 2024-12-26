@@ -1,85 +1,6 @@
 export function enableTimelinePrivileges(configDocument, timeline) {
 
-    // add a way to change the selected year
-    const activeYearContainer = document.getElementById('activeYear')
-
-    // A button to toggle editing mode
-    const changeYearBtn = document.createElement('a')
-    changeYearBtn.setAttribute('type', 'button')
-    changeYearBtn.setAttribute('class', 'fa fa-calendar')
-    changeYearBtn.setAttribute('style', 'margin-left: 10px')
-    changeYearBtn.innerHTML = '<small style="margin-left: 10px"></small>'
-    changeYearBtn.addEventListener('click', () => {
-      activeYearContainer.toggleAttribute('is-editing')
-    })
-
-
-    // A form to change the year
-    const changeYearForm = document.createElement('form')
-    changeYearForm.setAttribute('id', 'changeYearForm')
-    changeYearForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
-    // Define the form html
-    changeYearForm.innerHTML = `
-         <select>
-            ${Array.from({ length: 3 }, (_, i) => {
-      const year = new Date().getFullYear() - i + 2;
-      return `<option value="${year}">${year}</option>`;
-    }).join('')}
-          </select>
-          <button class="small" type="submit">Save</button>
-          `
-    // select the current year
-    changeYearForm.querySelector('select').value = configDocument.activeYear
-
-    // add an event listener to the form
-    changeYearForm.addEventListener('submit', (e) => {
-      // save to ghost-timeline/configDocument { activeYear: year }
-      e.preventDefault()
-      const year = changeYearForm.querySelector('select').value
-      // set the active year in the configDocument
-      configDocument.activeYear = year
-      // save the configDocument
-      CRUD.update('ghost-timeline', 'configDocument', configDocument).then(() => {
-        // update the active year
-        activeYearContainer.querySelector('.contentContainer .year').innerText = year
-        // // update the active year in the timeline
-        document.getElementById('timeline').querySelectorAll('li').forEach(li => {
-          li.querySelector('input[type=date]').setAttribute('min', `${year}-01-01`)
-          li.querySelector('input[type=date]').setAttribute('max', `${year}-12-31`)
-          // rerender the date input
-          const date = new Date(timeline[li.getAttribute('data-id')].date + `, ${year}`)
-          li.querySelector('input[type=date]').value = date.toISOString().split('T')[0]
-
-          // update the date in the timeline object in the database
-          const fbId = li.getAttribute('data-id')
-          CRUD.update('ghost-timeline', fbId, { date: date.toISOString().split('T')[0] })
-
-        })
-
-        // change out of edit mode
-        activeYearContainer.removeAttribute('is-editing')
-      })
-    })
-
-    // create container around the content of the li
-    const contentContainer = document.createElement('span')
-    contentContainer.setAttribute('class', 'contentContainer')
-    const yearContainer = document.createElement('span')
-    yearContainer.setAttribute('class', 'year')
-    contentContainer.appendChild(yearContainer)
-    // put all the content from the li in the container by moving the nodes
-    while (activeYearContainer.firstChild) {
-      yearContainer.appendChild(activeYearContainer.firstChild)
-    }
-    // append the container to the li
-    activeYearContainer.appendChild(contentContainer)
-    contentContainer.insertAdjacentElement('beforeend', changeYearBtn)
-
-
-
-    activeYearContainer.insertAdjacentElement('beforeend', changeYearForm)
-
-
+    setYearSelection()
 
 
     // Create a template button
@@ -330,3 +251,89 @@ export function enableTimelinePrivileges(configDocument, timeline) {
 
 
   }
+
+
+
+function setYearSelection(){
+
+    
+    // add a way to change the selected year
+    const activeYearContainer = document.getElementById('activeYear')
+
+    // A button to toggle editing mode
+    const changeYearBtn = document.createElement('a')
+    changeYearBtn.setAttribute('type', 'button')
+    changeYearBtn.setAttribute('class', 'fa fa-calendar')
+    changeYearBtn.setAttribute('style', 'margin-left: 10px')
+    changeYearBtn.innerHTML = '<small style="margin-left: 10px"></small>'
+    changeYearBtn.addEventListener('click', () => {
+      activeYearContainer.toggleAttribute('is-editing')
+    })
+
+
+    // A form to change the year
+    const changeYearForm = document.createElement('form')
+    changeYearForm.setAttribute('id', 'changeYearForm')
+    changeYearForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
+    // Define the form html
+    changeYearForm.innerHTML = `
+         <select>
+            ${Array.from({ length: 3 }, (_, i) => {
+      const year = new Date().getFullYear() - i + 2;
+      return `<option value="${year}">${year}</option>`;
+    }).join('')}
+          </select>
+          <button class="small" type="submit">Save</button>
+          `
+    // select the current year
+    changeYearForm.querySelector('select').value = configDocument.activeYear
+
+    // add an event listener to the form
+    changeYearForm.addEventListener('submit', (e) => {
+      // save to ghost-timeline/configDocument { activeYear: year }
+      e.preventDefault()
+      const year = changeYearForm.querySelector('select').value
+      // set the active year in the configDocument
+      configDocument.activeYear = year
+      // save the configDocument
+      CRUD.update('ghost-timeline', 'configDocument', configDocument).then(() => {
+        // update the active year
+        activeYearContainer.querySelector('.contentContainer .year').innerText = year
+        // // update the active year in the timeline
+        document.getElementById('timeline').querySelectorAll('li').forEach(li => {
+          li.querySelector('input[type=date]').setAttribute('min', `${year}-01-01`)
+          li.querySelector('input[type=date]').setAttribute('max', `${year}-12-31`)
+          // rerender the date input
+          const date = new Date(timeline[li.getAttribute('data-id')].date + `, ${year}`)
+          li.querySelector('input[type=date]').value = date.toISOString().split('T')[0]
+
+          // update the date in the timeline object in the database
+          const fbId = li.getAttribute('data-id')
+          CRUD.update('ghost-timeline', fbId, { date: date.toISOString().split('T')[0] })
+
+        })
+
+        // change out of edit mode
+        activeYearContainer.removeAttribute('is-editing')
+      })
+    })
+
+    // create container around the content of the li
+    const contentContainer = document.createElement('span')
+    contentContainer.setAttribute('class', 'contentContainer')
+    const yearContainer = document.createElement('span')
+    yearContainer.setAttribute('class', 'year')
+    contentContainer.appendChild(yearContainer)
+    // put all the content from the li in the container by moving the nodes
+    while (activeYearContainer.firstChild) {
+      yearContainer.appendChild(activeYearContainer.firstChild)
+    }
+    // append the container to the li
+    activeYearContainer.appendChild(contentContainer)
+    contentContainer.insertAdjacentElement('beforeend', changeYearBtn)
+
+
+
+    activeYearContainer.insertAdjacentElement('beforeend', changeYearForm)
+
+}
