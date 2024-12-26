@@ -1,4 +1,4 @@
-import roles from "../pages/my-contract/committee-roles"
+import roles from "/committee-roles"
 
 export function sendNewContractSubmissionEmail(user, transaction){
     
