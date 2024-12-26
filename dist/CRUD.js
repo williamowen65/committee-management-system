@@ -72,9 +72,9 @@ window.CRUD = {
         const docRef = firebase.doc(firebase.collection(firebase.db, collection), id)
         await firebase.setDoc(docRef, data, { merge: true })
     },
-    delete: async function (id) {
+    delete: async function (collection, id) {
         console.log("delete data", id)
-        const docRef = firebase.doc(firebase.collection(firebase.db, 'users'), id)
+        const docRef = firebase.doc(firebase.db, collection, id)
         return await firebase.deleteDoc(docRef)
     },
     /**
