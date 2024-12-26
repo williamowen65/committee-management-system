@@ -259,17 +259,16 @@ document.addEventListener('DOMContentLoaded', function () {
               // add the event to the timeline
               const li = document.createElement('li')
               li.setAttribute('data-id', event.id)
-              li.innerHTML = `
+                li.innerHTML = `
                 <a type="button" class="fa fa-pen editEvent"></a>
                 <span class="contentContainer">
-                <strong>${date}: </strong>
+                <strong>${new Date(date).toLocaleDateString('en-us', { month: 'long', day: 'numeric' })}: </strong>
                 ${description}
                 </span>
                 <form class="editTimelineForm ifEditing">
                 ${getTimeLineEditor()}
                 </form>
-                
-              `
+                `
               li.querySelector('input').value = date
               li.querySelector('textarea').value = description
               // Append it in the correct position of the timeline (TODO <------------------------------)
