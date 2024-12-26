@@ -246,7 +246,25 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             if (e.target.closest('#updateEvent')) {
-              alert('update event')
+              const li = e.target.closest('li');
+              const eventId = li.getAttribute('data-id');
+              const date = li.querySelector('input').value;
+              const description = li.querySelector('textarea').value;
+
+              // update the event in the timeline object
+              timeline[eventId].date = date;
+              timeline[eventId].description = description;
+
+              // update the event in the database
+              CRUD.update('ghost-timeline', eventId, { date, description }).then(() => {
+                // update the display
+                li.querySelector('.contentContainer').innerHTML = `
+                  <strong>${new Date(date).toLocaleDateString('en-us', { month: 'long', day: 'numeric' })}: </strong>
+                  ${description}
+                `;
+                // exit edit mode
+                li.removeAttribute('is-editing');
+              });
             }
 
 
