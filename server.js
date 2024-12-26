@@ -46,6 +46,7 @@ app.post('/api/paypal/order', createOrderMiddleware);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 app.use('/utils', express.static(path.join(__dirname, 'utils')));
+app.use('/outbound-emails', express.static(path.join(__dirname, 'pages/outbound-emails')));
 
 app.get('/', (req, res) => {   
     res.redirect('/members')
