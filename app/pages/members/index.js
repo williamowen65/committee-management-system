@@ -204,6 +204,14 @@ document.addEventListener('DOMContentLoaded', function () {
             if (e.target.classList.contains('cancelTimelineEdit')) {
               // change out of edit mode
               e.target.closest('*[is-editing]').removeAttribute('is-editing')
+
+              // reset the form to the original values
+              const li = e.target.closest('li')
+              const eventId = li.getAttribute('data-id')
+              const eventData = timeline[eventId]
+              li.querySelector('input').value = new Date(eventData.date + `, ${configDocument.activeYear}`).toISOString().split('T')[0]
+              li.querySelector('textarea').value = eventData.description
+
             }
 
 
@@ -226,6 +234,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 // get the parent #timeline container and add the edit form
                 const timeline = document.getElementById('timeline')
                 timeline.toggleAttribute('is-editing')
+            }
+
+            if (e.target.classList.contains('editEvent')) {
+              // make sure none of the other events are in edit mode
+              document.querySelectorAll('#timeline li').forEach(event => {
+                event.removeAttribute('is-editing')
+              })
+              const li = e.target.closest('li')
+              li.toggleAttribute('is-editing')
             }
 
 
@@ -297,14 +314,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
           // Use delegation to handle the edit button
           document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('editEvent')) {
-              // make sure none of the other events are in edit mode
-              document.querySelectorAll('#timeline li').forEach(event => {
-                event.removeAttribute('is-editing')
-              })
-              const li = e.target.closest('li')
-              li.toggleAttribute('is-editing')
-            }
+        
 
           })
 
