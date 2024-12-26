@@ -35,7 +35,7 @@ export async function  sendTestEmail(){
           <h1>A GHOST New Artist Application has been submitted!</h1>
             <p>
             The committee will be reviewing the application.<br>
-            The new artist applicant, ${newArtist.firstName} ${newArtist.lastName}, will receive a notification after the application has been reviewed. 
+            The new artist applicant, <b>${newArtist.firstName} ${newArtist.lastName}</b>, will receive a notification once the application has been reviewed. 
             <br>
             Application must be reviewed no later than ${date}.
             </p>
