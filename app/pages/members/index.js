@@ -4,9 +4,9 @@ import '../../../utils/logIf.js'
 
 const userRoles = {}
 
-document.addEventListener('DOMContentLoaded', async function () {
+document.addEventListener('DOMContentLoaded',  function () {
   firebase.redirectIfNotLoggedIn('/artist-sign-on')
-    .then(user => {
+    .then(async (user) => {
       if (user) {
 
         document.body.style.display = 'block'
