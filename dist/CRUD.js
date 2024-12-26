@@ -54,7 +54,8 @@ window.CRUD = {
                 docData.createdAt = docData.createdAt.toDate().toLocaleDateString()
             }
             if(docData.date){
-                docData.date = docData.date.toDate().toLocaleDateString()
+                const options = { month: 'long', day: 'numeric' };
+                docData.date = docData.date.toDate().toLocaleDateString('en-US', options);
             }
 
             data.push(docData)
