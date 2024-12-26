@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
           // set the year to the configDocument year
           document.getElementById('activeYear').innerText = configDocument.activeYear
 
+
           ghostTimeline = ghostTimeline.sort((a, b) => new Date(b.date) - new Date(a.date)).reverse()
           console.log({ timeline: ghostTimeline })
           const timelineContainer = document.getElementById('timeline')
@@ -47,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Add the event to the timeline object
             timeline[event.fbId] = event
           })
+
         })
 
         // Get the GHOST contract for the user
@@ -122,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // save the configDocument
             CRUD.update('ghost-timeline', 'configDocument', configDocument).then(() => {
               // update the active year
-              activeYearContainer.querySelector('.contentContainer').innerText = year
+              activeYearContainer.querySelector('.contentContainer .year').innerText = year
               // // update the active year in the timeline
               document.getElementById('timeline').querySelectorAll('li').forEach(li => {
                 li.querySelector('input[type=date]').setAttribute('min', `${year}-01-01`)
@@ -145,9 +147,12 @@ document.addEventListener('DOMContentLoaded', function () {
           // create container around the content of the li
           const contentContainer = document.createElement('span')
           contentContainer.setAttribute('class', 'contentContainer')
+          const yearContainer = document.createElement('span')
+          yearContainer.setAttribute('class', 'year')
+          contentContainer.appendChild(yearContainer)
           // put all the content from the li in the container by moving the nodes
           while (activeYearContainer.firstChild) {
-            contentContainer.appendChild(activeYearContainer.firstChild)
+            yearContainer.appendChild(activeYearContainer.firstChild)
           }
           // append the container to the li
           activeYearContainer.appendChild(contentContainer)
@@ -231,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function () {
               li.setAttribute('data-id', event.id)
               li.innerHTML = event.description
               // Append it in the correct position of the timeline
-              
+
 
               document.getElementById('timeline').querySelector('ul').appendChild(li)
 
