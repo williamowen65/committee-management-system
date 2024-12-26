@@ -94,6 +94,15 @@ document.addEventListener('DOMContentLoaded',  function () {
 
                 console.log('cloning button to li',{ event })
 
+                // create container around the content of the li
+                const contentContainer = document.createElement('div')
+                contentContainer.setAttribute('class', 'contentContainer')
+                // put all the content from the li in the container by moving the nodes
+                while (event.firstChild) {
+                  contentContainer.appendChild(event.firstChild)
+                }
+                // append the container to the li
+
 
                 // clone a button to the event
                 const editButtonClone = editButton.cloneNode(true)
@@ -105,11 +114,11 @@ document.addEventListener('DOMContentLoaded',  function () {
                 })
 
                 // clone the form to the event
-                // const editFormClone = editForm.cloneNode(true)
-                // editFormClone.classList.add('editTimelineForm')
+                const editFormClone = editForm.cloneNode(true)
+                editFormClone.classList.add('editTimelineForm')
                 // editFormClone.querySelector('input').value = event.querySelector('strong').innerText
                 // editFormClone.querySelector('textarea').value = event.querySelector('span').innerText
-                // event.appendChild(editFormClone)
+                event.appendChild(editFormClone)
                 
               })
 
