@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
                       // rerender the date input
                       const date = new Date(timeline[li.getAttribute('data-id')].date + `, ${year}`)
                       li.querySelector('input[type=date]').value = date.toISOString().split('T')[0]
-                      
+
                     })
 
                     // change out of edit mode
@@ -165,6 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
               editForm.classList.add('ifEditing') // <--- Conditionally show the element based on the parent attribute
               // Define the form html
                 editForm.innerHTML = `
+                <fieldset>
                   <legend></legend>
 
                 <input type="date" min="${configDocument.activeYear}-01-01" max="${configDocument.activeYear}-12-31"><br>
