@@ -297,10 +297,10 @@ document.addEventListener('DOMContentLoaded', function () {
           newEventForm.addEventListener('submit', (e) => {
             // create a new event in the timeline
             e.preventDefault()
-            const date = newEventForm.querySelector('input').value
+            const dateVal = newEventForm.querySelector('input').value
             const description = newEventForm.querySelector('textarea').value
             // add the event to the timeline object
-            CRUD.create('ghost-timeline', { date, description }).then((event) => {
+            CRUD.create('ghost-timeline', { date: dateVal, description }).then((event) => {
               console.log({ event })
               // const id = event.id
               // add the event to the timeline object
@@ -308,19 +308,19 @@ document.addEventListener('DOMContentLoaded', function () {
               // add the event to the timeline
               const li = document.createElement('li')
               li.setAttribute('data-id', event.id)
-              const [year, month, day] = date.split('-');
-              const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
+              const [year, month, day] = dateVal.split('-');
+              const dateObj = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
               li.innerHTML = `
                 <a type="button" class="fa fa-pen editEvent"></a>
                 <span class="contentContainer">
-                <strong>${date.toLocaleDateString('en-us', { month: 'long', day: 'numeric' })}: </strong>
+                <strong>${dateObj.toLocaleDateString('en-us', { month: 'long', day: 'numeric' })}: </strong>
                 ${description}
                 </span>
                 <form class="editTimelineForm ifEditing">
                 ${getTimeLineEditor()}
                 </form>
                 `
-              li.querySelector('input').value = date
+              li.querySelector('input').value = dateObj
               li.querySelector('textarea').value = description
 
               // add the form to the event
