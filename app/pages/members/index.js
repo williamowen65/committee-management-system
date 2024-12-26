@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
               // add the event to the timeline
               const li = document.createElement('li')
               li.setAttribute('data-id', event.id)
-              const [year, month, day] = dateInput.value.split('-');
+              const [year, month, day] = date.split('-');
               const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript
               li.innerHTML = `
                 <a type="button" class="fa fa-pen editEvent"></a>
