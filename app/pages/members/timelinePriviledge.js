@@ -22,7 +22,7 @@ export function enableTimelinePrivileges(configDocument, timeline) {
             events.concat(li)
         }
         events.sort((a, b) => new Date(b.querySelector('input[type=date]').value) - new Date(a.querySelector('input[type=date]').value)).reverse()
-
+        console.log({ events })
         // remove all the events
         timelineEl.querySelector('ul').innerHTML = ''
         // add the events back in the correct order
