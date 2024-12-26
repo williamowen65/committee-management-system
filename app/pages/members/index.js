@@ -81,12 +81,15 @@ document.addEventListener('DOMContentLoaded', function () {
               // Add the base "New Entry" form to the timeline
               document.getElementById('timeline').querySelector('ul')
               .insertAdjacentElement('afterbegin', editFormClone)
-
-              editButton.addEventListener('click', () => {
+              // create edit button clone
+              const editButtonClone = editButton.cloneNode(true)
+              editButtonClone.addEventListener('click', () => {
                 // get the parent #timeline container and add the edit form
                 const timeline = document.getElementById('timeline')
                 timeline.toggleAttribute('is-editing')
               })
+
+              
 
               
             }
