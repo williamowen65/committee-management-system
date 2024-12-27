@@ -101,7 +101,7 @@ ${studioSharingResponse}
             Yes, I would like an artist mentor
         </label>
         <label for="noArtistMentor-${randomId}">
-            <input disabled ${artistMentor == "Yes, I would like an artist mentor" ? "": "checked"}  required type="radio" name="artistMentor" value="No, I do not need an artist mentor"
+            <input disabled ${artistMentor == "No, I do not need an artist mentor" ? "checked": ""}  required type="radio" name="artistMentor" value="No, I do not need an artist mentor"
                 id="noArtistMentor-${randomId}"></input>
             No, I do not need an artist mentor
         </label>
