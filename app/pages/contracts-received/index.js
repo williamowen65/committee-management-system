@@ -1,5 +1,7 @@
-import roles from '../my-contract/committee-roles.js'
-document.addEventListener('DOMContentLoaded', () => {
+let roles;
+document.addEventListener('DOMContentLoaded', async () => {
+    roles = await CRUD.readAll('committee-roles')
+
     CRUD.readAll('ghost-contracts').then(contracts => {
         return contracts.filter(contract => contract.artistDetails.membershipPaid === true)
     }).then(renderContracts)
