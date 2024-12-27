@@ -27,7 +27,7 @@ export async function sendNewScholarshipEmail(user){
         committees: ['Board'],
      }).then(emails => emails.join(',') + ',' + user.email)
 
-    if(TESTING.newScholarship) console.log("Would send email to", artistName)
+    if(TESTING.newScholarship) console.log("Would send email to: ", emailAddresses)
 
     window.sendMessageToParent({
         controller: 'gmailController',

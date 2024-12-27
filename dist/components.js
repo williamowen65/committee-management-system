@@ -1304,7 +1304,7 @@ function _sendNewScholarshipEmail() {
           });
         case 8:
           emailAddresses = _context.sent;
-          if (_sendTestEmail_js__WEBPACK_IMPORTED_MODULE_1__.TESTING.newScholarship) console.log("Would send email to", artistName);
+          if (_sendTestEmail_js__WEBPACK_IMPORTED_MODULE_1__.TESTING.newScholarship) console.log("Would send email to: ", emailAddresses);
           window.sendMessageToParent({
             controller: 'gmailController',
             to: _sendTestEmail_js__WEBPACK_IMPORTED_MODULE_1__.TESTING.newScholarship ? 'william.owen.dev@gmail.com' : emailAddresses,
