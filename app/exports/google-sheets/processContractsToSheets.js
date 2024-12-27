@@ -36,6 +36,7 @@ export async function processContractsToSheets() {
                 'Digital Image 3': contract?.images?.digitalImage3 || "", //             'Digital Image 3',
                 'Artist in Studio Image': contract?.images?.artistInStudioImage || "", //             'Artist in Studio Image',
                 'Brochure Image': contract?.images?.brochureImage || "", //             'Brochure Image',
+                'Studio Sharing Answer': contract?.StudioSharingAnswer || "", //             'StudioSharingAnswer',
             }
         })
     })
@@ -59,6 +60,7 @@ export async function processContractsToSheets() {
             "Mailing Address",
             "Studio Address",
             "Medium",
+            'Studio Sharing Answer',
             "Artist Tagline",
             "Artist Statement",
             "Artistic Demonstration",
