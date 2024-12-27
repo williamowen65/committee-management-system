@@ -1,4 +1,4 @@
-import roles from '../my-contract/committee-roles copy.js'
+
 import '../../../utils/logIf.js'
 import { enableTimelinePrivileges } from './timelinePriviledge.js';
 import { sendTestEmail } from '../../outbound-emails/sendTestEmail.js';
@@ -6,8 +6,10 @@ import { sendTestEmail } from '../../outbound-emails/sendTestEmail.js';
 const timeline = {}
 const userRoles = {}
 let configDocument;
+let roles;
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
+  roles = await CRUD.readAll('committee-roles')
   firebase.redirectIfNotLoggedIn('/artist-sign-on')
     .then(async (user) => {
       if (user) {

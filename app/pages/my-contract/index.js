@@ -1,12 +1,14 @@
-import roles from './committee-roles.js'
+
 import '../../../utils/logIf.js'; // This is a special way to import the module, it will work in both Node.js and the browser. 
 
 
 let contracts;
 const imageFields = ['digitalImage1', 'digitalImage2', 'digitalImage3', 'artistInStudioImage', 'brochureImage']
+let roles;
 
 document.addEventListener('DOMContentLoaded', async function () {
 
+    roles = await CRUD.readAll('committee-roles')
     logIf.client && console.log("My Contract Page Loaded")
 
     // set listeners on forms
