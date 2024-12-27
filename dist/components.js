@@ -970,10 +970,11 @@ function _getEmailAddresses() {
     var options,
       committees,
       roles,
-      emails,
       committeeRoles,
       ghostContracts,
       roleIds,
+      membersToEmail,
+      emails,
       _args = arguments;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
@@ -984,14 +985,13 @@ function _getEmailAddresses() {
           };
           // Get all the emails listed in the committees and roles
           committees = options.committees, roles = options.roles;
-          emails = [];
-          _context.next = 5;
+          _context.next = 4;
           return CRUD.readAll('committee-roles');
-        case 5:
+        case 4:
           committeeRoles = _context.sent;
-          _context.next = 8;
+          _context.next = 7;
           return CRUD.readAll('ghost-contracts');
-        case 8:
+        case 7:
           ghostContracts = _context.sent;
           // combine ghostContracts and committeeRoles at committeeRoles[key].members = []
           ghostContracts.forEach(function (contract) {
@@ -1023,15 +1023,12 @@ function _getEmailAddresses() {
           // convert role to set
           roles = _toConsumableArray(new Set(roles));
 
-          // get all the emails of the contracts that have the role ids
-          ghostContracts.forEach(function (contract) {
-            var email = contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
-            // compare roles to the contract role
-            roles.forEach(function (roleId) {
-              if (contract.committeeRoleId && contract.committeeRoleId.includes(roleId)) {
-                emails.push(email);
-              }
-            });
+          // convert roles to members 
+          membersToEmail = roles.map(function (roleId) {
+            return committeeRoles[roleId].members;
+          }).flat(); // get all the emails of the contracts that have the role ids
+          emails = membersToEmail.map(function (contract) {
+            return contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
           });
           console.log({
             roles: roles,

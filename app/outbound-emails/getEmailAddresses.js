@@ -5,7 +5,7 @@ export async function getEmailAddresses(options = {
     // Get all the emails listed in the committees and roles
     let { committees, roles } = options;
 
-    const emails = []
+    
 
     const committeeRoles = await CRUD.readAll('committee-roles')
 
@@ -36,20 +36,15 @@ export async function getEmailAddresses(options = {
     // convert role to set
     roles = [...new Set(roles)]
 
+    // convert roles to members 
+    const membersToEmail = roles.map(roleId => committeeRoles[roleId].members).flat()
+
     // get all the emails of the contracts that have the role ids
-    ghostContracts.forEach(contract => {
-        const email = contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
-        // compare roles to the contract role
-        roles.forEach((roleId) => {
-            if (contract.committeeRoleId && contract.committeeRoleId.includes(roleId)) {
-                emails.push(email);
-            }
-        })
-
-
-
+    const emails = membersToEmail.map(contract => {
+        return contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
     })
 
+  
     console.log({ roles, options, committeeRoles, roleIds, ghostContracts })
     return emails
 }
