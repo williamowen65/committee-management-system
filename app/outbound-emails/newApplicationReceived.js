@@ -11,7 +11,7 @@ export async function sendNewApplicationEmail(newArtist){
     if(typeof specialTimelineEvent.date === 'string'){
         const [year, month, day] = specialTimelineEvent.date.split('-');
         date = new Date(year, month - 1, day); 
-        date = new Date(specialTimelineEvent.date).toLocaleDateString('en-us', {month: 'long', day: 'numeric'})
+        date = date.toLocaleDateString('en-us', {month: 'long', day: 'numeric'})
     } else {
         date = specialTimelineEvent.date.toDate().toLocaleDateString('en-us', {month: 'long', day: 'numeric'})
     }
