@@ -95,14 +95,14 @@ ${studioSharingResponse}
 
         <h3>I would like an artist mentor (an experienced artist who can talk to me about preparing for the tour,
             marketing and answer my questions)</h3>
-        <label for="artistMentor">
+        <label for="artistMentor-${randomId}">
             <input disabled ${artistMentor == "Yes, I would like an artist mentor" ? "checked": ""} required type="radio" name="artistMentor" value="Yes, I would like an artist mentor"
-                id="artistMentor"></input>
+                id="artistMentor-${randomId}"></input>
             Yes, I would like an artist mentor
         </label>
-        <label for="noArtistMentor">
+        <label for="noArtistMentor-${randomId}">
             <input disabled ${artistMentor == "Yes, I would like an artist mentor" ? "": "checked"}  required type="radio" name="artistMentor" value="No, I do not need an artist mentor"
-                id="noArtistMentor"></input>
+                id="noArtistMentor-${randomId}"></input>
             No, I do not need an artist mentor
         </label>
 
