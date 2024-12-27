@@ -13,29 +13,29 @@ export async function processContractsToSheets() {
         return contracts.map(contract => {
             console.log({ contract })
             return {
-                "GHOST Member Id": contract?.userId || "",
-                "First Name": contract?.artistDetails?.firstName || "",
-                "Last Name": contract?.artistDetails?.lastName || "",
-                "Membership Paid:": contract?.membershipPaid || false,
-                "Committee Role(s)": contract?.committeeRoleId?.map(roleId => roles[roleId]?.title).join(", ") || "",
-                "Personal Email": contract?.artistDetails?.personalEmail || "",
-                "Business Email": contract?.artistDetails?.personalEmail || "",
-                "Phone": contract?.artistDetails?.phone || "",
-                "Mailing Address": contract?.artistDetails?.mailingAddress || "",
-                "Studio Address": contract?.artistDetails?.studioAddress || "",
-                "Medium": contract?.artistDetails?.medium || "",
-                "Artist Tagline": contract?.artistDetails?.artistTagline || "",
-                "Artist Statement": contract?.artistDetails?.artistStatement || "",
-                "Artistic Demonstration": contract?.artisticDemonstration || "",
-                "Mentorship Requested": contract?.artistMentor || false,
-                "Website": contract?.artistDetails?.website || "",
-                "Facebook": contract?.artistDetails?.facebook || "",
-                "Instagram": contract?.artistDetails?.instagram || "",
-                'Digital Image 1': contract?.images?.digitalImage1 || "",
-                'Digital Image 2': contract?.images?.digitalImage2 || "",
-                'Digital Image 3': contract?.images?.digitalImage3 || "",
-                'Artist in Studio Image': contract?.images?.artistInStudioImage || "",
-                'Brochure Image': contract?.images?.brochureImage || "",
+                "GHOST Member Id": contract?.userId || "", //          "GHOST Member Id",
+                "First Name": contract?.artistDetails?.firstName || "", //             "First Name",
+                "Last Name": contract?.artistDetails?.lastName || "", //             "Last Name",
+                "Membership Paid:": contract?.membershipPaid || false, //             "Membership Paid:",
+                "Committee Role(s)": contract?.committeeRoleId?.map(roleId => roles[roleId]?.title).join(", ") || "", //             "Committee Role(s)",
+                "Personal Email": contract?.artistDetails?.personalEmail || "", //             "Personal Email",
+                "Business Email": contract?.artistDetails?.businessEmail || "", //             "Business Email",
+                "Phone": contract?.artistDetails?.phone || "", //             "Phone",
+                "Mailing Address": contract?.artistDetails?.mailingAddress || "", //             "Mailing Address",
+                "Studio Address": contract?.artistDetails?.studioAddress || "", //             "Studio Address",
+                "Medium": contract?.artistDetails?.medium || "", //             "Medium",
+                "Artist Tagline": contract?.artistDetails?.artistTagline || "", //             "Artist Tagline",
+                "Artist Statement": contract?.artistDetails?.artistStatement || "", //             "Artist Statement",
+                "Artistic Demonstration": contract?.artisticDemonstration || "", //             "Artistic Demonstration",
+                "Mentorship Requested": contract?.artistMentor || false, //             "Mentorship Requested",
+                "Website": contract?.artistDetails?.website || "", //             "Website",
+                "Facebook": contract?.artistDetails?.facebook || "", //             "Facebook",
+                "Instagram": contract?.artistDetails?.instagram || "", //             "Instagram",
+                'Digital Image 1': contract?.images?.digitalImage1 || "", //             'Digital Image 1',
+                'Digital Image 2': contract?.images?.digitalImage2 || "", //             'Digital Image 2',
+                'Digital Image 3': contract?.images?.digitalImage3 || "", //             'Digital Image 3',
+                'Artist in Studio Image': contract?.images?.artistInStudioImage || "", //             'Artist in Studio Image',
+                'Brochure Image': contract?.images?.brochureImage || "", //             'Brochure Image',
             }
         })
     })
@@ -74,4 +74,6 @@ export async function processContractsToSheets() {
         ]
     })
 }
+
+
 
