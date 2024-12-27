@@ -16,7 +16,7 @@ export async function processContractsToSheets() {
                 "GHOST Member Id": contract?.userId || "", //          "GHOST Member Id",
                 "First Name": contract?.artistDetails?.firstName || "", //             "First Name",
                 "Last Name": contract?.artistDetails?.lastName || "", //             "Last Name",
-                "Membership Paid:": contract?.membershipPaid || false, //             "Membership Paid:",
+                "Membership Paid:": contract?.artistDetails.membershipPaid || false, //             "Membership Paid:",
                 "Committee Role(s)": contract?.committeeRoleId?.map(roleId => roles[roleId]?.title).join(", ") || "", //             "Committee Role(s)",
                 "Personal Email": contract?.artistDetails?.personalEmail || "", //             "Personal Email",
                 "Business Email": contract?.artistDetails?.businessEmail || "", //             "Business Email",
