@@ -967,7 +967,7 @@ function _getEmailAddresses() {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          options = _args.length > 0 && _args[0] !== undefined ? _args[0] : -{
+          options = _args.length > 0 && _args[0] !== undefined ? _args[0] : {
             committees: [],
             roles: []
           };

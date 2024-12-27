@@ -1,4 +1,4 @@
-export async function getEmailAddresses(options =- {
+export async function getEmailAddresses(options = {
     committees: [],
     roles: [],
 }){
