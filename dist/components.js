@@ -1009,10 +1009,7 @@ function _getEmailAddresses() {
                   if (!committeeRoles[roleId].members) {
                     committeeRoles[roleId].members = [];
                   }
-                  console.log({
-                    roleId: roleId,
-                    contract: contract
-                  });
+                  // console.log({ roleId, contract })
                   committeeRoles[roleId].members.push(contract);
                 }
               });

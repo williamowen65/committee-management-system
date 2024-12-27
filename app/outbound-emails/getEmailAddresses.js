@@ -19,7 +19,7 @@ export async function getEmailAddresses(options = {
                     if (!committeeRoles[roleId].members) {
                         committeeRoles[roleId].members = []
                     }
-                    console.log({ roleId, contract })
+                    // console.log({ roleId, contract })
                     committeeRoles[roleId].members.push(contract)
                 }
             })
