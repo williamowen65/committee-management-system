@@ -46,7 +46,7 @@
             alias="Mailing Address"></textarea-component>
 
         <h3>Medium(s)</h3>
-        <input-component value="${medium.split(',')}" disabled="true" required="true" fieldName="medium"
+        <input-component value="test" disabled="true" required="true" fieldName="medium"
             placeholder="Comma separated list of mediums"></input-component>
 
         <h3>WA State Business License (UBI) Number *</h3>
