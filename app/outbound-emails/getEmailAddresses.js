@@ -41,6 +41,7 @@ export async function getEmailAddresses(options = {
 
     // get all the emails of the contracts that have the role ids
     const emails = membersToEmail.map(contract => {
+        if(!contract.artistDetails) return
         return contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
     })
 

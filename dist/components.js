@@ -1028,6 +1028,7 @@ function _getEmailAddresses() {
             return committeeRoles[roleId].members;
           }).flat(); // get all the emails of the contracts that have the role ids
           emails = membersToEmail.map(function (contract) {
+            if (!contract.artistDetails) return;
             return contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
           });
           console.log({
