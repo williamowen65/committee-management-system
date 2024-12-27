@@ -1,3 +1,4 @@
+import { getEmailAddresses } from "./getEmailAddresses.js";
 import { sendNewApplicationEmail } from "./newApplicationReceived.js";
 import { sendNewContractSubmissionBoardEmail, sendNewContractSubmissionEmail } from "./newContractSubmission.js";
 import { sendNewScholarshipEmail } from "./newScholarshipApplicant.js";
@@ -33,12 +34,19 @@ export async function sendTestEmail() {
     // sendNewContractSubmissionBoardEmail(user, transaction)
 
 
-    sendNewScholarshipEmail({
-        name: 'William Owen',
-    })
-    sendNewApplicationEmail({
-        firstName: 'William',
-        lastName: 'Owen',
+    // sendNewScholarshipEmail({
+    //     name: 'William Owen',
+    // })
+    // sendNewApplicationEmail({
+    //     firstName: 'William',
+    //     lastName: 'Owen',
+    // })
+
+    getEmailAddresses({
+        roles: [1,2,3],
+        committees: ['Board'],
+    }).then(emails => {
+        console.log("would send emails to",{emails})
     })
 
 }
