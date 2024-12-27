@@ -39,6 +39,8 @@ export async function getEmailAddresses(options = {
     // convert roles to members 
     const membersToEmail = roles.map(roleId => committeeRoles[roleId].members).flat()
 
+    console.log({ membersToEmail })
+
     // get all the emails of the contracts that have the role ids
     const emails = membersToEmail.map(contract => {
         if(!contract.artistDetails) return

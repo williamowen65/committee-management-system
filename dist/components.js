@@ -1026,7 +1026,12 @@ function _getEmailAddresses() {
           // convert roles to members 
           membersToEmail = roles.map(function (roleId) {
             return committeeRoles[roleId].members;
-          }).flat(); // get all the emails of the contracts that have the role ids
+          }).flat();
+          console.log({
+            membersToEmail: membersToEmail
+          });
+
+          // get all the emails of the contracts that have the role ids
           emails = membersToEmail.map(function (contract) {
             if (!contract.artistDetails) return;
             return contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
@@ -1039,7 +1044,7 @@ function _getEmailAddresses() {
             ghostContracts: ghostContracts
           });
           return _context.abrupt("return", emails);
-        case 16:
+        case 17:
         case "end":
           return _context.stop();
       }
