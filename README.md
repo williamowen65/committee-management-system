@@ -20,10 +20,7 @@ This is a project for a local community of artist in Gig Harbor. It is deployed 
   - The can edit their application 
   - The scholarships can be reviewed by GHOST board members
 
-- Gmail and Google Sheets integrations
-  - This integration requires a Google Workspace for a minimum of $6/month.
-    - Google Workspaces require owning a domain. (SquareSpace has a solution for verification)
-
+- Gmail and Google Sheets integrations requires minimal setup (see instructions below)
 ---
 
 ### Project Structure
@@ -32,9 +29,7 @@ This is a project for a local community of artist in Gig Harbor. It is deployed 
 app/
     api/
         paypal/ <-- Served from server.js
-    cloudFunctions/
-        google/  <--- Deploy to GCP with 'npm run deploy:gcf:googleapis'
-          Make sure to use 'gcloud config set project [PROJECT ID]' first
+    cloudFunctions/ (NO LONGER USED)
     components/ <--- Encapsulations of styles & logic (custom html components)
         3rdParty/
         application/
@@ -45,7 +40,7 @@ app/
         markdown/
         scholarship-application/
         component-build.js   <----- webpack.components.config.js points to this
-    firebase.rules  <-- txt files
+    firebase.rules  <-- txt files (Protecting data on firebase - Directly deploy on firebase)
     pages/ <---- Pages served from server.js dynamically
         artist-sign-on/
         members/
@@ -67,132 +62,35 @@ utils/
 server.js  <--- Serves all content (Entry point). Run with 'npm run start:w'
 watch.json <--- Config file (hosted on Glitch)
 webpack.components.config.js  <--- Run with 'npm run build:w'
-package.json <--- Build scripts
-    Make sure to have logged into the correct gmail account for GCF
+package.json <--- Build scripts (Run `npm run dev` to compile everything; Push changes to deploy )
+    
 ```
 
 ### Google Workspace Integration Steps 
 
+Clone the server-configuration folder, (which is a nested git repo)
+Within the server configuration file, clone the google-server folder
+
+In the server-configuration/deployment-management.js file, enter your Glitch server name
+In the server-configuration/package.json file, enter your GAS script ID. 
+- Create a Google Sheet/Apps Script project
+- Find the script id in the settings
+- Create a Google Cloud Project
+  - Create an Oauth Screen with your account as a "test" account for the OAuth screen
+  - Enable APIs - AppsScript, Drive, Docs, Sheets, Gmail
+  - Locate your project number in the Google Cloud
+    - Add the project number to the GAS project (on the settings page)
+
+Push to GAS with `run run push` (from the server-configuration folder). Changes can be view in GAS editor located in the spreadsheet menu
+(Extensions < Apps Script)
+
+- If this is the first time deploying this, you must do this through the GAS Editor
+  - Deploy < New Deployment < Web App < Apply Permissions < Deploy
 
 
-To set up email functionality alongside other Google APIs using a **service worker** (likely referring to a backend service or middleware with Google APIs), follow these steps:
+Your Glitch app should be deployed within a Google Iframe, and now able to communicate with Google via an IFrame "API"
 
+#### Examples can be found in this Glitch Project
 
-> What I learned. make sure to set polices for project and organization withing google workspace
-
----
-
-### **1. Set Up a Google Cloud Project**
-To use Google APIs programmatically, you need a Google Cloud project:
-1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
-2. **Create a New Project**:
-   - Give your project a name.
-3. **Enable Gmail API**:
-   - In the Cloud Console, navigate to **APIs & Services** > **Library**.
-   - Search for **Gmail API** and enable it.
-
----
-
-### **2. Set Up Service Account for Authentication**
-Service accounts allow secure, programmatic access to Google APIs:
-1. **Create a Service Account**:
-   - Go to **IAM & Admin** > **Service Accounts**.
-   - Click **Create Service Account**.
-   - Assign it a role (e.g., **Editor**, or custom roles based on API needs).
-2. **Generate a Key**:
-   - After creating the service account, generate a JSON key file.
-   - Download and save this securely. You'll use it in your app.
-
----
-
-### **3. Delegate Domain-Wide Access (For Gmail API)**
-
-> - You first need to create the workspace account   
->   - Requires owning a domain (https://gigharboropenstudiotour.org/) and going through the workspace verification process
-
-To send emails on behalf of users in your domain: (Our emails will be from ghost@gigharboropenstudiotour.org)
-1. **Go to Admin Console**:
-   - Visit the [Google Admin Console](https://admin.google.com/).
-2. **Security > API Controls > Domain-Wide Delegation**:
-   - Add your service account's client ID (from the JSON key file).
-   - Add required OAuth scopes for Gmail:
-     ```
-     https://www.googleapis.com/auth/gmail.send
-     ```
-
----
-
-### **4. Write a Service Worker Script**
-Use the Gmail API to send emails programmatically:
-#### Example: Node.js Service Worker
-
-1. **Install Required Libraries**:
-   ```bash
-   npm install googleapis nodemailer
-   ```
-
-2. **Service Worker Code**:
-   ```javascript
-   const { google } = require('googleapis');
-   const nodemailer = require('nodemailer');
-   const fs = require('fs');
-
-   // Load service account JSON
-   const keyFilePath = './service-account-key.json'; // Replace with your key file
-   const auth = new google.auth.GoogleAuth({
-     keyFile: keyFilePath,
-     scopes: ['https://www.googleapis.com/auth/gmail.send'],
-   });
-
-   async function sendEmail() {
-     const authClient = await auth.getClient();
-     const gmail = google.gmail({ version: 'v1', auth: authClient });
-
-     const email = [
-       'To: recipient@example.com',
-       'Subject: Test Email from Gmail API',
-       '',
-       'Hello! This is a test email.',
-     ].join('\n');
-
-     const encodedMessage = Buffer.from(email)
-       .toString('base64')
-       .replace(/\+/g, '-')
-       .replace(/\//g, '_')
-       .replace(/=+$/, '');
-
-     await gmail.users.messages.send({
-       userId: 'me',
-       requestBody: {
-         raw: encodedMessage,
-       },
-     });
-
-     console.log('Email sent!');
-   }
-
-   sendEmail().catch(console.error);
-   ```
-
----
-
-### **5. Use Other Google APIs**
-With the same service account setup, you can integrate other Google APIs (e.g., Sheets, Drive, Calendar). Adjust the **scopes** in your authentication setup to include the relevant APIs.
-
----
-
-### **6. Deploy the Service Worker**
-Deploy the script to a server or platform, such as:
-- **Node.js Server** (e.g., Express)
-- **Google Cloud Functions** or **App Engine**
-- **Glitch** (you’re already using it)
-
----
-
-### **7. Testing**
-1. **Domain-Wide Delegation**:
-   - Ensure your service account is allowed to send emails on behalf of users.
-2. **Email Output**:
-   - Test by sending a sample email and monitor logs for errors.
-
-Let me know if you need further customization or help setting up additional APIs!
+> See app/outbound-emails for GMail examples
+> See app/exports for Other examples.
