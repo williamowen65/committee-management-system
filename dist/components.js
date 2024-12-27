@@ -1010,8 +1010,12 @@ function _getEmailAddresses() {
               emails.push(email);
             }
           });
+          console.log({
+            roles: roles,
+            options: options
+          });
           return _context.abrupt("return", emails);
-        case 13:
+        case 14:
         case "end":
           return _context.stop();
       }

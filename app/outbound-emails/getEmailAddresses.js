@@ -29,5 +29,6 @@ export async function getEmailAddresses(options = {
         
     })
 
+    console.log({roles, options})
     return emails
 }
