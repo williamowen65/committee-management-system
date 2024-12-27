@@ -35,7 +35,8 @@ export async function sendTestEmail() {
     //     name: 'William Owen',
     // })
     sendNewApplicationEmail({
-        name: 'William Owen',
+        firstName: 'William',
+        lastName: 'Owen',
     })
 
     
