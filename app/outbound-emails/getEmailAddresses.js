@@ -52,5 +52,5 @@ export async function getEmailAddresses(options = {
 
   
     // console.log({ roles, options, committeeRoles, roleIds, ghostContracts })
-    return emails
+    return emails.filter(Boolean)
 }

@@ -1043,7 +1043,7 @@ function _getEmailAddresses() {
             if (!contract.artistDetails) return;
             return contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
           }); // console.log({ roles, options, committeeRoles, roleIds, ghostContracts })
-          return _context.abrupt("return", emails);
+          return _context.abrupt("return", emails.filter(Boolean));
         case 15:
         case "end":
           return _context.stop();
