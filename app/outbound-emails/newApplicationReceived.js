@@ -1,3 +1,5 @@
+import { TESTING } from './sendTestEmail.js'
+
 export async function sendNewApplicationEmail(newArtist){
 
     // get all board members

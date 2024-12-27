@@ -1,4 +1,5 @@
 // import roles from "../my-contract/committee-roles.js"; // <--special import (see the server file)
+import { TESTING } from './sendTestEmail.js'
 
 export function sendNewContractSubmissionEmail(user, transaction){
     
