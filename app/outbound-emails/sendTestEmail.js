@@ -39,6 +39,7 @@ export async function sendTestEmail() {
 
     sendNewScholarshipEmail({
         name: 'William Owen',
+        email: 'william.owen.dev@gmail.com'
     })
     // sendNewApplicationEmail({
     //     firstName: 'William',

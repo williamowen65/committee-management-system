@@ -1378,7 +1378,8 @@ function _sendTestEmail() {
           // // TEST #2: send email to the board members
           // sendNewContractSubmissionBoardEmail(user, transaction)
           (0,_newScholarshipApplicant_js__WEBPACK_IMPORTED_MODULE_3__.sendNewScholarshipEmail)({
-            name: 'William Owen'
+            name: 'William Owen',
+            email: 'william.owen.dev@gmail.com'
           });
           // sendNewApplicationEmail({
           //     firstName: 'William',
