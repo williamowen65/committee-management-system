@@ -26,7 +26,7 @@ export async function getEmailAddresses(options = {
         }
     })
 
-    console.log({ committeeRoles, ghostContracts, committees, roles })
+    // console.log({ committeeRoles, ghostContracts, committees, roles })
 
     // get all the ids of the roles that are in the committees
     const roleIds = Object.entries(committeeRoles)
@@ -42,7 +42,7 @@ export async function getEmailAddresses(options = {
     // convert roles to members 
     const membersToEmail = roles.map(roleId => committeeRoles[roleId].members).flat()
 
-    console.log({ membersToEmail })
+    // console.log({ membersToEmail })
 
     // get all the emails of the contracts that have the role ids
     const emails = membersToEmail.map(contract => {
@@ -51,6 +51,6 @@ export async function getEmailAddresses(options = {
     })
 
   
-    console.log({ roles, options, committeeRoles, roleIds, ghostContracts })
+    // console.log({ roles, options, committeeRoles, roleIds, ghostContracts })
     return emails
 }

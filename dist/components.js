@@ -1018,12 +1018,8 @@ function _getEmailAddresses() {
               });
             }
           });
-          console.log({
-            committeeRoles: committeeRoles,
-            ghostContracts: ghostContracts,
-            committees: committees,
-            roles: roles
-          });
+
+          // console.log({ committeeRoles, ghostContracts, committees, roles })
 
           // get all the ids of the roles that are in the committees
           roleIds = Object.entries(committeeRoles).filter(function (_ref) {
@@ -1044,25 +1040,14 @@ function _getEmailAddresses() {
           // convert roles to members 
           membersToEmail = roles.map(function (roleId) {
             return committeeRoles[roleId].members;
-          }).flat();
-          console.log({
-            membersToEmail: membersToEmail
-          });
-
+          }).flat(); // console.log({ membersToEmail })
           // get all the emails of the contracts that have the role ids
           emails = membersToEmail.map(function (contract) {
             if (!contract.artistDetails) return;
             return contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
-          });
-          console.log({
-            roles: roles,
-            options: options,
-            committeeRoles: committeeRoles,
-            roleIds: roleIds,
-            ghostContracts: ghostContracts
-          });
+          }); // console.log({ roles, options, committeeRoles, roleIds, ghostContracts })
           return _context.abrupt("return", emails);
-        case 18:
+        case 15:
         case "end":
           return _context.stop();
       }
