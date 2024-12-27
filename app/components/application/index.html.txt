@@ -48,7 +48,7 @@
             testing: ${medium}
 
         <h3>Medium(s)</h3>
-        <input-component value="test" disabled="true" required="true" fieldName="medium"
+        <input-component value="${medium}" disabled="true" required="true" fieldName="medium"
             placeholder="Comma separated list of mediums"></input-component>
 
         <h3>WA State Business License (UBI) Number *</h3>
