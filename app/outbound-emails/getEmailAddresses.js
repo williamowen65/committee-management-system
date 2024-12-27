@@ -7,9 +7,9 @@ export async function getEmailAddresses(options = {
 
     
 
-    const committeeRoles = await CRUD.readAll('committee-roles')
+    const committeeRoles = await CRUD.readAll('committee-roles').then(roles => roles.sort((a, b) => Number(a.fbId) - Number(b.fbId)))
 
-    const ghostContracts = await CRUD.readAll('ghost-contracts')
+    const ghostContracts = await CRUD.readAll('ghost-contracts').then(contracts => contracts.sort((a, b) => Number(a.fbId) - Number(b.fbId)))
 
     // combine ghostContracts and committeeRoles at committeeRoles[key].members = []
     ghostContracts.forEach(contract => {

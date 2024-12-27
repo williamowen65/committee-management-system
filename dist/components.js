@@ -986,11 +986,19 @@ function _getEmailAddresses() {
           // Get all the emails listed in the committees and roles
           committees = options.committees, roles = options.roles;
           _context.next = 4;
-          return CRUD.readAll('committee-roles');
+          return CRUD.readAll('committee-roles').then(function (roles) {
+            return roles.sort(function (a, b) {
+              return Number(a.fbId) - Number(b.fbId);
+            });
+          });
         case 4:
           committeeRoles = _context.sent;
           _context.next = 7;
-          return CRUD.readAll('ghost-contracts');
+          return CRUD.readAll('ghost-contracts').then(function (contracts) {
+            return contracts.sort(function (a, b) {
+              return Number(a.fbId) - Number(b.fbId);
+            });
+          });
         case 7:
           ghostContracts = _context.sent;
           // combine ghostContracts and committeeRoles at committeeRoles[key].members = []
