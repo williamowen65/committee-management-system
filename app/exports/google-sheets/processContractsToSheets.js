@@ -59,5 +59,5 @@ export async function processContractsToSheets(){
         'Artist in Studio Image'
       ]
     })
-
 }
+
