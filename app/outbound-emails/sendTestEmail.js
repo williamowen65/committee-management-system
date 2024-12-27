@@ -4,7 +4,8 @@ import { sendNewContractSubmissionBoardEmail, sendNewContractSubmissionEmail } f
 import { sendNewScholarshipEmail } from "./newScholarshipApplicant.js";
 
 export const TESTING = {
-    newApplication: true,
+    newApplication: false,
+    newScholarship: true
 };
 
 export async function sendTestEmail() {
@@ -36,14 +37,14 @@ export async function sendTestEmail() {
     // sendNewContractSubmissionBoardEmail(user, transaction)
 
 
-    // sendNewScholarshipEmail({
-    //     name: 'William Owen',
-    // })
-    sendNewApplicationEmail({
-        firstName: 'William',
-        lastName: 'Owen',
-        email: 'william.owen.dev@gmail.com'
+    sendNewScholarshipEmail({
+        name: 'William Owen',
     })
+    // sendNewApplicationEmail({
+    //     firstName: 'William',
+    //     lastName: 'Owen',
+    //     email: 'william.owen.dev@gmail.com'
+    // })
 
     // getEmailAddresses({
     //     roles: ["12"], // artist images chair

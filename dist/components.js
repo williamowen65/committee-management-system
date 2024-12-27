@@ -1124,8 +1124,7 @@ function _sendNewApplicationEmail() {
           window.sendMessageToParent({
             controller: 'gmailController',
             // every one on board, new artist applications chair, new artist recruitment chair and the person who applied
-            //   to: ""
-            to: _sendTestEmail_js__WEBPACK_IMPORTED_MODULE_1__.TESTING.newApplication ? 'william.owen.dev@gmail.com' : "",
+            to: _sendTestEmail_js__WEBPACK_IMPORTED_MODULE_1__.TESTING.newApplication ? 'william.owen.dev@gmail.com' : emailAddresses,
             subject: "GHOST New Artist Application sent from ".concat(newArtist.firstName, " ").concat(newArtist.lastName),
             body: "\n         <div style=\"text-align:center\">\n          <h1>A GHOST New Artist Application has been submitted!</h1>\n            <p>\n            The committee will be reviewing the application from <b>".concat(newArtist.firstName, " ").concat(newArtist.lastName, "</b>.<br>\n            The new artist applicant will receive a notification once the application has been reviewed. \n            </p>\n            <p>Application must be received no later than ").concat(date, ".\n            </p>\n\n\n            <p>Thank you for your membership.</p>\n            <p>Best Regards, <br>Gig Harbor Open Studio Tour</p>\n\n\n\n        </div>\n          ")
           });
@@ -1267,7 +1266,7 @@ function sendNewScholarshipEmail(_x) {
 }
 function _sendNewScholarshipEmail() {
   _sendNewScholarshipEmail = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(user) {
-    var artistName, newScholarshipEventId, specialTimelineEvent, date, _specialTimelineEvent, _specialTimelineEvent2, year, month, day;
+    var artistName, newScholarshipEventId, specialTimelineEvent, date, _specialTimelineEvent, _specialTimelineEvent2, year, month, day, emailAddresses;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -1293,15 +1292,26 @@ function _sendNewScholarshipEmail() {
               day: 'numeric'
             });
           }
+          _context.next = 8;
+          return getEmailAddresses({
+            roles: ["24", "15"],
+            // new applications chair, new recruitment chair
+            committees: ['Board']
+          }).then(function (emails) {
+            return emails.join(',') + ',' + user.email;
+          });
+        case 8:
+          emailAddresses = _context.sent;
+          if (_sendTestEmail_js__WEBPACK_IMPORTED_MODULE_0__.TESTING.newScholarship) console.log("Would send email to", artistName);
           window.sendMessageToParent({
             controller: 'gmailController',
-            to: _sendTestEmail_js__WEBPACK_IMPORTED_MODULE_0__.TESTING ? 'william.owen.dev@gmail.com' : "",
+            to: _sendTestEmail_js__WEBPACK_IMPORTED_MODULE_0__.TESTING.newScholarship ? 'william.owen.dev@gmail.com' : emailAddresses,
             // every one on board, new artist applications chair, new artist recruitment chair and the person who applied
             //   to: ""
             subject: "GHOST New scholarship Application sent from ".concat(artistName),
             body: "\n         <div style=\"text-align:center\">\n          <h1>A GHOST New scholarship Application has been submitted!</h1>\n            <p>\n            The committee will be reviewing the application from <b>".concat(artistName, "</b>.<br>\n            The new artist applicant will receive a notification once the application has been reviewed. \n            </p>\n            <p>The scholarship must be received no later than ").concat(date, ".\n            </p>\n\n\n            <p>Thank you for your membership.</p>\n            <p>Best Regards, <br>Gig Harbor Open Studio Tour</p>\n        </div>\n          ")
           });
-        case 7:
+        case 11:
         case "end":
           return _context.stop();
       }
@@ -1337,7 +1347,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 
 
 var TESTING = {
-  newApplication: true
+  newApplication: false,
+  newScholarship: true
 };
 function sendTestEmail() {
   return _sendTestEmail.apply(this, arguments);
@@ -1366,14 +1377,14 @@ function _sendTestEmail() {
           }; // sendNewContractSubmissionEmail(user, transaction)
           // // TEST #2: send email to the board members
           // sendNewContractSubmissionBoardEmail(user, transaction)
-          // sendNewScholarshipEmail({
-          //     name: 'William Owen',
-          // })
-          (0,_newApplicationReceived_js__WEBPACK_IMPORTED_MODULE_1__.sendNewApplicationEmail)({
-            firstName: 'William',
-            lastName: 'Owen',
-            email: 'william.owen.dev@gmail.com'
+          (0,_newScholarshipApplicant_js__WEBPACK_IMPORTED_MODULE_3__.sendNewScholarshipEmail)({
+            name: 'William Owen'
           });
+          // sendNewApplicationEmail({
+          //     firstName: 'William',
+          //     lastName: 'Owen',
+          //     email: 'william.owen.dev@gmail.com'
+          // })
 
           // getEmailAddresses({
           //     roles: ["12"], // artist images chair

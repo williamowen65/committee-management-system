@@ -21,9 +21,16 @@ export async function sendNewScholarshipEmail(user){
         date = specialTimelineEvent.date.toDate().toLocaleDateString('en-us', {month: 'long', day: 'numeric'})
     }
 
+    const emailAddresses = await getEmailAddresses({  
+        roles: ["24", "15"], // new applications chair, new recruitment chair
+        committees: ['Board'],
+     }).then(emails => emails.join(',') + ',' + user.email)
+
+    if(TESTING.newScholarship) console.log("Would send email to", artistName)
+
     window.sendMessageToParent({
         controller: 'gmailController',
-        to: TESTING ? 'william.owen.dev@gmail.com' : "",
+        to: TESTING.newScholarship ? 'william.owen.dev@gmail.com' : emailAddresses,
         // every one on board, new artist applications chair, new artist recruitment chair and the person who applied
     //   to: ""
         subject: `GHOST New scholarship Application sent from ${artistName}`,
