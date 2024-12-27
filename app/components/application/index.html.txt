@@ -45,6 +45,8 @@
         <textarea-component value="${mailingAddress}" disabled="true" required="true" fieldName="mailing-address"
             alias="Mailing Address"></textarea-component>
 
+            testing: ${medium}
+
         <h3>Medium(s)</h3>
         <input-component value="test" disabled="true" required="true" fieldName="medium"
             placeholder="Comma separated list of mediums"></input-component>
