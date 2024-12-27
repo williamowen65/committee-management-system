@@ -1,3 +1,4 @@
+import { sendNewApplicationEmail } from "./newApplicationReceived.js";
 import { sendNewContractSubmissionBoardEmail, sendNewContractSubmissionEmail } from "./newContractSubmission.js";
 import { sendNewScholarshipEmail } from "./newScholarshipApplicant.js";
 
@@ -30,7 +31,10 @@ export async function sendTestEmail() {
     // sendNewContractSubmissionBoardEmail(user, transaction)
 
 
-    sendNewScholarshipEmail({
+    // sendNewScholarshipEmail({
+    //     name: 'William Owen',
+    // })
+    sendNewApplicationEmail({
         name: 'William Owen',
     })
 
