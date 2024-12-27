@@ -11,6 +11,20 @@ export async function getEmailAddresses(options = {
 
     const ghostContracts = await CRUD.readAll('ghost-contracts')
 
+    // combine ghostContracts and committeeRoles at committeeRoles[key].members = []
+    ghostContracts.forEach(contract => {
+        if(contract.committeeRoleId) {
+            contract.committeeRoleId.forEach(roleId => {
+                if(committeeRoles[roleId]) {
+                    if(!committeeRoles[roleId].members) {
+                        committeeRoles[roleId].members = []
+                    }
+                    committeeRoles[roleId].members.push(contract)
+                }
+            })
+        }
+    })
+
     // get all the ids of the roles that are in the committees
     const roleIds = Object.entries(committeeRoles)
         .filter(([key, role]) => committees.includes(role.committee))

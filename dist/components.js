@@ -993,6 +993,20 @@ function _getEmailAddresses() {
           return CRUD.readAll('ghost-contracts');
         case 8:
           ghostContracts = _context.sent;
+          // combine ghostContracts and committeeRoles at committeeRoles[key].members = []
+          ghostContracts.forEach(function (contract) {
+            if (contract.committeeRoleId) {
+              contract.committeeRoleId.forEach(function (roleId) {
+                if (committeeRoles[roleId]) {
+                  if (!committeeRoles[roleId].members) {
+                    committeeRoles[roleId].members = [];
+                  }
+                  committeeRoles[roleId].members.push(contract);
+                }
+              });
+            }
+          });
+
           // get all the ids of the roles that are in the committees
           roleIds = Object.entries(committeeRoles).filter(function (_ref) {
             var _ref2 = _slicedToArray(_ref, 2),
@@ -1026,7 +1040,7 @@ function _getEmailAddresses() {
             roleIds: roleIds
           });
           return _context.abrupt("return", emails);
-        case 15:
+        case 16:
         case "end":
           return _context.stop();
       }
