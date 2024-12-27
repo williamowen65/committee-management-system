@@ -1,7 +1,7 @@
 export async function getEmailAddresses(options = {
     committees: [],
     roles: [],
-}){
+}) {
     // Get all the emails listed in the committees and roles
     let { committees, roles } = options;
 
@@ -13,10 +13,10 @@ export async function getEmailAddresses(options = {
 
     // combine ghostContracts and committeeRoles at committeeRoles[key].members = []
     ghostContracts.forEach(contract => {
-        if(contract.committeeRoleId) {
+        if (contract.committeeRoleId) {
             contract.committeeRoleId.forEach(roleId => {
-                if(committeeRoles[roleId]) {
-                    if(!committeeRoles[roleId].members) {
+                if (committeeRoles[roleId]) {
+                    if (!committeeRoles[roleId].members) {
                         committeeRoles[roleId].members = []
                     }
                     committeeRoles[roleId].members.push(contract)
@@ -35,17 +35,20 @@ export async function getEmailAddresses(options = {
 
     // convert role to set
     roles = [...new Set(roles)]
-    
+
     // get all the emails of the contracts that have the role ids
     ghostContracts.forEach(contract => {
         const email = contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
         // compare roles to the contract role
-        if(roles.forEach((roleId) => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))) {
-            emails.push(email);
-        }
-        
+        if (roles.forEach((roleId) => {
+            if (contract.committeeRoleId && contract.committeeRoleId.includes(roleId)) {
+                emails.push(email);
+            }
+        })) 
+
+            
     })
 
-    console.log({roles, options, committeeRoles, roleIds, ghostContracts})
+    console.log({ roles, options, committeeRoles, roleIds, ghostContracts })
     return emails
 }
