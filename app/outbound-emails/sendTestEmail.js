@@ -30,11 +30,9 @@ export async function sendTestEmail() {
     // sendNewContractSubmissionBoardEmail(user, transaction)
 
 
-    sendNewScholarshipEmail(user)
+    sendNewScholarshipEmail({
+        name: 'William Owen',
+    })
 
-    // sendNewScholarshipEmail({
-    //     firstName: 'William',
-    //     lastName: 'Owen',
-    //     email: ''
-    // })
+    
 }

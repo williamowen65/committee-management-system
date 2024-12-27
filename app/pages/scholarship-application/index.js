@@ -61,7 +61,9 @@ document.addEventListener('DOMContentLoaded', function () {
             createdAt: firebase.serverTimestamp(),
         }).then(() => {
 
-            
+            sendNewScholarshipEmail({
+                name,
+            })
             // change the button text back to original
             btnSubmit.innerText = "Your scholarship application has been submitted successfully!"
             // enable the button
