@@ -1,3 +1,5 @@
+import {TESTING} from './sendTestEmail.js'
+
 export async function sendNewScholarshipEmail(user){
 
     const artistName = user.name
@@ -21,9 +23,9 @@ export async function sendNewScholarshipEmail(user){
 
     window.sendMessageToParent({
         controller: 'gmailController',
+        to: TESTING ? 'william.owen.dev@gmail.com' : "",
         // every one on board, new artist applications chair, new artist recruitment chair and the person who applied
     //   to: ""
-        to: 'william.owen.dev@gmail.com', // <---TESTING
         subject: `GHOST New scholarship Application sent from ${artistName}`,
         body: `
          <div style="text-align:center">

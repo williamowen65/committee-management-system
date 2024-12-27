@@ -20,7 +20,7 @@ export async function sendNewApplicationEmail(newArtist){
         controller: 'gmailController',
         // every one on board, new artist applications chair, new artist recruitment chair and the person who applied
     //   to: ""
-        to: 'william.owen.dev@gmail.com', // <---TESTING
+        to: TESTING ? 'william.owen.dev@gmail.com' : "",
         subject: `GHOST New Artist Application sent from ${newArtist.firstName} ${newArtist.lastName}`,
         body: `
          <div style="text-align:center">

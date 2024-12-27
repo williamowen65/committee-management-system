@@ -2,6 +2,8 @@ import { sendNewApplicationEmail } from "./newApplicationReceived.js";
 import { sendNewContractSubmissionBoardEmail, sendNewContractSubmissionEmail } from "./newContractSubmission.js";
 import { sendNewScholarshipEmail } from "./newScholarshipApplicant.js";
 
+export const TESTING = true;
+
 export async function sendTestEmail() {
 
 
@@ -39,5 +41,5 @@ export async function sendTestEmail() {
         lastName: 'Owen',
     })
 
-    
 }
+

@@ -1020,8 +1020,7 @@ function _sendNewContractSubmissionBoardEmail() {
             controller: 'gmailController',
             // To all the board member and artist images chair emails
             // to: welcomeEmailAddress,
-            to: 'william.owen.dev@gmail.com',
-            // <---TESTING
+            to: TESTING ? 'william.owen.dev@gmail.com' : "",
             subject: "GHOST Contract Payment Submitted by ".concat(newArtist.name),
             body: "\n         <div style=\"text-align:center\">\n          <h1>The Gig Harbor Open Studio Tour is Growing</h1>\n          <p>".concat(newArtist.name, " has submitted their membership payment.\n          <br> Reach out to them to welcome them to the tour.\n          <br> You can reach them at ").concat(newArtist.email, "\n           </p>\n        \n          <fieldset style=\"width:fit-content; margin:auto;\">\n          \n          <legend>Invoice</legend>\n          \n          <p style=\"margin:0; text-align:start;\">Transaction ID: ").concat(transaction.id, "</p>\n          <p style=\"margin:0; text-align:start;\">Amount: ").concat(transaction.amount.value, "</p>\n          <p style=\"margin:0; text-align:start;\">Currency: ").concat(transaction.amount.currency_code, "</p>\n          <p style=\"margin:0; text-align:start;\">Status: ").concat(transaction.status, "</p>\n          <p style=\"margin:0; text-align:start;\">Created At: ").concat(new Date().toLocaleString(), "</p>\n          </fieldset>\n\n          <p>Thank you for your membership.</p>\n           <p>Best Regards, <br>Gig Harbor Open Studio Tour</p>\n        </div>\n          ")
           });

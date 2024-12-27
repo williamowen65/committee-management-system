@@ -74,7 +74,7 @@ export async function sendNewContractSubmissionBoardEmail(user, transaction){
         controller: 'gmailController',
         // To all the board member and artist images chair emails
         // to: welcomeEmailAddress,
-        to: 'william.owen.dev@gmail.com', // <---TESTING
+        to: TESTING ? 'william.owen.dev@gmail.com' : "",
         subject: `GHOST Contract Payment Submitted by ${newArtist.name}`,
         body: `
          <div style="text-align:center">
