@@ -45,12 +45,13 @@ export async function getEmailAddresses(options = {
     // console.log({ membersToEmail })
 
     // get all the emails of the contracts that have the role ids
-    const emails = membersToEmail.map(contract => {
+    let emails = membersToEmail.map(contract => {
         if(!contract.artistDetails) return
         return contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
-    })
+    }).filter(Boolean)
 
-  
+    emails = [...new Set(emails)]
+
     // console.log({ roles, options, committeeRoles, roleIds, ghostContracts })
-    return emails.filter(Boolean)
+    return emails
 }

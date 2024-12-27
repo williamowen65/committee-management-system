@@ -1042,9 +1042,12 @@ function _getEmailAddresses() {
           emails = membersToEmail.map(function (contract) {
             if (!contract.artistDetails) return;
             return contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
-          }); // console.log({ roles, options, committeeRoles, roleIds, ghostContracts })
-          return _context.abrupt("return", emails.filter(Boolean));
-        case 15:
+          }).filter(Boolean);
+          emails = _toConsumableArray(new Set(emails));
+
+          // console.log({ roles, options, committeeRoles, roleIds, ghostContracts })
+          return _context.abrupt("return", emails);
+        case 16:
         case "end":
           return _context.stop();
       }
