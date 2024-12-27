@@ -1003,21 +1003,11 @@ function _getEmailAddresses() {
           // get all the emails of the contracts that have the role ids
           ghostContracts.forEach(function (contract) {
             var email = contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
-
             // compare roles to the contract role
             if (roles.some(function (roleId) {
               return contract.committeeRoleId && contract.committeeRoleId.includes(roleId);
             })) {
               emails.push(email);
-              return;
-            }
-
-            // check committees like  "Board"
-            if (committees.some(function (committee) {
-              return committee == committeeRoles[roleId].committee;
-            })) {
-              emails.push(email);
-              return;
             }
           });
           return _context.abrupt("return", emails);

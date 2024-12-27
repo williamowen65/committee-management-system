@@ -22,17 +22,9 @@ export async function getEmailAddresses(options = {
     // get all the emails of the contracts that have the role ids
     ghostContracts.forEach(contract => {
         const email = contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
-
         // compare roles to the contract role
         if(roles.some((roleId) => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))) {
             emails.push(email);
-            return;
-        }
-
-        // check committees like  "Board"
-        if (committees.some(committee => committee == committeeRoles[roleId].committee)) {
-            emails.push(email);
-            return;
         }
         
     })
