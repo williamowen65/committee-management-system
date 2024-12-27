@@ -23,7 +23,7 @@ const data =
         "responsibility": "Assist the President and oversee the committees",
         "prerequisite": "Experience in organizational management",
         "tasks": [],
-        "sideBarButtons": ["newScholarshipApplications", "contracts-received"],
+        "sideBarButtons": ["newScholarshipApplications", "contracts-received", "newApplications"],
         "privileges": []
     },
     "3": {
@@ -32,7 +32,7 @@ const data =
         "responsibility": "Manage the organization's finances",
         "prerequisite": "Experience in financial management",
         "tasks": [],
-        "sideBarButtons": ["newScholarshipApplications", "contracts-received"],
+        "sideBarButtons": ["newScholarshipApplications", "contracts-received", "newApplications"],
         "privileges": []
     },
     "4": {
@@ -41,7 +41,7 @@ const data =
         "responsibility": "Record and distribute meeting minutes",
         "prerequisite": "Strong organizational and communication skills",
         "tasks": [],
-        "sideBarButtons": ["newScholarshipApplications", "contracts-received"]
+        "sideBarButtons": ["newScholarshipApplications", "contracts-received", "newApplications"]
     },
     "5": {
         "title": "Member-at-large",
@@ -49,7 +49,7 @@ const data =
         "responsibility": "Assist with various tasks as needed",
         "prerequisite": "Willingness to assist with various tasks",
         "tasks": [],
-        "sideBarButtons": ["newScholarshipApplications", "contracts-received"]
+        "sideBarButtons": ["newScholarshipApplications", "contracts-received", "newApplications"]
     },
     "6": {
         "title": "Web Design/Maintenance Chair",
@@ -108,7 +108,7 @@ const data =
             "Evaluate incoming images for size and proper cropping for brochures (1-3 MB jpeg, cropped square) and organize them in artist image folders on GHOST Google Drive",
             "Assist artists with image resizing, cropping, and jpeg uploading as needed during contract submission"
         ],
-        "sideBarButtons": []
+        "sideBarButtons": ["contracts-received"]
     },
     "13": {
         "title": "Brochure and Poster Chair",
@@ -116,7 +116,7 @@ const data =
         "responsibility": "Proposes budget for brochures/posters, coordinates with printer, oversees timetable, and explores layout options",
         "prerequisite": "Experience in graphic design",
         "tasks": [],
-        "sideBarButtons": []
+        "sideBarButtons": ['processToSheets']
     },
     "14": {
         "title": "Brochure and Poster Designer",
@@ -124,7 +124,7 @@ const data =
         "responsibility": "Design brochures and posters",
         "prerequisite": "Experience in graphic design",
         "tasks": [],
-        "sideBarButtons": []
+        "sideBarButtons": ['processToSheets']
     },
     "15": {
         "title": "New Artist Recruitment Chair",
@@ -132,7 +132,7 @@ const data =
         "responsibility": "Visits galleries and local festivals to recruit potential artists, collects contact info, and sends email reminders in Nov, Dec, and early Jan",
         "prerequisite": "Experience in recruitment",
         "tasks": [],
-        "sideBarButtons": []
+        "sideBarButtons": ["newApplications"]
     },
     "16": {
         "title": "New Artist Recruitment Assistant",
