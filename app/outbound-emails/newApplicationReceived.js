@@ -29,7 +29,7 @@ export async function sendNewApplicationEmail(values){
             The committee will be reviewing the application from <b>${newArtist.firstName} ${newArtist.lastName}</b>.<br>
             The new artist applicant will receive a notification once the application has been reviewed. 
             </p>
-            <p>Application must be reviewed no later than ${date}.
+            <p>Application must be received no later than ${date}.
             </p>
 
 

@@ -6,7 +6,7 @@ export async function sendNewScholarshipEmail(values){
     // new artist recruitment chair
 
 
-    const newScholarshipEventId = '1Iig2hZFN7MgyFUpjG0q' // A timeline event id for some date in the future
+    const newScholarshipEventId = 'aQJKYbbkaNgK3sef3rIp' // A timeline event id for some date in the future
     const specialTimelineEvent  = await CRUD.read('ghost-timeline', newScholarshipEventId)
 
     let date;
@@ -22,15 +22,15 @@ export async function sendNewScholarshipEmail(values){
         // every one on board, new artist applications chair, new artist recruitment chair and the person who applied
     //   to: ""
         to: 'william.owen.dev@gmail.com', // <---TESTING
-        subject: `GHOST New Artist Application sent from ${newArtist.firstName} ${newArtist.lastName}`,
+        subject: `GHOST New scholarship Application sent from ${newArtist.firstName} ${newArtist.lastName}`,
         body: `
          <div style="text-align:center">
-          <h1>A GHOST New Artist Application has been submitted!</h1>
+          <h1>A GHOST New scholarship Application has been submitted!</h1>
             <p>
             The committee will be reviewing the application from <b>${newArtist.firstName} ${newArtist.lastName}</b>.<br>
             The new artist applicant will receive a notification once the application has been reviewed. 
             </p>
-            <p>Application must be reviewed no later than ${date}.
+            <p>The scholarship must be received no later than ${date}.
             </p>
 
 
