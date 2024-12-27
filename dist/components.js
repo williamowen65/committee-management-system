@@ -1021,7 +1021,8 @@ function _getEmailAddresses() {
           });
           console.log({
             roles: roles,
-            options: options
+            options: options,
+            committeeRoles: committeeRoles
           });
           return _context.abrupt("return", emails);
         case 15:
