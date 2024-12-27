@@ -1369,7 +1369,8 @@ function _sendTestEmail() {
           // })
           (0,_newApplicationReceived_js__WEBPACK_IMPORTED_MODULE_1__.sendNewApplicationEmail)({
             firstName: 'William',
-            lastName: 'Owen'
+            lastName: 'Owen',
+            email: 'william.owen.dev@gmail.com'
           });
 
           // getEmailAddresses({

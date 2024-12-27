@@ -40,6 +40,7 @@ export async function sendTestEmail() {
     sendNewApplicationEmail({
         firstName: 'William',
         lastName: 'Owen',
+        email: 'william.owen.dev@gmail.com'
     })
 
     // getEmailAddresses({
