@@ -373,15 +373,7 @@ function allContractsButton(role) {
     </a>`
 }
 
-/**
-  payload:{
-    controller: 'sheetsController',
-    sheetName: string,
-    spreadsheetId: string,
-    action: ['upsert', 'delete'],
-    data: {object}
-  }
- */
+
 
 
 function testSheetsButton(role) {
