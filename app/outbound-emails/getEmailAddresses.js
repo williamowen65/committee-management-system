@@ -40,7 +40,7 @@ export async function getEmailAddresses(options = {
     ghostContracts.forEach(contract => {
         const email = contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
         // compare roles to the contract role
-        if(roles.some((roleId) => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))) {
+        if(roles.forEach((roleId) => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))) {
             emails.push(email);
         }
         

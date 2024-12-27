@@ -1027,7 +1027,7 @@ function _getEmailAddresses() {
           ghostContracts.forEach(function (contract) {
             var email = contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
             // compare roles to the contract role
-            if (roles.some(function (roleId) {
+            if (roles.forEach(function (roleId) {
               return contract.committeeRoleId && contract.committeeRoleId.includes(roleId);
             })) {
               emails.push(email);
