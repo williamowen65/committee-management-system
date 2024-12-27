@@ -32,6 +32,6 @@ export async function getEmailAddresses(options = {
         
     })
 
-    console.log({roles, options, committeeRoles})
+    console.log({roles, options, committeeRoles, roleIds})
     return emails
 }

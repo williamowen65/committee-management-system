@@ -1022,7 +1022,8 @@ function _getEmailAddresses() {
           console.log({
             roles: roles,
             options: options,
-            committeeRoles: committeeRoles
+            committeeRoles: committeeRoles,
+            roleIds: roleIds
           });
           return _context.abrupt("return", emails);
         case 15:
