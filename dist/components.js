@@ -1382,30 +1382,29 @@ function _sendTestEmail() {
           }; // sendNewContractSubmissionEmail(user, transaction)
           // // TEST #2: send email to the board members
           // sendNewContractSubmissionBoardEmail(user, transaction)
-          // sendNewScholarshipEmail({
-          //     name: 'William Owen',
-          //     email: 'william.owen.dev@gmail.com'
-          // })
+          (0,_newScholarshipApplicant_js__WEBPACK_IMPORTED_MODULE_3__.sendNewScholarshipEmail)({
+            name: 'William Owen',
+            email: 'william.owen.dev@gmail.com'
+          });
           // sendNewApplicationEmail({
           //     firstName: 'William',
           //     lastName: 'Owen',
           //     email: 'william.owen.dev@gmail.com'
           // })
+
           // getEmailAddresses({
           //     roles: ["12"], // artist images chair
           //     committees: ['Board'],
           // }).then(emails => {
           //     console.log("would send emails to",{emails})
           // })
-          (0,_getEmailAddresses_js__WEBPACK_IMPORTED_MODULE_0__.getEmailAddresses)({
-            roles: ["24", "15"],
-            // new applications chair, new recruitment chair
-            committees: ['Board']
-          }).then(function (emails) {
-            return emails.join(',');
-          }).then(function (emails) {
-            console.log("would send email to: ", emails);
-          });
+
+          // getEmailAddresses({  
+          //     roles: ["24", "15"], // new applications chair, new recruitment chair
+          //     committees: ['Board'],
+          //  }).then(emails => emails.join(', ')).then(emails => {
+          //     console.log("would send email to: ", emails)
+          //  })
         case 3:
         case "end":
           return _context.stop();

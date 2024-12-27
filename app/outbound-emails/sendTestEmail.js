@@ -37,10 +37,10 @@ export async function sendTestEmail() {
     // sendNewContractSubmissionBoardEmail(user, transaction)
 
 
-    // sendNewScholarshipEmail({
-    //     name: 'William Owen',
-    //     email: 'william.owen.dev@gmail.com'
-    // })
+    sendNewScholarshipEmail({
+        name: 'William Owen',
+        email: 'william.owen.dev@gmail.com'
+    })
     // sendNewApplicationEmail({
     //     firstName: 'William',
     //     lastName: 'Owen',
@@ -54,12 +54,12 @@ export async function sendTestEmail() {
     //     console.log("would send emails to",{emails})
     // })
 
-    getEmailAddresses({  
-        roles: ["24", "15"], // new applications chair, new recruitment chair
-        committees: ['Board'],
-     }).then(emails => emails.join(',')).then(emails => {
-        console.log("would send email to: ", emails)
-     })
+    // getEmailAddresses({  
+    //     roles: ["24", "15"], // new applications chair, new recruitment chair
+    //     committees: ['Board'],
+    //  }).then(emails => emails.join(', ')).then(emails => {
+    //     console.log("would send email to: ", emails)
+    //  })
 
 }
 
