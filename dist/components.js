@@ -987,15 +987,15 @@ function _getEmailAddresses() {
 
             // compare roles to the contract role
             if (roles.some(function (roleId) {
-              return contract.committeeRoleId.includes(roleId);
+              return contract.committeeRoleId && contract.committeeRoleId.includes(roleId);
             })) {
               emails.push(email);
               return;
             }
 
             // check committees like  "Board"
-            if (contract.committeeRoleId.some(function (roleId) {
-              return committees.includes(committeeRoles[roleId].committee);
+            if (committees.some(function (committee) {
+              return committee == committeeRoles[roleId].committee;
             })) {
               emails.push(email);
               return;

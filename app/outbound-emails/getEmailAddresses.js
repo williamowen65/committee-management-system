@@ -15,13 +15,13 @@ export async function getEmailAddresses(options = {
         const email = contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
 
         // compare roles to the contract role
-        if(roles.some((roleId) => contract.committeeRoleId.includes(roleId))) {
+        if(roles.some((roleId) => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))) {
             emails.push(email);
             return;
         }
 
         // check committees like  "Board"
-        if (contract.committeeRoleId.some(roleId => committees.includes(committeeRoles[roleId].committee))) {
+        if (committees.some(committee => committee == committeeRoles[roleId].committee)) {
             emails.push(email);
             return;
         }
