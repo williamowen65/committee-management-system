@@ -1016,7 +1016,7 @@ function _getEmailAddresses() {
             var _ref2 = _slicedToArray(_ref, 2),
               key = _ref2[0],
               role = _ref2[1];
-            return committees.includes(role.committee);
+            return committees == role.committee;
           }).map(function (_ref3) {
             var _ref4 = _slicedToArray(_ref3, 1),
               key = _ref4[0];

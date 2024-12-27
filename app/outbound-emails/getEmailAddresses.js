@@ -28,7 +28,7 @@ export async function getEmailAddresses(options = {
 
     // get all the ids of the roles that are in the committees
     const roleIds = Object.entries(committeeRoles)
-        .filter(([key, role]) => committees.includes(role.committee))
+        .filter(([key, role]) => committees == role.committee)
         .map(([key]) => key);
 
     // combine roleIds and roles (passed in)
