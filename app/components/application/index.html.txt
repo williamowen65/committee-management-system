@@ -91,7 +91,6 @@ ${studioSharingResponse}
         </textarea>
         <!-- <textarea-component description="If sharing a studio, have you made arrangements to do so? If so, please name the Tour Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host you in their studio."></textarea-component> -->
 
-        test: ${artistMentor}
 
         <h3>I would like an artist mentor (an experienced artist who can talk to me about preparing for the tour,
             marketing and answer my questions)</h3>
