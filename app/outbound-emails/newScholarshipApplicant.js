@@ -13,8 +13,8 @@ export async function sendNewScholarshipEmail(user){
     if(typeof specialTimelineEvent.date === 'string'){
         // parse date
         const [year, month, day] = specialTimelineEvent.date.split('-');
-                    const date = new Date(year, month - 1, day); 
-        date = new Date(date).toLocaleDateString('en-us', {month: 'long', day: 'numeric'})
+        date = new Date(year, month - 1, day); 
+        date = date.toLocaleDateString('en-us', {month: 'long', day: 'numeric'})
     } else {
         date = specialTimelineEvent.date.toDate().toLocaleDateString('en-us', {month: 'long', day: 'numeric'})
     }
