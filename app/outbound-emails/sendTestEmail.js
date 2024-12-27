@@ -43,7 +43,7 @@ export async function sendTestEmail() {
     // })
 
     getEmailAddresses({
-        roles: ["1","2","3"],
+        roles: ["12"], // artist images chair
         committees: ['Board'],
     }).then(emails => {
         console.log("would send emails to",{emails})

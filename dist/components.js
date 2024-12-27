@@ -1377,7 +1377,8 @@ function _sendTestEmail() {
           //     lastName: 'Owen',
           // })
           (0,_getEmailAddresses_js__WEBPACK_IMPORTED_MODULE_0__.getEmailAddresses)({
-            roles: ["1", "2", "3"],
+            roles: ["12"],
+            // artist images chair
             committees: ['Board']
           }).then(function (emails) {
             console.log("would send emails to", {
