@@ -1,6 +1,6 @@
-export async function sendNewScholarshipEmail(values){
+export async function sendNewScholarshipEmail(user){
 
-    const newArtist = values
+    const newArtist = user.artistDetails
     // get all board members
     // plus new artist applications chair
     // new artist recruitment chair
