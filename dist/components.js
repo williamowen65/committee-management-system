@@ -1010,6 +1010,12 @@ function _getEmailAddresses() {
               });
             }
           });
+          console.log({
+            committeeRoles: committeeRoles,
+            ghostContracts: ghostContracts,
+            committees: committees,
+            roles: roles
+          });
 
           // get all the ids of the roles that are in the committees
           roleIds = Object.entries(committeeRoles).filter(function (_ref) {
@@ -1048,7 +1054,7 @@ function _getEmailAddresses() {
             ghostContracts: ghostContracts
           });
           return _context.abrupt("return", emails);
-        case 17:
+        case 18:
         case "end":
           return _context.stop();
       }

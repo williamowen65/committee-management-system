@@ -26,6 +26,8 @@ export async function getEmailAddresses(options = {
         }
     })
 
+    console.log({ committeeRoles, ghostContracts, committees, roles })
+
     // get all the ids of the roles that are in the committees
     const roleIds = Object.entries(committeeRoles)
         .filter(([key, role]) => committees == role.committee)
