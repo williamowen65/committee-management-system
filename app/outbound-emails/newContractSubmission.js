@@ -1,4 +1,6 @@
 // import roles from "../my-contract/committee-roles.js"; // <--special import (see the server file)
+import e from 'express'
+import { getEmailAddresses } from './getEmailAddresses.js'
 import { TESTING } from './sendTestEmail.js'
 
 export function sendNewContractSubmissionEmail(user, transaction){
@@ -7,9 +9,11 @@ export function sendNewContractSubmissionEmail(user, transaction){
     const businessEmail = user.artistDetails.businessEmail || ""
     const email = firebase.auth.currentUser.email
 
+    // no TESTING mode needed here
+
     window.sendMessageToParent({
       controller: 'gmailController',
-      to: `${email}, ${personalEmail}, ${businessEmail}`,
+      to: [email, personalEmail, businessEmail].filter(Boolean).join(','),
       subject: 'GHOST Contract Invoice',
       body: `
        <div style="text-align:center">
@@ -52,30 +56,19 @@ export async function sendNewContractSubmissionBoardEmail(user, transaction){
         name: `${user.artistDetails.firstName} ${user.artistDetails.lastName}`,
         email: email
       }
-      const ghostBoardMemberRoleKeys = Object.entries(roles).filter(([key,role]) => {
-        if(role.committee == 'Board') return key
-      }).filter(Boolean)
+     
+      const emailAddresses = await getEmailAddresses({
+        roles: ["12"], // artist images chair
+        committees: ['Board'],
+      }).then(emails => emails.join(','))
 
-      const ghostArtistImagesChairRoleKeys = Object.entries(roles).filter(([key,role]) => {
-        if(role.title == 'Artist Images Chair') return key
-      }).filter(Boolean)
-
-      const ghostBoardMemberEmails = contracts.filter(contract => {
-        if(ghostBoardMemberRoleKeys.includes(contract.role)) return contract.artistDetails.personalEmail
-      }).filter(Boolean)
-
-      const ghostArtistImagesChairEmails = contracts.filter(contract => {
-        if(ghostArtistImagesChairRoleKeys.includes(contract.role)) return contract.artistDetails.personalEmail
-      }).filter(Boolean)
-
-      // To all the board member and artist images chair emails
-      const welcomeEmailAddress = ghostBoardMemberEmails.concat(ghostArtistImagesChairEmails).join(',')
+      if(TESTING.newContract) console.log("Would send email to", emailAddresses)
 
       window.sendMessageToParent({
         controller: 'gmailController',
         // To all the board member and artist images chair emails
         // to: welcomeEmailAddress,
-        to: TESTING ? 'william.owen.dev@gmail.com' : "",
+        to: TESTING.newContract ? 'william.owen.dev@gmail.com' : emailAddresses,
         subject: `GHOST Contract Payment Submitted by ${newArtist.name}`,
         body: `
          <div style="text-align:center">

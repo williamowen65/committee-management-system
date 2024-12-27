@@ -5,7 +5,8 @@ import { sendNewScholarshipEmail } from "./newScholarshipApplicant.js";
 
 export const TESTING = {
     newApplication: false,
-    newScholarship: true
+    newScholarship: false,
+    newContract: true
 };
 
 export async function sendTestEmail() {
@@ -30,17 +31,17 @@ export async function sendTestEmail() {
         status: 'Completed'
     }
 
-    // sendNewContractSubmissionEmail(user, transaction)
+    sendNewContractSubmissionEmail(user, transaction)
 
     // // TEST #2: send email to the board members
 
-    // sendNewContractSubmissionBoardEmail(user, transaction)
+    sendNewContractSubmissionBoardEmail(user, transaction)
 
 
-    sendNewScholarshipEmail({
-        name: 'William Owen',
-        email: 'william.owen.dev@gmail.com'
-    })
+    // sendNewScholarshipEmail({
+    //     name: 'William Owen',
+    //     email: 'william.owen.dev@gmail.com'
+    // })
     // sendNewApplicationEmail({
     //     firstName: 'William',
     //     lastName: 'Owen',
