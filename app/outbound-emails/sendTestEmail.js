@@ -23,13 +23,14 @@ export async function sendTestEmail() {
         status: 'Completed'
     }
 
-    sendNewContractSubmissionEmail(user, transaction)
+    // sendNewContractSubmissionEmail(user, transaction)
 
-    // TEST #2: send email to the board members
+    // // TEST #2: send email to the board members
 
-    sendNewContractSubmissionBoardEmail(user, transaction)
+    // sendNewContractSubmissionBoardEmail(user, transaction)
 
 
+    sendNewScholarshipEmail(user)
 
     // sendNewScholarshipEmail({
     //     firstName: 'William',
