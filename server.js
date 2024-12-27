@@ -47,6 +47,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 app.use('/utils', express.static(path.join(__dirname, 'utils')));
 app.use('/outbound-emails', express.static(path.join(__dirname, 'app/outbound-emails')));
+
+// serve the exports folder as a static folder (a nested folder)
+app.use('/exports', express.static(path.join(__dirname, 'app/exports')));
+// Serve all folders in exports as static folders
+const exportsDir = path.join(__dirname, 'app/exports');
+fs.readdir(exportsDir, (err, folders) => {
+    if (err) {
+        logIf.server && console.error('Unable to read exports directory:', err);
+        return;
+    }
+    folders.forEach(folder => {
+        const folderPath = path.join(exportsDir, folder);
+        if (fs.lstatSync(folderPath).isDirectory()) {
+            app.use(`/exports/${folder}`, express.static(folderPath));
+        }
+    });
+});
+
+
 app.get('/committee-roles', (req, res) => {
     res.sendFile(path.join(__dirname, 'app/pages/my-contract/committee-roles.js'));
 })
