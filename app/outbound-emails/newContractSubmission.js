@@ -1,5 +1,4 @@
 // import roles from "../my-contract/committee-roles.js"; // <--special import (see the server file)
-import e from 'express'
 import { getEmailAddresses } from './getEmailAddresses.js'
 import { TESTING } from './sendTestEmail.js'
 
