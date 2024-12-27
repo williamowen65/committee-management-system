@@ -11,13 +11,11 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.html.txt */ "./app/components/3rdParty/paypal/index.html.txt");
 /* harmony import */ var _utils_custom_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../utils/custom-element */ "./utils/custom-element.js");
-/* harmony import */ var _pages_my_contract_committee_roles_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../pages/my-contract/committee-roles.js */ "./app/pages/my-contract/committee-roles.js");
-/* harmony import */ var _outbound_emails_newContractSubmission_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../outbound-emails/newContractSubmission.js */ "./app/outbound-emails/newContractSubmission.js");
+/* harmony import */ var _outbound_emails_newContractSubmission_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../outbound-emails/newContractSubmission.js */ "./app/outbound-emails/newContractSubmission.js");
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
-
 
 
 
@@ -225,11 +223,11 @@ window.initializePaypalButtons = function () {
               }).then(function () {
                 // send email to the user
 
-                (0,_outbound_emails_newContractSubmission_js__WEBPACK_IMPORTED_MODULE_3__.sendNewContractSubmissionEmail)(user, transaction);
+                (0,_outbound_emails_newContractSubmission_js__WEBPACK_IMPORTED_MODULE_2__.sendNewContractSubmissionEmail)(user, transaction);
 
                 // send email to the board members
 
-                (0,_outbound_emails_newContractSubmission_js__WEBPACK_IMPORTED_MODULE_3__.sendNewContractSubmissionBoardEmail)(user, transaction, contracts);
+                (0,_outbound_emails_newContractSubmission_js__WEBPACK_IMPORTED_MODULE_2__.sendNewContractSubmissionBoardEmail)(user, transaction, contracts);
                 window.addEventListener("message", function (event) {
                   if (event.data.dispatch !== 'gmailController-response') return;
                   if (event.data.error) {
@@ -961,7 +959,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
-// import roles from "/committee-roles.js";
+// import roles from "../my-contract/committee-roles.js"; // <--special import (see the server file)
 
 function sendNewContractSubmissionEmail(user, transaction) {
   var personalEmail = user.artistDetails.personalEmail || "";
@@ -979,7 +977,7 @@ function sendNewContractSubmissionBoardEmail(_x, _x2) {
 }
 function _sendNewContractSubmissionBoardEmail() {
   _sendNewContractSubmissionBoardEmail = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(user, transaction) {
-    var contracts, email, newArtist, ghostBoardMemberRoleKeys, ghostArtistImagesChairRoleKeys, ghostBoardMemberEmails, ghostArtistImagesChairEmails, welcomeEmailAddress;
+    var contracts, email, roles, newArtist, ghostBoardMemberRoleKeys, ghostArtistImagesChairRoleKeys, ghostBoardMemberEmails, ghostArtistImagesChairEmails, welcomeEmailAddress;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -988,6 +986,13 @@ function _sendNewContractSubmissionBoardEmail() {
         case 2:
           contracts = _context.sent;
           email = user.artistDetails.personalEmail || user.artistDetails.businessEmail || firebase.auth.currentUser.email;
+          _context.next = 6;
+          return CRUD.readAll('committee-roles');
+        case 6:
+          roles = _context.sent;
+          console.log("sendNewContractSubmissionBoardEmail", {
+            roles: roles
+          });
           newArtist = {
             name: "".concat(user.artistDetails.firstName, " ").concat(user.artistDetails.lastName),
             email: email
@@ -1020,7 +1025,7 @@ function _sendNewContractSubmissionBoardEmail() {
             subject: "GHOST Contract Payment Submitted by ".concat(newArtist.name),
             body: "\n         <div style=\"text-align:center\">\n          <h1>The Gig Harbor Open Studio Tour is Growing</h1>\n          <p>".concat(newArtist.name, " has submitted their membership payment.\n          <br> Reach out to them to welcome them to the tour.\n          <br> You can reach them at ").concat(newArtist.email, "\n           </p>\n        \n          <fieldset style=\"width:fit-content; margin:auto;\">\n          \n          <legend>Invoice</legend>\n          \n          <p style=\"margin:0; text-align:start;\">Transaction ID: ").concat(transaction.id, "</p>\n          <p style=\"margin:0; text-align:start;\">Amount: ").concat(transaction.amount.value, "</p>\n          <p style=\"margin:0; text-align:start;\">Currency: ").concat(transaction.amount.currency_code, "</p>\n          <p style=\"margin:0; text-align:start;\">Status: ").concat(transaction.status, "</p>\n          <p style=\"margin:0; text-align:start;\">Created At: ").concat(new Date().toLocaleString(), "</p>\n          </fieldset>\n\n          <p>Thank you for your membership.</p>\n           <p>Best Regards, <br>Gig Harbor Open Studio Tour</p>\n        </div>\n          ")
           });
-        case 11:
+        case 15:
         case "end":
           return _context.stop();
       }
@@ -1028,406 +1033,6 @@ function _sendNewContractSubmissionBoardEmail() {
   }));
   return _sendNewContractSubmissionBoardEmail.apply(this, arguments);
 }
-
-/***/ }),
-
-/***/ "./app/pages/my-contract/committee-roles.js":
-/*!**************************************************!*\
-  !*** ./app/pages/my-contract/committee-roles.js ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var roles = {
-  // Board Members
-  0: {
-    title: 'Developer ',
-    committee: 'No Committee',
-    responsibility: 'Web development and maintenance',
-    tasks: [],
-    sideBarButtons: ['testEmail', 'testSheets', 'processToSheets', 'createDriveFolder', 'createDocument', 'newScholarshipApplications', 'newApplications', 'contracts-received'],
-    privileges: ['editTimeline']
-  },
-  1: {
-    title: 'President',
-    committee: 'Board',
-    responsibility: 'Oversee all aspects of the organization',
-    prerequisite: 'Previous experience in a leadership role',
-    tasks: [],
-    sideBarButtons: ['newScholarshipApplications', 'newApplications', 'contracts-received', 'processToSheets'],
-    privileges: ['editTimeline']
-  },
-  2: {
-    title: 'Vice President',
-    committee: 'Board',
-    responsibility: 'Assist the President and oversee the committees',
-    prerequisite: 'Experience in organizational management',
-    tasks: [],
-    sideBarButtons: ['newScholarshipApplications', 'contracts-received'],
-    privileges: []
-  },
-  3: {
-    title: 'Treasurer',
-    committee: 'Board',
-    responsibility: "Manage the organization's finances",
-    prerequisite: 'Experience in financial management',
-    tasks: [],
-    sideBarButtons: ['newScholarshipApplications', 'contracts-received'],
-    privileges: []
-  },
-  4: {
-    title: 'Secretary',
-    committee: 'Board',
-    responsibility: 'Record and distribute meeting minutes',
-    prerequisite: 'Strong organizational and communication skills',
-    tasks: [],
-    sideBarButtons: ['newScholarshipApplications', 'contracts-received']
-  },
-  5: {
-    title: 'Member-at-large',
-    committee: 'Board',
-    responsibility: 'Assist with various tasks as needed',
-    prerequisite: 'Willingness to assist with various tasks',
-    tasks: [],
-    sideBarButtons: ['newScholarshipApplications', 'contracts-received']
-  },
-  6: {
-    title: 'Web Design/Maintenance Chair',
-    committee: 'Web Design and Maintenance',
-    responsibility: "Maintain the organization's website",
-    prerequisite: 'Experience in web design and maintenance',
-    tasks: [
-      // 'Update website design (with board input) and add online contract',
-      // 'Update map to be interactive',
-      // 'Update yearly information on the website (dates, forms, images, map, etc.)'
-    ],
-    sideBarButtons: []
-  },
-  7: {
-    title: 'Social Media Chair',
-    committee: 'Social Media',
-    responsibility: "Manage the organization's social media accounts",
-    prerequisite: 'Needs familiarity with Canva or the ability to learn Canva to schedule posts and arrange advertising; Provides training and specific guidance to committee members',
-    tasks: [],
-    sideBarButtons: []
-  },
-  8: {
-    title: 'Social Media Assistant',
-    committee: 'Social Media',
-    responsibility: "Design general GHOST posts (using Canva)",
-    prerequisite: 'Experience with Canva and social media design',
-    tasks: [
-      // "Create posts for the organization's social media accounts"
-    ],
-    sideBarButtons: []
-  },
-  9: {
-    title: 'Social Media Assistant',
-    committee: 'Social Media',
-    responsibility: "Design mosaics of individual artists (using Canva)",
-    prerequisite: 'Experience with Canva and social media design',
-    tasks: [
-      // "Create posts for the organization's social media accounts"
-    ],
-    sideBarButtons: []
-  },
-  10: {
-    title: 'Social Media Assistant',
-    committee: 'Social Media',
-    responsibility: "Design Sponsor and “Make It a Weekend” posts with advertisers using Canva",
-    prerequisite: 'Experience with Canva and social media design',
-    tasks: [
-      // "Create posts for the organization's social media accounts"
-    ],
-    sideBarButtons: []
-  },
-  11: {
-    title: 'Social Media Assistant',
-    committee: 'Social Media',
-    responsibility: 'Prepare short videos',
-    prerequisite: 'Experience in video creation and editing',
-    tasks: [
-      // "Create posts for the organization's social media accounts"
-    ],
-    sideBarButtons: []
-  },
-  12: {
-    title: 'Artist Images Chair',
-    committee: 'Art Images',
-    responsibility: 'Reviews images from artists',
-    prerequisite: 'Needs comfort with manipulating image size and using Google Drive folders',
-    tasks: ["Evaluate incoming images for size and proper cropping for brochures (1-3 MB jpeg, cropped square) and organize them in artist image folders on GHOST Google Drive", "Assist artists with image resizing, cropping, and jpeg uploading as needed during contract submission"],
-    sideBarButtons: []
-  },
-  13: {
-    title: 'Brochure and Poster Chair',
-    committee: 'Marketing',
-    responsibility: 'Proposes budget for brochures/posters, coordinates with printer, oversees timetable, and explores layout options',
-    prerequisite: 'Experience in graphic design',
-    tasks: [],
-    sideBarButtons: []
-  },
-  14: {
-    title: 'Brochure and Poster Designer',
-    committee: 'Marketing',
-    responsibility: 'Design brochures and posters',
-    prerequisite: 'Experience in graphic design',
-    tasks: [],
-    sideBarButtons: []
-  },
-  15: {
-    title: 'New Artist Recruitment Chair',
-    committee: 'Recruitment',
-    responsibility: 'visits galleries and local festivals to recruit potential artists, collects contact info, and sends email reminders in Nov, Dec, and early Jan',
-    prerequisite: 'Experience in recruitment',
-    tasks: [],
-    sideBarButtons: []
-  },
-  16: {
-    title: 'New Artist Recruitment Assistant',
-    committee: 'Recruitment',
-    responsibility: 'Help with gallery visits and recruitment',
-    prerequisite: 'Experience in recruitment',
-    tasks: [],
-    sideBarButtons: []
-  },
-  17: {
-    title: 'New Artist Applications Chair',
-    committee: 'Artists Applications',
-    responsibility: 'Manage new artist applications and arranges screening committee',
-    prerequisite: 'Experience in reviewing applications',
-    tasks: [],
-    sideBarButtons: ['newApplications']
-  },
-  18: {
-    title: 'Distribution Chair',
-    committee: 'Distribution',
-    responsibility: 'Distribute brochures and posters',
-    prerequisite: 'Experience in distribution',
-    tasks: [],
-    sideBarButtons: []
-  },
-  19: {
-    title: 'Distribution Assistant',
-    committee: 'Distribution',
-    responsibility: 'Distribute brochures and posters to Gig Harbor (Downtown, Pioneer Ave and Kimball Ave)',
-    prerequisite: 'Experience in distribution',
-    tasks: [],
-    sideBarButtons: []
-  },
-  20: {
-    title: 'Distribution Assistant',
-    committee: 'Distribution',
-    responsibility: 'Distribute brochures and posters to Gig Harbor (Costco corridor and Point Fosdick business corridor)',
-    prerequisite: 'Experience in distribution',
-    tasks: [],
-    sideBarButtons: []
-  },
-  21: {
-    title: 'Distribution Assistant',
-    committee: 'Distribution',
-    responsibility: 'Distribute brochures and posters to Port Orchard/Olalla (including on the Southworth ferry)',
-    prerequisite: 'Experience in distribution',
-    tasks: [],
-    sideBarButtons: []
-  },
-  22: {
-    title: 'Distribution Assistant',
-    committee: 'Distribution',
-    responsibility: 'Distribute brochures and posters to selected areas in Seattle, Bellevue and Mercer Island',
-    prerequisite: 'Experience in distribution',
-    tasks: [],
-    sideBarButtons: []
-  },
-  23: {
-    title: 'Distribution Assistant',
-    committee: 'Distribution',
-    responsibility: 'Distribute brochures and posters to selected areas in Bremerton (including on the ferry), Bainbridge Island, Poulsbo and Port Townsend',
-    prerequisite: 'Experience in distribution',
-    tasks: [],
-    sideBarButtons: []
-  },
-  24: {
-    title: 'Sponsorship Chair',
-    committee: 'Sponsorship',
-    responsibility: 'Oversee sponsorship activities and relationships with sponsors (including paid ads)',
-    prerequisite: 'Experience in sponsorship management',
-    tasks: [],
-    sideBarButtons: []
-  },
-  25: {
-    title: 'Sponsorship Assistant',
-    committee: 'Sponsorship',
-    responsibility: 'Assist with sponsorship activities and maintain relationships with sponsors (including paid ads)',
-    prerequisite: 'Experience in sponsorship management',
-    tasks: [],
-    sideBarButtons: []
-  },
-  26: {
-    title: 'Signs for Artist Studios Chair',
-    committee: 'Signs for Artist Studios',
-    responsibility: 'Oversee the creation and distribution of signs for artist studios',
-    prerequisite: 'Experience in sign creation and distribution',
-    tasks: [],
-    sideBarButtons: []
-  },
-  27: {
-    title: 'Signs for Artist Studios Assistant',
-    committee: 'Signs for Artist Studios',
-    responsibility: 'Sign repairs plus bundling signs for distribution and help collecting signs at end of year',
-    prerequisite: 'Experience in sign creation and distribution',
-    tasks: [],
-    sideBarButtons: []
-  },
-  28: {
-    title: 'Signs for Artist Studios Assistant',
-    committee: 'Signs for Artist Studios',
-    responsibility: 'Sign repairs plus bundling signs for distribution and help collecting signs at end of year',
-    prerequisite: 'Experience in sign creation and distribution',
-    tasks: [],
-    sideBarButtons: []
-  },
-  29: {
-    title: 'Banners Chair',
-    committee: 'Banners',
-    responsibility: 'Oversee the creation and distribution of banners',
-    prerequisite: 'Experience in banner creation and distribution',
-    tasks: [],
-    sideBarButtons: ['']
-  },
-  30: {
-    title: 'Banners Assistant',
-    committee: 'Banners',
-    responsibility: 'Assist with the creation and distribution of banners',
-    prerequisite: 'Experience in banner creation and distribution',
-    tasks: [],
-    sideBarButtons: []
-  },
-  31: {
-    title: 'General Advertising Signs Chair',
-    committee: 'Signs for General Advertising',
-    responsibility: 'Oversee all general advertising signs activities',
-    prerequisite: 'Experience in advertising',
-    tasks: [],
-    sideBarButtons: []
-  },
-  32: {
-    title: 'General Advertising Signs Distributor',
-    committee: 'Signs for General Advertising',
-    responsibility: 'Install 4-5 signs in Gig Harbor (Downtown, Pioneer Ave and Kimball Ave) then collect them after the tour – early August',
-    prerequisite: 'Experience in advertising',
-    tasks: [],
-    sideBarButtons: []
-  },
-  33: {
-    title: 'General Advertising Signs Distributor',
-    committee: 'Signs for General Advertising',
-    responsibility: 'Install 4-5 signs in Gig Harbor (Costco and Point Fosdick business corridors) then collect them after the tour – early August',
-    prerequisite: 'Experience in advertising',
-    tasks: [],
-    sideBarButtons: []
-  },
-  34: {
-    title: 'General Advertising Signs Distributor',
-    committee: 'General Advertising',
-    responsibility: 'Install 4-5 signs in Port Orchard/Olalla (including near the Southworth ferry) then collect them after the tour – early August',
-    prerequisite: 'Experience in advertising',
-    tasks: [],
-    sideBarButtons: []
-  },
-  35: {
-    title: 'General Advertising Signs Distributor',
-    committee: 'Signs for General Advertising',
-    responsibility: 'Install 4-5 signs in selected areas in Tacoma and Olympia then collect them after the tour – early August',
-    prerequisite: 'Experience in advertising',
-    tasks: [],
-    sideBarButtons: []
-  },
-  36: {
-    title: 'General Advertising Signs Distributor',
-    committee: 'Signs for General Advertising',
-    responsibility: 'Install 4-5 signs in selected areas in Seattle, Bellevue and Mercer Island then collect them after the tour – early August',
-    prerequisite: 'Experience in advertising',
-    tasks: [],
-    sideBarButtons: []
-  },
-  37: {
-    title: 'General Advertising Signs Distributor',
-    committee: 'General Advertising',
-    responsibility: 'Install 4-5 signs in selected areas in Bremerton (including on the ferry), Bainbridge Island, Poulsbo and Port Townsend then collect them after the tour – early August',
-    prerequisite: 'Experience in advertising',
-    tasks: [],
-    sideBarButtons: []
-  },
-  38: {
-    title: 'Mailing List Coordinator',
-    committee: 'Mailing List/Mail Chimp',
-    responsibility: 'Manage the mailing list and send out newsletters using Mail Chimp',
-    prerequisite: 'Experience in mailing list management',
-    tasks: [],
-    sideBarButtons: []
-  },
-  39: {
-    title: 'Advertising/Publicity Chair',
-    committee: 'Advertising/Publicity',
-    responsibility: 'Oversee special advertisement and publicity',
-    prerequisite: 'Experience in advertising and publicity',
-    tasks: [],
-    sideBarButtons: []
-  },
-  40: {
-    title: 'Information Booth Chair',
-    committee: 'Information Booth',
-    responsibility: 'Oversee the setup and operation of the information booth',
-    prerequisite: 'Experience in event management',
-    tasks: [],
-    sideBarButtons: []
-  },
-  41: {
-    title: 'Information Booth Assistant',
-    committee: 'Information Booth',
-    responsibility: 'Assist chair with booth set up and tear down',
-    prerequisite: 'Experience in event management',
-    tasks: [],
-    sideBarButtons: []
-  },
-  42: {
-    title: 'Information Booth Volunteer',
-    committee: 'Information Booth',
-    responsibility: 'Man the booth Friday, July 18th',
-    prerequisite: 'Willingness to volunteer',
-    tasks: [],
-    sideBarButtons: []
-  },
-  43: {
-    title: 'Information Booth Volunteer',
-    committee: 'Information Booth',
-    responsibility: 'Man the booth Friday, July 19th',
-    prerequisite: 'Willingness to volunteer',
-    tasks: [],
-    sideBarButtons: []
-  },
-  44: {
-    title: 'Information Booth Volunteer',
-    committee: 'Information Booth',
-    responsibility: 'Man the booth Friday, July 20th',
-    prerequisite: 'Willingness to volunteer',
-    tasks: [],
-    sideBarButtons: []
-  },
-  45: {
-    title: "Grants Chair",
-    committee: "Grants",
-    responsibility: "Applying for and monitoring City of Gig Harbor Creative Endeavor Grant",
-    tasks: [],
-    sideBarButtons: []
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (roles);
 
 /***/ }),
 

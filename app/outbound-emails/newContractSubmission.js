@@ -1,4 +1,4 @@
-// import roles from "/committee-roles.js";
+// import roles from "../my-contract/committee-roles.js"; // <--special import (see the server file)
 
 export function sendNewContractSubmissionEmail(user, transaction){
     
@@ -43,7 +43,9 @@ export async function sendNewContractSubmissionBoardEmail(user, transaction){
     const email = user.artistDetails.personalEmail || user.artistDetails.businessEmail || firebase.auth.currentUser.email
 
 
+    const roles = await CRUD.readAll('committee-roles')
 
+    console.log("sendNewContractSubmissionBoardEmail",{roles})
 
     const newArtist = {
         name: `${user.artistDetails.firstName} ${user.artistDetails.lastName}`,
