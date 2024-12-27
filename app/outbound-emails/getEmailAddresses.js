@@ -3,7 +3,7 @@ export async function getEmailAddresses(options = {
     roles: [],
 }){
     // Get all the emails listed in the committees and roles
-    const { committees, roles } = options;
+    let { committees, roles } = options;
 
     const emails = []
 
