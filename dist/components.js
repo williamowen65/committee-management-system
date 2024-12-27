@@ -1345,7 +1345,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 var TESTING = {
   newApplication: false,
   newScholarship: false,
-  newContract: true
+  newContract: false
 };
 function sendTestEmail() {
   return _sendTestEmail.apply(this, arguments);
