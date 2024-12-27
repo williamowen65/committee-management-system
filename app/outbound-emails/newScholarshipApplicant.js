@@ -1,3 +1,4 @@
+import { getEmailAddresses } from './getEmailAddresses.js';
 import {TESTING} from './sendTestEmail.js'
 
 export async function sendNewScholarshipEmail(user){
