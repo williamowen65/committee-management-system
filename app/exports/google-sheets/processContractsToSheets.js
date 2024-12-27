@@ -27,7 +27,7 @@ export async function processContractsToSheets() {
                 "Artist Tagline": contract?.artistDetails?.artistTagline || "", //             "Artist Tagline",
                 "Artist Statement": contract?.artistDetails?.artistStatement || "", //             "Artist Statement",
                 "Artistic Demonstration": contract?.artisticDemonstration || "", //             "Artistic Demonstration",
-                "Mentorship Requested": contract?.artistMentor || false, //             "Mentorship Requested",
+                "Mentorship Requested": contract?.artistMentor ? true : false, //             "Mentorship Requested",
                 "Website": contract?.artistDetails?.website || "", //             "Website",
                 "Facebook": contract?.artistDetails?.facebook || "", //             "Facebook",
                 "Instagram": contract?.artistDetails?.instagram || "", //             "Instagram",
