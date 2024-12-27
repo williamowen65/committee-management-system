@@ -1,6 +1,8 @@
 export async function processContractsToSheets(){
 
-    
+    // get all roles
+    const roles = await CRUD.readAll('committee-roles')
+
     const sheetName = `GHOST Contracts ${new Date().getFullYear()}`
     if (!sheetName) return
 
