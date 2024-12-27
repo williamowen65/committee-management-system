@@ -1037,7 +1037,8 @@ function _getEmailAddresses() {
             roles: roles,
             options: options,
             committeeRoles: committeeRoles,
-            roleIds: roleIds
+            roleIds: roleIds,
+            ghostContracts: ghostContracts
           });
           return _context.abrupt("return", emails);
         case 16:
