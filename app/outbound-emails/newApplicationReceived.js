@@ -1,3 +1,4 @@
+import { getEmailAddresses } from './getEmailAddresses.js';
 import { TESTING } from './sendTestEmail.js'
 
 export async function sendNewApplicationEmail(newArtist){
@@ -17,6 +18,13 @@ export async function sendNewApplicationEmail(newArtist){
     } else {
         date = specialTimelineEvent.date.toDate().toLocaleDateString('en-us', {month: 'long', day: 'numeric'})
     }
+
+    const emailAddresses = await getEmailAddresses({
+        roles: ["17", "15"], // artist applications chair, new artist recruitment chair
+        committees: ['Board'],
+    }).then(emails => emails.join(',') + ',' + newArtist.email)
+
+    if(TESTING) console.log("Would send email to", emailAddresses)
 
     window.sendMessageToParent({
         controller: 'gmailController',

@@ -37,17 +37,17 @@ export async function sendTestEmail() {
     // sendNewScholarshipEmail({
     //     name: 'William Owen',
     // })
-    // sendNewApplicationEmail({
-    //     firstName: 'William',
-    //     lastName: 'Owen',
-    // })
-
-    getEmailAddresses({
-        roles: ["12"], // artist images chair
-        committees: ['Board'],
-    }).then(emails => {
-        console.log("would send emails to",{emails})
+    sendNewApplicationEmail({
+        firstName: 'William',
+        lastName: 'Owen',
     })
+
+    // getEmailAddresses({
+    //     roles: ["12"], // artist images chair
+    //     committees: ['Board'],
+    // }).then(emails => {
+    //     console.log("would send emails to",{emails})
+    // })
 
 }
 
