@@ -1120,12 +1120,12 @@ function _sendNewApplicationEmail() {
           });
         case 7:
           emailAddresses = _context.sent;
-          if (_sendTestEmail_js__WEBPACK_IMPORTED_MODULE_1__.TESTING) console.log("Would send email to", emailAddresses);
+          if (_sendTestEmail_js__WEBPACK_IMPORTED_MODULE_1__.TESTING.newApplication) console.log("Would send email to", emailAddresses);
           window.sendMessageToParent({
             controller: 'gmailController',
             // every one on board, new artist applications chair, new artist recruitment chair and the person who applied
             //   to: ""
-            to: _sendTestEmail_js__WEBPACK_IMPORTED_MODULE_1__.TESTING ? 'william.owen.dev@gmail.com' : "",
+            to: _sendTestEmail_js__WEBPACK_IMPORTED_MODULE_1__.TESTING.newApplication ? 'william.owen.dev@gmail.com' : "",
             subject: "GHOST New Artist Application sent from ".concat(newArtist.firstName, " ").concat(newArtist.lastName),
             body: "\n         <div style=\"text-align:center\">\n          <h1>A GHOST New Artist Application has been submitted!</h1>\n            <p>\n            The committee will be reviewing the application from <b>".concat(newArtist.firstName, " ").concat(newArtist.lastName, "</b>.<br>\n            The new artist applicant will receive a notification once the application has been reviewed. \n            </p>\n            <p>Application must be received no later than ").concat(date, ".\n            </p>\n\n\n            <p>Thank you for your membership.</p>\n            <p>Best Regards, <br>Gig Harbor Open Studio Tour</p>\n\n\n\n        </div>\n          ")
           });
@@ -1336,7 +1336,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 
 
 
-var TESTING = true;
+var TESTING = {
+  newApplication: true
+};
 function sendTestEmail() {
   return _sendTestEmail.apply(this, arguments);
 }

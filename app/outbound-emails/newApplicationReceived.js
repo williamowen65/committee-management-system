@@ -24,13 +24,13 @@ export async function sendNewApplicationEmail(newArtist){
         committees: ['Board'],
     }).then(emails => emails.join(',') + ',' + newArtist.email)
 
-    if(TESTING) console.log("Would send email to", emailAddresses)
+    if(TESTING.newApplication) console.log("Would send email to", emailAddresses)
 
     window.sendMessageToParent({
         controller: 'gmailController',
         // every one on board, new artist applications chair, new artist recruitment chair and the person who applied
     //   to: ""
-        to: TESTING ? 'william.owen.dev@gmail.com' : "",
+        to: TESTING.newApplication ? 'william.owen.dev@gmail.com' : "",
         subject: `GHOST New Artist Application sent from ${newArtist.firstName} ${newArtist.lastName}`,
         body: `
          <div style="text-align:center">

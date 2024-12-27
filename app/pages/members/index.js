@@ -1,4 +1,4 @@
-import roles from '../my-contract/committee-roles.js'
+import roles from '../my-contract/committee-roles copy.js'
 import '../../../utils/logIf.js'
 import { enableTimelinePrivileges } from './timelinePriviledge.js';
 import { sendTestEmail } from '../../outbound-emails/sendTestEmail.js';
