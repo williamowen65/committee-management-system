@@ -45,7 +45,6 @@
         <textarea-component value="${mailingAddress}" disabled="true" required="true" fieldName="mailing-address"
             alias="Mailing Address"></textarea-component>
 
-            testing: ${medium}
 
         <h3>Medium(s)</h3>
         <input-component value="${medium}" disabled="true" required="true" fieldName="medium"
@@ -70,7 +69,7 @@
             No, my studio is outside the boundary and I will need to share studio space with another artist
         </label>
 
-        <h3>Studio Availability</h3>
+        <h3>Will you need to share a studio?</h3>
         <style>
             input,
             textarea {
