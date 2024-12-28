@@ -758,30 +758,56 @@ function setEditContractEditor(myContract){
 
         textarea.setAttribute('id', 'contract-editor')
         textarea.style.display = 'none'
-        document.querySelector('#my-contract').insertAdjacentElement('afterbegin',textarea)
+        document.querySelector('#my-contract #edit-contract-btn').insertAdjacentElement('afterend',textarea)
 
         editButton.addEventListener('click', () => {  
 
-            // Initialize the TinyMCE editor
-            tinymce.init({
-                selector: 'textarea#contract-editor',
-                height: 500,
-                menubar: false,
-                plugins: [
-                    'advlist autolink lists link image charmap print preview anchor textcolor',
-                    'searchreplace visualblocks code fullscreen',
-                    'insertdatetime media table paste code help wordcount'
+            // show the editor
+            textarea.style.display = 'block'
+
+            const tinyPayload = {
+                selector: "#contract-editor",
+                plugins: "link image code",
+                toolbar_mode: "wrap",
+                // menubar: "insert",
+                // toolbar: "undo redo bold italic alignleft aligncenter alignright alignjustify | link image ",
+                toolbar: [
+                  { name: "history", items: ["undo", "redo"] },
+                  { name: "styles", items: ["styles", "fontfamily"] },
+                  { name: "formatting", items: ["bold", "italic", "underline"] },
+                  {
+                    name: "alignment",
+                    items: ["alignleft", "aligncenter", "alignright", "alignjustify"],
+                  },
+                  { name: "indentation", items: ["outdent", "indent"] },
+                  {
+                    name: "extraActions",
+                    items: ["link", "image", "code", "customInsertButton"],
+                  },
                 ],
-                toolbar: 'undo redo | formatselect | bold italic backcolor | \
-                alignleft aligncenter alignright alignjustify | \
-                bullist numlist outdent indent | removeformat | help',
-                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
                 setup: function (editor) {
-                    editor.on('init', function () {
-                        editor.setContent(myContract.contract || 'test')
-                    });
-                }
-            });
+                  editor.on("blur", function (e) {
+                    console.log("Editor was blurred", e);
+                    
+                  });
+          
+                
+                 
+                },
+          
+                // plugins: [
+                //   "advlist autolink lists link image charmap print preview anchor",
+                //   "searchreplace visualblocks code fullscreen",
+                //   "insertdatetime media table paste imagetools wordcount",
+                // ],
+                // toolbar:
+                //   "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                // content_style:
+                //   "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+              };
+
+            // Initialize the TinyMCE editor
+            tinymce.init(tinyPayload);
          })
 
 
