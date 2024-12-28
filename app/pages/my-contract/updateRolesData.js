@@ -105,7 +105,7 @@ const data =
         "responsibility": "Reviews images from artists",
         "prerequisite": "Needs comfort with manipulating image size and using Google Drive folders",
         "tasks": [
-            "Evaluate incoming images for size and proper cropping for brochures (1-3 MB jpeg, cropped square) and organize them in artist image folders on GHOST Google Drive",
+            "Evaluate incoming artist images",
             "Assist artists with image resizing, cropping, and jpeg uploading as needed during contract submission"
         ],
         "sideBarButtons": ["contracts-received"]
