@@ -1,6 +1,10 @@
 let roles;
 document.addEventListener('DOMContentLoaded', async () => {
-    roles = await CRUD.readAll('committee-roles')
+    roles = await CRUD.readAll('committee-roles').then(function (roles) {
+        return roles.sort(function (a, b) {
+          return Number(a.fbId) - Number(b.fbId);
+        });
+      });
 
     CRUD.readAll('ghost-contracts').then(contracts => {
         return contracts.filter(contract => contract.artistDetails.membershipPaid === true)
