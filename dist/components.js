@@ -412,8 +412,8 @@ function setUXEventListeners() {
     btnSubmit.innerText = 'Loading...';
     // disable the button
     btnSubmit.disabled = true;
-    var email = form.querySelector('input[id="email-login"]').value;
-    var password = form.querySelector('input[id="password-login"]').value;
+    var email = form.querySelector('input[id="email-login"]').value.trim();
+    var password = form.querySelector('input[id="password-login"]').value.trim();
     return firebase.signInWithEmailAndPassword(firebase.auth, email, password).then(function (user) {
       // redirect to members
       logIf.auth && console.log('redirecting to members page');
