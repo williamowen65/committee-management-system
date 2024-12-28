@@ -14,7 +14,12 @@ document.addEventListener('DOMContentLoaded', async function () {
     document.querySelector('body').style.display = 'block'
 
 
-    roles = await CRUD.readAll('committee-roles')
+    roles = await CRUD.readAll('committee-roles').then(function (roles) {
+        return roles.sort(function (a, b) {
+          return Number(a.fbId) - Number(b.fbId);
+        });
+      });
+
     logIf.client && console.log("My Contract Page Loaded")
 
     // set listeners on forms
@@ -347,6 +352,8 @@ function setUpVolunteerResponsibilityForm(contracts) {
             if (tasks) responsibility.insertAdjacentElement("beforeend", tasks)
             input.addEventListener('change', handleCheckboxChange)
 
+            // console.log("bugfix ", { role, input, responsibility, tasks})
+
             // get my role set
             // myRoles and filledRoles are an array of ids (ints)
 
@@ -399,6 +406,7 @@ function setUpVolunteerResponsibilityForm(contracts) {
     function createResponsibility(role) {
         const roleId = role.getAttribute('data-role-id')
         const thisRole = roles[roleId]
+        // console.log({ thisRole })
         const responsibility = document.createElement('div')
         // responsibility.classList.add('responsibility')
         responsibility.innerText = thisRole.responsibility
