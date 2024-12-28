@@ -108,7 +108,7 @@ async function handleDigitalImagesForm(e) {
     // Get file url and save it to firebase by image element id.
     // Save to firestore
     imageFields.forEach(async (field) => {
-        
+
         try {
             const url = await CRUD.saveImage(values[field])
             CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, {
@@ -735,7 +735,7 @@ async function setPaypalButton(contracts) {
     }
 }
 
-function setEditContractEditor(myContract){
+function setEditContractEditor(myContract) {
     const myPrivileges = (myContract.committeeRoleId || []).map(roleId => roles[roleId].privileges).flat()
 
     // if the user has the privileges to edit the contract, show the editor
@@ -750,33 +750,106 @@ function setEditContractEditor(myContract){
         editButton.setAttribute('title', "This button is only visible to users with the 'editContract' privilege")
 
         // editButton.addEventListener('click', handleEditContract)
-        document.querySelector('#my-contract h1').insertAdjacentElement('afterend',editButton)
+        document.querySelector('#my-contract h1').insertAdjacentElement('afterend', editButton)
 
 
-        editButton.addEventListener('click', () => {  
+        const container = document.createElement('div')
 
-            document.querySelector('#contract-editor').style.display = 'block'  
+        // invisible textarea for editing the contract
+        const textarea = document.createElement('textarea')
+        container.appendChild(textarea)
+
+        textarea.setAttribute('id', 'contract-editor')
+        container.style.display = 'none'
+        document.querySelector('#my-contract #edit-contract-btn').insertAdjacentElement('afterend', container)
+
+        editButton.addEventListener('click', () => {
+
+            // hide the button
+            editButton.style.display = 'none'
 
             // show the editor
+            container.style.display = 'block'
             tinymce.init({
+                plugins: 'paste',
+                paste_data_images: true,
+                setup: function (editor) {
+                    // Kept as an example of adding a new button
+                    // editor.ui.registry.addButton('saveButton', {
+                    //     text: 'Save',
+                    //     onAction: function () {
+                    //         // Save action
+                    //         console.log('Save button clicked');
+                    //     }
+                    // });
+                    editor.on("blur", function (e) {
+                        console.log("Editor was blurred", e);
+                    });
+                },
                 selector: '#contract-editor',
+                toolbar_mode: "wrap",
                 plugins: [
-                  // Core editing features
-                  'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-                  // Your account includes a free trial of TinyMCE premium features
-                  // Try the most popular premium features until Jan 11, 2025:
-                  'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+                    // Core editing features
+                    'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+                    // Your account includes a free trial of TinyMCE premium features
+                    // Try the most popular premium features until Jan 11, 2025:
+                    'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown', 'importword', 'exportword', 'exportpdf'
                 ],
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat | outdent indent',
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'Author name',
                 mergetags_list: [
-                  { value: 'First.Name', title: 'First Name' },
-                  { value: 'Email', title: 'Email' },
+                    { value: 'First.Name', title: 'First Name' },
+                    { value: 'Email', title: 'Email' },
                 ],
                 ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
-              });
-         })
+                init_instance_callback: function (editor) {
+                    // Adding custom buttons to the editor footer
+
+                    const editorContainer = editor.getContainer();
+                    const footerContainer = document.querySelector('#my-contract > div > div > div.tox-statusbar')
+                    footerContainer.style.height = "50px"
+                    const footer = editorContainer.querySelector('#my-contract > div > div > div.tox-statusbar > div.tox-statusbar__text-container.tox-statusbar__text-container--flex-start');
+                    const buttonContainer = document.createElement('div');
+                    buttonContainer.style.textAlign = 'center';
+                    buttonContainer.style.margin = '10px auto';
+
+                    const saveButton = document.createElement('button');
+                    saveButton.innerText = 'Save';
+                    saveButton.onclick = function () {
+                        // Save action
+                        console.log('Save button clicked');
+                    };
+
+                    const cancelButton = document.createElement('button');
+                    cancelButton.innerText = 'Cancel';
+                    cancelButton.onclick = function () {
+                        // Cancel action
+                        console.log('Cancel button clicked');
+                        // hide the editor
+                        container.style.display = 'none';
+                        // show the button
+                        editButton.style.display = 'block';
+                        // reset the editor content
+                        editor.setContent('');
+                    };
+
+                    buttonContainer.appendChild(saveButton);
+                    buttonContainer.appendChild(cancelButton);
+                    footer.style.display = 'none';
+                    footer.insertAdjacentElement('afterend',buttonContainer);
+
+                    // For both of the buttons, implement these styles
+                    saveButton.setAttribute('style', 'background-color: #272727; color: white; border: none; padding: 5px 10px; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; text-align: center; text-decoration: none; display: inline-block; margin: 4px 2px; cursor: pointer; transition: background-color 0.3s ease;');
+                    cancelButton.setAttribute('style', 'background-color: #272727; color: white; border: none; padding: 5px 10px; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; text-align: center; text-decoration: none; display: inline-block; margin: 4px 2px; cursor: pointer; transition: background-color 0.3s ease;');
+
+                  
+                   
+                }
+
+            });
+        })
 
 
     }
