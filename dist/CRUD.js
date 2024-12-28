@@ -14,6 +14,7 @@ window.CRUD = {
         data.createdAt = firebase.serverTimestamp()
         return await firebase.addDoc(firebase.collection(firebase.db, collection), data)
     },
+    // To read a configDocument for a collection, you must use this method to access it..
     read: async function (collection, id) {
         console.log("read data", { collection, id })
         const docRef = firebase.doc(firebase.collection(firebase.db, collection), id)
@@ -41,11 +42,14 @@ window.CRUD = {
             });
         }
     },
+    // readAll always ignores the documentId 'configDocument' which is used to store the configuration of the app
     readAll: async function (collection) {
         const query = firebase.query(firebase.collection(firebase.db, collection))
         const docs = await firebase.getDocs(query)
         const data = []
         docs.forEach(doc => {
+            if(doc.id === 'configDocument') return; // ignore the config document
+
             // convert createdAt to a formatted date
             const docData = doc.data()
             docData.fbId = doc.id

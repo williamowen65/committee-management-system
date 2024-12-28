@@ -23,16 +23,11 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 
 
+        configDocument = await CRUD.read('ghost-timeline', 'configDocument')
 
         // Add timeline event from the database to the timeline
         await CRUD.readAll('ghost-timeline').then(ghostTimeline => {
-          // remove the configDocument
-          ghostTimeline = ghostTimeline.filter(event => {
-            if (event.fbId !== 'configDocument') return event
-            else {
-              configDocument = event
-            }
-          })
+        
 
           // set the year to the configDocument year
           document.getElementById('activeYear').innerText = configDocument.activeYear
