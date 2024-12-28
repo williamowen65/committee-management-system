@@ -24,16 +24,32 @@
     firebase.redirectIfNotLoggedIn('/artist-sign-on')
   </script>
   <link rel="stylesheet" href="style.css">
+
+  <!-- WYSIWYG Editor for the editContract privilege -->
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // check for editContract privilege
+      
+    })
+  </script>
+
 </head>
 
 
 <body>
   <header-component slotLinks="ghost-members"></header-component>
-  <div class="container">
+  <div class="container" id="my-contract">
     <h1>My Contract</h1>
 
     <!-- Signature Form -->
     <form id="my-signature-form">
+
+      <!--  Include editor for editContract privilege -->
+      
+      
+
       <markdown-component>
         <span slot="markdown-content">
           This contract, along with all required images and electronic payment, are due on or before March 2, 2025.

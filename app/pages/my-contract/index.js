@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     CRUD.readAll('ghost-contracts').then((existingContracts) => {
         contracts = existingContracts
+        const myContract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
 
         // Set up Signature
         setSignatureForm(contracts);
@@ -57,6 +58,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         // set Paypal 
         setPaypalButton(contracts);
+
+        // Set editContract Editor
+        setEditContractEditor(myContract);
     })
 
     // Set the users assigned roles 
@@ -731,6 +735,24 @@ async function setPaypalButton(contracts) {
     }
 }
 
+function setEditContractEditor(myContract){
+    const myPrivileges = (myContract.committeeRoleId || []).map(roleId => roles[roleId].privileges).flat()
 
+    // if the user has the privileges to edit the contract, show the editor
+    if (myPrivileges.includes('editContract')) {
+
+        // show a button for editing the contract
+        const editButton = document.createElement('button')
+        editButton.innerText = "Edit Contract"
+        editButton.setAttribute('id', 'edit-contract-btn')
+        editButton.setAttribute('type', 'button')
+        editButton.classList.add('small')
+        
+        // editButton.addEventListener('click', handleEditContract)
+        document.querySelector('#my-contract h1').insertAdjacentElement('afterend',editButton)
+
+
+    }
+}
 
 /// 

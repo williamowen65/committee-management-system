@@ -6,7 +6,7 @@ const data =
         "responsibility": "Web development and maintenance",
         "tasks": [],
         "sideBarButtons": ["testEmail", "testSheets", "processToSheets", "createDriveFolder", "createDocument", "newScholarshipApplications", "newApplications", "contracts-received"],
-        "privileges": ["editTimeline"]
+        "privileges": ["editTimeline", "editContract"]
     },
     "1": {
         "title": "President",
@@ -15,7 +15,7 @@ const data =
         "prerequisite": "Previous experience in a leadership role",
         "tasks": [],
         "sideBarButtons": ["newScholarshipApplications", "newApplications", "contracts-received", "processToSheets"],
-        "privileges": ["editTimeline"]
+        "privileges": ["editTimeline", 'editContract']
     },
     "2": {
         "title": "Vice President",
