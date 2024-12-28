@@ -13,7 +13,11 @@ document.addEventListener('DOMContentLoaded', async function () {
   firebase.redirectIfNotLoggedIn('/artist-sign-on')
   .then(async (user) => {
     if (user) {
-        roles = await CRUD.readAll('committee-roles')
+        roles = await CRUD.readAll('committee-roles').then(function (roles) {
+          return roles.sort(function (a, b) {
+            return Number(a.fbId) - Number(b.fbId);
+          });
+        });
 
         document.body.style.display = 'block'
         const userDiv = document.querySelector('#user')
