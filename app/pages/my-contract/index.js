@@ -747,7 +747,8 @@ function setEditContractEditor(myContract){
         editButton.setAttribute('id', 'edit-contract-btn')
         editButton.setAttribute('type', 'button')
         editButton.classList.add('small')
-        
+        editButton.setAttribute('title', "This button is only visible to users with the 'editContract' privilege")
+
         // editButton.addEventListener('click', handleEditContract)
         document.querySelector('#my-contract h1').insertAdjacentElement('afterend',editButton)
 
