@@ -838,6 +838,10 @@ function setEditContractEditor(myContract) {
                         saveButton.onclick = function () {
                             // Save action
                             console.log('Save button clicked');
+                            // capture the content
+                            const content = editor.getContent();
+                            // save the content to the database
+                            
                         };
 
                         const cancelButton = document.createElement('button');
