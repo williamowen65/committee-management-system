@@ -8,6 +8,12 @@ let roles;
 
 document.addEventListener('DOMContentLoaded', async function () {
 
+    // Get contract details.
+    const configDocument = await CRUD.read('ghost-contracts', 'configDocument')
+    document.querySelector('#my-signature-form #contractDetails').insertAdjacentHTML('afterbegin', configDocument.contractDetails)
+    document.querySelector('body').style.display = 'block'
+
+
     roles = await CRUD.readAll('committee-roles')
     logIf.client && console.log("My Contract Page Loaded")
 
@@ -763,7 +769,11 @@ function setEditContractEditor(myContract) {
         container.style.display = 'none'
         document.querySelector('#my-contract #edit-contract-btn').insertAdjacentElement('afterend', container)
 
-        editButton.addEventListener('click', () => {
+        editButton.addEventListener('click', async () => {
+
+
+            const configDocument = await CRUD.read('ghost-contracts', 'configDocument')
+
 
             // hide the button
             editButton.style.display = 'none'
@@ -803,6 +813,10 @@ function setEditContractEditor(myContract) {
                         editor.on("blur", function (e) {
                             console.log("Editor was blurred", e);
                         });
+
+                        editor.on("init", function () {
+                            editor.setContent(configDocument.contractDetails || "");
+                        });
                     },
                     selector: '#contract-editor',
                     toolbar_mode: "wrap",
@@ -841,6 +855,12 @@ function setEditContractEditor(myContract) {
                             // capture the content
                             const content = editor.getContent();
                             // save the content to the database
+                            CRUD.update('ghost-contracts', 'configDocument', { contractDetails: content }).then(() => {
+                                // hide the editor
+                                container.style.display = 'none';
+                                // show the button
+                                editButton.style.display = 'block';
+                            });
                             
                         };
 
@@ -853,8 +873,6 @@ function setEditContractEditor(myContract) {
                             container.style.display = 'none';
                             // show the button
                             editButton.style.display = 'block';
-                            // reset the editor content
-                            editor.setContent('');
                         };
 
                         buttonContainer.appendChild(saveButton);

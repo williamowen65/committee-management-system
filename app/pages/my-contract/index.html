@@ -40,8 +40,8 @@
 
 </head>
 
-
-<body>
+<!-- Page becomes visible once the contract details have loaded -->
+<body style="display:none">
   <header-component slotLinks="ghost-members"></header-component>
   <div class="container" id="my-contract">
     <h1>My Contract</h1>
@@ -50,81 +50,10 @@
     <form id="my-signature-form">
 
       <!--  Include editor for editContract privilege (dynamically in JS) -->
-     
+      <div id="contractDetails">
+        <!-- Dynamically inserted content from ghost-contracts/configDocument {contractDetails} -->
+      </div>
       
-
-      <markdown-component>
-        <span slot="markdown-content">
-          This contract, along with all required images and electronic payment, are due on or before March 2, 2025.
-
-          <u><strong style="text-wrap: nowrap;">I hereby agree:</strong></u>
-
-          - My studio is either within the boundaries of the GHOST tour map OR I will be sharing studio space
-          with another artist
-
-          - To open my studio display during the hours of 10AM to 5PM on September 19, 20 and 21, 2025, and be
-          present during those hours.
-
-          - To have current, original, one-of-a-kind artwork prominently displayed at GHOST.
-
-          - To abide by restrictions on commercial reproductions: less prominent placement, clear and accurate
-          labeling as a reproduction. Any item sold at GHOST must be from artist's own images.
-
-          - To show visitors my workspace and demonstrate my techniques on works-in-progress. I will make my
-          process visible in a way that will enable visitors to learn more about my art form. Hosted artists
-          must comply with all the above except workspace.
-
-          - To serve as an active participant on one of the designated committees that help to produce the Tour.
-          All artists, even those that live outside of the tour boundaries, are expected to sign up for a
-          volunteer position on one of our committees.
-
-          - Attend all general meetings held to disseminate information and organize a smooth-running tour.
-
-          - I understand that: If another artist hosts me, he/she must be a qualified GHOST participant and I
-          cannot invite non-member artists to show work in my studio.
-
-          - Alcoholic beverages will not be offered if refreshments are provided at my studio.
-
-          - Artists who need insurance coverage for their artwork need to look into a homeowner's or business
-          insurance policy.
-
-          - Participant agrees to hold harmless Gig Harbor Open Studio Tour, Studio Tour Board, participating
-          artists, and participating studio owners from all claims, demands, actions and causes of action for
-          any and all injuries or damage to or theft of artwork displayed and any personal property brought to
-          the Tour. The artist assumes all risk of loss or damage to the artist's property.
-
-          - If the tour needs to be canceled due to unforeseeable circumstances, the refund amount will depend
-          on the bills & payments already made for tour requirements.
-
-          - If I cancel from the tour for any reason after the last day to approve changes to our brochure,
-          there is no refund.
-
-          - If I fail to comply with the Gig Harbor Open Studio Tour Guidelines and the conditions listed
-          herein, including not fulfilling my committee responsibilities, I will be ineligible for subsequent
-          GHOST Events.
-
-          <u><strong> I agree to participate in the following GHOST Timeline:</strong></u>
-
-          <u><strong>March 26:</strong></u> General members kick-off meeting at Gig Harbor library 5:30 – 7:00 pm
-
-          <u><strong>April 10:</strong></u> Last day for members to notify Beth Owen of corrections needed on
-          the brochure or website details (will be available online within the Member login site instead of in
-          person at the library)
-
-          <u><strong>August 20:</strong></u> General members meeting at Gig Harbor Library 5:30-7:00 pm to pick up signs
-          and review plans
-
-          <u><strong>Sept 19, 20 and 21:</strong></u> GHOST tour dates
-
-          <u><strong>October 22:</strong></u> General members meeting and potluck (location TBD) to return signs,
-          elect board for 2026, review survey results and discuss ideas for next year
-
-          (All the following information goes to a Google Spread sheet or a Google Drive Image folder when
-          submitted)
-
-          <u><strong>Artist name (this will act as your contract signature):</strong></u>
-        </span>
-      </markdown-component>
       <div class="" style="width: 400px; display: flex; flex-direction: column; margin: auto; ">
         <style>
           input[name="signature"] {
