@@ -817,6 +817,13 @@ function setEditContractEditor(myContract) {
                         editor.on("init", function () {
                             editor.setContent(configDocument.contractDetails || "");
                         });
+
+                        editor.on("keyup", function (e) {
+                            console.log("Editor was changed", e);
+                            // update the content in the DOM
+                            const html = editor.getContent()
+                            document.querySelector('#my-signature-form #contractDetails').innerHTML = html
+                        })
                     },
                     selector: '#contract-editor',
                     toolbar_mode: "wrap",
