@@ -10,10 +10,10 @@ let configDocument;
 let roles;
 
 document.addEventListener('DOMContentLoaded', async function () {
-  roles = await CRUD.readAll('committee-roles')
   firebase.redirectIfNotLoggedIn('/artist-sign-on')
-    .then(async (user) => {
-      if (user) {
+  .then(async (user) => {
+    if (user) {
+        roles = await CRUD.readAll('committee-roles')
 
         document.body.style.display = 'block'
         const userDiv = document.querySelector('#user')

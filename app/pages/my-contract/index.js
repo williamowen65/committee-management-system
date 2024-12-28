@@ -464,6 +464,10 @@ function updateVolunteerResponsibilityForm(contracts) {
             const roleId = role.getAttribute('data-role-id')
             const thisRole = roles[roleId]
             const checkbox = role.querySelector('input[type="checkbox"]')
+            if(!checkbox) {
+                console.error("Checkbox not found", {role})
+                return
+            }
             const isRoleFilled = filledRoles.includes(roleId)
             checkbox.checked = isRoleFilled ? true : false
             checkbox.disabled = isRoleFilled ? true : false
