@@ -753,6 +753,38 @@ function setEditContractEditor(myContract){
         document.querySelector('#my-contract h1').insertAdjacentElement('afterend',editButton)
 
 
+        // invisible textarea for editing the contract
+        const textarea = document.createElement('textarea')
+
+        textarea.setAttribute('id', 'contract-editor')
+        textarea.style.display = 'none'
+        document.querySelector('#my-contract').insertAdjacentElement('afterbegin',textarea)
+
+        editButton.addEventListener('click', () => {  
+
+            // Initialize the TinyMCE editor
+            tinymce.init({
+                selector: 'textarea#contract-editor',
+                height: 500,
+                menubar: false,
+                plugins: [
+                    'advlist autolink lists link image charmap print preview anchor textcolor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table paste code help wordcount'
+                ],
+                toolbar: 'undo redo | formatselect | bold italic backcolor | \
+                alignleft aligncenter alignright alignjustify | \
+                bullist numlist outdent indent | removeformat | help',
+                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                setup: function (editor) {
+                    editor.on('init', function () {
+                        editor.setContent(myContract.contract || 'test')
+                    });
+                }
+            });
+         })
+
+
     }
 }
 
