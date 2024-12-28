@@ -23,7 +23,7 @@ const data =
         "responsibility": "Assist the President and oversee the committees",
         "prerequisite": "Experience in organizational management",
         "tasks": [],
-        "sideBarButtons": ["newScholarshipApplications", "contracts-received", "newApplications"],
+        "sideBarButtons": ["newScholarshipApplications", "contracts-received", "newApplications", "processToSheets"],
         "privileges": []
     },
     "3": {
@@ -32,7 +32,7 @@ const data =
         "responsibility": "Manage the organization's finances",
         "prerequisite": "Experience in financial management",
         "tasks": [],
-        "sideBarButtons": ["newScholarshipApplications", "contracts-received", "newApplications"],
+        "sideBarButtons": ["newScholarshipApplications", "contracts-received", "newApplications", "processToSheets"],
         "privileges": []
     },
     "4": {
@@ -41,7 +41,7 @@ const data =
         "responsibility": "Record and distribute meeting minutes",
         "prerequisite": "Strong organizational and communication skills",
         "tasks": [],
-        "sideBarButtons": ["newScholarshipApplications", "contracts-received", "newApplications"]
+        "sideBarButtons": ["newScholarshipApplications", "contracts-received", "newApplications", "processToSheets"]
     },
     "5": {
         "title": "Member-at-large",
@@ -49,7 +49,7 @@ const data =
         "responsibility": "Assist with various tasks as needed",
         "prerequisite": "Willingness to assist with various tasks",
         "tasks": [],
-        "sideBarButtons": ["newScholarshipApplications", "contracts-received", "newApplications"]
+        "sideBarButtons": ["newScholarshipApplications", "contracts-received", "newApplications", "processToSheets"]
     },
     "6": {
         "title": "Web Design/Maintenance Chair",
