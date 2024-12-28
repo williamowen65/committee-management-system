@@ -753,61 +753,29 @@ function setEditContractEditor(myContract){
         document.querySelector('#my-contract h1').insertAdjacentElement('afterend',editButton)
 
 
-        // invisible textarea for editing the contract
-        const textarea = document.createElement('textarea')
-
-        textarea.setAttribute('id', 'contract-editor')
-        textarea.style.display = 'none'
-        document.querySelector('#my-contract #edit-contract-btn').insertAdjacentElement('afterend',textarea)
-
         editButton.addEventListener('click', () => {  
 
+            document.querySelector('#contract-editor').style.display = 'block'  
+
             // show the editor
-            textarea.style.display = 'block'
-
-            const tinyPayload = {
-                selector: "#contract-editor",
-                plugins: "link image code",
-                toolbar_mode: "wrap",
-                // menubar: "insert",
-                // toolbar: "undo redo bold italic alignleft aligncenter alignright alignjustify | link image ",
-                toolbar: [
-                  { name: "history", items: ["undo", "redo"] },
-                  { name: "styles", items: ["styles", "fontfamily"] },
-                  { name: "formatting", items: ["bold", "italic", "underline"] },
-                  {
-                    name: "alignment",
-                    items: ["alignleft", "aligncenter", "alignright", "alignjustify"],
-                  },
-                  { name: "indentation", items: ["outdent", "indent"] },
-                  {
-                    name: "extraActions",
-                    items: ["link", "image", "code", "customInsertButton"],
-                  },
+            tinymce.init({
+                selector: '#contract-editor',
+                plugins: [
+                  // Core editing features
+                  'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+                  // Your account includes a free trial of TinyMCE premium features
+                  // Try the most popular premium features until Jan 11, 2025:
+                  'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
                 ],
-                setup: function (editor) {
-                  editor.on("blur", function (e) {
-                    console.log("Editor was blurred", e);
-                    
-                  });
-          
-                
-                 
-                },
-          
-                // plugins: [
-                //   "advlist autolink lists link image charmap print preview anchor",
-                //   "searchreplace visualblocks code fullscreen",
-                //   "insertdatetime media table paste imagetools wordcount",
-                // ],
-                // toolbar:
-                //   "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-                // content_style:
-                //   "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-              };
-
-            // Initialize the TinyMCE editor
-            tinymce.init(tinyPayload);
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                tinycomments_mode: 'embedded',
+                tinycomments_author: 'Author name',
+                mergetags_list: [
+                  { value: 'First.Name', title: 'First Name' },
+                  { value: 'Email', title: 'Email' },
+                ],
+                ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+              });
          })
 
 
