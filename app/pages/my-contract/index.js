@@ -786,6 +786,7 @@ function setEditContractEditor(myContract) {
                 container.style.display = 'block'
             } else {
 
+                console.log("Initializing TinyMCE editor")
 
                 tinymce.init({
                     plugins: 'paste',
