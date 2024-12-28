@@ -503,6 +503,7 @@ function textProcessToSheetsButton(role) {
   }, 1)
 
   return `<button id="processToSheets" style="position: relative;">Google Sheet Summary</button>
+  <a href="https://docs.google.com/document/d/1wHtkK3xZbZwYfg0c1-8cQr1GtijNdh21/edit?usp=sharing&ouid=109956459933316731861&rtpof=true&sd=true" target="_blank">Need help viewing the spreadsheet?</a>
   `
 }
 
