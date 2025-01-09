@@ -1,6 +1,12 @@
-import roles from '../my-contract/committee-roles.js'
+let roles
 
 document.addEventListener('DOMContentLoaded', async () => { 
+    roles = await CRUD.readAll('committee-roles').then(function (roles) {
+        return roles.sort(function (a, b) {
+          return Number(a.fbId) - Number(b.fbId);
+        });
+      });
+
 
     await CRUD.readAll('ghost-contracts').then(contracts => {
         setVolunteerResponsibilityForm(contracts);

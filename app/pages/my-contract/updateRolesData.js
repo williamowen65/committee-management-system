@@ -353,7 +353,7 @@ const data =
     "43": {
         "title": "Information Booth Volunteer",
         "committee": "Information Booth",
-        "responsibility": "Man the booth Friday, July 19th",
+        "responsibility": "Man the booth Saturday, July 19th",
         "prerequisite": "Willingness to volunteer",
         "tasks": [],
         "sideBarButtons": []
@@ -361,7 +361,7 @@ const data =
     "44": {
         "title": "Information Booth Volunteer",
         "committee": "Information Booth",
-        "responsibility": "Man the booth Friday, July 20th",
+        "responsibility": "Man the booth Sunday, July 20th",
         "prerequisite": "Willingness to volunteer",
         "tasks": [],
         "sideBarButtons": []
