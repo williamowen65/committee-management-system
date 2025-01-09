@@ -474,18 +474,27 @@
 
             Please submit payment by March 2, 2025.
 
-            Payments must be made online. Click the button below to checkout. Your receipt will be emailed and displayed
-            here on your contract.
-
-
-
+            <p>Payments must be made online. Click the button below to checkout. Your receipt will be emailed and displayed here on your contract.</p>
 
           </span>
         </markdown-component>
 
-        <!--  Paypal Integration -->
+        <div class="contractIncomplete">
+          You must have completed the contract before you can pay.
+          <ul style="list-style-type: none; text-align: left;">
+            <li class="signature-incomplete incomplete">Signature</li>
+            <li class="artist-details-incomplete incomplete">Artist Details</li>
+            <li class="images-incomplete incomplete">Digital Images</li>
+            <li class="studio-sharing-incomplete incomplete">Studio Sharing Details</li>
+            <li class="volunteer-incomplete incomplete">Volunteer Responsibility</li>
+            <li class="demonstration-incomplete incomplete">Artistic Demonstration</li>
+          </ul>
+        </div>
 
-        <paypal-component></paypal-component>
+        <div class="ifContractComplete">
+          <!--  Paypal Integration -->
+          <paypal-component></paypal-component>
+        </div>
       </div>
 
       <div class="membership-paid" style="display:none; text-align: center; width:100%">

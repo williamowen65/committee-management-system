@@ -49,3 +49,17 @@
   margin: 0 auto;
   width: fit-content;
 }
+
+.contractIncomplete .incomplete {
+  color: red;
+  font-weight: bold;
+}
+.contractIncomplete .incomplete::before {
+  content: "👉";
+  position: absolute;
+  translate: -24px -2px;
+}
+
+
+
+

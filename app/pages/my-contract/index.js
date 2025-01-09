@@ -72,13 +72,20 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         // Set editContract Editor
         setEditContractEditor(myContract);
+
+
+   ;
     })
 
     // Set the users assigned roles 
     // listen to other peoples roles
     CRUD.listen('ghost-contracts', null, (existingContracts) => {
         contracts = existingContracts;
+        const myContract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+
         updateVolunteerResponsibilityForm(contracts);
+        // Check if contract is complete and enable paypal buttons
+        updateMyContract(myContract)
     })
 })
 
@@ -708,7 +715,7 @@ async function setPaypalButton(contracts) {
         return
     };
 
-    const membershipPaid = contract && contract.artistDetails && contract.artistDetails.membershipPaid || false
+    const membershipPaid = contract && contract.artistDetails && contract.artistDetails.membershipPaid === true || false
 
     // get scholarship status from scholarship data collection
     await CRUD.read('scholarship-applications', firebase.auth.currentUser.uid).then(scholarship => {
@@ -752,6 +759,8 @@ async function setPaypalButton(contracts) {
         }
     }
 }
+
+
 
 function setEditContractEditor(myContract) {
     const myPrivileges = (myContract.committeeRoleId || []).map(roleId => roles[roleId].privileges).flat()
@@ -916,4 +925,59 @@ function setEditContractEditor(myContract) {
     }
 }
 
-/// 
+function updateMyContract(myContract){
+    // If all sections are complete, enable the paypal button
+    // Check for Signature, Artist Details, Digital Images, Studio Sharing Details, Volunteer Responsibility, Artistic Demonstration
+
+    console.log("Checking if contract is complete", {myContract})
+    const signature = myContract.signature
+    const artistDetails = myContract.artistDetails
+    const images = myContract.images
+    const studioSharing = myContract.StudioSharingAnswer
+    const volunteerResponsibility = myContract.committeeRoleId.length > 0
+    const artisticDemonstration = myContract.artisticDemonstration
+
+    const contractComplete = signature && artistDetails && images && studioSharing && volunteerResponsibility && artisticDemonstration
+
+    if(contractComplete){
+        document.querySelector('.ifContractComplete').style.display = 'block'
+        document.querySelector('.contractIncomplete').style.display = 'none'
+    } else { // Contract is incomplete
+        document.querySelector('.contractIncomplete').style.display = 'block'
+        document.querySelector('.ifContractComplete').style.display = 'none'
+
+        // select the items that are incomplete
+        const incompleteItems = {
+            signature: !signature,
+            artistDetails: !artistDetails,
+            images: !images,
+            studioSharing: !studioSharing,
+            volunteerResponsibility: !volunteerResponsibility,
+            artisticDemonstration: !artisticDemonstration
+        };
+
+        document.querySelectorAll('.incomplete').forEach(item => {
+            item.classList.remove('incomplete')
+        })
+
+        if(incompleteItems.signature){
+            document.querySelector('.signature-incomplete').classList.add('incomplete')
+        }
+        if(incompleteItems.artistDetails){
+            document.querySelector('.artistDetails-incomplete').classList.add('incomplete')
+        }
+        if(incompleteItems.images){
+            document.querySelector('.images-incomplete').classList.add('incomplete')
+        }
+        if(incompleteItems.studioSharing){
+            document.querySelector('.studio-sharing-incomplete').classList.add('incomplete')
+        }
+        if(incompleteItems.volunteerResponsibility){
+            document.querySelector('.volunteer-incomplete').classList.add('incomplete')
+        }
+        if(incompleteItems.artisticDemonstration){
+            document.querySelector('.demonstration-incomplete').classList.add('incomplete')
+        }
+
+    }
+}
