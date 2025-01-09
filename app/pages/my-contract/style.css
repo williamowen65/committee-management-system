@@ -60,6 +60,12 @@
   translate: -24px -2px;
 }
 
+.contractIncomplete ul {
+  margin: auto;
+  margin-top:10px;
+  width: fit-content;
+}
+
 
 
 
