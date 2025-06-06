@@ -10,6 +10,9 @@ let configDocument;
 let roles;
 
 document.addEventListener('DOMContentLoaded', async function () {
+
+
+
   firebase.redirectIfNotLoggedIn('/artist-sign-on')
   .then(async (user) => {
     if (user) {
@@ -32,6 +35,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         // Add timeline event from the database to the timeline
         await CRUD.readAll('ghost-timeline').then(ghostTimeline => {
         
+
+       
 
           // set the year to the configDocument year
           document.getElementById('activeYear').innerText = configDocument.activeYear
@@ -76,9 +81,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
               enableTimelinePrivileges(configDocument, timeline)
 
-
-
-
             }
 
           })
@@ -96,6 +98,10 @@ document.addEventListener('DOMContentLoaded', async function () {
           if (!roleIds) return ''
           return roleIds.map(roleId => {
             const role = roles[roleId]
+            if(!role) {
+              console.log(`Role ${roleId} not found in DB`)
+              return null;
+            }
             const roleTitle = role.title
             const roleButtons = role.sideBarButtons
             const responsibility = role.responsibility
@@ -140,7 +146,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             return sidePanelHTML
 
 
-          }).join("")
+          }).filter(Boolean).join("")
         }
       }
     })

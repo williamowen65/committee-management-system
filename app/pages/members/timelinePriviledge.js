@@ -1,5 +1,7 @@
 export function enableTimelinePrivileges(configDocument, timeline) {
 
+    debugger
+
     setYearSelection()
 
     const { editButton, editForm } = createTemplates()
