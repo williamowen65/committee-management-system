@@ -1,16 +1,18 @@
-
-<link
-rel="stylesheet"
-href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-crossorigin="anonymous"
-/>
+<script
+  src="https://kit.fontawesome.com/4550fec5ff.js"
+  crossorigin="anonymous"
+></script>
 
 <!-- I don't remember what data-primary meant -->
 <div class="os-dual-form" data-primary="login" auth-mode="login">
   <form id="signup" class="left" autocomplete="off">
     <h1>Sign up</h1>
     <os-form-feedback feedbackName="success"></os-form-feedback>
+
+    <small style="margin-inline: 30px; font-weight: bold;">
+      Sign-up here if you need to set up your personal account. Otherwise, click on the "Go To Log In" button on the right.
+    </small>
+
 
     <div class="row">
       <input-component
@@ -60,8 +62,9 @@ crossorigin="anonymous"
     </div>
     <os-form-feedback feedbackName="submit"></os-form-feedback>
   </form>
-  <form id="login" class="right"  autocomplete="off">
+  <form id="login" class="right" autocomplete="off">
     <h1>Login</h1>
+    <small style="margin-inline: 30px; font-weight: bold;">Log In here if you have already set up your personal account. Otherwise, click on the "Register New Account" button on the left.</small>
     <input-component
       required="true"
       fieldName="email-login"
@@ -89,7 +92,7 @@ crossorigin="anonymous"
           text-decoration: underline;
         }
       </style>
-      <a type="button" class="reset-password">Reset Password</a>
+      <a type="button" class="reset-password">Forgot Password?</a>
       <button type="button" class="mobile-view toggleAuthType">
         Register new account
       </button>
@@ -98,11 +101,53 @@ crossorigin="anonymous"
   </form>
 
   <div class="cover left login" style="background-image: url(${loginImage})">
-    <button type="button" class="toggleAuthType secondary">
+    <button type="button" class="toggleAuthType secondary" style="background-color: #ff0084;">
       Register new account
     </button>
   </div>
   <div class="cover right signup" style="background-image: url(${signupImage})">
-    <button type="button" class="toggleAuthType">Go to Log in</button>
+    <button type="button" class="toggleAuthType" style="background-color: #ff0084;">Go to Log in</button>
+  </div>
+</div>
+
+<style>
+  #reset-password-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #reset-password-modal .modal-content {
+    width: fit-content;
+  }
+
+  .close-modal {
+    cursor: pointer;
+    font-size: 30px;
+    color: #007bff;
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+</style>
+
+<div id="reset-password-modal" class="modal">
+  <div class="modal-content" style="position: relative">
+    <span class="close-modal" style="">&times;</span>
+    <h2>Reset Password</h2>
+    <form onsubmit="event.preventDefault()" style="">
+      <input-component
+        moveLabel="true"
+        type="email"
+        alias="Email"
+        placeholder="Enter your email"
+        fieldName="resetEmail"
+      >
+      </input-component>
+      <button id="resetSubmit" class="btn small">Submit</button>
+      <div id="reset-password-modal-feedback"></div>
+    </form>
   </div>
 </div>

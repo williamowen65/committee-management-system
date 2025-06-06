@@ -19,22 +19,10 @@
       
     </script>
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        // fetch 'my-contract/committee-positions.html' and insert it into the 'container' div
-        fetch('/my-contract/committee-positions.html')
-          .then((response) => response.text())
-          .then((data) => {
-            document.querySelector('.container').innerHTML = data
-          })
-      })
+    
     </script>
 
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-      crossorigin="anonymous"
-    />
+<script src="https://kit.fontawesome.com/4550fec5ff.js" crossorigin="anonymous"></script>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -46,7 +34,9 @@
     <style>
       #committee-positions b {
         text-wrap: nowrap;
+        
       }
+     
       @media (max-width: 900px) {
                   #committee-positions b {
                       text-wrap: wrap;              
@@ -59,7 +49,9 @@
 
       #committee-positions li.role:has(input[type='checkbox']:not(:checked)) {
         background: yellow;
+        width: fit-content;
         color: black;
+       
       }
 
       .info-icon {
@@ -81,11 +73,12 @@
         /* margin-left: 63px; */
       }
       li.role {
-        display: flex;
+        display: grid;
         align-items: baseline;
+        grid-template-columns: 171px 1fr;
       }
       .user-name:not(:empty) {
-        border: 1px solid springgreen;
+        /* border: 1px solid springgreen; */
         margin-left: 10px;
         font-size: 14px;
         font-weight: bold;
@@ -93,8 +86,12 @@
         padding: 3px 5px;
         margin: 5px 10px 0px 0px;
         text-wrap: nowrap;
+        font-weight: bold;
+        text-decoration: underline;
 
       }
+
+
     </style>
   </head>
 

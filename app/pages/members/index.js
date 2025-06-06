@@ -10,16 +10,17 @@ let configDocument;
 let roles;
 
 document.addEventListener('DOMContentLoaded', async function () {
-
-
-
   firebase.redirectIfNotLoggedIn('/artist-sign-on')
   .then(async (user) => {
     if (user) {
         roles = await CRUD.readAll('committee-roles').then(function (roles) {
-          return roles.sort(function (a, b) {
-            return Number(a.fbId) - Number(b.fbId);
-          });
+          // return roles.sort(function (a, b) {
+          //   return Number(a.fbId) - Number(b.fbId);
+          // });
+          return roles.reduce((acc, next) => {
+            acc[next.fbId] = next
+            return acc
+        }, {})
         });
 
         document.body.style.display = 'block'
@@ -30,13 +31,17 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 
 
-        configDocument = await CRUD.read('ghost-timeline', 'configDocument')
+        // configDocument = await CRUD.read('ghost-timeline', 'configDocument')
+        await CRUD.read('app-settings', 'activeYear').then((doc => {
+          configDocument = {
+            activeYear: doc.data
+          }
+        }))
+
 
         // Add timeline event from the database to the timeline
         await CRUD.readAll('ghost-timeline').then(ghostTimeline => {
         
-
-       
 
           // set the year to the configDocument year
           document.getElementById('activeYear').innerText = configDocument.activeYear
@@ -81,6 +86,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
               enableTimelinePrivileges(configDocument, timeline)
 
+
+
+
             }
 
           })
@@ -98,10 +106,6 @@ document.addEventListener('DOMContentLoaded', async function () {
           if (!roleIds) return ''
           return roleIds.map(roleId => {
             const role = roles[roleId]
-            if(!role) {
-              console.log(`Role ${roleId} not found in DB`)
-              return null;
-            }
             const roleTitle = role.title
             const roleButtons = role.sideBarButtons
             const responsibility = role.responsibility
@@ -130,6 +134,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 buttons.insertAdjacentHTML('beforeend', testSheetsButton(role))
               }
               if (roleButtons.includes('processToSheets')) {
+                buttons.insertAdjacentHTML('beforeend', textOpenSheetsButton(role))
                 buttons.insertAdjacentHTML('beforeend', textProcessToSheetsButton(role))
               }
               if (roleButtons.includes('createDriveFolder')) {
@@ -146,7 +151,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             return sidePanelHTML
 
 
-          }).filter(Boolean).join("")
+          }).join("")
         }
       }
     })
@@ -337,7 +342,7 @@ function newApplicationsSidePanel(role) {
   }, 1)
 
   return `
-      <a onclick="navigateTo('/new-applications')" class="new-applications">
+      <a href="/new-applications" onclick="navigateTo('/new-applications')" class="new-applications">
         <button style="position: relative;">New Artist Applications Received <span class="badge" data-count="0"></span></button>
     </a>`
 }
@@ -353,7 +358,7 @@ function newScholarshipApplicationsButton(role) {
     })
   })
   return `
-      <a onclick="navigateTo('/scholarship-applications')" class="scholarship-applications">
+      <a href="/scholarship-applications" onclick="navigateTo('/scholarship-applications')" class="scholarship-applications">
         <button  style="position: relative;">Scholarships Received <span class="badge" data-count="0"></span></button>
     </a>`
 }
@@ -364,7 +369,7 @@ function allContractsButton(role) {
     // listen to new applications changes
     CRUD.readAll('ghost-contracts').then(contracts => {
       logIf.client || true && console.log({ contracts })
-      const totalToReview = contracts.filter(contract => contract.artistDetails.membershipPaid).length
+      const totalToReview = contracts.filter(c => c.artistDetails).filter(contract => contract.artistDetails.membershipPaid).length
       const badge = document.querySelector('a.contracts-received .badge')
       badge.innerText = totalToReview
       badge.setAttribute('data-count', totalToReview)
@@ -373,7 +378,7 @@ function allContractsButton(role) {
   }, 1)
 
   return `
-      <a onclick="navigateTo('/contracts-received')" class="contracts-received">
+      <a href="/contracts-received" onclick="navigateTo('/contracts-received')" class="contracts-received">
         <button style="position: relative;">Contracts Received <span class="badge" data-count="0"></span></button>
     </a>`
 }
@@ -474,6 +479,24 @@ function testCreateDocumentButton(role) {
   return `<button id="createDocument" style="position: relative;">Create Drive Document </button>`
 }
 
+function textOpenSheetsButton(role){
+  
+  setTimeout(() => {
+
+    document.getElementById('openSheets').addEventListener('click', () => {
+
+      // Just open the spreadsheet (1cmfgdGc8L5li_kx79W9SO5-ZwukiaXxlV5EZ3o8RYpY)
+      
+      window.openUrl('https://docs.google.com/spreadsheets/d/1cmfgdGc8L5li_kx79W9SO5-ZwukiaXxlV5EZ3o8RYpY/edit?usp=sharing')
+    })
+  }, 1)
+
+  return `<button id="openSheets" style="position: relative;">Open Google Sheets </button>
+  <a href="https://docs.google.com/document/d/1wHtkK3xZbZwYfg0c1-8cQr1GtijNdh21/edit?usp=sharing&ouid=109956459933316731861&rtpof=true&sd=true" target="_blank">Need help viewing the spreadsheet?</a>
+  `
+
+}
+
 function textProcessToSheetsButton(role) {
   setTimeout(() => {
     document.getElementById('processToSheets').addEventListener('click', async () => {
@@ -499,17 +522,16 @@ function textProcessToSheetsButton(role) {
 
         const data = event.data.data
         const sheetUrl = data.sheetUrl
-        console.log("sheetsController-response", event)
+        // console.log("sheetsController-response", event)
         // You can add additional logic here to handle the message
         // show success message
-        // alert('Sheets generated successfully: ' + data.sheetUrl)
-        window.openUrl(sheetUrl)
+        alert('Contracts have been processed to Google Sheets. Click the link to view the sheet.\n\n' + sheetUrl)
+        // window.openUrl(sheetUrl)
       })
     })
   }, 1)
 
-  return `<button id="processToSheets" style="position: relative;">Google Sheet Summary</button>
-  <a href="https://docs.google.com/document/d/1wHtkK3xZbZwYfg0c1-8cQr1GtijNdh21/edit?usp=sharing&ouid=109956459933316731861&rtpof=true&sd=true" target="_blank">Need help viewing the spreadsheet?</a>
+  return `<button id="processToSheets" style="position: relative;">Update Google Sheets</button>
   `
 }
 

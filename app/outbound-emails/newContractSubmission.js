@@ -40,6 +40,7 @@ export function sendNewContractSubmissionEmail(user, transaction){
     })
 }
 
+
 export async function sendNewContractSubmissionBoardEmail(user, transaction){
     
     const contracts  = await CRUD.readAll('ghost-contracts')
@@ -47,7 +48,13 @@ export async function sendNewContractSubmissionBoardEmail(user, transaction){
     const email = user.artistDetails.personalEmail || user.artistDetails.businessEmail || firebase.auth.currentUser.email
 
 
-    const roles = await CRUD.readAll('committee-roles')
+    
+    const roles = await CRUD.readAll('committee-roles').then(function (roles) {
+      return roles.reduce((acc, next) => {
+          acc[next.fbId] = next
+          return acc
+      }, {})
+    });
 
     console.log("sendNewContractSubmissionBoardEmail",{roles})
 

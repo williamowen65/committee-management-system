@@ -1,0 +1,59 @@
+<div class="modal close-modal" id="editRoleModal">
+    <div class="modal-content">
+        <form onsubmit="event.preventDefault()">
+            <div class="modal-header">
+                <h3>Edit Role</h3>
+                <label class="moveLabel"><small style="transform: translate(0px, -19px)" class="text">Assigned to:</small>
+                    <select style="width: 100%" class="role-assignment-select2"></select></label>
+            </div>
+            <div>
+                <input-component placeholder="Not required" moveLabel="true" value="{{title}}" fieldName="title"
+                    alias="Title"></input-component>
+                <!-- <input-component value="{{committee}}" required="true" fieldName="committee" alias="Committee"></input-component> -->
+                <!-- select 2  -->
+                <label class="moveLabel">
+                    <small class="text">Committee *</small>
+                </label>
+                <select class="committee-select2" style="width: 100%"></select>
+                <textarea-component value="{{responsibility}}" required="true" fieldName="responsibility"
+                    alias="Responsibility"></textarea-component>
+                <!-- tasks, sideBarButtons, privileges -->
+                <button
+                type="button"
+                class="small"
+                    onclick="document.querySelector('#editRoleModal .advancedSettings').style.display = document.querySelector('#editRoleModal .advancedSettings').style.display === 'none' ? 'block' : 'none';">
+                    Toggle Advanced Settings Menu
+                </button>
+                <div class="advancedSettings" style="display: none">
+                    <div class="tasks">
+                        <small style="font-weight: bold;">Specific Tasks: (Create mode) </small>
+                         <!-- Multiselect: you must not have an empty <option> element: 
+                        This Multiselect select allows new entries
+                        -->
+                        <select style="width:100%" class="tasks-select2"></select>
+                    </div>
+                    <div class="sideBarButtons">
+                        <small style="font-weight: bold;">Side Bar Buttons:</small>
+                        <!-- Multiselect: you must not have an empty <option> element: -->
+                        <select style="width:100%" class="sideBarButtons-select2"></select>
+                    </div>
+                    <div class="privileges">
+                        <small style="font-weight: bold;">Privileges:</small>
+                        <!-- Multiselect:you must not have an empty <option> element: -->
+                        <select style="width:100%" class="privileges-select2"></select>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="modal-footer">
+                <button type="submit" class="small btn btn-primary" id="editRole">Save</button>
+                <button type="button" class="small btn btn-secondary close-modal">Cancel</button>
+                <button type="button" id="deleteRole" class="small btn btn-secondary" data-container="#editRoleModal .modal-footer"
+                    data-toggle="confirmation" data-placement="right" data-title="Are you sure about deleting this role?">
+                    Delete
+                </button>
+            </div>
+        
+        </form>
+    </div>
+</div>

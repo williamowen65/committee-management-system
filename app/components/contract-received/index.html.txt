@@ -40,8 +40,7 @@
           margin: 10px;
         }
       </style>
-      <div>
-        <b>Digital Image 1:</b>
+      <div><b>Digital Image 1:</b>
         <img src="${digitalImage1}"></img>
       </div>
       <div><b>Digital Image 2:</b>
@@ -55,8 +54,7 @@
 
 
     <div style="display: flex; justify-content: center; flex-wrap: wrap;">
-      <div>
-        <b>Brochure Image:</b>
+      <div><b>Brochure Image:</b>
         <img src="${brochureImage}"></img>
       </div>
     </div>

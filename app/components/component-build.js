@@ -12,10 +12,11 @@ import '../../utils/logIf.js'
 import './contract-received/index.js'
 import logIf from '../../utils/logIf.js';
 
-
+import { moveLabel } from './input/index.js';
 // global google services api
 // import "../../lib/google.js";
 
+window.moveLabel = (element) => moveLabel(element);
 
 // Globals file
 // Helper function to get form values
@@ -92,3 +93,49 @@ window.openUrl = function (url) {
 }
 
 
+document.addEventListener('click', (e) => {
+    // using event delegation to handle click events
+    const target = e.target;
+    if (target.matches('.close-modal')) {
+        // close modal
+        target.closest('.modal').classList.remove('show')
+
+        // emit event to the target modal 
+        target.closest('.modal').dispatchEvent(new Event('modal-closing'))
+
+    }
+})
+
+
+window.mapId = function(object, key = 'key'){
+    return Object.entries(object).map(([id, value]) => {
+        return { ...value, [key]: id }
+    })
+}
+
+window.isBootStrapConfirmResponse = function(event){
+    // Workaround.... this prop was the only way to know if the event was triggered by the bootstrap confirm
+    return !event.isTrusted
+}
+
+
+window.toTitleCase = function(str){
+    // replace spaces with '' and capitalize the first letter of each word
+    return str.split(" ").reduce((acc,word, i) => {
+        word = word.charAt(0).toUpperCase() + word.slice(1)
+        acc += word
+        return acc
+    }, "")
+    
+}
+
+ // helper
+window.byLastName = function(a, b) {
+    if (a.artistDetails.lastName < b.artistDetails.lastName) {
+        return -1;
+    }
+    if (a.artistDetails.lastName > b.artistDetails.lastName) {
+        return 1;
+    }
+    return 0;
+}

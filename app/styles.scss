@@ -10,13 +10,15 @@
     }
 }
 
-.column{
+.column {
     display: flex;
     flex-direction: column;
+
     button {
         width: fit-content
     }
 }
+
 hr {
     border: 0;
     height: 1px;
@@ -34,54 +36,63 @@ textarea {
 }
 
 textarea-component,
-input-component {
-}
+input-component {}
+
 .w-100 {
     width: 100% !important;
     width: -webkit-fill-available !important;
 }
 
-.container{
-   max-width: 1000px;
+.container {
+    max-width: 1000px;
     margin: 0 auto;
 }
 
-#questionnaire{
+#questionnaire {
     display: flex;
     flex-direction: column;
+
     label {
         width: fit-content;
         display: flex;
         align-items: baseline;
         box-sizing: border-box;
+
         input {
             box-sizing: border-box;
-        margin-right: 10px;
-         translate: 0 3px; 
+            margin-right: 10px;
+            translate: 0 3px;
         }
+
         textarea-component {
             margin-top: 30px;
         }
+
         textarea {
             width: 100%;
-           
+
         }
+
         // margin-left: 24px;
     }
-    .level-1{
+
+    .level-1 {
         margin-left: 40px;
     }
+
     .level-2 {
         margin-left: 75px;
     }
-    .level-3{
+
+    .level-3 {
         margin-left: 100px;
     }
 }
 
-#studioElement{
+#studioElement {
     // width:fit-content;
-    width: 100%;;
+    width: 100%;
+    ;
 }
 
 
@@ -100,15 +111,16 @@ button {
     margin: 4px 2px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    &.small{
+
+    &.small {
         padding: 5px 10px;
         font-size: 10px;
     }
-  }
+}
 
-  button:hover {
+button:hover {
     background-color: #0056b3;
-  }
+}
 
 a {
     color: blue;
@@ -118,3 +130,63 @@ a {
         color: darkblue;
     }
 }
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    //  Default position: center of screen
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 35px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+.modal.show {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    overflow-y: auto;
+    width: 80%;
+    max-height: 83vh;
+}
+
+#keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: baseline;
+}
+
+
+
+

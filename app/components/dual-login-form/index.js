@@ -27,18 +27,64 @@ function setUXEventListeners() {
     })
 
     // listener on reset password
+    // this.querySelector('.reset-password').addEventListener('click', (e) => {
+    //     e.preventDefault();
+    //     const email = prompt('Enter your email address')
+    //     if (email) {
+    //         firebase.sendPasswordResetEmail(firebase.auth, email).then(() => {
+    //             alert('Password reset email sent')
+    //         }).catch(() => {
+    //             alert('There was an error sending the password reset email')
+    //         })
+    //     }
+    // })
+
+    // JavaScript
     this.querySelector('.reset-password').addEventListener('click', (e) => {
         e.preventDefault();
-        const email = prompt('Enter your email address')
-        if (email) {
-            firebase.sendPasswordResetEmail(firebase.auth, email).then(() => {
-                alert('Password reset email sent')
-            }).catch(() => {
-                alert('There was an error sending the password reset email')
-            })
-        }
-    })
+        const modal = document.getElementById('reset-password-modal');
+        modal.style.display = 'block';
+    });
 
+    document.querySelector('.close-modal').addEventListener('click', () => {
+        document.getElementById('reset-password-modal').style.display = 'none';
+    });
+
+
+    // Handle reset password
+    document.getElementById('resetSubmit').addEventListener('click', () => {
+        const email = document.getElementById('resetEmail').value;
+        console.log({email});
+        if (email) {
+            firebase.sendPasswordResetEmail(firebase.auth, email)
+                .then(() => {
+                    
+                    const feedback = document.getElementById('reset-password-modal-feedback');
+                    console.log({feedback});
+
+                    // Update test to show success message
+                    feedback.innerHTML = `
+                    <div class="alert alert-success" role="alert">
+                        Password reset email sent
+                    </div>
+                    `;
+
+
+                    // Hide the modal after 3 seconds
+                    setTimeout(() => {
+                        document.getElementById('reset-password-modal').style.display = 'none';
+                           // remove the success message after 3 seconds
+                    document.getElementById('reset-password-modal-feedback').innerHTML = '';
+                    }, 3000);
+
+                 
+
+                })
+                .catch(() => {
+                    alert('There was an error sending the password reset email');
+                });
+        }
+    });
     // handle submit event for login form
     this.querySelector('form#login').addEventListener('submit', function (e) {
         e.preventDefault();
@@ -67,7 +113,7 @@ function setUXEventListeners() {
             btnSubmit.innerText = btnText
             // enable the button
             btnSubmit.disabled = false
-            console.log("There was an error signing in to your account. ",{err})
+            console.log("There was an error signing in to your account. ", { err })
             // show error message
             alert('There was an error signing in to your account. Please try again')
         })
@@ -115,19 +161,19 @@ function setUXEventListeners() {
                 return result
             })
         }).then((result) => {
-                // Update ghost-contracts/{userId} with user data
+            // Update ghost-contracts/{userId} with user data
             firebase.setDoc(firebase.doc(firebase.collection(firebase.db, 'ghost-contracts'), result.user.uid), {
-                    userId: result.user.uid,
-                    artistDetails: {
-                        firstName,
-                        lastName,
-                        scholarshipApplied: false,
-                        membershipPaid: false,
-                    },
-                    createdAt: firebase.serverTimestamp()
+                userId: result.user.uid,
+                artistDetails: {
+                    firstName,
+                    lastName,
+                    scholarshipApplied: false,
+                    membershipPaid: false,
+                },
+                createdAt: firebase.serverTimestamp()
             }).then(() => {
                 // redirect to members
-                logIf.auth &&  console.log('redirecting to members page');
+                logIf.auth && console.log('redirecting to members page');
                 window.location.href = '/members'
             })
 
@@ -137,7 +183,7 @@ function setUXEventListeners() {
             // enable the button
             btnSubmit.disabled = false
             // show error message
-            console.log('There was an error creating your account.',{err})
+            console.log('There was an error creating your account.', { err })
             alert('There was an error creating your account. Please try again')
         })
 

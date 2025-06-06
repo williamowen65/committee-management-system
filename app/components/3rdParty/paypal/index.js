@@ -184,7 +184,7 @@ window.initializePaypalButtons = function (cost = 250.00) {
               }
             }
 
-            const contracts  = await CRUD.readAll('ghost-contracts') 
+            const contracts = await CRUD.readAll('ghost-contracts')
             CRUD.update('ghost-contracts', userId, {
               artistDetails: invoice
             }).then(() => {
@@ -197,7 +197,7 @@ window.initializePaypalButtons = function (cost = 250.00) {
 
               sendNewContractSubmissionBoardEmail(user, transaction, contracts)
 
-
+              claimRolesForMember(userId)
 
 
               window.addEventListener("message", (event) => {
@@ -237,4 +237,30 @@ window.initializePaypalButtons = function (cost = 250.00) {
       },
     })
     .render('.payPalContainer')
+}
+
+
+// Note move this method to a more appropriate file
+//this is for testing
+async function claimRolesForMember(userId) {
+  // get the user
+  const user = await CRUD.read('ghost-contracts', userId)
+  const allUsers = await CRUD.readAll('ghost-contracts')
+
+  // find the users that have the role of member
+  const membersToUpdate = Object.values(allUsers)
+    .filter((_user) => {
+      if (!_user.committeeRoleId) return null;
+      if (_user.userId === user.userId) return null;
+      return _user.committeeRoleId.some(roleId => user.committeeRoleId.includes(roleId))
+    }).filter(Boolean)
+
+  // update the users
+  membersToUpdate.forEach(async (member) => {
+    const newRoles = member.committeeRoleId.filter(roleId => !user.committeeRoleId.includes(roleId))
+    await CRUD.update('ghost-contracts', member.userId, {
+      committeeRoleId: newRoles
+    })
+  })
+
 }

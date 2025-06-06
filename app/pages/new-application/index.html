@@ -17,13 +17,9 @@
 
       
     </script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+   <script src="https://kit.fontawesome.com/4550fec5ff.js" crossorigin="anonymous"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 10px;
             /* background-color: #f4f4f4; */
         }
     </style>
@@ -45,9 +41,9 @@
                     to show in a new medium. If you are accepted onto the tour, you will
                     then need to set up your member account on this website and submit a
                     yearly member contract (it’s online through the Members page and is
-                    called My Contract.) This year’s member contract is due by March 2,
-                    2025.
+                    called My Contract.) 
                 </p>
+                <p>Check the timeline on the Join page to find out when Member Contracts are due, if you are accepted into the tour.</p>
             </span>
         </markdown-component>
         <h3>Artist Name</h3>
@@ -126,24 +122,27 @@
 
         <h3>How did you hear about the GHOST Tour? *</h3>
         <textarea required name="howDidYouHearAboutUs" style="width: 100%; box-sizing: border-box; "></textarea>
-
+        
         <h3>Three (3) digital images of your art *</h3>
         <p>Make sure that your images look professional and are jpgs that are a minimum of 150 KB (No thumbnails). 2D
-            art should only
-            be of your art image (no background or frame.) 3D art and jewelry should have a plain background (ex, black
+            art should only be of your art image (no background or frame.) 3D art and jewelry should have a plain background (ex, black
             or white) and have enough lighting to show good detail. Crop the image so that your art fills most of the
             image and make sure the image is crisp and does justice to your art.</p>
+            <p>If you are having trouble figuring out how to submit your digital images, contact <span
+                id="digitalImageCommitteeMember"> the Artist Images Chair. <span id="img-chair-member-details"></span></span></p>
+        <b style="display:block;text-align:center;">Click on a box below to upload your images.</b>
         <div style="display: flex; justify-content: center; flex-wrap: wrap;">
             <style>
                 file-input-component {
                     margin: 10px;
                 }
             </style>
-            <file-input-component required="true" fieldName="digitalImage1" alias="Digital Image 1"
+
+            <file-input-component fileName="{{randomNumber}}-digital-image-1" required="true" fieldName="digitalImage1" alias="Digital Image 1"
                 accept=".jpg,.jpeg,.png"></file-input-component>
-            <file-input-component required="true" fieldName="digitalImage2" alias="Digital Image 2"
+            <file-input-component fileName="{{randomNumber}}-digital-image-2" required="true" fieldName="digitalImage2" alias="Digital Image 2"
                 accept=".jpg,.jpeg,.png"></file-input-component>
-            <file-input-component required="true" fieldName="digitalImage3" alias="Digital Image 3"
+            <file-input-component fileName="{{randomNumber}}-digital-image-3" required="true" fieldName="digitalImage3" alias="Digital Image 3"
                 accept=".jpg,.jpeg,.png"></file-input-component>
         </div>
 
@@ -155,7 +154,7 @@
 
         <div style="display: flex; justify-content: center; flex-wrap: wrap;">
 
-            <file-input-component required="true" fieldName="digitalImage4" alias="Digital Image 1"
+            <file-input-component fileName="{{randomNumber}}-digital-image-4"  required="true" fieldName="digitalImage4" alias="Digital Image 4"
                 accept=".jpg,.jpeg,.png"></file-input-component>
         </div>
 
@@ -166,6 +165,23 @@
         <textarea-component placeholder="Website & Social media presence " fieldName="website-social-media" required
             description="If you have an art website and/or social media sites, list them here.  If you don't have any of those, type in NONE"></textarea-component>
 
+
+            <p>
+                You should receive notification about your application shortly after the screening date listed on the Join page of our website. 
+                This will also include directions about how to fill out and submit your contract. 
+                To help ensure that you see this (so it doesn&#39;t go to your Spam or buried into your email history), 
+                we recommend doing two things: 
+                <ul>
+                  <li> Add GHOpenStudioTour@gmail.com to your contacts</li>
+                      <li>
+
+                          Go to the settings on your email and unclick the &quot;Categorize Emails&quot; button, or choose something that says &quot;See All Emails&quot;.</li>
+                      </li>
+                </ul>
+              </p>
+              <p>
+                  Note that if you are accepted into the tour, it is your responsibility to make sure that you see these instructions so keep an eye out and check your Spam and Unread Emails if you don't see it!
+              </p>
         <button type="submit" style="margin: auto; display: block; ">Submit Application</button>
 
     </form>

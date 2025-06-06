@@ -136,7 +136,7 @@ label {
             overflow: hidden !important;
             position: relative;
 
-            button.delete-button {
+            button.rotate-image-button {
                 position: absolute;
                 left: 0;
             }
@@ -190,7 +190,7 @@ label {
         margin: auto;
     }
 
-    .delete-button {
+    .rotate-image-button {
         position: absolute;
         top: 0;
         right: 0;
@@ -211,6 +211,7 @@ label {
         border: 1px solid black;
         color: red;
         font-weight: bold;
+        margin-top: 5px;
     }
 
 
@@ -219,8 +220,20 @@ label {
 
 .file-input-component {
 
+    .saved-image-feedback:not(:empty) {
+        position: absolute;
+        z-index: 100;
+        background: #82a70d;
+        padding: 5px;
+        border-radius: 5px;
+        color: white;
+        right: 48px;
+        top: 3px;
+    }
+
     .alert-icon {
         display: none;
+
     }
 
     .ifLoading {
@@ -244,10 +257,11 @@ label {
     &.hasError {
         .alert-icon {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: -25px;
+            left: -34px;
             font-size: 60px;
             color: #ff0000; // warning color
+            display: block;
         }
     }
 }

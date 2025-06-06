@@ -27,6 +27,9 @@ const inputAttributes = [
   'multiple',
   'accept',
   'description',
+  'noTransform',
+  'fileName',
+  'instantUpload'
 ]
 
 createCustomElement(
@@ -105,6 +108,16 @@ createCustomElement(
   }
 )
 
+
+
+/*
+important note about using file-input-component
+- When uploading the file, there may be an unexpected error needing to be handled
+
+When catching error, use the query the html in the component to display an error.
+
+*/
+
 createCustomElement(
   'file-input-component',
   function () {
@@ -112,38 +125,54 @@ createCustomElement(
     const parentContainer = imagesContainer.closest('.file-input-component')
     const labelContainer = parentContainer.querySelector('.label-container')
 
+    const isInstantUpload = this.getAttribute('instantUpload') == 'true'
+
+    const component = this
+   
+
     this.setImage = function (src, file) {
-      // empty out the images container
-      const inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML
-      imagesContainer.innerHTML = inputLabelText
+
       const fileNameEl = parentContainer.querySelector('.file-name')
       if (fileNameEl) {
         fileNameEl.remove()
       }
 
       const img = document.createElement('img')
-      const deleteButton = document.createElement('button')
+      const rotateImageButton = document.createElement('button')
       const alertButton = document.createElement('i')
       alertButton.classList.add('fas', 'fa-exclamation-triangle', 'alert-icon')
 
-      deleteButton.textContent = 'X'
-      deleteButton.classList.add('delete-button')
-      deleteButton.addEventListener('click', (e) => {
+
+      rotateImageButton.innerHTML = `<i class="fa-solid fa-rotate"></i>`
+      rotateImageButton.classList.add('rotate-image-button')
+      rotateImageButton.addEventListener('click', (e) => {
         img.remove()
-        deleteButton.remove()
+        // rotateImageButton.remove()
         imagesContainer.classList.remove('has-images')
         parentContainer.querySelector('.file-name').remove()
         parentContainer
           .querySelectorAll('.error')
-          .forEach((error) => error.remove())
+          .forEach((error) => {
+            error.classList.remove('error')
+            error.innerHTML = ''
+          })
         // remove button from file input
         const fileInput = parentContainer.querySelector('input')
         fileInput.value = ''
         // empty .img-container
-        imagesContainer.innerHTML = inputLabelText
 
         // guarantee that the file input is required
         fileInput.setAttribute('required', 'required')
+
+        // remove the error class
+        parentContainer.classList.remove('hasError')
+
+        // remove the exclamation icon
+        const exclamations = parentContainer.querySelectorAll('.alert-icon')
+        exclamations.forEach((exclamation) => exclamation.remove())
+
+          // open the file input
+          fileInput.click()
 
         // prevent bubbling event on delete image button
         e.stopPropagation()
@@ -153,7 +182,7 @@ createCustomElement(
       const imgContainer = document.createElement('div')
       imgContainer.classList.add('img-container')
       imgContainer.appendChild(img)
-      labelContainer.appendChild(deleteButton)
+      labelContainer.appendChild(rotateImageButton)
 
       labelContainer.appendChild(alertButton)
 
@@ -186,12 +215,17 @@ createCustomElement(
       fileName.classList.add('file-name')
       parentContainer.appendChild(fileName)
 
+      // if there are no errors, display feedback
+
+     
+
+
       return this
     }
 
     this.querySelector('input').addEventListener('click', (e) => {
       // prevent bubbling event on delete image button
-      if (e.target.classList.contains('delete-button')) {
+      if (e.target.classList.contains('rotate-image-button')) {
         e.stopPropagation()
         e.stopImmediatePropagation()
       }
@@ -199,6 +233,54 @@ createCustomElement(
 
     // Set listeners to display images added to file input
     this.querySelector('input').addEventListener('change', async (e) => {
+
+      // clear saved-image-feedback
+      const savedImageFeedback = component.querySelector('.saved-image-feedback')
+      console.log("Input change", {savedImageFeedback})
+      if (savedImageFeedback) {
+        savedImageFeedback.innerHTML = ''
+      }
+
+      // clear any errors
+      const errorContainer = document.querySelector(`#${this.getAttribute('fieldName')}-error`)
+
+      if (errorContainer) {
+        errorContainer.innerHTML = ''
+        // remove error class 
+        errorContainer.classList.remove('error')
+      }
+
+      const exclamations = parentContainer.querySelectorAll('.alert-icon')
+      exclamations.forEach((exclamation) => exclamation.remove())
+
+      // remove the clear button
+      const deleteButtons = parentContainer.querySelectorAll('.rotate-image-button')
+      deleteButtons.forEach((button) => button.remove())
+
+      // clear the name of the file displayed
+      const fileNameEl = parentContainer.querySelector('.file-name')
+      if (fileNameEl) {
+        parentContainer.querySelector('.file-name').remove();
+      }
+
+      // clear any previous images
+      const imagesContainer = this.querySelector('.img-container')
+      if (imagesContainer) {
+        imagesContainer.remove()
+      }
+
+
+
+
+      // let uniqueFileName = this.getAttribute('filename')
+      // const userEmail = encodeURIComponent(firebase.auth.currentUser.email)
+      // // evaluate fileNameTemplate
+      // if (uniqueFileName) { 
+      //   uniqueFileName = uniqueFileName.replace('{{userName}}', userEmail)
+      // }
+      // console.log({ uniqueFileName })
+
+
       // get the file input
       const fileInput = e.target
       // Disable the input while processing
@@ -207,16 +289,24 @@ createCustomElement(
       const fileInputUI = fileInput.closest('.file-input-component')
       fileInputUI.classList.add('loading')
 
-      await new Promise((resolve) => setTimeout(resolve, 5000))
 
-      Array.from(e.target.files).forEach((file) => {
+      // Read the files
+      Array.from(e.target.files).forEach((oldFile) => {
+
+        //  NOTE: The file name change doesn't really take effect here.... Only when saving...
+        oldFile.nameTemplate = this.getAttribute('filename')
+
+        // Create a new file with the updated name
+
         const reader = new FileReader()
         reader.onloadend = () => {
-          this.setImage(reader.result, file)
+          this.setImage(reader.result, oldFile)
 
           this.querySelector('.file-input-component').classList.remove(
             'hasError'
           )
+
+
 
           // Display possible errors with this file
           // Requirements: Size must be no larger than 3 mb.
@@ -225,33 +315,30 @@ createCustomElement(
 
           logIf.component &&
             console.log('file size check ', {
-              fileSize: file.size,
-              fileName: file.name,
-              fileType: file.type,
+              fileSize: oldFile.size,
+              fileName: oldFile.name,
+              fileType: oldFile.type,
             })
 
+
           // Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )
-          if (file.size < 400000) {
-            const error = document.createElement('p')
-            error.textContent =
+          if (oldFile.size < 400000) {
+            errorContainer.textContent =
               'This image is too small. Please upload an image larger than 400 KB'
-            error.classList.add('error')
-            parentContainer.appendChild(error)
-            this.querySelector('.file-input-component').classList.add(
+            errorContainer.classList.add('error')
+            this.querySelector('.file-input-component').classList.add( // set error class on container
               'hasError'
             )
           }
           // make sure the image isn't too big
-          if (file.size > 5000000) {
+          if (oldFile.size > 5000000) {
             // 5 MB
-            const error = document.createElement('p')
-            error.textContent =
+            
+            errorContainer.textContent =
               'File is too large. Please upload an image less than 5 mb.'
-            error.classList.add('error')
-            parentContainer.appendChild(error)
-            this.querySelector('.file-input-component').setAttribute(
-              'hasError',
-              true
+            errorContainer.classList.add('error')
+            this.querySelector('.file-input-component').classList.add( // set error class on container
+              'hasError'
             )
           }
 
@@ -274,11 +361,13 @@ createCustomElement(
               }
 
               if (!isWithinRange(width, height, width)) {
-                const error = document.createElement('p')
-                error.textContent =
+                
+                errorContainer.textContent =
                   'Image is not square. Please upload a square image.'
-                error.classList.add('error')
-                parentContainer.appendChild(error)
+                errorContainer.classList.add('error')
+                this.querySelector('.file-input-component').classList.add( // set error class on container
+                  'hasError'
+                )
               }
             }
           }
@@ -287,8 +376,37 @@ createCustomElement(
           fileInput.disabled = false
           // get the file input UI element
           fileInputUI.classList.remove('loading')
+
+          
+
+
+
+          if (isInstantUpload) {
+            setTimeout(() => {
+
+              // check for error
+              if(this.querySelector('.file-input-component.hasError')) {
+                return 
+              }
+
+
+              // Save individual file to DB My contract
+              const file = oldFile
+
+              const newFileWithTemplatedName = updateFileNameToTemplate(file)
+              console.log("Uploading file", {oldFile: file, newFileWithTemplatedName})
+              handleIndividualImageUpload(newFileWithTemplatedName, this).then((url) => {
+                const fieldName = this.getAttribute('fieldName')
+                saveIndividualImageToContract(url, fieldName, newFileWithTemplatedName.name)
+            })
+
+            },1)
+          }
+      
+
+
         }
-        reader.readAsDataURL(file)
+        reader.readAsDataURL(oldFile)
       })
     })
   },
@@ -299,8 +417,16 @@ createCustomElement(
   }
 )
 
-function moveLabel() {
-  this.querySelectorAll('input, textarea').forEach((el) => {
+
+
+export function moveLabel(element) {
+
+  let target = this;
+  if (element) {
+    target = element
+  }
+
+  target.querySelectorAll('input, textarea').forEach((el) => {
     el.addEventListener('focus', (e) => {
       const target = e.target
       target.closest('label').classList.add('moveLabel')
@@ -312,7 +438,9 @@ function moveLabel() {
     el.addEventListener('blur', (e) => {
       const target = e.target
       if (target.value === '') {
-        target.closest('label').classList.remove('moveLabel')
+        if (noTransform !== 'true') {
+          target.closest('label').classList.remove('moveLabel')
+        }
         target
           .closest('label')
           .querySelector('[part]')
@@ -336,4 +464,5 @@ function moveLabel() {
       }
     })
   })
+
 }

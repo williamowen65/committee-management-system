@@ -1,11 +1,11 @@
-.role-checkbox{
-    width: fit-content;
-    /* margin: 0 !important; */
-    margin: 10px;
-    height: 10px;
-    display: inline-flex;
-    flex-direction: row-reverse;
-    align-items: center;
+.role-checkbox {
+  width: fit-content;
+  /* margin: 0 !important; */
+  margin: 10px;
+  height: 10px;
+  display: inline-flex;
+  flex-direction: row-reverse;
+  align-items: center;
 }
 .role-checkbox input {
   scale: 1.2;
@@ -21,7 +21,7 @@
   padding: 3px 5px;
 }
 
-#committee-positions{
+#committee-positions {
   position: relative;
 }
 
@@ -29,20 +29,21 @@
   /* float: right; */
   /* position: absolute; */
   margin-left: auto;
-  right:0;
+  right: 0;
   padding: 4px;
+  height: fit-content;
 }
 
-.studioSignsQuestion{
-  display:block;
+.studioSignsQuestion {
+  display: block;
   border: 1px solid black;
   padding: 10px;
 }
 
-#edit-contract-btn{
+#edit-contract-btn {
   /* positions: absolute; */
 
-  margin:auto;
+  margin: auto;
   display: block;
 }
 #contractDetails {
@@ -55,17 +56,146 @@
   font-weight: bold;
 }
 .contractIncomplete .incomplete::before {
-  content: "👉";
+  content: '👉';
   position: absolute;
   translate: -24px -2px;
 }
 
 .contractIncomplete ul {
   margin: auto;
-  margin-top:10px;
+  margin-top: 10px;
   width: fit-content;
 }
 
+.icon-blue {
+  color: blue;
+}
+.icon-green {
+  color: #5cff5c;
+}
+.icon-white {
+  color: white;
+}
 
+.insert-committee-container,
+.insert-role-container {
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
 
+.insert-committee-container:hover,
+.insert-role-container:hover {
+  opacity: 1 !important;
+}
+
+.insert-committee-btn,
+.insert-role-btn {
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  width: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.insert-role-container {
+  margin-right: 41px;
+}
+
+.line {
+  /* content: ''; */
+  display: block;
+  width: 45%;
+  height: 1px;
+  background-color: black;
+  position: absolute;
+}
+
+.line.left {
+  top: 50%;
+  left: 0;
+  background-image: linear-gradient(to right, #ccc, #333);
+}
+.line.right {
+  top: 50%;
+  right: 0;
+  background-image: linear-gradient(to left, #ccc, #333);
+}
+
+.modal-header label {
+  width: 272px;
+}
+
+/* custom popover confirmation style */
+
+.popover.confirmation {
+  padding: 20px;
+  background: antiquewhite;
+}
+
+.popover.confirmation h3 {
+  margin-top: 0;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-around;
+}
+
+.role .content {
+  display: inline-flex;
+  justify-content: start;
+  /* This gets set via Javascript in the editRole.js : justify-content: space-around; */
+  width: 100%;
+}
+
+#override-contract-select2-container {
+  position: sticky;
+  top: 10px;
+  width: fit-content;
+  z-index: 10000;
+  display: flex;
+  justify-content: end;
+}
+
+.select2-selection__clear {
+  color: black;
+}
+.select2-selection__clear span {
+  transform: translate(-14px, -11px);
+  position: absolute;
+}
+
+#override-contract-select2-container {
+       display: flex;
+      flex-direction: column;
+      background: white;
+      padding: 11px 28px 11px;
+      text-align: center;
+      transform: translate(8px, -10px);
+
+}
+#override-contract-select2-container.isEditing {
+  background: #f8d7da;
+  border-color: #f5c6cb;
+  border: 5px;
+  border-style: inset;
+}
+
+#override-contract-select2-container .select2-container {
+  margin-left: auto
+}
+
+#override-contract-label{
+  display: block;
+  font-weight: bold;
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.select2-dropdown {
+  z-index: 10000;
+  transform: translateY(-10px) !important;
+}
 

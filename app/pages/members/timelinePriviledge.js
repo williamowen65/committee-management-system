@@ -1,7 +1,5 @@
 export function enableTimelinePrivileges(configDocument, timeline) {
 
-    debugger
-
     setYearSelection()
 
     const { editButton, editForm } = createTemplates()
@@ -114,7 +112,9 @@ export function enableTimelinePrivileges(configDocument, timeline) {
             // set the active year in the configDocument
             configDocument.activeYear = year
             // save the configDocument
-            CRUD.update('ghost-timeline', 'configDocument', configDocument).then(() => {
+            CRUD.update('app-settings', 'activeYear', {
+                data: configDocument.activeYear
+            }).then(() => {
                 // update the active year
                 activeYearContainer.querySelector('.contentContainer .year').innerText = year
                 // // update the active year in the timeline

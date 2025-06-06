@@ -1,0 +1,16 @@
+<div class="modal close-modal" id="createCommitteeModal">
+    <div class="modal-content">
+       <form onsubmit="event.preventDefault()">
+        <h3>Create Committee</h3>
+        <input-component required="true" fieldName="committee-name" alias="Committee Name"></input-component>
+        <input-component required="true" fieldName="committee-header" alias="Committee Header"></input-component>
+
+
+        <div class="modal-footer">
+            <button type="submit" class="small btn btn-primary" id="createCommittee">Save New Committee</button>
+            <button class="small btn btn-secondary close-modal">Cancel</button>
+        </div>
+        <!-- tasks, sideBarButtons, privileges -->
+       </form>
+    </div>
+</div>

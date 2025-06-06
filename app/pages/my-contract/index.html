@@ -9,41 +9,56 @@
   <script src="/my-contract/index.js" type="module"></script>
   <script src="/dist/CRUD.js" type="module"></script>
   <script type="module" src="/dist/firebase.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-confirmation2/dist/bootstrap-confirmation.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dom-autoscroller@2.3.4/dist/dom-autoscroller.min.js"></script>
+  <script src="/my-contract/dragula-setup.js"></script>
   <script>
-    window.sendMessageToParent = function(dataObject) {
-         window.parent.postMessage(dataObject, '*');
+    window.sendMessageToParent = function (dataObject) {
+      window.parent.postMessage(dataObject, '*');
     }
 
 
 
   </script>
 
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+  <script src="https://kit.fontawesome.com/4550fec5ff.js" crossorigin="anonymous"></script>
   <script type="module">
     firebase.redirectIfNotLoggedIn('/artist-sign-on')
   </script>
   <link rel="stylesheet" href="style.css">
 
   <!-- WYSIWYG Editor for the editContract privilege -->
-  <script src="https://cdn.tiny.cloud/1/nckcqll2bo7scp9qwp028t53n1w0jmzn2ue0jg97j7ndgquy/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-  
-                    
+  <script src="https://cdn.tiny.cloud/1/nckcqll2bo7scp9qwp028t53n1w0jmzn2ue0jg97j7ndgquy/tinymce/7/tinymce.min.js"
+    referrerpolicy="origin"></script>
+
+
 
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // check for editContract privilege
-      
+
     })
   </script>
 
 </head>
 
 <!-- Page becomes visible once the contract details have loaded -->
+
 <body style="display:none">
   <header-component slotLinks="ghost-members"></header-component>
-  <div class="container" id="my-contract">
+  <div class="container" id="my-contract" style="background-color: #fff;" >
     <h1>My Contract</h1>
 
     <!-- Signature Form -->
@@ -53,7 +68,7 @@
       <div id="contractDetails">
         <!-- Dynamically inserted content from ghost-contracts/configDocument {contractDetails} -->
       </div>
-      
+
       <div class="" style="width: 400px; display: flex; flex-direction: column; margin: auto; ">
         <style>
           input[name="signature"] {
@@ -145,7 +160,7 @@
             show in the image.
 
             If you are having trouble figuring out how to submit your digital images, contact <span
-              id="digitalImageCommitteeMember"> the Artist Images Chair. </span>
+              id="digitalImageCommitteeMember"> the Artist Images Chair. <span id="img-chair-member-details"></span></span>
           </span>
         </markdown-component>
         <div style="max-width: 800px; margin:auto">
@@ -153,36 +168,41 @@
           <h4 style="text-align: center;">Three (3) images of your artwork – label these like this example:
             DonSmithArt1.jpg, DonSmithArt2.jpg,
             DonSmithArt3.jpg</h4>
+            
+            <b style="text-align:center; display: block;">Click on a box below to upload your images.</b>
+
+            <p>Make sure that your images look professional and are jpgs that are a minimum of 400 KB (No thumbnails). 2D art should only be of your art image (no background or frame.)</p>
+
           <div style="display: flex; justify-content: center; flex-wrap: wrap;">
 
-            <file-input-component required="true" fieldName="digitalImage1" alias="Digital Image 1"
-              accept=".jpg,.jpeg,.png"></file-input-component>
-            <file-input-component required="true" fieldName="digitalImage2" alias="Digital Image 2"
-              accept=".jpg,.jpeg,.png"></file-input-component>
-            <file-input-component required="true" fieldName="digitalImage3" alias="Digital Image 3"
-              accept=".jpg,.jpeg,.png"></file-input-component>
+            <file-input-component fileName="{{userName}}-digital-image-1.jpg" required="true" fieldName="digitalImage1" alias="Digital Image 1"
+              accept=".jpg,.jpeg,.png"  instantUpload="true"></file-input-component>
+            <file-input-component fileName="{{userName}}-digital-image-2.jpg"  required="true" fieldName="digitalImage2" alias="Digital Image 2"
+              accept=".jpg,.jpeg,.png"  instantUpload="true"></file-input-component>
+            <file-input-component fileName="{{userName}}-digital-image-3.jpg"  required="true" fieldName="digitalImage3" alias="Digital Image 3"
+              accept=".jpg,.jpeg,.png"  instantUpload="true"></file-input-component>
           </div>
 
           <h4 style="text-align: center;">One (1) image of you working in your studio – label these like this example:
             DonSmithStudio.jpg</h4>
           <div style="display: flex; justify-content: center; ">
-            <file-input-component required="true" fieldName="artistInStudioImage"
-              alias="Image of you working in your studio" accept=".jpg,.jpeg,.png"></file-input-component>
+            <file-input-component fileName="{{userName}}-artist-in-studio.jpg"  required="true" fieldName="artistInStudioImage"
+              alias="Image of you working in your studio" accept=".jpg,.jpeg,.png"  instantUpload="true"></file-input-component>
           </div>
           <h4 style="text-align: center;">One (1) SQUARE image of your artwork that you want to be the main piece
             featured in the brochure.
             This image should be one of the three images that you submitted above, but cropped so that it's square.
             Label like this example: DonSmithBrochure.jpg</h4>
           <div style="display: flex; justify-content: center; ">
-            <file-input-component required="true" square-requirement="true" fieldName="brochureImage"
-              alias="Brochure Image" accept=".jpg,.jpeg,.png"></file-input-component>
+            <file-input-component fileName="{{userName}}-brochure-image"  required="true" square-requirement="true" fieldName="brochureImage"
+              alias="Brochure Image" accept=".jpg,.jpeg,.png" instantUpload="true"></file-input-component>
           </div>
 
 
         </div>
       </div>
-      <button type="submit" id="save-digital-images" style="margin: auto; margin-top: 20px; display: block; ">Save
-        Digital Images</button>
+      <!-- <button type="submit" id="save-digital-images" style="margin: auto; margin-top: 20px; display: block; ">Save
+        Digital Images</button> -->
 
     </form>
 
@@ -321,14 +341,14 @@
             </legend>
             <div style="
             width: fit-content;
-            margin: auto; ">
+            margin: auto; max-width: 725px;">
 
               <div
-                style="text-align: center; font-weight: bold; background-color: yellow; width: fit-content; margin: auto;">
-                Changes made in this section are saved automatically.</div>
+                style="text-align: center; font-weight: bold; background-color: yellow; width: fit-content; margin: auto; ">
+                Your committee choice is not confirmed until you have submitted your contract </div>
 
-              Below is a list of each committee with volunteer positions available for that committee.with a basic job
-              description, an estimate of the time of year that committee is active and whether that job can be done
+              Below is a list of each committee with volunteer positions available for that committee with a basic job
+              description, an estimate of the time of year that committee is active, and whether that job can be done
               from home. If special skills are required for that position, it will be indicated in the description.
 
               Check the box by the specific volunteer job you are willing to be responsible for, as long as that
@@ -364,6 +384,18 @@
                 list-style: none;
               }
 
+              #committee-positions .committee ol:empty::after {
+                content: "This committee is currently hidden b/c there are no roles";
+                text-align: center;
+                width: 100%;
+                display: block;
+                background: yellow;
+              }
+
+              #committee-positions h3 {
+                display: inline-block;
+              }
+
               #committee-positions li.role:has(input[type="checkbox"]:not(:checked)) {
                 background: yellow;
                 color: black;
@@ -393,12 +425,32 @@
               }
 
               li.role {
-                display: flex;
-                align-items: baseline;
+                /* Now the role has a .content div which has these styles */
+                /* display: flex; */
+                /* flex-direction: row; */
+                /* align-items: baseline; */
               }
 
               li.role .user-name {
                 text-wrap: nowrap;
+              }
+
+              .editing fieldset {
+                background-color: #f4f4f4;
+              }
+
+              #edit-volunteer-responsibilities-btn {
+                position: sticky;
+                translate: -50% 42px;
+                text-align: center;
+                left: 50%;
+                top: 0px;
+              }
+
+              .edit-committee-btn {
+                float: right;
+                /* display: inline-block; */
+                /* margin-left: auto; */
               }
             </style>
 
@@ -432,7 +484,7 @@
       </label>
 
       <button type="submit" id="save-artistic-demonstration"
-        style="margin: auto; margin-top: 20px;; display: block;">Submit</button>
+        style="margin: auto; margin-top: 20px;; display: block;">Save Artistic Demonstration</button>
     </form>
     <hr>
 
@@ -456,12 +508,30 @@
       }
     </style>
 
+    <!-- 
+    Workflow Note:
+        The volunteer role selection requires possible clean up.
+
+        If a user selects a role, it should be removed from the list of 
+        available roles once they have completed the payment of the form.
+
+        Meanwhile, someone else may have begun filling out their contract, 
+        and have selected the same role.
+
+        This means that the role should be removed from their list selected roles, 
+        since the other person completed their payment first.
+
+        See method: claimRolesForMember(memberId)
+    -->
+
     <!-- Payment Form -->
     <form id="payment-form">
       <h3>Payment</h3>
       <div style="text-align: center;" class="membership-payment-due">
         <markdown-component>
           <span slot="markdown-content">
+            <p> To submit your contract, you must complete the payment below. </p>
+            <p>Once your payment information is filled out, then your contract will automatically submit.</p>
             <p class="scholarship-btn-container" style="display:none"> If interested in applying for a scholarship of a
               $100 discount, please fill out this additional <a href="/scholarship-application"><button type="button"
                   class="scholarship-btn">Scholarship Form</button></a> and obtain approval before submitting payment.
@@ -474,17 +544,19 @@
 
             Please submit payment by March 2, 2025.
 
-            <p>Payments must be made online. Click the button below to checkout. Your receipt will be emailed and displayed here on your contract.</p>
+            <p>Payments must be made online. Click the button below to checkout. Your receipt will be emailed and
+              displayed here on your contract.</p>
 
           </span>
         </markdown-component>
+
 
         <fieldset class="contractIncomplete">
           <h3>You must have completed the contract before you can pay.</h3>
           <ul style="list-style-type: none; text-align: left;">
             <li class="signature-incomplete incomplete">Signature</li>
             <li class="artist-details-incomplete incomplete">Artist Details</li>
-            <li class="images-incomplete incomplete">Digital Images</li>
+            <li class="images-incomplete incomplete all-images-exist-incomplete">Digital Images <span class="image-count"></span> </li>
             <li class="studio-sharing-incomplete incomplete">Studio Sharing Details</li>
             <li class="volunteer-incomplete incomplete">Volunteer Responsibility</li>
             <li class="demonstration-incomplete incomplete">Artistic Demonstration</li>
@@ -495,10 +567,14 @@
           <!--  Paypal Integration -->
           <paypal-component></paypal-component>
         </div>
+
+        <div
+          style="text-align: center;  font-weight: bold; background-color: yellow; width: fit-content; margin: 10px auto;">
+          Your committee choice is not confirmed until you have submitted your contract </div>
       </div>
 
       <div class="membership-paid" style="display:none; text-align: center; width:100%">
-        <b>You have already paid</b>
+        <b>You have already paid & your contract has been submitted.</b>
         <div class="membership-receipt" style="text-align: left; max-width: 267px;margin: 21px auto 0;;"></div>
       </div>
 

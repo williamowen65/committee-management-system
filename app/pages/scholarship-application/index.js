@@ -1,4 +1,5 @@
 import '../../../utils/logIf.js';
+import { sendNewScholarshipEmail } from "../../outbound-emails/newScholarshipApplicant.js";
 
 document.addEventListener('DOMContentLoaded', function () {
     let existingApplication = {}
@@ -63,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             sendNewScholarshipEmail({
                 name,
+                email
             })
             // change the button text back to original
             btnSubmit.innerText = "Your scholarship application has been submitted successfully!"

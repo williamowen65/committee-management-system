@@ -1,7 +1,12 @@
 export async function processContractsToSheets() {
 
     // get all roles
-    const roles = await CRUD.readAll('committee-roles')
+    const roles = await CRUD.readAll('committee-roles').then(function (roles) {
+        return roles.reduce((acc, next) => {
+            acc[next.fbId] = next
+            return acc
+        }, {})
+      });
 
     const sheetName = `GHOST Contracts ${new Date().getFullYear()}`
     if (!sheetName) return
@@ -12,6 +17,7 @@ export async function processContractsToSheets() {
     const contracts = await CRUD.readAll('ghost-contracts').then(contracts => {
         return contracts.map(contract => {
             console.log({ contract })
+            if (!contract.artistDetails) return null;
             return {
                 "GHOST Member Id": contract?.userId || "", //          "GHOST Member Id",
                 "First Name": contract?.artistDetails?.firstName || "", //             "First Name",
@@ -38,7 +44,7 @@ export async function processContractsToSheets() {
                 'Brochure Image': contract?.images?.brochureImage || "", //             'Brochure Image',
                 'Studio Sharing Answer': contract?.StudioSharingAnswer || "", //             'StudioSharingAnswer',
             }
-        })
+        }).filter(Boolean)
     })
 
     window.sendMessageToParent({

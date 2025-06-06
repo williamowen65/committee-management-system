@@ -1,9 +1,22 @@
 import '../../../utils/logIf.js';
 import { sendNewApplicationEmail } from '../../outbound-emails/newApplicationReceived.js';
 
+// Duplicate of the function in the my-contract.js file
+function setDigitalImagesCommitteeMember(contracts){
+    const digitalImageCommitteeMember = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes('12'))
+    const target = document.querySelector('#digitalImageCommitteeMember #img-chair-member-details:empty')
+    if (digitalImageCommitteeMember && target) {
+        target.appendChild(document.createTextNode("(" + digitalImageCommitteeMember.artistDetails.firstName + ' ' + digitalImageCommitteeMember.artistDetails.lastName + " - " + (digitalImageCommitteeMember.artistDetails.personalEmail || "") + ")"))
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const form  = document.querySelector('form#new-application-form')
     logIf.client && console.log({form, CRUD})
+
+    // fetch all contracts
+    CRUD.readAll('ghost-contracts').then(setDigitalImagesCommitteeMember)
+
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -21,6 +34,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const promises = Object.entries(values).map(([key, value]) => {
             if (value instanceof File) {
+
+                let newFileName = value.nameTemplate
+
+                newFileName = newFileName.replace("{{randomNumber}}", Math.random() * 100000)
+
+                // const name = values.name
+                // for each file, create a new file with correct name
+                value = new File([value], newFileName, { type: value.type })
+
+
                 return new Promise((resolve, reject) => {
                     CRUD.saveImage(value, 'new-applications').then(url => {
                         values[key] = url

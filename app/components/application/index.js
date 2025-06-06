@@ -37,7 +37,8 @@ createCustomElement('application-component', function () {
     'digitalImage4',
     'artistStatement',
     'websiteSocialMedia',
-    'fbId'
+    'fbId',
+    'status'
   ]
 });
 

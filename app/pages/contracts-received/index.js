@@ -1,13 +1,17 @@
 let roles;
 document.addEventListener('DOMContentLoaded', async () => {
     roles = await CRUD.readAll('committee-roles').then(function (roles) {
-        return roles.sort(function (a, b) {
-          return Number(a.fbId) - Number(b.fbId);
-        });
+        // return roles.sort(function (a, b) {
+        //   return Number(a.fbId) - Number(b.fbId);
+        // });
+        return roles.reduce((acc, next) => {
+            acc[next.fbId] = next
+            return acc
+        }, {})
       });
 
     CRUD.readAll('ghost-contracts').then(contracts => {
-        return contracts.filter(contract => contract.artistDetails.membershipPaid === true)
+        return contracts.filter(c => c.artistDetails).filter(contract => contract.artistDetails.membershipPaid === true)
     }).then(renderContracts)
 })
 
@@ -16,6 +20,7 @@ function renderContracts(contracts) {
     const contractsDiv = document.querySelector('#contracts')
     contractsDiv.innerHTML = ''
     contracts.forEach(contract => {
+        // create a new contract-received element (THIS IS A CUSTOM ELEMENT)
         const contractDiv = document.createElement('contract-received')
 
         const contractData = {
@@ -70,7 +75,7 @@ function renderCommitteeRoles(committeeRoleId) {
 
 
     return committeeRoleId.map(role => {
-
+        console.log({ role, roles })
         const title = roles[role].title
 
         return `<li>${title}</li>`

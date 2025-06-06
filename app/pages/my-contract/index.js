@@ -1,24 +1,47 @@
 
 import '../../../utils/logIf.js'; // This is a special way to import the module, it will work in both Node.js and the browser. 
 
+// Globals to communicate with other js files
+window.ghostCommittees = {}
+window.contracts = []
+window.roles = []
+window.sideBarButtonNameMap = {
+    'processToSheets': "Google Sheets",
+    'newApplications': "New Applications",
+    'newScholarshipApplications': "New Scholarship Applications",
+    'contracts-received': "Contracts Received",
+}
 
-let contracts;
 const imageFields = ['digitalImage1', 'digitalImage2', 'digitalImage3', 'artistInStudioImage', 'brochureImage']
-let roles;
-
 document.addEventListener('DOMContentLoaded', async function () {
-
+    let configDocument = {}
     // Get contract details.
-    const configDocument = await CRUD.read('ghost-contracts', 'configDocument')
+    await CRUD.read('app-settings', 'contractDetails').then(data => {
+        configDocument.contractDetails = data.data;
+    })
     document.querySelector('#my-signature-form #contractDetails').insertAdjacentHTML('afterbegin', configDocument.contractDetails)
     document.querySelector('body').style.display = 'block'
 
 
     roles = await CRUD.readAll('committee-roles').then(function (roles) {
-        return roles.sort(function (a, b) {
-          return Number(a.fbId) - Number(b.fbId);
-        });
-      });
+        // return roles.sort(function (a, b) {
+        //     return Number(a.fbId) - Number(b.fbId);
+        // });
+        return roles.reduce((acc, next) => {
+            acc[next.fbId] = next
+            return acc
+        }, {})
+    });
+    CRUD.listen('committee-roles', null, function (roles) {
+        console.log("listener on committee roles", { roles })
+        // window.roles = roles.sort(function (a, b) {
+        //     return Number(a.fbId) - Number(b.fbId);
+        // })
+        window.roles = roles.reduce((acc, next) => {
+            acc[next.fbId] = next
+            return acc
+        }, {})
+    });
 
     logIf.client && console.log("My Contract Page Loaded")
 
@@ -38,43 +61,55 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     })
 
-    // Add the Committee html
-    await fetch('/my-contract/committee-positions.html')
-        .then(response => response.text())
-        .then(data => {
-            document.querySelector('#committee-positions-container').innerHTML = data;
-        })
+
+
+
+    await Promise.all([
+        // Add the Committee html (This is stored in firebase and is an editable html element)
+        CRUD.read('app-settings', 'html-committee-positions')
+            .then(data => {
+                document.querySelector('#committee-positions-container').innerHTML = data.data;
+            }),
+        // Get the committee data
+        CRUD.read('app-settings', 'committees')
+            .then(data => {
+                ghostCommittees = data.data;
+            }),
+    ])
+
 
     CRUD.readAll('ghost-contracts').then((existingContracts) => {
         contracts = existingContracts
         const myContract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
 
         // Set up Signature
-        setSignatureForm(contracts);
+        setSignatureForm(myContract);
 
         // set up artist details form
-        setArtistDetailsForm(contracts);
+        setArtistDetailsForm(myContract);
 
         // Set up volunteer responsibility form (Adds checkboxes to the form)
         setUpVolunteerResponsibilityForm(contracts);
 
         // set the Studio Sharing form
-        setUpStudioSharingForm(contracts);
+        setUpStudioSharingForm(myContract);
 
         // Set the digital images form
-        setDigitalImagesForm(contracts);
+        setDigitalImagesForm(myContract);
 
         // Set Artistic demonstration
-        setArtisticDemonstrationForm(contracts);
+        setArtisticDemonstrationForm(myContract);
 
         // set Paypal 
-        setPaypalButton(contracts);
+        setPaypalButton(myContract);
 
         // Set editContract Editor
         setEditContractEditor(myContract);
+        // 
+        setVolunteerResponsibilityEditor(myContract);
 
+        setOverrideEditor(contracts);
 
-   ;
     })
 
     // Set the users assigned roles 
@@ -116,18 +151,67 @@ function handleArtistDetailsForm(e) {
     })
 
 }
+
+async function saveContractImage(oldFile, reader){
+    const userEmail = toTitleCase(firebase.auth.currentUser.displayName)
+    // evaluate fileNameTemplate
+    let uniqueFileName = oldFile.name
+    if (uniqueFileName) {
+        uniqueFileName = uniqueFileName.replace('{{userName}}', userEmail)
+    }
+    console.log({ uniqueFileName, oldFile })
+
+    const newFile = new File([oldFile], uniqueFileName, { type: oldFile.type });
+    const url = await CRUD.saveImage(newFile)
+    return url
+}
+
 async function handleDigitalImagesForm(e) {
     e.preventDefault();
 
-    const { values, form } = getFormValues('form#digital-images-form')
-    logIf.client && console.log({ values, form })
+    const { values: invalidValues, form } = getFormValues('form#digital-images-form')
+    console.log({ invalidValues })
+    const values = Array.from(form.querySelectorAll('file-input-component'))
+        .reduce((acc, curr) => {
+            // get the file
+            const oldFile = curr.querySelector('input[type=file]').files[0]
+
+            if (!oldFile) return acc
+
+            console.log({ oldFile })
+
+
+            // Using a predictable naming schema prevents file overwrite issues in a flat image folder
+            // Unfortunately you cannot rename files, but you can recreate files with a new name...
+            // update the file name
+            let uniqueFileName = curr.getAttribute('filename')
+            // const userEmail = encodeURIComponent(firebase.auth.currentUser.email)
+            const userEmail = toTitleCase(firebase.auth.currentUser.displayName)
+            // evaluate fileNameTemplate
+            if (uniqueFileName) {
+                uniqueFileName = uniqueFileName.replace('{{userName}}', userEmail)
+            }
+            console.log({ uniqueFileName, oldFile })
+
+            const newFile = new File([oldFile], uniqueFileName, { type: oldFile.type });
+
+            acc[curr.getAttribute('fieldname')] = newFile
+
+            return acc
+
+        }, {})
+    logIf.client || true && console.log({ values, form })
 
     // save images to storage
     // Get file url and save it to firebase by image element id.
     // Save to firestore
     imageFields.forEach(async (field) => {
-
+        if (!values[field]) return
         try {
+
+            // throw new Error("This is a test error")
+            console.log("debug image save", { field, values })
+          
             const url = await CRUD.saveImage(values[field])
             CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, {
                 images: {
@@ -138,12 +222,80 @@ async function handleDigitalImagesForm(e) {
             })
         } catch (error) {
             console.log("Error saving image", { error, field })
+
+            // Show error message to user by removing the image from the input and displaying an error message
+            const component = form.querySelector(`file-input-component[fieldname="${field}"]`)
+            component.querySelector('input[type=file]').value = ''
+
+            // add hasError class to component
+            component.querySelector('.file-input-component').classList.add('hasError')
+
+            // Show error message
+            const errorMessageEl = component.querySelector(`#${field}-error`)
+            errorMessageEl.innerHTML = "There was an error saving image. Please try again. Other images were saved correctly. (Error was on the server). <br> <small>Try refreshing your browser and try saving it again.</small>"
+            errorMessageEl.classList.add('error')
+
+            // reset the submit button
+            setLoading(form, false)
+
         }
 
     })
 
 
 }
+
+window.updateFileNameToTemplate = function (file) {
+    let uniqueFileName = file.nameTemplate
+    if (uniqueFileName) {
+        uniqueFileName = uniqueFileName.replace('{{userName}}', toTitleCase(firebase.auth.currentUser.displayName))
+    }
+  
+      // Create a new file with the new name
+      return new File([file], uniqueFileName, { type: file.type });
+}
+
+// async function handleIndividualImageUpload(file) {
+window.handleIndividualImageUpload = async function(file, component) {
+    // Update the name of the file based on the user and the file name template
+   
+    component.querySelector('.saved-image-feedback').innerHTML = "Uploading image..."
+    console.log("handleIndividualImageUpload", { file })
+
+  
+    // Save the image to storage
+    const url = await CRUD.saveImage(file)
+    return url
+}
+
+window.saveIndividualImageToContract = async function(url, fieldName, updatedFileName){
+    // Save to firestore
+    CRUD.update('ghost-contracts', firebase.auth.currentUser.uid, {
+        images: {
+            [fieldName]: url
+        }
+    }).then(() => {
+
+        // show saved image icon
+        const form = document.querySelector('form#digital-images-form')
+        const component = form.querySelector(`file-input-component[fieldname="${fieldName}"]`)
+        component.querySelector('.saved-image-feedback').innerHTML = "Saved"
+
+
+       
+
+        component.querySelector('.file-name').innerText = updatedFileName
+
+
+    
+        
+        // setLoading(form, false)
+    })
+}
+
+
+
+
 // This form is unique. It should return a single string which compiles a sentence based on the form values 
 /*
 "I have my own studio space within the GHOST tour boundaries.... 
@@ -342,21 +494,76 @@ function setUpVolunteerResponsibilityForm(contracts) {
 
     // Set timeout is a work around b/c the form is not loaded when the document is ready
     setTimeout(() => {
+        setTheCommittees()
+        setTheRoles()
+    }, 0)
+
+    function setTheCommittees() {
+        const form = document.querySelector('div#committee-positions')
+
+        Object.values(ghostCommittees).forEach(datum => {
+            // locate the correct committee by committee Key div title element and add the title 
+            // console.log("settting committeee", { committee: datum })
+
+            const committeeId = datum.id
+            const committeeRoles = Object.values(roles).filter(r => r.committeeId === committeeId)
+
+            // console.log("checking for committee roles for ", datum.committee, { committeeRoles })
+
+            const committeeElement = form.querySelector(`.committee[data-committee-id="${datum.id}"]`)
+            if (committeeElement) {
+                if (committeeRoles.length > 0) {
+                    const titleEl = committeeElement.querySelector('.committee-title')
+                    titleEl.innerText = datum['committee-header-text']
+                    titleEl.setAttribute('data-committee-title', datum.committee)
+                } else {
+                    // There must exist a committee with no one yet assigned to it
+
+                    // if current user is not a contract editor, remove the committee
+                    const activeUserRoleIds = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid).committeeRoleId || []
+                    console.log({roles})
+                    const userPrivileges = Object.values(roles).filter(role => activeUserRoleIds.includes(role.fbId)).map(role => role.privileges).flat()
+                    if (userPrivileges.includes('editContract')) return
+                    // remove the committee
+                    committeeElement.remove()
+                }
+            }
+        })
+
+    }
+
+
+
+
+    // This builds the role html, but doesn't put the assigned member in the role here
+    function setTheRoles() {
+
         const myContract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid) || []
         const form = document.querySelector('div#committee-positions')
-        const roles = form.querySelectorAll('li.role')
+        const rolesEls = form.querySelectorAll('li.role')
         const myRoles = myContract.committeeRoleId || []
-        roles.forEach(role => {
+        rolesEls.forEach(role => {
             // find all the roles
-            // Add html to each role 
+            // Add html to each role
+            const roleId = role.getAttribute('data-role-id')
+            const thisRole = roles[roleId]
+            const roleTitleEl = role.querySelector('.role-title')
+
+            // console.log({ roleTitleEl, thisRole })
+            if (thisRole.title) {
+                roleTitleEl.innerText = thisRole.title
+                // console.log("settings role title", { roleTitleEl, thisRole })
+            }
+
+
             const input = createCheckbox(role)
             const responsibility = createResponsibility(role)
             const tasks = createRoleTasks(role)
-            const button = createOffloadButton(role)
+            const offloadButton = createOffloadButton(role)
             const infoIcon = createInfoIcon(role)
-            role.querySelector('.responsibility').appendChild(responsibility)
-            role.insertAdjacentElement("afterbegin", input)
-            if (tasks) responsibility.insertAdjacentElement("beforeend", tasks)
+            role.querySelector('.content .responsibility').appendChild(responsibility)
+            role.querySelector('.content').insertAdjacentElement("afterbegin", input)
+            if (tasks) responsibility.insertAdjacentElement("afterend", tasks)
             input.addEventListener('change', handleCheckboxChange)
 
             // console.log("bugfix ", { role, input, responsibility, tasks})
@@ -365,15 +572,14 @@ function setUpVolunteerResponsibilityForm(contracts) {
             // myRoles and filledRoles are an array of ids (ints)
 
             // check if this role belongs to me
-            const roleId = role.getAttribute('data-role-id')
             const hasMyRoles = myRoles.includes(roleId)
 
             // logIf.client && console.log("Bugfix, multiple offload button ",{ roleId, myRoles, hasMyRoles, role, button })
 
             // check if this role is filled
             if (hasMyRoles) {
-                role.insertAdjacentElement("beforeend", button)
-                button.addEventListener('click', handleOffload)
+                role.querySelector('.content').insertAdjacentElement("beforeend", offloadButton)
+                offloadButton.addEventListener('click', handleOffload)
             }
 
 
@@ -386,14 +592,14 @@ function setUpVolunteerResponsibilityForm(contracts) {
             //     button.remove()
             // }
         })
-    }, 0)
+    }
 
     function createRoleTasks(role) {
         const roleId = role.getAttribute('data-role-id')
         const thisRole = roles[roleId]
         const tasks = document.createElement('ul')
-        tasks.classList.add('tasks')
-        thisRole.tasks.forEach(task => {
+        tasks.classList.add('tasks', 'editor-control')
+        thisRole.tasks && thisRole.tasks.forEach(task => {
             const li = document.createElement('li')
             li.innerText = task
             tasks.appendChild(li)
@@ -403,7 +609,7 @@ function setUpVolunteerResponsibilityForm(contracts) {
 
     function createInfoIcon(role) {
         const icon = document.createElement('i')
-        icon.classList.add('fas', 'fa-info-circle', 'info-icon')
+        icon.classList.add('fas', 'fa-info-circle', 'info-icon', 'editor-control')
         icon.setAttribute('data-bs-toggle', 'tooltip')
         icon.setAttribute('data-bs-placement', 'top')
         icon.setAttribute('title', roles[role.getAttribute('data-role-id')].responsibility)
@@ -415,7 +621,7 @@ function setUpVolunteerResponsibilityForm(contracts) {
         const thisRole = roles[roleId]
         // console.log({ thisRole })
         const responsibility = document.createElement('div')
-        // responsibility.classList.add('responsibility')
+        responsibility.classList.add('responsibility-description', 'editor-control')
         responsibility.innerText = thisRole.responsibility
         return responsibility
     }
@@ -426,10 +632,10 @@ function setUpVolunteerResponsibilityForm(contracts) {
         const roleId = role.getAttribute('data-role-id')
         const thisRole = roles[roleId]
         const label = document.createElement('label')
-        label.classList.add('role-checkbox')
+        label.classList.add('role-checkbox', 'editor-control')
         // span for username
         const userNameSpan = document.createElement('span')
-        userNameSpan.classList.add('user-name')
+        userNameSpan.classList.add('user-name', 'editor-control')
         label.appendChild(userNameSpan)
         const checkbox = document.createElement('input')
         label.appendChild(checkbox)
@@ -446,8 +652,11 @@ function setUpVolunteerResponsibilityForm(contracts) {
 }
 
 function handleOffload(e) {
-    logIf.client && console.log("Offloading", e.target.parentNode.getAttribute('data-role-id'))
-    const roleId = e.target.parentNode.getAttribute('data-role-id');
+
+    if (!isBootStrapConfirmResponse(e)) return
+
+    logIf.client && console.log("Offloading", e.target.closest('.role').getAttribute('data-role-id'))
+    const roleId = e.target.closest('.role').getAttribute('data-role-id');
     const userId = firebase.auth.currentUser.uid;
     let committeeRoleIds = contracts.find(contract => contract.userId === userId)?.committeeRoleId || [];
     committeeRoleIds = committeeRoleIds.filter(id => id !== roleId);
@@ -465,22 +674,65 @@ function createOffloadButton(role) {
     const button = document.createElement('button')
     button.innerText = "Offload"
     button.setAttribute("type", "button")
-    button.classList.add('offload-button')
+
+    // set Attributes for bootstrap confirmation
+    button.setAttribute('data-toggle', 'confirmation')
+    button.setAttribute('data-placement', 'left')
+    button.setAttribute('data-title', 'Are you sure you want to offload this role?')
+    button.setAttribute('data-btn-ok-label', 'Yes')
+    button.setAttribute('data-btn-ok-class', 'btn-success')
+    button.setAttribute('data-btn-cancel-label', 'No')
+    button.setAttribute('data-btn-cancel-class', 'btn-danger')
+
+    setTimeout(() => {
+        // set up delete warning popup
+        $(function () {
+            $('[data-toggle="confirmation"]').confirmation()
+        })
+
+    }, 0)
+
+    button.classList.add('offload-button', 'editor-control')
     return button
 }
 
+
+// Sets the assigned roles for the user
 function updateVolunteerResponsibilityForm(contracts) {
     setTimeout(() => {
 
-        const filledRoles = Object.values(contracts).map(contract => contract.committeeRoleId).flat()
+        const filledRoles = Object.values(contracts)
+            .filter(c => {
+                return c.artistDetails && (c.artistDetails.membershipPaid || c.artistDetails.committeePreAssignment)
+            })
+            .map(contract => contract.committeeRoleId).flat()
+
+
+        console.log("updateVolunteerResponsibilityForm", { contracts, filledRoles })
         const form = document.querySelector('div#committee-positions')
         const roles = form.querySelectorAll('li.role')
+
+        // check if current user has a selected role
+        // const myContract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+        // const myRoles = myContract.committeeRoleId || []
+        // myRoles.forEach(roleId => {
+        //     // get the role label element
+        //     const roleEl = document.querySelector(`li.role[data-role-id="${roleId}"]`)
+        //     if (!roleEl) return
+        //     // get the role
+        //     const role = roles[roleId]
+
+        //     const label = roleEl.querySelector('label')
+        //     handleRole(roleId, label, role)
+        // })
+
+        // iterating over DOM elements
         roles.forEach(role => {
             const roleId = role.getAttribute('data-role-id')
             const thisRole = roles[roleId]
             const checkbox = role.querySelector('input[type="checkbox"]')
-            if(!checkbox) {
-                console.error("Checkbox not found", {role})
+            if (!checkbox) {
+                console.error("Checkbox not found", { role })
                 return
             }
             const isRoleFilled = filledRoles.includes(roleId)
@@ -491,53 +743,81 @@ function updateVolunteerResponsibilityForm(contracts) {
             const label = role.querySelector('label')
             if (isRoleFilled) {
 
-                // Set the user name next to the checkbox
-                const committeeMemberContract = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))
-                const fullName = committeeMemberContract && committeeMemberContract.artistDetails && committeeMemberContract.artistDetails.firstName + ' ' + committeeMemberContract.artistDetails.lastName
-                label.querySelector('.user-name').innerText = fullName || "[UNKNOWN]"
-
-
-                // Get this users contract
-                const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
-                if (!contract) return;
-                const userId = contract?.userId
-                // get my roles fresh from the DB
-                // get my role set
-                // myRoles and filledRoles are an array of ids (ints)
-                const myRoles = contract.committeeRoleId || []
-
-
-                logIf.client && console.log("Updating offload buttons", { myRoles, roleId, "myRoles.includes(roleId)": myRoles.includes(roleId), contract })
-
-
-
-                if (myRoles.includes(roleId)) {
-                    const button = createOffloadButton(role)
-                    // check role for existing button
-                    const existingButton = role.querySelector('.offload-button')
-                    logIf.client && console.log("existingButton", existingButton)
-                    if (!existingButton) {
-
-
-
-                        role.insertAdjacentElement("beforeend", button)
-                        button.addEventListener('click', handleOffload)
-                    }
-                }
-
-
+                handleRole(roleId, label)
 
             } else {
                 label.querySelector('.user-name').innerText = ''
             }
-
         })
+
+        // check if current user has a selected role
+        const myContract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+        const myRoles = myContract.committeeRoleId || []
+        const currentUserId = firebase.auth.currentUser.uid
+        console.log("RENDERING MY ROLES ", { myRoles, currentUserId })
+        myRoles.forEach(roleId => {
+            // select the role for this user
+            const role = document.querySelector(`li.role[data-role-id="${roleId}"]`)
+            if (!role) return
+            const label = role.querySelector('label')
+            handleRole(roleId, label, currentUserId)
+            const checkbox = role.querySelector('input[type="checkbox"]')
+            checkbox.checked = true
+            checkbox.disabled = true
+        })
+
     }, 0)
 }
 
-function setUpStudioSharingForm(contracts) {
-    logIf.client && console.log("setUpStudioSharingForm", { contracts })
+
+function handleRole(roleId, label, userId = null) {
+    const role = document.querySelector(`li.role[data-role-id="${roleId}"]`)
+
+
+    // Set the user name next to the checkbox
+    let committeeMemberContract;
+    if (userId) {
+        committeeMemberContract = contracts.find(contract => contract.userId === userId)
+    } else {
+        committeeMemberContract = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))
+    }
+    // console.log("handleRole", { roleId, label, committeeMemberContract, userId })
+    const fullName = committeeMemberContract && committeeMemberContract.artistDetails && committeeMemberContract.artistDetails.firstName + ' ' + committeeMemberContract.artistDetails.lastName
+    const spanLabel = label.querySelector('.user-name')
+    spanLabel.innerText = fullName || "[UNKNOWN]"
+    spanLabel.setAttribute('data-user-id', committeeMemberContract?.userId)
+
+
+    // Get this users contract
     const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+    if (!contract) return;
+    userId = userId || contract?.userId
+    // get my roles fresh from the DB
+    // get my role set
+    // myRoles and filledRoles are an array of ids (ints)
+    const myRoles = contract.committeeRoleId || []
+
+
+    logIf.client && console.log("Updating offload buttons", { myRoles, roleId, "myRoles.includes(roleId)": myRoles.includes(roleId), contract })
+
+
+
+    if (myRoles.includes(roleId)) {
+
+        const button = createOffloadButton(role)
+        // check role for existing button
+        const existingButton = role.querySelector('.offload-button')
+        logIf.client && console.log("existingButton", existingButton)
+        if (!existingButton) {
+            role.insertAdjacentElement("beforeend", button)
+            button.addEventListener('click', handleOffload)
+        }
+    }
+
+}
+
+function setUpStudioSharingForm(contract) {
+    logIf.client && console.log("setUpStudioSharingForm", { contracts })
     if (contract) {
         logIf.client && console.log("Setting up studio sharing form", { contract })
         const form = document.querySelector('form#studio-sharing-form')
@@ -598,16 +878,19 @@ function setUpStudioSharingForm(contracts) {
     }
 }
 
-
-
-function setDigitalImagesForm(contracts) {
-    logIf.client || true && console.log("setDigitalImagesForm", { contracts })
-    const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+// Duplicate of the function in the new-application.js file
+function setDigitalImagesCommitteeMember(contracts){
     const digitalImageCommitteeMember = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes('12'))
-
-    if (digitalImageCommitteeMember) {
-        document.querySelector('#digitalImageCommitteeMember').appendChild(document.createTextNode("(" + digitalImageCommitteeMember.artistDetails.firstName + ' ' + digitalImageCommitteeMember.artistDetails.lastName + " - " + (digitalImageCommitteeMember.artistDetails.personalEmail || "") + ")"))
+    const target = document.querySelector('#digitalImageCommitteeMember #img-chair-member-details:empty')
+    if (digitalImageCommitteeMember && target) {
+        target.appendChild(document.createTextNode("(" + digitalImageCommitteeMember.artistDetails.firstName + ' ' + digitalImageCommitteeMember.artistDetails.lastName + " - " + (digitalImageCommitteeMember.artistDetails.personalEmail || "") + ")"))
     }
+}
+
+
+function setDigitalImagesForm(contract) {
+    logIf.client || true && console.log("setDigitalImagesForm", { contracts })
+    setDigitalImagesCommitteeMember(contracts)
 
     if (contract) {
 
@@ -632,6 +915,9 @@ function setDigitalImagesForm(contracts) {
                 // Set not required for input (to allow form to be submitted when user has existing image) --- you cannot set the value for file inputs 
                 thisComponent.querySelector('input[type=file]').removeAttribute('required')
 
+            
+                    thisComponent.querySelector('.saved-image-feedback').innerHTML = "Saved"
+            
                 logIf.client && console.log({ thisComponent })
             }
         })
@@ -640,8 +926,7 @@ function setDigitalImagesForm(contracts) {
 }
 
 
-function setArtisticDemonstrationForm(contracts) {
-    const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+function setArtisticDemonstrationForm(contract) {
     if (contract) {
         logIf.client && console.log("Setting up artistic demonstration form", { contract })
         const form = document.querySelector('form#artistic-demonstration-form')
@@ -666,10 +951,10 @@ function setArtisticDemonstrationForm(contracts) {
     }
 }
 
-function setSignatureForm(contracts) {
-    const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+function setSignatureForm(contract) {
     if (contract) {
-        logIf.client && console.log("Setting up signature form", { contract })
+
+        logIf.client || true && console.log("Setting up signature form", { contract })
         const form = document.querySelector('form#my-signature-form')
         const signature = contract.signature
         if (signature) {
@@ -679,13 +964,19 @@ function setSignatureForm(contracts) {
             // trigger change
             const event = new Event('change')
             input.dispatchEvent(event)
+        } else {
+            // clear the signature
+            const input = form.querySelector(`input[name="signature"]`)
+            input.value = ""
+            // trigger change
+            const event = new Event('change')
+            input.dispatchEvent(event)
         }
     }
 }
 
-function setArtistDetailsForm(contracts) {
+function setArtistDetailsForm(contract) {
     const form = document.querySelector('form#artist-details-form')
-    const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
     if (!contract) return
     const artistDetails = contract.artistDetails
     logIf.client && console.log("Setting up artist details form", { artistDetails, contract })
@@ -707,9 +998,8 @@ function setArtistDetailsForm(contracts) {
 
 /* TODO: Only allow payment if the rest of the contract has been filled */
 
-async function setPaypalButton(contracts) {
-    logIf.client && console.log("setPaypalButton", { contracts })
-    const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+async function setPaypalButton(contract) {
+    logIf.client && console.log("setPaypalButton", { contract })
     if (!contract) {
         document.querySelector('.scholarship-btn-container').style.display = 'block';
         return
@@ -773,7 +1063,7 @@ function setEditContractEditor(myContract) {
         editButton.innerText = "Edit Contract"
         editButton.setAttribute('id', 'edit-contract-btn')
         editButton.setAttribute('type', 'button')
-        editButton.classList.add('small')
+        editButton.classList.add('small', 'editor-control')
         editButton.setAttribute('title', "This button is only visible to users with the 'editContract' privilege")
 
         // editButton.addEventListener('click', handleEditContract)
@@ -793,8 +1083,13 @@ function setEditContractEditor(myContract) {
         editButton.addEventListener('click', async () => {
 
 
-            const configDocument = await CRUD.read('ghost-contracts', 'configDocument')
+            const configDocument = await CRUD.read('app-settings', 'contractDetails').then(datum => {
+                return {
+                    contractDetails: datum.data
+                }
+            })
 
+            console.log("editing contract", { configDocument })
 
             // hide the button
             editButton.style.display = 'none'
@@ -851,9 +1146,6 @@ function setEditContractEditor(myContract) {
                     plugins: [
                         // Core editing features
                         'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-                        // Your account includes a free trial of TinyMCE premium features
-                        // Try the most popular premium features until Jan 11, 2025:
-                        'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown', 'importword', 'exportword', 'exportpdf'
                     ],
 
                     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat | outdent indent',
@@ -883,13 +1175,13 @@ function setEditContractEditor(myContract) {
                             // capture the content
                             const content = editor.getContent();
                             // save the content to the database
-                            CRUD.update('ghost-contracts', 'configDocument', { contractDetails: content }).then(() => {
+                            CRUD.update('app-settings', 'contractDetails', { data: content }).then(() => {
                                 // hide the editor
                                 container.style.display = 'none';
                                 // show the button
                                 editButton.style.display = 'block';
                             });
-                            
+
                         };
 
                         const cancelButton = document.createElement('button');
@@ -925,21 +1217,22 @@ function setEditContractEditor(myContract) {
     }
 }
 
-function updateMyContract(myContract){
+function updateMyContract(myContract) {
+    if (!myContract) return
     // If all sections are complete, enable the paypal button
     // Check for Signature, Artist Details, Digital Images, Studio Sharing Details, Volunteer Responsibility, Artistic Demonstration
 
-    console.log("Checking if contract is complete", {myContract})
+    // console.log("Checking if contract is complete", { myContract })
     const signature = myContract.signature
     const artistDetails = myContract.artistDetails
     const images = myContract.images
     const studioSharing = myContract.StudioSharingAnswer
-    const volunteerResponsibility = myContract.committeeRoleId.length > 0
+    const volunteerResponsibility = myContract.committeeRoleId && myContract.committeeRoleId.length > 0
     const artisticDemonstration = myContract.artisticDemonstration
 
-    const contractComplete = signature && artistDetails && images && studioSharing && volunteerResponsibility && artisticDemonstration
-
-    if(contractComplete){
+    const contractComplete = signature && artistDetails && images && studioSharing && volunteerResponsibility && artisticDemonstration && allImagesExist(images)
+    console.log("Contract Complete", { contractComplete, committeeRoleId: myContract.committeeRoleId, signature, artistDetails, images, studioSharing, volunteerResponsibility, artisticDemonstration })
+    if (contractComplete) {
         document.querySelector('.ifContractComplete').style.display = 'block'
         document.querySelector('.contractIncomplete').style.display = 'none'
     } else { // Contract is incomplete
@@ -953,31 +1246,201 @@ function updateMyContract(myContract){
             images: !images,
             studioSharing: !studioSharing,
             volunteerResponsibility: !volunteerResponsibility,
-            artisticDemonstration: !artisticDemonstration
+            artisticDemonstration: !artisticDemonstration,
+            allImagesExist: !allImagesExist(images)
         };
 
         document.querySelectorAll('.incomplete').forEach(item => {
             item.classList.remove('incomplete')
         })
 
-        if(incompleteItems.signature){
+        if (incompleteItems.signature) {
             document.querySelector('.signature-incomplete').classList.add('incomplete')
         }
-        if(incompleteItems.artistDetails){
+        if (incompleteItems.artistDetails) {
             document.querySelector('.artistDetails-incomplete').classList.add('incomplete')
         }
-        if(incompleteItems.images){
+        if (incompleteItems.images) {
             document.querySelector('.images-incomplete').classList.add('incomplete')
         }
-        if(incompleteItems.studioSharing){
+        if (incompleteItems.studioSharing) {
             document.querySelector('.studio-sharing-incomplete').classList.add('incomplete')
         }
-        if(incompleteItems.volunteerResponsibility){
+        if (incompleteItems.volunteerResponsibility) {
             document.querySelector('.volunteer-incomplete').classList.add('incomplete')
         }
-        if(incompleteItems.artisticDemonstration){
+        if (incompleteItems.artisticDemonstration) {
             document.querySelector('.demonstration-incomplete').classList.add('incomplete')
         }
+        if (incompleteItems.allImagesExist) {
+            const el = document.querySelector('.all-images-exist-incomplete')
+            el.classList.add('incomplete')
+            // show image count
+            const imageCount = Object.values(images).filter(image => image).length
+            el.querySelector('.image-count').innerText = `(${imageCount}/5)`
 
+        }
+
+    }
+}
+
+function setVolunteerResponsibilityEditor(myContract) {
+    const myPrivileges = (myContract.committeeRoleId || []).map(roleId => roles[roleId].privileges).flat()
+
+    // if the user has the privileges to edit the contract, show the editor
+    if (myPrivileges.includes('editContract')) {
+        Promise.all([
+            fetch('modal/editRole/editRole.js').then(res => res.text()),
+            fetch('modal/createCommittee/createCommittee.js').then(res => res.text()),
+            fetch('modal/createRole/createRole.js').then(res => res.text()),
+            fetch('modal/editCommittee/editCommittee.js').then(res => res.text())
+        ]).then(scripts => {
+            scripts.forEach(scriptText => {
+                const script = document.createElement('script');
+                script.innerHTML = scriptText;
+                document.body.appendChild(script);
+            });
+            editRole();
+            createCommitteePermission()
+            createRoleSetUp()
+            editCommitteeButtons()
+            setUpDragula() // Imported via CDN in the /my-contract/index.html file
+        });
+
+    }
+}
+
+
+function allImagesExist(images) {
+    return imageFields.every(field => images[field])
+}
+
+
+function setOverrideEditor(contracts) {
+    const myContract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
+
+    const myPrivileges = (myContract.committeeRoleId || []).map(roleId => roles[roleId].privileges).flat()
+
+    // if the user has the privileges to edit the contract, show the editor
+    if (myPrivileges.includes('overrideContract')) {
+        const container = document.createElement('div')
+        container.setAttribute('id', 'override-contract-select2-container')
+        const label = document.createElement('div')
+        label.setAttribute('id', 'override-contract-label')
+        container.appendChild(label)
+
+        // show a button for overriding the contract
+        const overrideSelect = document.createElement('select')
+        // add placeholder option
+        const placeholderOption = document.createElement('option')
+        placeholderOption.value = ""
+        overrideSelect.appendChild(placeholderOption)
+        container.appendChild(overrideSelect)
+        overrideSelect.setAttribute('id', 'override-contract-select2')
+        container.style.marginLeft = "auto"
+        document.querySelector('#my-contract').insertAdjacentElement('beforebegin', container)
+
+        function formatOption(option) {
+            if (!option.id) {
+                return option.text;
+            }
+            var $option = $(
+                '<div style="display:flex; justify-content: between; align-items:center"><strong >' + option.text + '</strong><small style="margin-left:auto; display:block;font-size: 17px">' + option.description + '</small></div>'
+            );
+            return $option;
+        }
+
+        function formatSelection(option) {
+            if (!option.id) {
+                return option.text;
+            }
+            var $option = $(
+                '<div style="display:flex; justify-content: between; align-items:center"><small style="margin-right:10px; display:block;font-size: 17px">' + option.description + '</small><strong >' + option.text + '</strong></div>'
+            );
+            return $option;
+        }
+
+
+
+        function isMembershipPaid(contract) {
+            return contract.artistDetails && contract.artistDetails.membershipPaid === true;
+        }
+        $(overrideSelect).select2({
+            placeholder: "Edit Member Contract",
+            allowClear: true,
+            width: 'fit-content',
+            templateResult: formatOption,
+            templateSelection: formatSelection,
+            data: contracts.filter(c => c.artistDetails).sort(byLastName).map(contract => {
+                return {
+                    id: contract.userId,
+                    text: `${contract.artistDetails.firstName} ${contract.artistDetails.lastName}`,
+                    description: isMembershipPaid(contract) ? "😎" : "🤨"
+                }
+            })
+        });
+
+        function contractReset() {
+            const contractReset = {
+                images: imageFields.reduce((acc, curr) => {
+                    acc[curr] = "No image set"
+                    return acc
+                }, {})
+            }
+
+            setDigitalImagesForm(contractReset)
+            console.log({ contractReset })
+
+        }
+
+        function setIsEditingOtherContract(contract) {
+            // update the title of the browser tab
+            document.title = "Editing Contract: " + contract.artistDetails.firstName + " " + contract.artistDetails.lastName
+            document.querySelector('#my-contract > h1').innerText = "Editing Contract: " + contract.artistDetails.firstName + " " + contract.artistDetails.lastName
+            document.querySelector('#override-contract-select2-container #override-contract-label').style.display = "block"
+            document.querySelector('#override-contract-select2-container #override-contract-label').innerText = "Editing Contract"
+            document.querySelector('#override-contract-select2-container').classList.add('isEditing')
+        }
+        function setIsEditingMyContract() {
+            // update the title of the browser tab
+            document.title = "My Contract"
+            document.querySelector('#my-contract > h1').innerText = "My Contract"
+            document.querySelector('#override-contract-select2-container #override-contract-label').style.display = "none"
+            document.querySelector('#override-contract-select2-container').classList.remove('isEditing')
+        }
+
+
+        $(overrideSelect).on('select2:select', function (e) {
+            contractReset()
+            const userId = e.params.data.id
+            const selectedContract = contracts.find(contract => contract.userId === userId)
+            if (selectedContract) {
+                setIsEditingOtherContract(selectedContract)
+                // Load the selected contract details into the form
+                setSignatureForm(selectedContract)
+                setArtistDetailsForm(selectedContract)
+                setDigitalImagesForm(selectedContract)
+                setUpStudioSharingForm(selectedContract)
+                setArtisticDemonstrationForm(selectedContract)
+                updateMyContract(selectedContract)
+                setPaypalButton(selectedContract)
+            }
+        })
+        $(overrideSelect).on('select2:clear', function () {
+            setIsEditingMyContract()
+            contractReset()
+            const userId = firebase.auth.currentUser.uid;
+            const myContract = contracts.find(contract => contract.userId === userId);
+            if (myContract) {
+                // Load the logged-in user's contract details into the form
+                setSignatureForm(myContract);
+                setArtistDetailsForm(myContract);
+                setDigitalImagesForm(myContract);
+                setUpStudioSharingForm(myContract);
+                setArtisticDemonstrationForm(myContract);
+                updateMyContract(myContract);
+                setPaypalButton(myContract)
+            }
+        });
     }
 }

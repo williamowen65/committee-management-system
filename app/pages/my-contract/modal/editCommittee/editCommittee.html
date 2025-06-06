@@ -1,0 +1,19 @@
+<div class="modal close-modal" id="editCommitteeModal">
+    <div class="modal-content">
+        <form onsubmit="event.preventDefault()">
+            <h3>Edit Committee</h3>
+            <input-component required="true" value="{{committeeName}}" fieldName="committee-name" alias="Committee Name"></input-component>
+            <input-component required="true" value="{{committeeHeader}}" fieldName="committee-header" alias="Committee Header"></input-component>
+    
+            <div class="modal-footer">
+                <button type="submit" class="small btn btn-primary" id="editCommittee">Save</button>
+                <button class="small btn btn-secondary close-modal">Cancel</button>
+                <button class="small btn btn-secondary" id="deleteCommittee" data-container="#editCommitteeModal .modal-footer"
+                    data-toggle="confirmation" data-placement="right" data-title="Are you sure about deleting this committee?">
+                    Delete
+                </button>
+            </div>
+        </form>
+     
+    </div>
+</div>

@@ -30,14 +30,16 @@
         document.addEventListener("DOMContentLoaded", function() {
 
 
-            CRUD.readAll('scholarship-applications').then(applications => {
+            CRUD.readAll('scholarship-applications')
+            .then(applications => applications.sort((a, b) => new Date(a.createdAt) >new Date( b.createdAt) ? 1 : -1))
+            .then(applications => {
                 logIf.client && console.log(applications);
                 
                 const totalReviewed = applications.filter(application => application.hasBeenReviewed).length;
                 const totalNotReviewed = applications.filter(application => !application.hasBeenReviewed).length;
 
                 document.querySelector('#reviewedCount').innerText = totalReviewed;
-                document.querySelector('#notReveiwedCount').innerText = totalNotReviewed;
+                document.querySelector('#notReviewedCount').innerText = totalNotReviewed;
 
                 applications.forEach(application => {
 
@@ -86,7 +88,7 @@
     <div class="container">
         <div style="text-align: center;">
             <h1> Review Scholarship Applications <br>for GHOST Membership </h1>
-            <div>Under-review: <span id="notReveiwedCount"></span>  / Reviewed: <span id="reviewedCount"></span></div>
+            <div>Under-review: <span id="notReviewedCount"></span>  / Reviewed: <span id="reviewedCount"></span></div>
             <!-- <b>this page should only be view able by the admin and application chair</b> -->
         </div>
         <div id="applications">

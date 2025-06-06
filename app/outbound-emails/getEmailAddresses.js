@@ -5,9 +5,15 @@ export async function getEmailAddresses(options = {
     // Get all the emails listed in the committees and roles
     let { committees, roles } = options;
 
-    
 
-    const committeeRoles = await CRUD.readAll('committee-roles').then(roles => roles.sort((a, b) => Number(a.fbId) - Number(b.fbId)))
+
+    const committeeRoles = await CRUD.readAll('committee-roles')
+        .then(roles => {
+            return roles.reduce((acc, next) => {
+                acc[next.fbId] = next
+                return acc
+            }, {})
+        })
 
     const ghostContracts = await CRUD.readAll('ghost-contracts').then(contracts => contracts.sort((a, b) => Number(a.fbId) - Number(b.fbId)))
 
@@ -46,7 +52,7 @@ export async function getEmailAddresses(options = {
 
     // get all the emails of the contracts that have the role ids
     let emails = membersToEmail.map(contract => {
-        if(!contract.artistDetails) return
+        if (!contract.artistDetails) return
         return contract.artistDetails.personalEmail || contract.artistDetails.businessEmail;
     }).filter(Boolean)
 

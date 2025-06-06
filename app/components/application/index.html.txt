@@ -12,7 +12,7 @@
            
             <h4>Status: </h4>
             <span class="status">
-                <span>${approved == true ? "Approved" : hasBeenReviewed == true ? "Not Approved" : "Has not been reviewed"}</span>
+                <span>${status}</span>
             </span>
         </div>
         <button class="expandApplication show" onclick="event.target.closest('.artist-application-review').classList.toggle('expanded')"

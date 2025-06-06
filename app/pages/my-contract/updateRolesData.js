@@ -1,380 +1,604 @@
-const data = 
-{
-    "0": {
-        "title": "Developer",
-        "committee": "No Committee",
-        "responsibility": "Web development and maintenance",
-        "tasks": [],
-        "sideBarButtons": ["testEmail", "testSheets", "processToSheets", "createDriveFolder", "createDocument", "newScholarshipApplications", "newApplications", "contracts-received"],
-        "privileges": ["editTimeline", "editContract"]
-    },
-    "1": {
-        "title": "President",
-        "committee": "Board",
-        "responsibility": "Oversee all aspects of the organization",
-        "prerequisite": "Previous experience in a leadership role",
-        "tasks": [],
-        "sideBarButtons": ["newScholarshipApplications", "newApplications", "contracts-received", "processToSheets"],
-        "privileges": ["editTimeline", 'editContract']
-    },
-    "2": {
-        "title": "Vice President",
-        "committee": "Board",
-        "responsibility": "Assist the President and oversee the committees",
-        "prerequisite": "Experience in organizational management",
-        "tasks": [],
-        "sideBarButtons": ["newScholarshipApplications", "contracts-received", "newApplications", "processToSheets"],
-        "privileges": []
-    },
-    "3": {
-        "title": "Treasurer",
-        "committee": "Board",
-        "responsibility": "Manage the organization's finances",
-        "prerequisite": "Experience in financial management",
-        "tasks": [],
-        "sideBarButtons": ["newScholarshipApplications", "contracts-received", "newApplications", "processToSheets"],
-        "privileges": []
-    },
-    "4": {
-        "title": "Secretary",
-        "committee": "Board",
-        "responsibility": "Record and distribute meeting minutes",
-        "prerequisite": "Strong organizational and communication skills",
-        "tasks": [],
-        "sideBarButtons": ["newScholarshipApplications", "contracts-received", "newApplications", "processToSheets"]
-    },
-    "5": {
-        "title": "Member-at-large",
-        "committee": "Board",
-        "responsibility": "Assist with various tasks as needed",
-        "prerequisite": "Willingness to assist with various tasks",
-        "tasks": [],
-        "sideBarButtons": ["newScholarshipApplications", "contracts-received", "newApplications", "processToSheets"]
-    },
-    "6": {
-        "title": "Web Design/Maintenance Chair",
-        "committee": "Web Design and Maintenance",
-        "responsibility": "Maintain the organization's website",
-        "prerequisite": "Experience in web design and maintenance",
-        "tasks": [],
-        "sideBarButtons": []
-    },
-    "7": {
-        "title": "Social Media Chair",
-        "committee": "Social Media",
-        "responsibility": "Manage the organization's social media accounts",
-        "prerequisite": "Needs familiarity with Canva or the ability to learn Canva to schedule posts and arrange advertising; Provides training and specific guidance to committee members",
-        "tasks": [],
-        "sideBarButtons": []
-    },
-    "8": {
-        "title": "Social Media Assistant",
-        "committee": "Social Media",
-        "responsibility": "Design general GHOST posts (using Canva)",
-        "prerequisite": "Experience with Canva and social media design",
-        "tasks": [],
-        "sideBarButtons": []
-    },
-    "9": {
-        "title": "Social Media Assistant",
-        "committee": "Social Media",
-        "responsibility": "Design mosaics of individual artists (using Canva)",
-        "prerequisite": "Experience with Canva and social media design",
-        "tasks": [],
-        "sideBarButtons": []
-    },
-    "10": {
-        "title": "Social Media Assistant",
-        "committee": "Social Media",
-        "responsibility": "Design Sponsor and “Make It a Weekend” posts with advertisers using Canva",
-        "prerequisite": "Experience with Canva and social media design",
-        "tasks": [],
-        "sideBarButtons": []
-    },
-    "11": {
-        "title": "Social Media Assistant",
-        "committee": "Social Media",
-        "responsibility": "Prepare short videos",
-        "prerequisite": "Experience in video creation and editing",
-        "tasks": [],
-        "sideBarButtons": []
-    },
-    "12": {
-        "title": "Artist Images Chair",
-        "committee": "Art Images",
-        "responsibility": "Reviews images from artists",
-        "prerequisite": "Needs comfort with manipulating image size and using Google Drive folders",
-        "tasks": [
-            "Evaluate incoming artist images",
-            "Assist artists with image resizing, cropping, and jpeg uploading as needed during contract submission"
+
+
+const data = [
+    {
+        "userId": "0",
+        "sideBarButtons": [
+            "testEmail",
+            "testSheets",
+            "processToSheets",
+            "createDriveFolder",
+            "createDocument",
+            "newScholarshipApplications",
+            "newApplications",
+            "contracts-received"
         ],
-        "sideBarButtons": ["contracts-received"]
+        "privileges": [
+            "editTimeline",
+            "editContract"
+        ],
+        "title": "Developer",
+        "tasks": [],
+        "committeeId": "0",
+        "responsibility": "Web development and maintenance",
+        "fbId": "0"
     },
-    "13": {
-        "title": "Brochure and Poster Chair",
-        "committee": "Marketing",
+    {
+        "sideBarButtons": [],
+        "prerequisite": "Previous experience in a leadership role",
+        "responsibility": "Oversee all aspects of the organization and communicate with member artists\n",
+        "title": "President",
+        "committeeId": "1",
+        "tasks": [],
+        "userId": "1",
+        "committee": "1",
+        "privileges": [],
+        "fbId": "1"
+    },
+    {
+        "title": "Social Media Assistant",
+        "committee": "3",
+        "userId": "10",
+        "committeeId": "3",
+        "tasks": [],
+        "responsibility": "Design posts using Canva",
+        "privileges": [],
+        "prerequisite": "Experience with Canva and social media design",
+        "sideBarButtons": [],
+        "fbId": "10"
+    },
+    {
+        "committeeId": "3",
+        "responsibility": "Prepare short videos",
+        "userId": "11",
+        "sideBarButtons": [],
+        "prerequisite": "Experience in video creation and editing",
+        "title": "Social Media Assistant",
+        "tasks": [],
+        "fbId": "11"
+    },
+    {
+        "committee": "4",
+        "responsibility": "Reviews images from artists and assists with re-sizing images, if needed",
+        "title": "Artist Images Chair",
+        "prerequisite": "Needs comfort with manipulating image size and using Google Drive folders",
+        "committeeId": "4",
+        "sideBarButtons": [
+            "contracts-received"
+        ],
+        "tasks": [],
+        "userId": "12",
+        "privileges": [],
+        "fbId": "12"
+    },
+    {
+        "userId": "13",
+        "sideBarButtons": [
+            "processToSheets"
+        ],
         "responsibility": "Proposes budget for brochures/posters, coordinates with printer, oversees timetable, and explores layout options",
+        "committeeId": "5",
+        "title": "Brochure and Poster Chair",
         "prerequisite": "Experience in graphic design",
         "tasks": [],
-        "sideBarButtons": ['processToSheets']
+        "fbId": "13"
     },
-    "14": {
+    {
         "title": "Brochure and Poster Designer",
-        "committee": "Marketing",
+        "committeeId": "5",
+        "sideBarButtons": [
+            "processToSheets"
+        ],
+        "userId": "14",
         "responsibility": "Design brochures and posters",
+        "tasks": [],
         "prerequisite": "Experience in graphic design",
-        "tasks": [],
-        "sideBarButtons": ['processToSheets']
+        "fbId": "14"
     },
-    "15": {
-        "title": "New Artist Recruitment Chair",
-        "committee": "Recruitment",
+    {
+        "prerequisite": "Experience in recruitment",
+        "sideBarButtons": [
+            "newApplications"
+        ],
+        "committeeId": "6",
+        "tasks": [],
         "responsibility": "Visits galleries and local festivals to recruit potential artists, collects contact info, and sends email reminders in Nov, Dec, and early Jan",
-        "prerequisite": "Experience in recruitment",
-        "tasks": [],
-        "sideBarButtons": ["newApplications"]
+        "userId": "15",
+        "title": "New Artist Recruitment Chair",
+        "fbId": "15"
     },
-    "16": {
+    {
+        "prerequisite": "Experience in recruitment",
+        "committeeId": "6",
+        "tasks": [],
+        "userId": "16",
+        "sideBarButtons": [],
+        "committee": "6",
+        "responsibility": "Visit galleries and art festivals to recruit potential new artists",
+        "privileges": [],
         "title": "New Artist Recruitment Assistant",
-        "committee": "Recruitment",
-        "responsibility": "Help with gallery visits and recruitment",
-        "prerequisite": "Experience in recruitment",
-        "tasks": [],
-        "sideBarButtons": []
+        "fbId": "16"
     },
-    "17": {
-        "title": "New Artist Applications Chair",
-        "committee": "Artists Applications",
+    {
+        "sideBarButtons": [
+            "newApplications"
+        ],
+        "tasks": [],
         "responsibility": "Manage new artist applications and arranges screening committee",
+        "title": "New Artist Applications Chair",
+        "committeeId": "7",
+        "userId": "17",
         "prerequisite": "Experience in reviewing applications",
-        "tasks": [],
-        "sideBarButtons": ["newApplications"]
+        "fbId": "17"
     },
-    "18": {
-        "title": "Distribution Chair",
-        "committee": "Distribution",
-        "responsibility": "Distribute brochures and posters",
+    {
         "prerequisite": "Experience in distribution",
+        "sideBarButtons": [],
+        "responsibility": "Coordinates the committee, including putting brochure/poster packets together for distribution",
+        "privileges": [],
         "tasks": [],
-        "sideBarButtons": []
+        "userId": "18",
+        "title": "Brochure and Poster Distribution Chair",
+        "committee": "8",
+        "committeeId": "8",
+        "fbId": "18"
     },
-    "19": {
-        "title": "Distribution Assistant",
-        "committee": "Distribution",
+    {
+        "committee": "8",
+        "title": "Brochure and Posters Distribution Assistant",
+        "privileges": [],
+        "committeeId": "8",
+        "tasks": [],
+        "userId": "19",
         "responsibility": "Distribute brochures and posters to Gig Harbor (Downtown, Pioneer Ave and Kimball Ave)",
+        "sideBarButtons": [],
         "prerequisite": "Experience in distribution",
-        "tasks": [],
-        "sideBarButtons": []
+        "fbId": "19"
     },
-    "20": {
-        "title": "Distribution Assistant",
-        "committee": "Distribution",
+    {
+        "tasks": [],
+        "privileges": [],
+        "userId": "2",
+        "committeeId": "1",
+        "sideBarButtons": [
+            "processToSheets",
+            "newApplications",
+            "newScholarshipApplications",
+            "contracts-received"
+        ],
+        "committee": "1",
+        "responsibility": "Attend all board meetings as an advisor and fill in as needed for President",
+        "title": "Vice President",
+        "prerequisite": "Experience in organizational management",
+        "fbId": "2"
+    },
+    {
+        "tasks": [],
         "responsibility": "Distribute brochures and posters to Gig Harbor (Costco corridor and Point Fosdick business corridor)",
         "prerequisite": "Experience in distribution",
-        "tasks": [],
-        "sideBarButtons": []
+        "committee": "8",
+        "title": "Brochure and Poster Distribution Assistant",
+        "committeeId": "8",
+        "privileges": [],
+        "sideBarButtons": [],
+        "userId": "20",
+        "fbId": "20"
     },
-    "21": {
-        "title": "Distribution Assistant",
-        "committee": "Distribution",
+    {
+        "sideBarButtons": [],
+        "committeeId": "8",
         "responsibility": "Distribute brochures and posters to Port Orchard/Olalla (including on the Southworth ferry)",
-        "prerequisite": "Experience in distribution",
-        "tasks": [],
-        "sideBarButtons": []
-    },
-    "22": {
         "title": "Distribution Assistant",
-        "committee": "Distribution",
+        "tasks": [],
+        "prerequisite": "Experience in distribution",
+        "userId": "21",
+        "fbId": "21"
+    },
+    {
+        "userId": "22",
+        "privileges": [],
+        "prerequisite": "Experience in distribution",
+        "title": "Brochure and Poster Distribution Assistant",
+        "committee": "8",
+        "tasks": [],
         "responsibility": "Distribute brochures and posters to selected areas in Seattle, Bellevue and Mercer Island",
-        "prerequisite": "Experience in distribution",
-        "tasks": [],
-        "sideBarButtons": []
+        "committeeId": "8",
+        "sideBarButtons": [],
+        "fbId": "22"
     },
-    "23": {
-        "title": "Distribution Assistant",
-        "committee": "Distribution",
+    {
+        "committeeId": "8",
         "responsibility": "Distribute brochures and posters to selected areas in Bremerton (including on the ferry), Bainbridge Island, Poulsbo and Port Townsend",
+        "sideBarButtons": [],
+        "tasks": [],
         "prerequisite": "Experience in distribution",
-        "tasks": [],
-        "sideBarButtons": []
+        "title": "Brochure and Poster Distribution Assistant",
+        "committee": "8",
+        "userId": "23",
+        "privileges": [],
+        "fbId": "23"
     },
-    "24": {
-        "title": "Sponsorship Chair",
-        "committee": "Sponsorship",
+    {
         "responsibility": "Oversee sponsorship activities and relationships with sponsors (including paid ads)",
-        "prerequisite": "Experience in sponsorship management",
         "tasks": [],
-        "sideBarButtons": []
+        "title": "Sponsorship Chair",
+        "committeeId": "9",
+        "prerequisite": "Experience in sponsorship management",
+        "userId": "24",
+        "sideBarButtons": [],
+        "fbId": "24"
     },
-    "25": {
+    {
+        "committee": "9",
+        "userId": "25",
+        "privileges": [],
+        "sideBarButtons": [],
+        "prerequisite": "Experience in sponsorship management",
+        "responsibility": "Assist with sponsorship activities and relationships with sponsors (including paid ads)",
         "title": "Sponsorship Assistant",
-        "committee": "Sponsorship",
-        "responsibility": "Assist with sponsorship activities and maintain relationships with sponsors (including paid ads)",
-        "prerequisite": "Experience in sponsorship management",
+        "committeeId": "9",
         "tasks": [],
-        "sideBarButtons": []
+        "fbId": "25"
     },
-    "26": {
+    {
+        "committeeId": "10",
         "title": "Signs for Artist Studios Chair",
-        "committee": "Signs for Artist Studios",
-        "responsibility": "Oversee the creation and distribution of signs for artist studios",
-        "prerequisite": "Experience in sign creation and distribution",
         "tasks": [],
-        "sideBarButtons": []
+        "sideBarButtons": [],
+        "prerequisite": "Experience in sign creation and distribution",
+        "responsibility": "Oversee all aspects of the organization and communicates with member artists",
+        "userId": "26",
+        "committee": "10",
+        "privileges": [],
+        "fbId": "26"
     },
-    "27": {
-        "title": "Signs for Artist Studios Assistant",
-        "committee": "Signs for Artist Studios",
+    {
         "responsibility": "Sign repairs plus bundling signs for distribution and help collecting signs at end of year",
-        "prerequisite": "Experience in sign creation and distribution",
+        "committeeId": "10",
+        "sideBarButtons": [],
+        "userId": "27",
         "tasks": [],
-        "sideBarButtons": []
-    },
-    "28": {
+        "prerequisite": "Experience in sign creation and distribution",
         "title": "Signs for Artist Studios Assistant",
-        "committee": "Signs for Artist Studios",
-        "responsibility": "Sign repairs plus bundling signs for distribution and help collecting signs at end of year",
-        "prerequisite": "Experience in sign creation and distribution",
-        "tasks": [],
-        "sideBarButtons": []
+        "fbId": "27"
     },
-    "29": {
+    {
+        "tasks": [],
+        "userId": "28",
+        "sideBarButtons": [],
+        "prerequisite": "Experience in sign creation and distribution",
+        "responsibility": "Sign repairs plus bundling signs for distribution and help collecting signs at end of year",
+        "title": "Signs for Artist Studios Assistant",
+        "committeeId": "10",
+        "fbId": "28"
+    },
+    {
+        "tasks": [],
+        "privileges": [],
+        "committeeId": "11",
+        "prerequisite": "Experience in banner creation and distribution",
         "title": "Banners Chair",
-        "committee": "Banners",
-        "responsibility": "Oversee the creation and distribution of banners",
-        "prerequisite": "Experience in banner creation and distribution",
-        "tasks": [],
-        "sideBarButtons": []
+        "committee": "11",
+        "userId": "29",
+        "sideBarButtons": [],
+        "responsibility": "Oversee the creation and installation of banners, including the large banner over Harborview drive",
+        "fbId": "29"
     },
-    "30": {
+    {
+        "prerequisite": "Experience in financial management",
+        "committeeId": "1",
+        "privileges": [],
+        "responsibility": "Manage the finances",
+        "title": "Treasurer",
+        "tasks": [],
+        "userId": "3",
+        "committee": "1",
+        "sideBarButtons": [
+            "processToSheets",
+            "newApplications",
+            "newScholarshipApplications",
+            "contracts-received"
+        ],
+        "fbId": "3"
+    },
+    {
+        "responsibility": "Assists with the creation and installation of banners",
+        "committeeId": "11",
+        "sideBarButtons": [],
+        "tasks": [],
+        "prerequisite": "Experience in banner creation and distribution",
+        "committee": "11",
         "title": "Banners Assistant",
-        "committee": "Banners",
-        "responsibility": "Assist with the creation and distribution of banners",
-        "prerequisite": "Experience in banner creation and distribution",
-        "tasks": [],
-        "sideBarButtons": []
+        "userId": "30",
+        "privileges": [],
+        "fbId": "30"
     },
-    "31": {
+    {
+        "committee": "12",
+        "sideBarButtons": [],
+        "prerequisite": "Experience in advertising",
+        "tasks": [],
+        "privileges": [],
         "title": "General Advertising Signs Chair",
-        "committee": "Signs for General Advertising",
-        "responsibility": "Oversee all general advertising signs activities",
-        "prerequisite": "Experience in advertising",
-        "tasks": [],
-        "sideBarButtons": []
+        "userId": "31",
+        "responsibility": "Oversees all general advertising signs activities",
+        "committeeId": "12",
+        "fbId": "31"
     },
-    "32": {
+    {
+        "sideBarButtons": [],
+        "tasks": [],
         "title": "General Advertising Signs Distributor",
-        "committee": "Signs for General Advertising",
-        "responsibility": "Install 4-5 signs in Gig Harbor (Downtown, Pioneer Ave and Kimball Ave) then collect them after the tour – early August",
+        "privileges": [],
+        "userId": "32",
         "prerequisite": "Experience in advertising",
-        "tasks": [],
-        "sideBarButtons": []
+        "responsibility": "Install signs in Gig Harbor (Downtown, Pioneer Ave and Kimball Ave) then collect them after the tour – early August",
+        "committee": "12",
+        "committeeId": "12",
+        "fbId": "32"
     },
-    "33": {
+    {
+        "committeeId": "12",
+        "userId": "33",
+        "privileges": [],
         "title": "General Advertising Signs Distributor",
-        "committee": "Signs for General Advertising",
-        "responsibility": "Install 4-5 signs in Gig Harbor (Costco and Point Fosdick business corridors) then collect them after the tour – early August",
-        "prerequisite": "Experience in advertising",
         "tasks": [],
-        "sideBarButtons": []
+        "responsibility": "Install signs in Gig Harbor (Costco and Point Fosdick business corridors) then collect them after the tour – early August",
+        "committee": "12",
+        "prerequisite": "Experience in advertising",
+        "sideBarButtons": [],
+        "fbId": "33"
     },
-    "34": {
+    {
+        "prerequisite": "Experience in advertising",
+        "responsibility": "Install signs in Port Orchard/Olalla, then collect them after the tour – early August",
         "title": "General Advertising Signs Distributor",
-        "committee": "General Advertising",
-        "responsibility": "Install 4-5 signs in Port Orchard/Olalla (including near the Southworth ferry) then collect them after the tour – early August",
-        "prerequisite": "Experience in advertising",
+        "sideBarButtons": [],
+        "committeeId": "12",
+        "userId": "34",
+        "privileges": [],
+        "committee": "12",
         "tasks": [],
-        "sideBarButtons": []
+        "fbId": "34"
     },
-    "35": {
+    {
+        "prerequisite": "Experience in advertising",
+        "sideBarButtons": [],
+        "responsibility": "Install signs in selected areas in Tacoma then collect them after the tour – early August",
+        "userId": "35",
+        "committeeId": "12",
+        "privileges": [],
         "title": "General Advertising Signs Distributor",
-        "committee": "Signs for General Advertising",
-        "responsibility": "Install 4-5 signs in selected areas in Tacoma and Olympia then collect them after the tour – early August",
-        "prerequisite": "Experience in advertising",
         "tasks": [],
-        "sideBarButtons": []
+        "committee": "12",
+        "fbId": "35"
     },
-    "36": {
+    {
+        "privileges": [],
+        "prerequisite": "Experience in advertising",
+        "committeeId": "12",
+        "sideBarButtons": [],
+        "tasks": [],
+        "responsibility": "Install signs in selected areas in Seattle area, then collect them after the tour – early August",
+        "userId": "36",
         "title": "General Advertising Signs Distributor",
-        "committee": "Signs for General Advertising",
-        "responsibility": "Install 4-5 signs in selected areas in Seattle, Bellevue and Mercer Island then collect them after the tour – early August",
-        "prerequisite": "Experience in advertising",
-        "tasks": [],
-        "sideBarButtons": []
+        "committee": "12",
+        "fbId": "36"
     },
-    "37": {
+    {
+        "committee": "12",
+        "userId": "37",
+        "privileges": [],
+        "sideBarButtons": [],
         "title": "General Advertising Signs Distributor",
-        "committee": "General Advertising",
-        "responsibility": "Install 4-5 signs in selected areas in Bremerton (including on the ferry), Bainbridge Island, Poulsbo and Port Townsend then collect them after the tour – early August",
+        "responsibility": "Install signs in selected areas in Bremerton, Poulsbo and Bainbridge Island, then collect them after the tour – early August",
         "prerequisite": "Experience in advertising",
         "tasks": [],
-        "sideBarButtons": []
+        "committeeId": "12",
+        "fbId": "37"
     },
-    "38": {
-        "title": "Mailing List Coordinator",
-        "committee": "Mailing List/Mail Chimp",
+    {
+        "sideBarButtons": [],
         "responsibility": "Manage the mailing list and send out newsletters using Mail Chimp",
+        "tasks": [],
+        "committeeId": "13",
+        "title": "Mailing List Coordinator",
+        "userId": "38",
         "prerequisite": "Experience in mailing list management",
-        "tasks": [],
-        "sideBarButtons": []
+        "fbId": "38"
     },
-    "39": {
+    {
+        "userId": "39",
+        "committee": "14",
+        "tasks": [],
+        "responsibility": "Oversee development and implementation of additional advertisement and publicity",
         "title": "Advertising/Publicity Chair",
-        "committee": "Advertising/Publicity",
-        "responsibility": "Oversee special advertisement and publicity",
+        "committeeId": "14",
+        "sideBarButtons": [],
         "prerequisite": "Experience in advertising and publicity",
-        "tasks": [],
-        "sideBarButtons": []
+        "privileges": [],
+        "fbId": "39"
     },
-    "40": {
+    {
+        "title": "Secretary",
+        "privileges": [],
+        "prerequisite": "Strong organizational and communication skills",
+        "committeeId": "1",
+        "sideBarButtons": [
+            "processToSheets",
+            "newApplications",
+            "newScholarshipApplications",
+            "contracts-received"
+        ],
+        "tasks": [],
+        "committee": "1",
+        "userId": "4",
+        "responsibility": "Develop board meeting agendas, record and distribute meeting minutes",
+        "fbId": "4"
+    },
+    {
+        "tasks": [],
+        "sideBarButtons": [],
         "title": "Information Booth Chair",
-        "committee": "Information Booth",
+        "committeeId": "15",
         "responsibility": "Oversee the setup and operation of the information booth",
         "prerequisite": "Experience in event management",
-        "tasks": [],
-        "sideBarButtons": []
+        "userId": "40",
+        "fbId": "40"
     },
-    "41": {
-        "title": "Information Booth Assistant",
-        "committee": "Information Booth",
-        "responsibility": "Assist chair with booth set up and tear down",
-        "prerequisite": "Experience in event management",
-        "tasks": [],
-        "sideBarButtons": []
-    },
-    "42": {
+    {
+        "userId": "42",
+        "sideBarButtons": [],
+        "committeeId": "15",
+        "prerequisite": "Willingness to volunteer",
         "title": "Information Booth Volunteer",
-        "committee": "Information Booth",
-        "responsibility": "Man the booth Friday, July 18th",
+        "responsibility": "Man the booth for two half days on July 18, 19 or 20",
+        "tasks": [],
+        "fbId": "42"
+    },
+    {
+        "title": "Information Booth Volunteer",
+        "committeeId": "15",
+        "userId": "43",
         "prerequisite": "Willingness to volunteer",
         "tasks": [],
-        "sideBarButtons": []
+        "sideBarButtons": [],
+        "responsibility": "Man the booth for two half days on July 18, 19 or 20",
+        "fbId": "43"
     },
-    "43": {
-        "title": "Information Booth Volunteer",
-        "committee": "Information Booth",
-        "responsibility": "Man the booth Saturday, July 19th",
-        "prerequisite": "Willingness to volunteer",
+    {
+        "responsibility": "Responsible for all aspects of City of Gig Harbor Creative Endeavor Grant application",
         "tasks": [],
-        "sideBarButtons": []
-    },
-    "44": {
-        "title": "Information Booth Volunteer",
-        "committee": "Information Booth",
-        "responsibility": "Man the booth Sunday, July 20th",
-        "prerequisite": "Willingness to volunteer",
-        "tasks": [],
-        "sideBarButtons": []
-    },
-    "45": {
+        "sideBarButtons": [],
+        "privileges": [],
         "title": "Grants Chair",
-        "committee": "Grants",
-        "responsibility": "Applying for and monitoring City of Gig Harbor Creative Endeavor Grant",
+        "committee": "16",
+        "userId": "45",
+        "committeeId": "16",
+        "fbId": "45"
+    },
+    {
+        "committeeId": "14",
+        "committee": "1",
         "tasks": [],
-        "sideBarButtons": []
+        "responsibility": "Assist with development and implementation of advertising ideas",
+        "privileges": [],
+        "userId": "46",
+        "prerequisite": "Willingness to assist with various tasks",
+        "sideBarButtons": [],
+        "title": "Advertising/Publicity Assistant",
+        "fbId": "46"
+    },
+    {
+        "title": "Brochure and Poster Distribution Assistant",
+        "committeeId": "8",
+        "tasks": [],
+        "responsibility": "Distribute brochures and posters to selected areas in Tacoma",
+        "privileges": [],
+        "userId": "47",
+        "sideBarButtons": [],
+        "fbId": "47"
+    },
+    {
+        "tasks": [],
+        "committeeId": "1",
+        "sideBarButtons": [
+            "processToSheets",
+            "newApplications",
+            "newScholarshipApplications",
+            "contracts-received"
+        ],
+        "committee": "1",
+        "title": "Member-at-large",
+        "responsibility": "Attend all board meetings as an advisor",
+        "userId": "5",
+        "prerequisite": "Willingness to assist with various tasks",
+        "privileges": [],
+        "fbId": "5"
+    },
+    {
+        "tasks": [],
+        "committeeId": "1",
+        "sideBarButtons": [
+            "processToSheets",
+            "newApplications",
+            "newScholarshipApplications",
+            "contracts-received"
+        ],
+        "committee": "1",
+        "title": "Member-at-large",
+        "responsibility": "Attend all board meetings as an advisor",
+        "userId": "48",
+        "prerequisite": "Willingness to assist with various tasks",
+        "privileges": [],
+        "fbId": "48"
+    },
+    {
+        "responsibility": "Maintain and update website",
+        "privileges": [
+            "editContract",
+            "editTimeline"
+        ],
+        "userId": "6",
+        "committeeId": "2",
+        "tasks": [],
+        "sideBarButtons": [],
+        "committee": "2",
+        "title": "Web Design/Maintenance Chair",
+        "prerequisite": "Experience in web design and maintenance",
+        "fbId": "6"
+    },
+    {
+        "title": "Social Media Chair",
+        "prerequisite": "Needs familiarity with Canva or the ability to learn Canva to schedule posts and arrange advertising; Provides training and specific guidance to committee members",
+        "sideBarButtons": [],
+        "committee": "3",
+        "committeeId": "3",
+        "userId": "7",
+        "tasks": [],
+        "responsibility": "Manage social media campaigns and supervise Canva media production",
+        "privileges": [],
+        "fbId": "7"
+    },
+    {
+        "privileges": [],
+        "responsibility": "Design posts using Canva",
+        "tasks": [],
+        "committee": "3",
+        "sideBarButtons": [],
+        "prerequisite": "Experience with Canva and social media design",
+        "title": "Social Media Assistant",
+        "userId": "8",
+        "committeeId": "3",
+        "fbId": "8"
+    },
+    {
+        "sideBarButtons": [],
+        "privileges": [],
+        "committeeId": "3",
+        "prerequisite": "Experience with Canva and social media design",
+        "committee": "3",
+        "title": "Social Media Assistant",
+        "responsibility": "Design posts using Canva",
+        "tasks": [],
+        "userId": "9",
+        "fbId": "9"
     }
-}
+]
+
+
+
 // add data to firebase
-Object.entries(data).forEach(([key, item], index) => {
-    CRUD.update('committee-roles', key, item)
+data.forEach(item => {
+    CRUD.update('committee-roles', item.fbId, item, {
+        overwrite: true
+    })
 })
+
+
+/*
+/// READ all
+
+
+  CRUD.readAll('committee-roles')
+*/ 

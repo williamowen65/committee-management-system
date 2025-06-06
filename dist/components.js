@@ -228,6 +228,7 @@ window.initializePaypalButtons = function () {
                 // send email to the board members
 
                 (0,_outbound_emails_newContractSubmission_js__WEBPACK_IMPORTED_MODULE_2__.sendNewContractSubmissionBoardEmail)(user, transaction, contracts);
+                claimRolesForMember(userId);
                 window.addEventListener("message", function (event) {
                   if (event.data.dispatch !== 'gmailController-response') return;
                   if (event.data.error) {
@@ -268,6 +269,65 @@ window.initializePaypalButtons = function () {
   }).render('.payPalContainer');
 };
 
+// Note move this method to a more appropriate file
+//this is for testing
+function claimRolesForMember(_x) {
+  return _claimRolesForMember.apply(this, arguments);
+}
+function _claimRolesForMember() {
+  _claimRolesForMember = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(userId) {
+    var user, allUsers, membersToUpdate;
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.next = 2;
+          return CRUD.read('ghost-contracts', userId);
+        case 2:
+          user = _context4.sent;
+          _context4.next = 5;
+          return CRUD.readAll('ghost-contracts');
+        case 5:
+          allUsers = _context4.sent;
+          // find the users that have the role of member
+          membersToUpdate = Object.values(allUsers).filter(function (_user) {
+            if (!_user.committeeRoleId) return null;
+            if (_user.userId === user.userId) return null;
+            return _user.committeeRoleId.some(function (roleId) {
+              return user.committeeRoleId.includes(roleId);
+            });
+          }).filter(Boolean); // update the users
+          membersToUpdate.forEach(/*#__PURE__*/function () {
+            var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(member) {
+              var newRoles;
+              return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+                while (1) switch (_context3.prev = _context3.next) {
+                  case 0:
+                    newRoles = member.committeeRoleId.filter(function (roleId) {
+                      return !user.committeeRoleId.includes(roleId);
+                    });
+                    _context3.next = 3;
+                    return CRUD.update('ghost-contracts', member.userId, {
+                      committeeRoleId: newRoles
+                    });
+                  case 3:
+                  case "end":
+                    return _context3.stop();
+                }
+              }, _callee3);
+            }));
+            return function (_x2) {
+              return _ref.apply(this, arguments);
+            };
+          }());
+        case 8:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4);
+  }));
+  return _claimRolesForMember.apply(this, arguments);
+}
+
 /***/ }),
 
 /***/ "./app/components/application/index.js":
@@ -291,7 +351,7 @@ var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js
 
   // events must be inline
 }, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '', {
-  attributes: ['firstName', 'lastName', 'medium', 'createdAt', 'approved', 'hasBeenReviewed', 'email', 'phone', 'website', 'studioAddress', 'mailingAddress', 'isWithinBoundaries', 'randomId', 'waStateBusinessLicenseUbiNumber', 'studioSharingResponse', 'artistMentor', 'howDidYouHearAboutUs', 'digitalImage1', 'digitalImage2', 'digitalImage3', 'digitalImage4', 'artistStatement', 'websiteSocialMedia', 'fbId']
+  attributes: ['firstName', 'lastName', 'medium', 'createdAt', 'approved', 'hasBeenReviewed', 'email', 'phone', 'website', 'studioAddress', 'mailingAddress', 'isWithinBoundaries', 'randomId', 'waStateBusinessLicenseUbiNumber', 'studioSharingResponse', 'artistMentor', 'howDidYouHearAboutUs', 'digitalImage1', 'digitalImage2', 'digitalImage3', 'digitalImage4', 'artistStatement', 'websiteSocialMedia', 'fbId', 'status']
 });
 document.addEventListener('DOMContentLoaded', function () {
   window.updateReview = function (event, reviewAnswer) {
@@ -348,7 +408,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('contract-received', function () {}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '', {
+(0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_1__.createCustomElement)('contract-received', function () {
+  var _this = this;
+  setTimeout(function () {
+    // get all image elements
+    var images = Array.from(_this.querySelectorAll('img'));
+    console.log("images", images);
+    images.forEach(function (image) {
+      image.addEventListener('load', function () {
+        var filePath = this.src;
+        var regex = /\/o\/([^?]+)/;
+        var fileName;
+        var match = filePath.match(regex);
+        if (match) {
+          fileName = match[1];
+        }
+        var fileNameDiv = document.createElement('span');
+        fileNameDiv.classList.add('file-name');
+        fileNameDiv.innerText = fileName;
+        var target = this.closest('div').querySelector('b');
+        target.insertAdjacentHTML('beforeend', '<br>');
+        target.insertAdjacentElement('beforeend', fileNameDiv);
+      });
+    });
+  }, 0);
+}, _index_html_txt__WEBPACK_IMPORTED_MODULE_0__["default"], '', {
   attributes: ['firstName', 'lastName', 'membershipPaid', 'scholarshipApplied', 'studioSharingAnswer', 'artisticDemonstration', 'artistStatement', 'artistTagline', 'businessEmail', 'facebook', 'instagram', 'mailingAddress', 'membershipPaid', 'personalEmail', 'phone', 'studioAddress', 'website', 'committeeRoles', 'artistInStudioImage', 'brochureImage', 'digitalImage1', 'digitalImage2', 'digitalImage3', 'signature', 'medium']
 });
 
@@ -386,18 +470,55 @@ function setUXEventListeners() {
   });
 
   // listener on reset password
+  // this.querySelector('.reset-password').addEventListener('click', (e) => {
+  //     e.preventDefault();
+  //     const email = prompt('Enter your email address')
+  //     if (email) {
+  //         firebase.sendPasswordResetEmail(firebase.auth, email).then(() => {
+  //             alert('Password reset email sent')
+  //         }).catch(() => {
+  //             alert('There was an error sending the password reset email')
+  //         })
+  //     }
+  // })
+
+  // JavaScript
   this.querySelector('.reset-password').addEventListener('click', function (e) {
     e.preventDefault();
-    var email = prompt('Enter your email address');
+    var modal = document.getElementById('reset-password-modal');
+    modal.style.display = 'block';
+  });
+  document.querySelector('.close-modal').addEventListener('click', function () {
+    document.getElementById('reset-password-modal').style.display = 'none';
+  });
+
+  // Handle reset password
+  document.getElementById('resetSubmit').addEventListener('click', function () {
+    var email = document.getElementById('resetEmail').value;
+    console.log({
+      email: email
+    });
     if (email) {
       firebase.sendPasswordResetEmail(firebase.auth, email).then(function () {
-        alert('Password reset email sent');
+        var feedback = document.getElementById('reset-password-modal-feedback');
+        console.log({
+          feedback: feedback
+        });
+
+        // Update test to show success message
+        feedback.innerHTML = "\n                    <div class=\"alert alert-success\" role=\"alert\">\n                        Password reset email sent\n                    </div>\n                    ";
+
+        // Hide the modal after 3 seconds
+        setTimeout(function () {
+          document.getElementById('reset-password-modal').style.display = 'none';
+          // remove the success message after 3 seconds
+          document.getElementById('reset-password-modal-feedback').innerHTML = '';
+        }, 3000);
       })["catch"](function () {
         alert('There was an error sending the password reset email');
       });
     }
   });
-
   // handle submit event for login form
   this.querySelector('form#login').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -547,6 +668,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   moveLabel: () => (/* binding */ moveLabel)
+/* harmony export */ });
 /* harmony import */ var _types_text_input_html_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types/text-input.html.txt */ "./app/components/input/types/text-input.html.txt");
 /* harmony import */ var _types_file_input_html_txt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types/file-input.html.txt */ "./app/components/input/types/file-input.html.txt");
 /* harmony import */ var _types_textarea_input_html_txt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./types/textarea-input.html.txt */ "./app/components/input/types/textarea-input.html.txt");
@@ -564,7 +688,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 var logIf = __webpack_require__(/*! ../../../utils/logIf.js */ "./utils/logIf.js");
 var inputAttributes = ['waStateBusinessLicenseUbiNumber', 'subcaption', 'checked', 'placeholder', 'width', 'disabled',
 // Why is this not working on the textarea?
-'alias', 'labelClass', 'id', 'type', 'value', 'moveLabel', 'className', 'fieldName', 'required', 'multiple', 'accept', 'description'];
+'alias', 'labelClass', 'id', 'type', 'value', 'moveLabel', 'className', 'fieldName', 'required', 'multiple', 'accept', 'description', 'noTransform', 'fileName', 'instantUpload'];
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_3__.createCustomElement)('input-component', function () {
   logIf.component && console.log('input-component loaded');
   // set slot
@@ -626,41 +750,61 @@ var inputAttributes = ['waStateBusinessLicenseUbiNumber', 'subcaption', 'checked
 }, _types_textarea_input_html_txt__WEBPACK_IMPORTED_MODULE_2__["default"], '', {
   attributes: inputAttributes
 });
+
+/*
+important note about using file-input-component
+- When uploading the file, there may be an unexpected error needing to be handled
+
+When catching error, use the query the html in the component to display an error.
+
+*/
+
 (0,_utils_custom_element__WEBPACK_IMPORTED_MODULE_3__.createCustomElement)('file-input-component', function () {
   var _this2 = this;
   var imagesContainer = this.querySelector('.images-container');
   var parentContainer = imagesContainer.closest('.file-input-component');
   var labelContainer = parentContainer.querySelector('.label-container');
+  var isInstantUpload = this.getAttribute('instantUpload') == 'true';
+  var component = this;
   this.setImage = function (src, file) {
-    // empty out the images container
-    var inputLabelText = imagesContainer.querySelector('.ifEmpty').outerHTML;
-    imagesContainer.innerHTML = inputLabelText;
     var fileNameEl = parentContainer.querySelector('.file-name');
     if (fileNameEl) {
       fileNameEl.remove();
     }
     var img = document.createElement('img');
-    var deleteButton = document.createElement('button');
+    var rotateImageButton = document.createElement('button');
     var alertButton = document.createElement('i');
     alertButton.classList.add('fas', 'fa-exclamation-triangle', 'alert-icon');
-    deleteButton.textContent = 'X';
-    deleteButton.classList.add('delete-button');
-    deleteButton.addEventListener('click', function (e) {
+    rotateImageButton.innerHTML = "<i class=\"fa-solid fa-rotate\"></i>";
+    rotateImageButton.classList.add('rotate-image-button');
+    rotateImageButton.addEventListener('click', function (e) {
       img.remove();
-      deleteButton.remove();
+      // rotateImageButton.remove()
       imagesContainer.classList.remove('has-images');
       parentContainer.querySelector('.file-name').remove();
       parentContainer.querySelectorAll('.error').forEach(function (error) {
-        return error.remove();
+        error.classList.remove('error');
+        error.innerHTML = '';
       });
       // remove button from file input
       var fileInput = parentContainer.querySelector('input');
       fileInput.value = '';
       // empty .img-container
-      imagesContainer.innerHTML = inputLabelText;
 
       // guarantee that the file input is required
       fileInput.setAttribute('required', 'required');
+
+      // remove the error class
+      parentContainer.classList.remove('hasError');
+
+      // remove the exclamation icon
+      var exclamations = parentContainer.querySelectorAll('.alert-icon');
+      exclamations.forEach(function (exclamation) {
+        return exclamation.remove();
+      });
+
+      // open the file input
+      fileInput.click();
 
       // prevent bubbling event on delete image button
       e.stopPropagation();
@@ -669,7 +813,7 @@ var inputAttributes = ['waStateBusinessLicenseUbiNumber', 'subcaption', 'checked
     var imgContainer = document.createElement('div');
     imgContainer.classList.add('img-container');
     imgContainer.appendChild(img);
-    labelContainer.appendChild(deleteButton);
+    labelContainer.appendChild(rotateImageButton);
     labelContainer.appendChild(alertButton);
     imagesContainer.appendChild(imgContainer);
     imagesContainer.classList.add('has-images');
@@ -698,11 +842,14 @@ var inputAttributes = ['waStateBusinessLicenseUbiNumber', 'subcaption', 'checked
     fileName.textContent = file.name;
     fileName.classList.add('file-name');
     parentContainer.appendChild(fileName);
+
+    // if there are no errors, display feedback
+
     return this;
   };
   this.querySelector('input').addEventListener('click', function (e) {
     // prevent bubbling event on delete image button
-    if (e.target.classList.contains('delete-button')) {
+    if (e.target.classList.contains('rotate-image-button')) {
       e.stopPropagation();
       e.stopImmediatePropagation();
     }
@@ -711,25 +858,74 @@ var inputAttributes = ['waStateBusinessLicenseUbiNumber', 'subcaption', 'checked
   // Set listeners to display images added to file input
   this.querySelector('input').addEventListener('change', /*#__PURE__*/function () {
     var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
-      var fileInput, fileInputUI;
+      var savedImageFeedback, errorContainer, exclamations, deleteButtons, fileNameEl, imagesContainer, fileInput, fileInputUI;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
+            // clear saved-image-feedback
+            savedImageFeedback = component.querySelector('.saved-image-feedback');
+            console.log("Input change", {
+              savedImageFeedback: savedImageFeedback
+            });
+            if (savedImageFeedback) {
+              savedImageFeedback.innerHTML = '';
+            }
+
+            // clear any errors
+            errorContainer = document.querySelector("#".concat(_this2.getAttribute('fieldName'), "-error"));
+            if (errorContainer) {
+              errorContainer.innerHTML = '';
+              // remove error class 
+              errorContainer.classList.remove('error');
+            }
+            exclamations = parentContainer.querySelectorAll('.alert-icon');
+            exclamations.forEach(function (exclamation) {
+              return exclamation.remove();
+            });
+
+            // remove the clear button
+            deleteButtons = parentContainer.querySelectorAll('.rotate-image-button');
+            deleteButtons.forEach(function (button) {
+              return button.remove();
+            });
+
+            // clear the name of the file displayed
+            fileNameEl = parentContainer.querySelector('.file-name');
+            if (fileNameEl) {
+              parentContainer.querySelector('.file-name').remove();
+            }
+
+            // clear any previous images
+            imagesContainer = _this2.querySelector('.img-container');
+            if (imagesContainer) {
+              imagesContainer.remove();
+            }
+
+            // let uniqueFileName = this.getAttribute('filename')
+            // const userEmail = encodeURIComponent(firebase.auth.currentUser.email)
+            // // evaluate fileNameTemplate
+            // if (uniqueFileName) { 
+            //   uniqueFileName = uniqueFileName.replace('{{userName}}', userEmail)
+            // }
+            // console.log({ uniqueFileName })
+
             // get the file input
             fileInput = e.target; // Disable the input while processing
             fileInput.disabled = true;
             // get the file input UI element
             fileInputUI = fileInput.closest('.file-input-component');
             fileInputUI.classList.add('loading');
-            _context.next = 6;
-            return new Promise(function (resolve) {
-              return setTimeout(resolve, 5000);
-            });
-          case 6:
-            Array.from(e.target.files).forEach(function (file) {
+
+            // Read the files
+            Array.from(e.target.files).forEach(function (oldFile) {
+              //  NOTE: The file name change doesn't really take effect here.... Only when saving...
+              oldFile.nameTemplate = _this2.getAttribute('filename');
+
+              // Create a new file with the updated name
+
               var reader = new FileReader();
               reader.onloadend = function () {
-                _this2.setImage(reader.result, file);
+                _this2.setImage(reader.result, oldFile);
                 _this2.querySelector('.file-input-component').classList.remove('hasError');
 
                 // Display possible errors with this file
@@ -738,27 +934,28 @@ var inputAttributes = ['waStateBusinessLicenseUbiNumber', 'subcaption', 'checked
                 // One image must be a square
 
                 logIf.component && console.log('file size check ', {
-                  fileSize: file.size,
-                  fileName: file.name,
-                  fileType: file.type
+                  fileSize: oldFile.size,
+                  fileName: oldFile.name,
+                  fileType: oldFile.type
                 });
 
                 // Check if the file is a thumbnail image by checking the size (size must be greater than 20kB )
-                if (file.size < 400000) {
-                  var error = document.createElement('p');
-                  error.textContent = 'This image is too small. Please upload an image larger than 400 KB';
-                  error.classList.add('error');
-                  parentContainer.appendChild(error);
-                  _this2.querySelector('.file-input-component').classList.add('hasError');
+                if (oldFile.size < 400000) {
+                  errorContainer.textContent = 'This image is too small. Please upload an image larger than 400 KB';
+                  errorContainer.classList.add('error');
+                  _this2.querySelector('.file-input-component').classList.add(
+                  // set error class on container
+                  'hasError');
                 }
                 // make sure the image isn't too big
-                if (file.size > 5000000) {
+                if (oldFile.size > 5000000) {
                   // 5 MB
-                  var _error = document.createElement('p');
-                  _error.textContent = 'File is too large. Please upload an image less than 5 mb.';
-                  _error.classList.add('error');
-                  parentContainer.appendChild(_error);
-                  _this2.querySelector('.file-input-component').setAttribute('hasError', true);
+
+                  errorContainer.textContent = 'File is too large. Please upload an image less than 5 mb.';
+                  errorContainer.classList.add('error');
+                  _this2.querySelector('.file-input-component').classList.add(
+                  // set error class on container
+                  'hasError');
                 }
 
                 // Get attribute "square" from component
@@ -780,10 +977,11 @@ var inputAttributes = ['waStateBusinessLicenseUbiNumber', 'subcaption', 'checked
                       return value1 > value2 - tenPercent && value1 < value2 + tenPercent;
                     };
                     if (!isWithinRange(width, height, width)) {
-                      var _error2 = document.createElement('p');
-                      _error2.textContent = 'Image is not square. Please upload a square image.';
-                      _error2.classList.add('error');
-                      parentContainer.appendChild(_error2);
+                      errorContainer.textContent = 'Image is not square. Please upload a square image.';
+                      errorContainer.classList.add('error');
+                      _this2.querySelector('.file-input-component').classList.add(
+                      // set error class on container
+                      'hasError');
                     }
                   };
                 }
@@ -792,10 +990,30 @@ var inputAttributes = ['waStateBusinessLicenseUbiNumber', 'subcaption', 'checked
                 fileInput.disabled = false;
                 // get the file input UI element
                 fileInputUI.classList.remove('loading');
+                if (isInstantUpload) {
+                  setTimeout(function () {
+                    // check for error
+                    if (_this2.querySelector('.file-input-component.hasError')) {
+                      return;
+                    }
+
+                    // Save individual file to DB My contract
+                    var file = oldFile;
+                    var newFileWithTemplatedName = updateFileNameToTemplate(file);
+                    console.log("Uploading file", {
+                      oldFile: file,
+                      newFileWithTemplatedName: newFileWithTemplatedName
+                    });
+                    handleIndividualImageUpload(newFileWithTemplatedName, _this2).then(function (url) {
+                      var fieldName = _this2.getAttribute('fieldName');
+                      saveIndividualImageToContract(url, fieldName, newFileWithTemplatedName.name);
+                    });
+                  }, 1);
+                }
               };
-              reader.readAsDataURL(file);
+              reader.readAsDataURL(oldFile);
             });
-          case 7:
+          case 18:
           case "end":
             return _context.stop();
         }
@@ -808,8 +1026,12 @@ var inputAttributes = ['waStateBusinessLicenseUbiNumber', 'subcaption', 'checked
 }, _types_file_input_html_txt__WEBPACK_IMPORTED_MODULE_1__["default"], '', {
   attributes: inputAttributes
 });
-function moveLabel() {
-  this.querySelectorAll('input, textarea').forEach(function (el) {
+function moveLabel(element) {
+  var target = this;
+  if (element) {
+    target = element;
+  }
+  target.querySelectorAll('input, textarea').forEach(function (el) {
     el.addEventListener('focus', function (e) {
       var target = e.target;
       target.closest('label').classList.add('moveLabel');
@@ -818,7 +1040,9 @@ function moveLabel() {
     el.addEventListener('blur', function (e) {
       var target = e.target;
       if (target.value === '') {
-        target.closest('label').classList.remove('moveLabel');
+        if (noTransform !== 'true') {
+          target.closest('label').classList.remove('moveLabel');
+        }
         target.closest('label').querySelector('[part]').setAttribute('part', 'labelText');
       }
     });
@@ -914,6 +1138,12 @@ document.addEventListener('DOMContentLoaded', function () {
       hasBeenReviewed: true,
       scholarshipGranted: reviewAnswer
     }).then(function () {
+      return CRUD.update('ghost-contracts', fbId, {
+        artistDetails: {
+          scholarshipApplied: reviewAnswer
+        }
+      });
+    }).then(function () {
       // update the button text
       button.innerHTML = 'Review Submitted';
       setTimeout(function () {
@@ -987,9 +1217,10 @@ function _getEmailAddresses() {
           committees = options.committees, roles = options.roles;
           _context.next = 4;
           return CRUD.readAll('committee-roles').then(function (roles) {
-            return roles.sort(function (a, b) {
-              return Number(a.fbId) - Number(b.fbId);
-            });
+            return roles.reduce(function (acc, next) {
+              acc[next.fbId] = next;
+              return acc;
+            }, {});
           });
         case 4:
           committeeRoles = _context.sent;
@@ -1192,7 +1423,12 @@ function _sendNewContractSubmissionBoardEmail() {
           contracts = _context.sent;
           email = user.artistDetails.personalEmail || user.artistDetails.businessEmail || firebase.auth.currentUser.email;
           _context.next = 6;
-          return CRUD.readAll('committee-roles');
+          return CRUD.readAll('committee-roles').then(function (roles) {
+            return roles.reduce(function (acc, next) {
+              acc[next.fbId] = next;
+              return acc;
+            }, {});
+          });
         case 6:
           roles = _context.sent;
           console.log("sendNewContractSubmissionBoardEmail", {
@@ -1697,7 +1933,11 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.contract-received {
 }
 .contract-received .level-1 {
   padding-left: 50px;
-}`, "",{"version":3,"sources":["webpack://./app/components/contract-received/style.scss"],"names":[],"mappings":"AAAA;EACI,kBAAA;AACJ;AACI;EACI,aAAA;EACA,qBAAA;EACA,8BAAA;EACA,aAAA;EACA,gBAAA;EACA,iBAAA;EACA,YAAA;EACA,MAAA;AACR;AAAQ;EACI,iBAAA;AAEZ;AAGI;EACI,aAAA;EACA,aAAA;AADR;AAEQ;EACI,mBAAA;EACA,qBAAA;AAAZ;AAGI;EACI,uBAAA;AADR;AAEQ;EACI,cAAA;AAAZ;AAII;EACI,kBAAA;AAFR","sourceRoot":""}]);
+}
+
+.file-name {
+  text-align: center;
+}`, "",{"version":3,"sources":["webpack://./app/components/contract-received/style.scss"],"names":[],"mappings":"AAAA;EACI,kBAAA;AACJ;AACI;EACI,aAAA;EACA,qBAAA;EACA,8BAAA;EACA,aAAA;EACA,gBAAA;EACA,iBAAA;EACA,YAAA;EACA,MAAA;AACR;AAAQ;EACI,iBAAA;AAEZ;AAGI;EACI,aAAA;EACA,aAAA;AADR;AAEQ;EACI,mBAAA;EACA,qBAAA;AAAZ;AAGI;EACI,uBAAA;AADR;AAEQ;EACI,cAAA;AAAZ;AAII;EACI,kBAAA;AAFR;;AAMA;EAII,kBAAA;AANJ","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2213,7 +2453,7 @@ label .images-container .img-container {
   overflow: hidden !important;
   position: relative;
 }
-label .images-container .img-container button.delete-button {
+label .images-container .img-container button.rotate-image-button {
   position: absolute;
   left: 0;
 }
@@ -2251,7 +2491,7 @@ label .images-container.file-input-display.has-images .ifEmpty {
   overflow: visible;
   margin: auto;
 }
-.file-input-component .delete-button {
+.file-input-component .rotate-image-button {
   position: absolute;
   top: 0;
   right: 0;
@@ -2269,8 +2509,19 @@ label .images-container.file-input-display.has-images .ifEmpty {
   border: 1px solid black;
   color: red;
   font-weight: bold;
+  margin-top: 5px;
 }
 
+.file-input-component .saved-image-feedback:not(:empty) {
+  position: absolute;
+  z-index: 100;
+  background: #82a70d;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  right: 48px;
+  top: 3px;
+}
 .file-input-component .alert-icon {
   display: none;
 }
@@ -2289,10 +2540,11 @@ label .images-container.file-input-display.has-images .ifEmpty {
 }
 .file-input-component.hasError .alert-icon {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: -25px;
+  left: -34px;
   font-size: 60px;
   color: #ff0000;
+  display: block;
 }
 
 .password-toggle {
@@ -2302,7 +2554,7 @@ label .images-container.file-input-display.has-images .ifEmpty {
   right: 10px;
   scale: 0.8;
   cursor: pointer;
-}`, "",{"version":3,"sources":["webpack://./app/components/input/style.scss"],"names":[],"mappings":"AAAA;EASI,kBAAA;EACA,kBAAA;EACA,eAAA;EACA,qBAAA;EACA,WAAA;AAPJ;AAFI;EACI,iBAAA;AAIR;AAMI;;EAEI,WAAA;AAJR;AAOI;EACI,kBAAA;EACA,UAAA;EACA,oBAAA;EACA,+BAAA;EACA,iBAAA;EACA,YAAA;AALR;AASQ;EACI,+BAAA;EACA,kBAAA;EACA,iBAAA;AAPZ;AAWI;EACI,kBAAA;AATR;AAYQ;EACI,WAAA;EACA,kBAAA;EACA,SAAA;EACA,qBAAA;EACA,QAAA;EACA,UAAA;EACA,eAAA;EACA,eAAA;AAVZ;AAcI;EACI,kBAAA;EACA,mBAAA;EACA,eAAA;AAZR;AAeI;EACI,kBAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;AAbR;AAeQ;EACI,UAAA;EACA,mBAAA;EACA,0BAAA;EACA,eAAA;AAbZ;AAiBI;;EAGI,kBAAA;EACA,aAAA;EACA,sBAAA;EACA,kBAAA;AAhBR;AAmBI;EACI,gBAAA;EACA,iBAAA;AAjBR;AAoBI;EACI,aAAA;AAlBR;AAqBI;EACI,cAAA;AAnBR;AAuBQ;EACI,cAAA;AArBZ;AAwBQ;EACI,aAAA;AAtBZ;AA0BI;EACI,iBAAA;EACA,iBAAA;EACA,UAAA;EACA,iBAAA;AAxBR;AA2BI;EACI,aAAA;EACA,uBAAA;EACA,eAAA;EACA,kBAAA;AAzBR;AAiCQ;EACI,WAAA;EACA,YAAA;EACA,2BAAA;EACA,mBAAA;AA/BZ;AAoCQ;EAEI,2BAAA;EACA,kBAAA;AAnCZ;AAqCY;EACI,kBAAA;EACA,OAAA;AAnChB;AAuCQ;EACI,YAAA;EACA,aAAA;EAEA,gBAAA;EACA,eAAA;AAtCZ;AAwCY;EACI,uBAAA;AAtChB;AAyCY;EACI,eAAA;EACA,kBAAA;EACA,YAAA;AAvChB;AA2CY;EACI,YAAA;AAzChB;AA6CgB;EACI,aAAA;AA3CpB;;AAoDA;EAKI,YAAA;AArDJ;AAiDI;EACI,uBAAA;AA/CR;AAoDI;EACI,kBAAA;EACA,YAAA;EACA,aAAA;EACA,iBAAA;EACA,YAAA;AAlDR;AAqDI;EACI,kBAAA;EACA,MAAA;EACA,QAAA;EACA,qBAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;EACA,eAAA;AAnDR;AAsDI;;EAGI,kBAAA;AArDR;AAwDI;EACI,uBAAA;EACA,UAAA;EACA,iBAAA;AAtDR;;AA+DI;EACI,aAAA;AA5DR;AA+DI;EACI,aAAA;AA7DR;AAiEQ;EACI,cAAA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,gCAAA;AA/DZ;AAkEQ;EACI,aAAA;AAhEZ;AAqEQ;EACI,kBAAA;EACA,SAAA;EACA,UAAA;EACA,eAAA;EACA,cAAA;AAnEZ;;AA0EA;EACI,kBAAA;EACA,SAAA;EACA,kBAAA;EACA,WAAA;EACA,UAAA;EACA,eAAA;AAvEJ","sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./app/components/input/style.scss"],"names":[],"mappings":"AAAA;EASI,kBAAA;EACA,kBAAA;EACA,eAAA;EACA,qBAAA;EACA,WAAA;AAPJ;AAFI;EACI,iBAAA;AAIR;AAMI;;EAEI,WAAA;AAJR;AAOI;EACI,kBAAA;EACA,UAAA;EACA,oBAAA;EACA,+BAAA;EACA,iBAAA;EACA,YAAA;AALR;AASQ;EACI,+BAAA;EACA,kBAAA;EACA,iBAAA;AAPZ;AAWI;EACI,kBAAA;AATR;AAYQ;EACI,WAAA;EACA,kBAAA;EACA,SAAA;EACA,qBAAA;EACA,QAAA;EACA,UAAA;EACA,eAAA;EACA,eAAA;AAVZ;AAcI;EACI,kBAAA;EACA,mBAAA;EACA,eAAA;AAZR;AAeI;EACI,kBAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;AAbR;AAeQ;EACI,UAAA;EACA,mBAAA;EACA,0BAAA;EACA,eAAA;AAbZ;AAiBI;;EAGI,kBAAA;EACA,aAAA;EACA,sBAAA;EACA,kBAAA;AAhBR;AAmBI;EACI,gBAAA;EACA,iBAAA;AAjBR;AAoBI;EACI,aAAA;AAlBR;AAqBI;EACI,cAAA;AAnBR;AAuBQ;EACI,cAAA;AArBZ;AAwBQ;EACI,aAAA;AAtBZ;AA0BI;EACI,iBAAA;EACA,iBAAA;EACA,UAAA;EACA,iBAAA;AAxBR;AA2BI;EACI,aAAA;EACA,uBAAA;EACA,eAAA;EACA,kBAAA;AAzBR;AAiCQ;EACI,WAAA;EACA,YAAA;EACA,2BAAA;EACA,mBAAA;AA/BZ;AAoCQ;EAEI,2BAAA;EACA,kBAAA;AAnCZ;AAqCY;EACI,kBAAA;EACA,OAAA;AAnChB;AAuCQ;EACI,YAAA;EACA,aAAA;EAEA,gBAAA;EACA,eAAA;AAtCZ;AAwCY;EACI,uBAAA;AAtChB;AAyCY;EACI,eAAA;EACA,kBAAA;EACA,YAAA;AAvChB;AA2CY;EACI,YAAA;AAzChB;AA6CgB;EACI,aAAA;AA3CpB;;AAoDA;EAKI,YAAA;AArDJ;AAiDI;EACI,uBAAA;AA/CR;AAoDI;EACI,kBAAA;EACA,YAAA;EACA,aAAA;EACA,iBAAA;EACA,YAAA;AAlDR;AAqDI;EACI,kBAAA;EACA,MAAA;EACA,QAAA;EACA,qBAAA;EACA,YAAA;EACA,YAAA;EACA,YAAA;EACA,eAAA;AAnDR;AAsDI;;EAGI,kBAAA;AArDR;AAwDI;EACI,uBAAA;EACA,UAAA;EACA,iBAAA;EACA,eAAA;AAtDR;;AA+DI;EACI,kBAAA;EACA,YAAA;EACA,mBAAA;EACA,YAAA;EACA,kBAAA;EACA,YAAA;EACA,WAAA;EACA,QAAA;AA5DR;AA+DI;EACI,aAAA;AA7DR;AAiEI;EACI,aAAA;AA/DR;AAmEQ;EACI,cAAA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,gCAAA;AAjEZ;AAoEQ;EACI,aAAA;AAlEZ;AAuEQ;EACI,kBAAA;EACA,UAAA;EACA,WAAA;EACA,eAAA;EACA,cAAA;EACA,cAAA;AArEZ;;AA4EA;EACI,kBAAA;EACA,SAAA;EACA,kBAAA;EACA,WAAA;EACA,UAAA;EACA,eAAA;AAzEJ","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2533,7 +2785,59 @@ a {
 }
 a:hover {
   color: darkblue;
-}`, "",{"version":3,"sources":["webpack://./app/styles.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,WAAA;EACA,8BAAA;EACA,eAAA;EACA,mBAAA;AACJ;AAMA;EACI,aAAA;EACA,sBAAA;AAJJ;AAKI;EACI,kBAAA;AAHR;;AAMA;EACI,SAAA;EACA,WAAA;EACA,gBAAA;EACA,6DAAA;EACA,cAAA;AAHJ;;AAMA;;;EAGI,sBAAA;AAHJ;;AAWA;EACI,sBAAA;EACA,wCAAA;AARJ;;AAWA;EACG,iBAAA;EACC,cAAA;AARJ;;AAWA;EACI,aAAA;EACA,sBAAA;AARJ;AASI;EACI,kBAAA;EACA,aAAA;EACA,qBAAA;EACA,sBAAA;AAPR;AAQQ;EACI,sBAAA;EACJ,kBAAA;EACC,gBAAA;AANT;AAQQ;EACI,gBAAA;AANZ;AAQQ;EACI,WAAA;AANZ;AAWI;EACI,iBAAA;AATR;AAWI;EACI,iBAAA;AATR;AAWI;EACI,kBAAA;AATR;;AAaA;EAEI,WAAA;AAXJ;;AAeA;EACI,yBAAA;EACA,YAAA;EACA,YAAA;EACA,kBAAA;EACA,iBAAA;EACA,yBAAA;EACA,mBAAA;EACA,kBAAA;EACA,qBAAA;EACA,qBAAA;EACA,eAAA;EACA,eAAA;EACA,eAAA;EACA,sCAAA;AAZJ;AAaI;EACI,iBAAA;EACA,eAAA;AAXR;;AAeE;EACE,yBAAA;AAZJ;;AAeA;EACI,WAAA;EACA,0BAAA;AAZJ;AAcI;EACI,eAAA;AAZR","sourceRoot":""}]);
+}
+
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 35px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+.modal.show {
+  display: block;
+  animation: fadeIn 0.5s;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  overflow-y: auto;
+  width: 80%;
+  max-height: 83vh;
+}
+
+#keyframes fadeIn from {
+  opacity: 0;
+}
+#keyframes fadeIn to {
+  opacity: 1;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: baseline;
+}`, "",{"version":3,"sources":["webpack://./app/styles.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,WAAA;EACA,8BAAA;EACA,eAAA;EACA,mBAAA;AACJ;AAMA;EACI,aAAA;EACA,sBAAA;AAJJ;AAMI;EACI,kBAAA;AAJR;;AAQA;EACI,SAAA;EACA,WAAA;EACA,gBAAA;EACA,6DAAA;EACA,cAAA;AALJ;;AAQA;;;EAGI,sBAAA;AALJ;;AAaA;EACI,sBAAA;EACA,wCAAA;AAVJ;;AAaA;EACI,iBAAA;EACA,cAAA;AAVJ;;AAaA;EACI,aAAA;EACA,sBAAA;AAVJ;AAYI;EACI,kBAAA;EACA,aAAA;EACA,qBAAA;EACA,sBAAA;AAVR;AAYQ;EACI,sBAAA;EACA,kBAAA;EACA,gBAAA;AAVZ;AAaQ;EACI,gBAAA;AAXZ;AAcQ;EACI,WAAA;AAZZ;AAmBI;EACI,iBAAA;AAjBR;AAoBI;EACI,iBAAA;AAlBR;AAqBI;EACI,kBAAA;AAnBR;;AAuBA;EAEI,WAAA;AArBJ;;AA0BA;EACI,yBAAA;EACA,YAAA;EACA,YAAA;EACA,kBAAA;EACA,iBAAA;EACA,yBAAA;EACA,mBAAA;EACA,kBAAA;EACA,qBAAA;EACA,qBAAA;EACA,eAAA;EACA,eAAA;EACA,eAAA;EACA,sCAAA;AAvBJ;AAyBI;EACI,iBAAA;EACA,eAAA;AAvBR;;AA2BA;EACI,yBAAA;AAxBJ;;AA2BA;EACI,WAAA;EACA,0BAAA;AAxBJ;AA0BI;EACI,eAAA;AAxBR;;AA4BA;EACI,aAAA;EACA,sBAAA;EACA,eAAA;EACA,kBAAA;EAEA,UAAA;EACA,eAAA;EACA,iBAAA;EACA,wBAAA;EACA,OAAA;EACA,MAAA;EACA,WAAA;EACA,eAAA;EACA,YAAA;EACA,gBAAA;EACA,cAAA;EACA,4BAAA;EACA,8BAAA;EACA,mBAAA;EACA,oCAAA;EACA,qBAAA;AA1BJ;;AA6BA;EACI,cAAA;EACA,sBAAA;AA1BJ;;AA6BA;EACI,yBAAA;EACA,YAAA;EACA,aAAA;EACA,sBAAA;EACA,gBAAA;EACA,UAAA;EACA,gBAAA;AA1BJ;;AA8BI;EACI,UAAA;AA3BR;AA8BI;EACI,UAAA;AA5BR;;AAgCA;EACI,aAAA;EACA,8BAAA;EACA,WAAA;EACA,qBAAA;AA7BJ","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2672,7 +2976,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n<div class=\"payPalContainer\" style=\"width:fit-content; margin: auto \"></div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n\n<div class=\"payPalContainer\" style=\"width:fit-content; margin: auto \"></div>");
 
 /***/ }),
 
@@ -2687,7 +2991,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n<div class=\"artist-application-review\" >\r\n\r\n    <div class=\"app-preview\">\r\n        <div>\r\n\r\n           <h3> ${firstName} ${lastName}: ${medium}</h3>\r\n           \r\n            <p>Submitted on: ${createdAt}</p>\r\n        </div>\r\n        <div>\r\n           \r\n            <h4>Status: </h4>\r\n            <span class=\"status\">\r\n                <span>${approved == true ? \"Approved\" : hasBeenReviewed == true ? \"Not Approved\" : \"Has not been reviewed\"}</span>\r\n            </span>\r\n        </div>\r\n        <button class=\"expandApplication show\" onclick=\"event.target.closest('.artist-application-review').classList.toggle('expanded')\"\r\n        >${hasBeenReviewed =='true' ? \"Review Old Application\" : \"Review\"}</button>\r\n        <button class=\"expandApplication hide\" onclick=\"event.target.closest('.artist-application-review').classList.toggle('expanded')\"\r\n        >Minimize Application</button>\r\n        \r\n    </div>\r\n    <div class=\"app-contents\">\r\n\r\n\r\n        <h3>Artist Name</h3>\r\n        <div class=\"row\">\r\n            <input-component value=\"${firstName}\" disabled=\"true\" style=\"width: 48%\" required=\"true\"\r\n                fieldName=\"firstName\" alias=\"First Name\"></input-component>\r\n            <input-component value=\"${lastName}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" fieldName=\"lastName\"\r\n                alias=\"Last Name\"></input-component>\r\n        </div>\r\n        <h3>Contact Info</h3>\r\n        <div class=\"row\">\r\n            <input-component value=\"${email}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" type=\"email\"\r\n                fieldName=\"email\" alias=\"Email\"></input-component>\r\n            <input-component value=\"${phone}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" fieldName=\"phone\"\r\n                alias=\"Phone\"></input-component>\r\n        </div>\r\n        <textarea-component value=\"${studioAddress}\" disabled=\"true\" required=\"true\" fieldName=\"studio-address\"\r\n            alias=\"Studio Address\"></textarea-component>\r\n        <textarea-component value=\"${mailingAddress}\" disabled=\"true\" required=\"true\" fieldName=\"mailing-address\"\r\n            alias=\"Mailing Address\"></textarea-component>\r\n\r\n\r\n        <h3>Medium(s)</h3>\r\n        <input-component value=\"${medium}\" disabled=\"true\" required=\"true\" fieldName=\"medium\"\r\n            placeholder=\"Comma separated list of mediums\"></input-component>\r\n\r\n        <h3>WA State Business License (UBI) Number *</h3>\r\n        <p>A Washington State Business License (UBI) Number is required to be in the tour. If you don't have one, apply:\r\n            https://bls.dor.wa.gov/. </p>\r\n        <input-component value=\"${waStateBusinessLicenseUbiNumber}\" disabled=\"true\" required=\"true\"\r\n            fieldName=\"wa-state-business-license-ubi-number\" placeholder=\"UBI Number\"></input-component>\r\n\r\n        <h3>Is your studio within the GHOST Tour Boundaries? (That map is available on the Join page) *</h3>\r\n        <label for=\"isWithinBoundaries-${randomId}\">\r\n            <input disabled=\"true\" ${isWithinBoundaries == \"Yes, my studio falls within the boundary\" ? \"checked\" : \"\"} type=\"radio\" name=\"isWithinBoundaries-${randomId}\" value=\"Yes, my studio falls within the boundary\"\r\n                id=\"isWithinBoundaries-${randomId}\"></input>\r\n            Yes, my studio falls within the boundary\r\n        </label>\r\n        <label for=\"isNotWithinBoundaries-${randomId}\">\r\n            <input  disabled=\"true\" ${isWithinBoundaries == \"Yes, my studio falls within the boundary\" ? \"\": \"checked\"} type=\"radio\" name=\"isWithinBoundaries-${randomId}\"\r\n                value=\"No, my studio is outside the boundary and I will need to share studio space with another artist\"\r\n                id=\"isNotWithinBoundaries-${randomId}\"></input>\r\n            No, my studio is outside the boundary and I will need to share studio space with another artist\r\n        </label>\r\n\r\n        <h3>Will you need to share a studio?</h3>\r\n        <style>\r\n            input,\r\n            textarea {\r\n                margin: 10px 0 0 0;\r\n                padding: 10px;\r\n                border: 1px solid #ccc;\r\n                border-radius: 5px;\r\n            }\r\n\r\n            textarea {\r\n                resize: vertical;\r\n                min-height: 100px;\r\n            }\r\n        </style>\r\n        <p style=\"margin: 0;\">If sharing a studio, have you made arrangements to do so? If so, please name the Tour\r\n            Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host\r\n            you in their studio.</p>\r\n        <textarea disabled=\"true\" style=\"width: 100%; box-sizing: border-box; \">\r\n${studioSharingResponse}\r\n        </textarea>\r\n        <!-- <textarea-component description=\"If sharing a studio, have you made arrangements to do so? If so, please name the Tour Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host you in their studio.\"></textarea-component> -->\r\n\r\n\r\n        <h3>I would like an artist mentor (an experienced artist who can talk to me about preparing for the tour,\r\n            marketing and answer my questions)</h3>\r\n        <label for=\"artistMentor-${randomId}\">\r\n            <input disabled ${artistMentor == \"Yes, I would like an artist mentor\" ? \"checked\": \"\"} required type=\"radio\" name=\"artistMentor-${randomId}\" value=\"Yes, I would like an artist mentor\"\r\n                id=\"artistMentor-${randomId}\"></input>\r\n            Yes, I would like an artist mentor\r\n        </label>\r\n        <label for=\"noArtistMentor-${randomId}\">\r\n            <input disabled ${artistMentor == \"No, I do not need an artist mentor\" ? \"checked\": \"\"}  required type=\"radio\" name=\"artistMentor-${randomId}\" value=\"No, I do not need an artist mentor\"\r\n                id=\"noArtistMentor-${randomId}\"></input>\r\n            No, I do not need an artist mentor\r\n        </label>\r\n\r\n        <h3>How did you hear about the GHOST Tour?</h3>\r\n        <textarea disabled style=\"width: 100%; box-sizing: border-box; \">\r\n${howDidYouHearAboutUs}\r\n        </textarea>\r\n\r\n        <h3>Three (3) digital images of your art</h3>\r\n        <p>Make sure that your images look professional and are jpgs that are a minimum of 150 KB (No thumbnails). 2D\r\n            art should only\r\n            be of your art image (no background or frame.) 3D art and jewelry should have a plain background (ex, black\r\n            or white) and have enough lighting to show good detail. Crop the image so that your art fills most of the\r\n            image and make sure the image is crisp and does justice to your art.</p>\r\n        <div style=\"display: flex; justify-content: center; flex-wrap: wrap;\">\r\n            <style>\r\n                file-input-component {\r\n                    margin: 10px;\r\n                }\r\n                img {\r\n                    width: 200px;\r\n                    height: 200px;\r\n                    object-fit: cover;\r\n                    margin: 10px;\r\n                }\r\n            </style>\r\n            <img src=\"${digitalImage1}\"></img>\r\n            <img src=\"${digitalImage2}\"></img>\r\n            <img src=\"${digitalImage3}\"></img>\r\n        </div>\r\n\r\n        <h3>One (1) digital image of your studio (if it is within the studio tour boundaries and you will be showing\r\n            there) or your booth (if you will be showing at another artist's studio)</h3>\r\n        <p>This should be a jpg image that is a minimum of 150 KB (No thumbnails). Make sure your display space looks\r\n            professional, has good lighting\r\n            and is represented well in your photo.</p>\r\n\r\n        <div style=\"display: flex; justify-content: center; flex-wrap: wrap;\">\r\n            <img src=\"${digitalImage3}\"></img>\r\n        </div>\r\n\r\n        <h3>Artist Statement</h3>\r\n        <textarea-component  disabled=\"true\" fieldName=\"artistStatement-${randomId}\" placeholder=\"Artist Statement\" required\r\n            description=\"This  is a short statement that describes what art you make, how you make it and why you make it.  (Limit 200 words)\"\r\n            value=\"${artistStatement}\"></textarea-component>\r\n        <h3>Your art website or social media sites</h3>\r\n        <textarea-component disabled=\"true\" placeholder=\"Website & Social media presence \" fieldName=\"website-social-media-${randomId}\" required\r\n            description=\"If you have an art website and/or social media sites, list them here.  If you don't have any of those, type in NONE\"\r\n            value=\"${websiteSocialMedia}\"></textarea-component>\r\n\r\n            <div style=\"text-align: center;\">\r\n                <button data-fb-id=\"${fbId}\" onclick=\"window.updateReview(event,true)\">Approve Application</button>\r\n                <button data-fb-id=\"${fbId}\" onclick=\"window.updateReview(event,false)\">Disapprove</button>\r\n\r\n            </div>\r\n    </div>\r\n\r\n</div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n<div class=\"artist-application-review\" >\n\n    <div class=\"app-preview\">\n        <div>\n\n           <h3> ${firstName} ${lastName}: ${medium}</h3>\n           \n            <p>Submitted on: ${createdAt}</p>\n        </div>\n        <div>\n           \n            <h4>Status: </h4>\n            <span class=\"status\">\n                <span>${status}</span>\n            </span>\n        </div>\n        <button class=\"expandApplication show\" onclick=\"event.target.closest('.artist-application-review').classList.toggle('expanded')\"\n        >${hasBeenReviewed =='true' ? \"Review Old Application\" : \"Review\"}</button>\n        <button class=\"expandApplication hide\" onclick=\"event.target.closest('.artist-application-review').classList.toggle('expanded')\"\n        >Minimize Application</button>\n        \n    </div>\n    <div class=\"app-contents\">\n\n\n        <h3>Artist Name</h3>\n        <div class=\"row\">\n            <input-component value=\"${firstName}\" disabled=\"true\" style=\"width: 48%\" required=\"true\"\n                fieldName=\"firstName\" alias=\"First Name\"></input-component>\n            <input-component value=\"${lastName}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" fieldName=\"lastName\"\n                alias=\"Last Name\"></input-component>\n        </div>\n        <h3>Contact Info</h3>\n        <div class=\"row\">\n            <input-component value=\"${email}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" type=\"email\"\n                fieldName=\"email\" alias=\"Email\"></input-component>\n            <input-component value=\"${phone}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" fieldName=\"phone\"\n                alias=\"Phone\"></input-component>\n        </div>\n        <textarea-component value=\"${studioAddress}\" disabled=\"true\" required=\"true\" fieldName=\"studio-address\"\n            alias=\"Studio Address\"></textarea-component>\n        <textarea-component value=\"${mailingAddress}\" disabled=\"true\" required=\"true\" fieldName=\"mailing-address\"\n            alias=\"Mailing Address\"></textarea-component>\n\n\n        <h3>Medium(s)</h3>\n        <input-component value=\"${medium}\" disabled=\"true\" required=\"true\" fieldName=\"medium\"\n            placeholder=\"Comma separated list of mediums\"></input-component>\n\n        <h3>WA State Business License (UBI) Number *</h3>\n        <p>A Washington State Business License (UBI) Number is required to be in the tour. If you don't have one, apply:\n            https://bls.dor.wa.gov/. </p>\n        <input-component value=\"${waStateBusinessLicenseUbiNumber}\" disabled=\"true\" required=\"true\"\n            fieldName=\"wa-state-business-license-ubi-number\" placeholder=\"UBI Number\"></input-component>\n\n        <h3>Is your studio within the GHOST Tour Boundaries? (That map is available on the Join page) *</h3>\n        <label for=\"isWithinBoundaries-${randomId}\">\n            <input disabled=\"true\" ${isWithinBoundaries == \"Yes, my studio falls within the boundary\" ? \"checked\" : \"\"} type=\"radio\" name=\"isWithinBoundaries-${randomId}\" value=\"Yes, my studio falls within the boundary\"\n                id=\"isWithinBoundaries-${randomId}\"></input>\n            Yes, my studio falls within the boundary\n        </label>\n        <label for=\"isNotWithinBoundaries-${randomId}\">\n            <input  disabled=\"true\" ${isWithinBoundaries == \"Yes, my studio falls within the boundary\" ? \"\": \"checked\"} type=\"radio\" name=\"isWithinBoundaries-${randomId}\"\n                value=\"No, my studio is outside the boundary and I will need to share studio space with another artist\"\n                id=\"isNotWithinBoundaries-${randomId}\"></input>\n            No, my studio is outside the boundary and I will need to share studio space with another artist\n        </label>\n\n        <h3>Will you need to share a studio?</h3>\n        <style>\n            input,\n            textarea {\n                margin: 10px 0 0 0;\n                padding: 10px;\n                border: 1px solid #ccc;\n                border-radius: 5px;\n            }\n\n            textarea {\n                resize: vertical;\n                min-height: 100px;\n            }\n        </style>\n        <p style=\"margin: 0;\">If sharing a studio, have you made arrangements to do so? If so, please name the Tour\n            Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host\n            you in their studio.</p>\n        <textarea disabled=\"true\" style=\"width: 100%; box-sizing: border-box; \">\n${studioSharingResponse}\n        </textarea>\n        <!-- <textarea-component description=\"If sharing a studio, have you made arrangements to do so? If so, please name the Tour Artist who has invited you to share their studio. If not, we will match you with a Tour Artist who will host you in their studio.\"></textarea-component> -->\n\n\n        <h3>I would like an artist mentor (an experienced artist who can talk to me about preparing for the tour,\n            marketing and answer my questions)</h3>\n        <label for=\"artistMentor-${randomId}\">\n            <input disabled ${artistMentor == \"Yes, I would like an artist mentor\" ? \"checked\": \"\"} required type=\"radio\" name=\"artistMentor-${randomId}\" value=\"Yes, I would like an artist mentor\"\n                id=\"artistMentor-${randomId}\"></input>\n            Yes, I would like an artist mentor\n        </label>\n        <label for=\"noArtistMentor-${randomId}\">\n            <input disabled ${artistMentor == \"No, I do not need an artist mentor\" ? \"checked\": \"\"}  required type=\"radio\" name=\"artistMentor-${randomId}\" value=\"No, I do not need an artist mentor\"\n                id=\"noArtistMentor-${randomId}\"></input>\n            No, I do not need an artist mentor\n        </label>\n\n        <h3>How did you hear about the GHOST Tour?</h3>\n        <textarea disabled style=\"width: 100%; box-sizing: border-box; \">\n${howDidYouHearAboutUs}\n        </textarea>\n\n        <h3>Three (3) digital images of your art</h3>\n        <p>Make sure that your images look professional and are jpgs that are a minimum of 150 KB (No thumbnails). 2D\n            art should only\n            be of your art image (no background or frame.) 3D art and jewelry should have a plain background (ex, black\n            or white) and have enough lighting to show good detail. Crop the image so that your art fills most of the\n            image and make sure the image is crisp and does justice to your art.</p>\n        <div style=\"display: flex; justify-content: center; flex-wrap: wrap;\">\n            <style>\n                file-input-component {\n                    margin: 10px;\n                }\n                img {\n                    width: 200px;\n                    height: 200px;\n                    object-fit: cover;\n                    margin: 10px;\n                }\n            </style>\n            <img src=\"${digitalImage1}\"></img>\n            <img src=\"${digitalImage2}\"></img>\n            <img src=\"${digitalImage3}\"></img>\n        </div>\n\n        <h3>One (1) digital image of your studio (if it is within the studio tour boundaries and you will be showing\n            there) or your booth (if you will be showing at another artist's studio)</h3>\n        <p>This should be a jpg image that is a minimum of 150 KB (No thumbnails). Make sure your display space looks\n            professional, has good lighting\n            and is represented well in your photo.</p>\n\n        <div style=\"display: flex; justify-content: center; flex-wrap: wrap;\">\n            <img src=\"${digitalImage3}\"></img>\n        </div>\n\n        <h3>Artist Statement</h3>\n        <textarea-component  disabled=\"true\" fieldName=\"artistStatement-${randomId}\" placeholder=\"Artist Statement\" required\n            description=\"This  is a short statement that describes what art you make, how you make it and why you make it.  (Limit 200 words)\"\n            value=\"${artistStatement}\"></textarea-component>\n        <h3>Your art website or social media sites</h3>\n        <textarea-component disabled=\"true\" placeholder=\"Website & Social media presence \" fieldName=\"website-social-media-${randomId}\" required\n            description=\"If you have an art website and/or social media sites, list them here.  If you don't have any of those, type in NONE\"\n            value=\"${websiteSocialMedia}\"></textarea-component>\n\n            <div style=\"text-align: center;\">\n                <button data-fb-id=\"${fbId}\" onclick=\"window.updateReview(event,true)\">Approve Application</button>\n                <button data-fb-id=\"${fbId}\" onclick=\"window.updateReview(event,false)\">Disapprove</button>\n\n            </div>\n    </div>\n\n</div>");
 
 /***/ }),
 
@@ -2702,7 +3006,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"contract-received \">\r\n  <div class=\"preview\">\r\n\r\n    <div>\r\n\r\n      <h2 class=\"user-name\" style=\"margin-bottom: 0\">\r\n        ${firstName}\r\n        ${lastName}\r\n      </h2>\r\n      <b><ul style=\"margin: 0; padding: 0; list-style: none;\">${committeeRoles}</ul></b>\r\n    </div>\r\n    <button onclick=\"event.target.closest('.contract-received').classList.toggle('reveal')\">View Details</button>\r\n  </div>\r\n  <div class=\"content \">\r\n    <div><b>Personal Email:</b> ${personalEmail ? personalEmail : 'N/A'}</div>\r\n    <div><b>Business Email:</b> ${businessEmail ? businessEmail : 'N/A'} </div>\r\n    <div><b>Phone:</b> ${phone ? phone : 'N/A'}</div>\r\n    <div><b>Mailing Address:</b> ${mailingAddress ? mailingAddress : 'N/A'}</div>\r\n    <div><b>Studio Address:</b> ${studioAddress ? studioAddress : 'N/A'}</div>\r\n    <div><b>Website:</b> ${website ? website : 'N/A'}</div>\r\n    <div><b>Facebook:</b> ${facebook ? facebook : 'N/A'}</div>\r\n    <div><b>Instagram:</b> ${instagram ? instagram : 'N/A'}</div>\r\n    <div><b>Medium:</b> ${medium ? medium : 'N/A'}</div>\r\n\r\n    <div><b>Scholarship Applied:</b> ${scholarshipApplied ? 'True' : 'False'}</div>\r\n    <div><b>Studio Sharing Answer:</b>\r\n      <div class=\"level-1\">${studioSharingAnswer ? studioSharingAnswer : 'N/A'}</div>\r\n    </div>\r\n    <div><b>Artistic Demonstration:</b> ${artisticDemonstration ? artisticDemonstration : 'N/A'}</div>\r\n    <div><b>Artist Statement:</b> \r\n    <div class=\"level-1\" style=\"translate: 0px -10px\">${artistStatement ? artistStatement : 'N/A' }</div></div>\r\n    <div><b>Artist Tagline:</b> ${artistTagline ? artistTagline : 'N/A'}</div>\r\n  \r\n    <div style=\"display: flex; justify-content: center; flex-wrap: wrap; align-items: end;\">\r\n      <style>\r\n        img {\r\n          width: 200px;\r\n          height: 200px;\r\n          object-fit: cover;\r\n          margin: 10px;\r\n        }\r\n      </style>\r\n      <div>\r\n        <b>Digital Image 1:</b>\r\n        <img src=\"${digitalImage1}\"></img>\r\n      </div>\r\n      <div><b>Digital Image 2:</b>\r\n        <img src=\"${digitalImage2}\"></img>\r\n      </div>\r\n      <div><b>Digital Image 3:</b>\r\n        <img src=\"${digitalImage3}\"></img>\r\n      </div>\r\n    </div>\r\n\r\n\r\n\r\n    <div style=\"display: flex; justify-content: center; flex-wrap: wrap;\">\r\n      <div>\r\n        <b>Brochure Image:</b>\r\n        <img src=\"${brochureImage}\"></img>\r\n      </div>\r\n    </div>\r\n    <div style=\"display: flex; justify-content: center; flex-wrap: wrap;\">\r\n      <div><b>Artist in Studio Image:</b>\r\n        <img src=\"${artistInStudioImage}\"></img>\r\n      </div>\r\n    </div>\r\n\r\n  </div>\r\n\r\n</div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"contract-received \">\n  <div class=\"preview\">\n\n    <div>\n\n      <h2 class=\"user-name\" style=\"margin-bottom: 0\">\n        ${firstName}\n        ${lastName}\n      </h2>\n      <b><ul style=\"margin: 0; padding: 0; list-style: none;\">${committeeRoles}</ul></b>\n    </div>\n    <button onclick=\"event.target.closest('.contract-received').classList.toggle('reveal')\">View Details</button>\n  </div>\n  <div class=\"content \">\n    <div><b>Personal Email:</b> ${personalEmail ? personalEmail : 'N/A'}</div>\n    <div><b>Business Email:</b> ${businessEmail ? businessEmail : 'N/A'} </div>\n    <div><b>Phone:</b> ${phone ? phone : 'N/A'}</div>\n    <div><b>Mailing Address:</b> ${mailingAddress ? mailingAddress : 'N/A'}</div>\n    <div><b>Studio Address:</b> ${studioAddress ? studioAddress : 'N/A'}</div>\n    <div><b>Website:</b> ${website ? website : 'N/A'}</div>\n    <div><b>Facebook:</b> ${facebook ? facebook : 'N/A'}</div>\n    <div><b>Instagram:</b> ${instagram ? instagram : 'N/A'}</div>\n    <div><b>Medium:</b> ${medium ? medium : 'N/A'}</div>\n\n    <div><b>Scholarship Applied:</b> ${scholarshipApplied ? 'True' : 'False'}</div>\n    <div><b>Studio Sharing Answer:</b>\n      <div class=\"level-1\">${studioSharingAnswer ? studioSharingAnswer : 'N/A'}</div>\n    </div>\n    <div><b>Artistic Demonstration:</b> ${artisticDemonstration ? artisticDemonstration : 'N/A'}</div>\n    <div><b>Artist Statement:</b> \n    <div class=\"level-1\" style=\"translate: 0px -10px\">${artistStatement ? artistStatement : 'N/A' }</div></div>\n    <div><b>Artist Tagline:</b> ${artistTagline ? artistTagline : 'N/A'}</div>\n  \n    <div style=\"display: flex; justify-content: center; flex-wrap: wrap; align-items: end;\">\n      <style>\n        img {\n          width: 200px;\n          height: 200px;\n          object-fit: cover;\n          margin: 10px;\n        }\n      </style>\n      <div><b>Digital Image 1:</b>\n        <img src=\"${digitalImage1}\"></img>\n      </div>\n      <div><b>Digital Image 2:</b>\n        <img src=\"${digitalImage2}\"></img>\n      </div>\n      <div><b>Digital Image 3:</b>\n        <img src=\"${digitalImage3}\"></img>\n      </div>\n    </div>\n\n\n\n    <div style=\"display: flex; justify-content: center; flex-wrap: wrap;\">\n      <div><b>Brochure Image:</b>\n        <img src=\"${brochureImage}\"></img>\n      </div>\n    </div>\n    <div style=\"display: flex; justify-content: center; flex-wrap: wrap;\">\n      <div><b>Artist in Studio Image:</b>\n        <img src=\"${artistInStudioImage}\"></img>\n      </div>\n    </div>\n\n  </div>\n\n</div>");
 
 /***/ }),
 
@@ -2717,7 +3021,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n<link\r\nrel=\"stylesheet\"\r\nhref=\"https://use.fontawesome.com/releases/v5.7.2/css/all.css\"\r\nintegrity=\"sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr\"\r\ncrossorigin=\"anonymous\"\r\n/>\r\n\r\n<!-- I don't remember what data-primary meant -->\r\n<div class=\"os-dual-form\" data-primary=\"login\" auth-mode=\"login\">\r\n  <form id=\"signup\" class=\"left\" autocomplete=\"off\">\r\n    <h1>Sign up</h1>\r\n    <os-form-feedback feedbackName=\"success\"></os-form-feedback>\r\n\r\n    <div class=\"row\">\r\n      <input-component\r\n        required=\"true\"\r\n        fieldName=\"firstName\"\r\n        alias=\"First Name\"\r\n      ></input-component>\r\n\r\n      <input-component\r\n        required=\"true\"\r\n        fieldName=\"lastName\"\r\n        alias=\"Last Name\"\r\n      ></input-component>\r\n    </div>\r\n    <div class=\"\" style=\"margin-right: auto; margin-left: 10px\">\r\n      <!-- <input-component\r\n        required=\"true\"\r\n        fieldName=\"username\"\r\n        alias=\"Username\"\r\n      ></input-component> -->\r\n      <input-component required=\"true\" fieldName=\"email\" alias=\"Email\">\r\n      </input-component>\r\n    </div>\r\n    <div class=\"row\">\r\n      <input-component\r\n        required=\"true\"\r\n        fieldName=\"password\"\r\n        type=\"password\"\r\n        alias=\"Password\"\r\n      ></input-component>\r\n      <input-component\r\n        required=\"true\"\r\n        fieldName=\"confirm-password\"\r\n        type=\"password\"\r\n        alias=\"Confirm Password\"\r\n      ></input-component>\r\n    </div>\r\n    <!-- <div id=\"reCAPTCHA\"></div>\r\n      <os-form-feedback feedbackName=\"reCAPTCHA\"></os-form-feedback> -->\r\n\r\n    <div class=\"column submitBtnsContainer\">\r\n      <button type=\"submit\">Submit</button>\r\n\r\n      <button type=\"button\" class=\"mobile-view toggleAuthType\">\r\n        Go to Log in\r\n      </button>\r\n    </div>\r\n    <os-form-feedback feedbackName=\"submit\"></os-form-feedback>\r\n  </form>\r\n  <form id=\"login\" class=\"right\"  autocomplete=\"off\">\r\n    <h1>Login</h1>\r\n    <input-component\r\n      required=\"true\"\r\n      fieldName=\"email-login\"\r\n      alias=\"Email\"\r\n      type=\"email\"\r\n    ></input-component>\r\n    <input-component\r\n      required=\"true\"\r\n      fieldName=\"password-login\"\r\n      type=\"password\"\r\n      alias=\"Password\"\r\n    ></input-component>\r\n    <div class=\"column submitBtnsContainer\">\r\n      <button type=\"submit\">Submit</button>\r\n      <style>\r\n        .reset-password {\r\n          color: #007bff;\r\n          text-decoration: none;\r\n          cursor: pointer;\r\n          margin-top: 10px;\r\n          /* position: absolute; */\r\n          /* bottom: 0; */\r\n        }\r\n        .reset-password:hover {\r\n          text-decoration: underline;\r\n        }\r\n      </style>\r\n      <a type=\"button\" class=\"reset-password\">Reset Password</a>\r\n      <button type=\"button\" class=\"mobile-view toggleAuthType\">\r\n        Register new account\r\n      </button>\r\n    </div>\r\n    <os-form-feedback feedbackName=\"submit\"></os-form-feedback>\r\n  </form>\r\n\r\n  <div class=\"cover left login\" style=\"background-image: url(${loginImage})\">\r\n    <button type=\"button\" class=\"toggleAuthType secondary\">\r\n      Register new account\r\n    </button>\r\n  </div>\r\n  <div class=\"cover right signup\" style=\"background-image: url(${signupImage})\">\r\n    <button type=\"button\" class=\"toggleAuthType\">Go to Log in</button>\r\n  </div>\r\n</div>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<script\n  src=\"https://kit.fontawesome.com/4550fec5ff.js\"\n  crossorigin=\"anonymous\"\n></script>\n\n<!-- I don't remember what data-primary meant -->\n<div class=\"os-dual-form\" data-primary=\"login\" auth-mode=\"login\">\n  <form id=\"signup\" class=\"left\" autocomplete=\"off\">\n    <h1>Sign up</h1>\n    <os-form-feedback feedbackName=\"success\"></os-form-feedback>\n\n    <small style=\"margin-inline: 30px; font-weight: bold;\">\n      Sign-up here if you need to set up your personal account. Otherwise, click on the \"Go To Log In\" button on the right.\n    </small>\n\n\n    <div class=\"row\">\n      <input-component\n        required=\"true\"\n        fieldName=\"firstName\"\n        alias=\"First Name\"\n      ></input-component>\n\n      <input-component\n        required=\"true\"\n        fieldName=\"lastName\"\n        alias=\"Last Name\"\n      ></input-component>\n    </div>\n    <div class=\"\" style=\"margin-right: auto; margin-left: 10px\">\n      <!-- <input-component\n        required=\"true\"\n        fieldName=\"username\"\n        alias=\"Username\"\n      ></input-component> -->\n      <input-component required=\"true\" fieldName=\"email\" alias=\"Email\">\n      </input-component>\n    </div>\n    <div class=\"row\">\n      <input-component\n        required=\"true\"\n        fieldName=\"password\"\n        type=\"password\"\n        alias=\"Password\"\n      ></input-component>\n      <input-component\n        required=\"true\"\n        fieldName=\"confirm-password\"\n        type=\"password\"\n        alias=\"Confirm Password\"\n      ></input-component>\n    </div>\n    <!-- <div id=\"reCAPTCHA\"></div>\n      <os-form-feedback feedbackName=\"reCAPTCHA\"></os-form-feedback> -->\n\n    <div class=\"column submitBtnsContainer\">\n      <button type=\"submit\">Submit</button>\n\n      <button type=\"button\" class=\"mobile-view toggleAuthType\">\n        Go to Log in\n      </button>\n    </div>\n    <os-form-feedback feedbackName=\"submit\"></os-form-feedback>\n  </form>\n  <form id=\"login\" class=\"right\" autocomplete=\"off\">\n    <h1>Login</h1>\n    <small style=\"margin-inline: 30px; font-weight: bold;\">Log In here if you have already set up your personal account. Otherwise, click on the \"Register New Account\" button on the left.</small>\n    <input-component\n      required=\"true\"\n      fieldName=\"email-login\"\n      alias=\"Email\"\n      type=\"email\"\n    ></input-component>\n    <input-component\n      required=\"true\"\n      fieldName=\"password-login\"\n      type=\"password\"\n      alias=\"Password\"\n    ></input-component>\n    <div class=\"column submitBtnsContainer\">\n      <button type=\"submit\">Submit</button>\n      <style>\n        .reset-password {\n          color: #007bff;\n          text-decoration: none;\n          cursor: pointer;\n          margin-top: 10px;\n          /* position: absolute; */\n          /* bottom: 0; */\n        }\n        .reset-password:hover {\n          text-decoration: underline;\n        }\n      </style>\n      <a type=\"button\" class=\"reset-password\">Forgot Password?</a>\n      <button type=\"button\" class=\"mobile-view toggleAuthType\">\n        Register new account\n      </button>\n    </div>\n    <os-form-feedback feedbackName=\"submit\"></os-form-feedback>\n  </form>\n\n  <div class=\"cover left login\" style=\"background-image: url(${loginImage})\">\n    <button type=\"button\" class=\"toggleAuthType secondary\" style=\"background-color: #ff0084;\">\n      Register new account\n    </button>\n  </div>\n  <div class=\"cover right signup\" style=\"background-image: url(${signupImage})\">\n    <button type=\"button\" class=\"toggleAuthType\" style=\"background-color: #ff0084;\">Go to Log in</button>\n  </div>\n</div>\n\n<style>\n  #reset-password-modal form {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n  }\n\n  #reset-password-modal .modal-content {\n    width: fit-content;\n  }\n\n  .close-modal {\n    cursor: pointer;\n    font-size: 30px;\n    color: #007bff;\n    padding: 10px;\n    cursor: pointer;\n    position: absolute;\n    top: 0;\n    right: 0;\n  }\n</style>\n\n<div id=\"reset-password-modal\" class=\"modal\">\n  <div class=\"modal-content\" style=\"position: relative\">\n    <span class=\"close-modal\" style=\"\">&times;</span>\n    <h2>Reset Password</h2>\n    <form onsubmit=\"event.preventDefault()\" style=\"\">\n      <input-component\n        moveLabel=\"true\"\n        type=\"email\"\n        alias=\"Email\"\n        placeholder=\"Enter your email\"\n        fieldName=\"resetEmail\"\n      >\n      </input-component>\n      <button id=\"resetSubmit\" class=\"btn small\">Submit</button>\n      <div id=\"reset-password-modal-feedback\"></div>\n    </form>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -2732,7 +3036,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<footer>\r\n  <div id=\"footer-logo\">\r\n    <div>\r\n      <h1>Gig Harbor <br>Open Studio Tour</h1>\r\n      <small>Artist Portal</small>\r\n    </div>\r\n  </div>\r\n</footer>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<footer>\n  <div id=\"footer-logo\">\n    <div>\n      <h1>Gig Harbor <br>Open Studio Tour</h1>\n      <small>Artist Portal</small>\n    </div>\n  </div>\n</footer>\n");
 
 /***/ }),
 
@@ -2747,7 +3051,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<header>\r\n  <div id=\"header-logo\">\r\n    <div>\r\n      <h1>Gig Harbor <br>Open Studio Tour</h1>\r\n      <small>Artist Portal</small>\r\n    </div>\r\n    <img src=\"/dist/assets/ghost-logo-pink (1).jpg\" />\r\n  </div>\r\n\r\n  <nav id=\"links\">\r\n \r\n\r\n    ${window.location.href.includes('members') ? '' : slotLinks.includes('members') ? `<a  onclick=\"navigateTo('/members')\" style=\"cursor: pointer;\">Go back to Members page</a>` : ''}\r\n    <a target=\"top\" href=\"https://gigharboropenstudiotour.org/\">Go back to GHOST Website</a>\r\n  </nav>\r\n</header>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<header>\n  <div id=\"header-logo\">\n    <div>\n      <h1>Gig Harbor <br>Open Studio Tour</h1>\n      <small>Artist Portal</small>\n    </div>\n    <img src=\"/dist/assets/ghost-logo-pink (1).jpg\" />\n  </div>\n\n  <nav id=\"links\">\n \n\n    ${window.location.href.includes('members') ? '' : slotLinks.includes('members') ? `<a href=\"/members\"  onclick=\"navigateTo('/members')\" style=\"cursor: pointer;\">Go back to Members page</a>` : ''}\n    <a target=\"top\" href=\"https://gigharboropenstudiotour.org/\">Go back to GHOST Website</a>\n  </nav>\n</header>\n");
 
 /***/ }),
 
@@ -2762,7 +3066,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"file-input-component\" style=\"position: relative;\">\r\n    <div class=\"label-container\">\r\n        <label for=\"${fieldName}\" style=\"\">\r\n            <input style=\"opacity: 0; height: 0; width: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);\" ${required ? \"required\" : \"\" } type=\"file\" id=\"${fieldName}\" name=\"${fieldName}\"\r\n            ${multiple ? \"multiple=true\" : \"\" } ${accept ? `accept=\"${accept}\" ` : \"\" } />\r\n            <div class=\"images-container file-input-display\">\r\n                <div class=\"ifEmpty\">\r\n                    <div class=\"alias\">${alias ? alias : \"\"}</div>\r\n                </div>\r\n                <div class=\"ifLoading\">\r\n                    Loading ...\r\n                </div>\r\n            </div>\r\n        </label>\r\n    </div>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"file-input-component\" style=\"position: relative;\">\n    <div class=\"saved-image-feedback\" ></div>\n    <div class=\"label-container\">\n        <label for=\"${fieldName}\" style=\"\">\n            <input style=\"opacity: 0; height: 0; width: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);\" ${required ? \"required\" : \"\" } type=\"file\" id=\"${fieldName}\" name=\"${fieldName}\"\n            ${multiple ? \"multiple=true\" : \"\" } ${accept ? `accept=\"${accept}\" ` : \"\" } />\n            <div class=\"images-container file-input-display\">\n                <div class=\"ifEmpty\">\n                    <div class=\"alias\">${alias ? alias : \"\"}</div>\n                </div>\n                <div class=\"ifLoading\">\n                    Loading ...\n                </div>\n            </div>\n        </label>\n    </div>\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\n</div>");
 
 /***/ }),
 
@@ -2777,7 +3081,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n\r\n<span class=\"${className}\" id=\"${id}\">\r\n\r\n\r\n    <label for=\"${fieldName}\" class=\"${labelClass || \"\"} ${moveLabel ? \"moveLabel\": \"\"}  ${value ? \"moveLabel\" : \"\"}\" style=\"${width ? \"width:\"+ width + \";\" : \"\"}\">\r\n        <small class=\"text\" part=\"labelText\">${alias && required ? alias + \"*\" : alias ? alias : \"\"} </small>\r\n        <input  ${disabled ? \"disabled\" : \"\"} ${value ? `value=\"${value}\"` : \"\"}  placeholder=\"${placeholder}\" type=\"${type}\" id=\"${fieldName}\" name=\"${fieldName}\" class=\"${labelClass || \"\"}\" ${required ? \"required\" :\"\"} ${type === 'number' ? 'min=\"0\"' : ''} ${checked ? 'checked' :''} />\r\n        <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n    ${type == 'password' ? `\r\n    <i class=\"password-toggle show-password fa fa-solid fa-eye-slash\"></i>\r\n    <i class=\"password-toggle hide-password fa fa-solid fa-eye\"></i>\r\n    ` : ''}\r\n</label>\r\n<small>${subcaption}</small>\r\n</span>\r\n\r\n</span>\r\n\r\n\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n\n\n<span class=\"${className}\" id=\"${id}\">\n\n\n    <label for=\"${fieldName}\" class=\"${labelClass || \"\"} ${moveLabel ? \"moveLabel\": \"\"}  ${value ? \"moveLabel\" : \"\"}\" style=\"${width ? \"width:\"+ width + \";\" : \"\"}\">\n        <small class=\"text\" part=\"labelText\">${alias && required ? alias + \"*\" : alias ? alias : \"\"} </small>\n        <input  ${disabled ? \"disabled\" : \"\"} ${value ? `value=\"${value}\"` : \"\"}  placeholder=\"${placeholder}\" type=\"${type}\" id=\"${fieldName}\" name=\"${fieldName}\" class=\"${labelClass || \"\"}\" ${required ? \"required\" :\"\"} ${type === 'number' ? 'min=\"0\"' : ''} ${checked ? 'checked' :''} />\n        <div id=\"${fieldName}-error\" class=\"error-message\"></div>\n    ${type == 'password' ? `\n    <i class=\"password-toggle show-password fa fa-solid fa-eye-slash\"></i>\n    <i class=\"password-toggle hide-password fa fa-solid fa-eye\"></i>\n    ` : ''}\n</label>\n<small>${subcaption}</small>\n</span>\n\n</span>\n\n\n");
 
 /***/ }),
 
@@ -2792,7 +3096,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div>${description}</div>\r\n<label for=\"${fieldName}\" style=\"width: 100%; box-sizing: border-box; margin-top: 20px;\" class=\"${value ? \" moveLabel\"\r\n    : \"\" }\">\r\n    <small class=\"text\" part=\"labelText\">${alias && required ? alias + \"*\" : alias ? alias : \"\"} </small>\r\n    <textarea placeholder=\"${placeholder}\" id=\"${fieldName}\" name=\"${fieldName}\"\r\n        ${required ? \"required\" : \"\" }  ${disabled ? \"disabled\" : \"\"} >${value ? value : \"\"}</textarea>\r\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\r\n</label>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div>${description}</div>\n<label for=\"${fieldName}\" style=\"width: 100%; box-sizing: border-box; margin-top: 20px;\" class=\"${value ? \" moveLabel\"\n    : \"\" }\">\n    <small class=\"text\" part=\"labelText\">${alias && required ? alias + \"*\" : alias ? alias : \"\"} </small>\n    <textarea placeholder=\"${placeholder}\" id=\"${fieldName}\" name=\"${fieldName}\"\n        ${required ? \"required\" : \"\" }  ${disabled ? \"disabled\" : \"\"} >${value ? value : \"\"}</textarea>\n    <div id=\"${fieldName}-error\" class=\"error-message\"></div>\n</label>");
 
 /***/ }),
 
@@ -2822,7 +3126,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"artist-application-review\">\r\n\r\n    <div class=\"app-preview\">\r\n        <div>\r\n\r\n            <h3>${name}</h3>\r\n\r\n            <p>Submitted on: ${createdAt}</p>\r\n        </div>\r\n        <div>\r\n            <h4>Status: </h4>\r\n            <span class=\"status\">\r\n                <span>${scholarshipGranted=='true' ? \"Scholarship Granted\" : \"\"}</span>\r\n                <span>${hasBeenReviewed=='true' ? \"\" : \"Application needs review\"}</span>\r\n                <span>${(hasBeenReviewed && scholarshipGranted==\"false\") ? \"Not approved for scholarship\" : \"\"}</span>\r\n            </span>\r\n            <!-- <span>${approved  ? \"Approved\" :  hasBeenReviewed ?  \"Not Approved\": \"Has not been reviewed\" }</span> -->\r\n        </div>\r\n        <button class=\"expandApplication show\"\r\n            onclick=\"event.target.closest('.artist-application-review').classList.toggle('expanded')\">${hasBeenReviewed\r\n            =='true' ? \"Review Old Application\" : \"Review\"}</button>\r\n        <button class=\"expandApplication hide\"\r\n            onclick=\"event.target.closest('.artist-application-review').classList.toggle('expanded')\">Minimize\r\n            Application</button>\r\n\r\n    </div>\r\n    <div class=\"app-contents\">\r\n\r\n\r\n        <h3>Artist Name</h3>\r\n        <div class=\"row\">\r\n            <input-component value=\"${name}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" fieldName=\"name\"\r\n                alias=\"Name\"></input-component>\r\n\r\n        </div>\r\n        <div class=\"row\">\r\n            <input-component value=\"${email}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" type=\"email\"\r\n                fieldName=\"email\" alias=\"Email\"></input-component>\r\n        </div>\r\n\r\n\r\n        <label for=\"hasNotReceivedScholarshipPreviously\">\r\n            <input disabled ${hasNotReceivedScholarshipPreviously==\"true\" ? \"checked\" : \"\" } required type=\"checkbox\"\r\n                name=\"hasNotReceivedScholarshipPreviously\" value=\"true\"\r\n                id=\"hasNotReceivedScholarshipPreviously\"></input>\r\n            Click here to verify that you have not received a GHOST artist scholarship previously\r\n        </label>\r\n\r\n        <textarea-component disabled=\"disabled\" fieldName=\"needForScholarship-${randomId}\" required\r\n            alias=\" Please explain your need for a scholarship\" value=\"${needForScholarship}\"></textarea-component>\r\n\r\n        <div style=\"text-align: center;\">\r\n            <button data-fb-id=\"${fbId}\" onclick=\"window.updateScholarship(event,true)\">Approve Scholarship</button>\r\n            <button data-fb-id=\"${fbId}\" onclick=\"window.updateScholarship(event,false)\">Disapprove</button>\r\n\r\n        </div>\r\n    </div>\r\n\r\n</div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"artist-application-review\">\n\n    <div class=\"app-preview\">\n        <div>\n\n            <h3>${name}</h3>\n\n            <p>Submitted on: ${createdAt}</p>\n        </div>\n        <div>\n            <h4>Status: </h4>\n            <span class=\"status\">\n                <span>${scholarshipGranted=='true' ? \"Scholarship Granted\" : \"\"}</span>\n                <span>${hasBeenReviewed=='true' ? \"\" : \"Application needs review\"}</span>\n                <span>${(hasBeenReviewed && scholarshipGranted==\"false\") ? \"Not approved for scholarship\" : \"\"}</span>\n            </span>\n            <!-- <span>${approved  ? \"Approved\" :  hasBeenReviewed ?  \"Not Approved\": \"Has not been reviewed\" }</span> -->\n        </div>\n        <button class=\"expandApplication show\"\n            onclick=\"event.target.closest('.artist-application-review').classList.toggle('expanded')\">${hasBeenReviewed\n            =='true' ? \"Review Old Application\" : \"Review\"}</button>\n        <button class=\"expandApplication hide\"\n            onclick=\"event.target.closest('.artist-application-review').classList.toggle('expanded')\">Minimize\n            Application</button>\n\n    </div>\n    <div class=\"app-contents\">\n\n\n        <h3>Artist Name</h3>\n        <div class=\"row\">\n            <input-component value=\"${name}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" fieldName=\"name\"\n                alias=\"Name\"></input-component>\n\n        </div>\n        <div class=\"row\">\n            <input-component value=\"${email}\" disabled=\"true\" style=\"width: 48%\" required=\"true\" type=\"email\"\n                fieldName=\"email\" alias=\"Email\"></input-component>\n        </div>\n\n\n        <label for=\"hasNotReceivedScholarshipPreviously\">\n            <input disabled ${hasNotReceivedScholarshipPreviously==\"true\" ? \"checked\" : \"\" } required type=\"checkbox\"\n                name=\"hasNotReceivedScholarshipPreviously\" value=\"true\"\n                id=\"hasNotReceivedScholarshipPreviously\"></input>\n            Click here to verify that you have not received a GHOST artist scholarship previously\n        </label>\n\n        <textarea-component disabled=\"disabled\" fieldName=\"needForScholarship-${randomId}\" required\n            alias=\" Please explain your need for a scholarship\" value=\"${needForScholarship}\"></textarea-component>\n\n        <div style=\"text-align: center;\">\n            <button data-fb-id=\"${fbId}\" onclick=\"window.updateScholarship(event,true)\">Approve Scholarship</button>\n            <button data-fb-id=\"${fbId}\" onclick=\"window.updateScholarship(event,false)\">Disapprove</button>\n\n        </div>\n    </div>\n\n</div>");
 
 /***/ }),
 
@@ -6307,6 +6611,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utils/logIf.js */ "./utils/logIf.js");
 /* harmony import */ var _utils_logIf_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_utils_logIf_js__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var _contract_received_index_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./contract-received/index.js */ "./app/components/contract-received/index.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
  // Import the styles (These are really the global styles for the app -- They could have their own web pack config)
 
 
@@ -6323,6 +6639,10 @@ __webpack_require__.r(__webpack_exports__);
 
 // global google services api
 // import "../../lib/google.js";
+
+window.moveLabel = function (element) {
+  return (0,_input_index_js__WEBPACK_IMPORTED_MODULE_1__.moveLabel)(element);
+};
 
 // Globals file
 // Helper function to get form values
@@ -6398,6 +6718,49 @@ window.openUrl = function (url) {
     // This line update the main window with the new path
     window.top.postMessage(message, '*');
   }
+};
+document.addEventListener('click', function (e) {
+  // using event delegation to handle click events
+  var target = e.target;
+  if (target.matches('.close-modal')) {
+    // close modal
+    target.closest('.modal').classList.remove('show');
+
+    // emit event to the target modal 
+    target.closest('.modal').dispatchEvent(new Event('modal-closing'));
+  }
+});
+window.mapId = function (object) {
+  var key = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'key';
+  return Object.entries(object).map(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+      id = _ref2[0],
+      value = _ref2[1];
+    return _objectSpread(_objectSpread({}, value), {}, _defineProperty({}, key, id));
+  });
+};
+window.isBootStrapConfirmResponse = function (event) {
+  // Workaround.... this prop was the only way to know if the event was triggered by the bootstrap confirm
+  return !event.isTrusted;
+};
+window.toTitleCase = function (str) {
+  // replace spaces with '' and capitalize the first letter of each word
+  return str.split(" ").reduce(function (acc, word, i) {
+    word = word.charAt(0).toUpperCase() + word.slice(1);
+    acc += word;
+    return acc;
+  }, "");
+};
+
+// helper
+window.byLastName = function (a, b) {
+  if (a.artistDetails.lastName < b.artistDetails.lastName) {
+    return -1;
+  }
+  if (a.artistDetails.lastName > b.artistDetails.lastName) {
+    return 1;
+  }
+  return 0;
 };
 })();
 

@@ -30,14 +30,16 @@
         document.addEventListener("DOMContentLoaded", function() {
 
 
-            CRUD.readAll('new-applications').then(applications => {
+            CRUD.readAll('new-applications')
+            .then(applications => applications.sort((a, b) => new Date(a.createdAt) >new Date( b.createdAt) ? 1 : -1))
+            .then(applications => {
                 logIf.client && console.log(applications);
                 
                 const totalReviewed = applications.filter(application => application.hasBeenReviewed).length;
                 const totalNotReviewed = applications.filter(application => !application.hasBeenReviewed).length;
 
                 document.querySelector('#reviewedCount').innerText = totalReviewed;
-                document.querySelector('#notReveiwedCount').innerText = totalNotReviewed;
+                document.querySelector('#notReviewedCount').innerText = totalNotReviewed;
 
                 applications.forEach(application => {
 
@@ -73,6 +75,7 @@
                     fbId="${application["fbId"]}"
                     approved="${application["approved"]}"
                     websiteSocialMedia="${application["website-social-media"]}"
+                    status="${application.approved == true ? "Approved" : application.hasBeenReviewed == true ? "Not Approved" : "Has not been reviewed"}"
                     ></application-component> <hr>`;
 
 
@@ -104,7 +107,7 @@
     <div class="container">
         <div style="text-align: center;">
             <h1> Review new artist applications</h1>
-            <div>Under-review: <span id="notReveiwedCount"></span>  / Reviewed: <span id="reviewedCount"></span></div>
+            <div>Under-review: <span id="notReviewedCount"></span>  / Reviewed: <span id="reviewedCount"></span></div>
             <!-- <b>this page should only be view able by the admin and application chair</b> -->
         </div>
         <div id="applications">

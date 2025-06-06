@@ -1,26 +1,42 @@
 let roles
 
-document.addEventListener('DOMContentLoaded', async () => { 
-    roles = await CRUD.readAll('committee-roles').then(function (roles) {
-        return roles.sort(function (a, b) {
-          return Number(a.fbId) - Number(b.fbId);
+document.addEventListener('DOMContentLoaded', async () => {
+
+    // Fetch/Add the html for the committees to the DOM
+    // Add the Committee html (This is stored in firebase and is an editable html element)
+    CRUD.read('app-settings', 'html-committee-positions')
+        .then(data => {
+            document.querySelector('.container').innerHTML = data.data;
+        }),
+        // Get the committee data
+        CRUD.read('app-settings', 'committees')
+            .then(data => {
+                console.log({ghostCommittees: data.data})
+                // ghostCommittees = data.data;
+            }),
+
+
+        roles = await CRUD.readAll('committee-roles').then(function (roles) {
+            return roles.reduce((acc, next) => {
+                acc[next.fbId] = next
+                return acc
+            }, {})
         });
-      });
 
 
     await CRUD.readAll('ghost-contracts').then(contracts => {
         setVolunteerResponsibilityForm(contracts);
     })
-    
+
     CRUD.listen('ghost-contracts', null, (existingContracts) => {
         let contracts = existingContracts;
         updateVolunteerResponsibilityForm(contracts);
     })
- })
+})
 
 
 
- function updateVolunteerResponsibilityForm(contracts) {
+function updateVolunteerResponsibilityForm(contracts) {
     setTimeout(() => {
 
         const filledRoles = Object.values(contracts).map(contract => contract.committeeRoleId).flat()
@@ -36,13 +52,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 // Set the user name next to the checkbox
                 const committeeMemberContract = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))
-                  const fullName = committeeMemberContract && committeeMemberContract.artistDetails && committeeMemberContract.artistDetails.firstName + ' ' + committeeMemberContract.artistDetails.lastName
-            userNameSpan.innerText = fullName  || "[UNKNOWN]"
+                const fullName = committeeMemberContract && committeeMemberContract.artistDetails && committeeMemberContract.artistDetails.firstName + ' ' + committeeMemberContract.artistDetails.lastName
+                userNameSpan.innerText = fullName || "[UNKNOWN]"
 
 
                 // Get this users contract
                 const contract = contracts.find(contract => contract.userId === firebase.auth.currentUser.uid)
-                if(!contract) return;
+                if (!contract) return;
                 const userId = contract?.userId
                 // get my roles fresh from the DB
                 // get my role set
@@ -80,7 +96,7 @@ function setVolunteerResponsibilityForm(contracts) {
             const userName = createUserName(role)
             role.insertAdjacentElement("afterbegin", userName)
             role.querySelector('.responsibility').appendChild(responsibility)
-            if(tasks) responsibility.insertAdjacentElement("beforeend", tasks)
+            if (tasks) responsibility.insertAdjacentElement("afterend", tasks)
 
             // get my role set
             // myRoles and filledRoles are an array of ids (ints)
@@ -89,7 +105,7 @@ function setVolunteerResponsibilityForm(contracts) {
             const roleId = role.getAttribute('data-role-id')
             const hasMyRoles = myRoles.includes(roleId)
 
-      
+
 
 
         })
@@ -113,6 +129,7 @@ function setVolunteerResponsibilityForm(contracts) {
         const roleId = role.getAttribute('data-role-id')
         const thisRole = roles[roleId]
         const responsibility = document.createElement('div')
+        responsibility.classList.add('responsibility-description')
         // responsibility.classList.add('responsibility')
         responsibility.innerText = thisRole.responsibility
         return responsibility
@@ -130,9 +147,9 @@ function setVolunteerResponsibilityForm(contracts) {
         // get the user name
         const committeeMemberContract = contracts.find(contract => contract.committeeRoleId && contract.committeeRoleId.includes(roleId))
 
-        if(committeeMemberContract){   
+        if (committeeMemberContract) {
             const fullName = committeeMemberContract && committeeMemberContract.artistDetails && committeeMemberContract.artistDetails.firstName + ' ' + committeeMemberContract.artistDetails.lastName
-            userNameSpan.innerText = fullName  || "[UNKNOWN]"
+            userNameSpan.innerText = fullName || "[UNKNOWN]"
         } else {
             userNameSpan.innerText = "[ OPEN POSITION ]"
         }

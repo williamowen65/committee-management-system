@@ -1,19 +1,19 @@
 import applicationTemplate from './index.html.txt';
 import { createCustomElement, evaluateTemplate } from '../../../utils/custom-element';
-import  './style.scss';
+import './style.scss';
 const logIf = require("../../../utils/logIf.js");
 
 
 
 createCustomElement('scholarship-application-component', function () {
 
-        
-    // Fot some reason whe nthe component is loaded via javascript, this call back doesnt fire.
 
-    // events must be inline
+  // Fot some reason whe nthe component is loaded via javascript, this call back doesnt fire.
+
+  // events must be inline
 
 }, applicationTemplate, '', {
-  attributes:[
+  attributes: [
     'createdAt',
     'scholarshipGranted',
     'hasBeenReviewed',
@@ -29,11 +29,11 @@ createCustomElement('scholarship-application-component', function () {
   ]
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
 
-window.updateScholarship = function (event, reviewAnswer) {
-  logIf.component &&  console.log("updateScholarship", event)
+  window.updateScholarship = function (event, reviewAnswer) {
+    logIf.component && console.log("updateScholarship", event)
     // update button to loading
     const button = event.target;
     const btnText = button.innerHTML
@@ -44,30 +44,36 @@ window.updateScholarship = function (event, reviewAnswer) {
     const fbId = button.getAttribute('data-fb-id');
 
 
-  CRUD.update('scholarship-applications', fbId, 
-    {hasBeenReviewed: true, scholarshipGranted: reviewAnswer} )
-  .then(() =>{
+    CRUD.update('scholarship-applications', fbId,
+      { hasBeenReviewed: true, scholarshipGranted: reviewAnswer })
+      .then(() => CRUD.update('ghost-contracts', fbId,
+        {
+          artistDetails: {
+            scholarshipApplied: reviewAnswer
+          }
+        }))
+      .then(() => {
 
-    // update the button text
-    button.innerHTML = 'Review Submitted'
-    setTimeout(() => {
-      button.removeAttribute('disabled')
-      button.innerHTML = btnText
-    
-      // collapse the application
-        const application = button.closest('.artist-application-review')
-        application.classList.toggle('expanded');
+        // update the button text
+        button.innerHTML = 'Review Submitted'
+        setTimeout(() => {
+          button.removeAttribute('disabled')
+          button.innerHTML = btnText
 
-        // update status text
-        application.querySelector('.status').innerHTML = reviewAnswer ? 'Scholarship Granted' : 'Not Approved for Scholarship'
+          // collapse the application
+          const application = button.closest('.artist-application-review')
+          application.classList.toggle('expanded');
 
-        // move to new spot?
+          // update status text
+          application.querySelector('.status').innerHTML = reviewAnswer ? 'Scholarship Granted' : 'Not Approved for Scholarship'
 
-    }, 3000)
+          // move to new spot?
 
-    // move and collapse the application
-  })
-}
+        }, 3000)
+
+        // move and collapse the application
+      })
+  }
 
 })
 
