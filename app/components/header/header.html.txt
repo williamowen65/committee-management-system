@@ -7,9 +7,7 @@
     <img src="/dist/assets/ghost-logo-pink (1).jpg" />
   </div>
 
-  <nav id="links">
- 
-
+  <nav id="links" data-slotlinks="${slotLinks}">
     ${window.location.href.includes('members') ? '' : slotLinks.includes('members') ? `<a href="/members"  onclick="navigateTo('/members')" style="cursor: pointer;">Go back to Members page</a>` : ''}
     <a target="top" href="https://gigharboropenstudiotour.org/">Go back to GHOST Website</a>
   </nav>
