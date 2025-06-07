@@ -331,6 +331,7 @@ async function handleStudioSharingForm(e) {
             "canopy-no-studio": "",
             studioSigns: "",
             'studioSigns-2': "",
+            "studioSharingPlans-no-studio": ""
         }
     }
 
@@ -418,6 +419,11 @@ async function handleStudioSharingForm(e) {
         // StudioSharingAnswer += ' \n\t' + canopyPreference.parentNode.innerText;
         StudioSharingPayload.StudioSharingAnswer += ' \n\t' + canopyPreference.parentNode.innerText;
         StudioSharingPayload.StudioSharingInfo['canopy-no-studio'] = canopyPreference.value
+
+        // get plans to share studio space
+        const studioSharingPlans = form.querySelector('textarea[name="studioSharingPlans-no-studio"]')
+        StudioSharingPayload.StudioSharingAnswer += ' \n\t\t' + "I am planning to share my space with " + studioSharingPlans.value.trim();
+        StudioSharingPayload.StudioSharingInfo["studioSharingPlans-no-studio"] = studioSharingPlans.value;
 
     }
 
