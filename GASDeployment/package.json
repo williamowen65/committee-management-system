@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "push": "clasp push && clasp deploy --deploymentId AKfycbyH00JOaG4eSriZPkdYIvvu2Ao5Fc7LM8w6U_mJ0NA2X8nj0jJFrcAgbHzM7aBslRle"
+    }
+}
