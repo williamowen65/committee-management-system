@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gig Harbor Art Studio Tour</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe
+      src="https://script.google.com/macros/s/AKfycbyH00JOaG4eSriZPkdYIvvu2Ao5Fc7LM8w6U_mJ0NA2X8nj0jJFrcAgbHzM7aBslRle/exec"
+    ></iframe>
+    <script>
+
+   
+
+        console.log("window.myLocation (from the root): ", window.myLocation)
+
+      window.addEventListener('message', function (event) {
+        // Validate the origin of the message
+
+        var data = event.data
+        console.log('Received message from iframe:', data)
+
+        if (event.data.dispatch === 'navigate') {
+    
+            if(window.location.pathname !== event.data.path){ 
+                
+                // This keeps the window in sync with the nested iframe
+                window.location.href = window.location.origin + event.data.path
+
+            }
+        }
+      })
+
+      var iframe = document.querySelector('iframe')
+
+      // This sets the nested iframe's src to the current window's pathname
+      // add the path name as a query parameter
+       iframe.src = iframe.src + '?path=' + window.location.pathname
+     
+
+
+      // Listen for messages from the parent window
+      window.addEventListener('message', function (event) {
+        if (event.origin !== window.location.origin) {
+          // Ignore messages from different origins
+          return
+        }
+        if (event.data.dispatch === 'navigate') {
+          window.location.href = event.data.path
+        }
+      })
+    </script>
+  </body>
+</html>
