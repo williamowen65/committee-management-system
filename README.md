@@ -7,3 +7,5 @@ The WebApp offers a custom built interface for organizing roles within a committ
 A Google App Services deployment with access to many API resources.
 
 This WebApp is tailored to an art committee.
+
+<img src="screenshots/members-home.gif" />
