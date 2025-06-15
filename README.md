@@ -8,4 +8,6 @@ A Google App Services deployment with access to many API resources.
 
 This WebApp is tailored to an art committee.
 
+> <a target="_blank" href="https://medium.com/@william.owen.dev/put-some-gas-on-it-51b1612f5444">Related Article</a>
+
 <img src="screenshots/members-home.gif" />
